@@ -18,6 +18,7 @@
 | Kati Kask | `kati` | Turundus | - |
 | Toomas Tugi | `toomas` | IT-tugi | Võib uuendada süsteemi, kuid muud halduriõigused puuduvad |
 
+> [!TIP]
 > **Testimine:** selles laboris kontrollid õigusi teiste kasutajate nimel käsuga `sudo -iu kasutaja käsk`, mis käivitab käsu selle kasutaja sisselogimiskeskkonnas. Nii ei pea iga kasutajaga eraldi SSH kaudu sisse logima.
 
 ---
@@ -287,31 +288,5 @@ sudo rm -r /srv/firma
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K4 | `L` - parool on lukus. Ubuntus kasutatakse halduriõigusi käsuga `sudo` |
-| K7 | Põhigrupp `mari`, lisagrupp `tarkvara`. Ubuntu 24.04-s on kodukataloogid `750` (`drwxr-x---`) |
-| K8 | Ei õnnestu: kodukataloogi õigused ei anna muudele midagi |
-| K9 | Ubuntus tavaliselt umask `0002` → fail `664` |
-| K11 | `2` - SGID, `7` - omanik `rwx`, `7` - grupp `rwx`, `0` - muud ei midagi |
-| K12 | `chmod 1777 /srv/firma/ühine`; sama nagu `/tmp` |
-| K13 | `chown toomas:toomas` (või `toomas:root`), `chmod 755` |
-| T1–T8 | ✓ ✓ ✗ ✓ ✗ ✗ ✓ ✓ |
-| K16 | `apt update` töötab, `cat /etc/shadow` keelatakse: reegel lubab ainult kaht käsku |
-
-Näidislahendused:
-
-```bash
-sudo groupadd tarkvara; sudo groupadd turundus                              # 2.1
-sudo useradd -m -s /bin/bash -c "Jaan Tamm" -G tarkvara jaan                # K5
-sudo useradd -m -s /bin/bash -c "Kati Kask" -G turundus kati                # K5
-chmod u=rw,go= plaan.txt; chmod 600 plaan.txt                               # K10
-sudo chown root:turundus /srv/firma/turundus; sudo chmod 2770 /srv/firma/turundus   # 4.3
-sudo chmod 1777 /srv/firma/ühine                                            # K12
-sudo chown toomas:toomas /srv/firma/teated; sudo chmod 755 /srv/firma/teated   # K13
-sudo usermod -aG turundus jaan; sudo gpasswd -d jaan tarkvara               # K19
-sudo setfacl -m u:kati:x /srv/firma/tarkvara                                # lisaülesanne 1
-sudo setfacl -m u:kati:r /srv/firma/tarkvara/kood.py                        # lisaülesanne 1
-```
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

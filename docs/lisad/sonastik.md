@@ -11,6 +11,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | ajavöönd | time zone | Piirkonna ajaarvestus, nt `Europe/Tallinn` |
 | alglaadija | bootloader | Programm, mis laadib kerneli (nt GRUB) |
 | alglaadimine | boot | Arvuti käivitamine kuni operatsioonisüsteemi töövalmiduseni |
+| alglaadimiskeskkond | boot environment | ZFS-i juurfailisüsteemi kloon, millest saab alglaadida; võimaldab uuenduse kiiret tagasivõttu (`bectl`) |
 | alias (tulemüüris) | alias | Nimega rühm aadresse või porte, mida kasutatakse tulemüürireeglites |
 | andmebaas | database | Struktureeritud andmete kogum ja seda haldav server |
 | Apache | Apache HTTP Server | Levinud moodulipõhine veebiserver (`apache2`, `httpd`) |
@@ -23,6 +24,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | atribuut | attribute | LDAP-kirje väli, nt `uid` või `mail` |
 | autofs | automounter | Teenus, mis haagib võrgukettad automaatselt esimesel kasutamisel ja lahutab jõudeolekus |
 | avalik võti | public key | Võtmepaari jagatav osa |
+| baassüsteem | base system | FreeBSD-s koos arendatav ja väljastatav kernel, teegid, põhikäsud ja dokumentatsioon |
 | BIND | Berkeley Internet Name Domain | Levinuim DNS-serveri tarkvara (`named`, pakett `bind9`) |
 | box | box | Vagranti valmis põhitõmmis virtuaalmasina loomiseks |
 | BSD | Berkeley Software Distribution | UNIX-ist pärinev operatsioonisüsteemide perekond (FreeBSD, OpenBSD); OPNsense põhineb FreeBSD-l |
@@ -100,6 +102,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | iSCSI | Internet Small Computer Systems Interface | Protokoll plokkseadmete (ketaste) jagamiseks üle IP-võrgu |
 | ISO-tõmmis | ISO image | Optilise ketta tõmmisfail, millena levitatakse distrode paigaldusmeediat |
 | i-sõlm | inode | Failisüsteemi kirje, mis hoiab faili metaandmeid |
+| jail | jail | FreeBSD isoleeritud keskkond oma failisüsteemi, IP-aadressi ja protsessidega, kuid hosti kerneliga |
 | JSON | JavaScript Object Notation | Levinud tekstipõhine andmevorming (API-d, seadistusfailid) |
 | juhtsõlm | control node | Masin, kus Ansible töötab ja kust hallatakse teisi masinaid |
 | juurkasutaja | root, superuser | Piiramatute õigustega kasutaja |
@@ -208,9 +211,11 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | PID | process ID | Protsessi numbriline tunnus |
 | pilet | ticket | Kerberose ajutine tõend autentimiseks (nt TGT) |
 | pilvetõmmis | cloud image | Valmis paigaldatud kettatõmmis koos cloud-initiga, millest tehakse virtuaalmasina mall |
+| pkgbase | pkgbase | FreeBSD baassüsteem pakettidena, mida uuendab `pkg` |
 | plokkseade | block device | Seade, kust andmeid loetakse plokkide kaupa (ketas) |
 | pod | pod | Kubernetese väikseim üksus: üks või mitu ühise võrgu ja kettaga konteinerit |
 | pool | pool, zpool | ZFS-i ketaste ühine salvestusruum |
+| pordid | ports | FreeBSD retseptide kogum tarkvara kompileerimiseks lähtekoodist (`/usr/ports`) |
 | pordisuunamine | port forwarding | Välise pordi liikluse suunamine sisevõrgu masinale |
 | port | port | Teenust tähistav number (nt 22, 443) |
 | PostgreSQL | PostgreSQL | Võimas avatud lähtekoodiga relatsiooniline andmebaas |
@@ -229,6 +234,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | püsivara | firmware | Emaplaadi programm, mis käivitub esimesena (BIOS, UEFI) |
 | PXE | Preboot Execution Environment | Arvuti käivitamine võrgust |
 | QEMU | Quick Emulator | Riistvara emulaator, mis koos KVM-iga käitab virtuaalmasinaid |
+| rc.conf | rc.conf | FreeBSD peamine seadistusfail: hostinimi, võrk ja lubatud teenused |
 | RDP | Remote Desktop Protocol | Microsofti kaugtöölaua protokoll |
 | realm | realm | Kerberose haldusala, kirjutatakse suurtähtedega (nt `AD.LAB.EXAMPLE`) |
 | register | registry | Konteinerpiltide hoidla (nt docker.io) |

@@ -2,6 +2,7 @@
 
 **Maht:** 10 tundi · **Laboritöö:** AlmaLinux (juhtmasin), Debian ja Ubuntu (hallatavad) · **Eeldused:** moodulid 1–15
 
+> [!NOTE]
 > **Sissejuhatav moodul.** See moodul annab automatiseerimisest **ülevaate ja alused**: miks ja kuidas infrastruktuuri koodina hallata ning kuidas Ansible, Vagrant, cloud-init ja OpenTofu omavahel sobituvad. Eesmärk on, et oskaksid kursuse servereid korratavalt seadistada ja tunneksid vahendeid ära - mitte veel nende täielik valdamine.
 >
 > **HKHK õppijale:** automatiseerimist käsitletakse põhjalikult eraldi aines „IT-süsteemide automatiseerimine“, mis läbitakse pärast Linuxi ja BSD halduse moodulit. See moodul valmistab sind selleks ette.
@@ -214,6 +215,7 @@ ansible-playbook mänguraamat.yml --ask-vault-pass
 | **Vagrantfile** | Ruby-süntaksiga fail: millised masinad, mälu, võrk, seadistus |
 | **Provisioner** | mis tehakse masinas pärast loomist: shelli skript, Ansible jt |
 
+> [!NOTE]
 > **Litsents:** Vagrant on alates 2023. aastast BSL-litsentsiga (*Business Source License*) - õppimiseks ja oma töös kasutamiseks on see tasuta, kuid tegemist pole enam vaba tarkvaraga. Proxmoxis kasutatakse virtuaalmasinate koodina loomiseks pigem Terraformi/OpenTofut koos cloud-initiga; Vagrant sobib eelkõige **oma arvutisse** labori loomiseks.
 
 ### Näide: kolm masinat Ansible'i jaoks
@@ -246,6 +248,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+> [!NOTE]
 > **Märkus:** boxide nimed ja saadavus muutuvad. Kontrolli enne kasutamist Vagranti kataloogist (portal.cloud.hashicorp.com/vagrant/discover), et box on olemas ja uuendatud - eelista distrode ametlikke (`debian/…`, `almalinux/…`) või Bento (`bento/…`) boxe. AlmaLinux 10 vajab ka VirtualBoxis x86-64-v3 toega protsessorit.
 
 ### Põhikäsud
@@ -355,11 +358,9 @@ grep -E 'changed=[1-9]' /tmp/teine.txt && echo "EI OLE IDEMPOTENTNE" || echo "OK
 
 **Molecule** automatiseerib rolli testimise. Igal rollil on üks või mitu **stsenaariumi** (`molecule/default/`), mille test käib järgmiste sammudena:
 
-```text
-create → converge → idempotence → verify → destroy
-loo      rakenda    rakenda       kontrolli  kustuta
-masin    roll       uuesti,       tulemust   masin
-                    changed=0?
+```mermaid
+flowchart LR
+    A["create<br>loo masin"] --> B["converge<br>rakenda roll"] --> C["idempotence<br>rakenda uuesti,<br>changed=0?"] --> D["verify<br>kontrolli tulemust"] --> E["destroy<br>kustuta masin"]
 ```
 
 - `molecule.yml` kirjeldab, kus testitakse (nt Podmani konteiner pildist `almalinux:10` või `debian:13`);
@@ -377,6 +378,7 @@ molecule destroy
 
 Molecule'i stsenaariumi loomise käsk ja failide täpne kuju sõltuvad versioonist - vaata Molecule'i dokumentatsiooni „Getting started“ ja kasuta laboritöö lisaülesandes selle näidet.
 
+> [!NOTE]
 > **Konteiner ei ole päris server:** konteineris pole tavaliselt systemd-d ega kernelit. Teenuste käivitamise test vajab systemd-ga pilti või virtuaalmasinat (Vagrant). Seepärast testitakse Molecule'iga sageli just paigaldust ja seadistusfaile, teenuseid aga päris testmasinas.
 
 ## 16.5 Virtuaalmasinad koodina: cloud-init ja OpenTofu
@@ -472,6 +474,7 @@ OpenTofu peab **olekufaili** `terraform.tfstate`, kus on kirjas, mida ta on loon
 
 **Töövoog:** OpenTofu loob masinad → cloud-init annab neile nime, IP ja SSH-võtme → Ansible seadistab teenused. Kõik kolm on Gitis ja keskkonna saab mõne minutiga uuesti üles ehitada.
 
+> [!NOTE]
 > **Laboris:** API-tokeni loomiseks on vaja Proxmoxis vastavaid õigusi (*Datacenter* → *Permissions* → *API Tokens*). Kooli Proxmoxis küsi tokenit õpetajalt või harjuta oma Proxmoxis (moodul 23). Alternatiiv on Ansible'i moodul `community.general.proxmox_kvm`, mis kloonib malli samuti koodi järgi.
 
 ---

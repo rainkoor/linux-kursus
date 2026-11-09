@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K24**.
 
+> [!WARNING]
 > **Selles laboris rikud teadlikult oma süsteemi.** Tee enne alustamist virtuaalmasinast hetktõmmis (Proxmoxis: masin → *Snapshots* → *Take Snapshot*). Kui midagi läheb lootusetult valesti, saad selle taastada. Osad 5–8 ja 10 tehakse **konsoolis**, mitte SSH kaudu.
 
 ---
@@ -428,6 +429,7 @@ rm -rf ~/kernel                            # vabasta kettaruum
 
 ## 10. osa. GRUB-i parandamine (konsoolis)
 
+> [!WARNING]
 > **Tee enne seda osa uus hetktõmmis!** Selles osas muudad masina käivitumatuks ja parandad selle paigaldusmeedialt.
 
 **10.1** Kontrolli, kas masin kasutab BIOS-i või UEFI-t ja milline on süsteemiketas:
@@ -459,6 +461,7 @@ Taaskäivita masin ja vaata konsooli.
 
 **10.3** **Parandus taastamisrežiimis.** Lisa Proxmoxis masinale Debiani netinst ISO (*Hardware* → *CD/DVD Drive* → *Edit*) ja käivita sellelt (käivitamisel **Esc** → vali CD). Vali *Advanced options* → *Rescue mode*, läbi keele- ja võrgusammud, vali juurfailisüsteem ja seejärel *Reinstall GRUB boot loader* → `/dev/sda`. Taaskäivita kõvakettalt.
 
+> [!NOTE]
 > UEFI puhul vali taastamisrežiimis *Execute a shell in /dev/sda…* ja käivita `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian` ning `update-grub`. Seejärel kustuta kataloog `debian.katki`.
 
 **10.4** **Parandus `chroot`-iga.** Riku alglaadija uuesti (punkt 11.2), käivita jälle paigaldusmeedialt taastamisrežiim, aga vali seekord *Do not use a root file system* ja *Execute a shell in the installer environment*. Haagi süsteem ja paranda GRUB käsitsi:
@@ -515,39 +518,5 @@ Kui sinu Debianil on eraldi `/boot` või `/var` partitsioon, haagi need enne `ch
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K2 | `lspci` näitab nt `Red Hat, Inc. Virtio ...` seadmeid, `lscpu` rida `Hypervisor vendor: KVM` |
-| K3 | `cwd` - kesta töökataloog; `fd` - avatud failid. 0, 1, 2 on stdin, stdout, stderr, mis on seotud terminaliga (`/dev/pts/N`) |
-| K6 | `Operation not permitted`; `kernel.dmesg_restrict = 1` |
-| K7 | Tekkis liides `dummy0`, mis kadus eemaldamisel; fail `/lib/modules/<versioon>/kernel/drivers/net/dummy.ko*` |
-| K8 | Jah: `blacklist` takistab ainult **automaatset** laadimist (aliase järgi, nt riistvara tuvastamisel), käsitsi `modprobe nimi` laadib siiski. Täielikuks keelamiseks: `install dummy /bin/false` |
-| K9 | `ping` ei vasta. See ei peida masinat: muud teenused vastavad endiselt ja pordiskanner leiab masina |
-| K10 | Ruuter/NAT, VPN-server, konteinerite ja virtuaalmasinate võrk |
-| K11 | Genereeritakse käsuga `update-grub` failist `/etc/default/grub` ja skriptidest `/etc/grub.d/`; käsitsi muudatused kirjutatakse järgmisel uuendamisel üle |
-| K13 | Ainult põhiteenused (`systemd-journald`, `udev` jt); võrk puudub; juurfailisüsteem kirjutatav; `exit` jätkab vaike-eesmärgiga |
-| K14 | Teade umbes: `Timed out waiting for device /dev/disk/by-uuid/0000...` ja `Dependency failed for /mnt/olematu`. Juurfailisüsteem võib hädaolukorra režiimis olla ainult lugemiseks. `nofail` korral oleks alglaadimine jätkunud |
-| K15 | PID 1 - kest käivitati systemd asemel esimese protsessina. Konsoolile ligipääs = täielik ligipääs; kaitse: GRUB-i parool, ketta krüpteerimine, konsooli/hüperviisori ligipääsu piiramine |
-| K16 | Distro kernel ja backports'i kernel; käivitub uusim (GRUB-i esimene kirje) |
-| K17 | Esimesel korral vanem kernel, teisel jälle uusim. `grub-reboot` võimaldab uut kernelit testida riskita: kui see ei käivitu, käivitub hüperviisori kaudu taaskäivitades vana |
-| K18 | Lahtipakituna ca 1,5 GiB; `drivers` - draiverid, `fs` - failisüsteemid, `net` - võrguprotokollid, `arch` - protsessoriarhitektuurid |
-| K19 | `localmodconfig` jätab alles ainult laaditud moodulid; kui Btrfs-i ei kasutata, jäetakse see välja |
-| K20 | Sõltub ressurssidest (`localmodconfig` ja 4 tuumaga tavaliselt 10–30 min); tekivad `linux-image-*`, `linux-headers-*`, `linux-libc-dev_*` paketid; `/boot`-i lisanduvad `vmlinuz-*`, `initrd.img-*`, `config-*`, `System.map-*` |
-| K21 | Moodulite arv on palju väiksem; risk: puuduvad draiverid riistvarale, mida kompileerimise ajal ühendatud polnud |
-| K22 | SeaBIOS: `Booting from Hard Disk...` ja masin jääb seisma või proovib järgmist seadet (UEFI: läheb UEFI kesta / *BdsDxe: No bootable option*); kustutati ainult alglaadimiskood (440 baiti), partitsioonitabel (baidid 446–509) ja failisüsteemid jäid puutumata |
-| K23 | `grub-install` ja `update-grub` vajavad seadmefaile, protsesside ja kerneli infot; automaatne variant teeb sama, käsitsi on vaja, kui menüü ei tuvasta süsteemi õigesti, on LVM/krüpteering/mitu partitsiooni või kui tuleb teha muid parandusi (nt `fstab`, `initramfs`) |
-
-> **Märkus õpetajale:** kompileerimise kestus sõltub suuresti virtuaalmasina ressurssidest. 2 tuuma ja täieliku Debiani seadistusega (`localmodconfig`-ita) võib see kesta mitu tundi ja vajada üle 20 GiB kettaruumi. Klassis tasub kasutada `localmodconfig`-i ja anda masinatele ajutiselt rohkem tuumi. Kompileerimise võib jätta ka koduseks tööks, sest `tmux` hoiab töö käimas ka pärast väljalogimist.
-
-K24:
-
-| Sümptom | Etapp | Uurimine / lahendus |
-|---|---|---|
-| `grub rescue>` | Alglaadija | GRUB-i taaspaigaldus paigaldusmeedia taastamisrežiimist (`grub-install`, `update-grub`) |
-| Kernel panic, ei saa juurt haakida | Kernel/initramfs | Vali GRUB-is vana kernel; kontrolli `root=` parameetrit; uuenda initramfs |
-| Emergency mode | systemd | `journalctl -xb`, paranda fstab |
-| Veebiserver ei tööta | systemd/teenus | `systemctl status`, `journalctl -u` |
-| Aeglane alglaadimine | systemd | `systemd-analyze blame`, `critical-chain` |
-| Uus kernel ei käivitu | Kernel | GRUB-i „Advanced options“ → eelmine kernel |
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

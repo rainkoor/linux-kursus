@@ -94,6 +94,7 @@ dig @localhost www.lab.example
 
 BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (`allow-recursion` vaikimisi `localnets; localhost;`), nii et kliendid saavad sama serveri kaudu lahendada ka internetinimesid. Kliendid tuleb seadistada kasutama seda serverit (Netplan, `nmcli`, `/etc/resolv.conf` - vt moodul 7) ja tulemüüris peab olema avatud port 53 (UDP ja TCP).
 
+> [!NOTE]
 > **Domeeninimed:** `.example` on reserveeritud näidete jaoks ja ei kuulu kunagi kellelegi. Sisevõrgus kasutatakse sageli oma domeeni alamdomeeni (nt `lab.hkhk.ee`) või tippdomeeni `.internal`. Lõpuga `.local` tasub vältida, sest seda kasutab mDNS.
 
 ### Teised DNS-serverid
@@ -137,6 +138,7 @@ sudo systemctl restart dnsmasq
 dig @localhost www.lab.example +short
 ```
 
+> [!NOTE]
 > Ubuntu masinas kuulab `systemd-resolved` juba aadressil `127.0.0.53:53`. Kui dnsmasq või Pi-hole ei käivitu (`address already in use`), lülita resolvedi kohalik kuulaja välja: fail `/etc/systemd/resolved.conf.d/dns.conf` sisuga `[Resolve]` ja `DNSStubListener=no`, seejärel `sudo systemctl restart systemd-resolved`.
 
 #### CoreDNS
@@ -247,6 +249,7 @@ Püsivalt (`/etc/fstab`):
 
 `_netdev` ütleb, et failisüsteem vajab võrku.
 
+> [!NOTE]
 > **NFS ja kasutajad:** lihtsas NFS-is tuvastatakse kasutajad **UID-numbri järgi**. Kui kasutaja `mari` on serveris UID 1001 ja kliendis 1002, ei klapi failide omanikud. Suuremates keskkondades kasutatakse kesksest kataloogist (LDAP, Active Directory - valikmoodulid 20 ja 21) pärit kasutajaid ja Kerberost. Lisaks muudetakse kliendi juurkasutaja serveris vaikimisi õigusteta kasutajaks `nobody` (**root_squash**), et kliendi juurkasutaja ei saaks serveris kõike teha.
 
 ### autofs - haakimine vajadusel
@@ -406,12 +409,14 @@ root: admin@example.ee
 sudo newaliases
 ```
 
+> [!NOTE]
 > **Laboris** ei ole sageli välist SMTP-releed. Siis saab Postfixi testida kohaliku kohaletoimetamisega (*Local only*): kirjad jõuavad faili `/var/mail/<kasutaja>` ja neid saab lugeda käsuga `mail`. Testimiseks sobib ka konteineris töötav kirjapüüdja **Mailpit** (moodul 12), mis näitab saadetud kirju veebiliideses.
 
 AlmaLinuxis: `sudo dnf install postfix s-nail`, seadistus samas failis, logid `journalctl -u postfix`.
 
 ## 15.4 Varundus
 
+> [!WARNING]
 > **Varukoopia, mida ei ole proovitud taastada, ei ole varukoopia.**
 
 ### 3-2-1 reegel
@@ -476,6 +481,7 @@ sudo -E restic check                                # hoidla terviklikkuse kontr
 
 Teise serverisse saab varundada SFTP kaudu: `RESTIC_REPOSITORY=sftp:varu@varuserver:/srv/restic`.
 
+> [!WARNING]
 > **Kaota parool - kaota andmed.** restic'u hoidla on krüpteeritud. Hoia parooli turvaliselt ka väljaspool serverit.
 
 ## 15.5 Dokumenteerimine

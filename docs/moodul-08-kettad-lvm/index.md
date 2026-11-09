@@ -29,6 +29,7 @@ Kettaid nimetatakse Linuxis **plokkseadmeteks** (*block devices*), sest andmeid 
 
 Partitsioonid tähistatakse numbriga: `/dev/sda1`, `/dev/sda2`, `/dev/vdb1`. NVMe-ketastel lisatakse täht `p`: `/dev/nvme0n1p1`.
 
+> [!WARNING]
 > **Seadme nimi võib muutuda!** Kui lisad või eemaldad kettaid, võib `/dev/sdb` järgmisel alglaadimisel olla hoopis `/dev/sdc`. Seepärast kasutatakse püsivas seadistuses **UUID-d** (vt punkt 8.5).
 
 ### Seadmete uurimine
@@ -112,6 +113,7 @@ GPT puhul on `mkpart` esimene argument partitsiooni nimi, teine failisüsteemi t
 
 Pärast partitsioonide muutmist kontrolli tulemust käsuga `lsblk`. Kui kernel uusi partitsioone kohe ei näe, käivita `sudo partprobe /dev/sdb`.
 
+> [!WARNING]
 > **Hoiatus:** partitsioonitööriist teeb täpselt seda, mida käsid. Vale ketta tähe korral kustutad töötava süsteemi andmed. **Kontrolli enne iga muudatust `lsblk`-iga, et töötad õige kettaga.**
 ## 8.3 Failisüsteemid
 
@@ -134,6 +136,7 @@ sudo mkfs.ext4 -L andmed /dev/sdb1           # koos sildiga (label)
 sudo mkfs.xfs -f /dev/sdb2                   # -f: kirjuta olemasolev failisüsteem üle
 ```
 
+> [!WARNING]
 > **Vormindamine kustutab kõik partitsioonil olevad andmed.**
 
 Failisüsteemi kontroll ja parandamine (failisüsteem peab olema **haakimata**):
@@ -209,6 +212,7 @@ sudo mount -a                        # haagi kõik fstab-is olevad, mis pole vee
 df -h
 ```
 
+> [!WARNING]
 > **Vigane fstab võib takistada süsteemi käivitumist!** Kui alglaadimisel ei leita seadet, mis ei ole märgitud valikuga `nofail`, satub süsteem hädaolukorra režiimi (*emergency mode*), kust saab parandada ainult konsooli kaudu. Seepärast: kasuta lisaketastel `nofail`, kontrolli muudatusi `findmnt --verify` ja `mount -a` abil ning hoia konsool käepärast.
 ## 8.6 Saaleala (swap)
 
@@ -239,16 +243,19 @@ Kui palju saaleala on vaja, sõltub kasutusest. Serveritel on tavaliselt piisav 
 
 Tavalise partitsiooni suurust on raske muuta: partitsiooni taga ei pruugi olla vaba ruumi ja mitut ketast ühte partitsiooni ühendada ei saa. **LVM** (*Logical Volume Manager*) lisab ketaste ja failisüsteemide vahele paindliku kihi.
 
-```text
-  Failisüsteemid:    /srv/andmed (XFS)      /var/www (ext4)      [vaba ruum]
-                           │                      │
-  Loogilised köited:    lv_andmed              lv_www
-  (LV)                     └──────────┬───────────┘
-                                      │
-  Köitegrupp (VG):                 vg_andmed
-                          ┌───────────┴───────────┐
-  Füüsilised köited:   /dev/sdb               /dev/sdc1
-  (PV)                 (ketas)                (partitsioon)
+```mermaid
+flowchart BT
+    sdb["/dev/sdb<br>(ketas)"] --> VG
+    sdc1["/dev/sdc1<br>(partitsioon)"] --> VG
+    VG["köitegrupp (VG)<br>vg_andmed"] --> LV1["loogiline köide (LV)<br>lv_andmed"]
+    VG --> LV2["loogiline köide (LV)<br>lv_www"]
+    VG --> Vaba["vaba ruum"]
+    LV1 --> FS1["/srv/andmed<br>(XFS)"]
+    LV2 --> FS2["/var/www<br>(ext4)"]
+    subgraph PV ["füüsilised köited (PV)"]
+        sdb
+        sdc1
+    end
 ```
 
 | Kiht | Selgitus | Käsud |
@@ -353,8 +360,9 @@ Levinud põhjused, miks ketas täis saab:
 
 Virtualiseerimisplatvormil (nt Proxmox) saab virtuaalset ketast suurendada. Seejärel tuleb järjest suurendada kõiki kihte:
 
-```text
-virtuaalne ketas → partitsioon → PV → LV → failisüsteem
+```mermaid
+flowchart LR
+    A["virtuaalne ketas"] --> B["partitsioon"] --> C["PV"] --> D["LV"] --> E["failisüsteem"]
 ```
 
 Näide AlmaLinuxis, kus `sda3` on LVM-i PV:
@@ -372,10 +380,10 @@ Ilma LVM-ita: `growpart`, seejärel `resize2fs` (ext4) või `xfs_growfs` (XFS).
 
 Kui sülearvuti varastatakse või serveri ketas visatakse ära ilma kustutamata, saab igaüks selle andmeid lugeda - failiõigused kehtivad ainult töötavas süsteemis. **LUKS** (*Linux Unified Key Setup*) krüpteerib terve partitsiooni või ketta. Avamiseks on vaja parooli või võtmefaili.
 
-```text
-/dev/sdb1 (LUKS konteiner, krüpteeritud)
-   └── cryptsetup open → /dev/mapper/andmed (avatud, krüpteerimata vaade)
-         └── failisüsteem (ext4/XFS) või LVM
+```mermaid
+flowchart TD
+    A["/dev/sdb1<br>LUKS konteiner, krüpteeritud"] -- "cryptsetup open" --> B["/dev/mapper/andmed<br>avatud, krüpteerimata vaade"]
+    B --> C["failisüsteem (ext4/XFS) või LVM"]
 ```
 
 Krüpteeritud lisaketas:
@@ -409,6 +417,7 @@ Võtmepesad: LUKS-il on mitu pesa - igaüks oma parooli või võtmefailiga. Lisa
 
 Süsteemiketta krüpteerimine valitakse tavaliselt **paigaldamisel** (Debian ja Ubuntu: „Guided - use entire disk and set up encrypted LVM“; AlmaLinux: „Encrypt my data“). Sülearvutite puhul on see hea tava ja paljudes asutustes kohustuslik.
 
+> [!NOTE]
 > **Virtuaalmasinas** tähendab krüpteerimine, et hüperviisori administraator ei näe kettatõmmisest andmeid, kuid töötava masina mälus on võti olemas. Krüpteerimine kaitseb peamiselt **seisvaid andmeid** (*data at rest*).
 
 ---
@@ -429,6 +438,7 @@ Mitme ketta ühendamine töökindluseks (RAID, `mdadm`), ZFS, ketaste jõudluse 
 | `growpart` pakett | `cloud-guest-utils` | `cloud-guest-utils` | `cloud-utils-growpart` |
 | Krüpteerimine paigaldusel | „encrypted LVM“ | „encrypted LVM“ | „Encrypt my data“ |
 
+> [!WARNING]
 > **Ubuntu Serveri lõks:** Ubuntu paigaldusprogramm jätab LVM-i kasutades suure ketta korral osa köitegrupist kasutamata. Kui `df -h /` näitab oodatust väiksemat juurfailisüsteemi, kontrolli `sudo vgs` veergu `VFree` ja suurenda köidet: `sudo lvextend -r -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`.
 
 ---

@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K18** aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Iga käsu järel vaata hoolega, mida see väljastas.
 
+> [!NOTE]
 > **Iseõppijale:** sobib iga Debiani virtuaalmasin, nt VirtualBoxis. Paigalda Debian ilma graafilise töölauata ja vali paigaldamisel tarkvara hulka „SSH server“. Täpsed paigaldussammud on lisas [Laborikeskkond ja paigaldus](../lisad/paigaldus.md).
 
 ---
@@ -232,3 +233,5 @@ Jätka Banditiga tasemetel 6–15 - need kasutavad mooduli 2 teemasid (`find`, `
 
 ---
 
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

@@ -33,7 +33,7 @@ Projektil on **kolm taset**. Vali tase vastavalt sellele, kui kaugele oled kursu
 
 **Eeldused:** moodulid 1–8 · **Maht:** 12 tundi · **Distro:** Debian, Ubuntu või AlmaLinux
 
-Algtasemel ehitad ühe serveri, mis on korralikult seadistatud, turvatud, varundatud ja dokumenteeritud. Kõik tehakse käsitsi või Bashi skriptidega.
+Algtasemel ehitad ühe serveri, mis on korralikult seadistatud, turvatud, varundatud ja dokumenteeritud. Kõik tehakse käsitsi või Bashi skriptidega. Enne projekti tasub teha [põhiosa proovieksam](proovieksam-pohiosa.md) - see näitab, milliseid teemasid veel korrata.
 
 ### Teemad
 
@@ -78,6 +78,7 @@ Paigalda avatud lähtekoodiga veebirakendus (nt WordPress, Nextcloud, Moodle, Gi
 - **Põhinõuded:** veebiserver + rakendus + andmebaas eraldi masinates (moodulid 13–14); HTTPS oma CA või Caddy `tls internal`-iga (Let's Encrypt ainult siis, kui serveril on avalik DNS-nimi, moodul 13); eraldi andmebaasikasutaja ja andmebaas kättesaadav ainult veebiserverile; DNS-nimi (moodul 15); tulemüür ja SELinux/AppArmor; igaöine varundus teise masinasse koos testitud taastamisega; kättesaadavuse seire (Uptime Kuma, moodul 17).
 - **Lisanõuded:** rakendus konteinerites koos Quadletiga (moodul 12); Valkey vahemäluks; fail2ban rakenduse sisselogimisele; Prometheus + Grafana.
 
+> [!NOTE]
 > **Näide - WordPress:** `alma` (veebiserver): nginx + PHP-FPM (`php-mysqlnd`, `php-gd`, `php-xml`, `php-mbstring`, `php-intl`, `php-zip`), SELinux lubab veebiserveril andmebaasiga ühenduda (`setsebool -P httpd_can_network_connect_db on`) ja kirjutada üleslaadimiste kataloogi (`semanage fcontext … httpd_sys_rw_content_t`); `debian2` (andmebaas): MariaDB, kus kasutaja `'wordpress'@'10.0.83.55'` ja `bind-address` laborivõrgu aadressil, tulemüüris port 3306 lubatud ainult veebiserverile; `wp-config.php` õigused `640`; HTTPS oma CA sertifikaadiga; igaöine `mariadb-dump` + `wp-content` varundus resticuga; taastamistest uude VM-i. Lisanõudeks sobib WordPressi CLI (`wp-cli`) ja fail2ban WordPressi sisselogimislehele.
 
 **E2. Ansible'iga hallatav serveripark**
@@ -218,7 +219,7 @@ Lisanõuete täitmine ja eriti hea lahendus võivad hinnet tõsta, kuid ei asend
 
 ## Pärast kursust
 
-Palju õnne - oled läbinud Linuxi kursuse nullist süsteemihalduseni! Järgmised sammud võiksid olla:
+Palju õnne - oled läbinud Linuxi ja BSD kursuse nullist süsteemihalduseni! Järgmised sammud võiksid olla:
 
 - **sertifikaat:** LPIC-1 või CompTIA Linux+ (distrost sõltumatu), Red Hat RHCSA (praktiline), hiljem RHCE või LPIC-2;
 - **süvenemine:** „UNIX and Linux System Administration Handbook“, „The Linux Programming Interface“, Linux From Scratch;

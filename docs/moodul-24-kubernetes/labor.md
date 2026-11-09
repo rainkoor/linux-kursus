@@ -395,23 +395,5 @@ Kui klastrit enam ei vaja: `sudo /usr/local/bin/k3s-agent-uninstall.sh` agentide
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Versioon `kubectl version` järgi (nt `v1.3x.y+k3s1`). `kube-system`: coredns (DNS), local-path-provisioner (püsikettad), metrics-server (`kubectl top`), traefik ja svclb-traefik (Ingress ja ServiceLB), helm-install-traefik* (lõpetatud paigaldustööd). Pordil 6443 kuulab `k3s` (server-protsess, mis sisaldab API-serverit) |
-| K2 | `k3s1`: `control-plane,master` (uuemates versioonides `control-plane`), agentidel `<none>`; IP-d `.61–.63`; `containerd://…`. Allocatable on veidi väiksem kui masina mälu/CPU (süsteemile reserveeritud). Luba annab õiguse klastriga liituda - ründaja võiks lisada oma sõlme ja näha sinna paigutatud podide saladusi |
-| K3 | Podid jaotuvad tavaliselt kõigi kolme sõlme vahel; podide IP-d `10.42.x.y` (iga sõlm oma `/24`), teenuse IP `10.43.x.y` |
-| K4 | Uus pod loodi sekunditega; ReplicaSet'i kontroller (kube-controller-manager) märkas, et tegelik koopiate arv (2) erineb soovitud olekust (3) |
-| K5 | Vanad 5 (või 4) podi töötasid edasi, uus pod `ErrImagePull`/`ImagePullBackOff`, sündmus `Failed to pull image … not found`. Teenus ei katkenud: järkjärguline uuendus ei eemalda vanu pode enne, kui uued on valmis (`readinessProbe`), ja `maxUnavailable` piirab korraga eemaldatavate arvu |
-| K6 | Järgmine `kubectl apply` (või GitOps) kirjutaks käsitsi muudatuse üle; manifest Gitis on tegeliku olekuna dokumenteeritud ja korratav |
-| K7 | Jah, kubelet uuendab ConfigMap'ist haagitud faile perioodiliselt (kuni ~1 min; mitte `subPath` haakimisel). `rollout restart` loob podid järkjärgult uuesti, nt kui rakendus loeb seadistust ainult käivitumisel. Secret'i YAML-is on väärtus base64-na, mida saab kohe dekodeerida - see pole krüpteerimine |
-| K8 | Jah, kui klient usaldab labori CA-d. Vastus tuli ka `k3s3` kaudu: ServiceLB avab Traefiki pordid kõigil sõlmedel ja Traefik suunab päringu teenuse kaudu õigele podile ükskõik millises sõlmes |
-| K9 | `NotReady` ~40–60 s pärast; podid käivitati mujal ~5 min pärast (vaiketaluvus `not-ready`/`unreachable` 300 s). Leht vastas, sest `k3s1` ja teised podid töötasid (teenus saadab liikluse ainult valmis podidele; võis olla lühiajalisi vigu). `k3s1` väljalülitamisel kaoks API ja ka kliendi sisenemispunkt - see on üksik rikkepunkt |
-| K10 | PVC oli `Pending` (`WaitForFirstConsumer` - ketas luuakse alles siis, kui pod paigutatakse sõlme), seejärel `Bound`. Andmed säilisid. Need on sõlme kataloogis `/var/lib/rancher/k3s/storage/pvc-…`; selle sõlme rikke korral ei saa pod mujal käivituda (PV-l on sõlmeafiinsus) |
-| K11 | Deployment, ReplicaSet, Service, podid (lisaks nt ServiceAccount, mida `get all` ei näita). `upgrade` - 3 podi, uus revisjon; `rollback` - tagasi 1 podile, revisjon 3. Seaded failis `values.yaml` Gitis (`helm upgrade --install -f values.yaml`) |
-| K12 | Alles jäid DaemonSet'i podid (nt `svclb-traefik`), mis töötavad igas sõlmes. Jah, leht vastas - `k3s` teenuse peatamine ei peata konteinereid ja agendid jätkavad. Varukoopias on klastri olek (SQLite) ja token, kuid **mitte** püsiketaste andmeid ega konteinerpilte |
-| K13 | Kubernetes: mitme masina vahel ajastamine, isetervenemine sõlme rikkel, skaleerimine, järkjärgulised uuendused, ühtne API. Keerulisem: rohkem komponente, võrk, salvestus, uuendused, õppimine. Üks server mõne teenusega → Quadlet; palju teenuseid, sagedased uuendused, kõrge kättesaadavus → Kubernetes |
-| K14 | Üksikud rikkepunktid: üks server (`k3s1`) - kolm serverit etcd-ga; kliendi sisenemispunkt ühe sõlme IP-l - VIP või väline koormusejaotur; `local-path` PVC - Longhorn/NFS/replitseeritud salvestus; Proxmoxi host, kui kõik VM-id on samal sõlmel - jaota VM-id eri hostidele |
-
-> **Märkus õpetajale:** manifestide YAML-i süntaks on kontrollitud, kuid laboritööd ei ole päris klastris läbi tehtud. Kontrolli enne kasutamist k3s-i ja podinfo hetkeversioone ning tee laboritöö ise läbi. Kooli Proxmoxis vajab klaster ca 7 GiB mälu õppija kohta - lülitage masinad pärast tundi välja.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

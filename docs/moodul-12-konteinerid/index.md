@@ -22,19 +22,22 @@ Konteinerid on tänapäeva serverihalduse igapäevane tööriist. Õpime neid en
 
 **Konteiner** on isoleeritud protsess (või protsesside rühm), millel on oma failisüsteem, võrk ja protsessipuu, kuid mis kasutab **hostmasina kernelit**. Konteineri **pilt** (*image*) sisaldab rakendust koos kõigi teekide ja sõltuvustega - seepärast töötab see igas Linuxis ühtemoodi.
 
-```text
-  Virtuaalmasinad                         Konteinerid
-┌──────┐ ┌──────┐ ┌──────┐          ┌──────┐ ┌──────┐ ┌──────┐
-│ Rakd │ │ Rakd │ │ Rakd │          │ Rakd │ │ Rakd │ │ Rakd │
-│ Teek │ │ Teek │ │ Teek │          │ Teek │ │ Teek │ │ Teek │
-│  OS  │ │  OS  │ │  OS  │          └──────┘ └──────┘ └──────┘
-└──────┘ └──────┘ └──────┘          ┌──────────────────────────┐
-┌──────────────────────────┐        │ Konteinerimootor (Podman)│
-│  Hüperviisor (Proxmox)   │        ├──────────────────────────┤
-├──────────────────────────┤        │   Hosti OS ja kernel     │
-│        Riistvara         │        ├──────────────────────────┤
-└──────────────────────────┘        │        Riistvara         │
-                                    └──────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph KO ["Konteinerid"]
+        direction TB
+        K1["Rakendus<br>Teegid"] --- M
+        K2["Rakendus<br>Teegid"] --- M
+        K3["Rakendus<br>Teegid"] --- M
+        M["Konteinerimootor (Podman)"] --- OS["Hosti OS ja kernel"] --- HW2["Riistvara"]
+    end
+    subgraph VM ["Virtuaalmasinad"]
+        direction TB
+        V1["Rakendus<br>Teegid<br>OS"] --- H
+        V2["Rakendus<br>Teegid<br>OS"] --- H
+        V3["Rakendus<br>Teegid<br>OS"] --- H
+        H["Hüperviisor (Proxmox)"] --- HW1["Riistvara"]
+    end
 ```
 
 | | **Virtuaalmasin** | **Konteiner** |
@@ -65,6 +68,7 @@ Konteinerpildid laaditakse **registritest**:
 
 Pildi nimi: `register/nimeruum/nimi:silt`, nt `docker.io/library/nginx:1.27-alpine`. **Silt** (*tag*) tähistab versiooni. Silt `latest` tähendab lihtsalt „uusim“ - tootmises kasuta konkreetset versiooni, et uus versioon ei tuleks ootamatult.
 
+> [!WARNING]
 > **Usalda ainult ametlikke ja tuntud pilte.** Registrites on ka pahatahtlikke pilte. Eelista ametlikke pilte (`docker.io/library/...`) või tarkvara tootja enda pilte.
 
 ### Podman ja Docker
@@ -106,6 +110,7 @@ podman run -d --name veeb -p 8080:80 docker.io/library/nginx:alpine
 | `-v /host/kat:/konteineri/kat:Z` | Haagi hosti kataloog konteinerisse (`:Z` - SELinuxi märgis) |
 | `-e MUUTUJA=väärtus` | Keskkonnamuutuja |
 
+> [!NOTE]
 > **Täielikud pildinimed:** AlmaLinuxis ja RHEL-is küsib Podman lühinime (`nginx`) korral, millisest registrist pilti otsida. Kirjuta alati täielik nimi koos registriga (`docker.io/library/nginx`).
 
 ### Haldus
@@ -263,6 +268,7 @@ sudo systemctl enable --now podman-auto-update.timer   # uuenda iga päev automa
 
 `podman auto-update` laadib registrist sama sildiga uuema pildi, taaskäivitab teenuse ja **võtab muudatuse tagasi** (*rollback*), kui teenus uue pildiga ei käivitu. Mida täpsem on silt, seda väiksem on üllatuste oht: `nginx:1.27-alpine` saab ainult paranduspaiku, `nginx:latest` võib tuua uue põhiversiooni.
 
+> [!NOTE]
 > Usaldusväärsemaks muudab tagasivõtmise tervisekontroll (`HealthCmd=` Quadleti failis): siis loetakse uuendus õnnestunuks alles siis, kui rakendus päriselt vastab.
 
 ---

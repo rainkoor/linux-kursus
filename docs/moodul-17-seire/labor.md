@@ -198,21 +198,5 @@ rm ~/katkine.sh
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Sõltub VM-ist; `available` ≫ `free`, sest vahemälu vabastatakse vajadusel; `st` > 0 - hüperviisori sõlm on ülekoormatud ja VM ootab protsessorit |
-| K2 | CPU: `vmstat r` > tuumade arv, `us` ~100, `mpstat` kõik tuumad; mälu: `free` `available` väheneb, `vmstat si/so`; ketas: `vmstat wa`, `b`, `iostat %util` ~100 ja kasvav `w_await`, `pidstat -d` näitab `stress-ng-hdd` |
-| K3 | Kui saaleala on, siis `so` > 0; kui kõik otsas, tapab OOM killer protsessi (`Out of memory: Killed process …`) |
-| K4 | Jah, kui test oli pärast kogumise algust; vaikimisi iga 10 minuti järel (`sysstat-collect.timer`) |
-| K5 | `/etc/minu-rakendus/seaded.conf`, `ENOENT`; loo fail (või kataloog) või muuda skripti seadistust |
-| K6 | `tail`; kuulajad nt `sshd`, `nginx`, `named`, `mariadbd`, `prometheus-node`, `smbd` - sama mis `ss -tlpn` |
-| K7 | Tavaliselt DOWN põhjused: tulemüür (`ufw`/`firewalld`) blokeerib 9100, vale IP või eksportija ei tööta |
-| K8 | `node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100` |
-| K9 | Grafana konteineris on `localhost` Grafana konteiner ise; Compose'i võrgus leitakse teine konteiner teenuse nime järgi |
-| K10 | *Pending* - tingimus kehtib, kuid ooteaeg pole täis; *Firing* - häire aktiivne; ooteaeg väldib lühiajaliste hüpete pärast valehäireid |
-| K11 | Sõltub kontrolli intervallist (vaikimisi 60 s) ja korduskatsete arvust; jah, HTTPS-jälgimisel näitab sertifikaadi kehtivust ja võib selle kohta teavitada |
-| K14 | Prometheus: konteinerid, dünaamiline taristu, PromQL, palju eksportijaid; Zabbix: klassikalised serverid ja võrguseadmed, valmis mallid, kõik veebiliideses |
-
-> **Märkus õpetajale:** laboritööd ei ole terviklikult testitud. Kontrolli enne tundi Prometheuse ja Grafana konteinerpiltide versioonid ning Grafana menüüde nimed (sõltuvad versioonist). `stress-ng --vm 1 --vm-bytes 80%` võib väikese mäluga VM-is käivitada OOM killeri - see on õppimise mõttes hea, kuid hoiata õppijaid.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

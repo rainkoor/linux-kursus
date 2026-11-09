@@ -76,10 +76,12 @@ Olulisemad käsud (tavarežiimis):
 | `gg` / `G` | Faili algusesse / lõppu |
 | `:set number` | Näita reanumbreid |
 
+> [!TIP]
 > **Kui jäid vim-i lõksu:** vajuta paar korda **Esc**, kirjuta `:q!` ja vajuta Enter. Nii väljud, ilma et muudatusi salvestataks.
 
 Vim-i õppimiseks on suurepärane interaktiivne õpetus `vimtutor` (vajab paketti `vim`).
 
+> [!TIP]
 > **Kumba kasutada?** Igapäevaseks tööks sobib nano. vim-i põhitõed (`i`, `Esc`, `:wq`, `:q!`) peab aga oskama iga süsteemiadministraator, sest mõnes süsteemis on ainult `vi`.
 
 ## 2.3 Standardvood ja ümbersuunamine
@@ -115,6 +117,7 @@ find / -name "*.conf" 2> /dev/null   # peida veateated
 
 **`/dev/null`** on eriline fail, mis neelab kõik sinna kirjutatu. Seda kasutatakse soovimatu väljundi kõrvaldamiseks.
 
+> [!WARNING]
 > **Hoiatus:** `>` kirjutab faili üle ilma küsimata. `ls > tähtis.txt` kustutab faili `tähtis.txt` varasema sisu. Kui tahad lisada, kasuta `>>`.
 
 ## 2.4 Torud
@@ -251,6 +254,7 @@ Iga samm teeb üht asja: `cut` võtab 7. välja, `sort` sorteerib, `uniq -c` loe
 
 **Regulaaravaldis** (*regular expression*, *regex*) on muster teksti otsimiseks. Seda kasutavad `grep`, `sed`, `awk`, `vim` ja paljud programmeerimiskeeled.
 
+> [!WARNING]
 > **Ära aja segi metamärkidega!** Metamärgid (`*.txt`) on kesta failinimede mustrid. Regulaaravaldised on teksti mustrid ja seal tähendab `*` midagi muud.
 
 | Muster | Tähendus | Näide | Sobib |
@@ -283,6 +287,7 @@ grep -E 'error|fail' logi.txt                 # error või fail
 grep -E '^[0-9]{1,3}\.[0-9]{1,3}\.' logi.txt  # read, mis algavad IP-aadressi moodi
 ```
 
+> [!NOTE]
 > **Jutumärgid:** pane regulaaravaldised alati ülakomade vahele (`'...'`), et kest ei tõlgendaks erimärke ise.
 
 ### sed - voogredaktor
@@ -297,6 +302,7 @@ sed -n '5,10p' fail.txt              # näita ridu 5–10
 sed '/^#/d' fail.txt                 # kustuta kommentaariread
 ```
 
+> [!WARNING]
 > **Hoiatus:** `sed -i` muudab faili kohe. Proovi muster enne ilma võtmeta `-i` läbi ja tee olulisest failist koopia.
 
 ## 2.7 Failide otsimine
@@ -326,6 +332,7 @@ find . -name "*.sh" -exec ls -l {} \;       # käivita iga leitud faili kohta k�
 | `-user`, `-group` | Omanik, grupp |
 | `-exec käsk {} \;` | Käivita käsk, `{}` asendatakse failinimega |
 
+> [!NOTE]
 > Kui otsid kogu süsteemist (`find / ...`), suuna veateated `2>/dev/null`, sest tavakasutajal pole paljudesse kataloogidesse ligipääsu.
 
 ### locate
@@ -395,6 +402,7 @@ tar -cJf varu.tar.xz kataloog/       # xz-pakkimine (väiksem, aeglasem)
 | `v` | *verbose* - näita töödeldavaid faile |
 | `C` | Siht-kataloog lahtipakkimisel |
 
+> [!TIP]
 > **Meelespea:** **c**reate **z**ipped **f**ile = `czf`, e**x**tract **z**ipped **f**ile = `xzf`.
 
 ### gzip ja muud
@@ -449,6 +457,7 @@ cat serverid.txt | xargs -I{} ssh {} uptime              # {} asendatakse argume
 find . -name "*.png" -print0 | xargs -0 -P4 -n1 optipng   # 4 paralleelset protsessi
 ```
 
+> [!NOTE]
 > **Tühikud ja erimärgid:** ilma `-print0` ja `-0`-ta jagab `xargs` failinimed tühikute kohalt - fail `minu fail.txt` muutuks kaheks argumendiks. Paljudel juhtudel on lihtsam kasutada `find ... -exec käsk {} +`.
 
 ---

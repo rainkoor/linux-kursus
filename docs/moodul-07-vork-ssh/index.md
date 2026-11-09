@@ -75,6 +75,7 @@ sudo ip link set ens18 down                       # lülita liides välja (ettev
 sudo ip route add 10.0.0.0/8 via 10.0.83.254   # lisa marsruut
 ```
 
+> [!WARNING]
 > **Hoiatus:** kui muudad SSH kaudu selle liidese seadistust, mille kaudu oled ühendatud, võid ühenduse kaotada. Hoia käepärast konsool (nt Proxmoxi veebiliidese konsool).
 
 ### Masina nimi
@@ -125,6 +126,7 @@ sudo netplan try                 # rakenda; kui 120 s jooksul ei kinnitata, võe
 sudo netplan apply               # rakenda püsivalt
 ```
 
+> [!WARNING]
 > **YAML-is on taanded olulised!** Kasuta tühikuid, mitte tabulaatoreid, ja hoia sama tase sama kaugel. Üks vale tühik muudab faili vigaseks.
 
 **`netplan try` on SSH kaudu töötades kohustuslik:** kui uus seadistus katkestab ühenduse, taastatakse vana automaatselt. Vanemates juhendites kasutatav võti `gateway4` on aegunud, selle asemel kasutatakse `routes`.
@@ -293,6 +295,7 @@ nc -zv 10.0.83.52 22          # kas port on avatud (pakett netcat)
 sudo tcpdump -i ens18 port 53    # vaata võrguliiklust (pakett tcpdump)
 ```
 
+> [!TIP]
 > **Pea meeles:** `ping` võib olla tulemüüriga keelatud. Kui `ping` ei vasta, kuid `curl` töötab, on võrk korras.
 
 ## 7.6 SSH lähemalt
@@ -332,6 +335,7 @@ Avalik võti lisatakse serveris faili `~/.ssh/authorized_keys`.
 
 **3. Ühendu** - nüüd küsitakse privaatvõtme parooli (kui määrasid), mitte serveri kasutaja parooli.
 
+> [!WARNING]
 > **Õigused on olulised:** SSH keeldub võtmeid kasutamast, kui kataloogi `~/.ssh` või faili `authorized_keys` õigused on liiga avarad. Õiged õigused: `~/.ssh` - `700`, `authorized_keys` ja privaatvõti - `600`.
 
 ### ssh-agent
@@ -397,6 +401,7 @@ rsync -avn --delete kataloog/ ubuntusrv:~/kataloog/  # -n: proovirežiim, näita
 rsync -avz ubuntusrv:/var/www/ ./veebi-varu/         # -z: paki ülekandmisel
 ```
 
+> [!WARNING]
 > **Kaldkriips on oluline!** `rsync -av kataloog/ siht/` kopeerib kataloogi **sisu** sihtkohta. `rsync -av kataloog siht/` kopeerib kataloogi **enda** (tulemuseks `siht/kataloog/`). Kasuta `--delete` alati koos `-n` proovirežiimiga enne päris käivitamist.
 
 Mõlemad nõuavad, et `rsync` oleks paigaldatud mõlemas masinas.
@@ -460,6 +465,7 @@ AllowGroups ssh-kasutajad
 | `AllowGroups` / `AllowUsers` | Ainult nende gruppide/kasutajate sisselogimine on lubatud |
 | `Port 2222` | Muu port (vähendab automaatrünnakute müra, kuid ei ole turvameede iseenesest) |
 
+> [!WARNING]
 > **Esimene väärtus jääb kehtima!** `sshd` kasutab iga seade puhul **esimest** leitud väärtust ja `sshd_config.d` failid loetakse tähestiku järjekorras. Näiteks Ubuntu pilvepiltides on fail `50-cloud-init.conf` reaga `PasswordAuthentication yes`. Kui sinu fail on nimega `60-...`, jääb kehtima pilvefaili väärtus. Seepärast pane oma failile väike number (nt `10-`).
 
 Muudatuste rakendamine **turvaliselt**:
@@ -470,6 +476,7 @@ sudo systemctl reload ssh            # Debian/Ubuntu (AlmaLinuxis: sshd)
 sudo sshd -T | grep -i passwordauth  # vaata tegelikult kehtivat väärtust
 ```
 
+> [!WARNING]
 > **Ära lukusta ennast välja!**
 >
 > 1. Enne `PasswordAuthentication no` seadmist kontrolli, et võtmega sisselogimine **töötab**.
@@ -499,6 +506,7 @@ sudo ufw allow OpenSSH                    # luba SSH (rakenduse profiil)
 sudo ufw enable                           # lülita sisse
 ```
 
+> [!WARNING]
 > **Luba SSH enne `ufw enable` käivitamist!** Muidu katkestab tulemüür sinu SSH-ühenduse.
 
 Reeglite haldus:
@@ -529,6 +537,7 @@ sudo firewall-cmd --remove-service=http --permanent   # eemalda
 sudo firewall-cmd --get-services                      # teadaolevad teenused
 ```
 
+> [!NOTE]
 > **Ajutine ja püsiv:** ilma võtmeta `--permanent` kehtib muudatus ainult kuni `firewalld` taaskäivituseni. Võtmega `--permanent` salvestatakse see, kuid rakendub alles pärast `--reload`-i. Levinud töövõte: tee muudatus ilma `--permanent`-ita, testi, ja kui töötab, salvesta käsuga `sudo firewall-cmd --runtime-to-permanent`.
 
 ### nftables (Debian)
@@ -601,6 +610,7 @@ timedatectl list-timezones | grep Tallinn
 sudo timedatectl set-timezone Europe/Tallinn
 ```
 
+> [!NOTE]
 > **Serverites** hoitakse riistvara kella UTC-s (`RTC in local TZ: no`) ja logides kasutatakse sageli UTC-d - siis ei teki suveaja vahetusel segadust. Ajavöönd mõjutab ainult seda, kuidas aega kuvatakse.
 
 ### NTP kliendid
@@ -659,6 +669,7 @@ chronyc clients             # kes on aega küsinud
 
 Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 19).
 
+> [!NOTE]
 > **Virtuaalmasinad:** Proxmoxi VM-ides tuleb NTP klient hoida tööl ka siis, kui kasutatakse QEMU agenti. Pärast hetktõmmise taastamist võib kell olla väga vale - chrony parandab selle (`makestep` seadistusfailis lubab suure hüppe esimestel uuendustel).
 
 ## 7.10 Keel, lokaat ja klaviatuur
@@ -693,6 +704,7 @@ sudo localectl set-keymap ee                   # konsooli paigutus
 sudo localectl set-x11-keymap ee               # graafiline (X11) paigutus
 ```
 
+> [!NOTE]
 > SSH-ühenduses määrab klaviatuuri **sinu arvuti**, mitte server. Konsoolis tuleb paigutus seadistada serveris; paigaldusprogramm küsib seda (moodul 1, paigalduslisa).
 
 ## 7.11 VPN: WireGuard
@@ -701,8 +713,10 @@ sudo localectl set-x11-keymap ee               # graafiline (X11) paigutus
 
 **WireGuard** on Linuxi kernelis sisalduv kaasaegne VPN: väike, kiire ja lihtsa seadistusega. Iga osapool (*peer*) on tuvastatud **võtmepaariga** (nagu SSH-võtmed).
 
-```text
-sülearvuti 10.99.0.2 ──── krüpteeritud UDP 51820 ────▶ VPN-server 10.99.0.1 ──▶ labori võrk 10.0.83.0/24
+```mermaid
+flowchart LR
+    S["sülearvuti<br>10.99.0.2"] -- "krüpteeritud UDP 51820" --> V["VPN-server<br>10.99.0.1"]
+    V --> L["labori võrk<br>10.0.83.0/24"]
 ```
 
 Võtmed (mõlemas masinas):
@@ -752,6 +766,7 @@ ping 10.99.0.1
 
 Serveri tulemüüris ava **51820/udp** (`sudo ufw allow 51820/udp`). `AllowedIPs` on korraga marsruutimistabel ja juurdepääsukontroll: server võtab partnerilt vastu ainult nende aadresside pakette.
 
+> [!NOTE]
 > OPNsense'is (moodul 18) on WireGuard veebiliideses (*VPN* → *WireGuard*). Kooli võrgust välja ühendudes järgi alati asutuse IT-reegleid - ära ava omavoliliselt tunneleid sisevõrku.
 
 ## 7.12 Võrgu süvendus: IPv6, sild, VLAN ja bond
@@ -834,6 +849,7 @@ network:
 
 Debianis (`ifupdown`) on vastavad read `bridge-ports`, `vlan-raw-device` ja `bond-slaves` failis `/etc/network/interfaces` (paketid `bridge-utils`, `vlan`, `ifenslave`).
 
+> [!NOTE]
 > Virtuaalmasinas on bond'il ja VLAN-il vähe mõtet (hüperviisor teeb selle juba ära), kuid füüsilistes serverites on need tavalised. Harjutamiseks lisa Proxmoxis VM-ile teine võrguliides.
 
 ---
@@ -850,6 +866,7 @@ Debianis (`ifupdown`) on vastavad read `bridge-ports`, `vlan-raw-device` ja `bon
 | Ajasünkroonimine | `systemd-timesyncd` | `systemd-timesyncd` (24.04) | `chronyd` |
 | Lokaadid | `dpkg-reconfigure locales` | `locale-gen et_EE.UTF-8` | `glibc-langpack-et` |
 
+> [!NOTE]
 > **Ubuntu ja SSH pordi muutmine:** Ubuntu uuemates versioonides käivitab SSH-serveri vajadusel `ssh.socket`. Kui muudad SSH porti, tuleb pärast seadistuse muutmist käivitada `sudo systemctl daemon-reload` ja `sudo systemctl restart ssh.socket`, muidu jääb kuulama vana port.
 
 ---

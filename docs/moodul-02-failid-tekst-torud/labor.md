@@ -252,37 +252,5 @@ zgrep '" 500 ' /tmp/vana.log.gz
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K5 | 20 rida |
-| K6 | `10.0.0.7` (5 päringut) |
-| K7 | 4 rida, kõik IP-lt `10.0.0.7`: `/wp-login.php`, `/phpmyadmin`, `/.env`, `/admin/config.php` |
-| K9 | `200` (12 korda); serveri vigu `500` on 2 |
-| K10 | `/uudised` |
-| K11 | `/index.html` (4), `/tunniplaan.html` (3), `/uudised` (2) |
-| K12 | 3 päringut |
-| 3.11 | 191 548 baiti |
-
-Näidislahendused:
-
-```bash
-wc -l juurdepaas.log                                              # K5
-cut -d' ' -f1 juurdepaas.log | sort | uniq -c | sort -rn         # K6
-grep '" 404 ' juurdepaas.log                                      # K7
-grep '" 500 ' juurdepaas.log | cut -d' ' -f7 | sort -u           # K10
-cut -d' ' -f7 juurdepaas.log | sort | uniq -c | sort -rn | head -3   # K11
-grep ':10:[0-9][0-9]:[0-9][0-9] ' juurdepaas.log                  # K12
-grep -v '^192\.168\.10\.' juurdepaas.log                          # K13
-grep -E '" (403|404) ' juurdepaas.log                             # K14
-grep 'bash$' /etc/passwd | cut -d: -f1                            # K16
-grep -v '^#' /etc/ssh/sshd_config | grep -v '^$'                  # K17
-find /etc -name "*.conf" 2>/dev/null | wc -l                      # 5.1
-find /usr -type f -size +20M 2>/dev/null                          # 5.2
-find ~ -type f -mmin -60                                          # 5.3
-tar -czf ~/labor02-varu.tar.gz -C ~ labor02                       # 6.1
-tar -tzf ~/labor02-varu.tar.gz                                    # 6.2
-mkdir -p /tmp/taastamine && tar -xzf ~/labor02-varu.tar.gz -C /tmp/taastamine   # 6.3
-grep '" 404 ' juurdepaas.log | cut -d' ' -f1 | sort | uniq -c     # lisaülesanne 1
-```
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

@@ -23,13 +23,12 @@ Mooduli läbinud õppija:
 
 Kui vajutad arvuti toitenuppu, toimub enne sisselogimisviipa mitu etappi. Iga etapp laadib järgmise:
 
-```text
-┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐
-│  Püsivara    │──▶│  Alglaadija  │──▶│   Kernel +   │──▶│   systemd    │──▶│ Sisselogimine│
-│  UEFI/BIOS   │   │    GRUB      │   │  initramfs   │   │   (PID 1)    │   │              │
-└──────────────┘   └──────────────┘   └──────────────┘   └──────────────┘   └──────────────┘
- riistvara test     valib kerneli      riistvara,         teenused,          getty, sshd,
- alglaadimisseade   ja parameetrid     juurfailisüsteem   haakimised         graafika
+```mermaid
+flowchart LR
+    A["Püsivara<br>UEFI/BIOS<br>riistvara test,<br>alglaadimisseade"] --> B["Alglaadija<br>GRUB<br>valib kerneli<br>ja parameetrid"]
+    B --> C["Kernel +<br>initramfs<br>riistvara,<br>juurfailisüsteem"]
+    C --> D["systemd<br>(PID 1)<br>teenused,<br>haakimised"]
+    D --> E["Sisselogimine<br>getty, sshd,<br>graafika"]
 ```
 
 | Etapp | Mis toimub | Probleemi tunnus |
@@ -152,9 +151,10 @@ Kerneli versiooni näeb käsuga `uname -r`. Kernelid paigaldatakse ja uuendataks
 
 Kernel peab haakima juurfailisüsteemi, kuid draiverid, mida selleks vaja on (nt kettakontrolleri, LVM-i, RAID-i või krüpteeringu jaoks), võivad asuda just sellel failisüsteemil. Seda „muna ja kana“ probleemi lahendab **initramfs** (*initial RAM file system*): väike ajutine failisüsteem, mis laaditakse koos kerneliga mällu ja sisaldab juurfailisüsteemi haakimiseks vajalikke draivereid ja tööriistu.
 
-```text
-kernel käivitub → laadib initramfs-i mällu → initramfs laadib draiverid
-→ haagib päris juurfailisüsteemi → käivitab sealt systemd (PID 1)
+```mermaid
+flowchart LR
+    A["kernel käivitub"] --> B["laadib initramfs-i mällu"] --> C["initramfs laadib draiverid"]
+    C --> D["haagib päris juurfailisüsteemi"] --> E["käivitab sealt systemd (PID 1)"]
 ```
 
 initramfs genereeritakse kerneli paigaldamisel automaatselt. Käsitsi on seda vaja uuendada näiteks pärast kettakontrolleri või krüpteeringu seadistuse muutmist:
@@ -203,6 +203,7 @@ Startup finished in 1.982s (kernel) + 6.410s (userspace) = 8.393s
 multi-user.target reached after 6.390s in userspace.
 ```
 
+> [!TIP]
 > **Pea meeles:** `blame` näitab iga teenuse käivitusaega, kuid paljud teenused käivituvad paralleelselt. Tegelikku pudelikaela näitab paremini `critical-chain`.
 
 ### Alglaadimise logid
@@ -335,6 +336,7 @@ Give root password for maintenance
 3. Levinuim põhjus on vigane `/etc/fstab` (vt moodul 8). Juurfailisüsteem võib olla ainult lugemiseks - haagi see kirjutatavaks: `mount -o remount,rw /`.
 4. Paranda viga ja käivita `systemctl default` või `reboot`.
 
+> [!NOTE]
 > **Debian ja Ubuntu:** kui juurkasutaja konto on lukus (Ubuntus alati, Debianis siis, kui paigaldusel parooli ei määratud), ei saa taastamis- ja hädaolukorra režiimi sisse logida. Siis aitab ainult `init=/bin/bash` (vt allpool) või paigaldusmeedia taastamisrežiim.
 
 ### Juurkasutaja parooli lähtestamine
@@ -369,6 +371,7 @@ exit
 exit
 ```
 
+> [!WARNING]
 > **Turvalisus:** see näitab, et **füüsiline ligipääs masinale (või virtuaalmasina konsoolile) tähendab ligipääsu kõigele.** Seepärast on serveriruumid lukus, Proxmoxi veebiliides kaitstud ning tundlike süsteemide puhul kasutatakse ketta krüpteerimist ja GRUB-i parooli.
 
 ### Kui GRUB-i menüü ei ilmu
@@ -420,6 +423,7 @@ sudo mount /dev/sda2 /mnt/boot                       # /boot on LVM-ist väljas
 
 **AlmaLinux** kasutab käske `grub2-install` ja `grub2-mkconfig -o /boot/grub2/grub.cfg`. UEFI-süsteemis ei käivitata RHEL-i perekonnas `grub2-install`-i, vaid paigaldatakse alglaadija paketid uuesti: `dnf reinstall grub2-efi-x64 shim-x64`.
 
+> [!NOTE]
 > **Märkus:** püsivara saab süsteemi käivitada ka **võrgust** (PXE). Nii töötavad võrgupaigaldus, kettatõmmiste levitamine (FOG) ja ka võrgust käivitatavad taastetööriistad - vt valikmoodul 19.
 
 ## 10.10 Kernelite haldus ja kompileerimine
@@ -579,8 +583,10 @@ Kompileerimine võtab sõltuvalt seadistusest ja protsessorist 15 minutist mitme
 
 Lähtekoodist saab kerneli paigaldada ka ilma paketita (`sudo make modules_install && sudo make install`), kuid siis ei tea pakihaldur sellest ja eemaldamine on tülikas.
 
+> [!NOTE]
 > **Turvaline alglaadimine:** isekompileeritud kernel ei ole distro võtmega allkirjastatud. Kui masinas on *Secure Boot* sisse lülitatud, siis see kernel ei käivitu, kui sa ei allkirjasta seda ise. Proxmoxi BIOS-iga virtuaalmasinates see probleemiks ei ole.
 
+> [!TIP]
 > **Hea tava:** hoia alati alles distro töötav kernel. Kui sinu kernel ei käivitu, vali GRUB-i menüüst „Advanced options“ ja käivita distro kernel. Seejärel eemalda katkine kernel käsuga `sudo apt remove linux-image-<versioon>-minu`.
 
 ---

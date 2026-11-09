@@ -228,6 +228,7 @@ sudo apachectl configtest && sudo systemctl reload httpd
 curl --resolve kool.lab.example:443:10.0.83.55 https://kool.lab.example/     # Ubuntu kliendist, labori CA on usaldatud
 ```
 
+> [!NOTE]
 > **Laboris kasutame alati oma sertifikaate** (labori CA või Caddy `tls internal`). Let's Encrypt vajab avalikku DNS-nime ja internetist kättesaadavat porti 80 - laborivõrgus see ei tööta ega ole vajalik.
 
 ---
@@ -329,23 +330,5 @@ Ava brauseris `https://crt.sh/?q=debian.org` (või oma kooli domeen).
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | nginx (80) |
-| K2 | Vaikeserveriks on esimene sobiv plokk tähestikulises järjekorras (`info.lab.example`), kui `default_server` pole määratud |
-| K3 | Veateade koos faili ja reanumbriga; vigase seadistusega `restart` jätaks saidi maha |
-| K4 | `301 Moved Permanently`, `Location: https://kool.lab.example/`; teine - sertifikaati ei usaldata (`unable to get local issuer certificate`) |
-| K5 | `Verify return code: 0 (ok)`; CA võtmega saab välja anda sertifikaate mis tahes nimele, mida kõik CA-d usaldavad masinad usaldavad |
-| K6 | `403 Forbidden`; AVC: `httpd_t` ei tohi lugeda `var_t` tüüpi faile; `semanage fcontext -a -t httpd_sys_content_t "/srv/kool(/.*)?"` ja `restorecon -Rv /srv/kool` |
-| K7 | `403 Forbidden`; nginx ei loe kataloogides seadistust (ainult keskne seadistus); Apache peab iga päringu jaoks kontrollima kõiki kataloogide `.htaccess`-faile |
-| K8 | ~5 rida vs nginx-i serveriplokk + sertifikaadi loomine (punkt 3); väljaandja „Caddy Local Authority - …“ (5.4 järel sinu labori CA); avaliku nimega hangib Caddy sertifikaadi automaatselt Let's Encryptilt (vajab porte 80/443 internetist) |
-| K9 | Vaheldumisi (round robin); taustserverite virtuaalhostid valivad saidi `Host`-päise järgi |
-| K10 | `alma` DOWN (punane); kuni tervisekontroll rikke tuvastab (vaikimisi 2 s × 3 katset), võib mõni päring ebaõnnestuda, seejärel lähevad kõik `debian1`-le |
-| K11 | Taustserver näeb TCP-ühenduse lähteaadressi, mis on HAProxy oma; `option forwardfor` lisab päise `X-Forwarded-For`, nginx-is `set_real_ip_from` + `real_ip_header` |
-| K12 | Tavaliselt Let's Encrypt (R1x/E-seeria vahesertifikaat) või mõni muu avalik CA; ahelas serveri sertifikaat + vahesertifikaat(id); vahesertifikaat seob serveri sertifikaadi brauseris usaldatud juur-CA-ga (juur-CA võti hoitakse võrgust eemal); Let's Encryptil 90 päeva (lüheneb) |
-| K13 | Kõik domeeni sertifikaadid ja nende nimed (ka alamdomeenid); avalik logi paljastab sisevõrgu nimed ja taristu; lahendus: oma CA või wildcard-sertifikaat DNS-01 valideerimisega |
-| K14 | Nt nginx üldiseks saidiks, Caddy kiireks HTTPS-iks konteineri ees; tabel õppija täita |
-
-> **Märkus õpetajale:** sertifikaatide loomine ja kontroll on testitud. Apache'i, Caddy ja HAProxy osa ei ole päris masinates testitud. Caddy CA juursertifikaadi asukoht võib sõltuda paigaldusviisist (`caddy trust` või Caddy logist näeb tegelikku teed).
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

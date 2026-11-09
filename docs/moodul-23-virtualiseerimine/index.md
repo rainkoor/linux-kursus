@@ -2,6 +2,7 @@
 
 **Maht:** 12 tundi · **Laboritöö:** Debian (KVM), Proxmox VE, XCP-ng · **Eeldused:** moodulid 1–10, 12 · **Valikmoodul**
 
+> [!NOTE]
 > **HKHK õppijale:** hüperviisorite paigaldust ja riistvara käsitletakse põhjalikumalt aines „Majutuskeskkonna riistvara“. See moodul vaatab virtualiseerimist **Linuxi administraatori pilgu läbi**: mis toimub kapoti all, kuidas hüperviisorit käsurealt hallata ja kuidas see seostub kursuse teiste teemadega (võrk, kettad, ZFS, konteinerid, varundus).
 
 ## Õpiväljundid
@@ -28,6 +29,7 @@ Mooduli läbinud õppija:
 | Näited | Proxmox VE (KVM), XCP-ng (Xen), VMware ESXi, Microsoft Hyper-V | VirtualBox, VMware Workstation, UTM |
 | Kasutus | serverid, andmekeskused, kooli labor | oma arvuti, arendus, õppimine |
 
+> [!NOTE]
 > KVM on mõlema vahepeal: see on Linuxi kerneli moodul, mis muudab kogu Linuxi hüperviisoriks. Seepärast loetakse Proxmoxi tüüp 1 hüperviisoriks, kuigi selle all töötab terve Debian.
 
 ### Riistvaraline tugi
@@ -72,16 +74,14 @@ Broadcomi poolt VMware'i ostu järel (2023) muutusid VMware'i litsentsitingimuse
 
 Proxmoxi „kapoti all“ töötavad samad komponendid, mida saab kasutada igas Linuxis:
 
-```text
-virt-manager / virsh / Cockpit / Proxmoxi veebiliides
-          │
-       libvirt (või Proxmoxi qm)  - haldus
-          │
-        QEMU   - emuleerib riistvara (kettad, võrk, ekraan)
-          │
-        KVM    - kerneli moodul, kasutab VT-x/AMD-V
-          │
-       Linuxi kernel
+```mermaid
+flowchart TB
+    A["virt-manager / virsh / Cockpit / Proxmoxi veebiliides"]
+    B["libvirt (või Proxmoxi qm) - haldus"]
+    C["QEMU - emuleerib riistvara<br>(kettad, võrk, ekraan)"]
+    D["KVM - kerneli moodul,<br>kasutab VT-x/AMD-V"]
+    E["Linuxi kernel"]
+    A --- B --- C --- D --- E
 ```
 
 ```bash
@@ -163,6 +163,7 @@ pveversion -v
 reboot                  # kui uuendati kernelit
 ```
 
+> [!NOTE]
 > Tootmises on soovitatav tellimus ja enterprise-hoidla: paketid on rohkem testitud ja ametlik tugi on olemas. No-subscription hoidla sobib labori- ja väiksema tähtsusega keskkonda.
 
 ### Põhiversiooni uuendus
@@ -235,6 +236,8 @@ qm destroy 101 --purge
 
 Hangunud masina puhul: `qm unlock` ja `qm stop`; kui ka see ei aita, leia QEMU protsess (`ps aux | grep "id 101"`) ja lõpeta see juurkasutajana `kill -9 <PID>`.
 
+<!-- PILT: ../pildid/m23-proxmox-ulevaade.png | Proxmoxi veebiliides: sõlm, VM-id ja konteinerid, *Summary* -->
+
 ### LXC konteinerid
 
 **LXC** konteinerid on süsteemikonteinerid: need käituvad nagu väikesed virtuaalmasinad (oma init, kasutajad, SSH), kuid jagavad hosti kernelit (vrd Podman, moodul 12 - rakenduskonteinerid).
@@ -264,6 +267,8 @@ Kasuta **õigusteta** (*unprivileged*) konteinereid - konteineri `root` ei ole h
 vzdump 101 --mode stop --compress zstd --storage local
 qmrestore /var/lib/vz/dump/vzdump-qemu-101-*.vma.zst 150 --unique
 ```
+
+<!-- PILT: ../pildid/m23-proxmox-varunduse-too.png | *Datacenter → Backup* ajastatud varunduse töö -->
 
 ### Proxmox Backup Server
 
@@ -331,7 +336,10 @@ proxmox-backup-client backup etc.pxar:/etc
 proxmox-backup-client snapshot list
 ```
 
+> [!IMPORTANT]
 > **Varundus pole valmis, kuni taastamine on testitud** (moodul 15). Proovi PBS-i varukoopiast taastada nii terve masin kui ka üksik fail ja mõõda, kui kaua see aega võttis.
+
+<!-- PILT: ../pildid/m23-pbs-andmehoidla.png | PBS-i andmehoidla *Summary* koos deduplitseerimisteguriga -->
 
 ### Cloud-init mall
 
@@ -355,6 +363,8 @@ qm start 201
 ```
 
 Pilvetõmmise ketas on väike (ca 3 GiB) - suurenda seda kloonimisel (`qm resize`), cloud-init laiendab failisüsteemi ise. Veebiliideses on samad seaded VM-i vahekaardil *Cloud-Init*. Sama malli kasutavad ka OpenTofu ja Ansible'i `proxmox_kvm` (moodul 16).
+
+<!-- PILT: ../pildid/m23-cloud-init.png | VM-i vahekaart *Cloud-Init* (kasutaja, SSH-võti, IP) -->
 
 ### Võrk: sillad, VLAN-id ja NAT
 
@@ -449,6 +459,7 @@ Sõlme eemaldamine klastrist:
 4. Kui sõlm on veebiliideses ikka näha: `rm -rf /etc/pve/nodes/<sõlme nimi>`.
 5. Kontrolli: `pvecm status`, `pvecm nodes`.
 
+> [!WARNING]
 > Eemaldatud sõlme **ei tohi** uuesti samas olekus võrku ühendada - paigalda see uuesti.
 
 ---
@@ -459,17 +470,17 @@ Sõlme eemaldamine klastrist:
 
 ### Xeni ülesehitus
 
-```text
-┌─────────────┬──────────┬──────────┐
-│ dom0        │ domU     │ domU     │
-│ (haldus-    │ (VM)     │ (VM)     │
-│  Linux,     │          │          │
-│  XAPI, xe)  │          │          │
-├─────────────┴──────────┴──────────┤
-│        Xen hüperviisor            │
-├───────────────────────────────────┤
-│           riistvara               │
-└───────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Domeenid [" "]
+        direction LR
+        D0["dom0<br>haldus-Linux, XAPI, xe"]
+        U1["domU<br>(VM)"]
+        U2["domU<br>(VM)"]
+    end
+    X["Xen hüperviisor"]
+    R["riistvara"]
+    Domeenid --- X --- R
 ```
 
 Erinevalt KVM-ist ei ole Xen Linuxi kerneli osa: hüperviisor käivitub esimesena ja haldus-Linux (**dom0**) on ise privileegidega virtuaalmasin. Külalismasinad on **domU**.
@@ -537,7 +548,10 @@ sudo ./xo-install.sh          # vali 1 (Install)
 
 Pärast paigaldust ava `http(s)://<VM-i IP>`. Vaikimisi kasutaja on `admin@admin.net`, parool `admin` - **muuda kohe**. Lisa XCP-ng server: *Settings* → *Servers* → aadress, `root` ja parool.
 
+> [!WARNING]
 > Loe enne käivitamist alati läbi, mida võõras skript teeb (moodul 4) - see paigaldab Node.js-i, ehitab XO lähtekoodist ja loob teenuse.
+
+<!-- PILT: ../pildid/m23-xen-orchestra.png | Xen Orchestra VM-ide loend -->
 
 ---
 

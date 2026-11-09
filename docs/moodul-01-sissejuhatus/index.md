@@ -27,6 +27,7 @@ Linux on **vaba ja avatud lähtekoodiga tarkvara**: lähtekood on kõigile kätt
 
 Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud UNIX-i põhimõtteid, kuid ei sisalda UNIX-i koodi. UNIX-i otsene järeltulija on hoopis **BSD** perekond (FreeBSD, OpenBSD jt), mis on Linuxiga väga sarnane, kuid on terviklik süsteem ja kasutab teistsugust litsentsi. BSD aluseid kasutavad näiteks macOS ja paljud tulemüürid. Linuxi ja BSD erinevustest loe lähemalt lisast [Linuxi distributsioonide ülevaade](../lisad/distrod.md#bsd-ja-linux).
 
+> [!NOTE]
 > **Ajalugu:** kuidas tekkisid UNIX, BSD, GNU ja Linux ning miks Linux on just selline, nagu ta on - sellest räägib lisa [UNIX-i ja Linuxi ajalugu](../lisad/ajalugu.md).
 
 **Kus Linuxit kasutatakse?**
@@ -37,6 +38,7 @@ Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud
 - ruuterid, nutiteleviisorid, autod ja muud sardseadmed;
 - konteinerid (Docker, Kubernetes) ja virtualiseerimisplatvormid (nt Proxmox VE).
 
+> [!NOTE]
 > **Miks see IT-spetsialistile oluline on?** Kui haldad servereid, võrguseadmeid või pilveteenuseid, puutud Linuxiga kokku peaaegu kindlasti, isegi kui sinu töölaual on Windows.
 
 ## 1.2 Distributsioonid
@@ -62,6 +64,7 @@ Need kolm on valitud, sest koos katavad need kaks levinuimat serveridistrode per
 
 Sama perekonna distrod on väga sarnased: kui oskad Debianit, saad hakkama ka Ubuntuga. Perekondade vahel erinevad peamiselt pakihaldus, mõne konfiguratsioonifaili asukoht ja vaikimisi turvalahendused. Käsurea põhitõed, mida selles moodulis õpid, on kõigis distrodes samad.
 
+> [!NOTE]
 > **Märkus:** distrode versioonid muutuvad. Kehtiv versioon ja toe kestus on alati kirjas distro kodulehel.
 
 ### Kus Linuxit harjutada?
@@ -108,6 +111,8 @@ Kirjuta `yes` ja vajuta Enter. Seejärel küsitakse parooli. **Parooli sisestami
 
 Ühenduse lõpetamiseks kirjuta `exit` või vajuta **Ctrl+D**.
 
+<!-- PILT: ../pildid/m01-esimene-ssh-uhendus.png | Windows Terminal: esimene `ssh` ühendus koos sõrmejälje küsimusega -->
+
 ### Viip
 
 Pärast sisselogimist näed **viipa** (*prompt*), mis näitab, et kest ootab käsku:
@@ -123,6 +128,7 @@ mari@debian:~$
 | `~` | Praegune kataloog (`~` tähendab kodukataloogi) |
 | `$` | Tavakasutaja. Juurkasutajal on selle asemel `#` |
 
+> [!WARNING]
 > **Ohutusreegel:** kui viip lõpeb märgiga `#`, töötad juurkasutajana (*root*) ja süsteem täidab iga käsu küsimata. Ole eriti tähelepanelik.
 
 ## 1.5 Käsu ülesehitus
@@ -163,6 +169,7 @@ Märk `#` koos sellele järgneva tekstiga on **kommentaar** - kest ignoreerib se
 | **Ctrl+D** | Lõpeta sisestus või logi välja |
 | **Ctrl+A / Ctrl+E** | Liigu rea algusesse / lõppu |
 
+> [!TIP]
 > **Harjumus:** kasuta Tab-klahvi kogu aeg. See säästab aega ja hoiab ära trükivead failinimedes.
 
 Käsuajalugu saad vaadata käsuga `history`.
@@ -218,6 +225,7 @@ Tehisintellekti vestlusrobotid (ChatGPT, Claude, Copilot jt) oskavad selgitada k
 - **Testi laboris.** Proovi pakutud lahendust kõigepealt virtuaalmasinas, mille saad hetktõmmisest taastada.
 - **Järgi reegleid.** Laboritöödes, enesekontrollis ja eksamil kehtivad õpetaja reeglid AI kasutamise kohta. Proovieksamil on AI keelatud - päris töös peab oskama ka ilma.
 
+> [!TIP]
 > Hea harjutus: lase AI-l selgitada mõnda selle mooduli käsku ja kontrolli vastust `man`-lehe abil. Kas kõik oli õige?
 
 ## 1.7 Failisüsteemi hierarhia
@@ -243,6 +251,7 @@ Kataloogide paigutust kirjeldab standard **FHS** (*Filesystem Hierarchy Standard
 | `/opt` | Kolmandate osapoolte lisatarkvara |
 | `/srv` | Serveriteenuste andmed (nt veebilehe failid) |
 
+> [!NOTE]
 > **Linuxis on kõik fail.** Ka seadmed, protsessid ja kerneli seaded on esitatud failidena. Sellepärast saab neid uurida samade tööriistadega, millega tavalisi faile.
 
 ## 1.8 Liikumine failisüsteemis
@@ -347,6 +356,7 @@ rmdir tühi-kataloog            # kustuta tühi kataloog
 rm -r kataloog                 # kustuta kataloog koos sisuga
 ```
 
+> [!WARNING]
 > **Hoiatus:** käsureal ei ole prügikasti. `rm` kustutab failid jäädavalt. Eriti ettevaatlik ole käsuga `rm -r` ja metamärkidega. Kontrolli enne Enteri vajutamist, kus sa oled (`pwd`) ja mida kustutad (`ls`).
 
 ### Failide sisu vaatamine
@@ -378,6 +388,7 @@ cp *.jpg pildid/
 rm aruanne-202?.txt
 ```
 
+> [!TIP]
 > **Nipp:** enne kui kasutad metamärke koos käsuga `rm`, käivita sama muster käsuga `ls`. Nii näed, mida kustutama hakkad.
 
 ### Tühikud failinimedes

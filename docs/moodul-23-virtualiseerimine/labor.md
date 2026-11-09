@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K18**.
 
+> [!NOTE]
 > Pesastatud hüperviisor on aeglasem kui päris riistvaral. Kasuta väikeseid testmasinaid (Alpine, Debiani pilvetõmmis) ja lülita masinad pärast tundi välja.
 
 ---
@@ -255,24 +256,5 @@ Kustuta testmasinad (`virsh undefine test1 --remove-all-storage`, `qm destroy`, 
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Pesastamisega VM-is on `vmx`/`svm` olemas ja `/dev/kvm` olemas; muu protsessori tüübi puhul ei pruugi laiendused külalisele näha olla ja KVM ei tööta (QEMU kasutaks väga aeglast emulatsiooni) |
-| K2 | Aadress vahemikust `192.168.122.0/24` (libvirt'i vaikimisi NAT-võrk); VM on hostis tavaline `qemu-system-x86_64` protsess |
-| K3 | Ketas on qcow2 *backing file*'iga - algul väike, hoiab ainult erinevusi; pilvetõmmis on valmis süsteem, paigaldust pole vaja |
-| K4 | `401 Unauthorized` enterprise-hoidla kohta (tellimus puudub); enterprise - tootmises koos tellimuse ja toega |
-| K5 | `pvedaemon`, `pveproxy`, `pvestatd`, `pve-cluster`, `corosync` (klastris), `pve-firewall`; `/etc/pve` on pmxcfs - klastri ühine andmebaasil põhinev failisüsteem (FUSE), mis sünkroonitakse kõigi sõlmede vahel; `vmbr0` |
-| K6 | Konteiner käivitub sekundiga, kasutab vähem mälu ja sama kernelit mis host; VM - oma kernel, eri OS-id, tugevam isolatsioon |
-| K7 | Konteineri UID-d on hostis nihutatud (vaikimisi 100000+); konteineri `root` on hostis õigusteta kasutaja |
-| K8 | Jah (`--unique`); sama MAC tekitaks ARP-i ja DHCP konflikte, ühendused katkeksid |
-| K9 | Lingitud kloon sekundiga ja peaaegu ilma ruumita, täielik kopeerib kogu ketta; lingitud kloon kasutab malli ketast alusena |
-| K10 | Esimene varukoopia saadab kogu kasutatud ketta, teine ainult muutunud plokid (*dirty bitmap*) ja võtab sekundeid. Tegur sõltub masinast; kahe järjestikuse varukoopia korral ligikaudu 2 või rohkem. Teine on kiirem, sest QEMU teab, millised plokid on muutunud, ja PBS-is juba olemas olevaid tükke uuesti ei saadeta |
-| K11 | `DatastoreBackup` võimaldab varundada ja taastada, kuid mitte varukoopiaid kustutada - ründaja ei saa ajalugu hävitada. Sama Proxmoxi rikke (ketas, tulekahju, lunavara) korral kaoksid masinad ja varukoopiad korraga. Taastamise aeg sõltub masina suurusest ja võrgust (laboris tavaliselt minutid) |
-| K12 | Jah; MASQUERADE asendab väljuvate pakettide lähteaadressi hosti `vmbr0` aadressiga, `ip_forward` lubab kernelil pakette liideste vahel edastada; OPNsense teeb sama (NAT + tulemüür) eraldi seadmena |
-| K13 | 2 häält; ühe sõlmega on 1/2 - kvoorumit pole, `/etc/pve` on ainult lugemiseks; kolmega jääb ühe rikke korral alles enamus (2/3) |
-| K14 | dom0 on privilegeeritud haldus-VM (Linux), mis haldab seadmeid ja teisi VM-e; Xen käivitub enne Linuxit, KVM-is on hüperviisor Linuxi kerneli osa |
-| K15 | Ilma tööriistadeta: IP puudub, hoiatus *Management agent not detected*; pärast: IP, mälu, viisakas sulgemine. Proxmoxis QEMU Guest Agent (`qemu-guest-agent`) |
-
-> **Märkus õpetajale:** laboritööd ei ole testitud. Pesastatud Proxmoxi ja XCP-ng jaoks peab kooli Proxmoxi sõlmes olema pesastamine lubatud ja VM-ide protsessori tüüp `host`. XCP-ng pesastatult KVM-i peal töötab, kuid aeglasemalt. Malli- ja ISO-nimed (`pveam available`) muutuvad - kontrolli need enne tundi.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

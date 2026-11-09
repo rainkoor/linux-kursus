@@ -329,16 +329,5 @@ ja käivita idempotentsuse kontroll uuesti. Seejärel paranda ülesanne nii, et 
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K2 | Esimene `changed>0`, teine `changed=0` |
-| K3 | Mall täidetakse iga serveri faktidega (`ansible_hostname`, `ansible_distribution`) |
-| K4 | Ansible taastas avalehe ja paigaldas `tree` uuesti (`changed`); triiv - serveri tegelik olek erineb kirjeldatust |
-| K5 | Ülesanne „Saidi seadistus“ ebaõnnestub (`/etc/nginx/sites-available` puudub). Lahendus: AlmaLinuxis `conf.d` + `when`-tingimused; lisaks firewalld ja SELinux |
-| K6 | `group_vars` väärtus (Haapsalu õppekool), sest `group_vars` on kõrgema prioriteediga kui rolli `defaults`; `-e` on kõige kõrgema prioriteediga, leht näitab „Test“ |
-| K7 | Sõltub koodist; tavalised: `fqcn` (täielik moodulinimi), `name` (ülesande nimi), `yaml`, `risky-file-permissions` (puuduv `mode`). Puuduv `mode` võib päriselt jätta faili valede õigustega |
-| K8 | Enne: teine käivitus `changed=1` (EI OLE IDEMPOTENTNE); pärast `creates:`-i `changed=0`. Ansible ei tea, mida käsk teeb, nii et `shell`/`command` on alati „changed“, kui ei kasuta `creates`/`removes` või `changed_when` |
-
-> **Märkus õpetajale:** Ansible'i mänguraamatu ja mallide YAML/Jinja2 süntaks on testitud, käivitamist päris masinates mitte. Kui `ansible.builtin.package` ei leia Debianis paketti, käivita enne `apt update` (lisa ülesanne `ansible.builtin.apt: update_cache: true` koos `when`-iga).
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

@@ -1,8 +1,10 @@
-# Proovieksam
+# Proovieksam: süvendusosa
 
 **Maht:** 4 tundi (eksam 2,5 h + arutelu) · **Distro:** AlmaLinux 10 · **Eeldused:** moodulid 1–17
 
 Proovieksam on RHCSA eksami stiilis praktiline töö: tühjas virtuaalmasinas tuleb piiratud aja jooksul täita hulk haldusülesandeid. Hinnatakse **tulemust** (kas süsteem on õiges olekus, ka pärast taaskäivitust), mitte käskude kirjutamise viisi. Pärast eksamit kontrollib tulemust automaatne skript.
+
+Põhiosa (moodulid 1–8) järel on lühem [proovieksam Debianis](proovieksam-pohiosa.md).
 
 Eksam aitab õppijal näha, milliseid teemasid ta valdab iseseisvalt, ja õpetajal, mida enne lõpuprojekti korrata.
 
@@ -94,4 +96,5 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ku
 - Taasta hetktõmmis „eksami algus“ ja tee eksam uuesti - eesmärk on jõuda **90%+** ilma abita.
 - Tee sama eksam Debianis: mis on erinev (`apt`, `ufw`, AppArmor, `/etc/apt/`, `adm`/`sudo` grupid)? Skript on kirjutatud AlmaLinuxi jaoks - Debianis tuleb osa kontrolle kohandada.
 
+> [!NOTE]
 > **Õpetajale:** skript kontrollib ainult olekut. Ülesannete sõnastus on täpne (nimed, numbrid), et kontroll oleks automaatne. Lisaülesandeid saab hõlpsasti lisada funktsiooniga `kontroll PUNKTID "kirjeldus" käsk`. Skripti süntaks on kontrollitud (`bash -n`), kuid päris AlmaLinuxis ei ole seda testitud - tee eksam enne õppijatega kasutamist üks kord ise läbi.

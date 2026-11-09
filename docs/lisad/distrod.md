@@ -2,32 +2,34 @@
 
 Distrosid on sadu, kuid enamik neist põhineb mõnel suuremal **alusdistrol**. Selles ülevaates on aktiivselt arendatavad olulisemad distrod, mis on rühmitatud perekondade kaupa.
 
+> [!NOTE]
 > **Kursusel kasutatavad distrod** on **Debian**, **Ubuntu** ja **AlmaLinux**. Need on Haapsalu Kutsehariduskeskuse Proxmoxi labori põhilised distrod ja kogu kursuse materjal on üles ehitatud nende kolme põhjal. Teiste distrode tundmine aitab aga mõista, kust need pärinevad ja millega võid tööl kokku puutuda.
 
 Tabelites on kursusel kasutatavad distrod märgitud tärniga (★). Lehe lõpus on ülevaade Linuxi lähisugulasest **BSD-st** ja selle erinevustest Linuxiga.
 
+> [!NOTE]
 > **Märkus:** distrode olukord muutub: tekib uusi, mõni lõpetab tegevuse. Ülevaade on koostatud 2026. aasta sügisel. Ajakohase info leiad distro kodulehelt.
 
 ## Kuidas distrod omavahel seotud on?
 
-```text
-Debian ──┬── Ubuntu ──┬── Linux Mint
-         │            ├── Pop!_OS
-         │            └── Zorin OS, elementary OS
-         ├── Kali Linux, Raspberry Pi OS, MX Linux
-         └── Proxmox VE, TrueNAS SCALE
-
-Fedora ── CentOS Stream ── RHEL ──┬── AlmaLinux
-                                  ├── Rocky Linux
-                                  └── Oracle Linux
-
-SUSE Linux Enterprise ── openSUSE Leap        openSUSE Tumbleweed
-
-Arch Linux ──┬── Manjaro
-             ├── EndeavourOS, CachyOS
-             └── SteamOS
-
-Sõltumatud: Alpine, Gentoo, Slackware, NixOS, Void
+```mermaid
+flowchart LR
+    Debian --> Ubuntu
+    Ubuntu --> Mint["Linux Mint"]
+    Ubuntu --> Pop["Pop!_OS"]
+    Ubuntu --> Zorin["Zorin OS, elementary OS"]
+    Debian --> Kali["Kali Linux, Raspberry Pi OS, MX Linux"]
+    Debian --> PVE["Proxmox VE, TrueNAS SCALE"]
+    Fedora --> Stream["CentOS Stream"] --> RHEL
+    RHEL --> Alma["AlmaLinux"]
+    RHEL --> Rocky["Rocky Linux"]
+    RHEL --> Oracle["Oracle Linux"]
+    SLE["SUSE Linux Enterprise"] --> Leap["openSUSE Leap"]
+    Tumbleweed["openSUSE Tumbleweed"]
+    Arch["Arch Linux"] --> Manjaro
+    Arch --> Endeavour["EndeavourOS, CachyOS"]
+    Arch --> SteamOS
+    Muud["Sõltumatud: Alpine, Gentoo,<br>Slackware, NixOS, Void"]
 ```
 
 ## Debiani perekond
@@ -64,6 +66,7 @@ Arendus liigub suunas **Fedora → CentOS Stream → RHEL**: uued lahendused jõ
 | Fedora | Red Hati toetatud kogukonnadistro, uusim tarkvara, väljalase ca iga 6 kuu järel | Töölaud, arendajad | [fedoraproject.org](https://fedoraproject.org/) |
 | Amazon Linux | AWS-i pilve jaoks loodud Fedoral põhinev distro | AWS-i pilv | [aws.amazon.com/linux](https://aws.amazon.com/linux/) |
 
+> [!NOTE]
 > **Ajalugu:** varem oli tasuta RHEL-i koopia **CentOS Linux**. Red Hat lõpetas selle ja CentOS Linux 7 tugi lõppes 2024. aastal. Selle asemele tekkisid AlmaLinux ja Rocky Linux. Tänapäeval tähendab „CentOS“ ainult arendusharu CentOS Stream.
 
 ## SUSE perekond
@@ -140,14 +143,17 @@ Linuxi kõrval on teine suur vaba UNIX-i-laadsete operatsioonisüsteemide pere *
 
 ### Natuke ajalugu
 
-```text
-UNIX (AT&T Bell Labs, 1969)
- ├── BSD (California Ülikool Berkeley, 1977) ──┬── FreeBSD ── macOS-i osad, PlayStationi OS
- │                                             ├── NetBSD ─── OpenBSD
- │                                             └── (FreeBSD) ─ DragonFly BSD
- └── kommertslikud UNIX-id (Solaris, AIX, HP-UX)
-
-Linux (1991) - kirjutati nullist, UNIX-i eeskujul, kuid ilma UNIX-i koodita
+```mermaid
+flowchart LR
+    UNIX["UNIX<br>AT&T Bell Labs, 1969"] --> BSD["BSD<br>Berkeley, 1977"]
+    UNIX --> Komm["kommertslikud UNIX-id<br>Solaris, AIX, HP-UX"]
+    BSD --> FreeBSD
+    BSD --> NetBSD
+    NetBSD --> OpenBSD
+    FreeBSD --> Mac["macOS-i osad,<br>PlayStationi OS"]
+    FreeBSD --> Dragon["DragonFly BSD"]
+    Linux["Linux, 1991<br>kirjutati nullist UNIX-i eeskujul,<br>ilma UNIX-i koodita"]
+    UNIX -. eeskuju .-> Linux
 ```
 
 **BSD** (*Berkeley Software Distribution*) on otsene UNIX-i järeltulija, mis sai alguse California Ülikoolist Berkeleys. **Linux** ei põhine UNIX-i koodil: Linus Torvalds kirjutas kerneli nullist, järgides UNIX-i põhimõtteid ja POSIX-i standardit. Seetõttu nimetatakse mõlemat **UNIX-i-laadseks** süsteemiks.
@@ -192,4 +198,4 @@ Linux (1991) - kirjutati nullist, UNIX-i eeskujul, kuid ilma UNIX-i koodita
 
 Kui oskad Linuxit, saad BSD-ga põhimõtteliselt hakkama: failisüsteemis liikumine, failide haldus, torud ja enamik käske töötavad samamoodi. Erinevused tulevad välja süsteemi halduses (tarkvara paigaldus, teenused, võrgu ja tulemüüri seadistus) ning mõne käsu võtmetes. Näiteks GNU `sed -i 's/a/b/' fail` asemel tuleb BSD-s (ja macOS-is) kirjutada `sed -i '' 's/a/b/' fail`.
 
-Sellel kursusel BSD-d ei käsitleta, kuid hea on teada, et see on olemas ja miks seda kasutatakse.
+Kursusel käsitletakse BSD-d kahes valikmoodulis: [moodul 18](../moodul-18-opnsense/index.md) (OPNsense tulemüür FreeBSD peal) ja [moodul 25](../moodul-25-freebsd/index.md) (FreeBSD server käsurealt).

@@ -40,20 +40,19 @@ Mõlemad oskavad: tulemüür (pf), NAT, DHCP, DNS (Unbound), VPN (WireGuard, Ope
 
 Tüüpiline OPNsense'i paigaldus jagab võrgu kaheks:
 
-```text
-          Kooli võrk / internet
-                  │
-        ┌─────────┴─────────┐
-        │   WAN (vtnet0)    │  DHCP-ga kooli võrgust, nt 10.10.0.57
-        │                   │
-        │     OPNsense      │  tulemüür, NAT, DHCP, DNS
-        │                   │
-        │   LAN (vtnet1)    │  10.0.83.1/24
-        └─────────┬─────────┘
-                  │  isoleeritud laborivõrk
-     ┌────────────┼────────────┬────────────┐
-  debian1      debian2      alma        ubuntuklient
- 10.0.83.52   10.0.83.53   10.0.83.55   DHCP
+```mermaid
+flowchart TD
+    I["Kooli võrk / internet"] --- W
+    subgraph O ["OPNsense: tulemüür, NAT, DHCP, DNS"]
+        W["WAN (vtnet0)<br>DHCP kooli võrgust, nt 10.10.0.57"]
+        L["LAN (vtnet1)<br>10.0.83.1/24"]
+        W --- L
+    end
+    L --- S{{"isoleeritud laborivõrk"}}
+    S --- D1["debian1<br>10.0.83.52"]
+    S --- D2["debian2<br>10.0.83.53"]
+    S --- A["alma<br>10.0.83.55"]
+    S --- U["ubuntuklient<br>DHCP"]
 ```
 
 - **WAN** (*Wide Area Network*) - „väline“ pool, kust tuleb internet;
@@ -116,6 +115,8 @@ Kõige sagedamini vajad punkte **1** (liidesed), **2** (LAN-i aadress, kui see e
 
 LAN-i vaikimisi aadress on `192.168.1.1/24`. Kui sinu võrguplaanis on muu võrk (nt `10.0.83.0/24`), muuda see kohe punktis **2**: sisesta uus aadress ja mask, luba LAN-il DHCP-server ja määra DHCP vahemik võrguplaani järgi.
 
+<!-- PILT: ../pildid/m18-konsoolimenuu.png | OPNsense'i konsoolimenüü (liidesed ja aadressid, valikud 0-13) -->
+
 ### Veebiliides
 
 Ava LAN-i võrgus olevast masinast brauseris `https://<LAN-aadress>` (nt `https://10.0.83.1`) ja logi sisse kasutajaga `root`. Esimesel sisselogimisel käivitub **seadistusviisard**:
@@ -130,7 +131,10 @@ Ava LAN-i võrgus olevast masinast brauseris `https://<LAN-aadress>` (nt `https:
 5. **Root password:** võib muuta.
 6. **Reload** - seadistus rakendub.
 
+> [!NOTE]
 > **Kui muutsid LAN-i aadressi:** sinu brauseriga masin tuleb ühendada uude võrku (uus DHCP-aadress või staatiline aadress) ja avada uus aadress. Kontrolli ka, et DHCP vahemik on uues võrgus - paigaldaja ei pruugi seda muuta, ja kui vahemik on väljaspool võrku, DHCP-server ei käivitu.
+
+<!-- PILT: ../pildid/m18-armatuurlaud.png | OPNsense'i veebiliidese armatuurlaud (*Lobby → Dashboard*) -->
 
 ## 18.4 DHCP ja DNS
 
@@ -151,6 +155,7 @@ Olulised seaded (nimetused võivad versiooniti veidi erineda):
 
 Antud rendid näed DHCP-teenuse lehel *Leases*.
 
+> [!WARNING]
 > **Ainult üks DHCP-server võrgus!** Kui moodulis 19 seadistad Linuxi DHCP-serveri, tuleb OPNsense'i DHCP sellel liidesel välja lülitada - muidu jagavad kaks serverit klientidele vastuolulisi aadresse.
 
 ### DNS
@@ -190,6 +195,8 @@ Seetõttu: LAN-i liidesel on vaikimisi reegel „luba LAN-ist kõikjale“, WAN-
 
 Pärast muutmist vajuta **Apply changes**.
 
+<!-- PILT: ../pildid/m18-tulemuurireeglid.png | *Firewall → Rules → LAN* reeglite loend -->
+
 ### Aliased
 
 **Alias** on nimega aadresside, võrkude või portide loend (*Firewall* → *Aliases*). Reeglites kasutatakse aliast numbrite asemel:
@@ -219,6 +226,8 @@ Nii on reeglid loetavad ja muudatuse (nt uus server) saab teha ühes kohas.
 | Description | Veebiserver alma |
 
 Nüüd suunatakse ühendus `http://<WAN-aadress>:8080` sisevõrgu masina `alma` porti 80. OPNsense loob vaikimisi automaatselt ka sobiva tulemüürireegli WAN-il.
+
+<!-- PILT: ../pildid/m18-pordisuunamine.png | *Firewall → NAT → Port Forward* reegli vorm -->
 
 ### Logid ja diagnostika
 
@@ -290,7 +299,7 @@ Näed, et põhitööriistad (`ls`, `cd`, `grep`, `ps`, `top`, `tcpdump`, `ssh`) 
 | Varundus | *System* → *Configuration* → *Backups* |
 | FreeBSD | `ifconfig`, `netstat -rn`, `sockstat -4l`, `pfctl -sr` |
 
-**Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil.
+**Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil. FreeBSD-d käsurealt serverina haldad valikmoodulis [25. FreeBSD server](../moodul-25-freebsd/index.md).
 
 ## Lisamaterjal
 

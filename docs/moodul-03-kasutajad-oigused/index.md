@@ -66,6 +66,7 @@ mari:$y$j9T$...:20400:0:99999:7:::
 
 Kui räsi asemel on `!` või `*`, ei saa selle kasutajaga parooliga sisse logida (konto on lukus).
 
+> [!NOTE]
 > Parooli ennast Linux ei salvesta. Sisselogimisel arvutatakse sisestatud paroolist räsi ja võrreldakse seda salvestatuga.
 
 ### Kasutaja info
@@ -147,6 +148,7 @@ jaan    ALL=(root) /usr/bin/systemctl restart nginx   # ainult üks käsk
 
 Reegli kuju: `kes  kus=(kellena)  millised_käsud`. Märk `%` tähistab gruppi.
 
+> [!TIP]
 > **Hea tava:** lisa oma reeglid eraldi failidena kataloogi `/etc/sudoers.d/`, mitte põhifaili. Nii on neid lihtne hallata ja eemaldada.
 
 ## 3.5 Kasutajate ja gruppide haldus
@@ -176,6 +178,7 @@ sudo userdel -r mari                   # kustuta koos kodukataloogiga
 | `-G` | Lisagrupid (komaga eraldatud) |
 | `-u` | Kindel UID |
 
+> [!WARNING]
 > **Hoiatus:** `usermod -G grupp` ilma võtmeta `-a` **asendab** kõik kasutaja lisagrupid ühega. Kui eemaldad nii kogemata kasutaja grupist `sudo`, kaotab ta halduriõigused. Kasuta alati `usermod -aG` (*append*).
 
 Grupimuudatused jõustuvad alles **järgmisel sisselogimisel**. Kui lisasid iseenda gruppi, logi välja ja uuesti sisse.
@@ -236,6 +239,7 @@ drwxr-x--- 2 mari tarkvara 4096 jaan 10 09:20 kood
 | **w** (*write*) | Faili sisu muutmine | Failide loomine, kustutamine ja ümbernimetamine kataloogis |
 | **x** (*execute*) | Faili käivitamine programmina | Kataloogi sisenemine (`cd`) ja sealsetele failidele ligipääs |
 
+> [!WARNING]
 > **Tähelepanu:** faili kustutamiseks ei ole vaja õigust failile endale, vaid **kirjutusõigust kataloogile**, kus fail asub.
 
 Kataloogi puhul käivad `r` ja `x` tavaliselt koos: ilma `x`-ta ei pääse kataloogi failidele ligi, isegi kui `r` on olemas.
@@ -309,6 +313,7 @@ chmod 640 plaan.txt
 chmod 755 skript.sh
 ```
 
+> [!WARNING]
 > **Ära kasuta `chmod 777`!** See annab kõigile kõik õigused. Kui midagi „ei tööta õiguste pärast“, otsi õiget lahendust (õige omanik või grupp), mitte ära ava kõike.
 
 ## 3.8 Omaniku muutmine: chown ja chgrp
@@ -370,6 +375,7 @@ chmod 1777 /srv/yhine      # sama numbriliselt
 
 Kui `ls -l` näitab suurtähte (`S` või `T`), on eriline õigus määratud, kuid vastav `x` puudub - tavaliselt on see viga.
 
+> [!WARNING]
 > **Turvalisus:** SUID-programmid on häkkeritele huvitav sihtmärk, sest nende kaudu võib saada juurkasutaja õigused. Ära lisa SUID-õigust oma programmidele ja skriptidele. Süsteemi SUID-failid leiad käsuga `find / -perm -4000 -type f 2>/dev/null`.
 
 ## 3.11 Grupi jagatud kataloog
@@ -442,6 +448,7 @@ Muud vaikeseaded:
 
 Näiteks moodulid: `pam_unix` (tavaline parool), `pam_pwquality` (parooli tugevus), `pam_faillock` (lukustamine valede katsete järel), `pam_limits` (ressursipiirangud, moodul 5), `pam_mkhomedir` (kodukataloog, moodulid 20–21), `pam_sss` (LDAP/AD).
 
+> [!WARNING]
 > **Hoiatus:** vigane PAM-i seadistus võib takistada **kõigil** sisselogimist, ka `sudo`-t. Hoia muutmise ajal teises aknas juurkasutaja kest lahti ja testi uues aknas. Debianis ja Ubuntus muuda PAM-i võimalusel käsuga `pam-auth-update`, AlmaLinuxis käsuga `authselect`, mitte faile käsitsi.
 
 ### Parooli tugevus: pam_pwquality
@@ -478,6 +485,7 @@ sudo faillock --user mari                        # ebaõnnestunud katsed
 sudo faillock --user mari --reset                # ava lukk
 ```
 
+> [!NOTE]
 > SSH-ga võtmepõhise autentimise korral (moodul 7) PAM-i parooliseadeid ei kasutata; võrgust tulevate rünnakute vastu kasutatakse lisaks fail2ban-i (moodul 11).
 
 ---

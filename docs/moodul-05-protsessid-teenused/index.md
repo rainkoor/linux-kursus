@@ -142,6 +142,7 @@ killall firefox              # lõpeta kõik protsessid nimega firefox
 kill -l                      # kõik signaalid
 ```
 
+> [!TIP]
 > **Hea tava:** proovi alati kõigepealt `kill` (SIGTERM), mis laseb programmil oma töö korrektselt lõpetada: salvestada andmed, sulgeda failid ja ühendused. `kill -9` kasuta alles siis, kui protsess ei reageeri, sest see võib jätta andmed poolikuks.
 
 Tavakasutaja saab signaale saata ainult oma protsessidele, juurkasutaja kõigile.
@@ -221,6 +222,7 @@ systemctl is-active httpd             # kas töötab
 systemctl is-enabled httpd            # kas on lubatud
 ```
 
+> [!WARNING]
 > **start ja enable on eri asjad!** `start` käivitab teenuse **praegu**, `enable` määrab, et teenus käivitub **järgmisel alglaadimisel**. Uue teenuse puhul on tavaliselt vaja mõlemat: `enable --now`.
 
 `systemctl status` väljund:
@@ -305,6 +307,7 @@ systemctl status minuteenus
 
 `Restart=on-failure` taaskäivitab teenuse, kui see lõpetab veakoodiga või sunnitakse lõpetama (nt `SIGKILL`). Viisaka lõpetamise (`SIGTERM`) või `systemctl stop` järel taaskäivitust ei toimu.
 
+> [!NOTE]
 > **Programmi väljund läheb logisse.** Kõik, mida teenus kirjutab standardväljundisse või veaväljundisse, salvestab systemd journal'isse. Eraldi logifaili pole vaja.
 
 ## 5.7 Logid: journalctl
@@ -373,6 +376,7 @@ Crontab'i rea vorming:
 | `0 0 1 * * /usr/local/bin/kuuaruanne.sh` | Iga kuu esimesel päeval keskööl |
 | `@reboot /usr/local/bin/start.sh` | Iga alglaadimise järel |
 
+> [!WARNING]
 > **Levinud viga:** cron käivitab käsud väga minimaalse keskkonnaga (`PATH` on lühike). Kasuta crontab'is alati **täielikke teid** ja suuna väljund faili, et vigu näha: `... >> /var/log/varundus.log 2>&1`.
 
 Süsteemi ajastatud tööd on failis `/etc/crontab` ja kataloogides `/etc/cron.d/`, `/etc/cron.daily/`, `/etc/cron.weekly/` ja `/etc/cron.monthly/`.
@@ -500,6 +504,7 @@ Kasutajate seansid on systemd-s **lõikudes** (`user-1000.slice`) - piiranguid s
 | Logide lugemise grupp | `adm`, `systemd-journal` | `adm`, `systemd-journal` | `wheel`, `systemd-journal` |
 | SELinux mõjutab teenuseid | Ei (AppArmor) | Ei (AppArmor) | **Jah** - vt märkust allpool |
 
+> [!NOTE]
 > **AlmaLinux ja SELinux:** SELinux märgistab iga faili. Kui teenus peab käivitama skripti, mis on loodud kodukataloogis ja seejärel käsuga `mv` kausta `/usr/local/bin` teisaldatud, jääb sellele kodukataloogi märgis ja SELinux keelab käivitamise. Lahendus: loo fail otse sihtkataloogis või taasta õige märgis käsuga `sudo restorecon -v /usr/local/bin/skript.sh`. SELinuxit käsitleme lähemalt moodulis 11.
 
 ---

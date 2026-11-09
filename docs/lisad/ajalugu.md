@@ -207,19 +207,20 @@ Juhtum näitas korraga avatud lähtekoodi tugevust ja nõrkust:
 
 Nimi **UNIX** on tänapäeval kaubamärk, mille omanik on organisatsioon **The Open Group**. Ametlikult tohib end UNIX-iks nimetada ainult süsteem, mis on läbinud sertifitseerimise (nt macOS, AIX). Linux ja BSD ei ole sertifitseeritud, seepärast nimetatakse neid **UNIX-i-laadseteks** süsteemideks - kuigi praktikas töötavad need väga sarnaselt.
 
-```text
-                         UNIX (1969)
-                              │
-           ┌──────────────────┼──────────────────┐
-           │                  │                  │
-         BSD (1977)    System V (1983)      (UNIX-i eeskujul,
-           │                  │               ilma UNIX-i koodita)
-     ┌─────┼─────┐       ┌────┼────┐               │
-  FreeBSD NetBSD OpenBSD Solaris AIX HP-UX     GNU (1983) + Linux (1991)
-     │                                               │
-  macOS (osaliselt)                         Debian, Red Hat, Arch ...
-                                                     │
-                                        Ubuntu, AlmaLinux, Android ...
+```mermaid
+flowchart TD
+    UNIX["UNIX (1969)"] --> BSD["BSD (1977)"]
+    UNIX --> SysV["System V (1983)"]
+    UNIX -. "eeskuju, ilma UNIX-i koodita" .-> GNU["GNU (1983) + Linux (1991)"]
+    BSD --> FreeBSD
+    BSD --> NetBSD
+    BSD --> OpenBSD
+    FreeBSD --> macOS["macOS (osaliselt)"]
+    SysV --> Solaris
+    SysV --> AIX
+    SysV --> HPUX["HP-UX"]
+    GNU --> Distrod["Debian, Red Hat, Arch ..."]
+    Distrod --> Uued["Ubuntu, AlmaLinux, Android ..."]
 ```
 
 ## Inimesed, keda tasub teada

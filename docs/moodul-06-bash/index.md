@@ -22,6 +22,7 @@ Mooduli läbinud õppija:
 
 **Skript** on tekstifail, mis sisaldab kesta käske, mida täidetakse järjest. Kõik, mida saad kirjutada käsureale, saad panna ka skripti. Skriptid on süsteemiadministraatori põhitööriist korduvate tööde automatiseerimiseks: varundus, kasutajate loomine, logide analüüs, seire.
 
+> [!TIP]
 > **Millal skript, millal midagi muud?** Bash sobib hästi käskude ühendamiseks ja failidega töötamiseks. Kui skript kasvab üle paarisaja rea või vajab keerulisi andmestruktuure, on parem kasutada Pythonit. Mitme serveri seadistamiseks sobib Ansible (moodul 16).
 
 ### Esimene skript
@@ -155,6 +156,7 @@ rm $fail          # proovib kustutada kaks faili: "minu" ja "aruanne.txt"
 rm "$fail"        # kustutab faili "minu aruanne.txt"
 ```
 
+> [!TIP]
 > **Reegel:** pane muutujad **alati** jutumärkidesse: `"$muutuja"`, `"$1"`, `"$@"`. Erandeid on vähe ja kui sa pole kindel, kasuta jutumärke.
 
 ## 6.4 Argumendid
@@ -239,7 +241,7 @@ Nii saab skripti kasutaja väljundi ja vead eraldi suunata (vt moodul 2).
 
 ### if
 
-```bash
+```text
 if käsk; then
     # kui käsk õnnestus (väljumiskood 0)
 elif teine_käsk; then
@@ -266,6 +268,7 @@ if grep -q "mari" /etc/passwd; then
 fi
 ```
 
+> [!WARNING]
 > **Tühikud on kohustuslikud!** `[ "$a" = "$b" ]` töötab, `["$a"="$b"]` ei tööta. `[` on tegelikult käsk ja selle osad on argumendid.
 
 ### Võrdlused
@@ -354,6 +357,7 @@ for ((i = 1; i <= 10; i++)); do       # C-stiilis tsükkel
 done
 ```
 
+> [!WARNING]
 > **Ära kasuta `for f in $(ls)`!** See läheb katki tühikutega failinimede korral. Kasuta metamärke: `for f in *.txt`.
 
 ### while
@@ -423,6 +427,7 @@ if [[ "$vastus" != [jJ]* ]]; then
 fi
 ```
 
+> [!NOTE]
 > Halduskriptid peaksid töötama ka **ilma kasutajata** (nt cron'ist või taimerist käivitades). Seepärast eelista argumente ja seadistusfaile ning kasuta `read`-i ainult siis, kui see on tõesti vajalik (nt ohtliku toimingu kinnitamiseks).
 
 ## 6.9 Funktsioonid
@@ -595,9 +600,12 @@ Git ei ole ainult programmeerijatele. Süsteemiadministraator hoiab Gitis skript
 | **Haru** (*branch*) | Eraldi arendusliin, nt uue funktsiooni katsetamiseks |
 | **Kaughoidla** (*remote*) | Hoidla koopia serveris (GitHub, GitLab, oma server) |
 
-```text
-  töökataloog  ──git add──▶  ettevalmistusala  ──git commit──▶  kohalik hoidla  ──git push──▶  kaughoidla
-               ◀────────────────────────── git pull ─────────────────────────────────────────
+```mermaid
+flowchart LR
+    T["töökataloog"] -- "git add" --> E["ettevalmistusala"]
+    E -- "git commit" --> K["kohalik hoidla"]
+    K -- "git push" --> R["kaughoidla"]
+    R -- "git pull" --> T
 ```
 
 ### Seadistamine
@@ -648,6 +656,7 @@ Fail `.gitignore` ütleb, milliseid faile Git ei jälgi:
 salasõnad.txt
 ```
 
+> [!WARNING]
 > **Ära pane Giti paroole, privaatvõtmeid ega API-võtmeid!** Kord sisse kantud fail jääb ajalukku ka pärast kustutamist. Kui see juhtub ja hoidla on avalik, tuleb saladus kohe vahetada.
 
 ### Harud
@@ -689,6 +698,7 @@ Bashi skriptimine on kõigis distrodes sama. Erinevused on käskudes, mida skrip
 | ShellCheck | `apt install shellcheck` | `apt install shellcheck` | EPEL-ist `dnf install ShellCheck` |
 | Pakihaldus skriptis | `apt-get -y install` | `apt-get -y install` | `dnf -y install` |
 
+> [!WARNING]
 > **`#!/bin/sh` ei ole sama mis `#!/bin/bash`!** Debianis ja Ubuntus on `/bin/sh` väike ja kiire kest `dash`, mis ei toeta Bashi laiendusi (nt `[[ ]]`, massiivid, `{1..5}`, `(( ))` ja `<( )`). Kui kasutad Bashi võimalusi, kirjuta alati `#!/bin/bash`. AlmaLinuxis on `/bin/sh` viit Bashile, mistõttu seal töötav `sh`-skript võib Debianis katki minna.
 
 Distrost sõltuvat skripti saab kirjutada faili `/etc/os-release` põhjal:

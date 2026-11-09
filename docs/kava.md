@@ -25,7 +25,7 @@ Kursuse läbinud õppija:
 
 ## Maht ja ülesehitus
 
-Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksam 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (66 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
+Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 180 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (76 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
 
 ### Põhiosa: Linuxi kasutamine ja haldus
 
@@ -39,6 +39,7 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** ko
 | 6 | [Bashi skriptimine ja Git](moodul-06-bash/index.md) | 16 | Debian |
 | 7 | [Võrk ja SSH](moodul-07-vork-ssh/index.md) | 12 | Ubuntu |
 | 8 | [Kettad, failisüsteemid ja LVM](moodul-08-kettad-lvm/index.md) | 8 | AlmaLinux |
+| - | [Proovieksam: põhiosa](proovieksam-pohiosa.md) | 2 | Debian |
 
 ### Süvendusosa: serverid ja automatiseerimine
 
@@ -53,7 +54,7 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** ko
 | 15 | [Võrguteenused: DNS, failijagamine, e-post ja varundus](moodul-15-vorguteenused/index.md) | 10 | Debian (15B: Ubuntu) |
 | 16 | [Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](moodul-16-automatiseerimine/index.md) | 10 | AlmaLinux, Debian, Ubuntu |
 | 17 | [Seire ja jõudlus](moodul-17-seire/index.md) | 8 | Debian, Ubuntu |
-| - | [Proovieksam](proovieksam.md) | 4 | AlmaLinux |
+| - | [Proovieksam: süvendusosa](proovieksam.md) | 4 | AlmaLinux |
 | - | [Lõpuprojekt](lopuprojekt.md) (kolm taset) | 16 (12–32) | Õppija valik |
 
 Moodul 12 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodulites 13–15 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS, failid, e-post ja varundus), mida moodulites 16–17 automatiseeritakse ja seiratakse. Moodulid 16 ja 17 on **sissejuhatavad ja ülevaatlikud**: HKHK-s käsitletakse automatiseerimist ja seiret põhjalikult eraldi ainetes „IT-süsteemide automatiseerimine“ ja „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit.
@@ -69,8 +70,9 @@ Moodul 12 annab konteinerite alused, mida serverimoodulites kasutatakse alternat
 | 22 | [Linux töölaual ja WSL](moodul-22-toolaud-wsl/index.md) | 8 | Ubuntu Desktop, Kali, Windows (WSL) |
 | 23 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](moodul-23-virtualiseerimine/index.md) | 12 | Debian, Proxmox VE, XCP-ng |
 | 24 | [Kubernetes: k3s](moodul-24-kubernetes/index.md) | 10 | Debian |
+| 25 | [FreeBSD server](moodul-25-freebsd/index.md) | 10 | FreeBSD |
 
-Valikmoodulid 18–21 ehitavad üksteise peale (OPNsense'i laborivõrk → DHCP/PXE → LDAP → AD). Moodulid 22–24 on iseseisvad (moodul 24 eeldab konteinereid ja veebiservereid, moodulid 12–13).
+Valikmoodulid 18–21 ehitavad üksteise peale (OPNsense'i laborivõrk → DHCP/PXE → LDAP → AD). Moodulid 22–25 on iseseisvad (moodul 24 eeldab konteinereid ja veebiservereid, moodulid 12–13; moodul 25 eeldab põhiosa ja sobib hästi pärast moodulit 18).
 
 Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalmasinad ja paigaldus) on kirjeldatud lisas [Laborikeskkond ja paigaldus](lisad/paigaldus.md). Kõik laboritööd kasutavad sama IP-plaani, nii et õppija ehitab ühe keskkonna, mis kasvab moodulist moodulisse.
 
@@ -268,9 +270,19 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** k3s ja Kubernetese dokumentatsioon; minikube või kind oma arvutis; „Kubernetes the Hard Way“.
 
-### Proovieksam
+### Valikmoodul 25. FreeBSD server
 
-RHCSA stiilis praktiline eksam AlmaLinuxis: 2,5 tunniga tuleb täita 8 teemaplokki haldusülesandeid ning tulemust kontrollib automaatne skript. Juhend: [proovieksam](proovieksam.md).
+**Teemad:** BSD perekond ja FreeBSD, baassüsteem ja `/usr/local`, paigaldus ZFS juurfailisüsteemiga, GNU ja BSD tööriistade erinevused, `pkg`, pordid ja pkgbase, baassüsteemi uuendamine (`freebsd-update`), teenused rc.d süsteemiga (`rc.conf`, `sysrc`, `service`), logid, `newsyslog` ja `periodic`, kasutajad (`pw`, `vipw`, grupp `wheel`, `doas`), võrk (`ifconfig`, `rc.conf`), ZFS-i hetktõmmised ja alglaadimiskeskkonnad (`bectl`), tulemüür pf (tabelid, ühenduste piiramine), jailid, FreeBSD ja Linuxi halduse võrdlus.
+
+**Õpiväljundid:** õppija paigaldab ja haldab FreeBSD serverit käsurealt, uuendab seda turvaliselt alglaadimiskeskkondadega, seadistab pf-i ja jaili ning võrdleb FreeBSD ja Linuxi haldust.
+
+**Iseõppeks:** FreeBSD Handbook; „Absolute FreeBSD“ (M. W. Lucas); BastilleBSD.
+
+### Proovieksamid
+
+**Põhiosa** (2 h, pärast moodulit 8): praktiline eksam Debianis 7 teemaplokiga (süsteem, kasutajad, failid ja tekst, tarkvara ja ajastamine, võrk ja tulemüür, LVM, skript), tulemust kontrollib automaatne skript. Juhend: [proovieksam: põhiosa](proovieksam-pohiosa.md).
+
+**Süvendusosa** (4 h): RHCSA stiilis praktiline eksam AlmaLinuxis: 2,5 tunniga tuleb täita 8 teemaplokki haldusülesandeid ning tulemust kontrollib automaatne skript. Juhend: [proovieksam](proovieksam.md).
 
 ### Lõpuprojekt
 
@@ -294,7 +306,7 @@ Soovituslik hindamine (kohanda õppekava järgi):
 |---|---|---|
 | **Laboritööd** | 40% | kõik kohustuslikud osad on tehtud ja vähemalt 80% K-küsimustest on vastatud sisuliselt õigesti |
 | **Enesekontroll** | - | iseseisvaks kontrolliks; õpetaja võib kasutada küsimusi kontrolltöös |
-| **Proovieksam** | 20% | vähemalt 70% punktidest kontrollskripti järgi |
+| **Proovieksamid** | 20% | vähemalt 70% punktidest kontrollskripti järgi |
 | **Lõpuprojekt** | 40% | vt [lõpuprojekti hindamine](lopuprojekt.md) |
 
 ### Laboritöö hindamisjuhend

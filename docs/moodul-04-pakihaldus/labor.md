@@ -9,8 +9,10 @@
 
 **Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K16**.
 
+> [!NOTE]
 > **Erandina kasutad selles laboris kõiki kolme distrot.** Hoia kolm SSH-seanssi korraga lahti (nt Windows Terminali eri vahekaartidel), et saaksid tulemusi kohe võrrelda. Jälgi viipa, et teaksid, millises masinas oled.
 
+> [!NOTE]
 > **Debiani märkus:** kui Debiani paigaldamisel määrati juurkasutaja parool, ei pruugi `sudo` olla paigaldatud ega sinu kasutaja grupis `sudo`. Sel juhul tee järgmist: `su -`, siis `apt install sudo` ja `usermod -aG sudo sinu_kasutaja`, logi välja ja uuesti sisse.
 
 ---
@@ -45,6 +47,7 @@ ls /etc/yum.repos.d/                                             # AlmaLinux
 
 **1.6 Faili päritolu.** Leia, millisesse paketti kuuluvad failid `/usr/bin/ls` ja `/etc/ssh/ssh_config` (SSH kliendi seadistus).
 
+> [!NOTE]
 > Kui Debiani vanemas versioonis `dpkg -S /usr/bin/ls` vastust ei anna, proovi `dpkg -S /bin/ls`. Põhjus: vanemates versioonides registreeris pakihaldur faili vana tee all, kuigi `/bin` on viit kataloogile `/usr/bin`.
 
 **K3.** Kas paketid on kolmes distros samanimelised?
@@ -255,19 +258,5 @@ which -a hello
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | `apt update` värskendab ainult pakettide loendit, `apt upgrade` uuendab. `dnf` värskendab loendit automaatselt |
-| K3 | Osaliselt: `ls` kuulub kõigis paketti `coreutils` (AlmaLinuxi minimaalses keskkonnas võib olla `coreutils-single`), kuid `ssh_config` kuulub Debianis ja Ubuntus paketti `openssh-client`, AlmaLinuxis paketti `openssh-clients` |
-| K5 | Ei leitud: `ncdu` ei ole AlmaLinuxi põhihoidlates, vaid EPEL-is |
-| K7 | `undo` eemaldab `ncdu`, EPEL jääb alles, sest see paigaldati eraldi toiminguga |
-| K8 | AlmaLinux: `bind-utils`; Debian/Ubuntu: `bind9-dnsutils` (või üleminekupakett `dnsutils`) |
-| K9 | `universe` - kogukonna hooldatud; `main` - Canonicali toetatud |
-| K10 | Snapi käivitusfail on kataloogis `/snap/bin`; programm töötab isoleeritult koos oma sõltuvustega |
-| K12 | `/usr/local/bin/hello`; fail paigaldati käsitsi, pakihaldur sellest ei tea |
-| K13 | Kaks; `PATH`-is on `/usr/local/bin` enne `/usr/bin`, seega käivitub käsitsi paigaldatu |
-| K14 | Automaatsed (turva)uuendused, sõltuvuste haldus, puhas eemaldamine, allkirjastatud ja testitud paketid |
-| K15 | Tootja ametlik hoidla ≈ EPEL → kompileerimine → juhuslik PPA → `curl \| sudo bash` (viimane ainult siis, kui skript on enne läbi loetud) |
-| K16 | Varukoopia või hetktõmmis, uuenduste nimekirja ülevaatamine, hooldusaeg ja teavitus, taaskäivitusvalmidus |
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

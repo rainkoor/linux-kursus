@@ -39,6 +39,7 @@ Peaaegu iga rakendus hoiab oma andmeid andmebaasis. Administraator ei pea olema 
 | Varundus | `mariadb-dump` | `pg_dump` | `.backup`, faili koopia peatatud rakendusega |
 | Tugevus | levinud veebirakendustes, lihtne | standarditele vastav, võimas (JSON, laiendused) | null seadistust, üks fail |
 
+> [!NOTE]
 > **NoSQL** ei tähenda „parem“ ega „uuem“. Enamiku rakenduste jaoks on relatsiooniline andmebaas õige valik. NoSQL-andmebaasid lahendavad kitsamaid ülesandeid (vahemälu, väga suured andmemahud, paindlik struktuur).
 
 ## 14.2 MariaDB ja MySQL
@@ -88,6 +89,7 @@ sudo mariadb-dump --all-databases --single-transaction > koik.sql
 sudo mariadb kool < kool-2026-11-08.sql
 ```
 
+> [!NOTE]
 > **Andmebaasi failide (`/var/lib/mysql`) kopeerimine töötava serveri pealt ei ole usaldusväärne varukoopia** - failid võivad olla poolelioleva muudatuse keskel. Kasuta `mariadb-dump`-i või peata enne kopeerimist teenus.
 
 #### Unustatud andmebaasi parooli taastamine
@@ -118,6 +120,7 @@ sudo mariadb -u root -p                # kontrolli uut parooli
 
 `--skip-networking` on **kohustuslik**: sel ajal saab andmebaasi kasutada igaüks ilma paroolita ja see ei tohi olla võrgust kättesaadav. Klassikaline viis on käivitada server käsitsi: `sudo mariadbd-safe --skip-grant-tables --skip-networking &` (MySQL-is ja vanemas MariaDB-s `mysqld_safe`); siis võib olla vaja enne luua kataloog `/run/mysqld` omanikuga `mysql`.
 
+> [!WARNING]
 > **Turvalisus:** see töötab ainult juurkasutaja õigustega serveris. Andmebaasi kaitseb seega lõpuks operatsioonisüsteemi turvalisus - kes saab serveris `root`-iks, saab ka andmebaasi.
 
 ### Replikatsioon lühidalt
@@ -147,6 +150,7 @@ START REPLICA;
 SHOW REPLICA STATUS\G
 ```
 
+> [!WARNING]
 > **Replikatsioon ei ole varukoopia:** kogemata `DROP TABLE` jõuab sekunditega ka koopiasse.
 
 ### Ülevõtt: koopia põhiserveriks
@@ -173,6 +177,7 @@ Kui vana põhiserver taas töötab, **ei tohi seda lihtsalt käivitada** - siis 
 
 PostgreSQL-is tehakse koopiast põhiserver käsuga `SELECT pg_promote();` (või `pg_ctl promote`).
 
+> [!NOTE]
 > **Automaatne ülevõtt on keerukam, kui tundub.** Kõige raskem on otsustada, kas põhiserver on päriselt rikkis või on ainult võrk katkenud. Seepärast kasutavad automaatsed lahendused vähemalt kolme sõlme ja häälteenamust (*quorum*). Väikeses asutuses on sageli piisav **dokumenteeritud ja harjutatud käsitsi ülevõtt**.
 
 ## 14.3 PostgreSQL
@@ -272,6 +277,7 @@ Millal SQLite sobib ja millal mitte:
 | seadistus ja olek (nt Uptime Kuma, Grafana) | mitu serverit peab samu andmeid kasutama |
 | testid ja prototüübid | fail NFS-i peal (lukustus ei pruugi töötada) |
 
+> [!NOTE]
 > Haldaja jaoks on SQLite **lihtsalt fail**: varunda see (`.backup` või peatatud rakendusega koopia), ära kustuta kõrvalfaile `*-wal` ja `*-shm` töötava rakenduse ajal ning kontrolli õigusi - kes faili loeb, näeb kõiki andmeid.
 
 ## 14.5 Võti-väärtus hoidla: Valkey ja Redis
@@ -305,9 +311,11 @@ Turvalisus: vaikimisi kuulab ainult `127.0.0.1` ja `protected-mode yes`. **Ära 
 
 Klassikaline veebirakenduse virn on **LEMP** (*Linux, nginx, MariaDB/MySQL, PHP*) või Apache'iga **LAMP**. Nii töötavad näiteks WordPress ja Moodle.
 
-```text
-brauser → nginx (staatilised failid)
-              └── .php → PHP-FPM (PHP kood) → MariaDB (andmed)
+```mermaid
+flowchart LR
+    B["brauser"] --> N["nginx<br>(staatilised failid)"]
+    N -- ".php" --> P["PHP-FPM<br>(PHP kood)"]
+    P --> M["MariaDB<br>(andmed)"]
 ```
 
 **PHP-FPM** on eraldi teenus, mis käivitab PHP-koodi. nginx saadab `.php` päringud sellele Unixi pesa (*socket*) kaudu:

@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K20**.
 
+> [!WARNING]
 > **Turvavõrk:** selles laboris muudad võrgu- ja SSH-seadistust, mis võib katkestada sinu ühenduse. Hoia Ubuntu masina konsool brauseris avatuna. Kui midagi läheb valesti, saad konsooli kaudu parandada.
 
 Laboris kasutatavad tähised - asenda need oma väärtustega:
@@ -281,6 +282,7 @@ ssh debian1 "ls ~/proov1 ~/proov2"
 
 ## 7. osa. SSH-serveri karastamine
 
+> [!NOTE]
 > **Hoia kogu selle osa jooksul üks SSH-seanss Ubuntu masinasse avatuna** ja testi muudatusi teises aknas.
 
 **7.1** Uuri olemasolevaid lisafaile ja kehtivaid väärtusi:
@@ -443,33 +445,5 @@ Kui õpetaja ei ole teisiti öelnud, jäta seadistus alles. Iseõppija võib soo
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | `/24` → 254 kasutatavat aadressi |
-| K2 | systemd-resolved kohalik vahendaja; tegelik server on näha käsuga `resolvectl status` |
-| K3 | Netplani failis `dhcp4: true` (või staatilised `addresses`) |
-| K6 | `getent`/`ping` kasutavad `nsswitch.conf` järjekorda (`files` → `/etc/hosts`). `dig` küsib otse DNS-serverilt ega vaata `/etc/hosts`-i |
-| K7 | Nt `sshd` (või `systemd` socket) `0.0.0.0:22`; `systemd-resolved` `127.0.0.53:53` ja `127.0.0.54:53` |
-| K8 | Port 80 avatud (`succeeded`), 3306 suletud (`Connection refused`): seal ei kuula ükski teenus |
-| K9 | Ei: `ip` muudatused on ajutised |
-| K10 | Rakendab seadistuse ja taastab vana, kui 120 s jooksul ei kinnitata; aadress püsib |
-| K11 | YAML-i vea teade reanumbriga (nt `Invalid YAML` või `inconsistent indentation`) |
-| K12 | Võtme parooli (kui määrati). `~/.ssh` → `700`, `authorized_keys` → `600` |
-| K13 | Üle kanti `dok1.txt` ja `dok4.txt`, `dok2.txt` kustutati (`--delete`); `-n` näitab ette, mida kustutataks |
-| K14 | `proov1/sync/...` (kataloog ise), `proov2/...` (ainult sisu) |
-| K15 | `Permission denied (publickey)`; sshd kasutab esimest leitud väärtust ja failid loetakse tähestiku järjekorras |
-| K16 | Veeb lubatud ainult Debiani IP-lt, SSH kõigilt |
-| K19 | Tavaliselt `Etc/UTC` pilvetõmmisel või paigaldusel valitud vöönd; server nt `ntp.ubuntu.com` või `debian.pool.ntp.org`, nihe millisekundites; `RTC in local TZ: no` |
-| K20 | `curl` annab sertifikaadi vea (`certificate is not yet valid`), sest vale kellaajaga ei ole sertifikaat veel kehtiv; jah, kui Ubuntu küsis aega Debianilt |
-
-Tõrkeotsingu vead ja nende tunnused (K18):
-
-| Viga | Tunnus | Leidmine |
-|---|---|---|
-| 1 | `ping debian1` läheb valele aadressile | `getent hosts debian1`, `/etc/hosts` |
-| 2 | Debianist `curl` ei vasta (aegub) | `sudo ufw status numbered` |
-| 3 | `curl` → `Connection refused`, ka localhostist | `systemctl status nginx`, `ss -tlpn` |
-| 4 | `ping 1.1.1.1` töötab, nimed ei lahene | `resolvectl status`, Netplani fail |
-| 5 | Võtmega sisselogimine → `Permission denied` | konsoolist `sudo sshd -T \| grep allowusers` |
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K16**.
 
+> [!WARNING]
 > **Tee kõiki selle labori osi ainult isoleeritud laborivõrgus!** Kontrolli enne alustamist, et `debian1` võrguliides on Proxmoxis ühendatud sinu isoleeritud silda/VNet-i, mitte kooli võrku.
 
 Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `debian1` `10.0.83.52`, `debian2` `10.0.83.53`, `alma` `10.0.83.55`, DHCP vahemik `10.0.83.80–99`. Asenda oma võrguplaani väärtustega.
@@ -218,21 +219,5 @@ Pärast taaskäivitust: `df -h /mnt/iscsi && cat /mnt/iscsi/test.txt`.
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Näidisfail on mitusada rida kommentaaridega; lühikest oma seadistust on lihtsam mõista ja kontrollida |
-| K3 | Kliendid saaksid juhuslikult ühe või teise serveri vastuse - vastuolulised aadressid, vaikelüüsid, DNS |
-| K5 | Jah, DISCOVER ja REQUEST on leviedastused; vastuses valikud 1, 3, 6, 15, 51 (rendiaeg), 54 (server ID) |
-| K6 | Klientil oli kehtiv rent; tuli rent vabastada/kustutada (kliendis `networkctl` või Kea rendi kustutamine ja kliendi uuendamine) |
-| K7 | Klient jätkab olemasoleva rendi kasutamist kuni selle aegumiseni, proovides uuendada (T1, T2) |
-| K8 | PXE-püsivara saab DHCP-st aadressi ja failinime, laadib TFTP-ga iPXE, iPXE laadib internetist netboot.xyz menüü |
-| K9 | UEFI vajab EFI-faili (`netboot.xyz.efi`); kliendiklass valiku 93 järgi |
-| K11 | Nt `/dev/sdb`; `lsblk -S` näitab `TRAN` = `iscsi` |
-| K12 | Sisselogimine ebaõnnestub (*authorization failure*), sest IQN ei ole ACL-is |
-| K13 | Haakimine oodatakse pärast võrgu ja iSCSI seansi tekkimist; ilma selleta proovitakse haakida liiga vara ja alglaadimine võib takerduda |
-| K14 | Kaks masinat kirjutavad samale failisüsteemile teineteisest teadmata - andmed hävivad |
-| K16 | NFS/Samba - failitasemel, mitu klienti korraga; iSCSI - plokktasemel, üks klient LUN-i kohta (v.a klastrifailisüsteemid); iSCSI sobib virtualiseerimise ja andmebaaside salvestuseks |
-
-> **Märkus õpetajale:** Kea logisõnumite täpsed nimed sõltuvad versioonist. netboot.xyz menüü vajab laborivõrgust internetiühendust (OPNsense'i NAT). Kui klassis on mitu õppijat, peab igaühe DHCP olema rangelt oma isoleeritud võrgus.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

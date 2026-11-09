@@ -59,6 +59,7 @@ Põhimõisted:
 | GPO | puudub | olemas |
 | Linuxi kliendid | SSSD (`id_provider = ldap`) | SSSD (`id_provider = ad`), realmd |
 
+> [!NOTE]
 > **Märkus:** kui keskkonnas on Windowsi arvutid, on AD peaaegu alati õige valik. Puhtalt Linuxi keskkonnas on lihtsam OpenLDAP või FreeIPA.
 
 ---
@@ -105,6 +106,7 @@ Reeglid:
 - DC aadress peab olema staatiline.
 - OPNsense'is suunatakse `ad.lab.example` päringud DC-le: *Services* → *Unbound DNS* → *Query Forwarding* → domeen `ad.lab.example`, server `10.0.83.56`. Nii lahendavad nimesid ka masinad, mille DNS on OPNsense.
 
+> [!NOTE]
 > **Märkus:** laboris võib kõigi domeeniga liituvate masinate DNS-iks panna otse DC. Siis peab DC oskama edastada ka välised päringud (`dns forwarder`).
 
 ---
@@ -180,6 +182,7 @@ search ad.lab.example
 nameserver 10.0.83.56
 ```
 
+> [!NOTE]
 > **Märkus:** kui `/etc/resolv.conf` kirjutatakse üle (DHCP, NetworkManager, systemd-resolved), seadista DNS selle tööriista kaudu. Kontrolli pärast taaskäivitust uuesti.
 
 ### Kellaaja teenus
@@ -318,6 +321,7 @@ Kataloog ja DNS replitseeritakse automaatselt; kontrolli `samba-tool drs showrep
 
 4. Logi sisse kui `AD\mari`.
 
+> [!NOTE]
 > **Märkus:** domeeniga saab liita ainult Windowsi Pro, Education ja Enterprise väljaandeid, mitte Home'i.
 
 ### RSAT - haldus Windowsist
@@ -328,6 +332,8 @@ Domeeniga liidetud Windowsi arvutisse paigalda **RSAT** (*Seaded* → *Süsteem*
 - **Group Policy Management** (`gpmc.msc`) - GPO-d;
 - **DNS** (`dnsmgmt.msc`) - DNS-tsoonid ja kirjed.
 
+<!-- PILT: ../pildid/m21-aduc.png | *Active Directory Users and Computers* Samba domeeniga -->
+
 ### Rühmapoliitika näide
 
 1. `gpmc.msc` → loo OU `Opilased` juurde uus GPO „Õppijate töölaud“.
@@ -335,6 +341,8 @@ Domeeniga liidetud Windowsi arvutisse paigalda **RSAT** (*Seaded* → *Süsteem*
 3. Logi kliendis sisse OU `Opilased` kasutajana ja kontrolli `gpupdate /force`, `gpresult /r`.
 
 GPO-d salvestatakse DC kataloogi `/var/lib/samba/sysvol/ad.lab.example/Policies/`.
+
+<!-- PILT: ../pildid/m21-gpo-haldus.png | *Group Policy Management* - lingitud rühmapoliitika -->
 
 ---
 

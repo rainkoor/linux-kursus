@@ -414,26 +414,6 @@ ning kustutada failist `/etc/fstab` vastavad read (või taastada varukoopia `sud
 2. **Püsiv LUKS-köide:** krüpteeri LVM-i köide `lv_db` (andmed kaovad - varunda enne!), lisa see faili `/etc/crypttab` võtmefailiga (`/root/db.key`, õigused `400`) ja `/etc/fstab`-i ning kontrolli, et see avaneb taaskäivitusel automaatselt.
 
 ---
-## Õpetajale: kontrollvastused
 
-| Küsimus | Vastus |
-|---|---|
-| K1 | Tavaliselt `sda1` (biosboot või EFI), `sda2` `/boot` (XFS), `sda3` LVM-i PV, millel `almalinux-root` (`/`, XFS) ja `almalinux-swap` |
-| K2 | `/dev/mapper/almalinux-root` ja `-swap`; `/boot` UUID järgi |
-| K3 | 2 GiB ja ~3 GiB; joondus kettaplokkide ja SSD lehtedega, ruum partitsioonitabelile |
-| K4 | Fail oli peidus haagitud failisüsteemi all, ei kadunud; tuli lahtihaakimisel tagasi |
-| K5 | `target is busy`; `fuser` näitas sinu kesta protsessi |
-| K6 | Seadmenimed võivad muutuda; XFS-i ei kontrollita alglaadimisel `fsck`-iga |
-| K7 | `findmnt --verify` teatab, et allikat ei leita; `mount -a` annab vea. Ilma `nofail`-ita satuks süsteem hädaolukorra režiimi |
-| K8 | Teised kasutajad ei tohi saalefailist mälu sisu lugeda |
-| K9 | ~1 GiB (3 GiB − 2 × 1 GiB, miinus LVM-i metaandmed) |
-| K10 | Fail jäi alles; `-r` suurendas ka XFS-failisüsteemi (`xfs_growfs`) |
-| K11 | Viga: XFS-i ei saa vähendada |
-| K12 | Kustutab failisüsteemi ja partitsioonitabeli signatuurid; muidu üritataks alglaadimisel haakida olematuid failisüsteeme (`nofail` takistaks küll kokkujooksmist) |
-| K13 | ~8 GiB köitegrupp; `lv_db` asub mõlemal kettal (`/dev/sdc` ja `/dev/sdb`) |
-| K14 | Algne sisu „Oluline andmebaas“; hetktõmmis asub samal kettal ja sõltub algsest köitest |
-| K16 | Pärast protsessi lõpetamist: fail kustutatakse kettalt alles siis, kui ükski protsess seda enam avatuna ei hoia |
-| K17 | Ei - krüpteeritud seadmel on ainult juhuslikud baidid; `aes-xts-plain64`, LUKS2, võtmepesasid 32 (kasutusel 1) |
-| K18 | Päise rikkumisel (nt ülekirjutamisel) on andmed ilma selleta kadunud ka õige parooliga; hoia turvaliselt mujal, mitte samal kettal ega avalikus kohas - päis koos vana parooliga avab andmed |
-
-> **Märkus õpetajale:** laboritöö LVM- ja XFS-osa on kirjutatud AlmaLinuxi standardtööriistade (`lvm2`, `xfsprogs`, `parted`) põhjal. Ext4, haakimise, fstab-i ja UUID osad on testitud. LUKS-i osa (7. osa) ei ole testitud. Soovitatav on enne esimest tundi laboritöö üks kord läbi teha.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

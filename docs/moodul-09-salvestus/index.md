@@ -56,6 +56,7 @@ sudo mdadm /dev/md0 --add /dev/sdd         # uus ketas, algab taastamine (rebuil
 
 Massiivi saab kasutada otse failisüsteemina või LVM-i PV-na (moodul 8). Debianis ja Ubuntus uuenda pärast `mdadm.conf` muutmist initramfs: `sudo update-initramfs -u`.
 
+> [!WARNING]
 > **RAID ei ole varukoopia!** RAID kaitseb ketta rikke eest, kuid mitte kogemata kustutamise, viiruse, lunavara ega tulekahju eest.
 
 ## 9.2 ZFS
@@ -73,14 +74,14 @@ Põhiomadused:
 
 ### Mõisted
 
-```text
-zpool "tank"
- ├── vdev: mirror (sdb + sdc)        ← töökindlus tuleb vdev-i sees
- └── vdev: mirror (sdd + sde)        ← mitu vdev-i = andmed jaotatakse nende vahel
-       │
-       ├── dataset tank/kodu          ← failisüsteem, omaduste ja kvoodiga
-       ├── dataset tank/varu
-       └── zvol tank/vm-101-disk-0    ← plokkseade (nt virtuaalmasina ketas)
+```mermaid
+flowchart TD
+    P["zpool tank"] --> V1["vdev: mirror<br>sdb + sdc"]
+    P --> V2["vdev: mirror<br>sdd + sde"]
+    P --> D1["dataset tank/kodu<br>failisüsteem, omadused, kvoot"]
+    P --> D2["dataset tank/varu"]
+    P --> Z["zvol tank/vm-101-disk-0<br>plokkseade, nt VM-i ketas"]
+    N1["töökindlus tuleb vdev-i sees;<br>mitu vdev-i = andmed jaotatakse nende vahel"] -.- V2
 ```
 
 | Mõiste | Tähendus | LVM-i vaste |
@@ -98,6 +99,7 @@ zpool "tank"
 | `raidz2` | RAID 6 | 2 ketast | levinud NAS-ides (TrueNAS) |
 | `raidz3` | - | 3 ketast | väga suured massiivid |
 
+> [!WARNING]
 > **Tähtis:** kui pool sisaldab mitut vdev-i ja **üks vdev** hävib, on kadunud **kogu pool**. Töökindlus tuleb tagada iga vdev-i sees (peegel või raidz). Varukoopiat ZFS ei asenda.
 
 ### Põhikäsud
@@ -168,6 +170,7 @@ rm /srv/testfail
 
 `dd` on igal pool olemas, kuid mõõdab ainult järjestikust kirjutamist ja lugemist ühe lõimega. `/dev/zero` andmed võivad pakkivas salvestuses (ZFS, mõned SSD-d) anda ebarealistlikult häid tulemusi.
 
+> [!WARNING]
 > **Hoiatus:** ära kunagi kasuta `dd` väljundiks seadet (`of=/dev/sdb`), kui sa ei taha selle sisu hävitada. Testi alati **faili** haagitud failisüsteemis.
 
 ### Põhjalik test: `fio`
@@ -226,6 +229,7 @@ Olulised atribuudid (HDD/SATA SSD): `Reallocated_Sector_Ct`, `Current_Pending_Se
 
 Teenus `smartd` jälgib kettaid pidevalt ja saadab probleemist teate (`/etc/smartd.conf`, e-post - moodul 15). Proxmox ja TrueNAS näitavad SMART-i olekut veebiliideses.
 
+> [!NOTE]
 > **Virtuaalmasinas** ei ole SMART-i infot - virtuaalne ketas ei ole füüsiline seade. Ketaste tervist jälgitakse hüperviisori (Proxmoxi sõlme) tasemel.
 
 ## 9.5 Partitsioonide ja failide taastamine: TestDisk
@@ -254,6 +258,7 @@ Andmete taastamise kuldreeglid:
 - taastatud failid salvesta **teisele kettale**;
 - TestDisk ei aita, kui andmed on üle kirjutatud või ketas on füüsiliselt rikkis - siis on abi ainult varukoopiast (moodul 15).
 
+> [!NOTE]
 > **Märkus:** TestDisk ja PhotoRec on olemas ka paljudel taastekettal (nt SystemRescue), sest süsteemiketta taastamisel ei tohi sellelt ketastelt süsteemi käivitada.
 
 ---

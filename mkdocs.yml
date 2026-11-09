@@ -1,5 +1,5 @@
-site_name: Linuxi kursus
-site_description: Eestikeelne Linuxi kursus nullist süsteemihalduseni
+site_name: Linuxi ja BSD kursus
+site_description: Eestikeelne Linuxi ja BSD kursus nullist süsteemihalduseni
 docs_dir: docs
 copyright: "© 2026 Rain Koor, Haapsalu Kutsehariduskeskus · CC BY-SA 4.0"
 
@@ -23,12 +23,25 @@ theme:
         icon: material/weather-sunny
         name: Hele režiim
 
+hooks:
+  - hooks/callouts.py
+
 markdown_extensions:
   - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
   - pymdownx.highlight
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
   - Avaleht: index.md
@@ -103,7 +116,8 @@ nav:
           - Teooria: moodul-17-seire/index.md
           - Laboritöö: moodul-17-seire/labor.md
           - Enesekontroll: moodul-17-seire/enesekontroll.md
-      - Proovieksam: proovieksam.md
+      - "Proovieksam: põhiosa": proovieksam-pohiosa.md
+      - "Proovieksam: süvendusosa": proovieksam.md
       - Lõpuprojekt: lopuprojekt.md
   - Valikmoodulid:
       - "Moodul 18. BSD praktikas: OPNsense tulemüür":
@@ -134,6 +148,10 @@ nav:
           - Teooria: moodul-24-kubernetes/index.md
           - Laboritöö: moodul-24-kubernetes/labor.md
           - Enesekontroll: moodul-24-kubernetes/enesekontroll.md
+      - "Moodul 25. FreeBSD server":
+          - Teooria: moodul-25-freebsd/index.md
+          - Laboritöö: moodul-25-freebsd/labor.md
+          - Enesekontroll: moodul-25-freebsd/enesekontroll.md
   - Lisad:
       - Laborikeskkond ja paigaldus: lisad/paigaldus.md
       - Distrode ülevaade: lisad/distrod.md

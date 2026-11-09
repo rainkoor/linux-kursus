@@ -1,6 +1,19 @@
-# Linuxi kursus - nullist süsteemihalduseni
+# Linuxi ja BSD kursus - nullist süsteemihalduseni
 
-Eestikeelne avatud õppematerjal Linuxi õppimiseks: esimesest käsust kuni teenuste paigaldamise, skriptimise ja süsteemi sisemise toimimise mõistmiseni.
+<p align="center">
+  <img src="docs/pildid/logod/tux.svg" alt="Tux, Linuxi pingviin" height="110">
+  &nbsp;&nbsp;
+  <img src="docs/pildid/logod/bsd-daemon.svg" alt="BSD deemon" height="110">
+</p>
+<p align="center">
+  <a href="https://www.debian.org/"><img src="docs/pildid/logod/debian.svg" alt="Debian" height="56"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://ubuntu.com/"><img src="docs/pildid/logod/ubuntu.svg" alt="Ubuntu" height="56"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://almalinux.org/"><img src="docs/pildid/logod/almalinux.svg" alt="AlmaLinux" height="56"></a>
+</p>
+
+Eestikeelne avatud õppematerjal Linuxi (ja BSD) õppimiseks: esimesest käsust kuni teenuste paigaldamise, skriptimise ja süsteemi sisemise toimimise mõistmiseni.
 
 Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on kirjutatud nii, et sobib ka iseseisvaks õppimiseks.
 
@@ -14,7 +27,7 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 
 ## Ülesehitus
 
-Kursus koosneb **17 moodulist** (põhiosa 1–8 ja süvendusosa 9–17), [proovieksamist](docs/proovieksam.md), [lõpuprojektist](docs/lopuprojekt.md) ning **7 valikmoodulist** (18–24: OPNsense, DHCP/PXE/iSCSI, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes). Iga moodul sisaldab kolme osa:
+Kursus koosneb **17 moodulist** (põhiosa 1–8 ja süvendusosa 9–17), kahest proovieksamist ([põhiosa](docs/proovieksam-pohiosa.md) ja [süvendusosa](docs/proovieksam.md)), [lõpuprojektist](docs/lopuprojekt.md) ning **8 valikmoodulist** (18–25: OPNsense, DHCP/PXE/iSCSI, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes, FreeBSD server). Iga moodul sisaldab kolme osa:
 
 | Fail | Sisu |
 |---|---|
@@ -40,27 +53,22 @@ Need kolm katavad suurema osa reaalsetest Linuxi serveritest. Teiste distrode ü
 
 **Õppijana:** loe moodulid järjest läbi, tee iga mooduli laboritöö ja kontrolli end enesekontrolli küsimustega. Ära ainult loe - kirjuta iga käsk ise läbi ja katseta.
 
-**Õpetajana:** kava sisaldab soovituslikku mahtu tundides ja iga mooduli õpiväljundeid. Laboritööd on mõeldud tegemiseks virtuaalmasinas (nt Proxmox VE, VirtualBox), kus õppija võib julgelt asju katki teha.
+**Õpetajana:** kava sisaldab soovituslikku mahtu tundides ja iga mooduli õpiväljundeid. Laboritööd on mõeldud tegemiseks virtuaalmasinas (nt Proxmox VE, VirtualBox), kus õppija võib julgelt asju katki teha. Laboritööde kontrollvastused ja proovieksamite näidislahendused ei ole avalikud - need on eraldi õpetaja materjalides (küsi autorilt).
 
 **Iseõppijana:** sobib iga virtualiseerimiskeskkond (VirtualBox, VMware, Hyper-V, UTM) või pilveserver. Iga laboritöö alguses on kirjas, millist masinat on vaja.
 
-## GitHubi panemine ja veebileht
+## Veebileht
 
-1. Loo GitHubis uus tühi hoidla (ilma README, litsentsi ja `.gitignore`-ita - need on siin juba olemas).
-2. Paki zip lahti ja saada sisu GitHubi:
+Materjalist ehitatakse automaatselt veebileht: iga muudatus harus `main` käivitab GitHub Actionsi töövoo (`.github/workflows/veebileht.yml`), mis ehitab lehe MkDocsiga ja avaldab selle harus `gh-pages` (GitHubi seadetes *Settings* → *Pages* → *Deploy from a branch*, haru `gh-pages`).
 
-    ```bash
-    cd linux-kursus
-    git init -b main
-    git add .
-    git commit -m "Linuxi kursus: esimene versioon"
-    git remote add origin git@github.com:<kasutaja>/<hoidla>.git
-    git push -u origin main
-    ```
+Kohalik eelvaade:
 
-3. Veebilehe avaldamiseks on kaasas GitHub Actionsi töövoog `.github/workflows/veebileht.yml`: iga `main`-harusse tehtud muudatus ehitab MkDocsiga lehe ja avaldab selle harus `gh-pages`. Pärast esimest töövoo käivitust vali hoidla seadetes *Settings* → *Pages* → *Source*: *Deploy from a branch*, haru `gh-pages`, kaust `/ (root)`. Leht on aadressil `https://<kasutaja>.github.io/<hoidla>/`.
+```bash
+pip install -r requirements.txt
+mkdocs serve            # http://127.0.0.1:8000
+```
 
-Kohalikuks eelvaateks: `pip install -r requirements.txt` ja `mkdocs serve`.
+Oma koopia tegemiseks (nt teise kooli jaoks) tee hoidlast *fork* ja lülita selle seadetes sisse GitHub Pages.
 
 ## Teiste formaatide genereerimine
 
@@ -73,50 +81,22 @@ Materjal on kirjutatud tavalises Markdownis, et sellest oleks lihtne teha muid f
 | **Slaidid** | Mooduli teooriast saab teha slaidid nt Marpi või Reveal.js abil või lasta tehisintellektil need Markdownist genereerida. |
 | **Moodle** | MkDocsi väljundi HTML-i või pandoci abil loodud faile saab Moodle'isse üles laadida. |
 
-Et konverteerimine töötaks igal pool, kasutatakse ainult tavalist Markdowni (pealkirjad, tabelid, koodiplokid, tsitaadiplokid). Eriomaseid laiendusi ei kasutata.
-
-## Seis
-
-| Osa | Seis |
-|---|---|
-| Kursuse kava | ✅ Valmis |
-| Moodul 1 - Linux ja käsurida | ✅ Valmis |
-| Moodul 2 - Failid, tekst ja torud | ✅ Valmis |
-| Moodul 3 - Kasutajad, grupid ja õigused | ✅ Valmis |
-| Moodul 4 - Tarkvara ja pakihaldus | ✅ Valmis |
-| Moodul 5 - Protsessid, teenused ja systemd | ✅ Valmis |
-| Moodul 6 - Bashi skriptimine ja Git | ✅ Valmis |
-| Moodul 7 - Võrk ja SSH | ✅ Valmis |
-| Moodul 8 - Kettad, failisüsteemid ja LVM | ✅ Valmis |
-| Moodul 9 - Salvestus: RAID, ZFS, jõudlus ja taastamine | ✅ Valmis |
-| Moodul 10 - Kuidas Linux töötab: alglaadimine ja kernel | ✅ Valmis |
-| Moodul 11 - Turvalisus ja logid | ✅ Valmis |
-| Moodul 12 - Konteinerid | ✅ Valmis |
-| Moodul 13 - Veebiserverid | ✅ Valmis |
-| Moodul 14 - Andmebaasid | ✅ Valmis |
-| Moodul 15 - Võrguteenused: DNS, failijagamine, e-post ja varundus | ✅ Valmis |
-| Moodul 16 - Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina | ✅ Valmis |
-| Moodul 17 - Seire ja jõudlus | ✅ Valmis |
-| Valikmoodul 18 - BSD praktikas: OPNsense tulemüür | ✅ Valmis |
-| Valikmoodul 19 - Võrgu infrastruktuur: DHCP, PXE ja iSCSI | ✅ Valmis |
-| Valikmoodul 20 - Kataloogiteenused: OpenLDAP | ✅ Valmis |
-| Valikmoodul 21 - Active Directory Linuxis: Samba AD DC | ✅ Valmis |
-| Valikmoodul 22 - Linux töölaual ja WSL | ✅ Valmis |
-| Valikmoodul 23 - Virtualiseerimine: KVM, Proxmox VE ja XCP-ng | ✅ Valmis |
-| Valikmoodul 24 - Kubernetes: k3s | ✅ Valmis |
-| Proovieksam koos kontrollskriptiga | ✅ Valmis |
-| Lõpuprojekt (algtase, edasijõudnud, meister) | ✅ Valmis |
-| Distrode ja BSD ülevaade (lisa) | ✅ Valmis |
-| UNIX-i ja Linuxi ajalugu (lisa) | ✅ Valmis |
-| Sõnastik (lisa) | ✅ Valmis |
-| Käskude loend (lisa) | ✅ Valmis |
-| Laborikeskkond ja paigaldus (lisa) | ✅ Valmis |
+Materjal kasutab peaaegu ainult tavalist Markdowni. Erandid on kaks GitHubi toetatud laiendust: **joonised** (Mermaid-koodiplokk, keeleks `mermaid`) ja **märkusekastid** (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`). Need näevad korralikud välja nii GitHubis kui ka veebilehel; teistes vormingutes (pandoc) jäävad need tavaliseks koodiplokiks ja tsitaadiks.
 
 ## Litsents
 
 © 2026 Rain Koor, Haapsalu Kutsehariduskeskus.
 
 Materjal on avaldatud litsentsi [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.et) all: võid seda vabalt kasutada, muuta ja jagada, kui viitad autorile ja jagad muudetud versiooni sama litsentsi all. Vt faili [LICENSE](LICENSE).
+
+### Logod ja maskotid
+
+Logod ja maskotid **ei kuulu** CC BY-SA litsentsi alla - need kuuluvad oma omanikele ja on siin kasutatud ainult viitamiseks vastavatele projektidele:
+
+- **Tux** - Larry Ewing (lewing@isc.tamu.edu), loodud programmiga The GIMP.
+- **BSD deemon** - BSD Daemon Copyright 1988 by Marshall Kirk McKusick. All Rights Reserved.
+- **Debian Open Use Logo** - Copyright (c) 1999 Software in the Public Interest, Inc., litsents LGPL 3+ või CC BY-SA 3.0.
+- **Ubuntu** on Canonical Ltd. kaubamärk; **AlmaLinux** on AlmaLinux OS Foundationi kaubamärk. Kursus ei ole nende organisatsioonide poolt avaldatud ega heaks kiidetud.
 
 ## Panustamine
 

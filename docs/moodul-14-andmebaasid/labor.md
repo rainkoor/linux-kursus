@@ -285,22 +285,5 @@ valkey-benchmark -q -n 20000 -t set,get
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | `information_schema` ja `kool`; `127.0.0.1` - väljast ei saa ühenduda |
-| K2 | Kaitseb XSS-i (skriptisüste) eest; ilma selleta käivitaks brauser andmebaasist tulnud JavaScripti |
-| K3 | Fail võib lekkida (varukoopiad, Git, vale seadistus, mis näitab lähtekoodi); parem: eraldi seadistusfail väljaspool veebijuurt piiratud õigustega või keskkonnamuutujad PHP-FPM-i poolis |
-| K4 | „Andmebaasi viga: SQLSTATE[HY000] [2002] …“ ja kood 500; nginx-i logis on ainult päring, viga ise on PHP väljundis |
-| K5 | Lugemine õnnestus, `DELETE` andis `DELETE command denied`; mitmekihiline kaitse: kui kasutaja seadistus on vale või mõni teine kasutaja on `'%'`-ga, kaitseb tulemüür |
-| K6 | Ei (`--skip-networking`); taastamise ajal pole paroole vaja - võrgus kuulates saaks igaüks andmebaasi täielikult kasutada |
-| K7 | `peer` võrdleb süsteemikasutaja nime andmebaasi kasutaja nimega (`postgres` ≠ `kool`); `scram-sha-256` nõuab parooli ja kasutab turvalist räsi |
-| K8 | MariaDB: `CREATE USER 'nimi'@'host'`, aadress kasutaja osa + `bind-address`, `mariadb-dump`; PostgreSQL: `CREATE ROLE … LOGIN`, `pg_hba.conf` + `listen_addresses`, `pg_dump`/`pg_restore` |
-| K9 | Sõltub süsteemist (nt `/var/lib/PackageKit/`, `/var/lib/fwupd/`, Pi-hole'i `/etc/pihole/pihole-FTL.db`, Uptime Kuma konteineri köites `kuma.db`) |
-| K10 | Teek ja üks fail, mitte server: lihtne, kiire, null haldust; puudused - üks kirjutaja korraga, ei sobi mitme serveri vahel; kaitse = failiõigused ja varundus |
-| K11 | Võti aegus ja `GET` tagastab tühja (`nil`); tavaliselt kümneid kuni sadu tuhandeid operatsioone sekundis; andmed on mälus, aegumine sisseehitatud |
-| K12 | `127.0.0.1:6379`; avatud Redist/Valkeyd kasutatakse andmete varastamiseks ja serveri ülevõtmiseks (nt `CONFIG SET` abil failide kirjutamine) |
-| K14 | Nt PostgreSQL või MariaDB põhiandmetele, Valkey seanssidele (mõlemad veebiserverid näevad samu seansse), SQLite või seadistusfail väikeseks seadistuseks |
-
-> **Märkus õpetajale:** MariaDB ja PHP-lehe süntaks on testitud. PostgreSQL-i, SQLite'i ja Valkey osa ei ole päris masinates testitud. Debian 13-s võib Valkey pakett olla nimega `valkey-server` või tuleb kasutada `redis-server`-it - kontrolli enne tundi `apt search valkey`.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

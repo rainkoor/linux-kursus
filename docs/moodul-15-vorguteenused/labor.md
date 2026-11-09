@@ -392,37 +392,5 @@ dig @localhost test.lab.example +short
 
 ---
 
-## Õpetajale: kontrollvastused
-
-### 15
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | CNAME `info → kool.lab.example.` ja seejärel A-kirje; rekursioon on Debiani vaikimisi lubatud kohalikule võrgule |
-| K2 | Teised (sekundaarsed) serverid ja vahemälud ei saa muudatusest teada; seerianumber on tsooni versioon |
-| K3 | Tavakasutaja jah (kui õigused lubavad); `sudo touch` ebaõnnestus (`Permission denied`), sest kliendi root muudetakse serveris kasutajaks `nobody` |
-| K4 | Kliendi kasutaja UID (nt 1000); serveris võib see olla teine kasutaja - UID-d peavad klappima (LDAP/AD) |
-| K5 | Õigused `create mask = 0660`, grupp kataloogi SGID-i tõttu `smbkasutajad` |
-| K6 | `loopback-only` (127.0.0.1:25); avatud relee'd kasutatakse rämpsposti saatmiseks ja server satub mustadesse nimekirjadesse |
-| K7 | Varunduse tulemus, kettaruumi ja SMART-i hoiatused, turvauuendused, cron'i vead, sertifikaatide aegumine; `OnFailure=teavitus@%n.service` või `varunda-debian1 || mail -s ...` |
-| K8 | Töötava andmebaasi failid võivad olla ebajärjepidevad; CA võti on vajalik uute sertifikaatide väljaandmiseks |
-| K9 | Varukoopia samal kettal kaob koos kettaga |
-| K10 | 3 koopiat? Ei - originaal ja üks varukoopia samal masinal. Vaja on koopiat teises masinas/asukohas |
-| K11 | `openssl x509 -enddate -noout -in kool.crt`; jälgimissüsteem (nt Zabbix, Uptime Kuma) või skript taimeriga, mis hoiatab 30 päeva enne |
-| K13 | Seadistuste käsitsi taastamine; kiirendamine: seadistus Gitis ja automatiseeritud (Ansible), konteinerid |
-
-### 15B
-
-| Küsimus | Vastus |
-|---|---|
-| D1 | `systemd-resolved` aadressil `127.0.0.53` (ja `127.0.0.54`); Pi-hole tahab kuulata pordil 53 kõigil liidestel |
-| D2 | Paigaldab `pihole-FTL` (dnsmasq-il põhinev DNS + veebiserver), seadistuse `/etc/pihole/`, blokeerimisloendid (gravity), teenuse ja `pihole` käsu; skript töötab juurkasutajana, seega peab teadma, mida see teeb |
-| D3 | `0.0.0.0` (või `::`) - blokeeritud; loendis tavaliselt sadu tuhandeid domeene |
-| D4 | klient → Pi-hole → BIND9 (`lab.example`); muud päringud Pi-hole → ülemine DNS |
-| D5 | Kogu võrgu kaitse, ka seadmetel ilma blokeerijata; ei näe URL-i ega sisu (YouTube'i reklaamid), DoH möödub; logist näeb, milliseid saite iga masin külastab - juurdepääs logile tuleb piirata |
-| D6 | Jah; logiridadel päringu tüüp, nimi, vastuskood (`NOERROR`) ja kestus |
-| D7 | Jah, `file` pistikprogramm loeb faili uuesti, kui seerianumber suurenes; muidu muudatust ei rakendata |
-| D8 | Mõlemad tõmbavad sama Giti versiooni; eelis: ajalugu, ülevaatus, lihtne; puudus: viivitus kuni taimeri intervall, sõltub Giti serveri kättesaadavusest, pole DNS-i standardset NOTIFY-mehhanismi |
-| D10 | Nt Pi-hole (või kaks) klientidele DNS-iks, mis suunab `lab.example` päringud CoreDNS-ile/BIND9-le; DHCP jagab Pi-hole'i aadressi; tsoonid Gitis |
-
-> **Märkus õpetajale:** teenuste seadistused põhinevad Debiani standardpakettidel; kontrolli BIND9 versiooni (`type primary` vajab BIND 9.16+, vanemates `type master`). Postfixi, Pi-hole'i (v6) veebiliidese menüüde nimesid ja CoreDNS-i osa ei ole testitud.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

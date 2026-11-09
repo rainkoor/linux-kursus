@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K14**.
 
+> [!WARNING]
 > Tee enne alustamist mõlemast masinast hetktõmmis. **Kontrolli enne iga ohtlikku käsku `lsblk`-iga, millise kettaga töötad.**
 
 ---
@@ -202,22 +203,5 @@ Eemalda `/etc/mdadm.conf` ja `/etc/fstab`-ist lisatud read ning seejärel kettad
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | ~2 GiB (peegel); sünkroniseerimisel `resync = x%`, pärast `[2/2] [UU]` |
-| K2 | `clean, degraded`, `[2/1] [U_]`; andmed loetavad teiselt kettalt |
-| K3 | Väikese ketta puhul sekundid; suure ketta taastamine loeb kogu ketta - selle aja jooksul ei ole kaitset ja koormus võib teise vana ketta rikkuda |
-| K4 | `mdadm` massiivi saab kokku panna mis tahes Linuxi masinas; riistvaralise vajab sama või ühilduvat kontrollerit |
-| K5 | `dsync` ootab iga ploki järel, kuni see on kettal; esimene lugemine tuli lehevahemälust (RAM), teine pärast vahemälu tühjendamist kettalt |
-| K6 | Tulemused sõltuvad salvestusest; väikeste plokkide puhul on piirang operatsioonide arv, mitte läbilaskevõime (IOPS × 4 KiB); `%util` lähedane 100-le - ketas on küllastunud |
-| K7 | QEMU virtuaalne ketas ei toeta SMART-i (`SMART support is: Unavailable`); jälgida hüperviisori sõlmes või salvestussüsteemis |
-| K8 | `loop0p1` kadus, kuid andmed on alles - kustutati ainult partitsioonitabel |
-| K9 | Jah; algus sektor 2048 (1 MiB), nimi `andmed`; uus kirjutis võib üle kirjutada failisüsteemi andmeid ja metaandmeid, mida taastamiseks vaja on |
-| K10 | Sõltub andmetest (dokumentatsioon ~2–3×); vähem baite kettale-kettalt, protsessor pakib kiiremini kui ketas kirjutab |
-| K11 | `scrub` leidis kontrollsummade vead rikutud failis ja parandas need teiselt peegli poolelt (`CKSUM` > 0, `errors: No known data errors`); `mdadm` ei tea, kumb koopia on õige |
-| K12 | Mõlemad on copy-on-write, kuid ZFS-i hetktõmmised on failisüsteemi osa ja ei aeglusta; mõlemad asuvad samadel ketastel |
-| K14 | Nt ZFS kaks peeglit (kiirus) või raidz2 (maht + 2 ketta rike); ZFS-i replikatsioon või restic teise masinasse |
-
-> **Märkus õpetajale:** `mdadm`, TestDiski, `fio` ja ZFS-i osi ei ole testitud. ZFS-i osa töötab failidel põhinevate vdev-idega ega vaja lisakettaid.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

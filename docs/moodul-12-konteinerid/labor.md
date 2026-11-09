@@ -259,19 +259,5 @@ podman system prune -a
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Konteineris Alpine, hostis AlmaLinux; kernel sama - konteinerid jagavad hosti kernelit |
-| K2 | Paar protsessi (sh `sh`, `ps`); konteineris `root`, hostis tavakasutaja (`podman unshare id` näitab vastendust) |
-| K3 | Muudatus kadus: konteineri kirjutatav kiht kustutatakse koos konteineriga. Püsivad andmed köidetes või hosti kataloogides |
-| K4 | Jah; `ro` - ainult lugemiseks, `Z` - SELinuxi märgis `container_file_t`. Ilma `Z`-ta annab nginx `403` (SELinux keelab) |
-| K5 | Alpine-põhine pilt on mõnikümmend MB; `history` näitab kihte. Gitis hoitakse retsepti, pilt ehitatakse sellest |
-| K6 | Compose'i võrgus on konteinerid nimega leitavad; `localhost` oleks Adminer ise. Port 3306 ei ole hostis avatud - andmebaas ei ole väljast kättesaadav |
-| K7 | Jah, andmed on nimelises köites; `down -v` kustutaks ka köited |
-| K8 | Hallatakse `systemctl`-iga; käivitub alglaadimisel; juurkasutaja konteinerid on eraldi hoidlas, tavakasutaja `podman ps` neid ei näe |
-| K9 | Konteiner: üks rakendus/teenus, kiire, jagab kernelit (nt CoreDNS, Wazuh); VM: terve OS oma kerneliga, eri OS-id, täielik isolatsioon (nt õppija laborimasinad, Windows) |
-| K10 | Gitis: retseptid ja seadistus (Containerfile, compose, Quadlet); mitte: andmed (köited), ehitatud pildid (registris), paroolid (saladuste haldus, `.env` `.gitignore`-s) |
-
-> **Märkus õpetajale:** Podmani ja Quadleti käivitamist ei saanud testida päris AlmaLinuxi masinas.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

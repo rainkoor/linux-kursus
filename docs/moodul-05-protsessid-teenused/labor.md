@@ -382,28 +382,5 @@ systemd-analyze calendar "*-*-* 02:30:00"
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | `systemd`; kesta vanem on `sshd` sessiooniprotsess |
-| K3 | `Stopped` (T); pärast `bg` jätkab taustal (`Running`) |
-| K4 | `pkill sleep` või `killall sleep` |
-| K5 | Prioriteet mõjutab ainult protsessori jagamist **konkureerivate** protsesside vahel. Kui keegi teine protsessorit ei vaja, saab `yes` endiselt kogu aja |
-| K6 | `Permission denied`: tavakasutaja võib prioriteeti ainult alandada |
-| K8 | Ei tööta ega ole lubatud. Debianis ja Ubuntus käivitatakse teenus paigaldamisel kohe |
-| K9 | Ei töötanud, sest teenus oli käivitatud, kuid mitte lubatud. `systemctl enable --now httpd` |
-| K10 | Sümbolviida kataloogis `multi-user.target.wants` failile `/usr/lib/systemd/system/httpd.service` |
-| K13 | `Loaded` rida viitab failile kataloogis `/etc/systemd/system`; töötab kasutajana `nobody` |
-| K14 | Journal'isse; systemd kogub teenuste stdout/stderr automaatselt |
-| K15 | `kill` (SIGTERM) - taaskäivitust ei toimu (loetakse puhtaks lõpetuseks); `kill -9` (SIGKILL) - taaskäivitatakse 5 s pärast |
-| K16 | `/etc/systemd/system/kettakontroll.service.d/override.conf`; põhifail jääb puutumata ja muudatus on selgelt eraldi |
-| K17 | a) `45 6 * * *` b) `*/30 8-17 * * 1-5` c) `0 0 * * 0` |
-| K19 | Kui masin oli ettenähtud ajal väljas, käivitatakse vahelejäänud töö pärast alglaadimist |
-
-Koristamine (K20):
-
-```bash
-sudo systemctl disable --now kettakontroll varundus.timer
-sudo rm -f /srv/varundus/*.tar.gz
-```
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

@@ -2,6 +2,7 @@
 
 Kursuse laboritööd eeldavad, et sul on olemas **Debiani**, **Ubuntu** ja **AlmaLinuxi** virtuaalmasinad, millele saad SSH kaudu ligi. See lisa kirjeldab, kuidas laborikeskkond planeerida, virtuaalmasinad luua ja kõik kolm distrot serveriks paigaldada.
 
+> [!NOTE]
 > **HKHK õppijale: masinad on enamasti juba olemas.** Kooli Proxmoxis on iga laboritöö jaoks vajalikud virtuaalmasinad valmis tehtud mallidest - **ise ei pea midagi paigaldama**. Sinu jaoks on olulised punktid 1 (sisselogimine ja oma võrk), 2 (võrguplaan) ja 7 (esimesed sammud: parool, hostinimi, IP-aadress, uuendused). Punktid 3-6 ja 8 (VM-i loomine, distrode paigaldus, mallid) on vajalikud ainult erijuhtudel: kui laboritöö või projekt seda eraldi nõuab (nt moodul 19 PXE-paigaldus, moodul 23, lõpuprojekt) või kui õpetaja nii ütleb. Iseõppija vajab kõiki punkte.
 
 Juhend on kirjutatud eelkõige **Proxmox VE** jaoks (HKHK labor), kuid lisatud on ka märkused **VirtualBoxi** ja **WSL-i** kasutajatele.
@@ -10,6 +11,7 @@ Juhend on kirjutatud eelkõige **Proxmox VE** jaoks (HKHK labor), kuid lisatud o
 
 ## 1. HKHK Proxmoxi labor
 
+> [!TIP]
 > See osa on mõeldud **HKHK õppijatele**. Iseõppija võib selle vahele jätta ja kasutada oma Proxmoxi, VirtualBoxi või muud keskkonda - võrguplaan (punkt 2) on hea tava igal pool.
 
 Haapsalu Kutsehariduskeskuses on õppetöö jaoks mitu Proxmox VE klastrit. Igal õppijal on seal oma labor: virtuaalmasinad ja **eraldi IPv4 privaatvõrk**, mis ei kattu teiste sama serveri kasutajate võrkudega. Laboritöö masinad on loodud õpetaja mallidest ja leiad need Proxmoxi veebiliidesest oma kasutaja alt - kui mõni masin on puudu, pöördu õpetaja poole, mitte ära loo seda ise.
@@ -28,6 +30,8 @@ passwd
 ```
 
 Virtuaalmasinate mallides on eelnevalt loodud kasutajad. Nende nimed ja esialgsed paroolid annab õpetaja - **muuda parool kohe pärast esimest sisselogimist** (`passwd`), sest kõigis mallides on algul sama parool.
+
+<!-- PILT: ../pildid/lisa-hkhk-proxmox-sisselogimine.png | HKHK Proxmoxi sisselogimisaken (realm valik); õppija masinad vasakus puus -->
 
 ### Virtuaalmasinate kasutamine
 
@@ -84,6 +88,7 @@ Kursuse laboritööd kasutavad seda plaani. Sama masin teenib mitut laboritööd
 | `winklient-IT24-MariMaasikas` | `winklient` | DHCP (`10.0.83.99` reserveeritud) | Windowsi klient (15, 21, 22) |
 | `k3s1-IT24-MariMaasikas` … `k3s3-…` | `k3s1`, `k3s2`, `k3s3` | `10.0.83.61`–`10.0.83.63` | Kubernetese klaster (24) |
 | `pbs-IT24-MariMaasikas` | `pbs` | `10.0.83.65` | Proxmox Backup Server (23) |
+| `fbsd-IT24-MariMaasikas` | `fbsd` | `10.0.83.66` (jail `www`: `10.0.83.67`) | FreeBSD server (25) |
 | - | - | `10.0.83.50` | virtuaalne IP (keepalived, 13) |
 | - | - | `10.0.83.64` | k3s klastri virtuaalne IP (24, lisaülesanne) |
 
@@ -97,12 +102,14 @@ Head tavad:
 - virtuaalmasina nimes on rühm ja õppija nimi, et Proxmoxis oleks selge, kellele masin kuulub;
 - hostinimi on lühike, väiketähtedega ja kirjeldab rolli.
 
+> [!NOTE]
 > Võrguplaani mall sobib ka lõpuprojekti dokumentatsiooni. Täienda seda iga uue masina ja teenuse lisamisel.
 
 ---
 
 ## 3. Virtuaalmasina loomine Proxmoxis
 
+> [!NOTE]
 > **HKHK õppija:** seda punkti (ja punkte 4-6) on vaja ainult siis, kui laboritöö või projekt nõuab uue masina loomist ja paigaldamist. Tavaliselt on masinad olemas - jätka punktist 7.
 
 Proxmoxi veebiliideses: paremklõps sõlmel → **Create VM**.
@@ -124,10 +131,13 @@ Proxmoxi veebiliideses: paremklõps sõlmel → **Create VM**.
 | Network | Bridge | Õpetaja antud sild või SDN VNet |
 | | Model | VirtIO (paravirtualized) |
 
+> [!NOTE]
 > **AlmaLinux 10 ja protsessori tüüp.** AlmaLinux 10 (nagu RHEL 10) on vaikimisi kompileeritud protsessoritasemele **x86-64-v3**. Proxmoxi vaikimisi CPU-tüüp `x86-64-v2-AES` seda ei toeta ja paigaldusmeedia jookseb käivitamisel kokku. Lahendused:
 >
 > - vali CPU tüübiks **host** (kui kõik klastri sõlmed on sarnase protsessoriga) või **x86-64-v3**;
 > - või kasuta AlmaLinuxi **x86_64_v2** paigaldusmeediat, mis töötab ka vanematel protsessoritel.
+
+<!-- PILT: ../pildid/lisa-proxmox-loo-vm.png | Proxmoxi *Create VM* aken, vahekaart *Hardware* või kokkuvõte (*Confirm*) -->
 
 ### Paigaldusmeedia
 
@@ -157,6 +167,8 @@ Eestis on kiire peegel **mirrors.xtom.ee**, kust saab alla laadida kõiki kolme.
 10. **GRUB:** paigalda põhikettale (`/dev/sda`).
 11. **Taaskäivitus** - eemalda paigaldusmeedia (Proxmoxis *Hardware* → *CD/DVD* → *Do not use any media*).
 
+<!-- PILT: ../pildid/lisa-debian-tarkvara-valik.png | Debiani paigaldaja tarkvara valik: ainult *SSH server* ja *standard system utilities* -->
+
 ## 5. Ubuntu Server 24.04 LTS paigaldus
 
 1. **Keel:** English (eesti keelt paigaldaja ei paku). **Klaviatuur:** Estonian.
@@ -173,6 +185,8 @@ Eestis on kiire peegel **mirrors.xtom.ee**, kust saab alla laadida kõiki kolme.
 9. **Featured server snaps:** ära vali midagi.
 10. **Taaskäivitus** - eemalda paigaldusmeedia.
 
+<!-- PILT: ../pildid/lisa-ubuntu-openssh.png | Ubuntu paigaldaja *SSH configuration* (Install OpenSSH server märgitud) -->
+
 ## 6. AlmaLinux 10 paigaldus
 
 1. **Paigaldusmeedia:** vt protsessori märkust punktis 2. Vali käivitusmenüüst *Install AlmaLinux 10*.
@@ -184,6 +198,8 @@ Eestis on kiire peegel **mirrors.xtom.ee**, kust saab alla laadida kõiki kolme.
 7. **User Creation:** loo kasutaja ja märgi **Make this user administrator** - kasutaja lisatakse gruppi `wheel` ja saab kasutada `sudo`-t.
 8. **Software Selection:** *Minimal Install* (vaikimisi minimaalse meedia korral).
 9. **Begin Installation**, lõpus **Reboot System**.
+
+<!-- PILT: ../pildid/lisa-alma-paigalduse-kokkuvote.png | AlmaLinuxi paigaldaja *Installation Summary* (Minimal Install, ketas, kasutaja) -->
 
 ---
 

@@ -116,6 +116,7 @@ dnf updateinfo list --security          # saadaolevad turvauuendused
 dnf updateinfo info <ID>                # ühe teate üksikasjad (CVE-numbrid)
 ```
 
+> [!NOTE]
 > **Automaatne taaskäivitus?** Kerneli ja põhiteekide uuendused rakenduvad alles pärast taaskäivitust. Mõne serveri puhul on automaatne öine taaskäivitus vastuvõetav, teiste puhul (andmebaasid, kriitilised teenused) planeeritakse see käsitsi hooldusaknasse. Igal juhul peab keegi jälgima, et taaskäivitus toimub.
 
 ### Turvateated
@@ -179,6 +180,7 @@ Pärast `PasswordAuthentication no` seadmist ei saa SSH-sse parooliga sisse murd
 **OpenSSH 9.8** ja uuemad oskavad ka ise: seade `PerSourcePenalties` paneb liiga palju vigaseid ühendusi tegevale aadressile ajutise keelu ilma lisatarkvarata. Kontrolli, kas sinu versioonis see on olemas ja sees: `ssh -V` ja `sudo sshd -T | grep -i persourcepenalties`. (Ubuntu 24.04 OpenSSH 9.6 seda veel ei toeta.)
 
 Kokkuvõttes: fail2ban ei asenda võtmepõhist autentimist ega tulemüüri, kuid on lihtne ja levinud vahend paroolidega kaitstud teenuste jaoks - seepärast tasub seda osata.
+> [!NOTE]
 > **Kas fail2ban on vajalik, kui paroolid on keelatud?** Pärast `PasswordAuthentication no` seadmist ei saa parooliga sisse murda. `fail2ban` vähendab siiski logide müra ja koormust ning kaitseb ka teisi teenuseid (veebiserveri sisselogimine, e-post), mille jaoks saab samuti vanglaid seadistada.
 
 ## 11.4 Logid
@@ -287,6 +289,7 @@ Moodulis 3 õpitud tavalised õigused (`rwx`, omanik, grupp) on **valikuline juu
 | Ulatus | Kogu süsteem | Programmid, millel on profiil |
 | Keerukus | Võimsam, keerulisem | Lihtsam |
 
+> [!WARNING]
 > **Ära lülita SELinuxit ega AppArmorit välja!** Internetis soovitavad paljud juhendid probleemi korral SELinuxi lihtsalt välja lülitada. See on sama, mis tulemüüri väljalülitamine, sest port ei avane. Õige lahendus on probleem diagnoosida ja poliitikat kohandada - tavaliselt on see üks käsk.
 
 ## 11.6 SELinux (AlmaLinux)
@@ -499,6 +502,7 @@ Muud kasulikud tööriistad:
 | `aide` | Failide terviklikkuse kontroll: märkab, kui süsteemifaile on muudetud |
 | CIS Benchmarks | Rahvusvaheliselt tunnustatud karastamise juhendid iga distro jaoks |
 
+> [!WARNING]
 > **Ainult oma süsteemid!** Pordiskannimine ja turvatestimine võõraste süsteemide vastu ilma loata on ebaseaduslik. Kooli laboris tee neid ainult oma virtuaalmasinate vastu või õpetaja loal.
 
 ## 11.10 Turvasündmuste haldus: Wazuh
@@ -521,6 +525,8 @@ Wazuh oskab näiteks:
 - leida paigaldatud pakettide teadaolevaid haavatavusi (CVE);
 - kontrollida seadistust CIS Benchmarki järgi (*Security Configuration Assessment*);
 - reageerida automaatselt (nt blokeerida IP-aadress, sarnane fail2ban-iga).
+
+<!-- PILT: ../pildid/m11-wazuh-armatuurlaud.png | Wazuhi veebiliidese ülevaade (agentide olek, turvasündmused) -->
 
 ### Paigaldus Dockeriga (üks sõlm)
 
@@ -575,8 +581,10 @@ Wazuh võib sündmusele ka ise reageerida - näiteks blokeerida SSH-d murda proo
 
 Pärast muudatust taaskäivita server (`sudo docker compose restart wazuh.manager`). Agendi poolel näeb reageerimise logi failis `/var/ossec/logs/active-responses.log`. Reegli numbri leiad veebiliidesest (*Server management* → *Rules*) sündmuse juurest.
 
+> [!WARNING]
 > **Ettevaatust:** automaatne blokeerimine võib lukustada välja ka sinu enda (nt kui proovid mitu korda vale võtmega). Lisa oma haldusvõrk erandiks (`<white_list>` ploki `<global>` all) ja testi enne, kui lülitad selle sisse tootmises.
 
+> [!NOTE]
 > **Märkus:** Wazuh on suur süsteem ja selle seadistamine on omaette eriala. Selles kursuses on eesmärk näha, kuidas tsentraalne turvaseire töötab, ja seostada seda logide, fail2ban-i ja auditiga, mida tegid käsitsi.
 
 ---

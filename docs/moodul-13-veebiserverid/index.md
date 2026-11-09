@@ -110,6 +110,7 @@ sudo systemctl reload nginx
 curl -H "Host: kool.lab.example" http://localhost
 ```
 
+> [!WARNING]
 > **Alati `nginx -t` enne `reload`-i!** Vigase seadistusega `restart` jätab saidi maha, `reload` vigase seadistusega jätab vana seadistuse tööle - kuid parem on viga enne leida.
 
 Faili `default` saidi saab keelata: `sudo rm /etc/nginx/sites-enabled/default`.
@@ -147,9 +148,9 @@ TLS põhineb **sertifikaatidel**:
 - sertifikaati allkirjastab **sertifitseerimiskeskus** (CA, *Certificate Authority*);
 - brauser usaldab sertifikaati, kui selle allkirjastanud CA on brauseri või operatsioonisüsteemi usaldatud CA-de loendis.
 
-```text
-Juur-CA (brauseris usaldatud)
-   └── allkirjastab → serveri sertifikaat (kool.lab.example)
+```mermaid
+flowchart LR
+    CA["Juur-CA<br>(brauseris usaldatud)"] -- "allkirjastab" --> S["serveri sertifikaat<br>kool.lab.example"]
 ```
 
 Sertifikaadis peab serveri nimi olema väljal **SAN** (*Subject Alternative Name*) - brauserid kontrollivad just seda.
@@ -171,6 +172,8 @@ Sertifikaadis peab serveri nimi olema väljal **SAN** (*Subject Alternative Name
 | Asutuse sisevõrk (nimed pole avalikud) | oma CA (OpenSSL, `step-ca`), Active Directory sertifikaaditeenused, Proxmoxi enda CA |
 | Sisevõrgu server, kuid asutusel on päris domeen (nt `lab.kool.ee`) | Let's Encrypt **DNS-01** valideerimisega (server ei pea olema internetist kättesaadav) |
 | Avalik veebisait | Let's Encrypt (ACME) või kommertsiaalne CA |
+
+<!-- PILT: ../pildid/m13-brauseri-hoiatus.png | Brauseri hoiatus isesigneeritud sertifikaadi korral -->
 
 ### Avaliku sertifikaadi hankimine
 
@@ -276,7 +279,10 @@ sudo update-ca-certificates
 
 Windowsis imporditakse CA sertifikaat (`certmgr.msc` → *Trusted Root Certification Authorities*), brauseris Firefox kasutab oma sertifikaadihoidlat.
 
+> [!NOTE]
 > Proxmox VE, Active Directory sertifikaaditeenused ja tööriistad nagu `step-ca` kasutavad sama põhimõtet automatiseeritult.
+
+<!-- PILT: ../pildid/m13-sertifikaadi-ahel.png | Brauseri sertifikaadivaade: labori CA → serveri sertifikaat (pärast CA usaldamist) -->
 
 ### nginx ja HTTPS
 
@@ -410,6 +416,7 @@ sudo systemctl reload caddy
 
 `tls internal` kasutab Caddy enda sertifitseerimiskeskust (sobib laborile ja sisevõrgule). **Laboris kasuta alati `tls internal`-it või oma CA sertifikaati** (`tls /etc/caddy/certs/sait.crt /etc/caddy/certs/sait.key`) - muidu proovib Caddy Let's Encryptilt sertifikaati hankida ja see ebaõnnestub. Globaalne valik `{ local_certs }` Caddyfile'i alguses lülitab sisemise CA sisse kõigile saitidele korraga. Kliendid peavad selle juursertifikaati usaldama: see asub serveris failis `/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt` (kopeeri kliendile nagu oma CA sertifikaat punktis 13.3). PHP-rakenduse jaoks: `php_fastcgi unix//run/php/php8.4-fpm.sock`.
 
+> [!NOTE]
 > Caddy on hea valik, kui on vaja kiiresti panna HTTPS mõne rakenduse ette (nt konteineris töötav haldusliides). Suurtes ja keerukates seadistustes on nginx ja Apache endiselt levinumad.
 
 ## 13.6 lighttpd ja teised
@@ -439,10 +446,11 @@ Teised, mida tasub teada:
 
 Kui üks server ei jaksa või peab teenus töötama ka ühe serveri rikke korral, pannakse mitu **taustserverit** (*backend*) ühe **koormusejaoturi** (*load balancer*) taha.
 
-```text
-                     ┌──▶ debian1 (nginx)  10.0.83.52
-klient ──▶ HAProxy ──┤
-          :80/:443   └──▶ alma (Apache)    10.0.83.55
+```mermaid
+flowchart LR
+    K["klient"] --> H["HAProxy<br>:80 / :443"]
+    H --> D["debian1 (nginx)<br>10.0.83.52"]
+    H --> A["alma (Apache)<br>10.0.83.55"]
 ```
 
 ### nginx upstream
@@ -505,13 +513,13 @@ Tervisekontroll saadab päise `Host`, et taustserverid vastaksid õige saidiga (
 
 HAProxy jätab rikkis taustserveri välja, aga mis saab siis, kui rikki läheb **jaotur ise**? Siis on jaotur **üksik rikkepunkt** (*single point of failure*). Lahendus: kaks jaoturit ja nende vahel **virtuaalne IP-aadress** (VIP), mis on alati selle masina küljes, mis parajasti töötab. Kliendid ja DNS kasutavad ainult VIP-i.
 
-```text
-                       VIP 10.0.83.50
-                  ┌───────────┴───────────┐
-klient ──▶ VIP    ubuntusrv (MASTER)     debian2 (BACKUP)
-                  HAProxy + keepalived   HAProxy + keepalived
-                        │                       │
-                        └──▶ debian1, alma ◀────┘
+```mermaid
+flowchart LR
+    K["klient"] --> VIP(("VIP<br>10.0.83.50"))
+    VIP --> M["ubuntusrv (MASTER)<br>HAProxy + keepalived"]
+    VIP -. "rikke korral" .-> B["debian2 (BACKUP)<br>HAProxy + keepalived"]
+    M --> T["debian1, alma"]
+    B --> T
 ```
 
 **VRRP** (*Virtual Router Redundancy Protocol*) on standardne protokoll (IP-protokoll 112), millega masinad lepivad kokku, kes VIP-i hoiab: põhimasin (**MASTER**) saadab iga sekundi järel teate, ja kui teated lakkavad, võtab varumasin (**BACKUP**) aadressi üle. Linuxis teeb seda **keepalived**.
@@ -593,6 +601,7 @@ Olulised read väljundis:
 
 Teised tööriistad: **`wrk`** (`apt install wrk`; kiirem, kestusepõhine: `wrk -t2 -c50 -d30s URL`) ja **k6** (testid kirjutatakse JavaScriptis, sobib keerukamate kasutajastsenaariumide jaoks).
 
+> [!WARNING]
 > **Testi ainult enda servereid.** Koormustest võõra saidi vastu on sisuliselt teenusetõkestusrünnak (DoS). Laboris jälgi testi ajal taustserverites `top`-i ja HAProxy statistikalehte (moodul 17): kas pudelikael on protsessor, võrk või rakendus?
 
 ### Traefik

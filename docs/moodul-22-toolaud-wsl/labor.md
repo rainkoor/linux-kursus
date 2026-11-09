@@ -9,6 +9,7 @@
 
 **Aruanne:** vasta küsimustele **K1–K20**.
 
+> [!WARNING]
 > Tee enne alustamist Ubuntu VM-ist **hetktõmmis**.
 
 ---
@@ -140,6 +141,7 @@ Ava DigiDoc4 ja Firefoxis lehe id.ee kontrolliteenus.
 
 ## 5. osa. Kali Linux
 
+> [!WARNING]
 > **Tee see osa ainult isoleeritud laborivõrgus ja ainult masinatega, mille õpetaja on lubanud.**
 
 **5.1** Logi Kali VM-i sisse, muuda vaikeparool ja uuenda:
@@ -276,26 +278,5 @@ ssh kasutaja@SERVER_IP
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Ubuntu 24.04-l Wayland (VM-is mõne graafikaadapteriga võib GDM valida X11); GDM; XWayland vanade X11 rakenduste jaoks (käivitub vajadusel); GNOME ~1–1,5 GiB |
-| K2 | Lõikelaud host ↔ VM, automaatne ekraani suurus; *Summary* näitab agendi kaudu IP-aadresse |
-| K3 | Flatpak tavaliselt uuem ja suurem (runtime'id), apt väiksem; õigused nt `filesystem=host`, võrk, X11/Wayland; koolis: apt lihtsam keskselt hallata, Flatpak uuem ja isoleeritud |
-| K4 | Xfce 4.18/4.20 töötab X11-s (Wayland eksperimentaalne); mälu ~0,5 GiB vähem; vanad arvutid, VM-id, kaugtöölaud |
-| K5 | Parem pilt ja lõikelaud, ei vaja Proxmoxi ligipääsu; avalik RDP port on populaarne ründesiht - ainult VPN-i või SSH tunneli kaudu |
-| K6 | Süsteemifailid, kodukataloogid vaikimisi välja jäetud; Timeshift on VM-i sees ja failitasemel, Proxmoxi hetktõmmis kogu VM-ist (ketas, soovi korral mälu) |
-| K7 | Sõltub riistvarast; juhend lisab RIA hoidla, `open-eid` paketid (DigiDoc4, `pcscd`, Web eID) |
-| K8 | Debian testing (`kali-rolling`); paketid tuhandetes; nt `kali-tools-web`, `-passwords`, `-wireless`, `-forensics` |
-| K9 | Vastused vastusmustrite (TCP/IP sõrmejälg) ja teenuste bännerite/vastuste põhjal |
-| K10 | Sageli ufw `[UFW BLOCK]` logiread või fail2ban; skaneerimine on rünnaku eelfaas ja ilma loata ebaseaduslik |
-| K11 | Microsofti kernel (`…-microsoft-standard-WSL2`); uutes paigaldustes `systemd`, vanemates `init`; NAT-režiimis eraldi sisevõrgu IP (nt 172.x), *mirrored* režiimis sama mis Windowsil |
-| K12 | `/mnt/c` all mitu korda (sageli 5–20×) aeglasem; projektid Linuxi failisüsteemis `~/` |
-| K13 | Sõltub distrost (Debian ~ 300–600 MB); käivitus `root`-ina, sest importimisel kasutaja seadistus ei kandu, kui `wsl.conf`-is pole `[user] default=`; `--unregister` kustutab distro koos kõigi andmetega pöördumatult |
-| K14 | Sobivad: 1–4, 6, 12 (Git, Ansible juhtmasin, konteinerid); ei sobi: 7 (võrk, Netplan), 8 (kettad), 9 (alglaadimine), 10 osaliselt (SELinux, AppArmor, tulemüür) |
-| K16 | Proton tõlgib Windowsi API-kutsed Linuxi omadeks (Wine) ja DirectX-i Vulkanile (DXVK, VKD3D); muutumatu süsteem: ei saa kogemata rikkuda, uuendus tervikuna, tagasivõtmise võimalus |
-| K19 | WSL - arendus ja käsurida Windowsi arvutis; VM - serveri harjutamine, mitu masinat, katki tegemine; riistvara - igapäevane töölaud, mängud, jõudlus |
-| K20 | Palju turvatööriistu ja eriseadistusi, mida igapäevaseks tööks ei vaja; *rolling* testing-baas on vähem stabiilne; suurem ründepind; kasutus ainult testimiseks |
-
-> **Märkus õpetajale:** laboritööd ei saanud graafilises keskkonnas testida. GNOME seadete menüüde nimed sõltuvad Ubuntu versioonist. WSL-i osa vajab Windows 11-t; Proxmoxi Windowsi VM-is peab sõlmes olema pesastatud virtualiseerimine lubatud (`cat /sys/module/kvm_intel/parameters/nested` → `Y`) ja VM-i protsessori tüüp `host`. Kali osa tehakse kooli isoleeritud küberturbe laborivõrgus.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

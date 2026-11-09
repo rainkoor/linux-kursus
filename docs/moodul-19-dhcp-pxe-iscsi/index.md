@@ -15,6 +15,7 @@ Mooduli läbinud õppija:
 - selgitab iSCSI põhimõtteid (sihtmärk, initsiaator, LUN, IQN);
 - seadistab Linuxis iSCSI sihtmärgi ja ühendab selle Linuxi ning Windowsi initsiaatoriga.
 
+> [!WARNING]
 > **Ainult isoleeritud laborivõrgus!** Selle mooduli teenused (eriti DHCP ja PXE) mõjutavad kõiki samas võrgus olevaid masinaid. Vale DHCP-server kooli võrgus võib jätta kõik arvutid ilma internetita. Tee laboritöid ainult moodulis 18 ehitatud OPNsense'i taga oleval isoleeritud võrgul või muus isoleeritud võrgus.
 
 ---
@@ -27,12 +28,14 @@ Mooduli läbinud õppija:
 
 Klient ja server vahetavad nelja sõnumit (pordid UDP 67 server, 68 klient):
 
-```text
-Klient                                    Server
-  │── DHCPDISCOVER (leviedastus) ─────────▶│   „Kas keegi jagab aadresse?“
-  │◀──────────────── DHCPOFFER ────────────│   „Võta 10.0.83.85“
-  │── DHCPREQUEST (leviedastus) ──────────▶│   „Tahan 10.0.83.85“
-  │◀────────────────── DHCPACK ────────────│   „Kinnitan, rent 24 h“
+```mermaid
+sequenceDiagram
+    participant K as Klient
+    participant S as DHCP-server
+    K->>S: DHCPDISCOVER (leviedastus): „Kas keegi jagab aadresse?“
+    S->>K: DHCPOFFER: „Võta 10.0.83.85“
+    K->>S: DHCPREQUEST (leviedastus): „Tahan 10.0.83.85“
+    S->>K: DHCPACK: „Kinnitan, rent 24 h“
 ```
 
 Esimene sõnum on **leviedastus** (*broadcast*), sest kliendil pole veel aadressi ega teadmist serveri kohta. Seepärast töötab DHCP vaikimisi ainult ühe võrgusegmendi piires. Teistesse võrkudesse edastab päringud **DHCP relee** (*relay*, nt ruuteris).
@@ -190,11 +193,16 @@ Liides määratakse Debianis failis `/etc/default/isc-dhcp-server` (`INTERFACESv
 
 ### Kuidas PXE töötab
 
-```text
-1. Klient (võrgukaardi PXE-püsivara) ── DHCPDISCOVER ──▶ DHCP-server
-2. DHCP-server ──▶ IP-aadress + next-server (66) + boot-file (67)
-3. Klient ── TFTP ──▶ TFTP-server: laadi alglaadimisfail (nt undionly.kpxe)
-4. Alglaadimisprogramm (iPXE) laadib edasi menüü, kerneli, paigaldaja…
+```mermaid
+sequenceDiagram
+    participant K as Klient (PXE-püsivara)
+    participant D as DHCP-server
+    participant T as TFTP-server
+    K->>D: DHCPDISCOVER
+    D->>K: IP-aadress + next-server (66) + boot-file (67)
+    K->>T: TFTP: laadi alglaadimisfail (nt undionly.kpxe)
+    T->>K: alglaadimisprogramm (iPXE)
+    Note over K: iPXE laadib edasi menüü,<br>kerneli, paigaldaja…
 ```
 
 | Komponent | Ülesanne |
@@ -242,6 +250,7 @@ FOG paigaldatakse Debiani või Ubuntu serverisse skriptiga (`installfog.sh` FOG-
 
 Klassiruumi kasutuses on FOG-i eelis, et kõik arvutid saavad identse seadistuse ja vigase arvuti saab minutitega algolekusse taastada.
 
+> [!NOTE]
 > FOG vajab tõmmiste jaoks palju kettaruumi (laboris vähemalt 100 GiB) ja seda tasub katsetada eraldi isoleeritud võrgus, et teised arvutid ei käivituks kogemata FOG-i menüüsse.
 
 ### Automaatne paigaldus: kickstart, preseed ja autoinstall
@@ -322,7 +331,10 @@ Täielik näide koos kõigi partitsioneerimise kinnitustega on Debiani paigaldus
 
 **Autoinstall (Ubuntu)** kasutab YAML-faili, mille algus on `#cloud-config` ja võti `autoinstall:` (identiteet, SSH, paketid, salvestus). Ubuntu paigaldaja kirjutab käsitsi paigalduse järel valmis näite faili `/var/log/installer/autoinstall-user-data`.
 
+> [!NOTE]
 > **Domeeniga liitmine** (moodulid 20-21) vajab domeeni parooli, mida vastustefaili avatekstina panna ei tohi. Tavaline lahendus: vastustefail paigaldab paketid (`sssd`, `realmd`) ja SSH-võtme, liitmise teeb pärast esimest käivitust Ansible (moodul 16) koos Vaultis hoitud parooliga.
+
+<!-- PILT: ../pildid/m19-netbootxyz-menuu.png | netboot.xyz menüü võrgust alglaadimisel -->
 
 ## 19.5 iSCSI
 
@@ -340,6 +352,7 @@ Täielik näide koos kõigi partitsioneerimise kinnitustega on Debiani paigaldus
 
 **Kasutus:** salvestusvõrgud (SAN), virtualiseerimisplatvormide jagatud salvestus (Proxmox, VMware), andmebaasiserverite kettad, kettata tööjaamad.
 
+> [!WARNING]
 > **Ühte iSCSI LUN-i tohib korraga kasutada ainult üks initsiaator!** Tavalised failisüsteemid (ext4, XFS, NTFS) ei tea, et keegi teine samal ajal samale kettale kirjutab - tulemuseks on andmete hävimine. Mitme masina jagatud kasutuseks on vaja klastrifailisüsteemi (nt OCFS2, GFS2) või sellist kasutust, kus failisüsteemi haldab üks osapool (nt Proxmoxi LVM iSCSI peal).
 
 ### Sihtmärk: targetcli (LIO)

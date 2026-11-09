@@ -2,6 +2,7 @@
 
 **Maht:** 8 tundi · **Laboritöö:** Debian ja Ubuntu (Docker) · **Eeldused:** moodulid 1–16
 
+> [!NOTE]
 > **Sissejuhatav moodul.** See moodul annab seirest ja jõudluse analüüsist **ülevaate ja alused**: kuidas leida ühe serveri jõudlusprobleemi põhjus käsurea tööriistadega ning kuidas on üles ehitatud seiresüsteemid (Prometheus, Grafana, Uptime Kuma, Zabbix). Eesmärk on mõista põhimõtteid ja ehitada laborile lihtne seire - mitte veel suurte seirelahenduste täielik valdamine.
 >
 > **HKHK õppijale:** seiret käsitletakse põhjalikult eraldi aines „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit. See moodul valmistab sind selleks ette.
@@ -198,6 +199,7 @@ strace -c ls /usr/bin > /dev/null                        # kokkuvõte: millised 
 
 Tüüpiline leid: `openat(AT_FDCWD, "/etc/rakendus.conf", O_RDONLY) = -1 ENOENT (No such file or directory)` - programm otsib seadistust teisest kohast, kui arvasid.
 
+> [!WARNING]
 > **Hoiatus:** `strace` aeglustab programmi märgatavalt. Tootmisserveris kasuta seda lühiajaliselt. Süvitsi jõudlusanalüüsiks on `perf` ja eBPF-tööriistad (`bpftrace`, `bcc`).
 
 ---
@@ -220,10 +222,17 @@ Logide kogumiseks kasutatakse **Grafana Lokit**, **Graylogi** või **OpenSearchi
 
 ## 17.5 Prometheus, node_exporter ja Grafana
 
-```text
-debian1 ── node_exporter :9100 ─┐
-alma    ── node_exporter :9100 ─┼──◀ Prometheus :9090 (küsib iga 15 s, salvestab) ──▶ Grafana :3000
-ubuntusrv ─ node_exporter :9100 ─┘                       └──▶ Alertmanager (häired)
+```mermaid
+flowchart LR
+    D1["debian1<br>node_exporter :9100"]
+    D2["alma<br>node_exporter :9100"]
+    D3["ubuntusrv<br>node_exporter :9100"]
+    P["Prometheus :9090<br>küsib iga 15 s, salvestab"]
+    P -- "küsib" --> D1
+    P -- "küsib" --> D2
+    P -- "küsib" --> D3
+    G["Grafana :3000"] -- "päringud" --> P
+    P --> A["Alertmanager<br>(häired)"]
 ```
 
 ### node_exporter jälgitavatesse masinatesse
@@ -303,6 +312,8 @@ Ava `http://<seireserver>:9090/targets` - kõik sihtmärgid peavad olema **UP**.
 
 Ava `http://<seireserver>:3000` (esmakordne kasutaja `admin` / `admin` - muuda kohe). Lisa andmeallikas *Connections* → *Data sources* → *Prometheus*, URL `http://prometheus:9090`. Valmis armatuurlaua saad importida: *Dashboards* → *New* → *Import*, ID **1860** (*Node Exporter Full*).
 
+<!-- PILT: ../pildid/m17-grafana-node-exporter.png | Grafana töölaud *Node Exporter Full* (CPU, mälu, ketas) -->
+
 ### Häired
 
 Prometheuse reeglid kirjeldavad, millal tekib häire; **Alertmanager** saadab need e-posti, Slacki, Teamsi või Matrixi. Lihtsamal juhul saab häireid seadistada ka otse Grafanas (*Alerting* → *Alert rules*). Näide reeglist:
@@ -318,6 +329,7 @@ groups:
           summary: "{{ $labels.instance }}: juurfailisüsteemis alla 10% vaba ruumi"
 ```
 
+> [!TIP]
 > **Häirete väsimus:** kui häireid tuleb palju ja enamik neist ei vaja tegutsemist, lõpetavad inimesed nende lugemise. Häire peab tähendama, et **inimene peab midagi tegema**. Muu info kuulub armatuurlauale.
 
 ---
@@ -332,6 +344,8 @@ docker run -d --name uptime-kuma --restart unless-stopped \
 ```
 
 Ava `http://<server>:3001`, loo administraator ja lisa jälgimised (*Add New Monitor*), nt `https://kool.lab.example` (moodul 13) ja DNS-päring `debian1` serverile (moodul 15). Teavitusi saab saata e-posti (SMTP), Telegrami, Discordi, Teamsi jt kaudu. Avalik olekuleht (*Status Page*) näitab kasutajatele, kas teenused töötavad.
+
+<!-- PILT: ../pildid/m17-uptime-kuma.png | Uptime Kuma jälgitavate teenuste nimekiri -->
 
 ---
 

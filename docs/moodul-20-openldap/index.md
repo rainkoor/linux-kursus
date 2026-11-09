@@ -126,6 +126,8 @@ sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f muudatus.ldif
 
 **LDIF** (*LDAP Data Interchange Format*) on tekstivorming kirjete kirjeldamiseks. Kirjed eraldatakse tühja reaga.
 
+<!-- PILT: ../pildid/m20-lam-kasutajad.png | LAM-i kasutajate loend (`ou=kasutajad`) -->
+
 ### Põhistruktuur
 
 ```text
@@ -179,6 +181,7 @@ loginShell: /bin/bash
 userPassword: {SSHA}y8n3uxbSsl0b7Kg0rQ6s+fqa2pqOe3l5
 ```
 
+> [!NOTE]
 > **UID-d ja GID-d alates 10000** - nii ei satu need konflikti kohalike kasutajatega (1000–9999). Peab kokku leppima, kes ja kuidas uusi numbreid jagab (LAM teeb seda automaatselt).
 
 ### Otsimine
@@ -304,9 +307,11 @@ LAM-i saab käivitada ka konteinerina (Docker/Podman, moodul 12) ja selle ette p
 
 **SSSD** (*System Security Services Daemon*) ühendab Linuxi kataloogiteenusega: kasutajad ja grupid tulevad LDAP-ist (`getent passwd`, `id`), paroolid kontrollitakse LDAP-is ja SSSD hoiab vahemälu, et sisselogimine töötaks ka siis, kui server korraks kättesaamatu on.
 
-```text
-login/ssh → PAM → SSSD → LDAP-server
-id, ls -l → NSS → SSSD → LDAP-server
+```mermaid
+flowchart LR
+    A["login, ssh"] --> PAM --> SSSD
+    B["id, ls -l"] --> NSS --> SSSD
+    SSSD --> L["LDAP-server"]
 ```
 
 - **NSS** (*Name Service Switch*) - „kes on kasutaja 10001?“ (`/etc/nsswitch.conf`: `passwd: files sss`);
@@ -350,6 +355,7 @@ sudo systemctl enable --now sssd
 sudo systemctl restart sssd
 ```
 
+> [!NOTE]
 > SSSD keeldub vaikimisi paroole krüpteerimata ühenduse kaudu kontrollimast - TLS (punkt 20.5) on kohustuslik. Ainult kiireks testiks laboris saab seda vältida valikuga `ldap_auth_disable_tls_never_use_in_production = true`, mille nimi ütleb kõik.
 
 ### Kodukataloogi automaatne loomine

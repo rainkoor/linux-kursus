@@ -198,22 +198,5 @@ sudo sss_cache -E
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Ainult `dc=lab,dc=example` (ja vanemates versioonides `cn=admin`); skeemid `core`, `cosine`, `nis`, `inetorgperson` |
-| K2 | `inetOrgPerson` - nimi ja kontaktandmed, `posixAccount` - UID/GID/kodu/kest, `shadowAccount` - parooli aegumine |
-| K3 | `object class violation: object class 'inetOrgPerson' requires attribute 'sn'` vms; nõue tuleb skeemist |
-| K4 | `"(objectClass=posixAccount)" uid cn uidNumber`; `"(&(objectClass=posixAccount)(gidNumber=10000))"`; `"(givenName=K*)"`; `"(&(!(objectClass=posixAccount))(!(objectClass=posixGroup)))"` |
-| K5 | Anonüümne ei näe, Mari näeb oma räsi; Debiani vaikimisi `olcAccess`: `to attrs=userPassword by self write by anonymous auth by * none` |
-| K6 | Sertifikaat kehtib nimele `debian1.lab.example`, mitte `localhost` |
-| K7 | Krüpteerimata bind'i puhul on DN ja parool liikluses loetavad |
-| K8 | Järgmine vaba number seadistatud vahemikust; nt `shadowLastChange`, `sambaSID` (kui moodul lubatud), `gecos` |
-| K9 | `uid=10001(mari) gid=10000(opilased) groups=…`; NSS → `sss` |
-| K10 | Jah (mkhomedir); omanik 10001 - sama UID kõigis masinates, NFS-i õigused klapivad |
-| K11 | Õnnestus vahemälust (`cache_credentials = true`), kui kasutaja oli varem sisse loginud |
-| K12 | `kati` jah, `mari` ei; õigused hallatakse kataloogis grupi liikmesuse kaudu |
-| K13 | Sisselogimine keelatakse kohe pärast vahemälu tühjendamist; muud viisid: `shadowExpire`, parooli lukustamine (ppolicy overlay), SSSD `ldap_access_filter` |
-| K14 | Jah; config ja andmed on eraldi andmebaasid, mõlemaid on taastamiseks vaja |
-| K16 | Keegi ei saaks sisse logida (v.a vahemälu); lahendus: replikatsioon, mitu serverit, varundus |
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

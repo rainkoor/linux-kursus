@@ -35,20 +35,23 @@ Mooduli läbinud õppija:
 
 ## 24.2 Kubernetese ülesehitus
 
-```text
-                  ┌─────────────── juhtkiht (control plane) ───────────────┐
-kubectl ──HTTPS──▶│ kube-apiserver ◀──▶ etcd (klastri olek)                │
-(sina)            │ kube-scheduler (otsustab, kuhu pod läheb)              │
-                  │ kube-controller-manager (hoiab soovitud olekut)        │
-                  └──────────────┬─────────────────────────────────────────┘
-                                 │
-        ┌────────────────────────┼────────────────────────┐
-   sõlm k3s1                sõlm k3s2                sõlm k3s3
-   kubelet                  kubelet                  kubelet
-   containerd               containerd               containerd
-   kube-proxy               kube-proxy               kube-proxy
-   [pod] [pod]              [pod] [pod]              [pod]
-        └──────────── podivõrk (CNI, nt Flannel) ─────────┘
+```mermaid
+flowchart TB
+    U["kubectl (sina)"] -- HTTPS --> API
+    subgraph CP ["juhtkiht (control plane)"]
+        direction LR
+        SCH["kube-scheduler<br>otsustab, kuhu pod läheb"] --> API["kube-apiserver"]
+        CM["kube-controller-manager<br>hoiab soovitud olekut"] --> API
+        API <--> ETCD["etcd<br>klastri olek"]
+    end
+    API --> N
+    subgraph N ["sõlmed (podid ühendab podivõrk, nt Flannel)"]
+        direction LR
+        S1["sõlm k3s1<br>kubelet, containerd,<br>kube-proxy<br>pod · pod"]
+        S2["sõlm k3s2<br>kubelet, containerd,<br>kube-proxy<br>pod · pod"]
+        S1 ~~~ S2 ~~~ S3
+        S3["sõlm k3s3<br>kubelet, containerd,<br>kube-proxy<br>pod"]
+    end
 ```
 
 | Komponent | Ülesanne |
@@ -137,6 +140,7 @@ sudo k3s kubectl get nodes
 
 Paigaldusskript laadib alla `k3s` binaarfaili (`/usr/local/bin/k3s`), loob viited `kubectl`, `crictl` ja `ctr`, systemd teenuse `k3s` ning eemaldusskriptid `k3s-uninstall.sh` ja `k3s-killall.sh`. Kindla versiooni saab valida muutujaga `INSTALL_K3S_VERSION=v1.xx.y+k3s1` - tootmises pane versioon alati paika.
 
+> [!WARNING]
 > **`curl … | sh`** on Kubernetese maailmas levinud, kuid see käivitab internetist tulnud koodi juurkasutajana. Laadi skript esmalt faili, vaata see üle ja käivita siis - nagu ülal.
 
 Klastri haldamiseks tavakasutajana kopeeri **kubeconfig** (klastri aadress ja administraatori sertifikaat):
@@ -366,6 +370,7 @@ kubectl get secret db-parool -n kool -o jsonpath='{.data.parool}' | base64 -d
                   key: parool
 ```
 
+> [!WARNING]
 > **Secret ei ole krüpteeritud** - väärtus on ainult base64-kodeeritud ja seda näeb igaüks, kellel on õigus Secret'eid lugeda. Kaitse tuleb õigustest (RBAC) ja andmebaasi krüpteerimisest (k3s: `secrets-encryption: true`). Secret'eid **ei panda Giti** avatekstina - selleks on vahendid nagu Sealed Secrets, SOPS või External Secrets (sarnaselt Ansible Vaultiga, moodul 16).
 
 ## 24.8 Väljast ligipääs: Ingress ja TLS
@@ -405,6 +410,7 @@ spec:
 
 Klient peab nime lahendama mõne sõlme aadressiks (DNS või `/etc/hosts`). Kõik sõlmed suunavad päringu õigele podile, ükskõik millisel sõlmel see töötab. Tootmises pannakse sõlmede ette välise koormusejaoturi või virtuaalse IP-aadressi (keepalived, moodul 13), et ühe sõlme rike ei katkestaks ligipääsu.
 
+> [!NOTE]
 > Avalikus klastris hangib sertifikaate automaatselt **cert-manager** (Let's Encrypt ACME, moodul 13) - see on Kubernetese vaste certbotile.
 
 ## 24.9 Püsiandmed: PersistentVolumeClaim
@@ -471,6 +477,7 @@ kubectl get pods -n demo
 
 Seadistused hoitakse failis `values.yaml` Gitis, mitte käsurea `--set` võtmetes - siis on paigaldus korratav. k3s oskab Helmi tabeleid paigaldada ka ise: kataloogi `/var/lib/rancher/k3s/server/manifests/` pandud manifestid (ka `HelmChart` objektid) rakendatakse automaatselt.
 
+> [!WARNING]
 > Usalda tabeleid nagu kolmanda osapoole hoidlaid (moodul 4): eelista projekti ametlikke tabeleid ja vaata enne paigaldust üle, mida need loovad (`helm template`).
 
 ## 24.11 Klastri haldus

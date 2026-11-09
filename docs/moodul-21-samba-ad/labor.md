@@ -11,6 +11,7 @@
 
 Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `dc1` `10.0.83.56`, `alma` `10.0.83.55`, `ubuntuklient` `10.0.83.98`, `winklient` `10.0.83.99`. Domeen `ad.lab.example`, NetBIOS-nimi `AD`. Asenda oma võrguplaani väärtustega.
 
+> [!WARNING]
 > **Enne alustamist:** HKHK laboris on `dc1` mallist olemas, iseõppija paigaldab selle (vt [paigalduslisa](../lisad/paigaldus.md)). Anna sellele staatiline aadress ja **tee hetktõmmis** (snapshot). Provisioning'ut on lihtsam korrata puhtalt masinalt kui ebaõnnestunud katset parandada.
 
 ---
@@ -272,25 +273,5 @@ Seejärel taasta: `sudo timedatectl set-ntp true`.
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Provisioning ja DNS-i registreerimine kasutavad hostinime IP-d; `127.0.1.1` kirjutataks DNS-i A-kirjeks ja kliendid ei leiaks DC-d |
-| K2 | Kerberose piletites on ajatemplid (kordusrünnete vastu); lubatud erinevus vaikimisi 5 minutit |
-| K3 | 53 DNS, 88 Kerberos, 135 RPC, 389 LDAP, 445 SMB, 464 kpasswd, 636 LDAPS, 3268/3269 GC; `[global]`: `netbios name`, `realm`, `server role = active directory domain controller`, `workgroup`, `dns forwarder`, `idmap_ldb:use rfc2307 = yes`; jaotised `[sysvol]`, `[netlogon]` |
-| K4 | SRV-kirjed näitavad, millised hostid ja pordid pakuvad LDAP-i/Kerberost; kliendid leiavad nende järgi DC; `www.debian.org` vastus edastati OPNsense'ile (`dns forwarder`) |
-| K5 | `krbtgt/AD.LAB.EXAMPLE@AD.LAB.EXAMPLE`, kehtib 10 h; `Client 'vale-kasutaja@AD.LAB.EXAMPLE' not found in Kerberos database` |
-| K6 | Laborivõrgu DNS (OPNsense) jääb tööle ka siis, kui DC on maas; DC ei vastuta väliste päringute eest |
-| K7 | `samba-tool user create mari`, `samba-tool user move mari "OU=Opilased,DC=ad,DC=lab,DC=example"`; DN: `CN=Mari Maasikas,OU=Opilased,DC=ad,DC=lab,DC=example` (või `CN=mari,…`, kui ees- ja perenime ei antud) |
-| K8 | Parool lükatakse tagasi (liiga lühike); vaikimisi: min pikkus 7, keerukus sees, ajalugu 24, max vanus 42 päeva |
-| K9 | `ad\mari`, `\\DC1`; `krbtgt/AD.LAB.EXAMPLE` ja teenusepiletid (nt `cifs/dc1…`, `LDAP/dc1…`) |
-| K10 | Jah, Windows registreerib A-kirje dünaamiliselt (vaikimisi turvalised uuendused) |
-| K11 | Jaanile jah, Katile ei - GPO on seotud OU-ga `Opilased`, Kati on OU-s `Opetajad` |
-| K12 | GUID-nimelised kataloogid (`{31B2F340-…}`); Samba ei replitseeri SYSVOL-i DC-de vahel |
-| K13 | Realm nimi, tüüp `kerberos`, `server-software: active-directory`, `client-software: sssd`, vajalikud paketid; keytab sisaldab arvutikonto (`UBUNTUKLIENT$@AD.LAB.EXAMPLE`, `host/…`) võtmeid - masin autendib ennast DC-le |
-| K14 | Suur number (nt 1 234 801 104), arvutatud SID-i RID-ist ja domeeni SID-i räsist; jah, `krbtgt` pilet tekib PAM-i kaudu |
-| K15 | Jah - ID-mapping algoritm on kõigis SSSD masinates sama |
-| K16 | `realm deny --all`, `realm permit -g opilased@ad.lab.example linuxadminid@ad.lab.example`; `%linuxadminid ALL=(ALL:ALL) ALL` (lühinimedega); `administrator` ja `ain` said `Permission denied` / `Access denied` |
-| K17 | `Clock skew too great while getting initial credentials` - erinevus üle 5 minuti |
-| K18 | `realm discover` ei leia domeeni - avalik DNS ei tea `ad.lab.example` SRV-kirjeid; põhjused: DNS, kellaaeg, tulemüür, vale administraatori parool, hostinimi ilma FQDN-ita |
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).

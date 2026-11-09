@@ -30,6 +30,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | 22 | [Linux töölaual ja WSL](../moodul-22-toolaud-wsl/index.md) |
 | 23 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](../moodul-23-virtualiseerimine/index.md) |
 | 24 | [Kubernetes: k3s](../moodul-24-kubernetes/index.md) |
+| 25 | [FreeBSD server](../moodul-25-freebsd/index.md) |
 
 ## A
 
@@ -61,6 +62,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | Käsk | Mida teeb | Moodul |
 |---|---|---|
 | `bash` | Bashi kest; `bash -n` süntaksikontroll, `bash -x` silumine | [6](../moodul-06-bash/index.md) |
+| `bectl` | ZFS-i alglaadimiskeskkondade haldus (FreeBSD) | [25](../moodul-25-freebsd/index.md) |
 | `bg` | Jätkab peatatud tööd taustal | [5](../moodul-05-protsessid-teenused/index.md) |
 | `blkid` | Failisüsteemide tüübid ja UUID-d | [8](../moodul-08-kettad-lvm/index.md) |
 
@@ -98,6 +100,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `dmesg` | Kerneli teated | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `dnf` | AlmaLinuxi pakihaldur (`install`, `upgrade`, `history`, `provides`) | [4](../moodul-04-pakihaldus/index.md) |
 | `do-release-upgrade` | Ubuntu väljalaske uuendamine | [4](../moodul-04-pakihaldus/index.md) |
+| `doas` | Lihtne `sudo` alternatiiv (OpenBSD, FreeBSD) | [25](../moodul-25-freebsd/index.md) |
 | `docker` | Docker konteinerite haldus | [12](../moodul-12-konteinerid/index.md) |
 | `dpkg` | Debiani madala taseme pakihaldus (`-l`, `-L`, `-S`) | [4](../moodul-04-pakihaldus/index.md) |
 | `dracut` | Loob initramfs-i uuesti (AlmaLinux) | [10](../moodul-10-alglaadimine-kernel/index.md) |
@@ -126,16 +129,20 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `firewall-cmd` | firewalld tulemüür (AlmaLinux) | [7](../moodul-07-vork-ssh/index.md) |
 | `flatpak` | Flatpak-rakenduste haldus | [4](../moodul-04-pakihaldus/index.md) |
 | `free` | Mälu kasutus (`-h`) | [17](../moodul-17-seire/index.md) |
+| `freebsd-update` | FreeBSD baassüsteemi ja kerneli uuendamine | [25](../moodul-25-freebsd/index.md) |
+| `freebsd-version` | FreeBSD kerneli ja kasutajaruumi versioon (`-kru`) | [25](../moodul-25-freebsd/index.md) |
 | `fwupdmgr` | Püsivara uuendused | [22](../moodul-22-toolaud-wsl/index.md) |
 
 ## G
 
 | Käsk | Mida teeb | Moodul |
 |---|---|---|
+| `geom` | FreeBSD kettaseadmed (`geom disk list`) | [25](../moodul-25-freebsd/index.md) |
 | `getenforce` | SELinuxi režiim | [11](../moodul-11-turvalisus-logid/index.md) |
 | `getent` | Kasutaja- ja grupikirjed (ka LDAP-ist/AD-st) | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `getfacl` | Näitab ACL-i õigusi | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `git` | Versioonihaldus (`init`, `add`, `commit`, `log`, `branch`, `push`) | [6](../moodul-06-bash/index.md) |
+| `gpart` | FreeBSD partitsioonide haldus (`gpart show`) | [25](../moodul-25-freebsd/index.md) |
 | `gpasswd` | Lisab või eemaldab grupi liikmeid | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `grep` | Otsib mustrile vastavaid ridu (`-r`, `-i`, `-v`, `-E`) | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `groupadd` | Loob grupi | [3](../moodul-03-kasutajad-oigused/index.md) |
@@ -174,6 +181,8 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 
 | Käsk | Mida teeb | Moodul |
 |---|---|---|
+| `jexec` | Käivitab käsu FreeBSD jailis | [25](../moodul-25-freebsd/index.md) |
+| `jls` | Töötavad FreeBSD jailid | [25](../moodul-25-freebsd/index.md) |
 | `jobs` | Kesta taustatööd | [5](../moodul-05-protsessid-teenused/index.md) |
 | `journalctl` | systemd logide vaatamine (`-u`, `-f`, `-b`, `-p`) | [5](../moodul-05-protsessid-teenused/index.md) |
 
@@ -285,6 +294,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `photorec` | Kustutatud failide taastamine sisu järgi | [9](../moodul-09-salvestus/index.md) |
 | `pidstat` | Protsesside ressursikasutus ajas | [17](../moodul-17-seire/index.md) |
 | `ping` | Kontrollib ühendust ICMP-ga | [7](../moodul-07-vork-ssh/index.md) |
+| `pkg` | FreeBSD pakihaldur (`install`, `upgrade`, `audit`) | [25](../moodul-25-freebsd/index.md) |
 | `pkill` | Saadab signaali protsessidele nime järgi | [5](../moodul-05-protsessid-teenused/index.md) |
 | `podman` | Konteinerite käivitamine ja haldus (juurkasutajata) | [12](../moodul-12-konteinerid/index.md) |
 | `podman-compose` | Mitme konteineri rakendus `compose.yaml` järgi | [12](../moodul-12-konteinerid/index.md) |
@@ -300,6 +310,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `pvesm` | Proxmoxi salvestuse haldus | [23](../moodul-23-virtualiseerimine/index.md) |
 | `pveversion` | Proxmoxi versioon | [23](../moodul-23-virtualiseerimine/index.md) |
 | `pvs` | Füüsiliste köidete ülevaade (ka `vgs`, `lvs`) | [8](../moodul-08-kettad-lvm/index.md) |
+| `pw` | FreeBSD kasutajate ja gruppide haldus | [25](../moodul-25-freebsd/index.md) |
 | `pwd` | Näitab praegust kataloogi | [1](../moodul-01-sissejuhatus/index.md) |
 
 ## Q
@@ -361,6 +372,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `sudo` | Käivitab käsu teise kasutajana (vaikimisi juurkasutajana) | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `swapon` | Aktiveerib saaleala; `--show` näitab olekut | [8](../moodul-08-kettad-lvm/index.md) |
 | `sysctl` | Kerneli parameetrid (`-a`, `-w`, `--system`) | [10](../moodul-10-alglaadimine-kernel/index.md) |
+| `sysrc` | Muudab FreeBSD `rc.conf`-i seadeid | [25](../moodul-25-freebsd/index.md) |
 | `systemctl` | systemd teenuste ja üksuste haldus (`start`, `enable`, `status`) | [5](../moodul-05-protsessid-teenused/index.md) |
 | `systemd-analyze` | Alglaadimise aeg ja aeglased üksused | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `systemd-cgtop` | Ressursikasutus cgroup'ide kaupa | [5](../moodul-05-protsessid-teenused/index.md) |
@@ -416,6 +428,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `vgcreate` | Loob köitegrupi | [8](../moodul-08-kettad-lvm/index.md) |
 | `vgextend` | Lisab köitegrupile ketta | [8](../moodul-08-kettad-lvm/index.md) |
 | `vim` | Võimas režiimidega tekstiredaktor | [2](../moodul-02-failid-tekst-torud/index.md) |
+| `vipw` | Kasutajafaili turvaline muutmine (FreeBSD `master.passwd`) | [25](../moodul-25-freebsd/index.md) |
 | `virsh` | libvirt-i virtuaalmasinate haldus | [23](../moodul-23-virtualiseerimine/index.md) |
 | `virt-install` | Loob virtuaalmasina käsurealt | [23](../moodul-23-virtualiseerimine/index.md) |
 | `visudo` | Muudab sudoers-faili süntaksikontrolliga | [3](../moodul-03-kasutajad-oigused/index.md) |

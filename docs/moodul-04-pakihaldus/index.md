@@ -35,6 +35,7 @@ Pakihalduri eelised:
 - **kogu süsteem uueneb ühe käsuga** - nii operatsioonisüsteem kui ka kõik programmid;
 - **puhas eemaldamine** - pakihaldur teab täpselt, millised failid paketti kuuluvad.
 
+> [!TIP]
 > **Reegel:** paigalda tarkvara võimalusel alati distro ametlikust hoidlast. Allalaaditud skriptide ja tundmatute paigaldusfailide käivitamine juurkasutajana on üks levinumaid viise süsteemi rikkuda või nakatada.
 
 ### Kaks perekonda, kaks süsteemi
@@ -60,6 +61,7 @@ sudo apt upgrade             # uuenda paigaldatud pakette
 sudo apt full-upgrade        # uuenda, lubades ka pakette eemaldada või lisada
 ```
 
+> [!WARNING]
 > **Tähtis:** `apt update` **ei uuenda tarkvara**, vaid ainult loendi sellest, mis hoidlates saadaval on. Tarkvara uuendab `apt upgrade`. Seepärast käivitatakse need tavaliselt koos: `sudo apt update && sudo apt upgrade`.
 
 ### Tarkvara otsimine ja info
@@ -94,6 +96,7 @@ dpkg -S /usr/bin/ls          # millisesse paketti fail kuulub
 
 Kõik `apt` toimingud logitakse failidesse `/var/log/apt/history.log` (mis paigaldati ja millal) ja `/var/log/apt/term.log` (täielik väljund). Nii saab kontrollida, mis süsteemis muutus.
 
+> [!NOTE]
 > **apt või apt-get?** `apt` on uuem ja mugavam käsk interaktiivseks kasutamiseks. Vanemates juhendites ja skriptides kasutatakse käske `apt-get` ja `apt-cache`, mis teevad sama, kuid mille väljund on skriptidele stabiilsem.
 
 ## 4.3 dnf - AlmaLinux
@@ -247,6 +250,7 @@ sudo add-apt-repository ppa:kasutaja/hoidla
 sudo apt update
 ```
 
+> [!WARNING]
 > **Riskid:** iga lisatud hoidla saab sinu süsteemis käivitada koodi juurkasutaja õigustes, sest paigaldusskriptid töötavad juurkasutajana. Seepärast:
 >
 > - lisa ainult usaldusväärseid hoidlaid (distro, tuntud kogukond või tarkvara tootja);
@@ -364,6 +368,7 @@ sudo reboot
 
 `leapp preupgrade` leiab takistused (nt vanad kerneli moodulid, puuduvad vastused küsimustele failis `/var/log/leapp/answerfile`). Uuendus toimub taaskäivitusel spetsiaalses keskkonnas ja võtab aega.
 
+> [!WARNING]
 > **Tähtis:** AlmaLinux 10 nõuab protsessorilt x86-64-v3 tuge (vt [paigalduslisa](../lisad/paigaldus.md)). Kontrolli enne uuendust Proxmoxis VM-i protsessori tüüpi.
 
 ---

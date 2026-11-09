@@ -30,6 +30,7 @@ Serverites on Linux ammu valitsev operatsioonisüsteem. Töölaual on see olnud 
 - **Windows 10 toe lõpp** (oktoober 2025): miljonid arvutid ei vasta Windows 11 riistvaranõuetele. Linux annab neile turvauuendustega teise elu.
 - **Arendajad** - veebi-, pilve- ja konteineritöö käib Linuxi tööriistadega; paljud arendajad kasutavad Linuxit kas otse või WSL-i kaudu (punkt 22.9).
 
+> [!NOTE]
 > **Märkus:** suveräänsuse küsimused on poliitilised ja muutuvad kiiresti. Siin on toodud näited, mitte hinnang - kontrolli värskeid andmeid ja mõtle, millised on mõlema poole argumendid (ühilduvus, koolituskulud, tugi, turvalisus, sõltumatus).
 
 ---
@@ -60,16 +61,14 @@ Töölaua paigaldus käib samamoodi nagu serveril (vt [paigalduslisa](../lisad/p
 
 Linuxi töölaud koosneb mitmest vahetatavast kihist:
 
-```text
-rakendused (Firefox, LibreOffice, …)
-        │
-töölauakeskkond (GNOME, KDE Plasma, Xfce, …) + aknahaldur/komposiitor
-        │
-kuvaprotokoll: Wayland (uus) või X11 (vana, XWayland ühilduvuseks)
-        │
-kerneli graafikadraiverid (DRM/KMS: i915/xe, amdgpu, nouveau/nvidia)
-        │
-riistvara
+```mermaid
+flowchart TB
+    A["rakendused<br>Firefox, LibreOffice, …"]
+    B["töölauakeskkond (GNOME, KDE Plasma, Xfce, …)<br>+ aknahaldur/komposiitor"]
+    C["kuvaprotokoll: Wayland (uus) või X11 (vana)<br>XWayland ühilduvuseks"]
+    D["kerneli graafikadraiverid<br>DRM/KMS: i915/xe, amdgpu, nouveau/nvidia"]
+    E["riistvara"]
+    A --- B --- C --- D --- E
 ```
 
 | Kiht | Näited | Märkus |
@@ -95,6 +94,8 @@ Töölauakeskkondade võrdlus:
 | Filosoofia | lihtne, vähe seadeid, tegevuste ülevaade | väga seadistatav, Windowsi sarnane | kerge ja traditsiooniline |
 | Mälu (ligikaudu, tühjalt) | 1–1,5 GiB | ~1 GiB | ~0,5 GiB |
 | Vaikimisi | Ubuntu, Fedora, Debian | Kubuntu, SteamOS, openSUSE | Kali, Xubuntu |
+
+<!-- PILT: ../pildid/m22-gnome-toolaud.png | Ubuntu GNOME töölaud (*Activities* vaade) -->
 
 ---
 
@@ -225,6 +226,7 @@ Proxmoxis valitakse VM-ile graafikaadapter *Hardware* → *Display*: töölaua V
 | Kolmandate osapoolte draiverid | `ubuntu-drivers autoinstall` | `non-free-firmware`, `nvidia-driver` | RPM Fusion (Fedora), ELRepo (Alma) |
 | Kellele | töölaud, arendajad | stabiilsus | Fedora - uusim tarkvara; AlmaLinux - tööjaamad ettevõttes |
 
+> [!NOTE]
 > **Server ja töölaud:** serverisse graafilist keskkonda ei paigaldata - see kulutab ressursse, suurendab ründepinda ja uuenduste mahtu. Serverit hallatakse SSH ja veebiliideste kaudu.
 
 ---
@@ -259,13 +261,14 @@ Sarnane distro on **Parrot Security OS**.
 
 **WSL** (*Windows Subsystem for Linux*) võimaldab käivitada Linuxi distrot otse Windowsis. Praegune versioon **WSL 2** käitab päris Linuxi kernelit kerges Hyper-V virtuaalmasinas, mis käivitub sekunditega ja jagab Windowsiga failisüsteemi, võrku ja kuva. WSL on alates 2025. aastast avatud lähtekoodiga.
 
-```text
-Windows 11
- ├── Windowsi programmid (PowerShell, VS Code, brauser)
- └── WSL 2 kerge VM (Microsofti Linuxi kernel)
-       ├── Ubuntu          ← iga distro on eraldi failisüsteem,
-       ├── Debian             aga sama kernel ja võrk
-       └── AlmaLinux
+```mermaid
+flowchart TD
+    W["Windows 11"] --> P["Windowsi programmid<br>PowerShell, VS Code, brauser"]
+    W --> V["WSL 2 kerge VM<br>Microsofti Linuxi kernel"]
+    V --> U["Ubuntu"]
+    V --> D["Debian"]
+    V --> A["AlmaLinux"]
+    N["iga distro on eraldi failisüsteem,<br>aga sama kernel ja võrk"] -.- V
 ```
 
 ### Paigaldus ja põhikäsud (PowerShell)
@@ -286,6 +289,8 @@ wsl --unregister Debian2          # KUSTUTAB distro koos kõigi andmetega!
 
 Esimesel käivitamisel luuakse Linuxi kasutaja ja parool (eraldi Windowsi omast). Sealt edasi on tegemist tavalise distroga: `sudo apt update && sudo apt upgrade`, paigalda tarkvara, kirjuta skripte.
 
+<!-- PILT: ../pildid/m22-wsl-terminal.png | Windows Terminal: PowerShell `wsl -l -v` ja Ubuntu vahekaart -->
+
 ### Failid ja programmid kahe süsteemi vahel
 
 | Kust | Kuhu | Kuidas |
@@ -295,6 +300,7 @@ Esimesel käivitamisel luuakse Linuxi kasutaja ja parool (eraldi Windowsi omast)
 | Linuxist | Windowsi programm | `notepad.exe fail.txt`, `code .` (VS Code WSL-i laiendiga) |
 | Windowsist | Linuxi käsk | `wsl ls -la`, `wsl -d Debian -- uname -r` |
 
+> [!NOTE]
 > **Jõudlus:** hoia Linuxi projekte Linuxi failisüsteemis (`~/`), mitte `/mnt/c` all - üle piiri failide lugemine on mitu korda aeglasem.
 
 ### Seadistus
@@ -335,6 +341,7 @@ Muudatused jõustuvad pärast `wsl --shutdown`.
 | Bash ja Git (moodul 6), Docker/Podman (moodul 12), Ansible'i juhtmasin (moodul 16) | tulemüür, SELinux/AppArmor (moodul 11) |
 | SSH klient, arendustööriistad | teenused, mis peavad olema võrgust kättesaadavad 24/7 |
 
+> [!NOTE]
 > **WSL virtuaalmasinas:** kui Windows ise töötab Proxmoxi VM-is (nt laboris `winklient`), vajab WSL 2 **pesastatud virtualiseerimist** (*nested virtualization*): VM-i protsessori tüüp peab olema `host` ja Proxmoxi sõlmes peab pesastatud virtualiseerimine olema lubatud. Muidu annab `wsl --install` vea virtualiseerimise puudumise kohta.
 
 Alternatiivid Windowsis: virtuaalmasin (Hyper-V, VirtualBox), Docker Desktop (kasutab ise WSL-i), MSYS2/Git Bash (ainult tööriistad, mitte päris Linux).

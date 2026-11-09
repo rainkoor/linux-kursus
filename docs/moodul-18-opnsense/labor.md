@@ -56,6 +56,7 @@ ping -c2 debian.org
 - **A (soovitatav):** laborivõrgus on töölauaga klient (nt Ubuntu Desktop või Windows), mida kasutad Proxmoxi konsooli kaudu, ja avad veebiliidese selle brauseris;
 - **B:** luba veebiliides ajutiselt WAN-ist **ainult oma arvuti aadressilt**. OPNsense'i konsoolis (punkt **8**, kest) lülita tulemüür ajutiselt välja käsuga `pfctl -d`, ava oma arvutist `https://WAN_IP`, eemalda kõigepealt *Interfaces* → *WAN* valik *Block private networks* (sinu arvuti aadress on privaatvõrgust), seejärel lisa WAN-i liidesele reegel *Pass*, TCP, allikas = sinu arvuti IP, sihtkoht = *This Firewall*, port 443, ja vajuta *Apply* - see lülitab tulemüüri jälle sisse. Kontrolli konsoolis `pfctl -s info | head -1` (peab olema `Status: Enabled`).
 
+> [!NOTE]
 > **Õpetajale:** variant A on turvalisem ja lihtsam. Kui kasutad varianti B, veendu, et õppijad ei jätaks tulemüüri välja lülitatuks ega avaks haldusliidest kogu kooli võrgule.
 
 ## 4. osa. Veebiliides ja seadistusviisard
@@ -193,21 +194,5 @@ tcpdump -ni vtnet1 icmp
 
 ---
 
-## Õpetajale: kontrollvastused
-
-| Küsimus | Vastus |
-|---|---|
-| K1 | Üks liides välisvõrku (WAN), teine sisevõrku (LAN); tulemüür filtreerib ja marsruudib nende vahel |
-| K3 | Aadress DHCP vahemikust, vaikelüüs ja DNS = OPNsense'i LAN-aadress; esimene hüpe on OPNsense |
-| K4 | WAN on kooli privaatvõrk; päris internetis tuleks privaatvõrgu allikaga pakette käsitleda võltsitutena |
-| K5 | Serverid peavad töötama ka siis, kui DHCP-server ei tööta; seadistus on masinas endas nähtav |
-| K6 | Unbound (OPNsense); DHCP-klientide registreerimine sõltub seadistusest (Dnsmasq registreerib vaikimisi) |
-| K7 | Automaatne WAN-reegel *pass* sihtkohale `alma:80`; logis on WAN-i ühendus ja NAT |
-| K8 | *Block* - pakett visatakse vaikselt (ssh ootab kuni aegumiseni), *Reject* - saadetakse keeldumine (ssh lõpetab kohe veaga) |
-| K9 | Lubav reegel sobis enne, keelav reeglit ei jõutud kunagi (esimene sobiv reegel kehtib) |
-| K10 | `ifconfig`, `netstat -rn`, `sockstat -4l`, `pfctl -sr`, `service -e`, `gpart show`/`geom disk list` |
-| K12 | XML; sisaldab paroolide räsisid, sertifikaatide privaatvõtmeid, VPN-võtmeid |
-| K13 | Seadistuse varukoopia - ainult seadistus, taastatav ka uude/teistsugusesse masinasse; hetktõmmis - kogu masin, kiire tagasipööramine samas Proxmoxis |
-| K16 | Parool ja kasutajad, uuendused, privaatvõrkude blokeerimine WAN-il sisse, haldusliides ainult LAN-ist, tugevad reeglid, varundus, logide jälgimine, IDS |
-
-> **Märkus õpetajale:** OPNsense'i menüüde nimed muutuvad versioonide vahel (eriti DHCP-teenustel). Juhend järgib versiooni 26.x loogikat. Enne tundi kontrolli, kus asuvad sinu versioonis DHCP ja pordisuunamise seaded.
+> [!NOTE]
+> **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
