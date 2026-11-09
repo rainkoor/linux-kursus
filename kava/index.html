@@ -1944,6 +1944,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proovieksam-pohiosa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: põhiosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3267,34 +3295,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../proovieksam-pohiosa/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Proovieksam: põhiosa
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -5249,7 +5249,7 @@
 <li>planeerib varunduse ja taastamise ning dokumenteerib süsteemi nii, et keegi teine saab selle üle võtta.</li>
 </ol>
 <h2 id="maht-ja-ulesehitus">Maht ja ülesehitus<a class="headerlink" href="#maht-ja-ulesehitus" title="Permanent link">&para;</a></h2>
-<p>Kursus koosneb kolmest osast. Soovituslik kogumaht on <strong>ca 180 kontakttundi</strong> koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on <strong>valikmoodulid (76 h)</strong>, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.</p>
+<p>Kursus koosneb kolmest osast. Soovituslik kogumaht on <strong>ca 182 kontakttundi</strong> koos laboritöödega (põhiosa 76 h, süvendusosa 84 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on <strong>valikmoodulid (76 h)</strong>, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.</p>
 <h3 id="pohiosa-linuxi-kasutamine-ja-haldus">Põhiosa: Linuxi kasutamine ja haldus<a class="headerlink" href="#pohiosa-linuxi-kasutamine-ja-haldus" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -5337,7 +5337,7 @@
 <tr>
 <td>10</td>
 <td><a href="../moodul-10-alglaadimine-kernel/">Kuidas Linux töötab: alglaadimine ja kernel</a></td>
-<td>10</td>
+<td>12</td>
 <td>Debian</td>
 </tr>
 <tr>
@@ -5498,8 +5498,8 @@
 <p><strong>Õpiväljundid:</strong> õppija ehitab töökindla salvestuse, vahetab rikkis ketta, mõõdab ja jälgib ketaste jõudlust ning taastab kadunud partitsioonitabeli.</p>
 <p><strong>Iseõppeks:</strong> OpenZFS dokumentatsioon; Arch Wiki - RAID, ZFS, S.M.A.R.T.</p>
 <h3 id="moodul-10-kuidas-linux-tootab-alglaadimine-ja-kernel">Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel<a class="headerlink" href="#moodul-10-kuidas-linux-tootab-alglaadimine-ja-kernel" title="Permanent link">&para;</a></h3>
-<p><strong>Teemad:</strong> alglaadimise etapid (UEFI/BIOS, GRUB, kernel, initramfs, systemd), käivituseesmärgid (target), kerneli moodulid (<code>lsmod</code>, <code>modprobe</code>), <code>/proc</code> ja <code>/sys</code>, <code>dmesg</code>, kerneli parameetrid (<code>sysctl</code>), alglaadimise analüüs (<code>systemd-analyze</code>), süsteemi taastamine (rescue-režiim, juurkasutaja parooli lähtestamine, GRUB-i parandamine taastemeedialt ja <code>chroot</code>-iga), kernelite vahetamine ja eemaldamine, DKMS, kerneli kompileerimine lähtekoodist.</p>
-<p><strong>Õpiväljundid:</strong> õppija kirjeldab alglaadimise protsessi, diagnoosib käivitusprobleeme, taastab mittekäivituva süsteemi, vahetab kasutatavat kernelit ning kompileerib ja paigaldab kerneli lähtekoodist.</p>
+<p><strong>Teemad:</strong> alglaadimise etapid (UEFI/BIOS, GRUB, kernel, initramfs, systemd), käivituseesmärgid (target), kerneli moodulid (<code>lsmod</code>, <code>modprobe</code>), <code>/proc</code> ja <code>/sys</code>, <code>dmesg</code>, kerneli parameetrid (<code>sysctl</code>), alglaadimise analüüs (<code>systemd-analyze</code>), süsteemi taastamine (rescue-režiim, juurkasutaja parooli lähtestamine, GRUB-i parandamine taastemeedialt ja <code>chroot</code>-iga), kernelite vahetamine ja eemaldamine, DKMS, kerneli kompileerimine lähtekoodist, systemd süvitsi (sõltuvused ja järjekord, teenuse tüübid, keskkond, mallid, pesa- ja teeüksused, <code>.mount</code>/<code>.automount</code>, kasutajateenused, teenuste karastamine <code>systemd-analyze security</code>-ga, tõrkeotsing).</p>
+<p><strong>Õpiväljundid:</strong> õppija kirjeldab alglaadimise protsessi, diagnoosib käivitusprobleeme, taastab mittekäivituva süsteemi, vahetab kasutatavat kernelit, kompileerib ja paigaldab kerneli lähtekoodist ning seadistab, karastab ja silub systemd teenuseid.</p>
 <p><strong>Iseõppeks:</strong> „How Linux Works“; Linux From Scratch (süvenemiseks).</p>
 <h3 id="moodul-11-turvalisus-ja-logid">Moodul 11. Turvalisus ja logid<a class="headerlink" href="#moodul-11-turvalisus-ja-logid" title="Permanent link">&para;</a></h3>
 <p><strong>Teemad:</strong> turvalisuse põhimõtted, SSH karastamine, automaatsed turvauuendused, <code>fail2ban</code>, logide asukohad ja <code>journald</code>, <code>rsyslog</code> ja tsentraalne logimine, logide rotatsioon (<code>logrotate</code>), kohustuslik juurdepääsukontroll: SELinux (AlmaLinux) ja AppArmor (Ubuntu), auditeerimine (<code>auditd</code>), turvaaudit (Lynis), SIEM-i (Wazuh) tutvustus ja automaatne reageerimine, fail2ban-i vajalikkus ja alternatiivid (OpenSSH <code>PerSourcePenalties</code>, CrowdSec).</p>
@@ -5522,7 +5522,7 @@
 <p><strong>Õpiväljundid:</strong> õppija lisab serverile sisevõrgu DNS-i, failijagamise ja e-posti teavitused, planeerib varunduse RPO ja RTO järgi, testib taastamist ning dokumenteerib serveri koos käsiraamatuga.</p>
 <p><strong>Iseõppeks:</strong> BIND 9, Samba Wiki, Postfixi ja resticu dokumentatsioon.</p>
 <h3 id="moodul-16-automatiseerimine-ansible-vagrant-ja-infrastruktuur-koodina">Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina<a class="headerlink" href="#moodul-16-automatiseerimine-ansible-vagrant-ja-infrastruktuur-koodina" title="Permanent link">&para;</a></h3>
-<p><strong>Teemad:</strong> infrastruktuur koodina, idempotentsus, Ansible (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad, Vault, eri distrod, rollid ja muutujafailid), Ansible'i koodi testimine (<code>ansible-lint</code>, idempotentsuse test, Molecule), Vagrant laborikeskkonna loomiseks, virtuaalmasinad koodina (cloud-init, OpenTofu).</p>
+<p><strong>Teemad:</strong> automatiseerimise astmed (Bashi skriptid, cron ja systemd taimerid, Git, konteinerid, Ansible), infrastruktuur koodina, idempotentsus, Ansible (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad, Vault, eri distrod, rollid ja muutujafailid), Ansible'i koodi testimine (<code>ansible-lint</code>, idempotentsuse test, Molecule), Vagrant laborikeskkonna loomiseks, virtuaalmasinad koodina (cloud-init, OpenTofu).</p>
 <p><strong>Õpiväljundid:</strong> õppija seadistab mitu serverit korraga Ansible'i rollidega, testib automatiseerimiskoodi, loob virtuaalmasinad koodina ja korratava laborikeskkonna.</p>
 <p><strong>Iseõppeks:</strong> Ansible'i dokumentatsioon; J. Geerling „Ansible for DevOps“.</p>
 <h3 id="moodul-17-seire-ja-joudlus">Moodul 17. Seire ja jõudlus<a class="headerlink" href="#moodul-17-seire-ja-joudlus" title="Permanent link">&para;</a></h3>

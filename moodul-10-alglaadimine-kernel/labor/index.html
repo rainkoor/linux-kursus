@@ -1461,6 +1461,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proovieksam-pohiosa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: põhiosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1919,10 +1947,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-osa-kokkuvote" class="md-nav__link">
+  <a href="#11-osa-systemd-suvitsi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. osa. Kokkuvõte
+        11. osa. systemd süvitsi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-osa-kokkuvote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. osa. Kokkuvõte
       
     </span>
   </a>
@@ -2978,34 +3017,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../proovieksam-pohiosa/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Proovieksam: põhiosa
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -4597,10 +4608,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-osa-kokkuvote" class="md-nav__link">
+  <a href="#11-osa-systemd-suvitsi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. osa. Kokkuvõte
+        11. osa. systemd süvitsi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-osa-kokkuvote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. osa. Kokkuvõte
       
     </span>
   </a>
@@ -4661,7 +4683,7 @@
 </tr>
 <tr>
 <td><strong>Kestus</strong></td>
-<td>3 × 90 minutit (9. osa kompileerimine võib kesta kauem - selle võib teha ka iseseisvalt)</td>
+<td>4 × 90 minutit (9. osa kompileerimine võib kesta kauem - selle võib teha ka iseseisvalt)</td>
 </tr>
 <tr>
 <td><strong>Vajalik</strong></td>
@@ -4673,7 +4695,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K24</strong>.</p>
+<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K30</strong>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Selles laboris rikud teadlikult oma süsteemi.</strong> Tee enne alustamist virtuaalmasinast hetktõmmis (Proxmoxis: masin → <em>Snapshots</em> → <em>Take Snapshot</em>). Kui midagi läheb lootusetult valesti, saad selle taastada. Osad 5–8 ja 10 tehakse <strong>konsoolis</strong>, mitte SSH kaudu.</p>
@@ -4974,8 +4996,119 @@ reboot
 <p>Kui sinu Debianil on eraldi <code>/boot</code> või <code>/var</code> partitsioon, haagi need enne <code>chroot</code>-i (<code>mount /dev/sdaX /target/boot</code>). Eemalda ISO ja kontrolli, et masin käivitub.</p>
 <p><strong>K23.</strong> Miks seoti enne <code>chroot</code>-i kataloogid <code>/dev</code>, <code>/proc</code> ja <code>/sys</code>? Mis vahe on variantidel <em>Reinstall GRUB boot loader</em> ja käsitsi <code>chroot</code>-il? Millal on vaja käsitsi varianti?</p>
 <hr />
-<h2 id="11-osa-kokkuvote">11. osa. Kokkuvõte<a class="headerlink" href="#11-osa-kokkuvote" title="Permanent link">&para;</a></h2>
-<p><strong>K24.</strong> Täida tabel: millises alglaadimise etapis tekib probleem ja millise tööriista või meetodiga seda uurida/lahendada?</p>
+<h2 id="11-osa-systemd-suvitsi">11. osa. systemd süvitsi<a class="headerlink" href="#11-osa-systemd-suvitsi" title="Permanent link">&para;</a></h2>
+<p>Selles osas kasutad teooria punkti 10.11 näiteid. Kõik failid lähevad kataloogi <code>/etc/systemd/system/</code> ja pärast iga muudatust käivita <code>sudo systemctl daemon-reload</code>.</p>
+<p><strong>11.1 Sõltuvused</strong></p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>multi-user.target<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>--reverse<span class="w"> </span>ssh.service
+systemctl<span class="w"> </span>show<span class="w"> </span>-p<span class="w"> </span>Wants,Requires,After,Type<span class="w"> </span>ssh.service
+systemctl<span class="w"> </span>show<span class="w"> </span>-p<span class="w"> </span>Type<span class="w"> </span>chrony.service<span class="w"> </span>cron.service
+</code></pre></div>
+<p><strong>K24.</strong> Mis on <code>ssh.service</code> seadete <code>Wants</code>/<code>Requires</code> ja <code>After</code> väärtused ning mille poolest need erinevad? Mis juhtuks, kui teenusel oleks <code>Requires=mariadb.service</code>, kuid puuduks <code>After=mariadb.service</code>? Millist <code>Type=</code> kasutavad <code>ssh</code>, <code>chrony</code> ja <code>cron</code>?</p>
+<p><strong>11.2 Mall</strong> - loo teooria näite järgi <code>tervitaja@.service</code> ja käivita kaks eksemplari:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tervitaja@mari<span class="w"> </span>tervitaja@jaan
+systemctl<span class="w"> </span>list-units<span class="w"> </span><span class="s1">'tervitaja@*'</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span><span class="s1">'tervitaja@*'</span><span class="w"> </span>--since<span class="w"> </span><span class="s2">"1 min ago"</span>
+ps<span class="w"> </span>-o<span class="w"> </span>user,pid,cmd<span class="w"> </span>-C<span class="w"> </span>bash<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Tere
+sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span><span class="s1">'tervitaja@*'</span>
+</code></pre></div>
+<p><strong>K25.</strong> Mitu protsessi töötas ja millise kasutajana (<code>DynamicUser=yes</code>)? Kas see kasutaja on failis <code>/etc/passwd</code>? Too üks näide mallist, mida süsteem ise kasutab (<code>systemctl list-units '*@*'</code>).</p>
+<p><strong>11.3 Pesa aktiveerimine</strong> - loo <code>kell.socket</code> ja <code>kell@.service</code> teooria järgi:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcat-openbsd
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>kell.socket
+sudo<span class="w"> </span>ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">2000</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span><span class="s1">'kell@*'</span>
+nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">2000</span>
+nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">2000</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span><span class="s1">'kell@*'</span><span class="w"> </span>--since<span class="w"> </span><span class="s2">"5 min ago"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail
+</code></pre></div>
+<p><strong>K26.</strong> Milline protsess kuulas pordil 2000 enne esimest ühendust? Mitu <code>kell@</code> eksemplari tekkis ja kas need jäid tööle? Nimeta kaks pesa aktiveerimise eelist.</p>
+<p><strong>11.4 Failide jälgimine</strong> - loo <code>tootle.path</code> ja <code>tootle.service</code> teooria järgi:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/sisend<span class="w"> </span>/srv/valmis
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>tootle.path
+sudo<span class="w"> </span>touch<span class="w"> </span>/srv/sisend/aruanne1.txt<span class="w"> </span>/srv/sisend/aruanne2.txt
+sleep<span class="w"> </span><span class="m">2</span>
+ls<span class="w"> </span>/srv/sisend<span class="w"> </span>/srv/valmis
+journalctl<span class="w"> </span>-u<span class="w"> </span>tootle.service<span class="w"> </span>--since<span class="w"> </span><span class="s2">"5 min ago"</span>
+</code></pre></div>
+<p><strong>K27.</strong> Mitu korda teenus käivitus ja mida see logis? Miks peab teenus kataloogi tühjendama? Too üks näide, kus <code>.path</code> üksus oleks halduses kasulik.</p>
+<p><strong>11.5 Teenuse karastamine</strong> - loo karastamata teenus:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/aeg
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/aeg.service<span class="w"> </span><span class="s">&lt;&lt;'EOT'</span>
+<span class="s">[Unit]</span>
+<span class="s">Description=Kirjutab kellaaja faili</span>
+
+<span class="s">[Service]</span>
+<span class="s">Type=exec</span>
+<span class="s">ExecStart=/bin/bash -c 'while true; do date &gt;&gt; /var/lib/aeg/aeg.txt; sleep 30; done'</span>
+
+<span class="s">[Install]</span>
+<span class="s">WantedBy=multi-user.target</span>
+<span class="s">EOT</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>aeg.service
+systemd-analyze<span class="w"> </span>security<span class="w"> </span>aeg.service<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-3
+</code></pre></div>
+<p>Lisa seejärel karastus drop-in failina (<code>sudo systemctl edit aeg.service</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="k">[Service]</span>
+<span class="na">DynamicUser</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">StateDirectory</span><span class="o">=</span><span class="s">aeg</span>
+<span class="na">NoNewPrivileges</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectSystem</span><span class="o">=</span><span class="s">strict</span>
+<span class="na">ProtectHome</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">PrivateTmp</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">PrivateDevices</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">PrivateNetwork</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectKernelTunables</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectKernelModules</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectKernelLogs</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectControlGroups</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectClock</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">ProtectHostname</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">CapabilityBoundingSet</span><span class="o">=</span>
+<span class="na">RestrictAddressFamilies</span><span class="o">=</span><span class="s">AF_UNIX</span>
+<span class="na">RestrictNamespaces</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">RestrictRealtime</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">RestrictSUIDSGID</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">LockPersonality</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">MemoryDenyWriteExecute</span><span class="o">=</span><span class="s">yes</span>
+<span class="na">SystemCallArchitectures</span><span class="o">=</span><span class="s">native</span>
+<span class="na">SystemCallFilter</span><span class="o">=</span><span class="s">@system-service</span>
+<span class="na">UMask</span><span class="o">=</span><span class="s">0077</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/aeg<span class="w">                 </span><span class="c1"># StateDirectory loob kataloogi ise</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>aeg.service
+systemctl<span class="w"> </span>status<span class="w"> </span>aeg.service
+sleep<span class="w"> </span><span class="m">35</span><span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>tail<span class="w"> </span>-3<span class="w"> </span>/var/lib/aeg/aeg.txt
+systemd-analyze<span class="w"> </span>security<span class="w"> </span>aeg.service<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-3
+sudo<span class="w"> </span>systemd-run<span class="w"> </span>--wait<span class="w"> </span>-p<span class="w"> </span><span class="nv">ProtectSystem</span><span class="o">=</span>strict<span class="w"> </span>-p<span class="w"> </span><span class="nv">DynamicUser</span><span class="o">=</span>yes<span class="w"> </span>touch<span class="w"> </span>/etc/proov
+</code></pre></div>
+<p><strong>K28.</strong> Mis oli teenuse turvahinne enne ja pärast karastamist? Kas teenus töötas edasi? Kus asub <code>aeg.txt</code> nüüd tegelikult (<code>ls -l /var/lib/ | grep aeg</code>)? Miks ebaõnnestus <code>systemd-run</code> katse?</p>
+<p><strong>11.6 Tõrkeotsing</strong> - loo kaks vigast teenust:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/vigane1.service<span class="w"> </span><span class="s">&lt;&lt;'EOT'</span>
+<span class="s">[Service]</span>
+<span class="s">ExecStart=/usr/local/bin/olematu-programm</span>
+<span class="s">EOT</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/vigane2.service<span class="w"> </span><span class="s">&lt;&lt;'EOT'</span>
+<span class="s">[Service]</span>
+<span class="s">ExecStart=/bin/false</span>
+<span class="s">Restart=always</span>
+<span class="s">RestartSec=1</span>
+<span class="s">EOT</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>vigane1<span class="p">;</span><span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>vigane1<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-8
+systemd-analyze<span class="w"> </span>verify<span class="w"> </span>/etc/systemd/system/vigane1.service
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>vigane2<span class="p">;</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>vigane2<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-8
+journalctl<span class="w"> </span>-xeu<span class="w"> </span>vigane2<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-15
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reset-failed<span class="w"> </span>vigane2
+</code></pre></div>
+<p><strong>K29.</strong> Millise oleku ja koodi (<code>status=…</code>) näitas <code>vigane1</code> ning mida ütles <code>systemd-analyze verify</code>? Mis juhtus <code>vigane2</code>-ga umbes viie sekundi pärast ja miks? Mida teeb <code>reset-failed</code>?</p>
+<hr />
+<h2 id="12-osa-kokkuvote">12. osa. Kokkuvõte<a class="headerlink" href="#12-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<p><strong>K30.</strong> Täida tabel: millises alglaadimise etapis tekib probleem ja millise tööriista või meetodiga seda uurida/lahendada?</p>
 <table>
 <thead>
 <tr>
@@ -5023,6 +5156,7 @@ reboot
 <li>Taasta failid <code>/etc/default/grub</code> ja <code>/etc/fstab</code> (kui veel tegemata) ning käivita <code>sudo update-grub</code>.</li>
 <li>Eemalda <code>/etc/sysctl.d/90-labor.conf</code> ja käivita <code>sudo sysctl --system</code>, kui õpetaja ei ole teisiti öelnud.</li>
 <li>Eemalda backports'i hoidla fail <code>/etc/apt/sources.list.d/backports.list</code>, kui sa seda enam ei vaja, ja sea <code>GRUB_DEFAULT=0</code>.</li>
+<li>Eemalda 11. osa harjutused: <code>sudo systemctl disable --now kell.socket tootle.path aeg.service</code>, kustuta failid <code>tervitaja@.service</code>, <code>kell.socket</code>, <code>kell@.service</code>, <code>tootle.*</code>, <code>aeg.service</code> (ja kataloog <code>aeg.service.d</code>), <code>vigane1.service</code>, <code>vigane2.service</code> kataloogist <code>/etc/systemd/system/</code> ning käivita <code>sudo systemctl daemon-reload</code>.</li>
 <li>Kui kõik töötab, kustuta laborieelne hetktõmmis (Proxmoxis <em>Snapshots</em> → <em>Remove</em>), et see ei võtaks ruumi.</li>
 </ul>
 <hr />

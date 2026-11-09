@@ -1461,6 +1461,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proovieksam-pohiosa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: põhiosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3123,34 +3151,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../proovieksam-pohiosa/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Proovieksam: põhiosa
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -4940,12 +4940,13 @@
 <p><strong>Maht:</strong> 10 tundi · <strong>Laboritöö:</strong> AlmaLinux (juhtmasin), Debian ja Ubuntu (hallatavad) · <strong>Eeldused:</strong> moodulid 1–15</p>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
-<p><strong>Sissejuhatav moodul.</strong> See moodul annab automatiseerimisest <strong>ülevaate ja alused</strong>: miks ja kuidas infrastruktuuri koodina hallata ning kuidas Ansible, Vagrant, cloud-init ja OpenTofu omavahel sobituvad. Eesmärk on, et oskaksid kursuse servereid korratavalt seadistada ja tunneksid vahendeid ära - mitte veel nende täielik valdamine.</p>
+<p><strong>Sissejuhatav moodul.</strong> See moodul annab automatiseerimisest <strong>ülevaate ja alused</strong>: alates lihtsatest vahenditest (Bashi skriptid, cron ja systemd taimerid) kuni infrastruktuurini koodina, ning kuidas Ansible, Vagrant, cloud-init ja OpenTofu omavahel sobituvad. Eesmärk on, et oskaksid kursuse servereid korratavalt seadistada ja tunneksid vahendeid ära - mitte veel nende täielik valdamine.</p>
 <p><strong>HKHK õppijale:</strong> automatiseerimist käsitletakse põhjalikult eraldi aines „IT-süsteemide automatiseerimine“, mis läbitakse pärast Linuxi ja BSD halduse moodulit. See moodul valmistab sind selleks ette.</p>
 </div>
 <h2 id="opivaljundid">Õpiväljundid<a class="headerlink" href="#opivaljundid" title="Permanent link">&para;</a></h2>
 <p>Mooduli läbinud õppija:</p>
 <ul>
+<li>võrdleb automatiseerimise astmeid (Bashi skript, cron/taimer, Git, konteinerid, Ansible) ja valib ülesandele sobiva;</li>
 <li>selgitab infrastruktuuri koodina (IaC) põhimõtet ja idempotentsust;</li>
 <li>seadistab mitu serverit korraga Ansible'iga (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad);</li>
 <li>kirjutab mänguraamatu, mis töötab nii Debiani kui ka Red Hati perekonna distrol;</li>
@@ -4957,29 +4958,50 @@
 <hr />
 <h2 id="161-miks-automatiseerida">16.1 Miks automatiseerida?<a class="headerlink" href="#161-miks-automatiseerida" title="Permanent link">&para;</a></h2>
 <p>Moodulites 13–15 seadistasid serveri käsitsi. See võttis mitu tundi ja kui server peaks homme uuesti üles ehitama, kuluks sama palju aega - ja tõenäoliselt jääks midagi kahe silma vahele. Kujuta ette sama tööd kümne või saja serveriga.</p>
-<p>Oled juba õppinud kahte tööriista, mis selle probleemi lahendavad, ja selles moodulis lisandub kolmas:</p>
+<p>Automatiseerimine ei alga Ansible'ist. Oled seda juba teinud - väiksemas mahus:</p>
 <table>
 <thead>
 <tr>
+<th>Aste</th>
 <th>Tööriist</th>
-<th>Lahendab</th>
+<th>Mida automatiseerib</th>
+<th>Piirang</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>1</td>
+<td><strong>Bashi skript</strong> (moodul 6)</td>
+<td>toimingute jada ühes masinas: kasutajate loomine CSV-st, varundus, kontrollid</td>
+<td>kirjutad ise iga sammu ja veakontrolli; korduval käivitamisel võib tulemus muutuda</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>cron ja systemd taimer</strong> (moodul 5)</td>
+<td>käivitab skripti või käsu kindlal ajal: igaöine varundus, aruanded, koristamine</td>
+<td>ainult ajastab; mida tehakse, sõltub skriptist</td>
+</tr>
+<tr>
+<td>3</td>
 <td><strong>Git</strong> (moodul 6)</td>
-<td>Kus on seadistus, kes ja miks seda muutis, kuidas eelmise versiooni juurde tagasi minna</td>
+<td>seadistuse ja skriptide ajalugu: kes, mida ja miks muutis, tagasipöördumine</td>
+<td>ei rakenda midagi serverisse ise</td>
 </tr>
 <tr>
+<td>4</td>
 <td><strong>Konteinerid</strong> (moodul 12)</td>
-<td>Rakendus koos kõigi sõltuvustega ühes pakis, mis töötab igal pool ühtemoodi</td>
+<td>rakendus koos sõltuvustega ühes pakis, mis töötab igal pool ühtemoodi</td>
+<td>ei seadista hosti ennast</td>
 </tr>
 <tr>
-<td><strong>Ansible</strong></td>
-<td>Serverite seadistamine koodina: üks käsk seadistab kõik serverid ühesuguseks</td>
+<td>5</td>
+<td><strong>Ansible</strong> (selles moodulis)</td>
+<td>kogu serveri seadistus koodina, korraga kõigis serverites, ühesuguse tulemusega</td>
+<td>vajab õppimist ja algset ajakulu</td>
 </tr>
 </tbody>
 </table>
+<p>Bash ja cron on endiselt vajalikud - lihtne skript koos taimeriga on sageli parim lahendus ühe masina korduva ülesande jaoks. Mida rohkem on servereid ja mida olulisem on, et need oleksid <strong>ühesugused</strong>, seda rohkem võidad Ansible'ist ja teistest selle mooduli vahenditest. Tüüpiline töövoog ühendab kõik astmed: Ansible paigaldab serverisse skripti ja taimeri, kogu kood on Gitis.</p>
 <p>Ühine põhimõte on <strong>infrastruktuur koodina</strong> (<em>Infrastructure as Code</em>, IaC): serverite seadistus kirjeldatakse tekstifailides, mida hoitakse Gitis, vaadatakse üle nagu programmikoodi ja rakendatakse automaatselt.</p>
 <h2 id="162-ansible">16.2 Ansible<a class="headerlink" href="#162-ansible" title="Permanent link">&para;</a></h2>
 <p><strong>Ansible</strong> seadistab servereid üle SSH. Erinevalt mõnest teisest automatiseerimisvahendist ei vaja hallatavad serverid eraldi agenti - piisab SSH-st ja Pythonist.</p>

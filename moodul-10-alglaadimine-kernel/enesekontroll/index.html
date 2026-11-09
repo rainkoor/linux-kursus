@@ -1461,6 +1461,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proovieksam-pohiosa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: põhiosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2885,34 +2913,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../proovieksam-pohiosa/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Proovieksam: põhiosa
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -4484,6 +4484,11 @@
 <li>Miks on parem paigaldada isekompileeritud kernel <code>.deb</code> paketina kui käsuga <code>make install</code>?</li>
 <li>Masin näitab <code>grub rescue&gt;</code>. Kirjelda kahte viisi GRUB-i parandamiseks.</li>
 <li>Miks seotakse enne <code>chroot</code>-i kataloogid <code>/dev</code>, <code>/proc</code> ja <code>/sys</code>? Mida tuleb lisaks teha LVM-iga süsteemis?</li>
+<li>Mis vahe on <code>Requires=</code> ja <code>After=</code> seadetel? Miks on vaja <code>Wants=network-online.target</code> ja <code>After=network-online.target</code>, mitte ainult <code>network.target</code>?</li>
+<li>Millal kasutad <code>Type=oneshot</code> ja millal <code>Type=notify</code>? Mida teeb <code>RemainAfterExit=yes</code>?</li>
+<li>Mis on systemd mall (<code>nimi@.service</code>) ja pesa aktiveerimine? Too kummagi kohta üks näide.</li>
+<li>Mida teevad <code>DynamicUser=yes</code>, <code>ProtectSystem=strict</code> ja <code>NoNewPrivileges=yes</code>? Kuidas hinnata teenuse turvalisust?</li>
+<li>Teenus näitab <code>status=203/EXEC</code> ja teine teatab „Start request repeated too quickly“. Mida need tähendavad ja kuidas edasi uurid?</li>
 </ol>
 <h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4521,6 +4526,11 @@
 <li>Pakihaldur teab kernelist: selle saab puhtalt eemaldada (<code>apt remove</code>), paigaldamisel genereeritakse automaatselt initramfs ja GRUB-i kirje ning paketti saab kopeerida ja paigaldada teistesse masinatesse.</li>
 <li>Debiani paigaldusmeedia taastamisrežiim → <em>Reinstall GRUB boot loader</em>; või live-meedia: haagi juurfailisüsteem kataloogi <code>/mnt</code>, seo <code>/dev</code>, <code>/proc</code>, <code>/sys</code>, <code>/run</code>, <code>chroot /mnt</code>, <code>grub-install /dev/sda</code>, <code>update-grub</code>.</li>
 <li><code>chroot</code>-i sees töötavad programmid vajavad seadmefaile ja kerneli liideseid, mida tühi kataloog ei sisalda. LVM-i puhul tuleb enne haakimist köitegrupid aktiveerida: <code>vgscan</code>, <code>vgchange -ay</code>.</li>
+<li><code>Requires=</code> on sõltuvus (käivita ka see; kui see ebaõnnestub, ebaõnnestu ka ise), <code>After=</code> ainult järjekord. Ilma <code>After</code>-ita käivitatakse mõlemad korraga. <code>network.target</code> tähendab ainult võrguhalduse alustamist; <code>network-online.target</code> ootab, kuni võrk on päriselt kasutatav - see tuleb <code>Wants</code>-iga tõmmata ja <code>After</code>-iga oodata.</li>
+<li><code>oneshot</code> - ühekordne töö, mis lõpetab (varundus, taimeri teenus); systemd ootab lõpetamist. <code>notify</code> - programm teatab ise, et on valmis (nt nginx, PostgreSQL), kõige täpsem. <code>RemainAfterExit=yes</code> jätab oneshot-teenuse pärast lõpetamist olekusse <code>active</code> (nt seadistuse rakendamine).</li>
+<li>Mall on üksuse fail, millest käivitatakse mitu eksemplari, <code>%i</code> asendub eksemplari nimega (<code>getty@tty1</code>, <code>wg-quick@wg0</code>). Pesa aktiveerimisel kuulab systemd porti ja käivitab teenuse alles ühenduse saabumisel (<code>ssh.socket</code> Ubuntus, <code>kell.socket</code> laboris).</li>
+<li><code>DynamicUser</code> - teenus töötab ajutise kasutajana; <code>ProtectSystem=strict</code> - failisüsteem on teenusele ainult lugemiseks; <code>NoNewPrivileges</code> - teenus ei saa õigusi juurde (SUID). Hinnang: <code>systemd-analyze security teenus</code> (0-10, väiksem parem) koos soovitustega.</li>
+<li><code>203/EXEC</code> - <code>ExecStart</code> programmi ei leitud või see pole käivitatav. „Repeated too quickly“ - teenus jooksis korduvalt kokku ja ületas <code>StartLimitBurst</code>-i. Uuri <code>journalctl -xeu teenus</code> (esimene viga), <code>systemctl cat</code>, <code>systemd-analyze verify</code>; pärast parandust <code>systemctl reset-failed</code> ja uuesti käivitamine.</li>
 </ol>
 <h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>cut<span class="w"> </span>-d<span class="s1">' '</span><span class="w"> </span>-f1<span class="w"> </span>/proc/uptime
