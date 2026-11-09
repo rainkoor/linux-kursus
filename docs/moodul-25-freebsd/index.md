@@ -285,6 +285,18 @@ pfctl -f /etc/pf.conf            # laadi muudatused uuesti
 
 **Jail** on FreeBSD isoleeritud keskkond (aastast 2000 - üks konteinerite eelkäijaid): oma failisüsteemi juur, oma IP-aadress, oma kasutajad ja protsessid, kuid **sama kernel**. Jaili protsessid ei näe hosti ega teiste jailide protsesse. Jailis töötab tavaliselt üks teenus (veebiserver, andmebaas).
 
+```mermaid
+flowchart TB
+    subgraph H ["FreeBSD host - üks kernel"]
+        direction LR
+        J1["jail www<br>10.0.83.67<br>nginx"]
+        J2["jail db<br>10.0.83.68<br>PostgreSQL"]
+        HS["host ise<br>sshd, pf"]
+        J1 ~~~ J2 ~~~ HS
+    end
+    H --- Z[("ZFS<br>zroot/jails/www<br>zroot/jails/db")]
+```
+
 | | Linuxi konteiner (moodul 12) | FreeBSD jail |
 |---|---|---|
 | Alus | nimeruumid ja cgroups | jail kerneli alamsüsteem |

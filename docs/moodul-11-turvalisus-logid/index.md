@@ -187,6 +187,16 @@ Kokkuvõttes: fail2ban ei asenda võtmepõhist autentimist ega tulemüüri, kuid
 
 Logid on peamine allikas, et mõista, mis süsteemis toimus - nii vigade kui ka rünnakute puhul.
 
+```mermaid
+flowchart LR
+    P["programmid ja teenused<br>sshd, nginx, sudo"] --> J["systemd-journald<br>journalctl"]
+    K["kernel"] --> J
+    J --> R["rsyslog"]
+    R --> F["/var/log/*<br>tekstifailid"]
+    F --> LR["logrotate<br>pakib ja kustutab vanad"]
+    R -. "olulistes keskkondades" .-> S[("logiserver<br>/ SIEM")]
+```
+
 ### Olulisemad logid
 
 | Logi | Debian | Ubuntu | AlmaLinux |
@@ -281,6 +291,15 @@ Ründaja, kes saab juurkasutaja õigused, võib logid kustutada. Seepärast saad
 Moodulis 3 õpitud tavalised õigused (`rwx`, omanik, grupp) on **valikuline juurdepääsukontroll** (DAC, *Discretionary Access Control*): faili omanik otsustab ise, kes tohib faili kasutada, ja juurkasutajale need piirangud ei kehti.
 
 **Kohustuslik juurdepääsukontroll** (MAC, *Mandatory Access Control*) lisab süsteemse poliitika, mida ei saa mööda minna isegi juurkasutaja õigustes töötav programm. Näiteks: veebiserver tohib lugeda ainult veebifaile ja kuulata ainult veebiporte - isegi kui ründaja võtab veebiserveri üle, ei saa ta lugeda faili `/etc/shadow` ega avada uut porti.
+
+```mermaid
+flowchart LR
+    A["Protsess tahab faili<br>või porti kasutada"] --> D{"DAC<br>tavalised õigused<br>rwx, omanik, grupp"}
+    D -- "keelatud" --> X["⛔ Permission denied"]
+    D -- "lubatud" --> M{"MAC<br>SELinux / AppArmor<br>poliitika"}
+    M -- "keelatud" --> X2["⛔ keelatud + logikirje<br>(AVC / apparmor DENIED)"]
+    M -- "lubatud" --> OK["✅ lubatud"]
+```
 
 | | **SELinux** | **AppArmor** |
 |---|---|---|

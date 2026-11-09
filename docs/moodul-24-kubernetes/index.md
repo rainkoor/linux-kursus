@@ -377,6 +377,18 @@ kubectl get secret db-parool -n kool -o jsonpath='{.data.parool}' | base64 -d
 
 **Ingress** kirjeldab, milline nimi ja tee suunatakse millisele teenusele. Seda täidab **Ingressi kontroller** - k3s-is Traefik (moodul 13), mis kuulab kõigil sõlmedel porte 80 ja 443.
 
+Päringu teekond kliendist podini:
+
+```mermaid
+flowchart LR
+    K["klient<br>https://kool.k8s.lab.example"] --> N["mis tahes sõlm<br>port 443"]
+    N --> I["Ingress<br>Traefik"]
+    I -- "nimi + tee" --> S["Service kool<br>ClusterIP"]
+    S --> P1["pod"]
+    S --> P2["pod"]
+    S --> P3["pod"]
+```
+
 TLS-i jaoks pane sertifikaat ja võti Secret'iks (labori CA-ga allkirjastatud sertifikaat, moodul 13):
 
 ```bash

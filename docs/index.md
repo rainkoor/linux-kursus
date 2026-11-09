@@ -326,11 +326,11 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
 Kursusel kasutatakse kolme distributsiooni (distrot). **Need on Haapsalu Kutsehariduskeskuse Proxmoxi labori põhilised distrod ja kogu materjal on üles ehitatud nende kolme põhjal.**
 
-| Distro | Perekond | Pakihaldur | Miks | Koduleht |
-|---|---|---|---|---|
-| <a href="https://www.debian.org/"><img src="pildid/logod/debian.svg" alt="Debian" title="Debian - Debian Open Use Logo" height="28"></a> **Debian** | Debian | `apt` | Stabiilne, levinud serverites, paljude distrode alus | [debian.org](https://www.debian.org/) |
-| <a href="https://ubuntu.com/"><img src="pildid/logod/ubuntu.svg" alt="Ubuntu" title="Ubuntu - Canonical Ltd. kaubamärk" height="28"></a> **Ubuntu** | Debian | `apt` | Kõige levinum pilves ja töölaual | [ubuntu.com](https://ubuntu.com/) |
-| <a href="https://almalinux.org/"><img src="pildid/logod/almalinux.svg" alt="AlmaLinux" title="AlmaLinux - AlmaLinux OS Foundationi kaubamärk" height="28"></a> **AlmaLinux** | Red Hat (RHEL) | `dnf` | Tasuta RHEL-iga ühilduv distro, ettevõtete standard | [almalinux.org](https://almalinux.org/) |
+| | Distro | Miks just see? | Koduleht |
+|:---:|---|---|---|
+| <a href="https://www.debian.org/"><img src="pildid/logod/debian.svg" alt="Debian" title="Debian - Debian Open Use Logo" height="56"></a> | **Debian** | Stabiilne, levinud serverites, paljude distrode alus | [debian.org](https://www.debian.org/) |
+| <a href="https://ubuntu.com/"><img src="pildid/logod/ubuntu.svg" alt="Ubuntu" title="Ubuntu - Canonical Ltd. kaubamärk" height="56"></a> | **Ubuntu** | Kõige levinum pilves ja töölaual | [ubuntu.com](https://ubuntu.com/) |
+| <a href="https://almalinux.org/"><img src="pildid/logod/almalinux.svg" alt="AlmaLinux" title="AlmaLinux - AlmaLinux OS Foundationi kaubamärk" height="56"></a> | **AlmaLinux** | Tasuta RHEL-iga ühilduv distro, ettevõtete standard | [almalinux.org](https://almalinux.org/) |
 
 Need kolm katavad suurema osa reaalsetest Linuxi serveritest. Teiste distrode ülevaate leiad [distrode ülevaatest](lisad/distrod.md). **Iga laboritöö on kirjutatud ühe kindla distro jaoks** (see on märgitud laboritöö alguses). Teoorias on erinevused välja toodud lõikudes **„Distrode erinevused“**.
 

@@ -94,6 +94,13 @@ Igal programmil on kolm **standardvoogu**:
 | **stdout** - standardväljund | 1 | Ekraan |
 | **stderr** - standardveaväljund | 2 | Ekraan |
 
+```mermaid
+flowchart LR
+    I["⌨️ klaviatuur<br>või fail (< fail)"] -- "0 stdin" --> P["programm"]
+    P -- "1 stdout" --> O["🖥️ ekraan<br>või fail (> fail)"]
+    P -- "2 stderr" --> E["🖥️ ekraan<br>või fail (2> fail)"]
+```
+
 Väljundit ja veateateid näed ekraanil koos, kuid need on kaks erinevat voogu. Neid saab **ümber suunata**:
 
 | Tähis | Tegevus |
@@ -126,6 +133,17 @@ find / -name "*.conf" 2> /dev/null   # peida veateated
 
 ```bash
 käsk1 | käsk2 | käsk3
+```
+
+Iga käsk töötleb eelmise väljundit ja annab tulemuse edasi - nagu konveier:
+
+```mermaid
+flowchart LR
+    A["cat juurdepaas.log<br>kõik read"] -- "|" --> B["cut -d' ' -f1<br>ainult IP-aadressid"]
+    B -- "|" --> C["sort<br>sorteeritud"]
+    C -- "|" --> D["uniq -c<br>loendatud"]
+    D -- "|" --> E["sort -rn<br>enim ees"]
+    E --> F["🖥️ ekraan"]
 ```
 
 Näited:

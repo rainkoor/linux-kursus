@@ -28,6 +28,15 @@ Windowsis laaditakse programm sageli tootja kodulehelt alla ja käivitatakse pai
 | **Sõltuvus** (*dependency*) | Teine pakett, mida programm vajab töötamiseks (nt teek) |
 | **Pakihaldur** (*package manager*) | Programm, mis laadib paketid hoidlast, lahendab sõltuvused, paigaldab ja uuendab tarkvara |
 
+```mermaid
+flowchart LR
+    H[("Hoidla<br>deb.debian.org")] -- "apt update<br>pakettide loend" --> PH["Pakihaldur<br>apt / dnf"]
+    PH -- "apt install nginx" --> S{"Sõltuvused?"}
+    S --> D["laadib alla nginx<br>+ vajalikud teegid"]
+    D --> K["kontrollib allkirja"] --> I["paigaldab<br>dpkg / rpm"]
+    I --> F["failid: /usr/sbin/nginx,<br>/etc/nginx/, teenus"]
+```
+
 Pakihalduri eelised:
 
 - **turvalisus** - paketid on distro arendajate poolt allkirjastatud ja pakihaldur kontrollib allkirju;

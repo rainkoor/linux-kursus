@@ -20,6 +20,19 @@ Mooduli läbinud õppija:
 
 Moodulis 7 kasutasid DNS-i kliendina. Oma DNS-server on vajalik, et sisevõrgu masinatel oleksid nimed (nt `kool.lab.example`) ilma, et iga masina `/etc/hosts` faili peaks muutma.
 
+DNS on hierarhiline: iga tase teab ainult järgmise taseme servereid.
+
+```mermaid
+flowchart TB
+    R["juur ."] --> EE["ee."]
+    R --> COM["com."]
+    R --> ORG["org."]
+    EE --> EDU["edu.ee."]
+    EDU --> HK["hkhk.edu.ee.<br>kooli autoriteetne server"]
+    HK --> W["www.hkhk.edu.ee"]
+    COM --> G["google.com."]
+```
+
 DNS-serverid jagunevad kahte liiki:
 
 | Liik | Ülesanne | Tarkvara |
@@ -424,6 +437,13 @@ AlmaLinuxis: `sudo dnf install postfix s-nail`, seadistus samas failis, logid `j
 - **3** koopiat andmetest (originaal + 2 varukoopiat);
 - **2** eri andmekandjal;
 - **1** koopia mujal (teises hoones, pilves) - tulekahju, varguse ja lunavara vastu.
+
+```mermaid
+flowchart LR
+    O[("Originaal<br>server")] --> K1[("Koopia 1<br>teine ketas/server<br>samas kohas")]
+    O --> K2[("Koopia 2<br>teises hoones või pilves,<br>muudetamatu")]
+    K1 -. "2 eri andmekandjat" .- K2
+```
 
 Lunavara vastu on oluline, et vähemalt üks koopia oleks **muudetamatu** või **võrgust eraldatud** - muidu krüpteerib ründaja ka varukoopiad.
 

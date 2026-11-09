@@ -23,6 +23,16 @@ Rangelt võttes on **Linux** operatsioonisüsteemi **kernel** ehk tuum: programm
 
 Kernel üksi ei ole veel kasutatav süsteem. Selleks on vaja ka käsurea tööriistu, teeke, pakihaldurit, teenuseid ja muud tarkvara. Suur osa sellest pärineb **GNU projektist**, mistõttu räägitakse vahel ka nimest **GNU/Linux**.
 
+Linuxi süsteem koosneb kihtidest. Kasutaja ei räägi riistvaraga otse, vaid programmide ja kerneli kaudu:
+
+```mermaid
+flowchart TB
+    K["👤 Kasutaja"] --> R["Rakendused ja käsud<br>ls, nano, nginx, Firefox"]
+    R --> S["Kest ja tööriistad<br>Bash, GNU coreutils, teegid"]
+    S --> L["Linuxi kernel<br>protsessid, mälu, failisüsteemid, võrk, draiverid"]
+    L --> H["Riistvara<br>protsessor, mälu, kettad, võrgukaart"]
+```
+
 Linux on **vaba ja avatud lähtekoodiga tarkvara**: lähtekood on kõigile kättesaadav ning seda võib uurida, muuta ja levitada.
 
 Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud UNIX-i põhimõtteid, kuid ei sisalda UNIX-i koodi. UNIX-i otsene järeltulija on hoopis **BSD** perekond (FreeBSD, OpenBSD jt), mis on Linuxiga väga sarnane, kuid on terviklik süsteem ja kasutab teistsugust litsentsi. BSD aluseid kasutavad näiteks macOS ja paljud tulemüürid. Linuxi ja BSD erinevustest loe lähemalt lisast [Linuxi distributsioonide ülevaade](../lisad/distrod.md#bsd-ja-linux).
@@ -84,6 +94,20 @@ Mõisted, mida tihti segi aetakse:
 - **Konsool** on otse arvuti külge ühendatud ekraan ja klaviatuur või virtuaalmasina konsooliaken (nt Proxmoxi veebiliideses).
 - **Kest** (*shell*) on programm, mis loeb sinu käske, tõlgendab neid ja käivitab vastavad programmid. Linuxi levinuim kest on **Bash**.
 - **Käsurida** (*command line*) on üldnimetus tekstipõhisele töötamisele.
+
+Kuidas need osad kokku käivad, kui haldad serverit oma arvutist:
+
+```mermaid
+flowchart LR
+    subgraph A ["Sinu arvuti"]
+        T["Terminal<br>Windows Terminal"] --> C["SSH klient<br>ssh"]
+    end
+    subgraph S ["Server"]
+        D["SSH-server<br>sshd"] --> B["Kest<br>bash"] --> P["Käsk<br>nt ls -l"]
+    end
+    C -- "krüpteeritud ühendus, port 22" --> D
+    P -. "väljund" .-> T
+```
 
 ## 1.4 Ühendumine serveriga SSH kaudu
 
@@ -233,6 +257,21 @@ Tehisintellekti vestlusrobotid (ChatGPT, Claude, Copilot jt) oskavad selgitada k
 Windowsis on igal kettal oma täht (`C:`, `D:`). Linuxis on **üks puu**, mis algab **juurkataloogist** `/`. Kõik kettad, USB-mälud ja võrgukettad haagitakse selle puu mõnda kataloogi.
 
 Kataloogide paigutust kirjeldab standard **FHS** (*Filesystem Hierarchy Standard*):
+
+```mermaid
+flowchart TB
+    R["/"] --> home["/home<br>kasutajad"]
+    R --> etc["/etc<br>seadistus"]
+    R --> var["/var<br>logid, andmed"]
+    R --> usr["/usr<br>programmid"]
+    R --> boot["/boot<br>kernel"]
+    R --> dev["/dev<br>seadmed"]
+    R --> tmp["/tmp<br>ajutised failid"]
+    R --> root["/root<br>juurkasutaja"]
+    home --> mari["/home/mari"]
+    var --> log["/var/log"]
+    usr --> bin["/usr/bin"]
+```
 
 | Kataloog | Sisu |
 |---|---|

@@ -72,6 +72,19 @@ Kerberos on autentimisprotokoll, kus usaldatav kolmas osapool (**KDC** - *Key Di
 2. Kui kasutaja tahab kasutada teenust (nt failiserverit), küsib klient TGT abil KDC-lt **teenusepileti**.
 3. Teenus kontrollib piletit; parooli ei saadeta üle võrgu.
 
+```mermaid
+sequenceDiagram
+    participant K as Klient (mari)
+    participant DC as KDC (domeenikontroller)
+    participant T as Teenus (failiserver)
+    K->>DC: 1. Sisselogimine (parooliga tõestatud päring)
+    DC->>K: TGT - sissepääsupilet (10 h)
+    K->>DC: 2. TGT + „tahan failiserverit“
+    DC->>K: teenusepilet
+    K->>T: 3. teenusepilet
+    T->>K: ✅ ligipääs - parooli üle võrgu ei saadetud
+```
+
 Kerberose eeldused, mida laboris tihti unustatakse:
 
 - **Kellaaeg** - kliendi ja DC kellad tohivad erineda kõige rohkem **5 minutit**. Muidu: `Clock skew too great`.

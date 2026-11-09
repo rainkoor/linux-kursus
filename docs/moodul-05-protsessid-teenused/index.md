@@ -45,6 +45,24 @@ Kõik protsessid moodustavad puu. Selle juur on protsess **PID 1** - tänapäeva
 | `T` | *Stopped* | Peatatud (nt Ctrl+Z) |
 | `Z` | *Zombie* | Lõpetanud töö, kuid vanemprotsess pole selle tulemust veel kätte saanud |
 
+```mermaid
+stateDiagram-v2
+    [*] --> R: loomine (fork)
+    R: R - töötab / ootab protsessorit
+    S: S - ootab sündmust
+    D: D - ootab ketast
+    T: T - peatatud
+    Z: Z - zombie
+    R --> S: ootab sisendit
+    S --> R: sündmus saabus
+    R --> D: ketta I/O
+    D --> R: valmis
+    R --> T: Ctrl+Z / SIGSTOP
+    T --> R: fg, bg / SIGCONT
+    R --> Z: lõpetas töö
+    Z --> [*]: vanem luges tulemuse
+```
+
 ## 5.2 Protsesside vaatamine
 
 ### ps
@@ -162,6 +180,18 @@ Juba töötava käsu saab tausta saata:
 1. vajuta **Ctrl+Z** - käsk peatatakse;
 2. kirjuta `bg` - käsk jätkab taustal.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Esiplaan: käsk
+    [*] --> Taust: käsk &
+    Esiplaan --> Peatatud: Ctrl+Z
+    Peatatud --> Taust: bg
+    Peatatud --> Esiplaan: fg
+    Taust --> Esiplaan: fg
+    Esiplaan --> [*]: lõpetab / Ctrl+C
+    Taust --> [*]: lõpetab / kill
+```
+
 | Käsk | Tegevus |
 |---|---|
 | `käsk &` | Käivita taustal |
@@ -224,6 +254,20 @@ systemctl is-enabled httpd            # kas on lubatud
 
 > [!WARNING]
 > **start ja enable on eri asjad!** `start` käivitab teenuse **praegu**, `enable` määrab, et teenus käivitub **järgmisel alglaadimisel**. Uue teenuse puhul on tavaliselt vaja mõlemat: `enable --now`.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    inactive --> active: systemctl start
+    active --> inactive: systemctl stop
+    active --> active: restart / reload
+    active --> failed: viga, kokkujooksmine
+    failed --> active: start (pärast parandust)
+    note right of inactive
+        enable / disable ei muuda olekut kohe,
+        vaid seda, kas teenus käivitub alglaadimisel
+    end note
+```
 
 `systemctl status` väljund:
 
@@ -382,6 +426,12 @@ Crontab'i rea vorming:
 > **Levinud viga:** cron käivitab käsud väga minimaalse keskkonnaga (`PATH` on lühike). Kasuta crontab'is alati **täielikke teid** ja suuna väljund faili, et vigu näha: `... >> /var/log/varundus.log 2>&1`.
 
 Süsteemi ajastatud tööd on failis `/etc/crontab` ja kataloogides `/etc/cron.d/`, `/etc/cron.daily/`, `/etc/cron.weekly/` ja `/etc/cron.monthly/`.
+
+```mermaid
+flowchart LR
+    C["⏰ cron või<br>systemd taimer"] -- "kindlal ajal" --> S["teenus või käsk"] --> SK["skript<br>/usr/local/bin/varunda.sh"]
+    SK --> J["väljund ja vead<br>journal / e-kiri"]
+```
 
 ### systemd taimerid
 

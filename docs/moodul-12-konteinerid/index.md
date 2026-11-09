@@ -56,6 +56,16 @@ Konteinerid põhinevad Linuxi kerneli võimalustel:
 
 Proxmoxis on kahte liiki virtualiseerimist: **KVM** virtuaalmasinad ja **LXC** konteinerid. LXC konteiner on terve „kerge Linuxi süsteem“, Dockeri/Podmani konteiner on tavaliselt üks rakendus.
 
+```mermaid
+flowchart LR
+    CF["Containerfile<br>retsept"] -- "podman build" --> I["Pilt<br>(image)"]
+    REG[("Register<br>docker.io, quay.io")] -- "podman pull" --> I
+    I -- "podman push" --> REG
+    I -- "podman run" --> C1["Konteiner 1"]
+    I -- "podman run" --> C2["Konteiner 2"]
+    C1 -. "andmed" .-> V[("Köide<br>(volume)")]
+```
+
 ### Pildid ja registrid
 
 Konteinerpildid laaditakse **registritest**:

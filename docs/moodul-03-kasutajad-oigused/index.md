@@ -252,6 +252,17 @@ Linux kontrollib õigusi järjekorras ja kasutab **esimest sobivat**:
 2. muidu, kui kuulud faili gruppi, kehtivad grupi õigused;
 3. muidu kehtivad muude õigused.
 
+```mermaid
+flowchart TD
+    A["Protsess tahab faili lugeda,<br>kirjutada või käivitada"] --> R{"Kas kasutaja<br>on root?"}
+    R -- jah --> OK["✅ lubatud<br>(üldjuhul)"]
+    R -- ei --> O{"Kas kasutaja on<br>faili omanik?"}
+    O -- jah --> UO["kehtivad omaniku<br>õigused (u)"]
+    O -- ei --> G{"Kas kasutaja kuulub<br>faili gruppi?"}
+    G -- jah --> UG["kehtivad grupi<br>õigused (g)"]
+    G -- ei --> UM["kehtivad muude<br>õigused (o)"]
+```
+
 Juurkasutajale õiguste kontroll üldjuhul ei kehti.
 
 ## 3.7 Õiguste muutmine: chmod
@@ -445,6 +456,15 @@ Muud vaikeseaded:
 | `account` | kas kontol on lubatud praegu sisse logida (aegumine, kellaaeg, lukustus) |
 | `password` | parooli muutmine ja nõuded |
 | `session` | mis tehakse sisselogimisel (kodukataloogi loomine, piirangud, logimine) |
+
+```mermaid
+flowchart LR
+    P["login, sshd, sudo, su"] --> PAM["PAM<br>/etc/pam.d/"]
+    PAM --> A1["auth<br>kes sa oled?"] --> A2["account<br>kas tohid?"] --> A3["password<br>parooli muutmine"] --> A4["session<br>seansi algus"]
+    A1 -.- M1["pam_unix<br>pam_faillock"]
+    A3 -.- M3["pam_pwquality"]
+    A4 -.- M4["pam_mkhomedir<br>pam_limits"]
+```
 
 Näiteks moodulid: `pam_unix` (tavaline parool), `pam_pwquality` (parooli tugevus), `pam_faillock` (lukustamine valede katsete järel), `pam_limits` (ressursipiirangud, moodul 5), `pam_mkhomedir` (kodukataloog, moodulid 20–21), `pam_sss` (LDAP/AD).
 

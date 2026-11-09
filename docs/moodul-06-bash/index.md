@@ -251,6 +251,16 @@ else
 fi
 ```
 
+```mermaid
+flowchart TD
+    A["if käsk"] --> B{"väljumiskood = 0?"}
+    B -- "jah (õnnestus)" --> C["then-haru"]
+    B -- "ei" --> D{"elif teine_käsk<br>väljumiskood = 0?"}
+    D -- jah --> E["elif-haru"]
+    D -- ei --> F["else-haru"]
+    C & E & F --> G["fi - jätka skripti"]
+```
+
 `if` kontrollib käsu väljumiskoodi. Väga sageli on see käsk `test`, mida kirjutatakse nurksulgudes `[ ]`:
 
 ```bash
@@ -359,6 +369,15 @@ done
 
 > [!WARNING]
 > **Ära kasuta `for f in $(ls)`!** See läheb katki tühikutega failinimede korral. Kasuta metamärke: `for f in *.txt`.
+
+Kuidas `for`-tsükkel töötab:
+
+```mermaid
+flowchart TD
+    A["for fail in *.log"] --> B{"Kas loendis<br>on veel elemente?"}
+    B -- "jah" --> C["fail = järgmine element"] --> D["do … done<br>tsükli keha"] --> B
+    B -- "ei" --> E["jätka pärast done"]
+```
 
 ### while
 
@@ -667,6 +686,20 @@ git switch -c https-seadistus                # loo uus haru ja liigu sinna
 git switch main                              # tagasi põhiharusse
 git merge https-seadistus                    # liida muudatused
 git branch -d https-seadistus                # kustuta haru
+```
+
+```mermaid
+gitGraph
+    commit id: "algus"
+    commit id: "nginx seadistus"
+    branch https-seadistus
+    checkout https-seadistus
+    commit id: "TLS sertifikaat"
+    commit id: "suunamine HTTPS-ile"
+    checkout main
+    commit id: "README parandus"
+    merge https-seadistus id: "merge"
+    commit id: "järgmine muudatus"
 ```
 
 Kui samas failis on mõlemas harus sama koht muudetud, tekib **konflikt**. Git märgib konfliktsed read failis märkidega `<<<<<<<`, `=======` ja `>>>>>>>`. Paranda fail käsitsi, seejärel `git add` ja `git commit`.

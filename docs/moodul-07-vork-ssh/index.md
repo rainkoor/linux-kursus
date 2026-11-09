@@ -187,6 +187,17 @@ hosts: files dns
 1. **files** - kõigepealt vaadatakse faili `/etc/hosts`;
 2. **dns** - siis küsitakse DNS-serverilt, mis on kirjas failis `/etc/resolv.conf`.
 
+```mermaid
+flowchart TD
+    A["ping www.hkhk.edu.ee"] --> B{"/etc/hosts<br>(files)"}
+    B -- "leitud" --> IP["IP-aadress ✅"]
+    B -- "ei leitud" --> C["kohalik resolver<br>systemd-resolved 127.0.0.53"]
+    C -- "vahemälus" --> IP
+    C -- "küsib" --> D["DNS-server<br>/etc/resolv.conf, nt 10.0.83.1"]
+    D --> E["juur → ee → edu.ee →<br>hkhk.edu.ee autoriteetne server"]
+    E --> IP
+```
+
 ### /etc/hosts
 
 ```text
@@ -285,6 +296,21 @@ Kui „internet ei tööta“, liigu **altpoolt üles**, kihthaaval. Iga samm ko
 | 5. Kas nimelahendus töötab? | `getent hosts debian.org`, `dig debian.org` | DNS-seadistus |
 | 6. Kas teenus vastab? | `curl -I https://debian.org`, `nc -zv host 443` | Teenus, tulemüür, port |
 
+```mermaid
+flowchart TD
+    S1["1. ip -br a<br>liides ja aadress?"] -- OK --> S2["2. ip r<br>vaikelüüs?"]
+    S2 -- OK --> S3["3. ping lüüs<br>kohalik võrk?"]
+    S3 -- OK --> S4["4. ping 1.1.1.1<br>internet?"]
+    S4 -- OK --> S5["5. dig debian.org<br>DNS?"]
+    S5 -- OK --> S6["6. curl / nc<br>teenus ja port?"]
+    S1 -- viga --> V1["kaabel, DHCP,<br>võrgukaart"]
+    S2 -- viga --> V2["võrguseadistus"]
+    S3 -- viga --> V3["VLAN, kohalik tulemüür"]
+    S4 -- viga --> V4["ruuter, NAT"]
+    S5 -- viga --> V5["DNS-seadistus"]
+    S6 -- viga --> V6["teenus, tulemüür, port"]
+```
+
 Täiendavad tööriistad:
 
 ```bash
@@ -310,6 +336,20 @@ Paroolide asemel on turvalisem ja mugavam kasutada **võtmepaari**:
 - **avalik võti** (*public key*) - kopeeritakse serverisse. Seda võib vabalt jagada.
 
 Server kontrollib ühendumisel, kas sul on avalikule võtmele vastav privaatvõti, ilma et privaatvõti kunagi üle võrgu liiguks.
+
+```mermaid
+sequenceDiagram
+    participant K as Klient (privaatvõti)
+    participant S as Server (avalik võti<br>~/.ssh/authorized_keys)
+    K->>S: Tahan sisse logida kasutajana mari, võtmega X
+    S->>S: Kas võti X on authorized_keys failis?
+    S->>K: Väljakutse: allkirjasta need juhuslikud andmed
+    K->>K: Allkirjastab privaatvõtmega
+    K->>S: Allkiri
+    S->>S: Kontrollib allkirja avaliku võtmega
+    S->>K: ✅ Sisse lubatud
+    Note over K,S: Privaatvõti ei lahku kunagi kliendi arvutist
+```
 
 **1. Loo võtmepaar** (oma arvutis):
 
@@ -495,6 +535,15 @@ Linuxi kernelis on pakettide filtreerimise raamistik **netfilter**. Selle reegle
 | AlmaLinux | `firewalld` | Sisse lülitatud, lubatud on SSH (ja Cockpit) |
 
 **Põhimõte:** keela kõik sissetulev liiklus ja luba ainult vajalik (*default deny*).
+
+```mermaid
+flowchart LR
+    P["sissetulev pakett"] --> E{"Kas kuulub juba<br>lubatud ühendusse?"}
+    E -- jah --> OK["✅ lubatud"]
+    E -- ei --> R{"Kas mõni reegel<br>lubab seda porti<br>ja aadressi?"}
+    R -- jah --> OK
+    R -- ei --> X["⛔ keelatud<br>(default deny)"]
+```
 
 ### ufw (Ubuntu)
 
