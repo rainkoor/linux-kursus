@@ -4487,6 +4487,7 @@
 <li>Mis vahe on sillal, VLAN-il ja bond-liidesel?</li>
 <li>Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?</li>
 <li>Kuidas lubad kasutajal ainult SFTP kaudu faile laadida, nii et ta ei näe ülejäänud failisüsteemi? Millised nõuded on chroot-kataloogi omanikule ja õigustele?</li>
+<li>Mis on TOTP ja miks peab serveri kell selle kasutamisel täpne olema? Mida tähendab <code>AuthenticationMethods publickey,keyboard-interactive</code>?</li>
 </ol>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4523,6 +4524,7 @@
 <li>Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator); VLAN jagab ühe füüsilise võrgu mitmeks loogiliseks (märgistusega); bond koondab mitu füüsilist liidest üheks töökindluse või läbilaskevõime jaoks.</li>
 <li>Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): ühendused katkevad juhuslikult ja SSH võib ühenduda valesse masinasse. Kontrolli aadressiplaani ja teisest masinast <code>ping</code>, <code>ip neigh show &lt;aadress&gt;</code> või <code>arping -D</code>; kooli laboris kasuta ainult õpetaja antud aadressi.</li>
 <li><code>sshd</code> seadistuses <code>Match Group …</code> plokk koos <code>ChrootDirectory /srv/sftp/%u</code> ja <code>ForceCommand internal-sftp</code>. Chroot-kataloog ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ega tohi olla teistele kirjutatavad; kasutaja kirjutab alamkataloogi, mis kuulub talle.</li>
+<li>Ajapõhine ühekordne kood, mille telefonirakendus ja server arvutavad ühisest saladusest ja kellaajast; kood vahetub iga 30 sekundi järel, seega vale kellaga server ei aktsepteeri õiget koodi. <code>AuthenticationMethods publickey,keyboard-interactive</code> nõuab mõlemat: kõigepealt võti, seejärel PAM-i kaudu küsitav kood.</li>
 </ol>
 <h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/^default/ {print $3}'</span>

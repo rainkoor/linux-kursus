@@ -1626,6 +1626,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#kaheastmeline-autentimine-totp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kaheastmeline autentimine (TOTP)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5220,6 +5231,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#kaheastmeline-autentimine-totp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kaheastmeline autentimine (TOTP)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6071,6 +6093,32 @@ sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w"> </spa
 <p><strong><code>ChrootDirectory</code> ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.</strong> Muidu keeldub <code>sshd</code> ühendusest (logis <code>bad ownership or modes for chroot directory</code>). Seepärast kirjutab kasutaja alamkataloogi <code>failid</code>, mitte otse chroot-kataloogi.</p>
 </div>
 <p>Kontrolli: <code>sftp partner@ubuntusrv</code> töötab ja <code>ls /</code> näitab ainult kataloogi <code>failid</code>; <code>ssh partner@ubuntusrv</code> aga ei ava käsurida (<em>This service allows sftp connections only</em>). Kui sul on <code>AllowGroups</code>, lisa sinna ka <code>sftp-kasutajad</code>. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga <code>sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot</code>.</p>
+<h3 id="kaheastmeline-autentimine-totp">Kaheastmeline autentimine (TOTP)<a class="headerlink" href="#kaheastmeline-autentimine-totp" title="Permanent link">&para;</a></h3>
+<p>Võtmepõhine sisselogimine on juba tugev. Eriti oluliste serverite (nt internetist kättesaadav hüppeserver) puhul lisatakse <strong>teine tegur</strong>: lisaks võtmele küsitakse telefoni rakenduse (nt Aegis, Google Authenticator, Microsoft Authenticator) näidatud <strong>ühekordset koodi</strong> (<em>TOTP, Time-based One-Time Password</em>). Kood muutub iga 30 sekundi järel ja arvutatakse ühisest saladusest ning kellaajast, seega peab serveri kell olema täpne (punkt 7.9).</p>
+<p>Näide Ubuntus (AlmaLinuxis pakett <code>google-authenticator</code> EPEL-ist, PAM-fail <code>/etc/pam.d/sshd</code> on sama):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libpam-google-authenticator
+google-authenticator<span class="w">             </span><span class="c1"># käivita OMA kasutajana, mitte sudo-ga: loob ~/.google_authenticator</span>
+<span class="w">                                 </span><span class="c1"># skaneeri QR-kood telefoniga ja kirjuta varukoodid üles</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># /etc/pam.d/sshd - lisa faili lõppu:
+auth required pam_google_authenticator.so nullok
+
+# ja kommenteeri välja rida, mis küsiks lisaks kasutaja parooli:
+# @include common-auth
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># /etc/ssh/sshd_config.d/05-totp.conf
+UsePAM yes
+KbdInteractiveAuthentication yes
+AuthenticationMethods publickey,keyboard-interactive
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>ssh
+ssh<span class="w"> </span>mari@ubuntusrv<span class="w">               </span><span class="c1"># UUES aknas: kõigepealt võti, siis küsitakse "Verification code"</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Esimene väärtus jääb kehtima.</strong> Punkti 7.7 karastamise failis <code>10-karastamine.conf</code> on <code>KbdInteractiveAuthentication no</code>. Seepärast on TOTP-faili nimi <code>05-...</code>, et see loetaks enne. Hoia muudatuse ajal teine seanss lahti ja testi uues aknas.</p>
+</div>
+<p><code>nullok</code> lubab kasutajatel, kellel TOTP pole veel seadistatud, sisse logida ainult võtmega - nii saab TOTP-i järk-järgult kasutusele võtta. Kui kõik kasutajad on selle seadistanud, eemalda <code>nullok</code>. Kaota telefon → kasuta varukoodi või logi sisse konsoolist.</p>
 <h2 id="78-tulemüür">7.8 Tulemüür<a class="headerlink" href="#78-tulemüür" title="Permanent link">&para;</a></h2>
 <p>Linuxi kernelis on pakettide filtreerimise raamistik <strong>netfilter</strong>. Selle reegleid hallatakse tänapäeval tööriistaga <strong>nftables</strong> (<code>nft</code>), vanemates süsteemides <strong>iptables</strong>-iga. Enamik administraatoreid kasutab aga lihtsamaid kasutajaliideseid:</p>
 <table>
