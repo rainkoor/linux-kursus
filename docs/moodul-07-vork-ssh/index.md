@@ -583,6 +583,43 @@ sudo sshd -t && sudo systemctl reload ssh
 
 Kontrolli: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult kataloogi `failid`; `ssh partner@ubuntusrv` aga ei ava käsurida (*This service allows sftp connections only*). Kui sul on `AllowGroups`, lisa sinna ka `sftp-kasutajad`. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga `sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot`.
 
+### Kaheastmeline autentimine (TOTP)
+
+Võtmepõhine sisselogimine on juba tugev. Eriti oluliste serverite (nt internetist kättesaadav hüppeserver) puhul lisatakse **teine tegur**: lisaks võtmele küsitakse telefoni rakenduse (nt Aegis, Google Authenticator, Microsoft Authenticator) näidatud **ühekordset koodi** (*TOTP, Time-based One-Time Password*). Kood muutub iga 30 sekundi järel ja arvutatakse ühisest saladusest ning kellaajast, seega peab serveri kell olema täpne (punkt 7.9).
+
+Näide Ubuntus (AlmaLinuxis pakett `google-authenticator` EPEL-ist, PAM-fail `/etc/pam.d/sshd` on sama):
+
+```bash
+sudo apt install libpam-google-authenticator
+google-authenticator             # käivita OMA kasutajana, mitte sudo-ga: loob ~/.google_authenticator
+                                 # skaneeri QR-kood telefoniga ja kirjuta varukoodid üles
+```
+
+```text
+# /etc/pam.d/sshd - lisa faili lõppu:
+auth required pam_google_authenticator.so nullok
+
+# ja kommenteeri välja rida, mis küsiks lisaks kasutaja parooli:
+# @include common-auth
+```
+
+```text
+# /etc/ssh/sshd_config.d/05-totp.conf
+UsePAM yes
+KbdInteractiveAuthentication yes
+AuthenticationMethods publickey,keyboard-interactive
+```
+
+```bash
+sudo sshd -t && sudo systemctl reload ssh
+ssh mari@ubuntusrv               # UUES aknas: kõigepealt võti, siis küsitakse "Verification code"
+```
+
+> [!WARNING]
+> **Esimene väärtus jääb kehtima.** Punkti 7.7 karastamise failis `10-karastamine.conf` on `KbdInteractiveAuthentication no`. Seepärast on TOTP-faili nimi `05-...`, et see loetaks enne. Hoia muudatuse ajal teine seanss lahti ja testi uues aknas.
+
+`nullok` lubab kasutajatel, kellel TOTP pole veel seadistatud, sisse logida ainult võtmega - nii saab TOTP-i järk-järgult kasutusele võtta. Kui kõik kasutajad on selle seadistanud, eemalda `nullok`. Kaota telefon → kasuta varukoodi või logi sisse konsoolist.
+
 ## 7.8 Tulemüür
 
 Linuxi kernelis on pakettide filtreerimise raamistik **netfilter**. Selle reegleid hallatakse tänapäeval tööriistaga **nftables** (`nft`), vanemates süsteemides **iptables**-iga. Enamik administraatoreid kasutab aga lihtsamaid kasutajaliideseid:

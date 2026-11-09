@@ -101,7 +101,7 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ku
 - Tee sama eksam Debianis: mis on erinev (`apt`, `ufw`, AppArmor, `/etc/apt/`, `adm`/`sudo` grupid)? Skript on kirjutatud AlmaLinuxi jaoks - Debianis tuleb osa kontrolle kohandada.
 
 > [!NOTE]
-> **Õpetajale:** skript kontrollib ainult olekut. Ülesannete sõnastus on täpne (nimed, numbrid), et kontroll oleks automaatne. Lisaülesandeid saab hõlpsasti lisada funktsiooniga `kontroll PUNKTID "kirjeldus" käsk`. Skripti süntaks on kontrollitud (`bash -n`), kuid päris AlmaLinuxis ei ole seda testitud - tee eksam enne õppijatega kasutamist üks kord ise läbi.
+> **Õpetajale:** skript kontrollib ainult olekut. Ülesannete sõnastus on täpne (nimed, numbrid), et kontroll oleks automaatne. Lisaülesandeid saab hõlpsasti lisada funktsiooniga `kontroll PUNKTID "kirjeldus" käsk`. Skripti süntaks on kontrollitud (`bash -n`), kuid päris AlmaLinuxis ei ole seda testitud - tee eksam enne õppijatega kasutamist üks kord ise läbi. Näidislahendus ja sagedased vead on õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
 
 <!-- navigatsioon -->
 ---

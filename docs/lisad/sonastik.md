@@ -147,6 +147,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | juurkasutaja | root, superuser | Piiramatute õigustega kasutaja |
 | juurkataloog | root directory | Kataloogipuu algus `/` |
 | järkjärguline uuendus | rolling update | Uuendus, kus vanad koopiad asendatakse uutega järk-järgult, nii et teenus ei katke |
+| kaheastmeline autentimine | two-factor authentication (2FA) | Sisselogimine kahe eri teguriga, nt SSH võti ja telefoni kood |
 | Kali Linux | Kali Linux | Turvatestimiseks mõeldud Debianil põhinev distro |
 | karastamine | hardening | Süsteemi turvalisemaks muutmine seadistuse abil |
 | kasutusjuhend | manual page, man page | Käsu dokumentatsioon (`man`) |
@@ -407,6 +408,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | TLS | Transport Layer Security | Krüpteeritud ühenduse protokoll (HTTPS, LDAPS, SMTPS) |
 | tmux | terminal multiplexer | Terminalijagur, mille seanss jääb SSH-ühenduse katkemisel alles |
 | toru | pipe | Ühe käsu väljundi suunamine teise sisendiks (`\|`) |
+| TOTP | Time-based One-Time Password | Ajapõhine ühekordne kood (telefonirakendus), mida kasutatakse kaheastmelisel autentimisel |
 | TPM | Trusted Platform Module | Turvakiip (või virtuaalne vaste), mida nõuab nt Windows 11 |
 | Traefik | Traefik | Konteineritele mõeldud pöördpuhver ja koormusejaotur |
 | tsoon | zone | DNS-is ühe domeeni kirjete kogum |
