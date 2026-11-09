@@ -1,0 +1,6319 @@
+
+<!doctype html>
+<html lang="et" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Eestikeelne Linuxi ja BSD kursus nullist süsteemihalduseni">
+      
+      
+      
+      
+        <link rel="prev" href="../moodul-05-protsessid-teenused/enesekontroll/">
+      
+      
+        <link rel="next" href="labor/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Teooria - Linuxi ja BSD kursus</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#moodul-6-bashi-skriptimine-ja-git" class="md-skip">
+          Keri sisuni
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Päis">
+    <a href=".." title="Linuxi ja BSD kursus" class="md-header__button md-logo" aria-label="Linuxi ja BSD kursus" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linuxi ja BSD kursus
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Teooria
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Tume režiim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Tume režiim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Hele režiim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Hele režiim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Otsi" placeholder="Otsi" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Otsing">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Lähtesta" aria-label="Lähtesta" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Otsingu lähtestamine
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigatsioon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Linuxi ja BSD kursus" class="md-nav__button md-logo" aria-label="Linuxi ja BSD kursus" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Linuxi ja BSD kursus
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Avaleht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kava/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kursuse kava
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Põhiosa
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Põhiosa
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 1. Linux ja käsurida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 1. Linux ja käsurida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-01-sissejuhatus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-01-sissejuhatus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-01-sissejuhatus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 2. Failid, tekst ja torud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 2. Failid, tekst ja torud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-02-failid-tekst-torud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-02-failid-tekst-torud/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-02-failid-tekst-torud/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 3. Kasutajad, grupid ja õigused
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 3. Kasutajad, grupid ja õigused
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-03-kasutajad-oigused/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-03-kasutajad-oigused/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-03-kasutajad-oigused/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 4. Tarkvara ja pakihaldus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 4. Tarkvara ja pakihaldus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-04-pakihaldus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-04-pakihaldus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-04-pakihaldus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 5. Protsessid, teenused ja systemd
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 5. Protsessid, teenused ja systemd
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-05-protsessid-teenused/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-05-protsessid-teenused/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-05-protsessid-teenused/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 6. Bashi skriptimine ja Git
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 6. Bashi skriptimine ja Git
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Sisukord">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sisukord
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opivaljundid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Õpiväljundid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-mis-on-skript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Mis on skript?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Mis on skript?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esimene-skript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esimene skript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kuhu-skriptid-panna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kuhu skriptid panna?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-muutujad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Muutujad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Muutujad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keskkonnamuutujad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keskkonnamuutujad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaskude-asendus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Käskude asendus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aritmeetika" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aritmeetika
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-jutumargid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Jutumärgid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-argumendid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Argumendid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 Argumendid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vaikevaartused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vaikeväärtused
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-valjumiskoodid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Väljumiskoodid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 Väljumiskoodid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valjund-ja-veateated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Väljund ja veateated
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-tingimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 Tingimused
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 Tingimused">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vordlused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Võrdlused
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-bashi-taiustatud-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [[ ]] - Bashi täiustatud test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67-tsuklid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 Tsüklid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.7 Tsüklid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faili-lugemine-rea-kaupa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Faili lugemine rea kaupa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68-kasutaja-sisend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 Kasutaja sisend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#69-funktsioonid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 Funktsioonid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610-massiivid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 Massiivid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#611-tookindlad-skriptid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 Töökindlad skriptid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.11 Töökindlad skriptid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-euo-pipefail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set -euo pipefail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-koristamine-lopus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trap - koristamine lõpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shellcheck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShellCheck
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hea-skripti-tunnused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hea skripti tunnused
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#612-silumine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.12 Silumine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#613-skriptide-ajastamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.13 Skriptide ajastamine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#614-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.14 Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.14 Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pohimoisted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Põhimõisted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seadistamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seadistamine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#igapaevane-too" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Igapäevane töö
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muudatuste-tagasivotmine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muudatuste tagasivõtmine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .gitignore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Harud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaughoidla-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kaughoidla (GitHub)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distrode-erinevused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distrode erinevused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kokkuvote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kokkuvõte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lisamaterjal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lisamaterjal
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 7. Võrk ja SSH
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 7. Võrk ja SSH
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-07-vork-ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-07-vork-ssh/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-07-vork-ssh/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 8. Kettad, failisüsteemid ja LVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 8. Kettad, failisüsteemid ja LVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-08-kettad-lvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-08-kettad-lvm/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-08-kettad-lvm/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Süvendusosa
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Süvendusosa
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-09-salvestus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-09-salvestus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-09-salvestus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-10-alglaadimine-kernel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-10-alglaadimine-kernel/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-10-alglaadimine-kernel/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 11. Turvalisus ja logid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 11. Turvalisus ja logid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-11-turvalisus-logid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-11-turvalisus-logid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritööd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-11-turvalisus-logid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 12. Konteinerid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 12. Konteinerid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-12-konteinerid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-12-konteinerid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-12-konteinerid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 13. Veebiserverid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 13. Veebiserverid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-13-veebiserverid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-13-veebiserverid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-13-veebiserverid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 14. Andmebaasid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 14. Andmebaasid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-14-andmebaasid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-14-andmebaasid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-14-andmebaasid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-15-vorguteenused/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-15-vorguteenused/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritööd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-15-vorguteenused/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-16-automatiseerimine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-16-automatiseerimine/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-16-automatiseerimine/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 17. Seire ja jõudlus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 17. Seire ja jõudlus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-17-seire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-17-seire/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-17-seire/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proovieksam-pohiosa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: põhiosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proovieksam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: süvendusosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lopuprojekt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lõpuprojekt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valikmoodulid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Valikmoodulid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 18. BSD praktikas: OPNsense tulemüür
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 18. BSD praktikas: OPNsense tulemüür
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-18-opnsense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-18-opnsense/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-18-opnsense/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-19-dhcp-pxe-iscsi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-19-dhcp-pxe-iscsi/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-19-dhcp-pxe-iscsi/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 20. Kataloogiteenused: OpenLDAP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 20. Kataloogiteenused: OpenLDAP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-20-openldap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-20-openldap/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-20-openldap/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 21. Active Directory Linuxis: Samba AD DC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 21. Active Directory Linuxis: Samba AD DC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-21-samba-ad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-21-samba-ad/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritööd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-21-samba-ad/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 22. Linux töölaual ja WSL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 22. Linux töölaual ja WSL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-22-toolaud-wsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-22-toolaud-wsl/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-22-toolaud-wsl/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-23-virtualiseerimine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-23-virtualiseerimine/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-23-virtualiseerimine/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 24. Kubernetes: k3s
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 24. Kubernetes: k3s
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-24-kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-24-kubernetes/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-24-kubernetes/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_8" id="__nav_5_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 25. FreeBSD server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 25. FreeBSD server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-25-freebsd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-25-freebsd/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-25-freebsd/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lisad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lisad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/paigaldus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laborikeskkond ja paigaldus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/distrod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distrode ülevaade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/ajalugu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UNIX-i ja Linuxi ajalugu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/sonastik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sõnastik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/kasud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Käskude loend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Sisukord">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sisukord
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opivaljundid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Õpiväljundid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-mis-on-skript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Mis on skript?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Mis on skript?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esimene-skript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esimene skript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kuhu-skriptid-panna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kuhu skriptid panna?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-muutujad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Muutujad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Muutujad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keskkonnamuutujad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keskkonnamuutujad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaskude-asendus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Käskude asendus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aritmeetika" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aritmeetika
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-jutumargid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Jutumärgid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-argumendid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Argumendid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 Argumendid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vaikevaartused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vaikeväärtused
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-valjumiskoodid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Väljumiskoodid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 Väljumiskoodid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valjund-ja-veateated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Väljund ja veateated
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-tingimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 Tingimused
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 Tingimused">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vordlused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Võrdlused
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-bashi-taiustatud-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [[ ]] - Bashi täiustatud test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67-tsuklid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 Tsüklid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.7 Tsüklid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faili-lugemine-rea-kaupa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Faili lugemine rea kaupa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68-kasutaja-sisend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 Kasutaja sisend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#69-funktsioonid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 Funktsioonid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610-massiivid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 Massiivid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#611-tookindlad-skriptid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 Töökindlad skriptid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.11 Töökindlad skriptid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-euo-pipefail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set -euo pipefail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-koristamine-lopus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trap - koristamine lõpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shellcheck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShellCheck
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hea-skripti-tunnused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hea skripti tunnused
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#612-silumine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.12 Silumine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#613-skriptide-ajastamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.13 Skriptide ajastamine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#614-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.14 Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.14 Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pohimoisted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Põhimõisted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seadistamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seadistamine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#igapaevane-too" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Igapäevane töö
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muudatuste-tagasivotmine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muudatuste tagasivõtmine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .gitignore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Harud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaughoidla-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kaughoidla (GitHub)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distrode-erinevused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distrode erinevused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kokkuvote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kokkuvõte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lisamaterjal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lisamaterjal
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="moodul-6-bashi-skriptimine-ja-git">Moodul 6. Bashi skriptimine ja Git<a class="headerlink" href="#moodul-6-bashi-skriptimine-ja-git" title="Permanent link">&para;</a></h1>
+<p><strong>Maht:</strong> 16 tundi · <strong>Laboritöö:</strong> Debian · <strong>Eeldused:</strong> moodulid 1–5</p>
+<h2 id="opivaljundid">Õpiväljundid<a class="headerlink" href="#opivaljundid" title="Permanent link">&para;</a></h2>
+<p>Mooduli läbinud õppija:</p>
+<ul>
+<li>loob ja käivitab Bashi skripte;</li>
+<li>kasutab muutujaid, keskkonnamuutujaid ja käskude asendust;</li>
+<li>kasutab jutumärke õigesti;</li>
+<li>töötleb skripti argumente ja kontrollib sisendit;</li>
+<li>kasutab väljumiskoode, tingimusi, tsükleid ja funktsioone;</li>
+<li>loeb sisendit kasutajalt ja failist;</li>
+<li>kirjutab töökindlaid skripte (<code>set -euo pipefail</code>, veakontroll, ShellCheck);</li>
+<li>silub skripte ja ajastab nende käivitamise;</li>
+<li>versioonib skripte ja seadistusfaile Gitiga (sissekanded, harud, konfliktid, kaughoidla).</li>
+</ul>
+<hr />
+<h2 id="61-mis-on-skript">6.1 Mis on skript?<a class="headerlink" href="#61-mis-on-skript" title="Permanent link">&para;</a></h2>
+<p><strong>Skript</strong> on tekstifail, mis sisaldab kesta käske, mida täidetakse järjest. Kõik, mida saad kirjutada käsureale, saad panna ka skripti. Skriptid on süsteemiadministraatori põhitööriist korduvate tööde automatiseerimiseks: varundus, kasutajate loomine, logide analüüs, seire.</p>
+<div class="admonition tip">
+<p class="admonition-title">Näpunäide</p>
+<p><strong>Millal skript, millal midagi muud?</strong> Bash sobib hästi käskude ühendamiseks ja failidega töötamiseks. Kui skript kasvab üle paarisaja rea või vajab keerulisi andmestruktuure, on parem kasutada Pythonit. Mitme serveri seadistamiseks sobib Ansible (moodul 16).</p>
+</div>
+<h3 id="esimene-skript">Esimene skript<a class="headerlink" href="#esimene-skript" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>tere.sh
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Minu esimene skript</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Tere, </span><span class="nv">$USER</span><span class="s2">!"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Täna on </span><span class="k">$(</span>date<span class="w"> </span>+%A<span class="k">)</span><span class="s2">."</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Oled kataloogis </span><span class="nv">$PWD</span><span class="s2">."</span>
+</code></pre></div>
+<ul>
+<li>Esimene rida <code>#!/bin/bash</code> on <strong>shebang</strong>. See ütleb süsteemile, millise programmiga skripti käivitada. See peab olema faili päris esimene rida.</li>
+<li><code>#</code>-ga algavad read on kommentaarid.</li>
+</ul>
+<p>Skripti käivitamiseks peab sellel olema käivitusõigus:</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>tere.sh
+./tere.sh
+</code></pre></div>
+<p><code>./</code> on vajalik, sest praegune kataloog ei ole muutujas <code>PATH</code>. Skripti saab käivitada ka otse kestaga, ilma käivitusõiguseta: <code>bash tere.sh</code>.</p>
+<h3 id="kuhu-skriptid-panna">Kuhu skriptid panna?<a class="headerlink" href="#kuhu-skriptid-panna" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Asukoht</th>
+<th>Kasutus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/bin</code> või <code>~/.local/bin</code></td>
+<td>Isiklikud skriptid. Debianis ja Ubuntus lisatakse need kataloogid automaatselt muutujasse <code>PATH</code>, kui need sisselogimisel olemas on</td>
+</tr>
+<tr>
+<td><code>/usr/local/bin</code></td>
+<td>Kõigile kasutajatele mõeldud skriptid</td>
+</tr>
+<tr>
+<td><code>/usr/local/sbin</code></td>
+<td>Halduskriptid, mida käivitab juurkasutaja</td>
+</tr>
+</tbody>
+</table>
+<p>Kui skript on <code>PATH</code>-is, saab seda käivitada nime järgi nagu tavalist käsku.</p>
+<h2 id="62-muutujad">6.2 Muutujad<a class="headerlink" href="#62-muutujad" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nv">nimi</span><span class="o">=</span><span class="s2">"Mari"</span>
+<span class="nv">vanus</span><span class="o">=</span><span class="m">17</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Tere, </span><span class="nv">$nimi</span><span class="s2">! Oled </span><span class="nv">$vanus</span><span class="s2"> aastat vana."</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Failinimi: </span><span class="si">${</span><span class="nv">nimi</span><span class="si">}</span><span class="s2">_aruanne.txt"</span>
+</code></pre></div>
+<p>Reeglid:</p>
+<ul>
+<li><strong>võrdusmärgi ümber ei tohi olla tühikuid</strong>: <code>nimi = "Mari"</code> on viga (kest arvab, et <code>nimi</code> on käsk);</li>
+<li>muutuja väärtuse kasutamiseks pane nime ette <code>$</code>;</li>
+<li>loogelised sulud <code>${nimi}</code> eraldavad muutuja nime ümbritsevast tekstist;</li>
+<li>muutujate nimed on tõstutundlikud. Kokkuleppe järgi kasutatakse oma muutujate jaoks väiketähti ja keskkonnamuutujate jaoks suurtähti.</li>
+</ul>
+<h3 id="keskkonnamuutujad">Keskkonnamuutujad<a class="headerlink" href="#keskkonnamuutujad" title="Permanent link">&para;</a></h3>
+<p>Mõned muutujad on alati olemas:</p>
+<table>
+<thead>
+<tr>
+<th>Muutuja</th>
+<th>Sisu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$USER</code></td>
+<td>Kasutajanimi</td>
+</tr>
+<tr>
+<td><code>$HOME</code></td>
+<td>Kodukataloog</td>
+</tr>
+<tr>
+<td><code>$PWD</code></td>
+<td>Praegune kataloog</td>
+</tr>
+<tr>
+<td><code>$PATH</code></td>
+<td>Kataloogid, kust käske otsitakse</td>
+</tr>
+<tr>
+<td><code>$SHELL</code></td>
+<td>Kasutaja kest</td>
+</tr>
+<tr>
+<td><code>$HOSTNAME</code></td>
+<td>Masina nimi</td>
+</tr>
+<tr>
+<td><code>$RANDOM</code></td>
+<td>Juhuslik arv 0–32767</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>env<span class="w">                          </span><span class="c1"># kõik keskkonnamuutujad</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MINU_SEADE</span><span class="o">=</span><span class="s2">"väärtus"</span><span class="w">  </span><span class="c1"># muutuja pärandatakse ka käivitatavatele programmidele</span>
+</code></pre></div>
+<p>Ilma <code>export</code>-ita on muutuja nähtav ainult praeguses kestas, mitte sealt käivitatud programmides ja skriptides.</p>
+<p>Püsivad muutujad ja aliased kirjutatakse faili <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s1">'ls -lh'</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">EDITOR</span><span class="o">=</span>nano
+</code></pre></div>
+<h3 id="kaskude-asendus">Käskude asendus<a class="headerlink" href="#kaskude-asendus" title="Permanent link">&para;</a></h3>
+<p>Käsu väljundi saab salvestada muutujasse:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">tana</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>
+<span class="nv">failide_arv</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Täna on </span><span class="nv">$tana</span><span class="s2"> ja kataloogis /etc on </span><span class="nv">$failide_arv</span><span class="s2"> kirjet."</span>
+</code></pre></div>
+<p>Vanemates skriptides kasutatakse tagurpidi ülakomasid <code>`date`</code>, kuid <code>$( )</code> on loetavam ja seda saab pesastada.</p>
+<h3 id="aritmeetika">Aritmeetika<a class="headerlink" href="#aritmeetika" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">a</span><span class="o">=</span><span class="m">7</span>
+<span class="nv">b</span><span class="o">=</span><span class="m">3</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">b</span><span class="k">))</span><span class="w">              </span><span class="c1"># 10</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">b</span><span class="k">))</span><span class="w">              </span><span class="c1"># 21</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">b</span><span class="k">))</span><span class="w">              </span><span class="c1"># 2 (täisarvuline jagamine)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">b</span><span class="k">))</span><span class="w">              </span><span class="c1"># 1 (jääk)</span>
+<span class="nv">loendur</span><span class="o">=</span><span class="k">$((</span><span class="nv">loendur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="w">     </span><span class="c1"># suurenda ühe võrra</span>
+<span class="o">((</span>loendur++<span class="o">))</span><span class="w">                </span><span class="c1"># sama lühemalt</span>
+</code></pre></div>
+<p>Bash oskab ainult täisarve. Komakohtadega arvutamiseks kasuta näiteks <code>bc</code>-d: <code>echo "scale=2; 7/3" | bc</code>.</p>
+<p>Kaks lõksu:</p>
+<ul>
+<li>arvud, mis algavad nulliga, tõlgendatakse kaheksandarvudena. <code>$((08))</code> annab vea - see juhtub näiteks käsu <code>date +%H</code> väljundiga kell 8 ja 9. Lahendus: <code>$((10#$tund))</code>;</li>
+<li><code>((loendur++))</code> tagastab väljumiskoodi 1, kui muutuja väärtus oli 0. Koos seadega <code>set -e</code> (vt punkt 6.11) lõpetab see skripti. Kasuta sel juhul <code>loendur=$((loendur + 1))</code>.</li>
+</ul>
+<h2 id="63-jutumargid">6.3 Jutumärgid<a class="headerlink" href="#63-jutumargid" title="Permanent link">&para;</a></h2>
+<p>Jutumärkide õige kasutamine on Bashi skriptides <strong>kõige olulisem</strong> ja kõige sagedasemate vigade allikas.</p>
+<table>
+<thead>
+<tr>
+<th>Kuju</th>
+<th>Mis juhtub</th>
+<th>Näide</th>
+<th>Tulemus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"..."</code></td>
+<td>Muutujad ja <code>$( )</code> asendatakse, tühikud säilivad</td>
+<td><code>echo "Tere, $USER"</code></td>
+<td><code>Tere, mari</code></td>
+</tr>
+<tr>
+<td><code>'...'</code></td>
+<td>Kõik jääb täpselt nii, nagu on kirjutatud</td>
+<td><code>echo 'Tere, $USER'</code></td>
+<td><code>Tere, $USER</code></td>
+</tr>
+<tr>
+<td>ilma</td>
+<td>Muutujad asendatakse, tulemus <strong>jagatakse tühikute kohalt</strong> osadeks ja metamärgid laiendatakse</td>
+<td><code>rm $fail</code></td>
+<td>ohtlik!</td>
+</tr>
+</tbody>
+</table>
+<p>Näide, miks see oluline on:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">fail</span><span class="o">=</span><span class="s2">"minu aruanne.txt"</span>
+rm<span class="w"> </span><span class="nv">$fail</span><span class="w">          </span><span class="c1"># proovib kustutada kaks faili: "minu" ja "aruanne.txt"</span>
+rm<span class="w"> </span><span class="s2">"</span><span class="nv">$fail</span><span class="s2">"</span><span class="w">        </span><span class="c1"># kustutab faili "minu aruanne.txt"</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Reegel</p>
+<p>Pane muutujad <strong>alati</strong> jutumärkidesse: <code>"$muutuja"</code>, <code>"$1"</code>, <code>"$@"</code>. Erandeid on vähe ja kui sa pole kindel, kasuta jutumärke.</p>
+</div>
+<h2 id="64-argumendid">6.4 Argumendid<a class="headerlink" href="#64-argumendid" title="Permanent link">&para;</a></h2>
+<p>Skriptile käsurealt antud väärtused on erimuutujates:</p>
+<table>
+<thead>
+<tr>
+<th>Muutuja</th>
+<th>Sisu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$0</code></td>
+<td>Skripti nimi</td>
+</tr>
+<tr>
+<td><code>$1</code>, <code>$2</code>, …</td>
+<td>Esimene, teine jne argument</td>
+</tr>
+<tr>
+<td><code>$#</code></td>
+<td>Argumentide arv</td>
+</tr>
+<tr>
+<td><code>"$@"</code></td>
+<td>Kõik argumendid eraldi sõnadena (kasuta seda)</td>
+</tr>
+<tr>
+<td><code>$?</code></td>
+<td>Viimase käsu väljumiskood</td>
+</tr>
+<tr>
+<td><code>$$</code></td>
+<td>Skripti PID</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Skript: </span><span class="nv">$0</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Argumente: </span><span class="nv">$#</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Esimene: </span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Kõik: </span><span class="nv">$@</span><span class="s2">"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>./argumendid.sh<span class="w"> </span>üks<span class="w"> </span><span class="s2">"kaks kolm"</span><span class="w"> </span>neli
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Skript: ./argumendid.sh
+Argumente: 3
+Esimene: üks
+Kõik: üks kaks kolm neli
+</code></pre></div>
+<h3 id="vaikevaartused">Vaikeväärtused<a class="headerlink" href="#vaikevaartused" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">kataloog</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">"</span><span class="w">       </span><span class="c1"># kui $1 puudub või on tühi, kasuta $HOME</span>
+<span class="nv">arv</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">5</span><span class="si">}</span><span class="s2">"</span><span class="w">                </span><span class="c1"># vaikimisi 5</span>
+</code></pre></div>
+<p><code>shift</code> nihutab argumente vasakule: pärast <code>shift</code>-i saab <code>$2</code>-st <code>$1</code> jne. Seda kasutatakse võtmete töötlemisel.</p>
+<h2 id="65-valjumiskoodid">6.5 Väljumiskoodid<a class="headerlink" href="#65-valjumiskoodid" title="Permanent link">&para;</a></h2>
+<p>Iga käsk lõpetab <strong>väljumiskoodiga</strong> (<em>exit code</em>): <strong>0 tähendab edu</strong>, kõik muu viga. Viimase käsu väljumiskood on muutujas <code>$?</code>.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">                      </span><span class="c1"># 0</span>
+ls<span class="w"> </span>/olematu<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">                      </span><span class="c1"># 2</span>
+</code></pre></div>
+<p>Skript määrab oma väljumiskoodi käsuga <code>exit</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w">                       </span><span class="c1"># edukas lõpp</span>
+<span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w">                       </span><span class="c1"># viga</span>
+</code></pre></div>
+<p>Väljumiskoodide põhjal saab käske tingimuslikult ühendada:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>varu<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cp<span class="w"> </span>fail.txt<span class="w"> </span>varu/<span class="w">      </span><span class="c1"># kopeeri ainult siis, kui mkdir õnnestus</span>
+<span class="nb">cd</span><span class="w"> </span>/olematu<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w">                </span><span class="c1"># kui cd ebaõnnestus, lõpeta skript</span>
+ping<span class="w"> </span>-c1<span class="w"> </span>server<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Üleval"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Maas"</span>
+</code></pre></div>
+<h3 id="valjund-ja-veateated">Väljund ja veateated<a class="headerlink" href="#valjund-ja-veateated" title="Permanent link">&para;</a></h3>
+<p>Hea skript kirjutab tavaväljundi standardväljundisse ja veateated <strong>standardveaväljundisse</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kõik korras"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"VIGA: faili ei leitud"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="w">     </span><span class="c1"># &gt;&amp;2 suunab veaväljundisse</span>
+</code></pre></div>
+<p>Nii saab skripti kasutaja väljundi ja vead eraldi suunata (vt moodul 2).</p>
+<h2 id="66-tingimused">6.6 Tingimused<a class="headerlink" href="#66-tingimused" title="Permanent link">&para;</a></h2>
+<h3 id="if">if<a class="headerlink" href="#if" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>if käsk; then
+    # kui käsk õnnestus (väljumiskood 0)
+elif teine_käsk; then
+    # kui teine käsk õnnestus
+else
+    # muidu
+fi
+</code></pre></div>
+<p><code>if</code> kontrollib käsu väljumiskoodi. Väga sageli on see käsk <code>test</code>, mida kirjutatakse nurksulgudes <code>[ ]</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$#</span><span class="s2">"</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutus: </span><span class="nv">$0</span><span class="s2"> FAIL"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"/etc/os-release"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Fail on olemas"</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"mari"</span><span class="w"> </span>/etc/passwd<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutaja mari on olemas"</span>
+<span class="k">fi</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Tühikud on kohustuslikud!</strong> <code>[ "$a" = "$b" ]</code> töötab, <code>["$a"="$b"]</code> ei tööta. <code>[</code> on tegelikult käsk ja selle osad on argumendid.</p>
+</div>
+<h3 id="vordlused">Võrdlused<a class="headerlink" href="#vordlused" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Arvud</th>
+<th>Tekst</th>
+<th>Failid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-eq</code> võrdne</td>
+<td><code>=</code> võrdne</td>
+<td><code>-e</code> on olemas</td>
+</tr>
+<tr>
+<td><code>-ne</code> mittevõrdne</td>
+<td><code>!=</code> mittevõrdne</td>
+<td><code>-f</code> tavaline fail</td>
+</tr>
+<tr>
+<td><code>-lt</code> väiksem</td>
+<td><code>-z</code> tühi</td>
+<td><code>-d</code> kataloog</td>
+</tr>
+<tr>
+<td><code>-le</code> väiksem või võrdne</td>
+<td><code>-n</code> mittetühi</td>
+<td><code>-r</code> loetav</td>
+</tr>
+<tr>
+<td><code>-gt</code> suurem</td>
+<td></td>
+<td><code>-w</code> kirjutatav</td>
+</tr>
+<tr>
+<td><code>-ge</code> suurem või võrdne</td>
+<td></td>
+<td><code>-x</code> käivitatav</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>-s</code> mittetühi fail</td>
+</tr>
+</tbody>
+</table>
+<p>Tingimuste ühendamine: <code>[ -f "$f" ] &amp;&amp; [ -r "$f" ]</code> (ja), <code>[ -z "$a" ] || [ -z "$b" ]</code> (või), <code>! [ -d "$k" ]</code> (ei).</p>
+<h3 id="-bashi-taiustatud-test">[[ ]] - Bashi täiustatud test<a class="headerlink" href="#-bashi-taiustatud-test" title="Permanent link">&para;</a></h3>
+<p>Bashis on ka võimsam kuju <code>[[ ]]</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$vastus</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">[</span>jJ<span class="o">]</span>*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w">          </span><span class="c1"># mustriga võrdlus</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Vastasid jah"</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$arv</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span>+$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w">          </span><span class="c1"># regulaaravaldis</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"On täisarv"</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$fail</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">"</span><span class="nv">$fail</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w">    </span><span class="c1"># &amp;&amp; ja || sulgude sees</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Fail on loetav"</span>
+<span class="k">fi</span>
+</code></pre></div>
+<p><code>[[ ]]</code> on vähem vigadele altis (muutujaid ei jagata tühikute kohalt), kuid töötab ainult Bashis, mitte kõigis kestades. Kuna kirjutame Bashi skripte (<code>#!/bin/bash</code>), võib seda julgelt kasutada.</p>
+<p>Arvude võrdlemiseks on ka <code>(( ))</code>: <code>if (( arv &gt; 10 )); then ...</code></p>
+<h3 id="case">case<a class="headerlink" href="#case" title="Permanent link">&para;</a></h3>
+<p>Kui ühte muutujat on vaja võrrelda paljude väärtustega, on <code>case</code> loetavam kui pikk <code>if</code>-<code>elif</code>-ahel:</p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>start<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Käivitan..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>stop<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Peatan..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>status<span class="p">|</span>olek<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Olek..."</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutus: </span><span class="nv">$0</span><span class="s2"> {start|stop|status}"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div>
+<p>Iga haru lõpeb kahe semikooloniga <code>;;</code>. <code>*</code> sobib kõigega ja on vaikeharu. <code>|</code> tähendab „või“.</p>
+<h2 id="67-tsuklid">6.7 Tsüklid<a class="headerlink" href="#67-tsuklid" title="Permanent link">&para;</a></h2>
+<h3 id="for">for<a class="headerlink" href="#for" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>nimi<span class="w"> </span><span class="k">in</span><span class="w"> </span>Mari<span class="w"> </span>Jaan<span class="w"> </span>Kati<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Tere, </span><span class="nv">$nimi</span><span class="s2">!"</span>
+<span class="k">done</span>
+
+<span class="k">for</span><span class="w"> </span>fail<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/*.conf<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">           </span><span class="c1"># metamärgid</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Leidsin: </span><span class="nv">$fail</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">                   </span><span class="c1"># kõik argumendid</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Argument: </span><span class="nv">$arg</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..5<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">                   </span><span class="c1"># vahemik</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Ring </span><span class="nv">$i</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">       </span><span class="c1"># C-stiilis tsükkel</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$i</span><span class="s2">"</span>
+<span class="k">done</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Ära kasuta <code>for f in $(ls)</code>!</strong> See läheb katki tühikutega failinimede korral. Kasuta metamärke: <code>for f in *.txt</code>.</p>
+</div>
+<h3 id="while">while<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
+<p><code>while</code> kordab, kuni tingimus on tõene:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">loendur</span><span class="o">=</span><span class="m">1</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$loendur</span><span class="s2">"</span><span class="w"> </span>-le<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Ring </span><span class="nv">$loendur</span><span class="s2">"</span>
+<span class="w">    </span><span class="nv">loendur</span><span class="o">=</span><span class="k">$((</span><span class="nv">loendur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>Lõputu tsükkel (nt seireskriptides, vt moodul 5):</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>date
+<span class="w">    </span>sleep<span class="w"> </span><span class="m">60</span>
+<span class="k">done</span>
+</code></pre></div>
+<p><code>break</code> lõpetab tsükli, <code>continue</code> jätkab järgmise ringiga.</p>
+<h3 id="faili-lugemine-rea-kaupa">Faili lugemine rea kaupa<a class="headerlink" href="#faili-lugemine-rea-kaupa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>rida<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Rida: </span><span class="nv">$rida</span><span class="s2">"</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>fail.txt
+</code></pre></div>
+<p>Eraldajaga failist (nt CSV) väljade lugemine:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span>,<span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>kasutaja<span class="w"> </span>nimi<span class="w"> </span>grupp<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutaja </span><span class="nv">$kasutaja</span><span class="s2"> (</span><span class="nv">$nimi</span><span class="s2">), grupp </span><span class="nv">$grupp</span><span class="s2">"</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>kasutajad.csv
+</code></pre></div>
+<p><code>IFS</code> (<em>Internal Field Separator</em>) määrab väljade eraldaja ja <code>read -r</code> hoiab ära kaldkriipsude tõlgendamise. Kasuta <code>read</code>-iga alati võtit <code>-r</code>.</p>
+<p>Käsu väljundi lugemiseks rea kaupa:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>kasutaja<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutaja: </span><span class="nv">$kasutaja</span><span class="s2">"</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="w"> </span>/etc/passwd<span class="o">)</span>
+</code></pre></div>
+<p><code>&lt;( )</code> (<em>process substitution</em>) laseb kasutada käsu väljundit nagu faili.</p>
+<h2 id="68-kasutaja-sisend">6.8 Kasutaja sisend<a class="headerlink" href="#68-kasutaja-sisend" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span><span class="s2">"Sisesta oma nimi: "</span><span class="w"> </span>nimi
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Tere, </span><span class="nv">$nimi</span><span class="s2">!"</span>
+
+<span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-s<span class="w"> </span>-p<span class="w"> </span><span class="s2">"Parool: "</span><span class="w"> </span>parool<span class="w">       </span><span class="c1"># -s: ära kuva sisestust</span>
+<span class="nb">echo</span>
+
+<span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span><span class="s2">"Kas jätkata? (j/e) "</span><span class="w"> </span>vastus
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$vastus</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="o">[</span>jJ<span class="o">]</span>*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Katkestan."</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="k">fi</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Märkus</p>
+<p>Halduskriptid peaksid töötama ka <strong>ilma kasutajata</strong> (nt cron'ist või taimerist käivitades). Seepärast eelista argumente ja seadistusfaile ning kasuta <code>read</code>-i ainult siis, kui see on tõesti vajalik (nt ohtliku toimingu kinnitamiseks).</p>
+</div>
+<h2 id="69-funktsioonid">6.9 Funktsioonid<a class="headerlink" href="#69-funktsioonid" title="Permanent link">&para;</a></h2>
+<p>Funktsioon on korduvkasutatav koodiplokk:</p>
+<div class="highlight"><pre><span></span><code>tervita<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">nimi</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Tere, </span><span class="nv">$nimi</span><span class="s2">!"</span>
+<span class="o">}</span>
+
+tervita<span class="w"> </span><span class="s2">"Mari"</span>
+tervita<span class="w"> </span><span class="s2">"Jaan"</span>
+</code></pre></div>
+<ul>
+<li>funktsioon peab olema <strong>defineeritud enne</strong> selle kasutamist;</li>
+<li>funktsiooni argumendid on samuti <code>$1</code>, <code>$2</code>, <code>$@</code>, <code>$#</code>;</li>
+<li><code>local</code> muudab muutuja funktsiooni sisemiseks, et see ei mõjutaks ülejäänud skripti;</li>
+<li><code>return</code> määrab funktsiooni väljumiskoodi (0–255). Väärtuse tagastamiseks kasutatakse <code>echo</code>-t ja käskude asendust.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>on_juurkasutaja<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">"</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span>
+<span class="o">}</span>
+
+ruut<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">))</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>on_juurkasutaja<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Käivita skript sudo-ga"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">tulemus</span><span class="o">=</span><span class="k">$(</span>ruut<span class="w"> </span><span class="m">7</span><span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"7 ruudus on </span><span class="nv">$tulemus</span><span class="s2">"</span>
+</code></pre></div>
+<p>Tüüpilised abifunktsioonid, mida tasub igasse suuremasse skripti panna:</p>
+<div class="highlight"><pre><span></span><code>logi<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span><span class="s1">'+%F %T'</span><span class="k">)</span><span class="s2"> </span><span class="nv">$*</span><span class="s2">"</span>
+<span class="o">}</span>
+
+viga<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>logi<span class="w"> </span><span class="s2">"VIGA: </span><span class="nv">$*</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="o">}</span>
+
+<span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$siht</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>viga<span class="w"> </span><span class="s2">"Kataloogi </span><span class="nv">$siht</span><span class="s2"> ei ole"</span>
+</code></pre></div>
+<h2 id="610-massiivid">6.10 Massiivid<a class="headerlink" href="#610-massiivid" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nv">serverid</span><span class="o">=(</span><span class="s2">"web1"</span><span class="w"> </span><span class="s2">"web2"</span><span class="w"> </span><span class="s2">"db1"</span><span class="o">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">serverid</span><span class="p">[0]</span><span class="si">}</span><span class="s2">"</span><span class="w">          </span><span class="c1"># esimene element: web1</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">serverid</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="w">          </span><span class="c1"># kõik elemendid</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${#</span><span class="nv">serverid</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="w">         </span><span class="c1"># elementide arv: 3</span>
+<span class="nv">serverid</span><span class="o">+=(</span><span class="s2">"db2"</span><span class="o">)</span><span class="w">              </span><span class="c1"># lisa element</span>
+
+<span class="k">for</span><span class="w"> </span>s<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">serverid</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kontrollin serverit </span><span class="nv">$s</span><span class="s2">"</span>
+<span class="k">done</span>
+</code></pre></div>
+<h2 id="611-tookindlad-skriptid">6.11 Töökindlad skriptid<a class="headerlink" href="#611-tookindlad-skriptid" title="Permanent link">&para;</a></h2>
+<h3 id="set-euo-pipefail">set -euo pipefail<a class="headerlink" href="#set-euo-pipefail" title="Permanent link">&para;</a></h3>
+<p>Vaikimisi jätkab Bash pärast vigu järgmise käsuga, mis võib viia katastroofini:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/www/vana_sait
+rm<span class="w"> </span>-rf<span class="w"> </span>*<span class="w">                     </span><span class="c1"># kui cd ebaõnnestus, kustutatakse praeguse kataloogi sisu!</span>
+</code></pre></div>
+<p>Seepärast alustatakse halduskripte sageli nii:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Seade</th>
+<th>Tähendus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-e</code></td>
+<td>Lõpeta skript, kui mõni käsk ebaõnnestub</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>Lõpeta skript, kui kasutatakse defineerimata muutujat (kaitseb trükivigade eest)</td>
+</tr>
+<tr>
+<td><code>-o pipefail</code></td>
+<td>Toru ebaõnnestub, kui ükskõik milline selle käsk ebaõnnestub (mitte ainult viimane)</td>
+</tr>
+</tbody>
+</table>
+<p><code>set -e</code> ei ole täiuslik (näiteks <code>if</code>-tingimuses ja <code>&amp;&amp;</code>/<code>||</code> ahelates olevad käsud ei lõpeta skripti), seega oluliste käskude järel kontrolli tulemust ka ise: <code>cd "$kataloog" || exit 1</code>.</p>
+<p>Kui <code>set -u</code> on sees, kasuta valikuliste argumentide jaoks vaikeväärtust: <code>"${1:-}"</code>.</p>
+<h3 id="trap-koristamine-lopus">trap - koristamine lõpus<a class="headerlink" href="#trap-koristamine-lopus" title="Permanent link">&para;</a></h3>
+<p><code>trap</code> käivitab käsu, kui skript lõpeb või saab signaali. Sellega saab näiteks ajutised failid alati ära kustutada:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">ajutine</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="nb">trap</span><span class="w"> </span><span class="s1">'rm -f "$ajutine"'</span><span class="w"> </span>EXIT
+
+<span class="c1"># ... töö ajutise failiga ...</span>
+</code></pre></div>
+<p><code>mktemp</code> loob turvalise unikaalse nimega ajutise faili.</p>
+<h3 id="shellcheck">ShellCheck<a class="headerlink" href="#shellcheck" title="Permanent link">&para;</a></h3>
+<p><strong>ShellCheck</strong> on tööriist, mis leiab skriptidest levinud vigu: jutumärkide puudumise, ohtlikud konstruktsioonid, süntaksivead.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>shellcheck
+shellcheck<span class="w"> </span>minu_skript.sh
+</code></pre></div>
+<p>Iga hoiatus sisaldab koodi (nt <code>SC2086</code>), mille selgituse leiad aadressilt <code>https://www.shellcheck.net/wiki/SC2086</code>. <strong>Kontrolli iga skripti ShellCheckiga</strong> - see õpetab ka häid tavasid.</p>
+<h3 id="hea-skripti-tunnused">Hea skripti tunnused<a class="headerlink" href="#hea-skripti-tunnused" title="Permanent link">&para;</a></h3>
+<ol>
+<li>shebang ja lühike kommentaar, mida skript teeb ja kuidas seda kasutada;</li>
+<li><code>set -euo pipefail</code>;</li>
+<li>kõik muutujad jutumärkides;</li>
+<li>argumentide kontroll ja kasutusjuhend (<code>Kasutus: ...</code>), kui argumendid on valed;</li>
+<li>veateated standardveaväljundisse ja väljumiskood ≠ 0 vea korral;</li>
+<li>seadistatavad väärtused (teed, piirid) skripti alguses muutujates;</li>
+<li>korduv kood funktsioonides;</li>
+<li>ohtlike toimingute jaoks proovirežiim (<em>dry run</em>), mis näitab, mida tehtaks;</li>
+<li>ShellCheck ei anna hoiatusi.</li>
+</ol>
+<h2 id="612-silumine">6.12 Silumine<a class="headerlink" href="#612-silumine" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>-x<span class="w"> </span>skript.sh<span class="w">            </span><span class="c1"># näita iga käsku enne käivitamist</span>
+bash<span class="w"> </span>-n<span class="w"> </span>skript.sh<span class="w">            </span><span class="c1"># kontrolli ainult süntaksit, ära käivita</span>
+</code></pre></div>
+<p>Skripti sees saab silumise sisse ja välja lülitada:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="w"> </span>-x<span class="w">                       </span><span class="c1"># silumine sisse</span>
+probleemne_osa
+<span class="nb">set</span><span class="w"> </span>+x<span class="w">                       </span><span class="c1"># silumine välja</span>
+</code></pre></div>
+<h2 id="613-skriptide-ajastamine">6.13 Skriptide ajastamine<a class="headerlink" href="#613-skriptide-ajastamine" title="Permanent link">&para;</a></h2>
+<p>Valmis skripti saab ajastada cron'i või systemd taimeriga (vt moodul 5). Pea meeles:</p>
+<ul>
+<li>kasuta skriptis täielikke teid või määra <code>PATH</code> skripti alguses;</li>
+<li>skript ei tohi oodata kasutaja sisendit;</li>
+<li>suuna väljund logifaili (cron) või lase systemd-l see journal'isse salvestada (taimer);</li>
+<li>testi skripti enne ajastamist käsitsi.</li>
+</ul>
+<h2 id="614-git">6.14 Git<a class="headerlink" href="#614-git" title="Permanent link">&para;</a></h2>
+<p><strong>Git</strong> on versioonihaldussüsteem, mille lõi Linus Torvalds 2005. aastal Linuxi kerneli arenduse jaoks (vt <a href="../lisad/ajalugu/">ajalugu</a>). Git salvestab failide muudatuste ajaloo: iga muudatuse kohta on teada, kes, millal ja miks selle tegi, ning alati saab minna tagasi mis tahes varasemasse olekusse.</p>
+<p>Git ei ole ainult programmeerijatele. Süsteemiadministraator hoiab Gitis skripte, seadistusfaile, Ansible'i mänguraamatuid ja dokumentatsiooni. Seepärast õpime Giti koos skriptimisega: iga skript, mille sellest moodulist alates kirjutad, kuulub Git-hoidlasse.</p>
+<h3 id="pohimoisted">Põhimõisted<a class="headerlink" href="#pohimoisted" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Mõiste</th>
+<th>Tähendus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hoidla</strong> (<em>repository</em>, <em>repo</em>)</td>
+<td>Projekti kataloog koos kogu muudatuste ajalooga (peidetud kataloog <code>.git</code>)</td>
+</tr>
+<tr>
+<td><strong>Sissekanne</strong> (<em>commit</em>)</td>
+<td>Salvestatud hetkeseis koos kirjeldusega</td>
+</tr>
+<tr>
+<td><strong>Ettevalmistusala</strong> (<em>staging area</em>, <em>index</em>)</td>
+<td>Muudatused, mis lähevad järgmisse sissekandesse</td>
+</tr>
+<tr>
+<td><strong>Haru</strong> (<em>branch</em>)</td>
+<td>Eraldi arendusliin, nt uue funktsiooni katsetamiseks</td>
+</tr>
+<tr>
+<td><strong>Kaughoidla</strong> (<em>remote</em>)</td>
+<td>Hoidla koopia serveris (GitHub, GitLab, oma server)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart LR
+    T["töökataloog"] -- "git add" --&gt; E["ettevalmistusala"]
+    E -- "git commit" --&gt; K["kohalik hoidla"]
+    K -- "git push" --&gt; R["kaughoidla"]
+    R -- "git pull" --&gt; T</code></pre>
+<h3 id="seadistamine">Seadistamine<a class="headerlink" href="#seadistamine" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>git<span class="w">                         </span><span class="c1"># AlmaLinux (Debian/Ubuntu: apt install git)</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Mari Maasikas"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"mari@hkhk.edu.ee"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.defaultBranch<span class="w"> </span>main
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span>nano
+git<span class="w"> </span>config<span class="w"> </span>--list
+</code></pre></div>
+<h3 id="igapaevane-too">Igapäevane töö<a class="headerlink" href="#igapaevane-too" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>~/serverid<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/serverid
+git<span class="w"> </span>init<span class="w">                                     </span><span class="c1"># loo uus hoidla</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"# Kooli serverid"</span><span class="w"> </span>&gt;<span class="w"> </span>README.md
+git<span class="w"> </span>status<span class="w">                                   </span><span class="c1"># mis on muutunud</span>
+git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w">                            </span><span class="c1"># lisa ettevalmistusalasse (git add . - kõik)</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Lisa README"</span><span class="w">                  </span><span class="c1"># salvesta sissekanne</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">                            </span><span class="c1"># ajalugu</span>
+git<span class="w"> </span>diff<span class="w">                                     </span><span class="c1"># muudatused, mida pole veel lisatud</span>
+git<span class="w"> </span>diff<span class="w"> </span>--staged<span class="w">                            </span><span class="c1"># muudatused, mis on lisatud, kuid salvestamata</span>
+</code></pre></div>
+<p><strong>Hea sissekande kirjeldus</strong> ütleb lühidalt, <strong>mida ja miks</strong> muudeti: <code>Lisa nginx-i HTTPS-suunamine</code>, mitte <code>muudatused</code> või <code>parandus</code>.</p>
+<h3 id="muudatuste-tagasivotmine">Muudatuste tagasivõtmine<a class="headerlink" href="#muudatuste-tagasivotmine" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>fail.txt<span class="w">                         </span><span class="c1"># võta tagasi salvestamata muudatused failis</span>
+git<span class="w"> </span>restore<span class="w"> </span>--staged<span class="w"> </span>fail.txt<span class="w">                </span><span class="c1"># eemalda ettevalmistusalast</span>
+git<span class="w"> </span>show<span class="w"> </span>&lt;commit&gt;<span class="w">                            </span><span class="c1"># ühe sissekande sisu</span>
+git<span class="w"> </span>revert<span class="w"> </span>&lt;commit&gt;<span class="w">                          </span><span class="c1"># loo uus sissekanne, mis tühistab vana</span>
+git<span class="w"> </span>checkout<span class="w"> </span>&lt;commit&gt;<span class="w"> </span>--<span class="w"> </span>fail.txt<span class="w">            </span><span class="c1"># too fail vanast versioonist</span>
+</code></pre></div>
+<h3 id="gitignore">.gitignore<a class="headerlink" href="#gitignore" title="Permanent link">&para;</a></h3>
+<p>Fail <code>.gitignore</code> ütleb, milliseid faile Git ei jälgi:</p>
+<div class="highlight"><pre><span></span><code>*.log
+*.tmp
+.venv/
+salasõnad.txt
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Ära pane Giti paroole, privaatvõtmeid ega API-võtmeid!</strong> Kord sisse kantud fail jääb ajalukku ka pärast kustutamist. Kui see juhtub ja hoidla on avalik, tuleb saladus kohe vahetada.</p>
+</div>
+<h3 id="harud">Harud<a class="headerlink" href="#harud" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>https-seadistus<span class="w">                </span><span class="c1"># loo uus haru ja liigu sinna</span>
+<span class="c1"># ... muuda faile, git add, git commit ...</span>
+git<span class="w"> </span>switch<span class="w"> </span>main<span class="w">                              </span><span class="c1"># tagasi põhiharusse</span>
+git<span class="w"> </span>merge<span class="w"> </span>https-seadistus<span class="w">                    </span><span class="c1"># liida muudatused</span>
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>https-seadistus<span class="w">                </span><span class="c1"># kustuta haru</span>
+</code></pre></div>
+<p>Kui samas failis on mõlemas harus sama koht muudetud, tekib <strong>konflikt</strong>. Git märgib konfliktsed read failis märkidega <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> ja <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. Paranda fail käsitsi, seejärel <code>git add</code> ja <code>git commit</code>.</p>
+<h3 id="kaughoidla-github">Kaughoidla (GitHub)<a class="headerlink" href="#kaughoidla-github" title="Permanent link">&para;</a></h3>
+<p>GitHubi (või GitLabi, Codebergi) hoidlaga suheldakse tavaliselt SSH-võtmega (vt moodul 7): lisa oma avalik võti GitHubi seadistustes (<em>Settings → SSH and GPG keys</em>).</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-T<span class="w"> </span>git@github.com<span class="w">                                   </span><span class="c1"># kontrolli ühendust</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:kasutaja/serverid.git
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main<span class="w">                                 </span><span class="c1"># saada muudatused</span>
+git<span class="w"> </span>pull<span class="w">                                                </span><span class="c1"># too teiste muudatused</span>
+git<span class="w"> </span>clone<span class="w"> </span>git@github.com:kasutaja/serverid.git<span class="w">          </span><span class="c1"># kopeeri hoidla</span>
+</code></pre></div>
+<p>Meeskonnatöös tehakse muudatused tavaliselt eraldi harus ja liidetakse põhiharuga <strong>liitmistaotluse</strong> (<em>pull request</em>, <em>merge request</em>) kaudu, kus kolleeg saab muudatuse enne üle vaadata.</p>
+<hr />
+<h2 id="distrode-erinevused">Distrode erinevused<a class="headerlink" href="#distrode-erinevused" title="Permanent link">&para;</a></h2>
+<p>Bashi skriptimine on kõigis distrodes sama. Erinevused on käskudes, mida skript kasutab:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Debian</strong></th>
+<th><strong>Ubuntu</strong></th>
+<th><strong>AlmaLinux</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/bin/sh</code> on</td>
+<td><code>dash</code></td>
+<td><code>dash</code></td>
+<td><code>bash</code></td>
+</tr>
+<tr>
+<td>Isiklik <code>~/bin</code> lisatakse <code>PATH</code>-i</td>
+<td>Jah (<code>~/.profile</code>)</td>
+<td>Jah (<code>~/.profile</code>)</td>
+<td><code>~/.local/bin</code> ja <code>~/bin</code> (<code>~/.bashrc</code>)</td>
+</tr>
+<tr>
+<td>ShellCheck</td>
+<td><code>apt install shellcheck</code></td>
+<td><code>apt install shellcheck</code></td>
+<td>EPEL-ist <code>dnf install ShellCheck</code></td>
+</tr>
+<tr>
+<td>Pakihaldus skriptis</td>
+<td><code>apt-get -y install</code></td>
+<td><code>apt-get -y install</code></td>
+<td><code>dnf -y install</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong><code>#!/bin/sh</code> ei ole sama mis <code>#!/bin/bash</code>!</strong> Debianis ja Ubuntus on <code>/bin/sh</code> väike ja kiire kest <code>dash</code>, mis ei toeta Bashi laiendusi (nt <code>[[ ]]</code>, massiivid, <code>{1..5}</code>, <code>(( ))</code> ja <code>&lt;( )</code>). Kui kasutad Bashi võimalusi, kirjuta alati <code>#!/bin/bash</code>. AlmaLinuxis on <code>/bin/sh</code> viit Bashile, mistõttu seal töötav <code>sh</code>-skript võib Debianis katki minna.</p>
+</div>
+<p>Distrost sõltuvat skripti saab kirjutada faili <code>/etc/os-release</code> põhjal:</p>
+<div class="highlight"><pre><span></span><code>.<span class="w"> </span>/etc/os-release
+<span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ID</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>debian<span class="p">|</span>ubuntu<span class="o">)</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>almalinux<span class="p">|</span>rocky<span class="p">|</span>rhel<span class="o">)</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Tundmatu distro: </span><span class="nv">$ID</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div>
+<hr />
+<h2 id="kokkuvote">Kokkuvõte<a class="headerlink" href="#kokkuvote" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Konstruktsioon</th>
+<th>Näide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shebang</td>
+<td><code>#!/bin/bash</code></td>
+</tr>
+<tr>
+<td>Muutuja</td>
+<td><code>nimi="Mari"</code>, <code>"$nimi"</code>, <code>"${nimi}"</code></td>
+</tr>
+<tr>
+<td>Käskude asendus</td>
+<td><code>tana=$(date +%F)</code></td>
+</tr>
+<tr>
+<td>Aritmeetika</td>
+<td><code>$((a + b))</code></td>
+</tr>
+<tr>
+<td>Argumendid</td>
+<td><code>$1</code>, <code>$#</code>, <code>"$@"</code>, <code>${1:-vaikimisi}</code></td>
+</tr>
+<tr>
+<td>Väljumiskood</td>
+<td><code>$?</code>, <code>exit 1</code>, <code>käsk &amp;&amp; ...</code>, <code>käsk \|\| ...</code></td>
+</tr>
+<tr>
+<td>Tingimus</td>
+<td><code>if [ -f "$f" ]; then ... fi</code>, <code>[[ "$a" =~ regex ]]</code></td>
+</tr>
+<tr>
+<td>Valik</td>
+<td><code>case "$1" in a) ... ;; *) ... ;; esac</code></td>
+</tr>
+<tr>
+<td>Tsükkel</td>
+<td><code>for f in *.txt; do ... done</code>, <code>while ...; do ... done</code></td>
+</tr>
+<tr>
+<td>Faili lugemine</td>
+<td><code>while IFS= read -r rida; do ... done &lt; fail</code></td>
+</tr>
+<tr>
+<td>Sisend</td>
+<td><code>read -r -p "Küsimus: " vastus</code></td>
+</tr>
+<tr>
+<td>Funktsioon</td>
+<td><code>nimi() { local x="$1"; ... }</code></td>
+</tr>
+<tr>
+<td>Töökindlus</td>
+<td><code>set -euo pipefail</code>, <code>trap '...' EXIT</code>, <code>shellcheck</code></td>
+</tr>
+<tr>
+<td>Silumine</td>
+<td><code>bash -x skript.sh</code></td>
+</tr>
+<tr>
+<td>Git</td>
+<td><code>git init</code>, <code>add</code>, <code>commit -m</code>, <code>status</code>, <code>log --oneline</code>, <code>diff</code></td>
+</tr>
+<tr>
+<td>Giti harud ja kaughoidla</td>
+<td><code>git switch -c</code>, <code>merge</code>, <code>remote add</code>, <code>push</code>, <code>pull</code>, <code>clone</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Järgmised sammud:</strong> tee <a href="labor/">laboritöö</a> ja kontrolli oma teadmisi <a href="enesekontroll/">enesekontrolli</a> abil.</p>
+<h2 id="lisamaterjal">Lisamaterjal<a class="headerlink" href="#lisamaterjal" title="Permanent link">&para;</a></h2>
+<ul>
+<li>William Shotts, „The Linux Command Line“ - IV osa „Writing Shell Scripts“</li>
+<li>Greg's Wiki - BashGuide ja BashPitfalls (mywiki.wooledge.org)</li>
+<li>ShellCheck (shellcheck.net) - veebis saab skripte ka ilma paigaldamata kontrollida</li>
+<li>MIT Missing Semester - „Shell Tools and Scripting“ ja „Version Control (Git)“</li>
+<li>Pro Git (git-scm.com/book) - tasuta raamat</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Jalus" >
+        
+          
+          <a href="../moodul-05-protsessid-teenused/enesekontroll/" class="md-footer__link md-footer__link--prev" aria-label="Eelmine: Enesekontroll">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Eelmine
+              </span>
+              <div class="md-ellipsis">
+                Enesekontroll
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="labor/" class="md-footer__link md-footer__link--next" aria-label="Järgmine: Laboritöö">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Järgmine
+              </span>
+              <div class="md-ellipsis">
+                Laboritöö
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Rain Koor, Haapsalu Kutsehariduskeskus · CC BY-SA 4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.footer", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Kopeeritud", "clipboard.copy": "Kopeeri l\u00f5ikelauale", "search.result.more.one": "1 veel sellel lehel", "search.result.more.other": "# veel sellel lehel", "search.result.none": "Otsingule ei leitud \u00fchtegi vastet", "search.result.one": "Leiti \u00fcks tulemus", "search.result.other": "Leiti # tulemust", "search.result.placeholder": "Otsimiseks kirjuta siia", "search.result.term.missing": "Puudub", "select.version": "Vali versioon"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
