@@ -18,6 +18,7 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 8. Milleks on Compose? Kuidas leiavad Compose'i konteinerid üksteist?
 9. Mis on Quadlet ja miks seda kasutada?
 10. Kuidas uuendab Podman Quadleti konteinereid automaatselt ja mis juhtub, kui uus pilt ei käivitu?
+11. Mis on `chroot` ja miks ei ole see konteineri samaväärne asendus?
 
 ## Praktilised miniülesanded
 
@@ -38,6 +39,7 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 8. Mitme konteineri rakenduse kirjeldamine ja käivitamine ühe failiga. Konteinerid leiavad üksteist teenuse nime järgi (nt `db`).
 9. Podmani võimalus kirjeldada konteiner systemd üksusena (`.container` fail). Nii käivitub konteiner alglaadimisel, taaskäivitub vea korral ja on hallatav `systemctl`/`journalctl` abil.
 10. Quadleti failis `AutoUpdate=registry` (täieliku pildinimega); `podman auto-update` (või taimer `podman-auto-update.timer`) laadib sama sildiga uuema pildi ja taaskäivitab teenuse. Kui teenus uue pildiga ei käivitu, võetakse muudatus tagasi ja kasutatakse vana pilti.
+11. `chroot` käivitab protsessi nii, et valitud kataloog paistab talle juurkataloogina. See eraldab ainult failisüsteemi: protsessid, võrk ja kasutajad on hostiga ühised, ressursse ei piirata ja juurkasutaja saab sealt välja murda. Konteiner lisab nimeruumid, cgroupid ja turvapiirangud.
 
 ### Miniülesannete lahendused
 

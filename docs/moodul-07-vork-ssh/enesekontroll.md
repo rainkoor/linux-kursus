@@ -30,6 +30,7 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 20. Mis on IPv6 link-local aadress ja miks on IPv6 puhul tulemüür eriti oluline?
 21. Mis vahe on sillal, VLAN-il ja bond-liidesel?
 22. Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?
+23. Kuidas lubad kasutajal ainult SFTP kaudu faile laadida, nii et ta ei näe ülejäänud failisüsteemi? Millised nõuded on chroot-kataloogi omanikule ja õigustele?
 
 ## Praktilised miniülesanded
 
@@ -66,6 +67,7 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 20. `fe80::`-ga algav aadress, mis on igal liidesel automaatselt ja töötab ainult samas võrgulõigus. IPv6-s NAT-i tavaliselt pole, masinad on otse adresseeritavad - ainult tulemüür kaitseb neid.
 21. Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator); VLAN jagab ühe füüsilise võrgu mitmeks loogiliseks (märgistusega); bond koondab mitu füüsilist liidest üheks töökindluse või läbilaskevõime jaoks.
 22. Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): ühendused katkevad juhuslikult ja SSH võib ühenduda valesse masinasse. Kontrolli aadressiplaani ja teisest masinast `ping`, `ip neigh show <aadress>` või `arping -D`; kooli laboris kasuta ainult õpetaja antud aadressi.
+23. `sshd` seadistuses `Match Group …` plokk koos `ChrootDirectory /srv/sftp/%u` ja `ForceCommand internal-sftp`. Chroot-kataloog ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ega tohi olla teistele kirjutatavad; kasutaja kirjutab alamkataloogi, mis kuulub talle.
 
 ### Miniülesannete lahendused
 

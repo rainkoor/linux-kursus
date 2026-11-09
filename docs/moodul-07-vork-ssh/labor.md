@@ -448,7 +448,8 @@ Kui õpetaja ei ole teisiti öelnud, jäta seadistus alles. Iseõppija võib soo
 5. **WireGuard:** tee Ubuntust VPN-server ja Debianist klient (võrk `10.99.0.0/24`, teooria punkt 7.11). Kontrolli `wg show` ja `ping`-iga. Mis juhtub, kui kliendi `AllowedIPs` ei sisalda serveri aadressi?
 6. **ProxyJump:** seadista `~/.ssh/config`-is Debiani masinale ligipääs läbi Ubuntu masina (`ProxyJump`) ja kontrolli `ssh -v` väljundist, et ühendus läks läbi hüppeserveri.
 7. **Bond:** lisa Proxmoxis Ubuntu masinale teine võrguliides, loo Netplaniga `bond0` (`active-backup`), võta Proxmoxis üks liides lahti (*Disconnect*) ja kontrolli `ping`-iga, et ühendus jätkub (`cat /proc/net/bonding/bond0`).
-8. **IPv6:** leia oma masinate link-local aadressid (`ip -6 a`) ja pingi naabrit: `ping -6 fe80::…%ens18`. Miks on vaja liidese nime (`%ens18`)?
+8. **SFTP chroot:** loo Ubuntu masinas grupp `sftp-kasutajad` ja kasutaja `partner`, kes saab ainult SFTP kaudu faile laadida kataloogi `/srv/sftp/partner/failid` (teooria punkt 7.7). Kontrolli Debianist: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult `failid`, `ssh partner@ubuntusrv` ei anna käsurida. Muuda siis meelega `sudo chmod 775 /srv/sftp/partner`, proovi uuesti ühenduda ja leia põhjus logist (`journalctl -u ssh`).
+9. **IPv6:** leia oma masinate link-local aadressid (`ip -6 a`) ja pingi naabrit: `ping -6 fe80::…%ens18`. Miks on vaja liidese nime (`%ens18`)?
 
 ---
 

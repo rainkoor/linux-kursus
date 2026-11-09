@@ -47,7 +47,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | cgroup | control group | Kerneli mehhanism protsessirühmade ressursside (CPU, mälu, I/O) piiramiseks |
 | CHAP | Challenge-Handshake Authentication Protocol | iSCSI ühenduse autentimine ühise saladusega |
 | chrony | chrony | Täielik NTP klient ja server |
-| chroot | chroot | Protsessi juurkataloogi vahetamine, nt süsteemi parandamiseks taastemeedialt |
+| chroot | chroot | Protsessi juurkataloogi vahetamine; kasutatakse süsteemi parandamiseks taastemeedialt ja SFTP-kasutajate piiramiseks, konteinerite eelkäija |
 | CIFS | Common Internet File System | SMB vanem nimetus; Linuxis haakimise tüüp `cifs` |
 | CIS | Center for Internet Security | Organisatsioon, mis avaldab süsteemide karastamise juhiseid (CIS Benchmarks) |
 | cloud-init | cloud-init | Tööriist, mis seadistab virtuaalmasina esimesel käivitusel (nimi, IP, kasutaja, SSH-võti) |

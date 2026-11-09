@@ -52,6 +52,41 @@ flowchart TB
 | Isolatsioon | Väga tugev (riistvara tasemel) | Tugev, kuid ühine kernel |
 | Kasutus | Erinevad OS-id, tugev eraldatus | Rakenduste pakendamine ja käivitamine |
 
+### Eelkäija: chroot
+
+Konteinerite idee on vana. Juba 1979. aastal lisati Unixisse **`chroot`** (*change root*): käsk, mis käivitab protsessi nii, et mingi kataloog paistab talle juurkataloogina `/`. Protsess ei näe faile väljaspool seda kataloogi. Sama käsuga parandad moodulis 10 alglaadijat taastemeedialt.
+
+```bash
+sudo mkdir -p /srv/proov
+sudo debootstrap stable /srv/proov    # minimaalne Debian kataloogi (Debian/Ubuntu)
+sudo chroot /srv/proov /bin/bash      # sees: cat /etc/os-release, ls /
+ps aux | head                         # protsessid on ikka kõik nähtavad!
+exit
+```
+
+`chroot` eraldab ainult **failisüsteemi**. Protsessid, võrk, kasutajad ja ressursid on hostiga ühised ning juurkasutaja saab `chroot`-ist lihtsalt välja murda. Seega ei ole `chroot` turvapiir. Konteiner lisab sellele ülejäänud isolatsiooni:
+
+```mermaid
+flowchart LR
+    A["1979<br>chroot<br>ainult failisüsteem"] --> B["2000<br>FreeBSD jail<br>+ protsessid, võrk"]
+    B --> C["2002-2008<br>Linuxi nimeruumid<br>ja cgroups"]
+    C --> D["2008<br>LXC"]
+    D --> E["2013<br>Docker<br>pildid ja register"]
+    E --> F["2018-<br>Podman, Kubernetes"]
+```
+
+| | `chroot` | Konteiner |
+|---|---|---|
+| Failisüsteem | eraldi juur | eraldi juur (pildist) |
+| Protsessid | näeb kõiki hosti protsesse | näeb ainult enda omi |
+| Võrk | hosti võrk | oma võrguliides ja aadress |
+| Ressursipiirangud | puuduvad | cgroups |
+| Turvapiir | ei | jah (ühine kernel jääb siiski nõrgaks kohaks) |
+
+Tänapäeval kasutatakse `chroot`-i peamiselt süsteemi parandamiseks, pakettide ehitamiseks ja failiedastuse kasutajate piiramiseks (SFTP, moodul 7).
+
+### Millel konteinerid põhinevad
+
 Konteinerid põhinevad Linuxi kerneli võimalustel:
 
 - **nimeruumid** (*namespaces*) - konteiner näeb ainult oma protsesse, võrguliideseid, haakepunkte ja kasutajaid;

@@ -287,7 +287,7 @@ pfctl -f /etc/pf.conf            # laadi muudatused uuesti
 
 ## 25.11 Jailid
 
-**Jail** on FreeBSD isoleeritud keskkond (aastast 2000 - üks konteinerite eelkäijaid): oma failisüsteemi juur, oma IP-aadress, oma kasutajad ja protsessid, kuid **sama kernel**. Jaili protsessid ei näe hosti ega teiste jailide protsesse. Jailis töötab tavaliselt üks teenus (veebiserver, andmebaas).
+**Jail** on FreeBSD isoleeritud keskkond (aastast 2000 - üks konteinerite eelkäijaid). See sündis `chroot`-i (moodul 12) täiendusena: `chroot` eraldab ainult failisüsteemi, jail lisab eraldi protsessid, võrgu ja kasutajad. Jailil on oma failisüsteemi juur, oma IP-aadress, oma kasutajad ja protsessid, kuid **sama kernel**. Jaili protsessid ei näe hosti ega teiste jailide protsesse. Jailis töötab tavaliselt üks teenus (veebiserver, andmebaas).
 
 ```mermaid
 flowchart TB

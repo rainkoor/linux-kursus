@@ -554,6 +554,35 @@ sudo sshd -T | grep -i passwordauth  # vaata tegelikult kehtivat väärtust
 > 3. Testi uut seadistust **uues** aknas enne vanast väljumist.
 > 4. Hoia käepärast konsool (Proxmoxi veebiliides), juhuks kui kõik läheb valesti.
 
+### SFTP-kasutajad oma kataloogis (chroot)
+
+Sageli on vaja anda kellelegi ainult **failide üleslaadimise** õigus (nt veebilehe sisu, partneri aruanded), ilma käsurea ja ilma ligipääsuta ülejäänud failisüsteemile. Seda teeb SSH-server ise: grupi liikmed saavad kasutada ainult SFTP-d ja `chroot` lukustab nad oma kataloogi, kus `/` on nende jaoks kataloog `/srv/sftp/<kasutaja>`.
+
+```text
+# /etc/ssh/sshd_config.d/20-sftp.conf
+Match Group sftp-kasutajad
+    ChrootDirectory /srv/sftp/%u
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
+```
+
+```bash
+sudo groupadd sftp-kasutajad
+sudo useradd -M -s /usr/sbin/nologin -G sftp-kasutajad partner
+sudo passwd partner                             # või lisa võti, kui paroolid on keelatud
+sudo mkdir -p /srv/sftp/partner/failid
+sudo chown root:root /srv/sftp /srv/sftp/partner          # chroot-kataloog: omanik root
+sudo chmod 755 /srv/sftp /srv/sftp/partner                # teised ei tohi sinna kirjutada
+sudo chown partner:partner /srv/sftp/partner/failid       # kasutaja kirjutab alamkataloogi
+sudo sshd -t && sudo systemctl reload ssh
+```
+
+> [!IMPORTANT]
+> **`ChrootDirectory` ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.** Muidu keeldub `sshd` ühendusest (logis `bad ownership or modes for chroot directory`). Seepärast kirjutab kasutaja alamkataloogi `failid`, mitte otse chroot-kataloogi.
+
+Kontrolli: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult kataloogi `failid`; `ssh partner@ubuntusrv` aga ei ava käsurida (*This service allows sftp connections only*). Kui sul on `AllowGroups`, lisa sinna ka `sftp-kasutajad`. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga `sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot`.
+
 ## 7.8 Tulemüür
 
 Linuxi kernelis on pakettide filtreerimise raamistik **netfilter**. Selle reegleid hallatakse tänapäeval tööriistaga **nftables** (`nft`), vanemates süsteemides **iptables**-iga. Enamik administraatoreid kasutab aga lihtsamaid kasutajaliideseid:
