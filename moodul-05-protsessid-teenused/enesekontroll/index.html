@@ -1073,7 +1073,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -1084,7 +1084,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -1107,7 +1107,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-5-enesekontroll">Moodul 5. Enesekontroll<a class="headerlink" href="#moodul-5-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Mis on protsess, PID ja PPID?</li>
 <li>Milline protsess on PID 1 ja mis on selle roll?</li>
@@ -4482,7 +4482,7 @@
 <li>Mis vahe on cron-il, systemd taimeril ja <code>at</code>-il?</li>
 <li>Miks ei mõju <code>/etc/security/limits.conf</code> systemd teenustele ja kuidas teenuse ressursse piirata?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Leia kolm kõige rohkem protsessorit kasutavat protsessi.</li>
 <li>Leia, mitu protsessi töötab juurkasutaja õigustes.</li>
@@ -4512,7 +4512,7 @@
 <li>cron ja taimer käivitavad tööd korduvalt kindla ajakava järgi; <code>at</code> käivitab töö ühe korra määratud ajal.</li>
 <li><code>limits.conf</code>-i rakendab <code>pam_limits</code> kasutaja sisselogimisel; teenused käivitab systemd ilma PAM-ita. Teenustele: üksuse seaded <code>MemoryMax=</code>, <code>CPUQuota=</code>, <code>TasksMax=</code>, <code>LimitNOFILE=</code> (<code>systemctl edit</code> või <code>set-property</code>).</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>ps<span class="w"> </span>-eo<span class="w"> </span>pid,%cpu,cmd<span class="w"> </span>--sort<span class="o">=</span>-%cpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-4
 ps<span class="w"> </span>-U<span class="w"> </span>root<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>--no-headers<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 nice<span class="w"> </span>-n<span class="w"> </span><span class="m">19</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="p">&amp;</span>

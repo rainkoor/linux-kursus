@@ -3334,7 +3334,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#opivaljundid" class="md-nav__link">
+  <a href="#õpiväljundid" class="md-nav__link">
     <span class="md-ellipsis">
       
         Õpiväljundid
@@ -3356,7 +3356,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#202-ldap-i-pohimoisted" class="md-nav__link">
+  <a href="#202-ldap-i-põhimõisted" class="md-nav__link">
     <span class="md-ellipsis">
       
         20.2 LDAP-i põhimõisted
@@ -3424,7 +3424,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pohistruktuur" class="md-nav__link">
+  <a href="#põhistruktuur" class="md-nav__link">
     <span class="md-ellipsis">
       
         Põhistruktuur
@@ -3468,7 +3468,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#juurdepaasuoigused-acl" class="md-nav__link">
+  <a href="#juurdepääsuõigused-acl" class="md-nav__link">
     <span class="md-ellipsis">
       
         Juurdepääsuõigused (ACL)
@@ -3589,7 +3589,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kokkuvote" class="md-nav__link">
+  <a href="#kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         Kokkuvõte
@@ -4621,7 +4621,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#opivaljundid" class="md-nav__link">
+  <a href="#õpiväljundid" class="md-nav__link">
     <span class="md-ellipsis">
       
         Õpiväljundid
@@ -4643,7 +4643,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#202-ldap-i-pohimoisted" class="md-nav__link">
+  <a href="#202-ldap-i-põhimõisted" class="md-nav__link">
     <span class="md-ellipsis">
       
         20.2 LDAP-i põhimõisted
@@ -4711,7 +4711,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pohistruktuur" class="md-nav__link">
+  <a href="#põhistruktuur" class="md-nav__link">
     <span class="md-ellipsis">
       
         Põhistruktuur
@@ -4755,7 +4755,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#juurdepaasuoigused-acl" class="md-nav__link">
+  <a href="#juurdepääsuõigused-acl" class="md-nav__link">
     <span class="md-ellipsis">
       
         Juurdepääsuõigused (ACL)
@@ -4876,7 +4876,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kokkuvote" class="md-nav__link">
+  <a href="#kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         Kokkuvõte
@@ -4916,7 +4916,7 @@
 
 <h1 id="moodul-20-kataloogiteenused-openldap">Moodul 20. Kataloogiteenused: OpenLDAP<a class="headerlink" href="#moodul-20-kataloogiteenused-openldap" title="Permanent link">&para;</a></h1>
 <p><strong>Maht:</strong> 8 tundi · <strong>Laboritöö:</strong> Debian (server), Ubuntu ja AlmaLinux (kliendid) · <strong>Eeldused:</strong> moodulid 1–7, 11–15 · <strong>Valikmoodul</strong></p>
-<h2 id="opivaljundid">Õpiväljundid<a class="headerlink" href="#opivaljundid" title="Permanent link">&para;</a></h2>
+<h2 id="õpiväljundid">Õpiväljundid<a class="headerlink" href="#õpiväljundid" title="Permanent link">&para;</a></h2>
 <p>Mooduli läbinud õppija:</p>
 <ul>
 <li>selgitab kataloogiteenuste ja tsentraalse autentimise vajadust;</li>
@@ -4964,7 +4964,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="202-ldap-i-pohimoisted">20.2 LDAP-i põhimõisted<a class="headerlink" href="#202-ldap-i-pohimoisted" title="Permanent link">&para;</a></h2>
+<h2 id="202-ldap-i-põhimõisted">20.2 LDAP-i põhimõisted<a class="headerlink" href="#202-ldap-i-põhimõisted" title="Permanent link">&para;</a></h2>
 <p><strong>LDAP</strong> (<em>Lightweight Directory Access Protocol</em>) on protokoll kataloogi andmete lugemiseks ja muutmiseks. Kataloog on <strong>puu</strong> (<em>DIT - Directory Information Tree</em>):</p>
 <div class="highlight"><pre><span></span><code>                    dc=lab,dc=example                 (juur, ehk base DN)
                    /                 \
@@ -5146,7 +5146,7 @@ sudo<span class="w"> </span>ldapmodify<span class="w"> </span>-Y<span class="w">
 <p><strong>LDIF</strong> (<em>LDAP Data Interchange Format</em>) on tekstivorming kirjete kirjeldamiseks. Kirjed eraldatakse tühja reaga.</p>
 <!-- PILT: ../pildid/m20-lam-kasutajad.png | LAM-i kasutajate loend (`ou=kasutajad`) -->
 
-<h3 id="pohistruktuur">Põhistruktuur<a class="headerlink" href="#pohistruktuur" title="Permanent link">&para;</a></h3>
+<h3 id="põhistruktuur">Põhistruktuur<a class="headerlink" href="#põhistruktuur" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code># struktuur.ldif
 dn: ou=People,dc=lab,dc=example
 objectClass: organizationalUnit
@@ -5247,7 +5247,7 @@ ldappasswd<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> <
 ldapdelete<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W<span class="w"> </span><span class="nv">uid</span><span class="o">=</span>jaan,ou<span class="o">=</span>People,dc<span class="o">=</span>lab,dc<span class="o">=</span>example
 </code></pre></div>
 <p>Kasutaja saab oma parooli ise muuta, kui teeb bind'i enda DN-iga: <code>ldappasswd -x -D uid=mari,ou=People,dc=lab,dc=example -W -S</code>.</p>
-<h3 id="juurdepaasuoigused-acl">Juurdepääsuõigused (ACL)<a class="headerlink" href="#juurdepaasuoigused-acl" title="Permanent link">&para;</a></h3>
+<h3 id="juurdepääsuõigused-acl">Juurdepääsuõigused (ACL)<a class="headerlink" href="#juurdepääsuõigused-acl" title="Permanent link">&para;</a></h3>
 <p>OpenLDAP-i õigused on <code>cn=config</code>-is atribuudis <code>olcAccess</code>. Debiani vaikimisi reeglid lubavad:</p>
 <ul>
 <li>kasutajal muuta oma parooli, kuid mitte lugeda teiste paroolide räsisid;</li>
@@ -5420,7 +5420,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
 </table>
 <p>Seepärast paigaldatakse selles moodulis OpenLDAP-server Debiani ja AlmaLinux on ainult klient.</p>
 <hr />
-<h2 id="kokkuvote">Kokkuvõte<a class="headerlink" href="#kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="kokkuvõte">Kokkuvõte<a class="headerlink" href="#kokkuvõte" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

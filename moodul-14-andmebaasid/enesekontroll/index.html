@@ -2429,7 +2429,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -2440,7 +2440,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -2463,7 +2463,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-14-enesekontroll">Moodul 14. Enesekontroll<a class="headerlink" href="#moodul-14-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Miks peab veebirakendusel olema oma andmebaasikasutaja?</li>
 <li>Miks ei ole töötava andmebaasi failide kopeerimine usaldusväärne varukoopia?</li>
@@ -4477,7 +4477,7 @@
 <li>Miks peab PHP-leht kasutama <code>htmlspecialchars()</code>-i andmebaasist tulnud teksti väljastamisel?</li>
 <li>Mis on ülevõtt (<em>failover</em>)? Milliseid samme teed MariaDB-s, et koopiast saaks põhiserver, ja miks ei tohi vana põhiserverit pärast parandamist lihtsalt uuesti käivitada?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Kirjuta SQL-käsud, mis loovad andmebaasi <code>moodle</code> ja kasutaja <code>moodle</code>, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt <code>10.0.83.55</code>.</li>
 <li>Loo PostgreSQL-is roll <code>moodle</code> parooliga ja andmebaas <code>moodle</code>, mille omanik see roll on.</li>
@@ -4500,7 +4500,7 @@
 <li>Andmebaasis võib olla HTML-i või JavaScripti (nt kasutaja sisestatud nimi); ilma kodeerimiseta käivitaks brauser selle (XSS).</li>
 <li>Rikkis põhiserveri asendamine koopiaga. Koopias: kontrolli replikatsiooni olekut, <code>STOP REPLICA</code>, <code>RESET REPLICA ALL</code>, <code>read_only = OFF</code> (ka seadistusfailis) ning suuna rakendus uuele serverile (nimi või virtuaalne IP). Vana server võtaks vastu kirjutusi ja andmed läheksid lahku (<em>split brain</em>) - sellest tehakse uue põhiserveri koopia.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">moodle</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Tugev-Parool-456'</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">moodle</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="p">;</span>

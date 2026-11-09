@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-16-ansible-ja-vagrant" class="md-skip">
+        <a href="#laboritöö-16-ansible-ja-vagrant" class="md-skip">
           Keri sisuni
         </a>
       
@@ -2716,7 +2716,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-osa-kokkuvote" class="md-nav__link">
+  <a href="#4-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. osa. Kokkuvõte
@@ -2727,7 +2727,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4432,7 +4432,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-osa-kokkuvote" class="md-nav__link">
+  <a href="#4-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. osa. Kokkuvõte
@@ -4443,7 +4443,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4470,7 +4470,7 @@
 
 
 
-<h1 id="laboritoo-16-ansible-ja-vagrant">Laboritöö 16. Ansible ja Vagrant<a class="headerlink" href="#laboritoo-16-ansible-ja-vagrant" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-16-ansible-ja-vagrant">Laboritöö 16. Ansible ja Vagrant<a class="headerlink" href="#laboritöö-16-ansible-ja-vagrant" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4708,12 +4708,12 @@ ansible-lint
 <p><strong>K8.</strong> Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible <code>shell</code>-ülesande alati muutunuks?</p>
 <p><strong>3.7</strong> Kanna muudatused Giti: <code>git add -A &amp;&amp; git commit -m "Veebiserveri roll, group_vars ja ansible-lint"</code> ja <code>git push</code>.</p>
 <hr />
-<h2 id="4-osa-kokkuvote">4. osa. Kokkuvõte<a class="headerlink" href="#4-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="4-osa-kokkuvõte">4. osa. Kokkuvõte<a class="headerlink" href="#4-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K9.</strong> Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?</p>
 <p><strong>K10.</strong> Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.</p>
 <p><strong>K11.</strong> Koosta <code>git log --oneline --graph</code> väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Molecule:</strong> loo rollile <code>veebiserver</code> Molecule'i stsenaarium, mis testib rolli Podmani konteineris (Debian 13 ja AlmaLinux 10 pildiga). Lisa <code>verify.yml</code>, mis kontrollib, et fail <code>/var/www/ansible/index.html</code> on olemas ja sisaldab kooli nime. Käivita <code>molecule test</code>. Millised sammud (create, converge, idempotence, verify, destroy) läbiti? Miks ei saa konteineris nginx-i teenust tavapäraselt testida (teooria punkt 16.4)?</li>
 <li><strong>Kasutajad:</strong> lisa mänguraamatusse ülesanne, mis loob kõigisse serveritesse laboritöö 6 CSV-faili põhjal kasutajad (<code>ansible.builtin.read_csv</code> ja <code>ansible.builtin.user</code> koos <code>loop</code>-iga).</li>

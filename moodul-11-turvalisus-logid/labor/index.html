@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-11-turvalisus-ja-logid" class="md-skip">
+        <a href="#laboritöö-11-turvalisus-ja-logid" class="md-skip">
           Keri sisuni
         </a>
       
@@ -4315,14 +4315,14 @@
 
 
 
-<h1 id="laboritoo-11-turvalisus-ja-logid">Laboritöö 11. Turvalisus ja logid<a class="headerlink" href="#laboritoo-11-turvalisus-ja-logid" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-11-turvalisus-ja-logid">Laboritöö 11. Turvalisus ja logid<a class="headerlink" href="#laboritöö-11-turvalisus-ja-logid" title="Permanent link">&para;</a></h1>
 <p>Selles moodulis on kaks laboritööd, kumbki oma distrol:</p>
 <ul>
-<li><strong>10A - AlmaLinux:</strong> SELinux, automaatsed uuendused, audit;</li>
-<li><strong>10B - Ubuntu:</strong> logid ja logrotate, fail2ban, AppArmor, turvaaudit.</li>
+<li><strong>11A - AlmaLinux:</strong> SELinux, automaatsed uuendused, audit;</li>
+<li><strong>11B - Ubuntu:</strong> logid ja logrotate, fail2ban, AppArmor, turvaaudit.</li>
 </ul>
 <hr />
-<h1 id="laboritoo-11a-selinux-uuendused-ja-audit-almalinux">Laboritöö 11A. SELinux, uuendused ja audit (AlmaLinux)<a class="headerlink" href="#laboritoo-11a-selinux-uuendused-ja-audit-almalinux" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-11a-selinux-uuendused-ja-audit-almalinux">Laboritöö 11A. SELinux, uuendused ja audit (AlmaLinux)<a class="headerlink" href="#laboritöö-11a-selinux-uuendused-ja-audit-almalinux" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4442,7 +4442,7 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8888
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-service<span class="o">=</span>http<span class="w"> </span>--permanent
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
 </code></pre></div>
-<h2 id="4-osa-toevaartused">4. osa. Tõeväärtused<a class="headerlink" href="#4-osa-toevaartused" title="Permanent link">&para;</a></h2>
+<h2 id="4-osa-tõeväärtused">4. osa. Tõeväärtused<a class="headerlink" href="#4-osa-tõeväärtused" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Uuri veebiserveri tõeväärtusi:</p>
 <div class="highlight"><pre><span></span><code>getsebool<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>httpd<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
 getsebool<span class="w"> </span>httpd_can_network_connect<span class="w"> </span>httpd_enable_homedirs
@@ -4498,7 +4498,7 @@ sudo<span class="w"> </span>augenrules<span class="w"> </span>--load
 sudo<span class="w"> </span>auditctl<span class="w"> </span>-l
 </code></pre></div>
 <p><strong>A13.</strong> Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?</p>
-<h2 id="7-osa-kokkuvote">7. osa. Kokkuvõte<a class="headerlink" href="#7-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="7-osa-kokkuvõte">7. osa. Kokkuvõte<a class="headerlink" href="#7-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>A14.</strong> Täida tabel: SELinuxi probleem → tunnus → lahendus.</p>
 <table>
 <thead>
@@ -4532,7 +4532,7 @@ sudo<span class="w"> </span>auditctl<span class="w"> </span>-l
 </tbody>
 </table>
 <hr />
-<h1 id="laboritoo-11b-logid-fail2ban-apparmor-ja-audit-ubuntu">Laboritöö 11B. Logid, fail2ban, AppArmor ja audit (Ubuntu)<a class="headerlink" href="#laboritoo-11b-logid-fail2ban-apparmor-ja-audit-ubuntu" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-11b-logid-fail2ban-apparmor-ja-audit-ubuntu">Laboritöö 11B. Logid, fail2ban, AppArmor ja audit (Ubuntu)<a class="headerlink" href="#laboritöö-11b-logid-fail2ban-apparmor-ja-audit-ubuntu" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4719,11 +4719,11 @@ nmap<span class="w"> </span>UBUNTU_IP
 sudo<span class="w"> </span>nmap<span class="w"> </span>-sV<span class="w"> </span>UBUNTU_IP
 </code></pre></div>
 <p><strong>B12.</strong> Millised pordid ja teenused on väljast nähtavad? Kas <code>nmap</code> tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?</p>
-<h2 id="6-osa-kokkuvote">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>B13.</strong> Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.</p>
 <p><strong>B14.</strong> Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?</p>
 <hr />
-<h2 id="lisaulesanne-valikuline-wazuh-siem">Lisaülesanne (valikuline): Wazuh SIEM<a class="headerlink" href="#lisaulesanne-valikuline-wazuh-siem" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline-wazuh-siem">Lisaülesanne (valikuline): Wazuh SIEM<a class="headerlink" href="#lisaülesanne-valikuline-wazuh-siem" title="Permanent link">&para;</a></h2>
 <p>Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB) mäluga ja vähemalt 2 jälgitavat masinat (nt <code>debian1</code> ja <code>alma</code>).</p>
 <ol>
 <li>Paigalda Wazuh ühe sõlmena Dockeriga (teooria punkt 11.10). Muuda vaikeparool.</li>

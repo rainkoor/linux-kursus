@@ -2288,7 +2288,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -2299,7 +2299,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -2322,7 +2322,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-13-enesekontroll">Moodul 13. Enesekontroll<a class="headerlink" href="#moodul-13-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Kirjelda üldist töövoogu uue serveriteenuse paigaldamisel.</li>
 <li>Mis on virtuaalhost ja kuidas valib nginx, millist saiti näidata?</li>
@@ -4487,7 +4487,7 @@
 <li>Kuidas VRRP otsustab, milline masin virtuaalset IP-aadressi hoiab? Mis juhtub, kui tulemüür VRRP-teated blokeerib?</li>
 <li>Milliseid näitajaid vaatad koormustesti (<code>ab</code>) väljundis ja miks on protsentiilid olulisemad kui keskmine?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Leia, millal aegub serveri <code>www.debian.org</code> sertifikaat ja kes selle välja andis.</li>
 <li>Kirjuta nginx-i serveriplokk, mis suunab kõik nime <code>vana.lab.example</code> päringud aadressile <code>https://kool.lab.example</code>.</li>
@@ -4521,7 +4521,7 @@
 <li>Masinad saadavad VRRP-teateid; VIP on suurima <code>priority</code>-ga töötava masina (MASTER) küljes. Kui varumasin teateid enam ei saa, võtab ta aadressi üle. Kui tulemüür blokeerib protokolli 112, ei näe masinad üksteist ja mõlemad muutuvad MASTER-iks (lõhestunud aju) - VIP on kahes kohas korraga.</li>
 <li><code>Requests per second</code> (läbilaskevõime), <code>Failed requests</code> (peab olema 0) ja vastamisaegade jaotus. Keskmine peidab aeglased päringud: kui 95% vastab 20 ms-ga ja 5% 3 sekundiga, on keskmine hea, aga iga kahekümnes kasutaja ootab kaua.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>www.debian.org:443<span class="w"> </span>-servername<span class="w"> </span>www.debian.org<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-issuer<span class="w"> </span>-enddate
 </code></pre></div>

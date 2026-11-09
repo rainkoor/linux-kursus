@@ -3108,7 +3108,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -3119,7 +3119,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -3142,7 +3142,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-18-enesekontroll">Moodul 18. Enesekontroll<a class="headerlink" href="#moodul-18-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Mis on OPNsense ja millisel operatsioonisüsteemil see põhineb? Kuidas on see seotud pfSense'iga?</li>
 <li>Mis on WAN ja LAN? Milline liiklus on nende vahel vaikimisi lubatud?</li>
@@ -4480,7 +4480,7 @@
 <li>Mida näitab käsk <code>pfctl -sr</code>?</li>
 <li>Miks ei tohi haldusliidest WAN-i poole avada?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Loo alias <code>dns-serverid</code>, kuhu kuuluvad <code>1.1.1.1</code> ja <code>9.9.9.9</code>.</li>
 <li>Kirjuta LAN-i reegel, mis lubab laborivõrgust DNS-päringuid (UDP ja TCP 53) ainult aliase <code>dns-serverid</code> aadressidele ja OPNsense'ile endale.</li>
@@ -4507,7 +4507,7 @@
 <li>Kehtivad pf tulemüürireeglid (genereeritud OPNsense'i seadistusest).</li>
 <li>Haldusliidese kaudu saab muuta kogu tulemüüri seadistust. Avalik haldusliides on rünnakute (paroolide arvamine, turvaaugud) sihtmärk.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <ol>
 <li><em>Firewall</em> → <em>Aliases</em> → <strong>+</strong>: nimi <code>dns-serverid</code>, tüüp <em>Host(s)</em>, sisu <code>1.1.1.1</code>, <code>9.9.9.9</code>.</li>
 <li><em>Firewall</em> → <em>Rules</em> → <em>LAN</em>, kaks reeglit vaikimisi lubava reegli kohale: <em>Pass</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <code>dns-serverid</code>, port 53; <em>Pass</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <em>This Firewall</em>, port 53; ning nende alla <em>Block</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <em>any</em>, port 53.</li>

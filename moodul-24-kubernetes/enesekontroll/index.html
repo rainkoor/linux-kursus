@@ -3954,7 +3954,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -3965,7 +3965,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -3988,7 +3988,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-24-enesekontroll">Moodul 24. Enesekontroll<a class="headerlink" href="#moodul-24-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Milliseid probleeme lahendab konteinerite orkestreerimine võrreldes Quadleti või Compose'iga ühes masinas? Millal Kubernetest ei tasu kasutada?</li>
 <li>Nimeta Kubernetese juhtkihi komponendid ja sõlme komponendid ning nende ülesanded.</li>
@@ -4481,7 +4481,7 @@
 <li>Miks on kõrge kättesaadavusega k3s-is kolm serverit, mitte kaks? Mis on GitOps?</li>
 <li>Milliseid porte peab k3s klastri sõlmede vahel lubama ja milleks?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Kirjuta käsud, mis näitavad kõigi nimeruumide podid koos sõlmedega ja viimased sündmused nimeruumis <code>kool</code>.</li>
 <li>Kirjuta Deploymenti manifest <code>whoami</code> (pilt <code>docker.io/traefik/whoami</code>, 2 koopiat, port 80) ja sellele Service.</li>
@@ -4508,7 +4508,7 @@
 <li>etcd vajab otsuste tegemiseks häälteenamust: kolmest kaks on enamus, kahest üks ei ole - kahe serveriga klaster ei talu ühtegi riket paremini kui üks server. GitOps: klastri soovitud olek on Gitis ja kontroller (Argo CD, Flux) rakendab muudatused automaatselt.</li>
 <li>6443/tcp (API: agendid ja administraator → server), 8472/udp (Flannel VXLAN kõigi sõlmede vahel), 10250/tcp (kubelet), mitme serveri korral 2379–2380/tcp (etcd); klientidele 80/443 (Ingress). Hosti tulemüür peab lubama ka podi- ja teenusevõrgu (<code>10.42.0.0/16</code>, <code>10.43.0.0/16</code>).</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide
 kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp
 </code></pre></div>

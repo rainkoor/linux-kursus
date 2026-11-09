@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-20-openldap-kataloog-ja-linuxi-kliendid" class="md-skip">
+        <a href="#laboritöö-20-openldap-kataloog-ja-linuxi-kliendid" class="md-skip">
           Keri sisuni
         </a>
       
@@ -3439,7 +3439,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-osa-kokkuvote" class="md-nav__link">
+  <a href="#8-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         8. osa. Kokkuvõte
@@ -3450,7 +3450,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4520,7 +4520,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-osa-kokkuvote" class="md-nav__link">
+  <a href="#8-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         8. osa. Kokkuvõte
@@ -4531,7 +4531,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4558,7 +4558,7 @@
 
 
 
-<h1 id="laboritoo-20-openldap-kataloog-ja-linuxi-kliendid">Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid<a class="headerlink" href="#laboritoo-20-openldap-kataloog-ja-linuxi-kliendid" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-20-openldap-kataloog-ja-linuxi-kliendid">Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid<a class="headerlink" href="#laboritöö-20-openldap-kataloog-ja-linuxi-kliendid" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4711,11 +4711,11 @@ touch<span class="w"> </span>test.txt<span class="w"> </span><span class="o">&am
 <p><strong>7.1</strong> Varunda seadistus ja andmed (teooria punkt 20.8). Kontrolli failide sisu.</p>
 <p><strong>7.2</strong> Kustuta kasutaja <code>kati</code> ja taasta kogu andmebaas varukoopiast.</p>
 <p><strong>K14.</strong> Kas <code>kati</code> taastus? Miks on vaja eraldi varundada <code>cn=config</code> (<code>-n 0</code>) ja andmed (<code>-n 1</code>)?</p>
-<h2 id="8-osa-kokkuvote">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="8-osa-kokkuvõte">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K15.</strong> Joonista skeem: kuidas jõuab <code>ssh mari@ubuntuklient</code> sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?</p>
 <p><strong>K16.</strong> Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>memberOf:</strong> lülita sisse <code>memberOf</code> overlay ja kasuta gruppe objektiklassiga <code>groupOfNames</code>, et iga kasutaja juures oleks näha, millistesse gruppidesse ta kuulub.</li>
 <li><strong>Replikatsioon:</strong> paigalda teine OpenLDAP-server (<code>debian2</code>) ja seadista <em>syncrepl</em> replikatsioon. Lisa SSSD-sse mõlemad serverid (<code>ldap_uri = ldap://debian1…, ldap://debian2…</code>).</li>

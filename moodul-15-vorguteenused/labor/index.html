@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-15-kooli-vaikeserver-iii-osa-dns-failid-e-post-ja-varundus" class="md-skip">
+        <a href="#laboritöö-15-kooli-väikeserver-iii-osa-dns-failid-e-post-ja-varundus" class="md-skip">
           Keri sisuni
         </a>
       
@@ -2619,7 +2619,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4509,7 +4509,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4536,7 +4536,7 @@
 
 
 
-<h1 id="laboritoo-15-kooli-vaikeserver-iii-osa-dns-failid-e-post-ja-varundus">Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus<a class="headerlink" href="#laboritoo-15-kooli-vaikeserver-iii-osa-dns-failid-e-post-ja-varundus" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-15-kooli-väikeserver-iii-osa-dns-failid-e-post-ja-varundus">Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus<a class="headerlink" href="#laboritöö-15-kooli-väikeserver-iii-osa-dns-failid-e-post-ja-varundus" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4763,7 +4763,7 @@ curl<span class="w"> </span>https://kool.lab.example/opilased.php
 <p><strong>K12.</strong> Kirjuta loetelu kõigist portidest, mis sinu serveris on avatud, ja millise teenuse jaoks. Millised neist peaksid olema kättesaadavad kogu sisevõrgule ja millised ainult kindlatele masinatele?</p>
 <p><strong>K13.</strong> Kui server tuleks homme nullist uuesti üles ehitada, millised sammud oleksid kõige aeganõudvamad? Kuidas saaks seda kiirendada? (See on hea sissejuhatus moodulisse 16.)</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Tulemüür:</strong> seadista serverisse <code>nftables</code> nii, et avatud on ainult SSH, HTTP/HTTPS, DNS, NFS ja Samba ning NFS ja Samba ainult laborivõrgule.</li>
 <li><strong>Kaugvarundus:</strong> seadista restic varundama Ubuntu masinasse SFTP kaudu (<code>sftp:varu@KLIENT_IP:/srv/restic</code>) eraldi kasutajaga, kellel on ainult SSH-võtmega ligipääs.</li>
@@ -4784,7 +4784,7 @@ curl<span class="w"> </span>https://kool.lab.example/opilased.php
 <li><strong>autofs:</strong> asenda Ubuntu kliendis 2. osa fstab-i NFS-rida autofs-iga (teooria punkt 15.2) ja kontrolli, et jagamine haagitakse alles kataloogi avamisel ning haagitakse lahti pärast <code>--timeout</code> aega.</li>
 </ol>
 <hr />
-<h1 id="laboritoo-15b-teised-dns-serverid-pi-hole-ja-coredns-ubuntu">Laboritöö 15B. Teised DNS-serverid: Pi-hole ja CoreDNS (Ubuntu)<a class="headerlink" href="#laboritoo-15b-teised-dns-serverid-pi-hole-ja-coredns-ubuntu" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-15b-teised-dns-serverid-pi-hole-ja-coredns-ubuntu">Laboritöö 15B. Teised DNS-serverid: Pi-hole ja CoreDNS (Ubuntu)<a class="headerlink" href="#laboritöö-15b-teised-dns-serverid-pi-hole-ja-coredns-ubuntu" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4872,7 +4872,7 @@ dig<span class="w"> </span>@localhost<span class="w"> </span>www.debian.org<span
 <p><strong>D7.</strong> Kas uus kirje ilmus ilma taaskäivituseta? Mis juhtub, kui seerianumbrit ei suurenda?</p>
 <p><strong>2.4</strong> Pane <code>Corefile</code>, <code>compose.yaml</code> ja <code>zones/</code> Giti hoidlasse. Kirjuta skript <code>uuenda.sh</code>, mis teeb <code>git pull</code> ja mille käivitab systemd taimer (moodul 5) iga 5 minuti järel. Muuda kirjet teises masinas, <code>push</code>-i ja kontrolli, et CoreDNS-i vastus muutus.</p>
 <p><strong>D8.</strong> Kuidas tagab selline lahendus, et kaks DNS-serverit annavad sama vastuse? Mis on selle eelis ja puudus võrreldes BIND9 primaar-sekundaar tsooniülekandega (AXFR)?</p>
-<h2 id="3-osa-kokkuvote">3. osa. Kokkuvõte<a class="headerlink" href="#3-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="3-osa-kokkuvõte">3. osa. Kokkuvõte<a class="headerlink" href="#3-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>D9.</strong> Täida tabel: BIND9, dnsmasq, CoreDNS, Pi-hole - kas autoriteetne, kas rekursiivne/edastav, seadistuse vorm, kus sa seda kasutaksid?</p>
 <p><strong>D10.</strong> Kool tahab laborivõrgule sisevõrgu nimesid ja reklaamide blokeerimist. Kirjelda arhitektuur, kasutades selle laboritöö teenuseid.</p>
 <hr />

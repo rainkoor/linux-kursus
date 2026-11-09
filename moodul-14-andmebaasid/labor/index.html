@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-14-andmebaasid-kooli-vaikeserver-ii-osa" class="md-skip">
+        <a href="#laboritöö-14-andmebaasid-kooli-väikeserver-ii-osa" class="md-skip">
           Keri sisuni
         </a>
       
@@ -2412,7 +2412,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-osa-mariadb-varundus-kauguhendus-ja-parooli-taastamine" class="md-nav__link">
+  <a href="#2-osa-mariadb-varundus-kaugühendus-ja-parooli-taastamine" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. osa. MariaDB varundus, kaugühendus ja parooli taastamine
@@ -2456,7 +2456,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-osa-kokkuvote" class="md-nav__link">
+  <a href="#6-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         6. osa. Kokkuvõte
@@ -2467,7 +2467,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4432,7 +4432,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-osa-mariadb-varundus-kauguhendus-ja-parooli-taastamine" class="md-nav__link">
+  <a href="#2-osa-mariadb-varundus-kaugühendus-ja-parooli-taastamine" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. osa. MariaDB varundus, kaugühendus ja parooli taastamine
@@ -4476,7 +4476,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-osa-kokkuvote" class="md-nav__link">
+  <a href="#6-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         6. osa. Kokkuvõte
@@ -4487,7 +4487,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4514,7 +4514,7 @@
 
 
 
-<h1 id="laboritoo-14-andmebaasid-kooli-vaikeserver-ii-osa">Laboritöö 14. Andmebaasid (kooli väikeserver, II osa)<a class="headerlink" href="#laboritoo-14-andmebaasid-kooli-vaikeserver-ii-osa" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-14-andmebaasid-kooli-väikeserver-ii-osa">Laboritöö 14. Andmebaasid (kooli väikeserver, II osa)<a class="headerlink" href="#laboritöö-14-andmebaasid-kooli-väikeserver-ii-osa" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4613,7 +4613,7 @@ curl<span class="w"> </span>https://kool.lab.example/opilased.php<span class="w"
 <p><strong>1.6</strong> Peata MariaDB (<code>sudo systemctl stop mariadb</code>), laadi leht uuesti, vaata nginx-i ja PHP logisid ning käivita MariaDB uuesti.</p>
 <p><strong>K4.</strong> Mida näitas leht? Millises logis oli viga näha (<code>/var/log/nginx/kool.error.log</code>, <code>journalctl -u php*-fpm</code>)?</p>
 <hr />
-<h2 id="2-osa-mariadb-varundus-kauguhendus-ja-parooli-taastamine">2. osa. MariaDB varundus, kaugühendus ja parooli taastamine<a class="headerlink" href="#2-osa-mariadb-varundus-kauguhendus-ja-parooli-taastamine" title="Permanent link">&para;</a></h2>
+<h2 id="2-osa-mariadb-varundus-kaugühendus-ja-parooli-taastamine">2. osa. MariaDB varundus, kaugühendus ja parooli taastamine<a class="headerlink" href="#2-osa-mariadb-varundus-kaugühendus-ja-parooli-taastamine" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Varunda andmebaas, „kustuta kogemata“ tabel ja taasta:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mariadb-dump<span class="w"> </span>--single-transaction<span class="w"> </span>kool<span class="w"> </span>&gt;<span class="w"> </span>~/kool.sql
 sudo<span class="w"> </span>mariadb<span class="w"> </span>-e<span class="w"> </span><span class="s2">"DROP TABLE kool.opilased;"</span>
@@ -4710,11 +4710,11 @@ sudo<span class="w"> </span>ss<span class="w"> </span>-tlpn<span class="w"> </sp
 <p><strong>K11.</strong> Mis juhtus võtmega <code>seanss:mari</code> 31 sekundi pärast? Mitu operatsiooni sekundis Valkey tegi? Miks sobib see vahemäluks ja seansside hoidmiseks?</p>
 <p><strong>K12.</strong> Millisel aadressil Valkey kuulab? Mis juhtuks, kui port 6379 oleks internetist ilma paroolita kättesaadav?</p>
 <hr />
-<h2 id="6-osa-kokkuvote">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K13.</strong> Täida tabel MariaDB, PostgreSQL, SQLite ja Valkey kohta: tüüp, port, klient, kasutajad ja õigused, varundus, sobiv kasutus.</p>
 <p><strong>K14.</strong> Kooli uus rakendus vajab: kasutajate ja hinnete andmebaasi, kiiret seansside hoidlat kahe veebiserveri taga (laboritöö 13 HAProxy) ja väikest seadistuse hoidlat. Milliseid andmebaase kasutaksid ja miks?</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>WordPress:</strong> paigalda samasse serverisse WordPress oma andmebaasi ja kasutajaga (vt <a href="../../lopuprojekt/">lõpuprojekti</a> teema E1 näide).</li>
 <li><strong>Replikatsioon:</strong> paigalda <code>debian2</code>-sse MariaDB ja seadista see <code>debian1</code> koopiaks (teooria punkt 14.2). Lisa põhiserverisse õpilane ja kontrolli, et ta ilmus koopiasse. Mis juhtub koopias <code>DROP TABLE</code>-i järel põhiserveris? Seejärel harjuta <strong>ülevõttu</strong> (teooria punkt 14.2): peata <code>debian1</code> MariaDB, tee <code>debian2</code> põhiserveriks, kirjuta sinna uus rida ja tee <code>debian1</code>-st uue põhiserveri koopia. Mõõda, kui kaua ülevõtt aega võttis.</li>

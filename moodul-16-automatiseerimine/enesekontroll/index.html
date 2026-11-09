@@ -2711,7 +2711,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -2722,7 +2722,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -2745,7 +2745,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-16-enesekontroll">Moodul 16. Enesekontroll<a class="headerlink" href="#moodul-16-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Mis on infrastruktuur koodina (IaC)?</li>
 <li>Mis on Ansible'i inventuur, moodul, ülesanne, mänguraamat ja käsitleja?</li>
@@ -4471,11 +4471,18 @@
 <li>Mis on Ansible'i roll ja millistest kataloogidest see koosneb? Mis vahe on rolli <code>defaults/main.yml</code> ja <code>group_vars/</code> muutujatel?</li>
 <li>Nimeta Ansible'i koodi testimise tasemed alates süntaksikontrollist kuni Molecule'ini. Mida kontrollib Molecule'i samm <code>idempotence</code>?</li>
 <li>Mis on cloud-init ja OpenTofu roll virtuaalmasinate loomisel? Miks ei panda olekufaili <code>terraform.tfstate</code> Giti?</li>
+<li>Millal on Bashi skript koos systemd taimeriga parem valik kui Ansible ja millal vastupidi?</li>
+<li>Miks on Ansible'is parem kasutada moodulit (nt <code>ansible.builtin.lineinfile</code>, <code>template</code>) kui <code>shell</code>- või <code>command</code>-moodulit?</li>
+<li>Kuidas teeb üks mänguraamat sama tööd Debianis ja AlmaLinuxis, kuigi paketi nimi ja pakihaldur erinevad?</li>
+<li>Mis on Ansible Vault ja kuidas hoiad paroole Gitis turvaliselt?</li>
+<li>Mida näitab <code>ansible-playbook --check --diff</code> ja miks tasub seda enne päris käivitust kasutada?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Kirjuta Ansible'i ülesanne, mis loob kasutaja <code>abi</code> (kest <code>/bin/bash</code>, lisagrupp <code>sudo</code>).</li>
 <li>Kirjuta Ansible'i ad-hoc käsk, mis näitab kõigi serverite vaba kettaruumi juurfailisüsteemis.</li>
+<li>Kirjuta ülesanne, mis loob mallist <code>motd.j2</code> faili <code>/etc/motd</code>, ja käsitleja, mis taaskäivitab <code>nginx</code>-i ainult siis, kui mallist loodud fail <code>/etc/nginx/conf.d/kool.conf</code> muutus.</li>
+<li>Kirjuta kaks ülesannet, mis paigaldavad veebiserveri nii Debiani (<code>apache2</code>) kui ka AlmaLinuxi (<code>httpd</code>) masinatesse.</li>
 </ol>
 <hr />
 <h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
@@ -4487,8 +4494,13 @@
 <li>Korduvkasutatav ülesannete komplekt kindlas kataloogistruktuuris: <code>tasks/</code>, <code>handlers/</code>, <code>templates/</code>, <code>files/</code>, <code>defaults/</code>, <code>vars/</code>, <code>meta/</code>. <code>defaults/</code> on madalaima prioriteediga vaikeväärtused; <code>group_vars/</code> (ja <code>host_vars/</code>) kirjutavad need keskkonna järgi üle.</li>
 <li><code>--syntax-check</code> → <code>ansible-lint</code> → <code>--check --diff</code> → kaks järjestikust käivitust (<code>changed=0</code>) → Molecule (ajutine masin, rakendus, korduvrakendus, kontroll, kustutamine). <code>idempotence</code> käivitab rolli teist korda ja ebaõnnestub, kui midagi muudeti.</li>
 <li>OpenTofu loob masinad deklaratiivse koodi järgi (pakkuja kaudu, nt Proxmoxi API); cloud-init seadistab masina esimesel käivitusel (nimi, IP, kasutaja, SSH-võti), misjärel Ansible seadistab teenused. Olekufailis võivad olla saladused ja see muutub iga käivitusega; seda hoitakse turvalises jagatud salvestuses, mitte Gitis.</li>
+<li>Skript ja taimer sobivad ühe masina lihtsaks korduvaks tööks (varundus, koristamine), kus pole vaja mitut masinat ühesuguseks hoida. Ansible on parem, kui servereid on mitu, seadistus peab olema kõigis sama, korduval käivitamisel ei tohi midagi katki minna (idempotentsus) ja kogu serveri olek peab olema koodina kirjeldatud.</li>
+<li>Moodul on idempotentne ja teab olekut: muudab ainult siis, kui vaja, ja annab õige <code>changed</code>/<code>ok</code> tulemuse, mis käivitab käsitlejaid õigesti. <code>shell</code> käivitab käsu iga kord ja Ansible ei tea, kas midagi muutus; korduvkäivitus võib anda erineva tulemuse.</li>
+<li>Tingimustega (<code>when: ansible_os_family == "Debian"</code> / <code>"RedHat"</code>) või muutujatega, mille väärtus sõltub distrost (nt <code>group_vars/</code> või <code>vars/Debian.yml</code>); osa mooduleid (<code>package</code>, <code>service</code>) töötab mõlemas ühtemoodi.</li>
+<li>Ansible Vault krüpteerib muutujafailid (<code>ansible-vault create</code>/<code>encrypt</code>); Gitis on krüpteeritud fail ja parool antakse käivitamisel (<code>--ask-vault-pass</code>) või parooli failist, mis ei ole Gitis.</li>
+<li>Kuivkäivitus: näitab, mida muudetaks (<code>changed</code>) ja failide muudatuste erinevust, ilma midagi muutmata. Nii näed enne päris käivitust, kas mänguraamat teeb seda, mida ootad.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Loo kasutaja abi</span>
 <span class="w">  </span><span class="nt">ansible.builtin.user</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abi</span>
@@ -4497,6 +4509,36 @@
 <span class="w">    </span><span class="nt">append</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>all<span class="w"> </span>-a<span class="w"> </span><span class="s2">"df -h /"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># tasks</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Teadaanne sisselogimisel</span>
+<span class="w">  </span><span class="nt">ansible.builtin.template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">motd.j2</span>
+<span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/motd</span>
+<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"0644"</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kooli saidi seadistus</span>
+<span class="w">  </span><span class="nt">ansible.builtin.template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kool.conf.j2</span>
+<span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/nginx/conf.d/kool.conf</span>
+<span class="w">  </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Taaskäivita nginx</span>
+
+<span class="c1"># handlers</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Taaskäivita nginx</span>
+<span class="w">  </span><span class="nt">ansible.builtin.service</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Paigalda Apache (Debian)</span>
+<span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
+<span class="w">    </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_os_family == "Debian"</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Paigalda Apache (AlmaLinux)</span>
+<span class="w">  </span><span class="nt">ansible.builtin.dnf</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">httpd</span>
+<span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_os_family == "RedHat"</span>
 </code></pre></div>
 
 

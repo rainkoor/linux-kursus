@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-24-k3s-klaster" class="md-skip">
+        <a href="#laboritöö-24-k3s-klaster" class="md-skip">
           Keri sisuni
         </a>
       
@@ -3970,7 +3970,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-osa-skaleerimine-uuendus-ja-tagasivott" class="md-nav__link">
+  <a href="#4-osa-skaleerimine-uuendus-ja-tagasivõtt" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. osa. Skaleerimine, uuendus ja tagasivõtt
@@ -4003,7 +4003,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-osa-pusiandmed" class="md-nav__link">
+  <a href="#7-osa-püsiandmed" class="md-nav__link">
     <span class="md-ellipsis">
       
         7. osa. Püsiandmed
@@ -4036,7 +4036,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-osa-kokkuvote" class="md-nav__link">
+  <a href="#10-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         10. osa. Kokkuvõte
@@ -4058,7 +4058,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4531,7 +4531,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-osa-skaleerimine-uuendus-ja-tagasivott" class="md-nav__link">
+  <a href="#4-osa-skaleerimine-uuendus-ja-tagasivõtt" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. osa. Skaleerimine, uuendus ja tagasivõtt
@@ -4564,7 +4564,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-osa-pusiandmed" class="md-nav__link">
+  <a href="#7-osa-püsiandmed" class="md-nav__link">
     <span class="md-ellipsis">
       
         7. osa. Püsiandmed
@@ -4597,7 +4597,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-osa-kokkuvote" class="md-nav__link">
+  <a href="#10-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         10. osa. Kokkuvõte
@@ -4619,7 +4619,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4646,7 +4646,7 @@
 
 
 
-<h1 id="laboritoo-24-k3s-klaster">Laboritöö 24. k3s klaster<a class="headerlink" href="#laboritoo-24-k3s-klaster" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-24-k3s-klaster">Laboritöö 24. k3s klaster<a class="headerlink" href="#laboritöö-24-k3s-klaster" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4775,7 +4775,7 @@ kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w">
 </code></pre></div>
 <p><strong>K4.</strong> Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?</p>
 <hr />
-<h2 id="4-osa-skaleerimine-uuendus-ja-tagasivott">4. osa. Skaleerimine, uuendus ja tagasivõtt<a class="headerlink" href="#4-osa-skaleerimine-uuendus-ja-tagasivott" title="Permanent link">&para;</a></h2>
+<h2 id="4-osa-skaleerimine-uuendus-ja-tagasivõtt">4. osa. Skaleerimine, uuendus ja tagasivõtt<a class="headerlink" href="#4-osa-skaleerimine-uuendus-ja-tagasivõtt" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong></p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>kool<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>--replicas<span class="o">=</span><span class="m">5</span>
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>-o<span class="w"> </span>wide
@@ -4839,7 +4839,7 @@ kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> <
 <p>Oota vähemalt 6 minutit, seejärel käivita <code>k3s3</code> uuesti.</p>
 <p><strong>K9.</strong> Kui kiiresti muutus <code>k3s3</code> olekuks <code>NotReady</code>? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil <code>kool.k8s.lab.example</code> (kliendi <code>hosts</code> failis on <code>k3s1</code>)? Mis oleks juhtunud, kui välja oleks lülitatud <code>k3s1</code>?</p>
 <hr />
-<h2 id="7-osa-pusiandmed">7. osa. Püsiandmed<a class="headerlink" href="#7-osa-pusiandmed" title="Permanent link">&para;</a></h2>
+<h2 id="7-osa-püsiandmed">7. osa. Püsiandmed<a class="headerlink" href="#7-osa-püsiandmed" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Loo fail <code>andmed.yaml</code>: teooria punkti 24.9 PVC <code>andmed</code> ja Deployment <code>kirjutaja</code>, mis kirjutab iga 10 sekundi järel kellaaja püsikettale:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
@@ -4927,14 +4927,14 @@ ls<span class="w"> </span>-lh<span class="w"> </span>/root/k3s-varu-*.tar.gz
 <p><strong>K12.</strong> Millised podid jäid <code>k3s2</code>-sse pärast <code>drain</code>-i ja miks (vihje: DaemonSet)? Kas veebileht vastas <code>k3s1</code> teenuse peatamise ajal? Mis on sinu varukoopias ja mida see <strong>ei</strong> sisalda?</p>
 <p><strong>9.4</strong> Kanna kõik manifestid (<code>~/k8s</code>) Git-hoidlasse (moodul 6). <strong>Ära lisa</strong> <code>k8s.key</code>, <code>kubeconfig</code>-faile ega Secret'ide väärtusi.</p>
 <hr />
-<h2 id="10-osa-kokkuvote">10. osa. Kokkuvõte<a class="headerlink" href="#10-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="10-osa-kokkuvõte">10. osa. Kokkuvõte<a class="headerlink" href="#10-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K13.</strong> Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?</p>
 <p><strong>K14.</strong> Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus <code>kool</code>, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.</p>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <p>Kui klastrit enam ei vaja: <code>sudo /usr/local/bin/k3s-agent-uninstall.sh</code> agentides ja <code>sudo /usr/local/bin/k3s-uninstall.sh</code> serveris - või taasta hetktõmmis „enne k3s-i“. Lülita masinad välja, kui sa nendega ei tööta.</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Kõrge kättesaadavus:</strong> ehita kolmest serverist koosnev klaster sisseehitatud etcd-ga (teooria punkt 24.11; <code>cluster-init</code>) ja virtuaalse IP-ga <code>10.0.83.64</code> (keepalived, moodul 13). Lülita üks server välja: kas <code>kubectl</code> töötab edasi? Lülita teine välja: mis juhtub ja miks? Tee <code>sudo k3s etcd-snapshot save</code> ja leia tõmmis.</li>
 <li><strong>GitOps Argo CD-ga:</strong> paigalda Argo CD (<code>kubectl create namespace argocd</code> ja <code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml</code>), loo Argo CD rakendus, mis jälgib sinu Git-hoidla kataloogi <code>k8s/</code>, ja muuda Gitis koopiate arvu. Kui kiiresti muudatus klastrisse jõudis? Mis juhtub, kui muudad koopiate arvu <code>kubectl scale</code>-iga?</li>

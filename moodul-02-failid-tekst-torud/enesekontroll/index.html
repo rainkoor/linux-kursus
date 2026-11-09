@@ -650,7 +650,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -661,7 +661,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -684,7 +684,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-2-enesekontroll">Moodul 2. Enesekontroll<a class="headerlink" href="#moodul-2-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Kuidas väljuda vim-ist muudatusi salvestamata? Aga salvestades?</li>
 <li>Nimeta kolm standardvoogu ja nende numbrid.</li>
@@ -4482,7 +4482,7 @@
 <li>Milleks kasutatakse <code>diff -u</code> ja <code>patch</code>-i? Mida tähendavad <code>+</code> ja <code>-</code> read?</li>
 <li>Mida teeb <code>xargs</code> ja miks kasutatakse koos sellega <code>find -print0</code> ja <code>xargs -0</code>?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Loenda, mitu kasutajat on failis <code>/etc/passwd</code>.</li>
 <li>Kuva failist <code>/etc/passwd</code> kasutajad, kelle UID on vähemalt 1000, sorteerituna tähestiku järgi.</li>
@@ -4512,7 +4512,7 @@
 <li><code>diff -u</code> näitab failide erinevusi ühtses vormingus (paik); <code>patch</code> rakendab selle teisele failile. <code>-</code> on eemaldatud rida, <code>+</code> lisatud rida.</li>
 <li><code>xargs</code> loeb sisendist sõnu/ridu ja annab need käsule argumentideks. <code>-print0</code>/<code>-0</code> eraldavad failinimed nullmärgiga, nii et tühikute ja erimärkidega failinimed ei lähe katki.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>wc<span class="w"> </span>-l<span class="w"> </span>&lt;<span class="w"> </span>/etc/passwd
 awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">'$3 &gt;= 1000 {print $1}'</span><span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort
 find<span class="w"> </span>/etc<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span><span class="s2">"s*"</span>

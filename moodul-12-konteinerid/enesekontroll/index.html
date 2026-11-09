@@ -2147,7 +2147,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -2158,7 +2158,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -2181,7 +2181,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-12-enesekontroll">Moodul 12. Enesekontroll<a class="headerlink" href="#moodul-12-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Mis vahe on konteineril ja virtuaalmasinal?</li>
 <li>Millistel Linuxi kerneli võimalustel konteinerid põhinevad?</li>
@@ -4475,11 +4475,17 @@
 <li>Mis on Quadlet ja miks seda kasutada?</li>
 <li>Kuidas uuendab Podman Quadleti konteinereid automaatselt ja mis juhtub, kui uus pilt ei käivitu?</li>
 <li>Mis on <code>chroot</code> ja miks ei ole see konteineri samaväärne asendus?</li>
+<li>Miks ei saa juurkasutajata Podmani konteiner kuulata porti 80 ja kuidas seda lahendada? Mida teeb <code>loginctl enable-linger</code>?</li>
+<li>Mis vahe on köitel (<code>-v nimi:/tee</code>) ja hosti kataloogi sidumisel (<code>-v /srv/veeb:/tee</code>)? Millal kasutad kumba?</li>
+<li>Mis vahe on <code>-p 8080:80</code> ja <code>-p 127.0.0.1:8080:80</code> vahel? Miks on andmebaasi konteineri puhul teine turvalisem?</li>
+<li>Konteiner käivitub ja kustub kohe. Milliste käskudega leiad põhjuse?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Käivita PostgreSQL-i konteiner nimega <code>pg</code>, mis kasutab köidet <code>pgandmed</code> ja on kättesaadav ainult hostist (<code>127.0.0.1</code>) pordil 5432.</li>
 <li>Kirjuta <code>Containerfile</code>, mis põhineb pildil <code>docker.io/library/python:3.12-slim</code>, kopeerib faili <code>rakendus.py</code> kataloogi <code>/app</code> ja käivitab selle.</li>
+<li>Kirjuta <code>compose.yaml</code>, mis käivitab nginx-i (pordil 8080) ja Valkey (<code>docker.io/valkey/valkey:8</code>, ainult sisevõrgus, andmed köites <code>valkeyandmed</code>).</li>
+<li>Kirjuta Quadleti fail, mis käivitab süsteemi käivitumisel konteineri <code>docker.io/traefik/whoami</code> hosti pordil 8090 ja taaskäivitab selle rikke korral.</li>
 </ol>
 <hr />
 <h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
@@ -4495,8 +4501,12 @@
 <li>Podmani võimalus kirjeldada konteiner systemd üksusena (<code>.container</code> fail). Nii käivitub konteiner alglaadimisel, taaskäivitub vea korral ja on hallatav <code>systemctl</code>/<code>journalctl</code> abil.</li>
 <li>Quadleti failis <code>AutoUpdate=registry</code> (täieliku pildinimega); <code>podman auto-update</code> (või taimer <code>podman-auto-update.timer</code>) laadib sama sildiga uuema pildi ja taaskäivitab teenuse. Kui teenus uue pildiga ei käivitu, võetakse muudatus tagasi ja kasutatakse vana pilti.</li>
 <li><code>chroot</code> käivitab protsessi nii, et valitud kataloog paistab talle juurkataloogina. See eraldab ainult failisüsteemi: protsessid, võrk ja kasutajad on hostiga ühised, ressursse ei piirata ja juurkasutaja saab sealt välja murda. Konteiner lisab nimeruumid, cgroupid ja turvapiirangud.</li>
+<li>Tavakasutaja ei tohi avada porte alla 1024. Kasuta kõrget porti (<code>-p 8080:80</code>) ja vajadusel pöördpuhvrit või tulemüüri suunamist pordilt 80; teine võimalus on konteiner juurkasutajana. <code>loginctl enable-linger kasutaja</code> laseb kasutaja teenustel (ka konteineritel) töötada ilma sisse logimata ja käivituda alglaadimisel.</li>
+<li>Köidet haldab Podman (<code>podman volume</code>), selle asukoht ja õigused on konteineri jaoks õiged; sobib andmebaasi andmetele. Hosti kataloog on tavaline kataloog, mida saab hostis otse muuta ja varundada; sobib nt veebisaidi failidele ja seadistusele (AlmaLinuxis vajab <code>:Z</code>/<code>:z</code>).</li>
+<li>Esimene avaldab pordi kõigil hosti aadressidel (võrgust kättesaadav), teine ainult hostist endast. Andmebaasi ei pea võrku avama, kui rakendus töötab samas masinas või samas Compose'i võrgus.</li>
+<li><code>podman ps -a</code> (olek ja väljumiskood), <code>podman logs &lt;nimi&gt;</code> (rakenduse veateade), <code>podman inspect &lt;nimi&gt;</code> (seaded, nt keskkonnamuutujad, köited); Quadleti puhul <code>systemctl status</code> ja <code>journalctl -u</code>. Sageli puudub kohustuslik keskkonnamuutuja (nt andmebaasi parool) või on köite õigused valed.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>pg<span class="w"> </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>Salajane-123<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>pgandmed:/var/lib/postgresql/data<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:5432:5432<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>docker.io/library/postgres:17
@@ -4506,6 +4516,37 @@
 <span class="k">COPY</span><span class="w"> </span>rakendus.py<span class="w"> </span>.
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">"python"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rakendus.py"</span><span class="p">]</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">veeb</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/library/nginx:1.27-alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8080:80"</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">  </span><span class="nt">valkey</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/valkey/valkey:8</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">valkeyandmed:/data</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">valkeyandmed</span><span class="p">:</span>
+</code></pre></div>
+<p>Valkey'le pole <code>ports:</code> kirjet, seega on see kättesaadav ainult Compose'i võrgus nime <code>valkey</code> järgi.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/containers/systemd/whoami.container</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">whoami testteenus</span>
+
+<span class="k">[Container]</span>
+<span class="na">Image</span><span class="o">=</span><span class="s">docker.io/traefik/whoami</span>
+<span class="na">PublishPort</span><span class="o">=</span><span class="s">8090:80</span>
+
+<span class="k">[Service]</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</code></pre></div>
+<p>Seejärel <code>sudo systemctl daemon-reload &amp;&amp; sudo systemctl start whoami</code>.</p>
 
 
 

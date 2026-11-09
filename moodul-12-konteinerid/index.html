@@ -2091,7 +2091,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#opivaljundid" class="md-nav__link">
+  <a href="#õpiväljundid" class="md-nav__link">
     <span class="md-ellipsis">
       
         Õpiväljundid
@@ -2125,7 +2125,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#eelkaija-chroot" class="md-nav__link">
+  <a href="#eelkäija-chroot" class="md-nav__link">
     <span class="md-ellipsis">
       
         Eelkäija: chroot
@@ -2136,7 +2136,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#millel-konteinerid-pohinevad" class="md-nav__link">
+  <a href="#millel-konteinerid-põhinevad" class="md-nav__link">
     <span class="md-ellipsis">
       
         Millel konteinerid põhinevad
@@ -2186,7 +2186,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#konteinerite-kaivitamine" class="md-nav__link">
+  <a href="#konteinerite-käivitamine" class="md-nav__link">
     <span class="md-ellipsis">
       
         Konteinerite käivitamine
@@ -2208,7 +2208,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#andmed-ja-koited" class="md-nav__link">
+  <a href="#andmed-ja-köited" class="md-nav__link">
     <span class="md-ellipsis">
       
         Andmed ja köited
@@ -2296,7 +2296,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kokkuvote" class="md-nav__link">
+  <a href="#kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         Kokkuvõte
@@ -4571,7 +4571,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#opivaljundid" class="md-nav__link">
+  <a href="#õpiväljundid" class="md-nav__link">
     <span class="md-ellipsis">
       
         Õpiväljundid
@@ -4605,7 +4605,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#eelkaija-chroot" class="md-nav__link">
+  <a href="#eelkäija-chroot" class="md-nav__link">
     <span class="md-ellipsis">
       
         Eelkäija: chroot
@@ -4616,7 +4616,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#millel-konteinerid-pohinevad" class="md-nav__link">
+  <a href="#millel-konteinerid-põhinevad" class="md-nav__link">
     <span class="md-ellipsis">
       
         Millel konteinerid põhinevad
@@ -4666,7 +4666,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#konteinerite-kaivitamine" class="md-nav__link">
+  <a href="#konteinerite-käivitamine" class="md-nav__link">
     <span class="md-ellipsis">
       
         Konteinerite käivitamine
@@ -4688,7 +4688,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#andmed-ja-koited" class="md-nav__link">
+  <a href="#andmed-ja-köited" class="md-nav__link">
     <span class="md-ellipsis">
       
         Andmed ja köited
@@ -4776,7 +4776,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kokkuvote" class="md-nav__link">
+  <a href="#kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         Kokkuvõte
@@ -4816,7 +4816,7 @@
 
 <h1 id="moodul-12-konteinerid">Moodul 12. Konteinerid<a class="headerlink" href="#moodul-12-konteinerid" title="Permanent link">&para;</a></h1>
 <p><strong>Maht:</strong> 8 tundi · <strong>Laboritöö:</strong> AlmaLinux · <strong>Eeldused:</strong> moodulid 1–11</p>
-<h2 id="opivaljundid">Õpiväljundid<a class="headerlink" href="#opivaljundid" title="Permanent link">&para;</a></h2>
+<h2 id="õpiväljundid">Õpiväljundid<a class="headerlink" href="#õpiväljundid" title="Permanent link">&para;</a></h2>
 <p>Mooduli läbinud õppija:</p>
 <ul>
 <li>selgitab konteinerite toimimist ja erinevust virtuaalmasinatest;</li>
@@ -4881,7 +4881,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="eelkaija-chroot">Eelkäija: chroot<a class="headerlink" href="#eelkaija-chroot" title="Permanent link">&para;</a></h3>
+<h3 id="eelkäija-chroot">Eelkäija: chroot<a class="headerlink" href="#eelkäija-chroot" title="Permanent link">&para;</a></h3>
 <p>Konteinerite idee on vana. Juba 1979. aastal lisati Unixisse <strong><code>chroot</code></strong> (<em>change root</em>): käsk, mis käivitab protsessi nii, et mingi kataloog paistab talle juurkataloogina <code>/</code>. Protsess ei näe faile väljaspool seda kataloogi. Sama käsuga parandad moodulis 10 alglaadijat taastemeedialt.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/proov
 sudo<span class="w"> </span>debootstrap<span class="w"> </span>stable<span class="w"> </span>/srv/proov<span class="w">    </span><span class="c1"># minimaalne Debian kataloogi (Debian/Ubuntu)</span>
@@ -4933,7 +4933,7 @@ ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><sp
 </tbody>
 </table>
 <p>Tänapäeval kasutatakse <code>chroot</code>-i peamiselt süsteemi parandamiseks, pakettide ehitamiseks ja failiedastuse kasutajate piiramiseks (SFTP, moodul 7).</p>
-<h3 id="millel-konteinerid-pohinevad">Millel konteinerid põhinevad<a class="headerlink" href="#millel-konteinerid-pohinevad" title="Permanent link">&para;</a></h3>
+<h3 id="millel-konteinerid-põhinevad">Millel konteinerid põhinevad<a class="headerlink" href="#millel-konteinerid-põhinevad" title="Permanent link">&para;</a></h3>
 <p>Konteinerid põhinevad Linuxi kerneli võimalustel:</p>
 <ul>
 <li><strong>nimeruumid</strong> (<em>namespaces</em>) - konteiner näeb ainult oma protsesse, võrguliideseid, haakepunkte ja kasutajaid;</li>
@@ -5025,7 +5025,7 @@ ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><sp
 podman<span class="w"> </span>--version
 podman<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
 </code></pre></div>
-<h3 id="konteinerite-kaivitamine">Konteinerite käivitamine<a class="headerlink" href="#konteinerite-kaivitamine" title="Permanent link">&para;</a></h3>
+<h3 id="konteinerite-käivitamine">Konteinerite käivitamine<a class="headerlink" href="#konteinerite-käivitamine" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>docker.io/library/alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Tere konteinerist"</span>
 podman<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>docker.io/library/alpine:latest<span class="w"> </span>sh<span class="w">      </span><span class="c1"># interaktiivne kest</span>
 podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>veeb<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>docker.io/library/nginx:alpine
@@ -5086,7 +5086,7 @@ podman<span class="w"> </span>rmi<span class="w"> </span>nginx:alpine<span class
 podman<span class="w"> </span>stats<span class="w">                 </span><span class="c1"># ressursikasutus</span>
 podman<span class="w"> </span>system<span class="w"> </span>prune<span class="w">          </span><span class="c1"># koristamine</span>
 </code></pre></div>
-<h3 id="andmed-ja-koited">Andmed ja köited<a class="headerlink" href="#andmed-ja-koited" title="Permanent link">&para;</a></h3>
+<h3 id="andmed-ja-köited">Andmed ja köited<a class="headerlink" href="#andmed-ja-köited" title="Permanent link">&para;</a></h3>
 <p>Konteiner on <strong>ajutine</strong>: kui see kustutatakse, kaob kõik, mis konteineri sisse kirjutati. Püsivad andmed hoitakse <strong>köidetes</strong> (<em>volumes</em>) või hosti kataloogides:</p>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>dbandmed
 podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>db<span class="w"> </span>-v<span class="w"> </span>dbandmed:/var/lib/mysql<span class="w"> </span><span class="se">\</span>
@@ -5255,7 +5255,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 </tbody>
 </table>
 <hr />
-<h2 id="kokkuvote">Kokkuvõte<a class="headerlink" href="#kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="kokkuvõte">Kokkuvõte<a class="headerlink" href="#kokkuvõte" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

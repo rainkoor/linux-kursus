@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-13-veebiserverid-kooli-vaikeserver-i-osa" class="md-skip">
+        <a href="#laboritöö-13-veebiserverid-kooli-väikeserver-i-osa" class="md-skip">
           Keri sisuni
         </a>
       
@@ -2337,7 +2337,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-osa-paris-sertifikaadid" class="md-nav__link">
+  <a href="#7-osa-päris-sertifikaadid" class="md-nav__link">
     <span class="md-ellipsis">
       
         7. osa. Päris sertifikaadid
@@ -2348,7 +2348,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-osa-kokkuvote" class="md-nav__link">
+  <a href="#8-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         8. osa. Kokkuvõte
@@ -2359,7 +2359,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4531,7 +4531,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-osa-paris-sertifikaadid" class="md-nav__link">
+  <a href="#7-osa-päris-sertifikaadid" class="md-nav__link">
     <span class="md-ellipsis">
       
         7. osa. Päris sertifikaadid
@@ -4542,7 +4542,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-osa-kokkuvote" class="md-nav__link">
+  <a href="#8-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         8. osa. Kokkuvõte
@@ -4553,7 +4553,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4580,7 +4580,7 @@
 
 
 
-<h1 id="laboritoo-13-veebiserverid-kooli-vaikeserver-i-osa">Laboritöö 13. Veebiserverid (kooli väikeserver, I osa)<a class="headerlink" href="#laboritoo-13-veebiserverid-kooli-vaikeserver-i-osa" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-13-veebiserverid-kooli-väikeserver-i-osa">Laboritöö 13. Veebiserverid (kooli väikeserver, I osa)<a class="headerlink" href="#laboritöö-13-veebiserverid-kooli-väikeserver-i-osa" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4792,7 +4792,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 <p><strong>6.4</strong> Vaata <code>debian1</code> nginx-i juurdepääsulogi: mis IP-aadressilt päringud tulid?</p>
 <p><strong>K11.</strong> Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: <code>X-Forwarded-For</code>, HAProxy <code>option forwardfor</code>)?</p>
 <hr />
-<h2 id="7-osa-paris-sertifikaadid">7. osa. Päris sertifikaadid<a class="headerlink" href="#7-osa-paris-sertifikaadid" title="Permanent link">&para;</a></h2>
+<h2 id="7-osa-päris-sertifikaadid">7. osa. Päris sertifikaadid<a class="headerlink" href="#7-osa-päris-sertifikaadid" title="Permanent link">&para;</a></h2>
 <p>Laboris kasutasid oma CA-d ja Caddy CA-d. Selles osas uurid, kuidas näevad välja <strong>avalikud</strong> sertifikaadid (teooria punkt 13.3, „Avaliku sertifikaadi hankimine“). Internetiühendusega masinast:</p>
 <p><strong>7.1</strong> Vaata päris saidi sertifikaati ja ahelat:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>www.debian.org:443<span class="w"> </span>-servername<span class="w"> </span>www.debian.org<span class="w"> </span>-showcerts<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
@@ -4808,10 +4808,10 @@ dig<span class="w"> </span>+short<span class="w"> </span>CAA<span class="w"> </s
 <p><strong>K12.</strong> Kes väljastas <code>www.debian.org</code> sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?</p>
 <p><strong>K13.</strong> Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (<code>proxmox1.lab.kool.ee</code>) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?</p>
 <hr />
-<h2 id="8-osa-kokkuvote">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="8-osa-kokkuvõte">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K14.</strong> Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Pöördpuhver nginx-iga:</strong> käivita <code>debian1</code>-s Pythoni veebiserver (<code>python3 -m http.server 3000 --bind 127.0.0.1</code>) ja tee see nginx-i kaudu kättesaadavaks aadressil <code>https://rakendus.lab.example</code> (lisa nimi kliendi <code>/etc/hosts</code>-i ja loo labori CA-ga sertifikaat, mille SAN sisaldab ka seda nime).</li>
 <li><strong>lighttpd:</strong> paigalda <code>debian1</code>-sse lighttpd pordile 8081 (<code>server.port = 8081</code>) ja võrdle nginx-i ning lighttpd mälukasutust (<code>ps -o rss,cmd -C nginx,lighttpd</code>).</li>

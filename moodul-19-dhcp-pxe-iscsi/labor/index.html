@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-19-dhcp-pxe-ja-iscsi" class="md-skip">
+        <a href="#laboritöö-19-dhcp-pxe-ja-iscsi" class="md-skip">
           Keri sisuni
         </a>
       
@@ -3254,7 +3254,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-osa-iscsi-sihtmark" class="md-nav__link">
+  <a href="#4-osa-iscsi-sihtmärk" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. osa. iSCSI sihtmärk
@@ -3276,7 +3276,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-osa-kokkuvote" class="md-nav__link">
+  <a href="#6-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         6. osa. Kokkuvõte
@@ -3287,7 +3287,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4454,7 +4454,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-osa-iscsi-sihtmark" class="md-nav__link">
+  <a href="#4-osa-iscsi-sihtmärk" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. osa. iSCSI sihtmärk
@@ -4476,7 +4476,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-osa-kokkuvote" class="md-nav__link">
+  <a href="#6-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         6. osa. Kokkuvõte
@@ -4487,7 +4487,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4514,7 +4514,7 @@
 
 
 
-<h1 id="laboritoo-19-dhcp-pxe-ja-iscsi">Laboritöö 19. DHCP, PXE ja iSCSI<a class="headerlink" href="#laboritoo-19-dhcp-pxe-ja-iscsi" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-19-dhcp-pxe-ja-iscsi">Laboritöö 19. DHCP, PXE ja iSCSI<a class="headerlink" href="#laboritöö-19-dhcp-pxe-ja-iscsi" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4606,7 +4606,7 @@ tftp<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </
 <p><strong>K8.</strong> Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?</p>
 <p><strong>3.5</strong> Muuda masina BIOS UEFI-ks (OVMF) ja proovi uuesti.</p>
 <p><strong>K9.</strong> Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?</p>
-<h2 id="4-osa-iscsi-sihtmark">4. osa. iSCSI sihtmärk<a class="headerlink" href="#4-osa-iscsi-sihtmark" title="Permanent link">&para;</a></h2>
+<h2 id="4-osa-iscsi-sihtmärk">4. osa. iSCSI sihtmärk<a class="headerlink" href="#4-osa-iscsi-sihtmärk" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> <code>debian2</code>-s: kasuta lisaketast (<code>/dev/sdb</code>) LVM-iga või failipõhist tausta. Lihtsam variant (fail):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>targetcli-fb
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/iscsi
@@ -4660,11 +4660,11 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
 <p><strong>K13.</strong> Mis on valiku <code>_netdev</code> ülesanne? Mis juhtuks alglaadimisel ilma selleta?</p>
 <p><strong>5.5</strong> (Valikuline) Ühenda sama sihtmärgi <strong>teine LUN</strong> (loo <code>debian2</code>-s eraldi taust ja ACL Windowsi initsiaatori IQN-ile) Windowsi kliendist <code>iscsicpl</code> abil ja vorminda NTFS-iks.</p>
 <p><strong>K14.</strong> Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?</p>
-<h2 id="6-osa-kokkuvote">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K15.</strong> Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.</p>
 <p><strong>K16.</strong> Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>UEFI PXE:</strong> lisa Kea seadistusse kliendiklassid, mis jagavad BIOS-klientidele <code>netboot.xyz.kpxe</code> ja UEFI-klientidele <code>netboot.xyz.efi</code> (vihje: valik 93, <code>client-classes</code>, <code>test</code> avaldis <code>option[93].hex == 0x0007</code>).</li>
 <li><strong>FOG:</strong> paigalda FOG eraldi Debiani masinasse (vähemalt 100 GiB ketast) ja salvesta ning paigalda ühe kliendi kettatõmmis. Seadista Kea <code>next-server</code> FOG-i serverile.</li>

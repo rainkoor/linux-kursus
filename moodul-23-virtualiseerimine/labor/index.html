@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-23-kvm-proxmox-ve-ja-xcp-ng" class="md-skip">
+        <a href="#laboritöö-23-kvm-proxmox-ve-ja-xcp-ng" class="md-skip">
           Keri sisuni
         </a>
       
@@ -3829,7 +3829,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-osa-proxmoxi-vork-sild-ja-nat" class="md-nav__link">
+  <a href="#5-osa-proxmoxi-võrk-sild-ja-nat" class="md-nav__link">
     <span class="md-ellipsis">
       
         5. osa. Proxmoxi võrk: sild ja NAT
@@ -3862,7 +3862,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-osa-kokkuvote" class="md-nav__link">
+  <a href="#8-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         8. osa. Kokkuvõte
@@ -3884,7 +3884,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4498,7 +4498,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-osa-proxmoxi-vork-sild-ja-nat" class="md-nav__link">
+  <a href="#5-osa-proxmoxi-võrk-sild-ja-nat" class="md-nav__link">
     <span class="md-ellipsis">
       
         5. osa. Proxmoxi võrk: sild ja NAT
@@ -4531,7 +4531,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-osa-kokkuvote" class="md-nav__link">
+  <a href="#8-osa-kokkuvõte" class="md-nav__link">
     <span class="md-ellipsis">
       
         8. osa. Kokkuvõte
@@ -4553,7 +4553,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lisaulesanne-valikuline" class="md-nav__link">
+  <a href="#lisaülesanne-valikuline" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
@@ -4580,7 +4580,7 @@
 
 
 
-<h1 id="laboritoo-23-kvm-proxmox-ve-ja-xcp-ng">Laboritöö 23. KVM, Proxmox VE ja XCP-ng<a class="headerlink" href="#laboritoo-23-kvm-proxmox-ve-ja-xcp-ng" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-23-kvm-proxmox-ve-ja-xcp-ng">Laboritöö 23. KVM, Proxmox VE ja XCP-ng<a class="headerlink" href="#laboritöö-23-kvm-proxmox-ve-ja-xcp-ng" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4715,7 +4715,7 @@ pvesm<span class="w"> </span>list<span class="w"> </span>pbs
 <li>Taasta kogu masin uue ID-ga: varukoopia → <em>Restore</em>, VM ID <code>130</code>, märgi <em>Unique</em>. Käivita masin 130 ja kontrolli, et see töötab.</li>
 </ol>
 <p><strong>K11.</strong> Mis on PBS-i õiguse <code>DatastoreBackup</code> eelis võrreldes <code>root</code>-iga, kui ründaja saab Proxmoxi enda üle kontrolli? Miks ei ole hea mõte paigaldada PBS samasse Proxmoxi, mida see varundab? Kui kaua võttis kogu masina taastamine?</p>
-<h2 id="5-osa-proxmoxi-vork-sild-ja-nat">5. osa. Proxmoxi võrk: sild ja NAT<a class="headerlink" href="#5-osa-proxmoxi-vork-sild-ja-nat" title="Permanent link">&para;</a></h2>
+<h2 id="5-osa-proxmoxi-võrk-sild-ja-nat">5. osa. Proxmoxi võrk: sild ja NAT<a class="headerlink" href="#5-osa-proxmoxi-võrk-sild-ja-nat" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Loo sild <code>vmbr10</code> võrguga <code>10.0.222.0/24</code> (Proxmox <code>10.0.222.1</code>) ja NAT (teooria punkt 23.3). Rakenda <code>ifreload -a</code>.</p>
 <p><strong>5.2</strong> Ühenda konteiner 200 sillaga <code>vmbr10</code>, anna talle staatiline aadress <code>10.0.222.10/24</code>, vaikelüüs <code>10.0.222.1</code>, ja kontrolli internetiühendust:</p>
 <div class="highlight"><pre><span></span><code>pct<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>--net0<span class="w"> </span><span class="nv">name</span><span class="o">=</span>eth0,bridge<span class="o">=</span>vmbr10,ip<span class="o">=</span><span class="m">10</span>.0.222.10/24,gw<span class="o">=</span><span class="m">10</span>.0.222.1
@@ -4749,7 +4749,7 @@ xl<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><s
 <p><strong>7.3</strong> Paigalda Debiani VM-i Xen Orchestra lähtekoodist (teooria punkt 23.4), logi sisse, <strong>muuda vaikeparool</strong> ja lisa XCP-ng server.</p>
 <p><strong>7.4</strong> Loo Xen Orchestras VM, paigalda OS ja külalistööriistad (<code>guest-tools.iso</code>). Kontrolli, et XO näitab VM-i IP-aadressi.</p>
 <p><strong>K15.</strong> Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?</p>
-<h2 id="8-osa-kokkuvote">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvote" title="Permanent link">&para;</a></h2>
+<h2 id="8-osa-kokkuvõte">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
 <p><strong>K16.</strong> Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.</p>
 <p><strong>K17.</strong> Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.</p>
 <p><strong>K18.</strong> Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja <code>apt</code>, ZFS, Linuxi sillad, LXC, <code>vzdump</code>, systemd, iSCSI).</p>
@@ -4757,7 +4757,7 @@ xl<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><s
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <p>Kustuta testmasinad (<code>virsh undefine test1 --remove-all-storage</code>, <code>qm destroy</code>, <code>pct destroy</code>) ja lülita pesastatud hüperviisorid välja, et need ei kulutaks kooli Proxmoxi ressursse.</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>PBS-i krüpteerimine ja teine koopia:</strong> loo PBS-i salvestusele krüpteerimisvõti, tee krüpteeritud varukoopia ja proovi seda taastada. Paigalda teine PBS, lisa esimene sinna <em>Remote</em>'iks ja seadista <em>Sync Job</em>. Varunda <code>proxmox-backup-client</code>-iga ka üks tavaline Linuxi server (nt <code>debian1</code> kataloog <code>/etc</code>).</li>
 <li><strong>Cloud-init mall:</strong> tee Debiani pilvetõmmisest Proxmoxi mall koos cloud-initiga (teooria punkt 23.3, <em>Cloud-init mall</em>) ja klooni sellest kolm masinat, mis saavad kohe õige nime, IP ja SSH-võtme.</li>

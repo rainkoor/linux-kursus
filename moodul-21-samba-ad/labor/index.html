@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#laboritoo-21-samba-ad-domeen" class="md-skip">
+        <a href="#laboritöö-21-samba-ad-domeen" class="md-skip">
           Keri sisuni
         </a>
       
@@ -4315,7 +4315,7 @@
 
 
 
-<h1 id="laboritoo-21-samba-ad-domeen">Laboritöö 21. Samba AD domeen<a class="headerlink" href="#laboritoo-21-samba-ad-domeen" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-21-samba-ad-domeen">Laboritöö 21. Samba AD domeen<a class="headerlink" href="#laboritöö-21-samba-ad-domeen" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -4349,7 +4349,7 @@
 <p>HKHK laboris on <code>dc1</code> mallist olemas, iseõppija paigaldab selle (vt <a href="../../lisad/paigaldus/">paigalduslisa</a>). Anna sellele staatiline aadress ja <strong>tee hetktõmmis</strong> (snapshot). Provisioning'ut on lihtsam korrata puhtalt masinalt kui ebaõnnestunud katset parandada.</p>
 </div>
 <hr />
-<h1 id="laboritoo-21a-domeenikontroller-ja-windowsi-klient-debian-windows">Laboritöö 21A. Domeenikontroller ja Windowsi klient (Debian, Windows)<a class="headerlink" href="#laboritoo-21a-domeenikontroller-ja-windowsi-klient-debian-windows" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-21a-domeenikontroller-ja-windowsi-klient-debian-windows">Laboritöö 21A. Domeenikontroller ja Windowsi klient (Debian, Windows)<a class="headerlink" href="#laboritöö-21a-domeenikontroller-ja-windowsi-klient-debian-windows" title="Permanent link">&para;</a></h1>
 <h2 id="1-osa-ettevalmistus">1. osa. Ettevalmistus<a class="headerlink" href="#1-osa-ettevalmistus" title="Permanent link">&para;</a></h2>
 <p><strong>1.1</strong> Seadista <code>dc1</code> hostinimi ja <code>/etc/hosts</code> (teooria punkt 21.3–21.4). Kontrolli:</p>
 <div class="highlight"><pre><span></span><code>hostname
@@ -4463,7 +4463,7 @@ host<span class="w"> </span><span class="m">10</span>.0.83.56
 host<span class="w"> </span>winklient.ad.lab.example
 </code></pre></div>
 <p><strong>K10.</strong> Kas Windowsi klient registreeris ennast DNS-is automaatselt?</p>
-<h2 id="6-osa-rsat-ja-ruhmapoliitika">6. osa. RSAT ja rühmapoliitika<a class="headerlink" href="#6-osa-rsat-ja-ruhmapoliitika" title="Permanent link">&para;</a></h2>
+<h2 id="6-osa-rsat-ja-rühmapoliitika">6. osa. RSAT ja rühmapoliitika<a class="headerlink" href="#6-osa-rsat-ja-rühmapoliitika" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Logi <code>winklient</code>-i sisse kui <code>AD\Administrator</code> ja paigalda RSAT-tööriistad (teooria punkt 21.6). Ava <code>dsa.msc</code> ja leia 4. osas loodud OU-d ja kasutajad. Loo <code>dsa.msc</code>-ga uus kasutaja <code>ain</code> OU-sse <code>Opetajad</code> ja kontrolli DC-s <code>samba-tool user list</code>.</p>
 <p><strong>6.2</strong> Loo <code>gpmc.msc</code>-ga GPO, mis keelab OU <code>Opilased</code> kasutajatel juhtpaneeli, ja seo see OU-ga. Logi sisse kui <code>AD\jaan</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gpupdate</span> <span class="p">/</span><span class="n">force</span>
@@ -4475,7 +4475,7 @@ host<span class="w"> </span>winklient.ad.lab.example
 </code></pre></div>
 <p><strong>K12.</strong> Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?</p>
 <hr />
-<h1 id="laboritoo-21b-linuxi-kliendid-ubuntu-almalinux">Laboritöö 21B. Linuxi kliendid (Ubuntu, AlmaLinux)<a class="headerlink" href="#laboritoo-21b-linuxi-kliendid-ubuntu-almalinux" title="Permanent link">&para;</a></h1>
+<h1 id="laboritöö-21b-linuxi-kliendid-ubuntu-almalinux">Laboritöö 21B. Linuxi kliendid (Ubuntu, AlmaLinux)<a class="headerlink" href="#laboritöö-21b-linuxi-kliendid-ubuntu-almalinux" title="Permanent link">&para;</a></h1>
 <h2 id="7-osa-ubuntu-liitmine-domeeniga">7. osa. Ubuntu liitmine domeeniga<a class="headerlink" href="#7-osa-ubuntu-liitmine-domeeniga" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Seadista <code>ubuntuklient</code> hostinimeks <code>ubuntuklient.ad.lab.example</code> ja DNS-iks <code>10.0.83.56</code> (Netplan, moodul 7) või OPNsense, kui Query Forwarding on tehtud. Kontrolli kella.</p>
 <p><strong>7.2</strong> Paigalda paketid ja liitu (teooria punkt 21.7):</p>
@@ -4504,7 +4504,7 @@ id<span class="w"> </span>mari@ad.lab.example
 </code></pre></div>
 <p><strong>8.2</strong> Muuda ka siin <code>use_fully_qualified_names = False</code> ja <code>fallback_homedir = /home/%u</code>.</p>
 <p><strong>K15.</strong> Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?</p>
-<h2 id="9-osa-ligipaasu-piiramine-ja-sudo">9. osa. Ligipääsu piiramine ja <code>sudo</code><a class="headerlink" href="#9-osa-ligipaasu-piiramine-ja-sudo" title="Permanent link">&para;</a></h2>
+<h2 id="9-osa-ligipääsu-piiramine-ja-sudo">9. osa. Ligipääsu piiramine ja <code>sudo</code><a class="headerlink" href="#9-osa-ligipääsu-piiramine-ja-sudo" title="Permanent link">&para;</a></h2>
 <p><strong>9.1</strong> Mõlemas Linuxi kliendis luba sisse logida ainult gruppidel <code>opilased</code> ja <code>linuxadminid</code>. Proovi sisse logida kasutajana <code>administrator</code> ja <code>ain</code>.</p>
 <p><strong>9.2</strong> Anna grupile <code>linuxadminid</code> <code>sudo</code> õigus (fail <code>/etc/sudoers.d/ad-adminid</code>). Kontrolli kasutajana <code>kati</code>:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-l
@@ -4523,7 +4523,7 @@ kinit<span class="w"> </span>mari
 <p><strong>10.2</strong> Muuda <code>ubuntuklient</code>-is ajutiselt DNS-iks <code>1.1.1.1</code> ja proovi <code>realm discover ad.lab.example</code>. Taasta DNS.</p>
 <p><strong>K18.</strong> Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.</p>
 <hr />
-<h2 id="lisaulesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaulesanne-valikuline" title="Permanent link">&para;</a></h2>
+<h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Teine DC:</strong> paigalda <code>dc2</code> (<code>10.0.83.57</code>) ja liida see domeeniga DC-na. Kontrolli replikatsiooni (<code>samba-tool drs showrepl</code>), lülita <code>dc1</code> välja ja proovi sisse logida.</li>
 <li><strong>Failiserver domeenis:</strong> liida <code>debian2</code> domeeniga liikmena (winbind või SSSD), loo jagatud kaust, millele on ligipääs ainult grupil <code>opilased</code>, ja haagi see Windowsis automaatselt GPO abil.</li>

@@ -2006,7 +2006,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -2017,7 +2017,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -2040,7 +2040,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4394,7 +4394,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#kusimused" class="md-nav__link">
+  <a href="#küsimused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Küsimused
@@ -4405,7 +4405,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#praktilised-miniulesanded" class="md-nav__link">
+  <a href="#praktilised-miniülesanded" class="md-nav__link">
     <span class="md-ellipsis">
       
         Praktilised miniülesanded
@@ -4428,7 +4428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#miniulesannete-lahendused" class="md-nav__link">
+  <a href="#miniülesannete-lahendused" class="md-nav__link">
     <span class="md-ellipsis">
       
         Miniülesannete lahendused
@@ -4462,7 +4462,7 @@
 
 <h1 id="moodul-11-enesekontroll">Moodul 11. Enesekontroll<a class="headerlink" href="#moodul-11-enesekontroll" title="Permanent link">&para;</a></h1>
 <p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
-<h2 id="kusimused">Küsimused<a class="headerlink" href="#kusimused" title="Permanent link">&para;</a></h2>
+<h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Mida tähendab kihiline kaitse? Too näide kolmest kihist.</li>
 <li>Miks on automaatsed turvauuendused olulised? Millise tööriistaga need Ubuntus ja AlmaLinuxis seadistatakse?</li>
@@ -4483,7 +4483,7 @@
 <li>Kas fail2ban on vajalik, kui SSH lubab ainult võtmeid? Millal on see endiselt kasulik ja millised on alternatiivid?</li>
 <li>Mis on Wazuhi automaatne reageerimine (<em>active response</em>) ja millist ohtu see endaga kaasa toob?</li>
 </ol>
-<h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <ol>
 <li>(Ubuntu) Leia viimase 24 tunni jooksul kõik ebaõnnestunud SSH-sisselogimised ja loenda IP-aadresside kaupa.</li>
 <li>(AlmaLinux) Leia, millised SELinuxi tõeväärtused on seotud Samba (<code>samba</code>) teenusega.</li>
@@ -4514,7 +4514,7 @@
 <li>SSH jaoks pole see hädavajalik (parooliga sisse ei saa), kuid vähendab logide müra. Peamine kasu on paroolipõhiste teenuste (veebirakenduse sisselogimine, e-post) kaitsmisel. Alternatiivid: SSH piiramine tulemüüris, OpenSSH 9.8+ <code>PerSourcePenalties</code>, CrowdSec, Wazuhi automaatne reageerimine.</li>
 <li>Server käivitab reegli peale agendis käsu, nt <code>firewall-drop</code> blokeerib ründaja IP mõneks ajaks. Oht: valepositiivne sündmus võib blokeerida administraatori või partneri - haldusvõrk tuleb lisada erandiks ja reaktsiooni enne testida.</li>
 </ol>
-<h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
+<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># 1</span>
 journalctl<span class="w"> </span>-u<span class="w"> </span>ssh<span class="w"> </span>--since<span class="w"> </span><span class="s2">"24 hours ago"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"Failed|Invalid user"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oE<span class="w"> </span><span class="s2">"from [0-9.]+"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
