@@ -5358,6 +5358,10 @@
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>flowchart LR
+    I["⌨️ klaviatuur&lt;br&gt;või fail (&lt; fail)"] -- "0 stdin" --&gt; P["programm"]
+    P -- "1 stdout" --&gt; O["🖥️ ekraan&lt;br&gt;või fail (&gt; fail)"]
+    P -- "2 stderr" --&gt; E["🖥️ ekraan&lt;br&gt;või fail (2&gt; fail)"]</code></pre>
 <p>Väljundit ja veateateid näed ekraanil koos, kuid need on kaks erinevat voogu. Neid saab <strong>ümber suunata</strong>:</p>
 <table>
 <thead>
@@ -5409,6 +5413,13 @@ find<span class="w"> </span>/<span class="w"> </span>-name<span class="w"> </spa
 <p><strong>Toru</strong> (<em>pipe</em>) <code>|</code> suunab ühe käsu väljundi järgmise käsu sisendiks:</p>
 <div class="highlight"><pre><span></span><code>käsk1<span class="w"> </span><span class="p">|</span><span class="w"> </span>käsk2<span class="w"> </span><span class="p">|</span><span class="w"> </span>käsk3
 </code></pre></div>
+<p>Iga käsk töötleb eelmise väljundit ja annab tulemuse edasi - nagu konveier:</p>
+<pre class="mermaid"><code>flowchart LR
+    A["cat juurdepaas.log&lt;br&gt;kõik read"] -- "|" --&gt; B["cut -d' ' -f1&lt;br&gt;ainult IP-aadressid"]
+    B -- "|" --&gt; C["sort&lt;br&gt;sorteeritud"]
+    C -- "|" --&gt; D["uniq -c&lt;br&gt;loendatud"]
+    D -- "|" --&gt; E["sort -rn&lt;br&gt;enim ees"]
+    E --&gt; F["🖥️ ekraan"]</code></pre>
 <p>Näited:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w">                    </span><span class="c1"># sirvi pikka väljundit</span>
 cat<span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">              </span><span class="c1"># loe ridade arvu</span>

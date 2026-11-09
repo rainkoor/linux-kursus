@@ -5157,6 +5157,12 @@
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>flowchart LR
+    H[("Hoidla&lt;br&gt;deb.debian.org")] -- "apt update&lt;br&gt;pakettide loend" --&gt; PH["Pakihaldur&lt;br&gt;apt / dnf"]
+    PH -- "apt install nginx" --&gt; S{"Sõltuvused?"}
+    S --&gt; D["laadib alla nginx&lt;br&gt;+ vajalikud teegid"]
+    D --&gt; K["kontrollib allkirja"] --&gt; I["paigaldab&lt;br&gt;dpkg / rpm"]
+    I --&gt; F["failid: /usr/sbin/nginx,&lt;br&gt;/etc/nginx/, teenus"]</code></pre>
 <p>Pakihalduri eelised:</p>
 <ul>
 <li><strong>turvalisus</strong> - paketid on distro arendajate poolt allkirjastatud ja pakihaldur kontrollib allkirju;</li>

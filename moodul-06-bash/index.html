@@ -5678,6 +5678,13 @@ else
     # muidu
 fi
 </code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    A["if käsk"] --&gt; B{"väljumiskood = 0?"}
+    B -- "jah (õnnestus)" --&gt; C["then-haru"]
+    B -- "ei" --&gt; D{"elif teine_käsk&lt;br&gt;väljumiskood = 0?"}
+    D -- jah --&gt; E["elif-haru"]
+    D -- ei --&gt; F["else-haru"]
+    C &amp; E &amp; F --&gt; G["fi - jätka skripti"]</code></pre>
 <p><code>if</code> kontrollib käsu väljumiskoodi. Väga sageli on see käsk <code>test</code>, mida kirjutatakse nurksulgudes <code>[ ]</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$#</span><span class="s2">"</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutus: </span><span class="nv">$0</span><span class="s2"> FAIL"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
@@ -5805,6 +5812,11 @@ fi
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Ära kasuta <code>for f in $(ls)</code>!</strong> See läheb katki tühikutega failinimede korral. Kasuta metamärke: <code>for f in *.txt</code>.</p>
 </div>
+<p>Kuidas <code>for</code>-tsükkel töötab:</p>
+<pre class="mermaid"><code>flowchart TD
+    A["for fail in *.log"] --&gt; B{"Kas loendis&lt;br&gt;on veel elemente?"}
+    B -- "jah" --&gt; C["fail = järgmine element"] --&gt; D["do … done&lt;br&gt;tsükli keha"] --&gt; B
+    B -- "ei" --&gt; E["jätka pärast done"]</code></pre>
 <h3 id="while">while<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
 <p><code>while</code> kordab, kuni tingimus on tõene:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">loendur</span><span class="o">=</span><span class="m">1</span>
@@ -6070,6 +6082,17 @@ git<span class="w"> </span>switch<span class="w"> </span>main<span class="w">   
 git<span class="w"> </span>merge<span class="w"> </span>https-seadistus<span class="w">                    </span><span class="c1"># liida muudatused</span>
 git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>https-seadistus<span class="w">                </span><span class="c1"># kustuta haru</span>
 </code></pre></div>
+<pre class="mermaid"><code>gitGraph
+    commit id: "algus"
+    commit id: "nginx seadistus"
+    branch https-seadistus
+    checkout https-seadistus
+    commit id: "TLS sertifikaat"
+    commit id: "suunamine HTTPS-ile"
+    checkout main
+    commit id: "README parandus"
+    merge https-seadistus id: "merge"
+    commit id: "järgmine muudatus"</code></pre>
 <p>Kui samas failis on mõlemas harus sama koht muudetud, tekib <strong>konflikt</strong>. Git märgib konfliktsed read failis märkidega <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> ja <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. Paranda fail käsitsi, seejärel <code>git add</code> ja <code>git commit</code>.</p>
 <h3 id="kaughoidla-github">Kaughoidla (GitHub)<a class="headerlink" href="#kaughoidla-github" title="Permanent link">&para;</a></h3>
 <p>GitHubi (või GitLabi, Codebergi) hoidlaga suheldakse tavaliselt SSH-võtmega (vt moodul 7): lisa oma avalik võti GitHubi seadistustes (<em>Settings → SSH and GPG keys</em>).</p>

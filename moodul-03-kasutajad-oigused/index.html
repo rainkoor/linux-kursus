@@ -5458,6 +5458,14 @@ drwxr-x--- 2 mari tarkvara 4096 jaan 10 09:20 kood
 <li>muidu, kui kuulud faili gruppi, kehtivad grupi õigused;</li>
 <li>muidu kehtivad muude õigused.</li>
 </ol>
+<pre class="mermaid"><code>flowchart TD
+    A["Protsess tahab faili lugeda,&lt;br&gt;kirjutada või käivitada"] --&gt; R{"Kas kasutaja&lt;br&gt;on root?"}
+    R -- jah --&gt; OK["✅ lubatud&lt;br&gt;(üldjuhul)"]
+    R -- ei --&gt; O{"Kas kasutaja on&lt;br&gt;faili omanik?"}
+    O -- jah --&gt; UO["kehtivad omaniku&lt;br&gt;õigused (u)"]
+    O -- ei --&gt; G{"Kas kasutaja kuulub&lt;br&gt;faili gruppi?"}
+    G -- jah --&gt; UG["kehtivad grupi&lt;br&gt;õigused (g)"]
+    G -- ei --&gt; UM["kehtivad muude&lt;br&gt;õigused (o)"]</code></pre>
 <p>Juurkasutajale õiguste kontroll üldjuhul ei kehti.</p>
 <h2 id="37-oiguste-muutmine-chmod">3.7 Õiguste muutmine: chmod<a class="headerlink" href="#37-oiguste-muutmine-chmod" title="Permanent link">&para;</a></h2>
 <p>Õigusi muudab faili omanik või juurkasutaja käsuga <code>chmod</code>. Õigusi saab anda kahel kujul.</p>
@@ -5755,6 +5763,12 @@ ls<span class="w"> </span>-la<span class="w"> </span>/home/testija
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>flowchart LR
+    P["login, sshd, sudo, su"] --&gt; PAM["PAM&lt;br&gt;/etc/pam.d/"]
+    PAM --&gt; A1["auth&lt;br&gt;kes sa oled?"] --&gt; A2["account&lt;br&gt;kas tohid?"] --&gt; A3["password&lt;br&gt;parooli muutmine"] --&gt; A4["session&lt;br&gt;seansi algus"]
+    A1 -.- M1["pam_unix&lt;br&gt;pam_faillock"]
+    A3 -.- M3["pam_pwquality"]
+    A4 -.- M4["pam_mkhomedir&lt;br&gt;pam_limits"]</code></pre>
 <p>Näiteks moodulid: <code>pam_unix</code> (tavaline parool), <code>pam_pwquality</code> (parooli tugevus), <code>pam_faillock</code> (lukustamine valede katsete järel), <code>pam_limits</code> (ressursipiirangud, moodul 5), <code>pam_mkhomedir</code> (kodukataloog, moodulid 20–21), <code>pam_sss</code> (LDAP/AD).</p>
 <div class="admonition warning">
 <p class="admonition-title">Hoiatus</p>

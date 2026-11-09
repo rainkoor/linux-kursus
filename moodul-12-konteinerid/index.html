@@ -4844,6 +4844,13 @@
 <li><strong>SELinux/AppArmor</strong> ja <strong>seccomp</strong> - lisapiirangud.</li>
 </ul>
 <p>Proxmoxis on kahte liiki virtualiseerimist: <strong>KVM</strong> virtuaalmasinad ja <strong>LXC</strong> konteinerid. LXC konteiner on terve „kerge Linuxi süsteem“, Dockeri/Podmani konteiner on tavaliselt üks rakendus.</p>
+<pre class="mermaid"><code>flowchart LR
+    CF["Containerfile&lt;br&gt;retsept"] -- "podman build" --&gt; I["Pilt&lt;br&gt;(image)"]
+    REG[("Register&lt;br&gt;docker.io, quay.io")] -- "podman pull" --&gt; I
+    I -- "podman push" --&gt; REG
+    I -- "podman run" --&gt; C1["Konteiner 1"]
+    I -- "podman run" --&gt; C2["Konteiner 2"]
+    C1 -. "andmed" .-&gt; V[("Köide&lt;br&gt;(volume)")]</code></pre>
 <h3 id="pildid-ja-registrid">Pildid ja registrid<a class="headerlink" href="#pildid-ja-registrid" title="Permanent link">&para;</a></h3>
 <p>Konteinerpildid laaditakse <strong>registritest</strong>:</p>
 <table>

@@ -4952,6 +4952,15 @@
 <hr />
 <h2 id="151-dns-server">15.1 DNS-server<a class="headerlink" href="#151-dns-server" title="Permanent link">&para;</a></h2>
 <p>Moodulis 7 kasutasid DNS-i kliendina. Oma DNS-server on vajalik, et sisevõrgu masinatel oleksid nimed (nt <code>kool.lab.example</code>) ilma, et iga masina <code>/etc/hosts</code> faili peaks muutma.</p>
+<p>DNS on hierarhiline: iga tase teab ainult järgmise taseme servereid.</p>
+<pre class="mermaid"><code>flowchart TB
+    R["juur ."] --&gt; EE["ee."]
+    R --&gt; COM["com."]
+    R --&gt; ORG["org."]
+    EE --&gt; EDU["edu.ee."]
+    EDU --&gt; HK["hkhk.edu.ee.&lt;br&gt;kooli autoriteetne server"]
+    HK --&gt; W["www.hkhk.edu.ee"]
+    COM --&gt; G["google.com."]</code></pre>
 <p>DNS-serverid jagunevad kahte liiki:</p>
 <table>
 <thead>
@@ -5428,6 +5437,10 @@ mailq<span class="w">                                       </span><span class="
 <li><strong>2</strong> eri andmekandjal;</li>
 <li><strong>1</strong> koopia mujal (teises hoones, pilves) - tulekahju, varguse ja lunavara vastu.</li>
 </ul>
+<pre class="mermaid"><code>flowchart LR
+    O[("Originaal&lt;br&gt;server")] --&gt; K1[("Koopia 1&lt;br&gt;teine ketas/server&lt;br&gt;samas kohas")]
+    O --&gt; K2[("Koopia 2&lt;br&gt;teises hoones või pilves,&lt;br&gt;muudetamatu")]
+    K1 -. "2 eri andmekandjat" .- K2</code></pre>
 <p>Lunavara vastu on oluline, et vähemalt üks koopia oleks <strong>muudetamatu</strong> või <strong>võrgust eraldatud</strong> - muidu krüpteerib ründaja ka varukoopiad.</p>
 <h3 id="taastamise-eesmargid-rpo-ja-rto">Taastamise eesmärgid: RPO ja RTO<a class="headerlink" href="#taastamise-eesmargid-rpo-ja-rto" title="Permanent link">&para;</a></h3>
 <p>Varundusplaani koostamist alusta kahest küsimusest teenuse omanikule:</p>

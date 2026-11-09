@@ -5143,6 +5143,15 @@ pfctl<span class="w"> </span>-f<span class="w"> </span>/etc/pf.conf<span class="
 </div>
 <h2 id="2511-jailid">25.11 Jailid<a class="headerlink" href="#2511-jailid" title="Permanent link">&para;</a></h2>
 <p><strong>Jail</strong> on FreeBSD isoleeritud keskkond (aastast 2000 - üks konteinerite eelkäijaid): oma failisüsteemi juur, oma IP-aadress, oma kasutajad ja protsessid, kuid <strong>sama kernel</strong>. Jaili protsessid ei näe hosti ega teiste jailide protsesse. Jailis töötab tavaliselt üks teenus (veebiserver, andmebaas).</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph H ["FreeBSD host - üks kernel"]
+        direction LR
+        J1["jail www&lt;br&gt;10.0.83.67&lt;br&gt;nginx"]
+        J2["jail db&lt;br&gt;10.0.83.68&lt;br&gt;PostgreSQL"]
+        HS["host ise&lt;br&gt;sshd, pf"]
+        J1 ~~~ J2 ~~~ HS
+    end
+    H --- Z[("ZFS&lt;br&gt;zroot/jails/www&lt;br&gt;zroot/jails/db")]</code></pre>
 <table>
 <thead>
 <tr>

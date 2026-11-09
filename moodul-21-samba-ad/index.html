@@ -5402,6 +5402,16 @@
 <li>Kui kasutaja tahab kasutada teenust (nt failiserverit), küsib klient TGT abil KDC-lt <strong>teenusepileti</strong>.</li>
 <li>Teenus kontrollib piletit; parooli ei saadeta üle võrgu.</li>
 </ol>
+<pre class="mermaid"><code>sequenceDiagram
+    participant K as Klient (mari)
+    participant DC as KDC (domeenikontroller)
+    participant T as Teenus (failiserver)
+    K-&gt;&gt;DC: 1. Sisselogimine (parooliga tõestatud päring)
+    DC-&gt;&gt;K: TGT - sissepääsupilet (10 h)
+    K-&gt;&gt;DC: 2. TGT + „tahan failiserverit“
+    DC-&gt;&gt;K: teenusepilet
+    K-&gt;&gt;T: 3. teenusepilet
+    T-&gt;&gt;K: ✅ ligipääs - parooli üle võrgu ei saadetud</code></pre>
 <p>Kerberose eeldused, mida laboris tihti unustatakse:</p>
 <ul>
 <li><strong>Kellaaeg</strong> - kliendi ja DC kellad tohivad erineda kõige rohkem <strong>5 minutit</strong>. Muidu: <code>Clock skew too great</code>.</li>

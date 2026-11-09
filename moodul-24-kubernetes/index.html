@@ -5649,6 +5649,14 @@ kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w">
 </div>
 <h2 id="248-valjast-ligipaas-ingress-ja-tls">24.8 Väljast ligipääs: Ingress ja TLS<a class="headerlink" href="#248-valjast-ligipaas-ingress-ja-tls" title="Permanent link">&para;</a></h2>
 <p><strong>Ingress</strong> kirjeldab, milline nimi ja tee suunatakse millisele teenusele. Seda täidab <strong>Ingressi kontroller</strong> - k3s-is Traefik (moodul 13), mis kuulab kõigil sõlmedel porte 80 ja 443.</p>
+<p>Päringu teekond kliendist podini:</p>
+<pre class="mermaid"><code>flowchart LR
+    K["klient&lt;br&gt;https://kool.k8s.lab.example"] --&gt; N["mis tahes sõlm&lt;br&gt;port 443"]
+    N --&gt; I["Ingress&lt;br&gt;Traefik"]
+    I -- "nimi + tee" --&gt; S["Service kool&lt;br&gt;ClusterIP"]
+    S --&gt; P1["pod"]
+    S --&gt; P2["pod"]
+    S --&gt; P3["pod"]</code></pre>
 <p>TLS-i jaoks pane sertifikaat ja võti Secret'iks (labori CA-ga allkirjastatud sertifikaat, moodul 13):</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>kool-tls<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>--cert<span class="o">=</span>k8s.crt<span class="w"> </span>--key<span class="o">=</span>k8s.key
 </code></pre></div>

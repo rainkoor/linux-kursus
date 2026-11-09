@@ -5426,6 +5426,13 @@ sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="
 </div>
 <h2 id="114-logid">11.4 Logid<a class="headerlink" href="#114-logid" title="Permanent link">&para;</a></h2>
 <p>Logid on peamine allikas, et mõista, mis süsteemis toimus - nii vigade kui ka rünnakute puhul.</p>
+<pre class="mermaid"><code>flowchart LR
+    P["programmid ja teenused&lt;br&gt;sshd, nginx, sudo"] --&gt; J["systemd-journald&lt;br&gt;journalctl"]
+    K["kernel"] --&gt; J
+    J --&gt; R["rsyslog"]
+    R --&gt; F["/var/log/*&lt;br&gt;tekstifailid"]
+    F --&gt; LR["logrotate&lt;br&gt;pakib ja kustutab vanad"]
+    R -. "olulistes keskkondades" .-&gt; S[("logiserver&lt;br&gt;/ SIEM")]</code></pre>
 <h3 id="olulisemad-logid">Olulisemad logid<a class="headerlink" href="#olulisemad-logid" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -5567,6 +5574,12 @@ sudo<span class="w"> </span>logrotate<span class="w"> </span>-f<span class="w"> 
 <h2 id="115-kohustuslik-juurdepaasukontroll">11.5 Kohustuslik juurdepääsukontroll<a class="headerlink" href="#115-kohustuslik-juurdepaasukontroll" title="Permanent link">&para;</a></h2>
 <p>Moodulis 3 õpitud tavalised õigused (<code>rwx</code>, omanik, grupp) on <strong>valikuline juurdepääsukontroll</strong> (DAC, <em>Discretionary Access Control</em>): faili omanik otsustab ise, kes tohib faili kasutada, ja juurkasutajale need piirangud ei kehti.</p>
 <p><strong>Kohustuslik juurdepääsukontroll</strong> (MAC, <em>Mandatory Access Control</em>) lisab süsteemse poliitika, mida ei saa mööda minna isegi juurkasutaja õigustes töötav programm. Näiteks: veebiserver tohib lugeda ainult veebifaile ja kuulata ainult veebiporte - isegi kui ründaja võtab veebiserveri üle, ei saa ta lugeda faili <code>/etc/shadow</code> ega avada uut porti.</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Protsess tahab faili&lt;br&gt;või porti kasutada"] --&gt; D{"DAC&lt;br&gt;tavalised õigused&lt;br&gt;rwx, omanik, grupp"}
+    D -- "keelatud" --&gt; X["⛔ Permission denied"]
+    D -- "lubatud" --&gt; M{"MAC&lt;br&gt;SELinux / AppArmor&lt;br&gt;poliitika"}
+    M -- "keelatud" --&gt; X2["⛔ keelatud + logikirje&lt;br&gt;(AVC / apparmor DENIED)"]
+    M -- "lubatud" --&gt; OK["✅ lubatud"]</code></pre>
 <table>
 <thead>
 <tr>

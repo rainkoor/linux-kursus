@@ -5154,6 +5154,12 @@
 <h2 id="11-mis-on-linux">1.1 Mis on Linux?<a class="headerlink" href="#11-mis-on-linux" title="Permanent link">&para;</a></h2>
 <p>Rangelt võttes on <strong>Linux</strong> operatsioonisüsteemi <strong>kernel</strong> ehk tuum: programm, mis haldab riistvara (protsessor, mälu, kettad, võrk) ja jagab ressursse teiste programmide vahel. Kerneli kirjutas 1991. aastal Soome tudeng <strong>Linus Torvalds</strong> ja seda arendavad tänapäeval tuhanded inimesed üle maailma.</p>
 <p>Kernel üksi ei ole veel kasutatav süsteem. Selleks on vaja ka käsurea tööriistu, teeke, pakihaldurit, teenuseid ja muud tarkvara. Suur osa sellest pärineb <strong>GNU projektist</strong>, mistõttu räägitakse vahel ka nimest <strong>GNU/Linux</strong>.</p>
+<p>Linuxi süsteem koosneb kihtidest. Kasutaja ei räägi riistvaraga otse, vaid programmide ja kerneli kaudu:</p>
+<pre class="mermaid"><code>flowchart TB
+    K["👤 Kasutaja"] --&gt; R["Rakendused ja käsud&lt;br&gt;ls, nano, nginx, Firefox"]
+    R --&gt; S["Kest ja tööriistad&lt;br&gt;Bash, GNU coreutils, teegid"]
+    S --&gt; L["Linuxi kernel&lt;br&gt;protsessid, mälu, failisüsteemid, võrk, draiverid"]
+    L --&gt; H["Riistvara&lt;br&gt;protsessor, mälu, kettad, võrgukaart"]</code></pre>
 <p>Linux on <strong>vaba ja avatud lähtekoodiga tarkvara</strong>: lähtekood on kõigile kättesaadav ning seda võib uurida, muuta ja levitada.</p>
 <p>Linux on <strong>UNIX-i-laadne</strong> operatsioonisüsteem: see järgib 1969. aastal loodud UNIX-i põhimõtteid, kuid ei sisalda UNIX-i koodi. UNIX-i otsene järeltulija on hoopis <strong>BSD</strong> perekond (FreeBSD, OpenBSD jt), mis on Linuxiga väga sarnane, kuid on terviklik süsteem ja kasutab teistsugust litsentsi. BSD aluseid kasutavad näiteks macOS ja paljud tulemüürid. Linuxi ja BSD erinevustest loe lähemalt lisast <a href="../lisad/distrod/#bsd-ja-linux">Linuxi distributsioonide ülevaade</a>.</p>
 <div class="admonition note">
@@ -5258,6 +5264,16 @@
 <li><strong>Kest</strong> (<em>shell</em>) on programm, mis loeb sinu käske, tõlgendab neid ja käivitab vastavad programmid. Linuxi levinuim kest on <strong>Bash</strong>.</li>
 <li><strong>Käsurida</strong> (<em>command line</em>) on üldnimetus tekstipõhisele töötamisele.</li>
 </ul>
+<p>Kuidas need osad kokku käivad, kui haldad serverit oma arvutist:</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph A ["Sinu arvuti"]
+        T["Terminal&lt;br&gt;Windows Terminal"] --&gt; C["SSH klient&lt;br&gt;ssh"]
+    end
+    subgraph S ["Server"]
+        D["SSH-server&lt;br&gt;sshd"] --&gt; B["Kest&lt;br&gt;bash"] --&gt; P["Käsk&lt;br&gt;nt ls -l"]
+    end
+    C -- "krüpteeritud ühendus, port 22" --&gt; D
+    P -. "väljund" .-&gt; T</code></pre>
 <h2 id="14-uhendumine-serveriga-ssh-kaudu">1.4 Ühendumine serveriga SSH kaudu<a class="headerlink" href="#14-uhendumine-serveriga-ssh-kaudu" title="Permanent link">&para;</a></h2>
 <p><strong>SSH</strong> (<em>Secure Shell</em>) on krüpteeritud protokoll, millega saab üle võrgu teise arvuti käsureale ligi. SSH klient on olemas Windowsis, macOS-is ja Linuxis.</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>kasutaja@aadress
@@ -5429,6 +5445,18 @@ man<span class="w"> </span>-k<span class="w"> </span>copy
 <h2 id="17-failisusteemi-hierarhia">1.7 Failisüsteemi hierarhia<a class="headerlink" href="#17-failisusteemi-hierarhia" title="Permanent link">&para;</a></h2>
 <p>Windowsis on igal kettal oma täht (<code>C:</code>, <code>D:</code>). Linuxis on <strong>üks puu</strong>, mis algab <strong>juurkataloogist</strong> <code>/</code>. Kõik kettad, USB-mälud ja võrgukettad haagitakse selle puu mõnda kataloogi.</p>
 <p>Kataloogide paigutust kirjeldab standard <strong>FHS</strong> (<em>Filesystem Hierarchy Standard</em>):</p>
+<pre class="mermaid"><code>flowchart TB
+    R["/"] --&gt; home["/home&lt;br&gt;kasutajad"]
+    R --&gt; etc["/etc&lt;br&gt;seadistus"]
+    R --&gt; var["/var&lt;br&gt;logid, andmed"]
+    R --&gt; usr["/usr&lt;br&gt;programmid"]
+    R --&gt; boot["/boot&lt;br&gt;kernel"]
+    R --&gt; dev["/dev&lt;br&gt;seadmed"]
+    R --&gt; tmp["/tmp&lt;br&gt;ajutised failid"]
+    R --&gt; root["/root&lt;br&gt;juurkasutaja"]
+    home --&gt; mari["/home/mari"]
+    var --&gt; log["/var/log"]
+    usr --&gt; bin["/usr/bin"]</code></pre>
 <table>
 <thead>
 <tr>

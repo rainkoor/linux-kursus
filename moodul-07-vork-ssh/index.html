@@ -5586,6 +5586,14 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <li><strong>files</strong> - kõigepealt vaadatakse faili <code>/etc/hosts</code>;</li>
 <li><strong>dns</strong> - siis küsitakse DNS-serverilt, mis on kirjas failis <code>/etc/resolv.conf</code>.</li>
 </ol>
+<pre class="mermaid"><code>flowchart TD
+    A["ping www.hkhk.edu.ee"] --&gt; B{"/etc/hosts&lt;br&gt;(files)"}
+    B -- "leitud" --&gt; IP["IP-aadress ✅"]
+    B -- "ei leitud" --&gt; C["kohalik resolver&lt;br&gt;systemd-resolved 127.0.0.53"]
+    C -- "vahemälus" --&gt; IP
+    C -- "küsib" --&gt; D["DNS-server&lt;br&gt;/etc/resolv.conf, nt 10.0.83.1"]
+    D --&gt; E["juur → ee → edu.ee →&lt;br&gt;hkhk.edu.ee autoriteetne server"]
+    E --&gt; IP</code></pre>
 <h3 id="etchosts">/etc/hosts<a class="headerlink" href="#etchosts" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>127.0.0.1       localhost
 127.0.1.1       ubuntusrv
@@ -5755,6 +5763,18 @@ tcp   LISTEN 127.0.0.1:3306      0.0.0.0:*         users:(("mariadbd",pid=950,fd
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>flowchart TD
+    S1["1. ip -br a&lt;br&gt;liides ja aadress?"] -- OK --&gt; S2["2. ip r&lt;br&gt;vaikelüüs?"]
+    S2 -- OK --&gt; S3["3. ping lüüs&lt;br&gt;kohalik võrk?"]
+    S3 -- OK --&gt; S4["4. ping 1.1.1.1&lt;br&gt;internet?"]
+    S4 -- OK --&gt; S5["5. dig debian.org&lt;br&gt;DNS?"]
+    S5 -- OK --&gt; S6["6. curl / nc&lt;br&gt;teenus ja port?"]
+    S1 -- viga --&gt; V1["kaabel, DHCP,&lt;br&gt;võrgukaart"]
+    S2 -- viga --&gt; V2["võrguseadistus"]
+    S3 -- viga --&gt; V3["VLAN, kohalik tulemüür"]
+    S4 -- viga --&gt; V4["ruuter, NAT"]
+    S5 -- viga --&gt; V5["DNS-seadistus"]
+    S6 -- viga --&gt; V6["teenus, tulemüür, port"]</code></pre>
 <p>Täiendavad tööriistad:</p>
 <div class="highlight"><pre><span></span><code>tracepath<span class="w"> </span>debian.org<span class="w">             </span><span class="c1"># näita teed sihtkohani (ruuterid vahel)</span>
 mtr<span class="w"> </span>debian.org<span class="w">                   </span><span class="c1"># tracepath + ping reaalajas (pakett mtr)</span>
@@ -5775,6 +5795,17 @@ sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </
 <li><strong>avalik võti</strong> (<em>public key</em>) - kopeeritakse serverisse. Seda võib vabalt jagada.</li>
 </ul>
 <p>Server kontrollib ühendumisel, kas sul on avalikule võtmele vastav privaatvõti, ilma et privaatvõti kunagi üle võrgu liiguks.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant K as Klient (privaatvõti)
+    participant S as Server (avalik võti&lt;br&gt;~/.ssh/authorized_keys)
+    K-&gt;&gt;S: Tahan sisse logida kasutajana mari, võtmega X
+    S-&gt;&gt;S: Kas võti X on authorized_keys failis?
+    S-&gt;&gt;K: Väljakutse: allkirjasta need juhuslikud andmed
+    K-&gt;&gt;K: Allkirjastab privaatvõtmega
+    K-&gt;&gt;S: Allkiri
+    S-&gt;&gt;S: Kontrollib allkirja avaliku võtmega
+    S-&gt;&gt;K: ✅ Sisse lubatud
+    Note over K,S: Privaatvõti ei lahku kunagi kliendi arvutist</code></pre>
 <p><strong>1. Loo võtmepaar</strong> (oma arvutis):</p>
 <div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">"mari@sülearvuti"</span>
 </code></pre></div>
@@ -5951,6 +5982,12 @@ sudo<span class="w"> </span>sshd<span class="w"> </span>-T<span class="w"> </spa
 </tbody>
 </table>
 <p><strong>Põhimõte:</strong> keela kõik sissetulev liiklus ja luba ainult vajalik (<em>default deny</em>).</p>
+<pre class="mermaid"><code>flowchart LR
+    P["sissetulev pakett"] --&gt; E{"Kas kuulub juba&lt;br&gt;lubatud ühendusse?"}
+    E -- jah --&gt; OK["✅ lubatud"]
+    E -- ei --&gt; R{"Kas mõni reegel&lt;br&gt;lubab seda porti&lt;br&gt;ja aadressi?"}
+    R -- jah --&gt; OK
+    R -- ei --&gt; X["⛔ keelatud&lt;br&gt;(default deny)"]</code></pre>
 <h3 id="ufw-ubuntu">ufw (Ubuntu)<a class="headerlink" href="#ufw-ubuntu" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>verbose<span class="w">                   </span><span class="c1"># olek</span>
 sudo<span class="w"> </span>ufw<span class="w"> </span>default<span class="w"> </span>deny<span class="w"> </span>incoming<span class="w">            </span><span class="c1"># keela vaikimisi sissetulev</span>

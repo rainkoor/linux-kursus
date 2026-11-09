@@ -5126,6 +5126,21 @@
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; R: loomine (fork)
+    R: R - töötab / ootab protsessorit
+    S: S - ootab sündmust
+    D: D - ootab ketast
+    T: T - peatatud
+    Z: Z - zombie
+    R --&gt; S: ootab sisendit
+    S --&gt; R: sündmus saabus
+    R --&gt; D: ketta I/O
+    D --&gt; R: valmis
+    R --&gt; T: Ctrl+Z / SIGSTOP
+    T --&gt; R: fg, bg / SIGCONT
+    R --&gt; Z: lõpetas töö
+    Z --&gt; [*]: vanem luges tulemuse</code></pre>
 <h2 id="52-protsesside-vaatamine">5.2 Protsesside vaatamine<a class="headerlink" href="#52-protsesside-vaatamine" title="Permanent link">&para;</a></h2>
 <h3 id="ps">ps<a class="headerlink" href="#ps" title="Permanent link">&para;</a></h3>
 <p><code>ps</code> näitab protsesside hetkeseisu.</p>
@@ -5303,6 +5318,15 @@ killall<span class="w"> </span>firefox<span class="w">              </span><span
 <li>vajuta <strong>Ctrl+Z</strong> - käsk peatatakse;</li>
 <li>kirjuta <code>bg</code> - käsk jätkab taustal.</li>
 </ol>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; Esiplaan: käsk
+    [*] --&gt; Taust: käsk &amp;
+    Esiplaan --&gt; Peatatud: Ctrl+Z
+    Peatatud --&gt; Taust: bg
+    Peatatud --&gt; Esiplaan: fg
+    Taust --&gt; Esiplaan: fg
+    Esiplaan --&gt; [*]: lõpetab / Ctrl+C
+    Taust --&gt; [*]: lõpetab / kill</code></pre>
 <table>
 <thead>
 <tr>
@@ -5404,6 +5428,17 @@ systemctl<span class="w"> </span>is-enabled<span class="w"> </span>httpd<span cl
 <p class="admonition-title">Hoiatus</p>
 <p><strong>start ja enable on eri asjad!</strong> <code>start</code> käivitab teenuse <strong>praegu</strong>, <code>enable</code> määrab, et teenus käivitub <strong>järgmisel alglaadimisel</strong>. Uue teenuse puhul on tavaliselt vaja mõlemat: <code>enable --now</code>.</p>
 </div>
+<pre class="mermaid"><code>stateDiagram-v2
+    direction LR
+    inactive --&gt; active: systemctl start
+    active --&gt; inactive: systemctl stop
+    active --&gt; active: restart / reload
+    active --&gt; failed: viga, kokkujooksmine
+    failed --&gt; active: start (pärast parandust)
+    note right of inactive
+        enable / disable ei muuda olekut kohe,
+        vaid seda, kas teenus käivitub alglaadimisel
+    end note</code></pre>
 <p><code>systemctl status</code> väljund:</p>
 <div class="highlight"><pre><span></span><code>● sshd.service - OpenSSH server daemon
      Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: enabled)
@@ -5600,6 +5635,9 @@ sudo<span class="w"> </span>crontab<span class="w"> </span>-u<span class="w"> </
 <p>Cron käivitab käsud väga minimaalse keskkonnaga (<code>PATH</code> on lühike). Kasuta crontab'is alati <strong>täielikke teid</strong> ja suuna väljund faili, et vigu näha: <code>... &gt;&gt; /var/log/varundus.log 2&gt;&amp;1</code>.</p>
 </div>
 <p>Süsteemi ajastatud tööd on failis <code>/etc/crontab</code> ja kataloogides <code>/etc/cron.d/</code>, <code>/etc/cron.daily/</code>, <code>/etc/cron.weekly/</code> ja <code>/etc/cron.monthly/</code>.</p>
+<pre class="mermaid"><code>flowchart LR
+    C["⏰ cron või&lt;br&gt;systemd taimer"] -- "kindlal ajal" --&gt; S["teenus või käsk"] --&gt; SK["skript&lt;br&gt;/usr/local/bin/varunda.sh"]
+    SK --&gt; J["väljund ja vead&lt;br&gt;journal / e-kiri"]</code></pre>
 <h3 id="systemd-taimerid">systemd taimerid<a class="headerlink" href="#systemd-taimerid" title="Permanent link">&para;</a></h3>
 <p>Taimer on cron'i tänapäevane alternatiiv. Taimeri jaoks on vaja kahte faili: teenus, mis tööd teeb, ja taimer, mis selle käivitab.</p>
 <p><code>/etc/systemd/system/varundus.service</code>:</p>
