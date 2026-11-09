@@ -79,7 +79,12 @@ Olulisemad käsud (tavarežiimis):
 > [!TIP]
 > **Kui jäid vim-i lõksu:** vajuta paar korda **Esc**, kirjuta `:q!` ja vajuta Enter. Nii väljud, ilma et muudatusi salvestataks.
 
-Vim-i õppimiseks on suurepärane interaktiivne õpetus `vimtutor` (vajab paketti `vim`).
+Vim-i õppimiseks sobivad:
+
+- `vimtutor` - interaktiivne õpetus otse terminalis (vajab paketti `vim`); hea alustuseks, võtab umbes 30 minutit.
+- [Vim Adventures](https://vim-adventures.com/) - brauserimäng, kus tegelast liigutatakse vim-i klahvidega; esimesed tasemed on tasuta.
+- [The Viminator](https://www.theviminator.com/) - brauseris töötav vim-i käskude harjutamise rakendus.
+- [VimGolf](https://www.vimgolf.com/) - ülesanded, kus tuleb tekst muuta võimalikult väheste klahvivajutustega; sobib edasijõudnule.
 
 > [!TIP]
 > **Kumba kasutada?** Igapäevaseks tööks sobib nano. vim-i põhitõed (`i`, `Esc`, `:wq`, `:q!`) peab aga oskama iga süsteemiadministraator, sest mõnes süsteemis on ainult `vi`.
