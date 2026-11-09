@@ -4753,6 +4753,10 @@ nc<span class="w"> </span>-zv<span class="w"> </span>UBUNTU_IP<span class="w"> <
 <hr />
 <h2 id="4-osa-pusiv-vorguseadistus-netplaniga">4. osa. Püsiv võrguseadistus Netplaniga<a class="headerlink" href="#4-osa-pusiv-vorguseadistus-netplaniga" title="Permanent link">&para;</a></h2>
 <p>Lisad Ubuntu masinale teise IP-aadressi, säilitades olemasoleva DHCP-seadistuse.</p>
+<div class="admonition info">
+<p class="admonition-title">Oluline</p>
+<p><strong>Kontrolli enne, et <code>LISA_IP</code> on vaba.</strong> Samas alamvõrgus ei tohi kahel masinal olla sama aadressi. Debiani masinast: <code>ping -c2 LISA_IP</code> ja <code>ip neigh show LISA_IP</code> - kui aadress vastab või naabertabelis on MAC-aadress, on see kasutusel ja vajad teist aadressi. Kooli laboris kasutab iga õppija ainult talle antud aadressi.</p>
+</div>
 <p><strong>4.1</strong> Proovi kõigepealt ajutiselt:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ip<span class="w"> </span>address<span class="w"> </span>add<span class="w"> </span>LISA_IP/24<span class="w"> </span>dev<span class="w"> </span>&lt;liides&gt;
 ip<span class="w"> </span>-br<span class="w"> </span>address

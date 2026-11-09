@@ -1344,6 +1344,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iga-masin-vajab-oma-aadressi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iga masin vajab oma aadressi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#masina-nimi" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4910,6 +4921,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iga-masin-vajab-oma-aadressi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iga masin vajab oma aadressi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#masina-nimi" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5486,6 +5508,45 @@ sudo<span class="w"> </span>ip<span class="w"> </span>route<span class="w"> </sp
 <p class="admonition-title">Hoiatus</p>
 <p>Kui muudad SSH kaudu selle liidese seadistust, mille kaudu oled ühendatud, võid ühenduse kaotada. Hoia käepärast konsool (nt Proxmoxi veebiliidese konsool).</p>
 </div>
+<h3 id="iga-masin-vajab-oma-aadressi">Iga masin vajab oma aadressi<a class="headerlink" href="#iga-masin-vajab-oma-aadressi" title="Permanent link">&para;</a></h3>
+<p>Samas alamvõrgus ei tohi kahel masinal olla <strong>sama IP-aadress</strong>. Kui kaks masinat kasutavad sama aadressi (<em>IP address conflict</em>), ei tea ülejäänud võrk, kummale pakette saata: ühendused katkevad juhuslikult, SSH ühendub vahel valesse masinasse ja viga on raske leida. DHCP-server jälgib, et ta ei jagaks sama aadressi kaks korda, kuid <strong>staatilise aadressi</strong> eest vastutad sina.</p>
+<p>Kursuse laboris on igal masinal oma aadress (vt lisa <a href="../lisad/paigaldus/">Laborikeskkond ja paigaldus</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Masin</th>
+<th>Aadress</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>debian1</code></td>
+<td><code>10.0.83.52/24</code></td>
+</tr>
+<tr>
+<td><code>debian2</code></td>
+<td><code>10.0.83.53/24</code></td>
+</tr>
+<tr>
+<td><code>ubuntusrv</code></td>
+<td><code>10.0.83.54/24</code></td>
+</tr>
+<tr>
+<td><code>alma</code></td>
+<td><code>10.0.83.55/24</code></td>
+</tr>
+</tbody>
+</table>
+<p>Kõik masinad on samas alamvõrgus <code>10.0.83.0/24</code> ja kasutavad sama vaikelüüsi <code>10.0.83.1</code>, kuid aadressi viimane osa on igal masinal erinev. Selle mooduli näidetes kasutame samu aadresse: Ubuntu näited <code>.54</code>, Debiani näited <code>.52</code> ja AlmaLinuxi näited <code>.55</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Oluline</p>
+<p><strong>Enne staatilise aadressi kasutuselevõttu kontrolli, et see on vaba.</strong> Kooli laboris annab aadressi õpetaja; ära võta suvalist aadressi. Kontrolli teisest masinast samas võrgus:</p>
+<div class="highlight"><pre><span></span><code>ping<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>.0.83.60<span class="w">                       </span><span class="c1"># vastus = aadress on juba kasutusel</span>
+ip<span class="w"> </span>neigh<span class="w"> </span>show<span class="w"> </span><span class="m">10</span>.0.83.60<span class="w">                  </span><span class="c1"># kas aadressil on MAC-aadress (naabertabelis)?</span>
+sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>ens18<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>.0.83.60<span class="w">    </span><span class="c1"># duplikaadi tuvastus (pakett iputils-arping)</span>
+</code></pre></div>
+<p>Ka <code>ping</code>-ile mittevastav aadress võib olla kasutusel (tulemüür, väljalülitatud masin), seega kontrolli kindlasti ka aadressiplaani.</p>
+</div>
 <h3 id="masina-nimi">Masina nimi<a class="headerlink" href="#masina-nimi" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>hostnamectl<span class="w">                               </span><span class="c1"># vaata</span>
 sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>ubuntusrv<span class="w">       </span><span class="c1"># muuda püsivalt</span>
@@ -5519,7 +5580,7 @@ sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span
 </tr>
 </tbody>
 </table>
-<p>Kõigis näidetes määrame liidesele <code>ens18</code> staatilise aadressi <code>10.0.83.54/24</code>, vaikelüüsi <code>10.0.83.1</code> ja DNS-serveri <code>10.0.83.1</code>.</p>
+<p>Igas näites on vaikelüüs ja DNS-server <code>10.0.83.1</code>, kuid <strong>aadress on igal masinal oma</strong>: Ubuntu (<code>ubuntusrv</code>) <code>10.0.83.54/24</code>, Debian (<code>debian1</code>) <code>10.0.83.52/24</code> ja AlmaLinux (<code>alma</code>) <code>10.0.83.55/24</code>. Kui kopeerid näite, muuda aadress oma masina omaks.</p>
 <h3 id="ubuntu-netplan">Ubuntu: Netplan<a class="headerlink" href="#ubuntu-netplan" title="Permanent link">&para;</a></h3>
 <p>Netplan loeb YAML-vormingus faile kataloogist <code>/etc/netplan/</code> ja genereerib nende põhjal seadistuse.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/netplan/50-staatiline.yaml</span>
@@ -5553,7 +5614,7 @@ iface lo inet loopback
 
 auto ens18
 iface ens18 inet static
-    address 10.0.83.54/24
+    address 10.0.83.52/24
     gateway 10.0.83.1
 </code></pre></div>
 <p>DNS-serverid kirjutatakse faili <code>/etc/resolv.conf</code>:</p>
@@ -5569,7 +5630,7 @@ nmcli<span class="w"> </span>connection<span class="w"> </span>show<span class="
 
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.54/24<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.55/24<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.gateway<span class="w"> </span><span class="m">10</span>.0.83.1<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.dns<span class="w"> </span><span class="s2">"10.0.83.1 1.1.1.1"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.dns-search<span class="w"> </span>lab.example
@@ -6269,7 +6330,7 @@ ip<span class="w"> </span>-d<span class="w"> </span>link<span class="w"> </span>
 <h3 id="bond-liideste-koondamine">Bond (liideste koondamine)<a class="headerlink" href="#bond-liideste-koondamine" title="Permanent link">&para;</a></h3>
 <p><strong>Bond</strong> (ka <em>teaming</em>, <em>LACP</em>) ühendab mitu võrgukaarti üheks loogiliseks liideseks: kaabli või kaardi rikke korral jätkub ühendus (<code>active-backup</code>) või liiklus jaotatakse (<code>802.3ad</code>/LACP, vajab kommutaatori tuge).</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nmcli<span class="w"> </span>con<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>bond<span class="w"> </span>con-name<span class="w"> </span>bond0<span class="w"> </span>ifname<span class="w"> </span>bond0<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>bond.options<span class="w"> </span><span class="s2">"mode=active-backup,miimon=100"</span><span class="w"> </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.52/24
+<span class="w">    </span>bond.options<span class="w"> </span><span class="s2">"mode=active-backup,miimon=100"</span><span class="w"> </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.55/24
 sudo<span class="w"> </span>nmcli<span class="w"> </span>con<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>ethernet<span class="w"> </span>ifname<span class="w"> </span>ens18<span class="w"> </span>master<span class="w"> </span>bond0
 sudo<span class="w"> </span>nmcli<span class="w"> </span>con<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>ethernet<span class="w"> </span>ifname<span class="w"> </span>ens19<span class="w"> </span>master<span class="w"> </span>bond0
 cat<span class="w"> </span>/proc/net/bonding/bond0

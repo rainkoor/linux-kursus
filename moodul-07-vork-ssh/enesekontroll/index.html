@@ -4485,6 +4485,7 @@
 <li>Mis on hüppeserver ja kuidas ühenduda sisevõrgu masinaga ühe SSH käsuga?</li>
 <li>Mis on IPv6 link-local aadress ja miks on IPv6 puhul tulemüür eriti oluline?</li>
 <li>Mis vahe on sillal, VLAN-il ja bond-liidesel?</li>
+<li>Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?</li>
 </ol>
 <h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4519,6 +4520,7 @@
 <li>Server, mille kaudu pääseb sisevõrku (bastion). <code>ssh -J kasutaja@hupe kasutaja@sisemasin</code> või <code>~/.ssh/config</code>-is <code>ProxyJump</code>.</li>
 <li><code>fe80::</code>-ga algav aadress, mis on igal liidesel automaatselt ja töötab ainult samas võrgulõigus. IPv6-s NAT-i tavaliselt pole, masinad on otse adresseeritavad - ainult tulemüür kaitseb neid.</li>
 <li>Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator); VLAN jagab ühe füüsilise võrgu mitmeks loogiliseks (märgistusega); bond koondab mitu füüsilist liidest üheks töökindluse või läbilaskevõime jaoks.</li>
+<li>Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): ühendused katkevad juhuslikult ja SSH võib ühenduda valesse masinasse. Kontrolli aadressiplaani ja teisest masinast <code>ping</code>, <code>ip neigh show &lt;aadress&gt;</code> või <code>arping -D</code>; kooli laboris kasuta ainult õpetaja antud aadressi.</li>
 </ol>
 <h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/^default/ {print $3}'</span>
