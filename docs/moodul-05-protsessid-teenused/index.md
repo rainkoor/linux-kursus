@@ -358,7 +358,7 @@ systemctl status minuteenus
 > [!NOTE]
 > **Programmi väljund läheb logisse.** Kõik, mida teenus kirjutab standardväljundisse või veaväljundisse, salvestab systemd journal'isse. Eraldi logifaili pole vaja.
 
-Sõltuvused, teenuse tüübid, mallid, pesa- ja teeüksused, kasutajateenused ning teenuste karastamine on põhjalikumalt [moodulis 10, punkt 10.11](../moodul-10-alglaadimine-kernel/index.md#1011-systemd-suvitsi).
+Sõltuvused, teenuse tüübid, mallid, pesa- ja teeüksused, kasutajateenused ning teenuste karastamine on põhjalikumalt [moodulis 10, punkt 10.11](../moodul-10-alglaadimine-kernel/index.md#1011-systemd-süvitsi).
 
 ## 5.7 Logid: journalctl
 

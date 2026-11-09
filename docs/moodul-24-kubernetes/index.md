@@ -6,6 +6,11 @@
 
 **Maht:** 10 tundi · **Laboritöö:** Debian (kolm sõlme) · **Eeldused:** moodulid 1–13, soovitatavalt 16 ja 23 · **Valikmoodul**
 
+> [!NOTE]
+> **Sissejuhatav moodul.** Kubernetes on selgelt edasijõudnute teema: lai ja keeruline valdkond, mille valdamine võtab aastaid. See moodul on mõeldud õppijale, kes **ei tea Kubernetesest veel midagi**, ja annab esimese sissevaate Linuxi administraatori vaatenurgast: miks orkestreerimist vaja on, kuidas klaster on üles ehitatud ning kuidas väikest k3s klastrit paigaldada, kasutada ja hooldada. Eesmärk on, et põhimõisted (pod, Deployment, Service, Ingress) oleksid tuttavad ja Kubernetes ei tunduks võõras - mitte Kubernetese, rakenduste arenduse ega pilveplatvormide valdamine.
+>
+> **HKHK õppijale:** konteinerite orkestreerimist ja pilvetehnoloogiaid käsitletakse põhjalikult viimase õppeaasta erialaainetes. See valikmoodul ei asenda neid ega käsitle nende teemasid sügavuti; see aitab huvilisel enne neid aineid põhimõisted selgeks saada.
+
 Moodulis 12 käivitasid konteinereid ühes masinas Podmani, Compose'i ja Quadletiga. Kui konteinereid ja servereid on palju, on vaja süsteemi, mis otsustab, millises masinas konteiner töötab, taaskäivitab selle rikke korral teises masinas, jagab koormust ja uuendab rakendusi katkestuseta. Seda nimetatakse **orkestreerimiseks** ja selle valdkonna standard on **Kubernetes**. Moodulis kasutame kerget, kuid täisväärtuslikku Kubernetese distributsiooni **k3s**.
 
 ## Õpiväljundid

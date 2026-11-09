@@ -53,6 +53,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `ansible-vault` | Saladuste krüpteerimine | [16](../moodul-16-automatiseerimine/index.md) |
 | `apache2ctl` | Apache'i juhtimine ja `configtest` | [13](../moodul-13-veebiserverid/index.md) |
 | `apt` | Debiani ja Ubuntu pakihaldur (`update`, `upgrade`, `install`, `remove`, `search`) | [4](../moodul-04-pakihaldus/index.md) |
+| `apt-mark` | Lukustab paketi versiooni (`hold`, `unhold`, `showhold`) | [4](../moodul-04-pakihaldus/index.md) |
 | `arping` | Saadab ARP-päringu; `-D` kontrollib, kas IP-aadress on võrgus juba kasutusel | [7](../moodul-07-vork-ssh/index.md) |
 | `at` | Käivitab käsu üks kord kindlal ajal | [5](../moodul-05-protsessid-teenused/index.md) |
 | `atq` | Ootel `at`-tööd | [5](../moodul-05-protsessid-teenused/index.md) |
@@ -117,6 +118,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | Käsk | Mida teeb | Moodul |
 |---|---|---|
 | `echo` | Väljastab teksti | [2](../moodul-02-failid-tekst-torud/index.md) |
+| `ethtool` | Võrguliidese kiirus, duplex ja draiveri info | [17](../moodul-17-seire/index.md) |
 | `exit` | Lõpetab skripti antud väljumiskoodiga | [6](../moodul-06-bash/index.md) |
 | `exportfs` | NFS-i jagatud kataloogid | [15](../moodul-15-vorguteenused/index.md) |
 
@@ -181,6 +183,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `ifreload` | Debiani ifupdown2 seadistuse uuesti laadimine (Proxmox) | [23](../moodul-23-virtualiseerimine/index.md) |
 | `iostat` | Ketaste koormus ja ooteajad | [9](../moodul-09-salvestus/index.md) |
 | `ip` | Võrguliidesed, aadressid ja marsruudid (`ip a`, `ip r`) | [7](../moodul-07-vork-ssh/index.md) |
+| `iperf3` | Mõõdab võrgu läbilaskevõimet kahe masina vahel | [17](../moodul-17-seire/index.md) |
 | `iscsiadm` | iSCSI initsiaator: avastamine ja sisselogimine | [19](../moodul-19-dhcp-pxe-iscsi/index.md) |
 
 ## J
@@ -270,6 +273,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `nano` | Lihtne tekstiredaktor | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `nc` | Netcat: TCP/UDP pordi testimine | [7](../moodul-07-vork-ssh/index.md) |
 | `ncdu` | Interaktiivne kettakasutuse vaade | [8](../moodul-08-kettad-lvm/index.md) |
+| `needrestart` | Näitab teenuseid, mis vajavad pärast teegi uuendust taaskäivitust (Debian, Ubuntu) | [4](../moodul-04-pakihaldus/index.md) |
 | `netplan` | Ubuntu võrguseadistuse rakendamine (`try`, `apply`) | [7](../moodul-07-vork-ssh/index.md) |
 | `nft` | nftables tulemüüri reeglid | [7](../moodul-07-vork-ssh/index.md) |
 | `nginx` | Veebiserver; `nginx -t` seadistuse kontroll | [13](../moodul-13-veebiserverid/index.md) |

@@ -198,7 +198,8 @@ rm ~/katkine.sh
 2. **Loki:** lisa logide kogumiseks Grafana Loki ja Alloy (või Promtail) ning vaata `debian1` journali logisid Grafanas.
 3. **Zabbix:** paigalda Zabbixi server (konteineritena: `zabbix/zabbix-server-pgsql`, `zabbix/zabbix-web-nginx-pgsql`, `postgres`) ja agent `debian1`-sse, seo host malliga *Linux by Zabbix agent*.
 4. **Netdata:** paigalda Netdata ühte masinasse ja võrdle selle reaalajagraafikuid Grafanaga.
-5. **tuned:** vaata AlmaLinuxis `tuned-adm active` ja `tuned-adm recommend`. Vaheta profiil `throughput-performance`-ks ja tagasi ning võrdle `sysctl vm.dirty_ratio` väärtusi.
+5. **Võrgu läbilaskevõime:** paigalda `iperf3` masinatesse `debian1` ja `ubuntusrv` (ava tulemüüris ajutiselt port 5201/tcp) ning mõõda kiirus mõlemas suunas. Käivita mõõtmise ajal teises masinas `stress-ng --cpu 0` ja vaata, kas tulemus muutub. Mida näitab `ethtool ens18`?
+6. **tuned:** vaata AlmaLinuxis `tuned-adm active` ja `tuned-adm recommend`. Vaheta profiil `throughput-performance`-ks ja tagasi ning võrdle `sysctl vm.dirty_ratio` väärtusi.
 
 ---
 

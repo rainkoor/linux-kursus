@@ -6,8 +6,8 @@
 
 Selles moodulis on kaks laboritööd, kumbki oma distrol:
 
-- **10A - AlmaLinux:** SELinux, automaatsed uuendused, audit;
-- **10B - Ubuntu:** logid ja logrotate, fail2ban, AppArmor, turvaaudit.
+- **11A - AlmaLinux:** SELinux, automaatsed uuendused, audit;
+- **11B - Ubuntu:** logid ja logrotate, fail2ban, AppArmor, turvaaudit.
 
 ---
 

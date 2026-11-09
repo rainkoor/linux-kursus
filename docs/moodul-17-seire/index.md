@@ -137,6 +137,18 @@ ip -s link                     # liidese liiklus ja vead
 sudo iftop -i ens18            # reaalajas liiklus ühenduste kaupa (pakett iftop)
 ```
 
+Kui kahtlustad, et võrk on aeglane, mõõda **läbilaskevõimet** kahe masina vahel ja kontrolli liidese kiirust:
+
+```bash
+iperf3 -s                                  # masinas A: server (port 5201/tcp)
+iperf3 -c 10.0.83.52 -t 10                 # masinas B: mõõda 10 sekundit A suunas
+iperf3 -c 10.0.83.52 -R                    # vastupidine suund
+sudo ethtool ens18                         # liidese kiirus ja duplex (Speed, Duplex, Link detected)
+mtr -rwc 20 1.1.1.1                        # pakettide kadu ja viide iga hüppe kaupa
+```
+
+Proxmoxi VirtIO kaart näitab `ethtool`-is sageli kiirust `Unknown` - see on normaalne, tegeliku kiiruse näitab `iperf3`. Kui mõõdetud kiirus on oodatust palju väiksem, kontrolli liidese vigu (`ip -s link`), MTU-d ja kaablit või kommutaatori porti.
+
 ### Kiire ülevaade 60 sekundiga
 
 Kui logid aeglasesse serverisse, käivita järjest:

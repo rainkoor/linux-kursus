@@ -319,6 +319,28 @@ Serverites eelistatakse üldjuhul distro tavapakette. Ubuntu serveris on Snap va
 - automaatseid turvauuendusi (`unattended-upgrades`, `dnf-automatic`) käsitleme moodulis 11;
 - väljalaske uuendus (nt Debian 12 → 13) on eraldi protsess, vt punkt 4.10.
 
+### Pärast uuendust: millised teenused vajavad taaskäivitust?
+
+Kui uuendatakse teeki (nt `openssl` või `glibc`), jäävad juba töötavad teenused kasutama **vana koopiat mälus** - turvaparandus hakkab kehtima alles teenuse taaskäivitamisel. Selle leidmiseks on tööriistad:
+
+```bash
+sudo needrestart              # Debian/Ubuntu: näitab ja pakub taaskäivitada teenused (Ubuntus vaikimisi paigaldatud)
+sudo dnf needs-restarting -s  # AlmaLinux: teenused, mis vajavad taaskäivitust
+sudo dnf needs-restarting -r  # AlmaLinux: kas on vaja kogu masina taaskäivitust
+```
+
+### Paketi versiooni lukustamine
+
+Mõnikord ei tohi paketti uuendada: uus versioon ei ühildu rakendusega või ootad enne uuendamist testi tulemust. Siis **lukustatakse** paketi versioon (*hold*, *versionlock*). Ära unusta lukku hiljem eemaldada - lukustatud pakett ei saa ka turvauuendusi.
+
+| Tegevus | Debian/Ubuntu | AlmaLinux |
+|---|---|---|
+| Lukusta | `sudo apt-mark hold nginx` | `sudo dnf versionlock add nginx` |
+| Näita lukustatuid | `apt-mark showhold` | `dnf versionlock list` |
+| Eemalda lukk | `sudo apt-mark unhold nginx` | `sudo dnf versionlock delete nginx` |
+
+AlmaLinuxis vajab `versionlock` paketti `python3-dnf-plugin-versionlock`. Kerneli uuendamist ei ole tavaliselt vaja lukustada: alles jäetakse mitu vana kerneli versiooni ja alglaadimisel saab valida eelmise (moodul 10).
+
 ## 4.10 Väljalaske uuendamine
 
 Tavaline `apt upgrade` või `dnf upgrade` uuendab pakette **sama väljalaske piires**. Uuele väljalaskele (nt Debian 12 *bookworm* → Debian 13 *trixie*) üleminek muudab hoidlaid, sadu pakette ja sageli ka seadistusfailide vormingut. See on eraldi protsess.
