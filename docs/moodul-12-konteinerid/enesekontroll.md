@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 12. Konteinerid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 13. Veebiserverid →](../moodul-13-veebiserverid/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 12. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

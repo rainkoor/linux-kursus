@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 14. Andmebaasid (kooli väikeserver, II osa)](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus →](../moodul-15-vorguteenused/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 14. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

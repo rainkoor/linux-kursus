@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 14. Enesekontroll](../moodul-14-andmebaasid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus
 
 **Maht:** 10 tundi · **Laboritöö:** Debian (15), Ubuntu (15B) · **Eeldused:** moodulid 13–14

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 10. Enesekontroll](../moodul-10-alglaadimine-kernel/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 11. Turvalisus ja logid →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 11. Turvalisus ja logid
 
 **Maht:** 10 tundi · **Laboritöö:** AlmaLinux (11A) ja Ubuntu (11B) · **Eeldused:** moodulid 1–10

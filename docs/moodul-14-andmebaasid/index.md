@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 13. Enesekontroll](../moodul-13-veebiserverid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 14. Andmebaasid (kooli väikeserver, II osa) →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 14. Andmebaasid
 
 **Maht:** 8 tundi · **Laboritöö:** Debian (ja AlmaLinux kliendina) · **Eeldused:** moodul 13

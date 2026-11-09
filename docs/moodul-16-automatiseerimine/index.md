@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 15. Enesekontroll](../moodul-15-vorguteenused/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 16. Ansible ja Vagrant →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
 
 **Maht:** 10 tundi · **Laboritöö:** AlmaLinux (juhtmasin), Debian ja Ubuntu (hallatavad) · **Eeldused:** moodulid 1–15

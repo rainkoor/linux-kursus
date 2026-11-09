@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 4. Tarkvara ja pakihaldus](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 4. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 4. Pakihaldus kolmel distrol
 
 | | |

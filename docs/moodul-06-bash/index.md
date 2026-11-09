@@ -1,6 +1,15 @@
+<!-- navigatsioon -->
+[← Moodul 5. Enesekontroll](../moodul-05-protsessid-teenused/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 6. Halduskriptid ja Git →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 6. Bashi skriptimine ja Git
 
 **Maht:** 16 tundi · **Laboritöö:** Debian · **Eeldused:** moodulid 1–5
+
+> [!NOTE]
+> **Süsteemihalduri vaade skriptimisele.** See moodul õpetab Bashi skriptimist nii palju, kui süsteemihaldur igapäevatöös vajab: korduvate tegevuste automatiseerimine, töökindlad hooldus- ja varundusskriptid, nende ajastamine ning skriptide ja seadistusfailide hoidmine Gitis. Eesmärk on kirjutada lühikesi praktilisi skripte ja lugeda teiste omi - mitte programmeerimise ega skriptimise täielik valdamine.
+>
+> **HKHK õppijale:** skriptimist käsitletakse põhjalikult eraldi skriptimise aines. See moodul annab Linuxi serverite haldamiseks vajaliku aluse ja seob skriptimise kursuse teiste teemadega.
 
 ## Õpiväljundid
 

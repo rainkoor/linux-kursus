@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 22. Linux töölaual ja WSL](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 22. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 22. Linux töölaual, Kali ja WSL
 
 | | |

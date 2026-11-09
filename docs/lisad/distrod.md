@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laborikeskkond ja serverite paigaldus](paigaldus.md) · [Sisukord](../../README.md#sisukord) · [UNIX-i ja Linuxi ajalugu →](ajalugu.md)
+<!-- /navigatsioon -->
+
 # Linuxi distributsioonide ülevaade
 
 Distrosid on sadu, kuid enamik neist põhineb mõnel suuremal **alusdistrol**. Selles ülevaates on aktiivselt arendatavad olulisemad distrod, mis on rühmitatud perekondade kaupa.

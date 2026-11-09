@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 1. Linux ja käsurida](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 1. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 1. Esimesed sammud käsureal
 
 | | |

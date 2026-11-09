@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 18. Enesekontroll](../moodul-18-opnsense/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 19. DHCP, PXE ja iSCSI →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
 
 **Maht:** 10 tundi · **Laboritöö:** Debian (serverid), AlmaLinux ja Ubuntu (kliendid) · **Eeldused:** moodulid 1–8, 15, 18 · **Valikmoodul**

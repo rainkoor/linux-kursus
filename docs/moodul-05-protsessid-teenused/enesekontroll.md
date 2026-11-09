@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 5. Protsessid, teenused ja ajastamine](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 6. Bashi skriptimine ja Git →](../moodul-06-bash/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 5. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

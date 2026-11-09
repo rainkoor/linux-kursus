@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Lõpuprojekt](../lopuprojekt.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 18. OPNsense laborivõrgu tulemüürina →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 18. BSD praktikas: OPNsense tulemüür
 
 **Maht:** 8 tundi · **Laboritöö:** OPNsense (FreeBSD), kliendid Debian ja Ubuntu · **Eeldused:** moodulid 1–7 · **Valikmoodul**

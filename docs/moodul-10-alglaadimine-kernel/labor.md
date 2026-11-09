@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 10. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 10. Alglaadimine, kernel ja taastamine
 
 | | |

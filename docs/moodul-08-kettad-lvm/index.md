@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 7. Enesekontroll](../moodul-07-vork-ssh/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 8. Kettad, failisüsteemid ja LVM →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 8. Kettad, failisüsteemid ja LVM
 
 **Maht:** 8 tundi · **Laboritöö:** AlmaLinux · **Eeldused:** moodulid 1–7

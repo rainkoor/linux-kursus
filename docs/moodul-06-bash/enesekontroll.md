@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 6. Halduskriptid ja Git](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 7. Võrk ja SSH →](../moodul-07-vork-ssh/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 6. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

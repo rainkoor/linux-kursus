@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 4. Enesekontroll](../moodul-04-pakihaldus/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 5. Protsessid, teenused ja ajastamine →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 5. Protsessid, teenused ja systemd
 
 **Maht:** 8 tundi · **Laboritöö:** AlmaLinux · **Eeldused:** moodulid 1–4

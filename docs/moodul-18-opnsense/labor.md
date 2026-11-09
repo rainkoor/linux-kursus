@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 18. BSD praktikas: OPNsense tulemüür](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 18. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 18. OPNsense laborivõrgu tulemüürina
 
 | | |

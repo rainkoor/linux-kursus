@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 1. Enesekontroll](../moodul-01-sissejuhatus/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 2. Logide analüüs ja failide haldus →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 2. Failid, tekst ja torud
 
 **Maht:** 10 tundi · **Laboritöö:** Debian · **Eeldused:** moodul 1

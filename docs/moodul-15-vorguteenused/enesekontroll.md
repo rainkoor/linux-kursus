@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina →](../moodul-16-automatiseerimine/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 15. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

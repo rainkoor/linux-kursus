@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 13. Veebiserverid (kooli väikeserver, I osa)](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 14. Andmebaasid →](../moodul-14-andmebaasid/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 13. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

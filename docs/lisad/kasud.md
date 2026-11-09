@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Sõnastik](sonastik.md) · [Sisukord](../../README.md#sisukord)
+<!-- /navigatsioon -->
+
 # Käskude loend
 
 Kursusel kasutatud olulisemad käsud tähestikulises järjekorras: mida käsk teeb ja millises moodulis selle kasutamist õpetatakse. Loend on mõeldud kiireks meeldetuletuseks - täpsed võtmed ja näited leiad moodulist ning käsu kasutusjuhendist (`man käsk`, `käsk --help`).

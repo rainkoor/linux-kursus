@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 23. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 23. KVM, Proxmox VE ja XCP-ng
 
 | | |

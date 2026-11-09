@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 12. Enesekontroll](../moodul-12-konteinerid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 13. Veebiserverid (kooli väikeserver, I osa) →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 13. Veebiserverid
 
 **Maht:** 10 tundi · **Laboritöö:** Debian, AlmaLinux, Ubuntu · **Eeldused:** moodulid 1–8, 11–12

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 11. Enesekontroll](../moodul-11-turvalisus-logid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 12. Konteinerid →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 12. Konteinerid
 
 **Maht:** 8 tundi · **Laboritöö:** AlmaLinux · **Eeldused:** moodulid 1–11

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 24. k3s klaster](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 25. FreeBSD server →](../moodul-25-freebsd/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 24. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

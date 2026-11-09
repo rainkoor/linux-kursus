@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 19. Enesekontroll](../moodul-19-dhcp-pxe-iscsi/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 20. Kataloogiteenused: OpenLDAP
 
 **Maht:** 8 tundi · **Laboritöö:** Debian (server), Ubuntu ja AlmaLinux (kliendid) · **Eeldused:** moodulid 1–7, 11–15 · **Valikmoodul**

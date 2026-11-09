@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 19. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 19. DHCP, PXE ja iSCSI
 
 | | |

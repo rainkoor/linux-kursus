@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 11. Turvalisus ja logid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 11. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 11. Turvalisus ja logid
 
 Selles moodulis on kaks laboritööd, kumbki oma distrol:

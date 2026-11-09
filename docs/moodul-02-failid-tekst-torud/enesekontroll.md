@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 2. Logide analüüs ja failide haldus](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 3. Kasutajad, grupid ja õigused →](../moodul-03-kasutajad-oigused/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 2. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Proovieksam: süvendusosa](proovieksam.md) · [Sisukord](../README.md#sisukord) · [Moodul 18. BSD praktikas: OPNsense tulemüür →](moodul-18-opnsense/index.md)
+<!-- /navigatsioon -->
+
 # Lõpuprojekt
 
 Lõpuprojektis ehitad iseseisvalt tervikliku Linuxi-lahenduse, kasutades kursusel õpitut. Projekti eesmärk on näidata, et oskad lahendust **planeerida, ehitada, turvata, varundada, automatiseerida ja dokumenteerida** - nii, nagu seda tehakse päris töös.

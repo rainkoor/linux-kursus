@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 4. Pakihaldus kolmel distrol](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 5. Protsessid, teenused ja systemd →](../moodul-05-protsessid-teenused/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 4. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

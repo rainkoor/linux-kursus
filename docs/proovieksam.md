@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 17. Enesekontroll](moodul-17-seire/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Lõpuprojekt →](lopuprojekt.md)
+<!-- /navigatsioon -->
+
 # Proovieksam: süvendusosa
 
 **Maht:** 4 tundi (eksam 2,5 h + arutelu) · **Distro:** AlmaLinux 10 · **Eeldused:** moodulid 1–17

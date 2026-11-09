@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 9. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 9. Salvestus: RAID, jõudlus, taastamine ja ZFS
 
 | | |

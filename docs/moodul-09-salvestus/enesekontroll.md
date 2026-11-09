@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 9. Salvestus: RAID, jõudlus, taastamine ja ZFS](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel →](../moodul-10-alglaadimine-kernel/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 9. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

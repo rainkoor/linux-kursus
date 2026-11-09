@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 13. Veebiserverid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 13. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 13. Veebiserverid (kooli väikeserver, I osa)
 
 | | |

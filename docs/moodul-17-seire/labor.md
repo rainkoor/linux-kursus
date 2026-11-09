@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 17. Seire ja jõudlus](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 17. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 17. Seire ja jõudlus
 
 | | |

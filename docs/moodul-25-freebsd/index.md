@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 24. Enesekontroll](../moodul-24-kubernetes/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 25. FreeBSD server →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 25. FreeBSD server
 
 **Maht:** 10 tundi · **Laboritöö:** FreeBSD 15 · **Eeldused:** moodulid 1–8, soovitatavalt 9 (ZFS) ja 18 · **Valikmoodul**

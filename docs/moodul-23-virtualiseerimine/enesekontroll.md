@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 23. KVM, Proxmox VE ja XCP-ng](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 24. Kubernetes: k3s →](../moodul-24-kubernetes/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 23. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

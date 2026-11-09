@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 22. Enesekontroll](../moodul-22-toolaud-wsl/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 23. KVM, Proxmox VE ja XCP-ng →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
 
 **Maht:** 12 tundi · **Laboritöö:** Debian (KVM), Proxmox VE, XCP-ng · **Eeldused:** moodulid 1–10, 12 · **Valikmoodul**

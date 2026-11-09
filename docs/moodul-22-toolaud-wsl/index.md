@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 21. Enesekontroll](../moodul-21-samba-ad/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 22. Linux töölaual, Kali ja WSL →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 22. Linux töölaual ja WSL
 
 **Maht:** 8 tundi · **Laboritöö:** Ubuntu Desktop, Kali Linux, Windows (WSL) · **Eeldused:** moodulid 1–5, 7 · **Valikmoodul**

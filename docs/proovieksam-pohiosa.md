@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 8. Enesekontroll](moodul-08-kettad-lvm/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine →](moodul-09-salvestus/index.md)
+<!-- /navigatsioon -->
+
 # Proovieksam: põhiosa
 
 **Maht:** 2 tundi (eksam 1,5 h + arutelu) · **Distro:** Debian 13 · **Eeldused:** moodulid 1–8

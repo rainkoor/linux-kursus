@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 12. Konteinerid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 12. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 12. Konteinerid
 
 | | |

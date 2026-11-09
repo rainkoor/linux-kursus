@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 20. Enesekontroll](../moodul-20-openldap/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 21. Samba AD domeen →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 21. Active Directory Linuxis: Samba AD DC
 
 **Maht:** 10 tundi · **Laboritöö:** Debian (domeenikontroller), Ubuntu ja AlmaLinux (domeeni liikmed), Windows (klient) · **Eeldused:** moodulid 1–7, 15, 18; soovitatavalt 19 · **Valikmoodul**

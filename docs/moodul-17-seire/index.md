@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 16. Enesekontroll](../moodul-16-automatiseerimine/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 17. Seire ja jõudlus →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 17. Seire ja jõudlus
 
 **Maht:** 8 tundi · **Laboritöö:** Debian ja Ubuntu (Docker) · **Eeldused:** moodulid 1–16

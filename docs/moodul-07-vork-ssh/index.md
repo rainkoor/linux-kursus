@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 6. Enesekontroll](../moodul-06-bash/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 7. Võrk, SSH ja tulemüür →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 7. Võrk ja SSH
 
 **Maht:** 12 tundi · **Laboritöö:** Ubuntu · **Eeldused:** moodulid 1–6, võrgu alused (IP-aadress, alamvõrk, vaikelüüs)

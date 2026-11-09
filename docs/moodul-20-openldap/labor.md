@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 20. Kataloogiteenused: OpenLDAP](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 20. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid
 
 | | |

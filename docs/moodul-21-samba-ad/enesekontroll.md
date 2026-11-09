@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 21. Samba AD domeen](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 22. Linux töölaual ja WSL →](../moodul-22-toolaud-wsl/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 21. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

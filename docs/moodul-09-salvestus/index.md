@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Proovieksam: põhiosa](../proovieksam-pohiosa.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 9. Salvestus: RAID, jõudlus, taastamine ja ZFS →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine
 
 **Maht:** 8 tundi · **Laboritöö:** AlmaLinux ja Ubuntu · **Eeldused:** moodul 8

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 11. Turvalisus ja logid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 12. Konteinerid →](../moodul-12-konteinerid/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 11. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

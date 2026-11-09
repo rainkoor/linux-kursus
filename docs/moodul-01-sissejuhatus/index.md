@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Kursuse kava](../kava.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 1. Esimesed sammud käsureal →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 1. Linux ja käsurida
 
 **Maht:** 8 tundi · **Laboritöö:** Debian · **Eeldused:** puuduvad

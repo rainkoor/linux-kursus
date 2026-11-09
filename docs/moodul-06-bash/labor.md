@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 6. Bashi skriptimine ja Git](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 6. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 6. Halduskriptid ja Git
 
 | | |

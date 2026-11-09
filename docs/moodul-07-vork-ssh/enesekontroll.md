@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 7. Võrk, SSH ja tulemüür](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 8. Kettad, failisüsteemid ja LVM →](../moodul-08-kettad-lvm/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 7. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

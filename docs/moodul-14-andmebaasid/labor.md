@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 14. Andmebaasid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 14. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 14. Andmebaasid (kooli väikeserver, II osa)
 
 | | |

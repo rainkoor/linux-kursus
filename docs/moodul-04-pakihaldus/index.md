@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 3. Enesekontroll](../moodul-03-kasutajad-oigused/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 4. Pakihaldus kolmel distrol →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 4. Tarkvara ja pakihaldus
 
 **Maht:** 6 tundi · **Laboritöö:** Debian, Ubuntu ja AlmaLinux · **Eeldused:** moodulid 1–3

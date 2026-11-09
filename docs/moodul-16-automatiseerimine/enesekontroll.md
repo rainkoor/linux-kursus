@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 16. Ansible ja Vagrant](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 17. Seire ja jõudlus →](../moodul-17-seire/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 16. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 8. Kettad, failisüsteemid ja LVM](labor.md) · [Sisukord](../../README.md#sisukord) · [Proovieksam: põhiosa →](../proovieksam-pohiosa.md)
+<!-- /navigatsioon -->
+
 # Moodul 8. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

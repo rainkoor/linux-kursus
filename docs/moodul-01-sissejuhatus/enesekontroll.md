@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 1. Esimesed sammud käsureal](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 2. Failid, tekst ja torud →](../moodul-02-failid-tekst-torud/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 1. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

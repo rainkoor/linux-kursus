@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← UNIX-i ja Linuxi ajalugu](ajalugu.md) · [Sisukord](../../README.md#sisukord) · [Käskude loend →](kasud.md)
+<!-- /navigatsioon -->
+
 # Sõnastik
 
 Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatakse koos uute moodulitega.

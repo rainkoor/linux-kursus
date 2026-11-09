@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 3. Kasutajad, grupid ja jagatud kataloogid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 4. Tarkvara ja pakihaldus →](../moodul-04-pakihaldus/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 3. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

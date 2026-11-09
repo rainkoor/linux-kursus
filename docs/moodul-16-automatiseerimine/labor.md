@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 16. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 16. Ansible ja Vagrant
 
 | | |

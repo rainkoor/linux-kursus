@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 17. Seire ja jõudlus](labor.md) · [Sisukord](../../README.md#sisukord) · [Proovieksam: süvendusosa →](../proovieksam.md)
+<!-- /navigatsioon -->
+
 # Moodul 17. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

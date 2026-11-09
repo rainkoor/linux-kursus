@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 8. Kettad, failisüsteemid ja LVM](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 8. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 8. Kettad, failisüsteemid ja LVM
 
 | | |

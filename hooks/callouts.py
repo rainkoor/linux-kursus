@@ -1,4 +1,4 @@
-"""MkDocsi hook: eemaldab GitHubi navigatsioonirea ja teisendab GitHubi stiilis märkused (> [!NOTE] jt) Materiali kastideks.
+"""MkDocsi hook: eemaldab GitHubi navigatsiooniread ja teisendab GitHubi stiilis märkused (> [!NOTE] jt) Materiali kastideks.
 
 Lähtetekstis kasutatakse GitHubi süntaksit, mis näeb värviliste kastidena välja ka
 GitHubis. Veebilehe ehitamisel teeb see hook neist Materiali admonition-kastid

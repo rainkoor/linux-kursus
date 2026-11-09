@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 7. Võrk ja SSH](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 7. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 7. Võrk, SSH ja tulemüür
 
 | | |

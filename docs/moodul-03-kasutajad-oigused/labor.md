@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 3. Kasutajad, grupid ja õigused](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 3. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 3. Kasutajad, grupid ja jagatud kataloogid
 
 | | |

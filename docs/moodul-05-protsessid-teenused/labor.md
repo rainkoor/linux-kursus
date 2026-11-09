@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 5. Protsessid, teenused ja systemd](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 5. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 5. Protsessid, teenused ja ajastamine
 
 | | |

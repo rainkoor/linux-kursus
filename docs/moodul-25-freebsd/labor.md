@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 25. FreeBSD server](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 25. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 25. FreeBSD server
 
 | | |

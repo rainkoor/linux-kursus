@@ -5,7 +5,7 @@ Käivita repo juurkaustas pärast lehtede lisamist, ümbernimetamist või menü�
 
     python3 tools/navigatsioon.py
 
-- Iga lehe lõppu kirjutatakse (või uuendatakse) rida „← eelmine · Sisukord · järgmine →“
+- Iga lehe algusesse ja lõppu kirjutatakse (või uuendatakse) rida „← eelmine · Sisukord · järgmine →“
   märgendite <!-- navigatsioon --> ja <!-- /navigatsioon --> vahele.
 - README.md-s uuendatakse sisukord märgendite <!-- sisukord --> ja <!-- /sisukord --> vahel.
 
@@ -69,12 +69,14 @@ def navigatsioon(lehed):
         osad.append(f"[Sisukord]({sisukord}#sisukord)")
         if i < len(lehed) - 1:
             osad.append(f"[{pealkiri(lehed[i+1])} →]({suht(leht, lehed[i+1])})")
-        plokk = "<!-- navigatsioon -->\n---\n\n" + " · ".join(osad) + "\n<!-- /navigatsioon -->\n"
+        rida = " · ".join(osad)
+        ylal = "<!-- navigatsioon -->\n" + rida + "\n<!-- /navigatsioon -->\n"
+        all = "<!-- navigatsioon -->\n---\n\n" + rida + "\n<!-- /navigatsioon -->\n"
         tee = os.path.join(DOCS, leht)
         with open(tee, encoding="utf-8") as f:
             sisu = f.read()
         sisu = re.sub(r"\n*<!-- navigatsioon -->.*?<!-- /navigatsioon -->\n?", "\n", sisu, flags=re.S)
-        sisu = sisu.rstrip("\n") + "\n\n" + plokk
+        sisu = ylal + "\n" + sisu.strip("\n") + "\n\n" + all
         with open(tee, "w", encoding="utf-8") as f:
             f.write(sisu)
 

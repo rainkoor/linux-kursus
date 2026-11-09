@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 22. Linux töölaual, Kali ja WSL](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng →](../moodul-23-virtualiseerimine/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 22. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

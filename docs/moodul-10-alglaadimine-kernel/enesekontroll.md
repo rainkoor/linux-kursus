@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 10. Alglaadimine, kernel ja taastamine](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 11. Turvalisus ja logid →](../moodul-11-turvalisus-logid/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 10. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

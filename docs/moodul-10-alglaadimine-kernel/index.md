@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 9. Enesekontroll](../moodul-09-salvestus/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 10. Alglaadimine, kernel ja taastamine →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel
 
 **Maht:** 12 tundi · **Laboritöö:** Debian · **Eeldused:** moodulid 1–8

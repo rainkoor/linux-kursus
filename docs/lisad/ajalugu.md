@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Linuxi distributsioonide ülevaade](distrod.md) · [Sisukord](../../README.md#sisukord) · [Sõnastik →](sonastik.md)
+<!-- /navigatsioon -->
+
 # UNIX-i ja Linuxi ajalugu
 
 See lisa räägib, kuidas tekkisid UNIX, BSD, GNU ja Linux. Ajaloo tundmine aitab mõista, miks Linux on just selline, nagu ta on: miks käsud on lühikesed, miks „kõik on fail“, miks Linux ja BSD on nii sarnased ning kust tuleb vaba tarkvara idee.

@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 21. Active Directory Linuxis: Samba AD DC](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 21. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 21. Samba AD domeen
 
 | | |

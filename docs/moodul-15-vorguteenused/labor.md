@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 15. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus
 
 | | |

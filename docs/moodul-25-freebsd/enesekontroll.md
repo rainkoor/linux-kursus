@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 25. FreeBSD server](labor.md) · [Sisukord](../../README.md#sisukord) · [Laborikeskkond ja serverite paigaldus →](../lisad/paigaldus.md)
+<!-- /navigatsioon -->
+
 # Moodul 25. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

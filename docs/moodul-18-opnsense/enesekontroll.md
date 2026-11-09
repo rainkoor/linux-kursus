@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 18. OPNsense laborivõrgu tulemüürina](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI →](../moodul-19-dhcp-pxe-iscsi/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 18. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

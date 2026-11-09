@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 25. Enesekontroll](../moodul-25-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
+<!-- /navigatsioon -->
+
 # Laborikeskkond ja serverite paigaldus
 
 Kursuse laboritööd eeldavad, et sul on olemas **Debiani**, **Ubuntu** ja **AlmaLinuxi** virtuaalmasinad, millele saad SSH kaudu ligi. See lisa kirjeldab, kuidas laborikeskkond planeerida, virtuaalmasinad luua ja kõik kolm distrot serveriks paigaldada.

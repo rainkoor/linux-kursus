@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 24. Kubernetes: k3s](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 24. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 24. k3s klaster
 
 | | |

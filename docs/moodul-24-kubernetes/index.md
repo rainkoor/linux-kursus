@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 23. Enesekontroll](../moodul-23-virtualiseerimine/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 24. k3s klaster →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 24. Kubernetes: k3s
 
 **Maht:** 10 tundi · **Laboritöö:** Debian (kolm sõlme) · **Eeldused:** moodulid 1–13, soovitatavalt 16 ja 23 · **Valikmoodul**

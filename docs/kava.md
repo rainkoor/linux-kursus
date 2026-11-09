@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[Sisukord](../README.md#sisukord) · [Moodul 1. Linux ja käsurida →](moodul-01-sissejuhatus/index.md)
+<!-- /navigatsioon -->
+
 # Kursuse kava
 
 ## Eesmärk

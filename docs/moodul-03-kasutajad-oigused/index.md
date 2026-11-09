@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 2. Enesekontroll](../moodul-02-failid-tekst-torud/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 3. Kasutajad, grupid ja jagatud kataloogid →](labor.md)
+<!-- /navigatsioon -->
+
 # Moodul 3. Kasutajad, grupid ja õigused
 
 **Maht:** 8 tundi · **Laboritöö:** Ubuntu · **Eeldused:** moodulid 1–2

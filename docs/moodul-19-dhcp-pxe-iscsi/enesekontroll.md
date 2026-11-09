@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 19. DHCP, PXE ja iSCSI](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 20. Kataloogiteenused: OpenLDAP →](../moodul-20-openldap/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 19. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

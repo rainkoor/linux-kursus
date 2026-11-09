@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 21. Active Directory Linuxis: Samba AD DC →](../moodul-21-samba-ad/index.md)
+<!-- /navigatsioon -->
+
 # Moodul 20. Enesekontroll
 
 Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.

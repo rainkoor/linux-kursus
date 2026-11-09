@@ -1,3 +1,7 @@
+<!-- navigatsioon -->
+[← Moodul 2. Failid, tekst ja torud](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 2. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->
+
 # Laboritöö 2. Logide analüüs ja failide haldus
 
 | | |
