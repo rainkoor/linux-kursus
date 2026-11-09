@@ -22,7 +22,7 @@ Kursus koosneb **17 moodulist** (põhiosa 1–8 ja süvendusosa 9–17), [proovi
 | `labor.md` | Praktiline laboritöö kindlal distributsioonil |
 | `enesekontroll.md` | Küsimused, praktilised miniülesanded ja vastused |
 
-Kursuse täielik kava on failis [docs/kava.md](docs/kava.md). Mõistete eesti-inglise sõnastik on failis [docs/lisad/sonastik.md](docs/lisad/sonastik.md). Laborikeskkonna (Proxmoxi virtuaalmasinate, võrguplaani ja distrode paigalduse) kirjeldus on failis [docs/lisad/paigaldus.md](docs/lisad/paigaldus.md).
+Kursuse täielik kava on failis [docs/kava.md](docs/kava.md). Mõistete eesti-inglise sõnastik on failis [docs/lisad/sonastik.md](docs/lisad/sonastik.md) ja käskude loend failis [docs/lisad/kasud.md](docs/lisad/kasud.md). Laborikeskkonna (Proxmoxi virtuaalmasinate, võrguplaani ja distrode paigalduse) kirjeldus on failis [docs/lisad/paigaldus.md](docs/lisad/paigaldus.md).
 
 ## Distributsioonid
 
@@ -109,6 +109,7 @@ Et konverteerimine töötaks igal pool, kasutatakse ainult tavalist Markdowni (p
 | Distrode ja BSD ülevaade (lisa) | ✅ Valmis |
 | UNIX-i ja Linuxi ajalugu (lisa) | ✅ Valmis |
 | Sõnastik (lisa) | ✅ Valmis |
+| Käskude loend (lisa) | ✅ Valmis |
 | Laborikeskkond ja paigaldus (lisa) | ✅ Valmis |
 
 ## Litsents
