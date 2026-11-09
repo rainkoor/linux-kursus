@@ -3,11 +3,11 @@
 | | |
 |---|---|
 | **Platvormid** | Debian (KVM ja libvirt), Proxmox VE, XCP-ng ja Debian (Xen Orchestra) |
-| **Kestus** | 4 × 90 minutit |
-| **Vajalik** | Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp `host`): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) ja Debian Xen Orchestra jaoks (2 vCPU, 3 GiB). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini |
+| **Kestus** | 5 × 90 minutit |
+| **Vajalik** | Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp `host`): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) Debian Xen Orchestra jaoks (2 vCPU, 3 GiB) ja Proxmox Backup Server (2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB + andmeketas 32 GiB, nt `10.0.83.65`). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini |
 | **Eesmärk** | Mõista, kuidas Linux virtualiseerib, ning paigaldada ja hallata kahte avatud hüperviisorit |
 
-**Aruanne:** vasta küsimustele **K1–K16**.
+**Aruanne:** vasta küsimustele **K1–K18**.
 
 > Pesastatud hüperviisor on aeglasem kui päris riistvaral. Kasuta väikeseid testmasinaid (Alpine, Debiani pilvetõmmis) ja lülita masinad pärast tundi välja.
 
@@ -115,7 +115,7 @@ Konteineris: `cat /etc/os-release; uname -r; ps aux`. Proxmoxis: `uname -r`.
 
 **K7.** Mida tähendab `--unprivileged 1`? Mis on konteineri `root`-i UID hostis (vihje: `ps -o user,pid,cmd -C bash` hostis, kui konteineris töötab kest)?
 
-## 4. osa. Varundus, mall ja kloonid
+## 4. osa. Varundus, mall, kloonid ja Proxmox Backup Server
 
 **4.1** Tee masinast 100 varukoopia ja taasta see uue masinana:
 
@@ -140,6 +140,38 @@ pvesm list local-lvm
 
 **K9.** Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?
 
+**4.3 Proxmox Backup Server.** Paigalda PBS ISO-st eraldi VM-i (teooria punkt 23.3, *Proxmox Backup Server*): staatiline IP (nt `10.0.83.65`), seejärel ava `https://10.0.83.65:8007`. Lülita hoidlad *no-subscription* peale ja uuenda (`apt update && apt full-upgrade`). Loo andmekettale andmehoidla `andmed` (*Administration* → *Storage / Disks* → *Directory*, *Add as Datastore*).
+
+**4.4** PBS-i konsoolis loo Proxmoxi jaoks kasutaja ja vaata sõrmejälge:
+
+```bash
+proxmox-backup-manager user create pve@pbs --password 'Pikk-parool-2026'
+proxmox-backup-manager acl update /datastore/andmed DatastoreBackup --auth-id pve@pbs
+proxmox-backup-manager cert info | grep Fingerprint
+```
+
+Lisa PBS laboritöö Proxmoxis salvestuseks (*Datacenter* → *Storage* → *Add* → *Proxmox Backup Server*, ID `pbs`). **Ära lülita** selles harjutuses krüpteerimist sisse (või salvesta võti kindlasti alles).
+
+**4.5** Varunda töötav masin 100 PBS-i kaks korda järjest ja võrdle:
+
+```bash
+time vzdump 100 --storage pbs --mode snapshot
+time vzdump 100 --storage pbs --mode snapshot
+pvesm list pbs
+```
+
+Vaata PBS-i veebiliideses andmehoidla *Summary* (deduplitseerimistegur) ja *Content*. Seadista andmehoidlale *Prune & GC* (nt *keep-last 3, keep-daily 7*) ja käivita *Verify* käsitsi.
+
+**K10.** Kui kaua võttis esimene ja teine varukoopia ning kui palju andmeid kumbki kord saadeti (vt `vzdump` väljundit)? Mis on deduplitseerimistegur? Miks oli teine varukoopia kiirem?
+
+**4.6** Taasta failid ja masin:
+
+1. Kustuta masinas 100 mõni fail (nt `/etc/motd`).
+2. Proxmoxis vali salvestus `pbs` → viimane varukoopia → *File Restore*, leia fail ja laadi see alla.
+3. Taasta kogu masin uue ID-ga: varukoopia → *Restore*, VM ID `130`, märgi *Unique*. Käivita masin 130 ja kontrolli, et see töötab.
+
+**K11.** Mis on PBS-i õiguse `DatastoreBackup` eelis võrreldes `root`-iga, kui ründaja saab Proxmoxi enda üle kontrolli? Miks ei ole hea mõte paigaldada PBS samasse Proxmoxi, mida see varundab? Kui kaua võttis kogu masina taastamine?
+
 ## 5. osa. Proxmoxi võrk: sild ja NAT
 
 **5.1** Loo sild `vmbr10` võrguga `10.0.222.0/24` (Proxmox `10.0.222.1`) ja NAT (teooria punkt 23.3). Rakenda `ifreload -a`.
@@ -160,7 +192,7 @@ iptables -t nat -L POSTROUTING -n -v
 sysctl net.ipv4.ip_forward
 ```
 
-**K10.** Kas konteiner pääses internetti? Mida teeb reegel `MASQUERADE` ja miks oli vaja `ip_forward`-i? Võrdle seda OPNsense'iga (moodul 18).
+**K12.** Kas konteiner pääses internetti? Mida teeb reegel `MASQUERADE` ja miks oli vaja `ip_forward`-i? Võrdle seda OPNsense'iga (moodul 18).
 
 ## 6. osa. Klaster (valikuline, kaks Proxmoxi VM-i)
 
@@ -175,7 +207,7 @@ pvecm nodes
 
 **6.2** Migreeri konteiner või väljalülitatud VM `pve2`-le (*Migrate*). Lülita `pve2` välja ja vaata `pve1`-s `pvecm status`.
 
-**K11.** Mitu häält (*votes*) klastris on ja kas pärast `pve2` väljalülitamist on kvoorum? Miks on HA jaoks vaja vähemalt kolme sõlme?
+**K13.** Mitu häält (*votes*) klastris on ja kas pärast `pve2` väljalülitamist on kvoorum? Miks on HA jaoks vaja vähemalt kolme sõlme?
 
 ## 7. osa. XCP-ng ja Xen Orchestra
 
@@ -188,7 +220,7 @@ xe network-list
 xl info | head        # Xeni enda tööriist
 ```
 
-**K12.** Mis on dom0 ja mille poolest erineb Xeni ülesehitus KVM-ist?
+**K14.** Mis on dom0 ja mille poolest erineb Xeni ülesehitus KVM-ist?
 
 **7.2** Loo kohalik ISO-repositoorium (teooria punkt 23.4) ja kopeeri sinna väike ISO (`scp`).
 
@@ -196,15 +228,15 @@ xl info | head        # Xeni enda tööriist
 
 **7.4** Loo Xen Orchestras VM, paigalda OS ja külalistööriistad (`guest-tools.iso`). Kontrolli, et XO näitab VM-i IP-aadressi.
 
-**K13.** Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?
+**K15.** Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?
 
 ## 8. osa. Kokkuvõte
 
-**K14.** Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.
+**K16.** Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.
 
-**K15.** Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.
+**K17.** Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.
 
-**K16.** Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja `apt`, ZFS, Linuxi sillad, LXC, `vzdump`, systemd, iSCSI).
+**K18.** Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja `apt`, ZFS, Linuxi sillad, LXC, `vzdump`, systemd, iSCSI).
 
 ---
 
@@ -216,9 +248,9 @@ Kustuta testmasinad (`virsh undefine test1 --remove-all-storage`, `qm destroy`, 
 
 ## Lisaülesanne (valikuline)
 
-1. **Proxmox Backup Server:** paigalda PBS eraldi VM-i, lisa see Proxmoxi salvestuseks ja võrdle teise varukoopia kestust ja suurust `vzdump`-iga (inkrementaalsus, deduplitseerimine).
-2. **Cloud-init mall:** tee Debiani pilvetõmmisest Proxmoxi mall koos cloud-initiga (`qm importdisk`, `qm set --ide2 local-lvm:cloudinit`) ja klooni sellest kolm masinat, mis saavad kohe õige nime, IP ja SSH-võtme.
-3. **Proxmoxi API:** loo API-võti ja küsi `curl`-iga masinate loetelu (`/api2/json/cluster/resources`). Kirjuta Bashi skript (moodul 6), mis käivitab kõik ühe kogumi (*pool*) masinad.
+1. **PBS-i krüpteerimine ja teine koopia:** loo PBS-i salvestusele krüpteerimisvõti, tee krüpteeritud varukoopia ja proovi seda taastada. Paigalda teine PBS, lisa esimene sinna *Remote*'iks ja seadista *Sync Job*. Varunda `proxmox-backup-client`-iga ka üks tavaline Linuxi server (nt `debian1` kataloog `/etc`).
+2. **Cloud-init mall:** tee Debiani pilvetõmmisest Proxmoxi mall koos cloud-initiga (teooria punkt 23.3, *Cloud-init mall*) ja klooni sellest kolm masinat, mis saavad kohe õige nime, IP ja SSH-võtme.
+3. **Proxmoxi API:** loo API-võti ja küsi `curl`-iga masinate loetelu (teooria punkt 23.3, *API ja skriptid*). Kirjuta Bashi skript (moodul 6), mis käivitab kõik ühe kogumi (*pool*) masinad.
 4. **Ansible ja Proxmox:** kasuta Ansible'i kogumit `community.general` (moodulid `proxmox_kvm` ja `proxmox`), et luua masinaid koodina (moodul 16).
 
 ---
@@ -236,9 +268,11 @@ Kustuta testmasinad (`virsh undefine test1 --remove-all-storage`, `qm destroy`, 
 | K7 | Konteineri UID-d on hostis nihutatud (vaikimisi 100000+); konteineri `root` on hostis õigusteta kasutaja |
 | K8 | Jah (`--unique`); sama MAC tekitaks ARP-i ja DHCP konflikte, ühendused katkeksid |
 | K9 | Lingitud kloon sekundiga ja peaaegu ilma ruumita, täielik kopeerib kogu ketta; lingitud kloon kasutab malli ketast alusena |
-| K10 | Jah; MASQUERADE asendab väljuvate pakettide lähteaadressi hosti `vmbr0` aadressiga, `ip_forward` lubab kernelil pakette liideste vahel edastada; OPNsense teeb sama (NAT + tulemüür) eraldi seadmena |
-| K11 | 2 häält; ühe sõlmega on 1/2 - kvoorumit pole, `/etc/pve` on ainult lugemiseks; kolmega jääb ühe rikke korral alles enamus (2/3) |
-| K12 | dom0 on privilegeeritud haldus-VM (Linux), mis haldab seadmeid ja teisi VM-e; Xen käivitub enne Linuxit, KVM-is on hüperviisor Linuxi kerneli osa |
-| K13 | Ilma tööriistadeta: IP puudub, hoiatus *Management agent not detected*; pärast: IP, mälu, viisakas sulgemine. Proxmoxis QEMU Guest Agent (`qemu-guest-agent`) |
+| K10 | Esimene varukoopia saadab kogu kasutatud ketta, teine ainult muutunud plokid (*dirty bitmap*) ja võtab sekundeid. Tegur sõltub masinast; kahe järjestikuse varukoopia korral ligikaudu 2 või rohkem. Teine on kiirem, sest QEMU teab, millised plokid on muutunud, ja PBS-is juba olemas olevaid tükke uuesti ei saadeta |
+| K11 | `DatastoreBackup` võimaldab varundada ja taastada, kuid mitte varukoopiaid kustutada - ründaja ei saa ajalugu hävitada. Sama Proxmoxi rikke (ketas, tulekahju, lunavara) korral kaoksid masinad ja varukoopiad korraga. Taastamise aeg sõltub masina suurusest ja võrgust (laboris tavaliselt minutid) |
+| K12 | Jah; MASQUERADE asendab väljuvate pakettide lähteaadressi hosti `vmbr0` aadressiga, `ip_forward` lubab kernelil pakette liideste vahel edastada; OPNsense teeb sama (NAT + tulemüür) eraldi seadmena |
+| K13 | 2 häält; ühe sõlmega on 1/2 - kvoorumit pole, `/etc/pve` on ainult lugemiseks; kolmega jääb ühe rikke korral alles enamus (2/3) |
+| K14 | dom0 on privilegeeritud haldus-VM (Linux), mis haldab seadmeid ja teisi VM-e; Xen käivitub enne Linuxit, KVM-is on hüperviisor Linuxi kerneli osa |
+| K15 | Ilma tööriistadeta: IP puudub, hoiatus *Management agent not detected*; pärast: IP, mälu, viisakas sulgemine. Proxmoxis QEMU Guest Agent (`qemu-guest-agent`) |
 
 > **Märkus õpetajale:** laboritööd ei ole testitud. Pesastatud Proxmoxi ja XCP-ng jaoks peab kooli Proxmoxi sõlmes olema pesastamine lubatud ja VM-ide protsessori tüüp `host`. XCP-ng pesastatult KVM-i peal töötab, kuid aeglasemalt. Malli- ja ISO-nimed (`pveam available`) muutuvad - kontrolli need enne tundi.

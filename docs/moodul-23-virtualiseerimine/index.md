@@ -1,6 +1,6 @@
 # Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
 
-**Maht:** 10 tundi · **Laboritöö:** Debian (KVM), Proxmox VE, XCP-ng · **Eeldused:** moodulid 1–10, 12 · **Valikmoodul**
+**Maht:** 12 tundi · **Laboritöö:** Debian (KVM), Proxmox VE, XCP-ng · **Eeldused:** moodulid 1–10, 12 · **Valikmoodul**
 
 > **HKHK õppijale:** hüperviisorite paigaldust ja riistvara käsitletakse põhjalikumalt aines „Majutuskeskkonna riistvara“. See moodul vaatab virtualiseerimist **Linuxi administraatori pilgu läbi**: mis toimub kapoti all, kuidas hüperviisorit käsurealt hallata ja kuidas see seostub kursuse teiste teemadega (võrk, kettad, ZFS, konteinerid, varundus).
 
@@ -13,6 +13,7 @@ Mooduli läbinud õppija:
 - paigaldab Proxmox VE, seadistab hoidlad, uuendab süsteemi ning haldab virtuaalmasinaid ja LXC konteinereid nii veebiliidesest kui ka käsurealt;
 - seadistab Proxmoxis salvestust, võrgusildu, VLAN-e ja NAT-i;
 - teeb varukoopiaid, malle ja klone ning kirjeldab klastri ja kõrge kättesaadavuse põhimõtteid;
+- seadistab Proxmox Backup Serveri, varundab sinna virtuaalmasinaid ning taastab terve masina ja üksikud failid;
 - paigaldab XCP-ng ja Xen Orchestra ning võrdleb seda Proxmoxiga.
 
 ---
@@ -264,6 +265,74 @@ vzdump 101 --mode stop --compress zstd --storage local
 qmrestore /var/lib/vz/dump/vzdump-qemu-101-*.vma.zst 150 --unique
 ```
 
+### Proxmox Backup Server
+
+`vzdump` teeb igal korral **täieliku** varukoopia ja salvestab selle failina - 20 varukoopiat 30 GiB masinast võtavad ruumi peaaegu 20 korda. **Proxmox Backup Server** (PBS) on Proxmoxi eraldi toode (samuti Debiani põhine ja vaba tarkvara), mis lahendab selle:
+
+| Omadus | Mida see annab |
+|---|---|
+| **Deduplitseerimine** | andmed jagatakse tükkideks (*chunks*) ja iga tükk salvestatakse ainult üks kord - ka eri masinate vahel. Kümme sarnast Debiani VM-i võtavad vähe rohkem ruumi kui üks |
+| **Inkrementaalne varundus** | töötava VM-i puhul jälgib QEMU muutunud plokke (*dirty bitmap*) ja PBS-i saadetakse ainult need - järgmine varukoopia võtab sekundeid, mitte minuteid |
+| **Kliendipoolne krüpteerimine** | andmed krüpteeritakse juba Proxmoxis; PBS-i haldaja ei näe sisu |
+| **Kontroll** (*verify*) | kontrollib regulaarselt, et salvestatud tükid on terved |
+| **Üksikfailide taastamine** | VM-i varukoopiast saab alla laadida üksiku faili ilma kogu masinat taastamata |
+| **Sünkroonimine** | teine PBS (nt teises hoones) tõmbab varukoopiad endale - 3-2-1 reegel (moodul 15) |
+| **Iga Linuxi masin** | `proxmox-backup-client` varundab ka tavalisi Linuxi servereid, mitte ainult Proxmoxi VM-e |
+
+**Paigaldus.** PBS paigaldatakse ISO-st eraldi masinasse või VM-i (laboris: 2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB ja **eraldi andmeketas** varukoopiate jaoks). Tootmises ei panda PBS-i samasse Proxmoxi, mida see varundab - rikke korral kaoksid koos masinatega ka varukoopiad. Veebiliides on pordil **8007** (`https://<pbs>:8007`, kasutaja `root`, realm *Linux PAM*). Hoidlad seadistatakse samamoodi nagu Proxmox VE-s (*no-subscription*).
+
+**Andmehoidla** (*datastore*) on kataloog või ZFS-i andmekogum, kuhu tükid salvestatakse. Veebiliideses *Administration* → *Storage / Disks* → *Directory* (või *ZFS*) → vali andmeketas ja märgi *Add as Datastore*. Käsurealt:
+
+```bash
+proxmox-backup-manager datastore create andmed /mnt/datastore/andmed
+proxmox-backup-manager datastore list
+```
+
+**Kasutaja Proxmoxi jaoks.** Ära kasuta Proxmoxis PBS-i `root`-i, vaid eraldi kasutajat, kellel on ainult varundamise õigus:
+
+```bash
+proxmox-backup-manager user create pve@pbs --password 'Pikk-parool-2026'
+proxmox-backup-manager acl update /datastore/andmed DatastoreBackup --auth-id pve@pbs
+proxmox-backup-manager cert info | grep Fingerprint     # sertifikaadi sõrmejälg
+```
+
+`DatastoreBackup` lubab varukoopiaid teha ja oma varukoopiaid taastada, kuid mitte teiste omi kustutada - kui ründaja saab Proxmoxi enda kätte, ei saa ta PBS-ist vanu varukoopiaid hävitada.
+
+**PBS Proxmoxi salvestuseks.** Proxmox VE-s *Datacenter* → *Storage* → *Add* → *Proxmox Backup Server*: ID (nt `pbs`), server, kasutaja `pve@pbs`, parool, andmehoidla `andmed` ja sõrmejälg. Vahekaardil *Encryption* saab luua krüpteerimisvõtme - **salvesta võti ka mujale** (nt paroolihaldurisse või paberile), ilma selleta ei saa krüpteeritud varukoopiaid taastada.
+
+Seejärel töötab PBS nagu iga teine varunduse sihtkoht:
+
+```bash
+vzdump 101 --storage pbs --mode snapshot      # käsitsi
+pvesm list pbs                                # varukoopiad
+```
+
+Ajastatud varundus: *Datacenter* → *Backup* → *Add*, sihtkohaks `pbs`.
+
+**Hooldustööd PBS-is** (*Datastore* → `andmed`):
+
+| Töö | Mida teeb | Soovitus |
+|---|---|---|
+| **Prune** | kustutab säilitusreegli järgi vanad varukoopiad (nt *keep-last 3, keep-daily 7, keep-weekly 4, keep-monthly 6*) | iga päev |
+| **Garbage collection** | vabastab ruumi tükkidest, millele ükski varukoopia enam ei viita (alles pärast seda ruum päriselt vabaneb) | iga päev pärast prune'i |
+| **Verify** | loeb tükid ja kontrollib nende kontrollsummasid | kord nädalas, uued varukoopiad kohe |
+| **Sync** | tõmbab varukoopiad teisest PBS-ist (*Remotes*) | välise koopia jaoks |
+
+*Summary* vaates on näha **deduplitseerimistegur** (*Deduplication Factor*) - mitu korda vähem ruumi kulub võrreldes tavaliste varukoopiatega.
+
+**Taastamine.** Proxmoxis vali salvestus `pbs` → varukoopia → *Restore* (kogu masin, soovitatavalt uue ID-ga ja *Unique*) või *File Restore* (sirvi varukoopia failisüsteemi ja laadi alla üksikud failid).
+
+**Tavalise Linuxi serveri varundus.** `proxmox-backup-client` (pakett Proxmoxi hoidlast) varundab katalooge PBS-i - sobib nt füüsilisele serverile või kodukataloogidele:
+
+```bash
+export PBS_REPOSITORY='pve@pbs@10.0.83.65:andmed'
+export PBS_FINGERPRINT='<sõrmejälg>'
+proxmox-backup-client backup etc.pxar:/etc
+proxmox-backup-client snapshot list
+```
+
+> **Varundus pole valmis, kuni taastamine on testitud** (moodul 15). Proovi PBS-i varukoopiast taastada nii terve masin kui ka üksik fail ja mõõda, kui kaua see aega võttis.
+
 ### Cloud-init mall
 
 Distrode pilvetõmmistes on cloud-init (moodul 16, punkt 16.5) juba sees. Neist tehtud malli kloonid saavad esimesel käivitusel nime, IP-aadressi, kasutaja ja SSH-võtme Proxmoxi seadetest - ilma paigaldajata ja mõne sekundiga.
@@ -480,7 +549,7 @@ Pärast paigaldust ava `http(s)://<VM-i IP>`. Vaikimisi kasutaja on `admin@admin
 | Konteinerid | LXC sisseehitatud | ei (VM-id) |
 | Veebihaldus | sisseehitatud, kõik ühes | XO Lite (üks host), Xen Orchestra (eraldi VM) |
 | Salvestus | ZFS, Ceph sisseehitatud | LVM/ext, NFS, iSCSI; XOSTOR |
-| Varundus | `vzdump`, Proxmox Backup Server | Xen Orchestra (inkrementaalne, replikatsioon) |
+| Varundus | `vzdump`, Proxmox Backup Server (deduplitseeritud, inkrementaalne) | Xen Orchestra (inkrementaalne, replikatsioon) |
 | Linuxi administraatorile | tuttav Debian, `/etc/network/interfaces`, `apt` | dom0 on suletum, haldus `xe` ja XO kaudu |
 | Tüüpiline kasutaja | koolid, väikesed ja keskmised asutused, kodulaborid | VMware'ilt/Citrixilt tulijad, suuremad Xeni keskkonnad |
 
@@ -509,6 +578,7 @@ Mõlemad on vabad ja tootmiskõlbulikud. Valiku määravad olemasolevad oskused,
 | Proxmoxi VM-id | `qm list/start/shutdown/stop/snapshot/clone/template/destroy`, `qm unlock` |
 | Proxmoxi konteinerid | `pveam`, `pct create/start/enter/list` |
 | Varundus | `vzdump`, `qmrestore --unique` |
+| Proxmox Backup Server | port 8007, `proxmox-backup-manager datastore/user/acl`, *Prune*, *Garbage collection*, *Verify*, *File Restore*, `proxmox-backup-client` |
 | Salvestus | `pvesm status` |
 | Võrk | `/etc/network/interfaces`, `ifreload -a` |
 | Klaster | `pvecm create/add/status/nodes/delnode` |

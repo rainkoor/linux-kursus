@@ -25,7 +25,7 @@ Kursuse läbinud õppija:
 
 ## Maht ja ülesehitus
 
-Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksam 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (64 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
+Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksam 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (66 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
 
 ### Põhiosa: Linuxi kasutamine ja haldus
 
@@ -67,7 +67,7 @@ Moodul 12 annab konteinerite alused, mida serverimoodulites kasutatakse alternat
 | 20 | [Kataloogiteenused: OpenLDAP](moodul-20-openldap/index.md) | 8 | Debian (server), Ubuntu ja AlmaLinux (kliendid) |
 | 21 | [Active Directory Linuxis: Samba AD DC](moodul-21-samba-ad/index.md) | 10 | Debian (DC), Ubuntu, AlmaLinux, Windows |
 | 22 | [Linux töölaual ja WSL](moodul-22-toolaud-wsl/index.md) | 8 | Ubuntu Desktop, Kali, Windows (WSL) |
-| 23 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](moodul-23-virtualiseerimine/index.md) | 10 | Debian, Proxmox VE, XCP-ng |
+| 23 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](moodul-23-virtualiseerimine/index.md) | 12 | Debian, Proxmox VE, XCP-ng |
 | 24 | [Kubernetes: k3s](moodul-24-kubernetes/index.md) | 10 | Debian |
 
 Valikmoodulid 18–21 ehitavad üksteise peale (OPNsense'i laborivõrk → DHCP/PXE → LDAP → AD). Moodulid 22–24 on iseseisvad (moodul 24 eeldab konteinereid ja veebiservereid, moodulid 12–13).
@@ -254,9 +254,9 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 ### Valikmoodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
 
-**Teemad:** hüperviisorite tüübid, riistvaraline tugi ja pesastatud virtualiseerimine, KVM, QEMU ja libvirt, Proxmox VE (paigaldus, hoidlad, uuendused, VM-id ja LXC, salvestus, sillad, VLAN-id, NAT, varundus, mallid ja cloud-init mall, kasutajad ja õigused, REST API ja `pvesh`, klaster), XCP-ng (`xe`, külalistööriistad) ja Xen Orchestra. HKHK-s käsitletakse hüperviisoreid põhjalikumalt aines „Majutuskeskkonna riistvara“.
+**Teemad:** hüperviisorite tüübid, riistvaraline tugi ja pesastatud virtualiseerimine, KVM, QEMU ja libvirt, Proxmox VE (paigaldus, hoidlad, uuendused, VM-id ja LXC, salvestus, sillad, VLAN-id, NAT, varundus (`vzdump` ja Proxmox Backup Server: deduplitseerimine, säilitusreeglid, kontroll, üksikfailide taastamine), mallid ja cloud-init mall, kasutajad ja õigused, REST API ja `pvesh`, klaster), XCP-ng (`xe`, külalistööriistad) ja Xen Orchestra. HKHK-s käsitletakse hüperviisoreid põhjalikumalt aines „Majutuskeskkonna riistvara“.
 
-**Õpiväljundid:** õppija paigaldab ja haldab avatud hüperviisoreid, loob cloud-init malle, kasutab Proxmoxi API-t ning selgitab, kuidas Linux virtualiseerib.
+**Õpiväljundid:** õppija paigaldab ja haldab avatud hüperviisoreid, varundab ja taastab virtuaalmasinaid Proxmox Backup Serveriga, loob cloud-init malle, kasutab Proxmoxi API-t ning selgitab, kuidas Linux virtualiseerib.
 
 **Iseõppeks:** Proxmox VE dokumentatsioon ja wiki; XCP-ng dokumentatsioon.
 

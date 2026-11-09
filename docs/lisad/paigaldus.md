@@ -2,6 +2,8 @@
 
 Kursuse laboritööd eeldavad, et sul on olemas **Debiani**, **Ubuntu** ja **AlmaLinuxi** virtuaalmasinad, millele saad SSH kaudu ligi. See lisa kirjeldab, kuidas laborikeskkond planeerida, virtuaalmasinad luua ja kõik kolm distrot serveriks paigaldada.
 
+> **HKHK õppijale: masinad on enamasti juba olemas.** Kooli Proxmoxis on iga laboritöö jaoks vajalikud virtuaalmasinad valmis tehtud mallidest - **ise ei pea midagi paigaldama**. Sinu jaoks on olulised punktid 1 (sisselogimine ja oma võrk), 2 (võrguplaan) ja 7 (esimesed sammud: parool, hostinimi, IP-aadress, uuendused). Punktid 3-6 ja 8 (VM-i loomine, distrode paigaldus, mallid) on vajalikud ainult erijuhtudel: kui laboritöö või projekt seda eraldi nõuab (nt moodul 19 PXE-paigaldus, moodul 23, lõpuprojekt) või kui õpetaja nii ütleb. Iseõppija vajab kõiki punkte.
+
 Juhend on kirjutatud eelkõige **Proxmox VE** jaoks (HKHK labor), kuid lisatud on ka märkused **VirtualBoxi** ja **WSL-i** kasutajatele.
 
 ---
@@ -10,7 +12,7 @@ Juhend on kirjutatud eelkõige **Proxmox VE** jaoks (HKHK labor), kuid lisatud o
 
 > See osa on mõeldud **HKHK õppijatele**. Iseõppija võib selle vahele jätta ja kasutada oma Proxmoxi, VirtualBoxi või muud keskkonda - võrguplaan (punkt 2) on hea tava igal pool.
 
-Haapsalu Kutsehariduskeskuses on õppetöö jaoks mitu Proxmox VE klastrit. Igal õppijal on seal oma labor: virtuaalmasinad ja **eraldi IPv4 privaatvõrk**, mis ei kattu teiste sama serveri kasutajate võrkudega.
+Haapsalu Kutsehariduskeskuses on õppetöö jaoks mitu Proxmox VE klastrit. Igal õppijal on seal oma labor: virtuaalmasinad ja **eraldi IPv4 privaatvõrk**, mis ei kattu teiste sama serveri kasutajate võrkudega. Laboritöö masinad on loodud õpetaja mallidest ja leiad need Proxmoxi veebiliidesest oma kasutaja alt - kui mõni masin on puudu, pöördu õpetaja poole, mitte ära loo seda ise.
 
 ### Sisselogimine
 
@@ -81,6 +83,7 @@ Kursuse laboritööd kasutavad seda plaani. Sama masin teenib mitut laboritööd
 | `ubuntuklient-IT24-MariMaasikas` | `ubuntuklient` | DHCP (`10.0.83.98` reserveeritud) | töölaud (22), domeeni liige (20–21) |
 | `winklient-IT24-MariMaasikas` | `winklient` | DHCP (`10.0.83.99` reserveeritud) | Windowsi klient (15, 21, 22) |
 | `k3s1-IT24-MariMaasikas` … `k3s3-…` | `k3s1`, `k3s2`, `k3s3` | `10.0.83.61`–`10.0.83.63` | Kubernetese klaster (24) |
+| `pbs-IT24-MariMaasikas` | `pbs` | `10.0.83.65` | Proxmox Backup Server (23) |
 | - | - | `10.0.83.50` | virtuaalne IP (keepalived, 13) |
 | - | - | `10.0.83.64` | k3s klastri virtuaalne IP (24, lisaülesanne) |
 
@@ -99,6 +102,8 @@ Head tavad:
 ---
 
 ## 3. Virtuaalmasina loomine Proxmoxis
+
+> **HKHK õppija:** seda punkti (ja punkte 4-6) on vaja ainult siis, kui laboritöö või projekt nõuab uue masina loomist ja paigaldamist. Tavaliselt on masinad olemas - jätka punktist 7.
 
 Proxmoxi veebiliideses: paremklõps sõlmel → **Create VM**.
 
@@ -184,9 +189,9 @@ Eestis on kiire peegel **mirrors.xtom.ee**, kust saab alla laadida kõiki kolme.
 
 ## 7. Esimesed sammud pärast paigaldust
 
-Tee need sammud igas uues serveris. Täpsemad selgitused on viidatud moodulites.
+Tee need sammud igas uues serveris - ka HKHK mallist tehtud masinas (eriti parooli muutmine, hostinimi ja IP-aadress). Täpsemad selgitused on viidatud moodulites.
 
-### 6.1 Uuendused ja põhitööriistad
+### 7.1 Uuendused ja põhitööriistad
 
 ```bash
 # Debian, Ubuntu
@@ -200,7 +205,7 @@ sudo dnf install qemu-guest-agent vim curl
 
 **QEMU külalisagent** laseb Proxmoxil näha masina IP-aadressi, masinat korrektselt välja lülitada ja teha järjepidevaid varukoopiaid. Käivita see (`sudo systemctl enable --now qemu-guest-agent`) ja kontrolli, et Proxmoxi masina *Summary* lehel on näha IP-aadress. Agent peab olema Proxmoxis *Options* → *QEMU Guest Agent* lubatud.
 
-### 6.2 Hostinimi ja staatiline IP-aadress
+### 7.2 Hostinimi ja staatiline IP-aadress
 
 ```bash
 sudo hostnamectl set-hostname debian1
@@ -208,7 +213,7 @@ sudo hostnamectl set-hostname debian1
 
 Staatilise aadressi seadistamine on igas distros erinev - vt moodul 7 (Debian: `/etc/network/interfaces`, Ubuntu: Netplan, AlmaLinux: `nmcli`).
 
-### 6.3 SSH-võtmed
+### 7.3 SSH-võtmed
 
 Loo oma arvutis võtmepaar ja kopeeri avalik võti serverisse (vt moodul 7):
 
@@ -225,7 +230,7 @@ type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh kasutaja@10.0.83.52 "mkdir -p ~/
 
 Kui võtmega sisselogimine töötab, keela paroolid (vt moodul 7, punkt 7.7). **Ubuntus** pane tähele faili `/etc/ssh/sshd_config.d/50-cloud-init.conf` - kui see on olemas ja sisaldab rida `PasswordAuthentication yes`, kehtib see sinu `sshd_config`-i muudatuse asemel.
 
-### 6.4 Tulemüür
+### 7.4 Tulemüür
 
 | Distro | Tulemüür | Esmane seadistus |
 |---|---|---|
@@ -235,7 +240,7 @@ Kui võtmega sisselogimine töötab, keela paroolid (vt moodul 7, punkt 7.7). **
 
 Täpsemalt moodulis 7. Avalikult kättesaadavatele serveritele lisa `fail2ban` (moodul 11).
 
-### 6.5 Hetktõmmis
+### 7.5 Hetktõmmis
 
 Kui masin on paigaldatud ja põhiseadistus tehtud, **tee hetktõmmis** (Proxmoxis *Snapshots* → *Take Snapshot*, nimi nt `puhas-paigaldus`). Laboritöödes saad alati sellesse olekusse tagasi minna.
 

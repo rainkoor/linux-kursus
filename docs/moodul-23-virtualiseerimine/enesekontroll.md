@@ -19,6 +19,8 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 13. Mis on kvoorum ja miks vajab HA-klaster vähemalt kolme sõlme?
 14. Mis on Xenis dom0 ja domU?
 15. Mis on Xen Orchestra ja mis vahe on XOA-l ning lähtekoodist paigaldatud XO-l?
+16. Mille poolest erineb Proxmox Backup Server tavalisest `vzdump` failivarundusest? Nimeta vähemalt neli eelist.
+17. Mis vahe on PBS-i töödel *Prune*, *Garbage collection* ja *Verify*? Miks ei vabane ruum kohe pärast vana varukoopia kustutamist?
 
 ## Praktilised miniülesanded
 
@@ -47,6 +49,8 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 13. Kvoorum on üle poole sõlmede häältest; ilma selleta lukustab klaster seadistuse, et vältida *split brain*-i. Kolme sõlmega jääb ühe rikke korral alles enamus.
 14. dom0 - privilegeeritud haldus-Linux, mis haldab seadmeid ja XAPI-t; domU - tavalised külalismasinad.
 15. XCP-ng serverite ja kogumite veebihaldus. XOA on valmis seade (tasuta versioon piiratud, tasuline tugi); XO lähtekoodist sisaldab kõiki funktsioone, kuid ilma toeta ja tuleb ise uuendada.
+16. Deduplitseerimine (sama tükki hoitakse üks kord, ka eri masinate vahel), inkrementaalne varundus muutunud plokkidega (kiire), kliendipoolne krüpteerimine, regulaarne kontroll (verify), üksikfailide taastamine, sünkroonimine teise PBS-i, eraldi õigused (varundaja ei saa kustutada), ka tavaliste Linuxi masinate varundus `proxmox-backup-client`-iga.
+17. Prune kustutab säilitusreegli järgi varukoopiate kirjed; Garbage collection kustutab tükid, millele ükski varukoopia enam ei viita (alles siis vabaneb ruum); Verify kontrollib tükkide kontrollsummasid. Prune eemaldab ainult viited, sest sama tükki võivad kasutada teised varukoopiad.
 
 ### Miniülesannete lahendused
 

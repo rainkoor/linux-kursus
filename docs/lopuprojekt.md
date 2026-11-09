@@ -125,7 +125,7 @@ Meistritasemel ehitad lahenduse, mis võiks töötada päris asutuses: see talub
 
 **M2. Virtualiseerimisplatvorm koodina**
 
-- **Põhinõuded:** vähemalt kahesõlmeline Proxmox VE klaster (pesastatult või füüsiliselt, moodul 23) või XCP-ng kogum; jagatud salvestus (NFS, iSCSI või Ceph) või ZFS-i replikatsioon; virtuaalmasinad luuakse koodina (cloud-init mall, moodul 23, + OpenTofu või Ansible'i `community.general.proxmox_kvm`, moodul 16) ja seadistatakse Ansible'iga; varundus Proxmox Backup Serverisse koos taastamistestiga; kasutajad ja õigused (realm, rollid, kogumid); seire.
+- **Põhinõuded:** vähemalt kahesõlmeline Proxmox VE klaster (pesastatult või füüsiliselt, moodul 23) või XCP-ng kogum; jagatud salvestus (NFS, iSCSI või Ceph) või ZFS-i replikatsioon; virtuaalmasinad luuakse koodina (cloud-init mall, moodul 23, + OpenTofu või Ansible'i `community.general.proxmox_kvm`, moodul 16) ja seadistatakse Ansible'iga; varundus Proxmox Backup Serverisse (moodul 23) koos taastamistestiga; kasutajad ja õigused (realm, rollid, kogumid); seire.
 - **Lisanõuded:** kõrge kättesaadavus (HA) koos rikketestiga; SDN võrgud; API-põhine haldusskript (moodulid 6 ja 23) õppijate laborite loomiseks.
 
 **M3. Kooli võrk ja kasutajahaldus**

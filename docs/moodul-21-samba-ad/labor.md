@@ -11,7 +11,7 @@
 
 Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `dc1` `10.0.83.56`, `alma` `10.0.83.55`, `ubuntuklient` `10.0.83.98`, `winklient` `10.0.83.99`. Domeen `ad.lab.example`, NetBIOS-nimi `AD`. Asenda oma võrguplaani väärtustega.
 
-> **Enne alustamist:** paigalda `dc1` (vt [paigalduslisa](../lisad/paigaldus.md)), anna sellele staatiline aadress ja **tee hetktõmmis** (snapshot). Provisioning'ut on lihtsam korrata puhtalt masinalt kui ebaõnnestunud katset parandada.
+> **Enne alustamist:** HKHK laboris on `dc1` mallist olemas, iseõppija paigaldab selle (vt [paigalduslisa](../lisad/paigaldus.md)). Anna sellele staatiline aadress ja **tee hetktõmmis** (snapshot). Provisioning'ut on lihtsam korrata puhtalt masinalt kui ebaõnnestunud katset parandada.
 
 ---
 

@@ -289,6 +289,8 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `podman` | Konteinerite käivitamine ja haldus (juurkasutajata) | [12](../moodul-12-konteinerid/index.md) |
 | `podman-compose` | Mitme konteineri rakendus `compose.yaml` järgi | [12](../moodul-12-konteinerid/index.md) |
 | `postfix` | Postfixi juhtimine (`check`, `reload`) | [15](../moodul-15-vorguteenused/index.md) |
+| `proxmox-backup-client` | Varundab Linuxi masina katalooge Proxmox Backup Serverisse | [23](../moodul-23-virtualiseerimine/index.md) |
+| `proxmox-backup-manager` | Proxmox Backup Serveri haldus (andmehoidlad, kasutajad, õigused) | [23](../moodul-23-virtualiseerimine/index.md) |
 | `ps` | Protsesside loetelu (`aux`, `-ef`) | [5](../moodul-05-protsessid-teenused/index.md) |
 | `psql` | PostgreSQL-i klient | [14](../moodul-14-andmebaasid/index.md) |
 | `pstree` | Protsesside puu | [5](../moodul-05-protsessid-teenused/index.md) |

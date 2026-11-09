@@ -41,6 +41,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | CSV | Comma-Separated Values | Tekstivormingus tabel, kus väljad on eraldatud komaga |
 | CVE | Common Vulnerabilities and Exposures | Turvaaukude rahvusvaheline tunnus |
 | dataset | dataset | ZFS-i pooli sees olev failisüsteem oma omadustega |
+| deduplitseerimine | deduplication | Sama andmetüki salvestamine ainult üks kord, ka eri failide või varukoopiate vahel (ZFS, PBS, restic) |
 | Deployment | Deployment | Kubernetese objekt, mis hoiab rakenduse soovitud arvu pode ja haldab uuendusi |
 | DHCP | Dynamic Host Configuration Protocol | Protokoll, millega võrguseadmed saavad automaatselt IP-aadressi ja võrguseaded |
 | distributsioon, distro | distribution | Kernelist ja tarkvarast koosnev terviklik OS |
@@ -221,6 +222,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | proovirežiim | dry run | Režiim, mis näitab, mida tehtaks, ilma tegemata |
 | Proton | Proton | Valve'i ühilduvuskiht Windowsi mängude käitamiseks Linuxis |
 | protsess | process | Töötav programm |
+| Proxmox Backup Server | Proxmox Backup Server (PBS) | Proxmoxi deduplitseeriv ja inkrementaalne varundusserver |
 | PVC | PersistentVolumeClaim | Kubernetese podi taotlus püsiketta järele |
 | põhigrupp | primary group | Kasutaja vaikegrupp, millele kuuluvad tema loodud failid |
 | pöördpuhverserver | reverse proxy | Server, mis edastab päringud taustal töötavale rakendusele |
@@ -283,6 +285,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | SUID | set user ID | Programm töötab faili omaniku õigustes |
 | sõlm (klastris) | node | Klastri üks masin |
 | sõltuvus | dependency | Pakett, mida teine pakett töötamiseks vajab |
+| säilitusreegel | retention policy, prune | Reegel, mitu varukoopiat (päeva, nädala, kuu kaupa) alles hoida |
 | süsteemikutse | system call | Programmi pöördumine kerneli poole (nt faili avamine) |
 | SYSVOL | SYSVOL | AD domeenikontrolleri jagatud kaust rühmapoliitikate ja sisselogimisskriptide jaoks |
 | ZFS | ZFS | Failisüsteem ja köitehaldur ühes, kontrollsummade ja hetktõmmistega |
