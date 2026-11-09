@@ -1,0 +1,321 @@
+# Kursuse kava
+
+## Eesmärk
+
+Kursuse eesmärk on anda õppijale oskused Linuxi süsteemide igapäevaseks kasutamiseks ja haldamiseks: käsurea kindel valdamine, kasutajate, tarkvara, teenuste, võrgu ja salvestuse haldus, skriptimine ning arusaam sellest, kuidas Linux sisemiselt töötab.
+
+Kursus algab nullist ja jõuab tasemeni, mis vastab ligikaudu algtaseme sertifikaatide (LPIC-1, CompTIA Linux+, Red Hat RHCSA) nõuetele.
+
+## Õpiväljundid
+
+Kursuse läbinud õppija:
+
+1. kasutab Linuxi käsurida iseseisvalt ja leiab vajadusel abi süsteemi dokumentatsioonist;
+2. haldab faile, kasutajaid, gruppe ja õigusi;
+3. paigaldab ja uuendab tarkvara nii Debiani kui ka Red Hati perekonna distrodel;
+4. haldab protsesse ja teenuseid ning analüüsib logisid;
+5. kirjutab Bashi skripte korduvate ülesannete automatiseerimiseks;
+6. seadistab võrguühendusi, SSH-d ja tulemüüri;
+7. haldab kettaid, failisüsteeme ja LVM-i;
+8. selgitab Linuxi alglaadimise ja kerneli toimimise põhimõtteid;
+9. paigaldab, seadistab ja turvab levinud serveriteenuseid;
+10. kasutab konteinereid, Giti ja automatiseerimisvahendeid;
+11. jälgib süsteemide jõudlust ja tervist ning seadistab seire.
+
+## Maht ja ülesehitus
+
+Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksam 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (64 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
+
+### Põhiosa: Linuxi kasutamine ja haldus
+
+| Nr | Moodul | Maht (h) | Laboritöö distro |
+|---|---|---|---|
+| 1 | [Linux ja käsurida](moodul-01-sissejuhatus/index.md) | 8 | Debian |
+| 2 | [Failid, tekst ja torud](moodul-02-failid-tekst-torud/index.md) | 10 | Debian |
+| 3 | [Kasutajad, grupid ja õigused](moodul-03-kasutajad-oigused/index.md) | 8 | Ubuntu |
+| 4 | [Tarkvara ja pakihaldus](moodul-04-pakihaldus/index.md) | 6 | Debian, Ubuntu, AlmaLinux |
+| 5 | [Protsessid, teenused ja systemd](moodul-05-protsessid-teenused/index.md) | 8 | AlmaLinux |
+| 6 | [Bashi skriptimine ja Git](moodul-06-bash/index.md) | 16 | Debian |
+| 7 | [Võrk ja SSH](moodul-07-vork-ssh/index.md) | 12 | Ubuntu |
+| 8 | [Kettad, failisüsteemid ja LVM](moodul-08-kettad-lvm/index.md) | 8 | AlmaLinux |
+
+### Süvendusosa: serverid ja automatiseerimine
+
+| Nr | Moodul | Maht (h) | Laboritöö distro |
+|---|---|---|---|
+| 9 | [Salvestus: RAID, ZFS, jõudlus ja taastamine](moodul-09-salvestus/index.md) | 8 | AlmaLinux, Ubuntu |
+| 10 | [Kuidas Linux töötab: alglaadimine ja kernel](moodul-10-alglaadimine-kernel/index.md) | 10 | Debian |
+| 11 | [Turvalisus ja logid](moodul-11-turvalisus-logid/index.md) | 10 | AlmaLinux, Ubuntu |
+| 12 | [Konteinerid](moodul-12-konteinerid/index.md) | 8 | AlmaLinux |
+| 13 | [Veebiserverid](moodul-13-veebiserverid/index.md) | 10 | Debian, AlmaLinux, Ubuntu |
+| 14 | [Andmebaasid](moodul-14-andmebaasid/index.md) | 8 | Debian, AlmaLinux |
+| 15 | [Võrguteenused: DNS, failijagamine, e-post ja varundus](moodul-15-vorguteenused/index.md) | 10 | Debian (15B: Ubuntu) |
+| 16 | [Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](moodul-16-automatiseerimine/index.md) | 10 | AlmaLinux, Debian, Ubuntu |
+| 17 | [Seire ja jõudlus](moodul-17-seire/index.md) | 8 | Debian, Ubuntu |
+| - | [Proovieksam](proovieksam.md) | 4 | AlmaLinux |
+| - | [Lõpuprojekt](lopuprojekt.md) (kolm taset) | 16 (12–32) | Õppija valik |
+
+Moodul 12 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodulites 13–15 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS, failid, e-post ja varundus), mida moodulites 16–17 automatiseeritakse ja seiratakse.
+
+### Valikmoodulid
+
+| Nr | Moodul | Maht (h) | Laboritöö distro |
+|---|---|---|---|
+| 18 | [BSD praktikas: OPNsense tulemüür](moodul-18-opnsense/index.md) | 8 | OPNsense (FreeBSD), Debian, Ubuntu |
+| 19 | [Võrgu infrastruktuur: DHCP, PXE ja iSCSI](moodul-19-dhcp-pxe-iscsi/index.md) | 10 | Debian, AlmaLinux, Ubuntu |
+| 20 | [Kataloogiteenused: OpenLDAP](moodul-20-openldap/index.md) | 8 | Debian (server), Ubuntu ja AlmaLinux (kliendid) |
+| 21 | [Active Directory Linuxis: Samba AD DC](moodul-21-samba-ad/index.md) | 10 | Debian (DC), Ubuntu, AlmaLinux, Windows |
+| 22 | [Linux töölaual ja WSL](moodul-22-toolaud-wsl/index.md) | 8 | Ubuntu Desktop, Kali, Windows (WSL) |
+| 23 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](moodul-23-virtualiseerimine/index.md) | 10 | Debian, Proxmox VE, XCP-ng |
+| 24 | [Kubernetes: k3s](moodul-24-kubernetes/index.md) | 10 | Debian |
+
+Valikmoodulid 18–21 ehitavad üksteise peale (OPNsense'i laborivõrk → DHCP/PXE → LDAP → AD). Moodulid 22–24 on iseseisvad (moodul 24 eeldab konteinereid ja veebiservereid, moodulid 12–13).
+
+Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalmasinad ja paigaldus) on kirjeldatud lisas [Laborikeskkond ja paigaldus](lisad/paigaldus.md). Kõik laboritööd kasutavad sama IP-plaani, nii et õppija ehitab ühe keskkonna, mis kasvab moodulist moodulisse.
+
+## Moodulite sisu
+
+### Moodul 1. Linux ja käsurida
+
+**Teemad:** mis on Linux, kernel ja distributsioon, distrode perekonnad, terminal ja kest, SSH-ühendus, käsu ülesehitus, abi leidmine (`man`, `--help`), failisüsteemi hierarhia, liikumine kataloogides, failide ja kataloogide loomine, kopeerimine, teisaldamine ja kustutamine, metamärgid, tehisintellekt abilisena, harjutusmäng OverTheWire Bandit.
+
+**Õpiväljundid:** õppija ühendub serveriga SSH kaudu, liigub failisüsteemis absoluutsete ja suhteliste teede abil, teeb põhitoiminguid failide ja kataloogidega ning leiab käskude kohta abi.
+
+**Iseõppeks:** W. Shotts „The Linux Command Line“ (I osa); OverTheWire Bandit, tasemed 0–5.
+
+### Moodul 2. Failid, tekst ja torud
+
+**Teemad:** tekstiredaktorid (`nano`, `vim` põhitõed), väljundi ümbersuunamine (`>`, `>>`, `2>`), torud (`|`), tekstitöötlus (`grep`, `sort`, `uniq`, `wc`, `cut`, `tr`), failide otsimine (`find`, `locate`), lingid (`ln`), arhiveerimine ja pakkimine (`tar`, `gzip`), regulaaravaldiste alused, failide võrdlemine ja paikamine (`diff`, `patch`), `xargs`.
+
+**Õpiväljundid:** õppija redigeerib konfiguratsioonifaile, kombineerib käske torude abil ja otsib infot failidest ning failisüsteemist.
+
+**Iseõppeks:** Shotts (I ja III osa); MIT Missing Semester - „Shell Tools and Scripting“, „Editors (Vim)“; OverTheWire Bandit, tasemed 6–15.
+
+### Moodul 3. Kasutajad, grupid ja õigused
+
+**Teemad:** kasutajad ja grupid (`/etc/passwd`, `/etc/group`, `/etc/shadow`), kasutajate haldus (`useradd`, `usermod`, `passwd`), `sudo` ja juurkasutaja, failiõigused (`chmod`, `chown`, `chgrp`), numbriline ja sümboolne kuju, `umask`, erilised õigused (SUID, SGID, sticky bit), ACL-i tutvustus, uue kasutaja vaikeseaded (`/etc/skel`, `login.defs`), PAM, paroolipoliitika (`pam_pwquality`) ja konto lukustamine (`pam_faillock`).
+
+**Õpiväljundid:** õppija loob ja haldab kasutajaid ning gruppe ja määrab failidele sobivad õigused vähima õiguse põhimõttel.
+
+**Iseõppeks:** Shotts (II osa); Linux Upskill Challenge.
+
+### Moodul 4. Tarkvara ja pakihaldus
+
+**Teemad:** paketid ja hoidlad, `apt` ja `dpkg` (Debian, Ubuntu), `dnf` ja `rpm` (AlmaLinux), süsteemi uuendamine, pakettide otsimine ja eemaldamine, kolmandate osapoolte hoidlad (EPEL, PPA) ja nende riskid, tarkvara kompileerimine lähtekoodist, Snap ja Flatpak, väljalaske uuendamine (Debian 12 → 13, `do-release-upgrade`, ELevate).
+
+**Õpiväljundid:** õppija paigaldab, uuendab ja eemaldab tarkvara kõigil kolmel distrol ning selgitab pakihaldurite erinevusi.
+
+**Iseõppeks:** distrode dokumentatsioon (Debian Reference, AlmaLinux Wiki).
+
+### Moodul 5. Protsessid, teenused ja systemd
+
+**Teemad:** protsessid ja PID, `ps`, `top`, `htop`, signaalid ja `kill`, esi- ja taustatööd (`jobs`, `fg`, `bg`, `nohup`), prioriteedid (`nice`), systemd ja `systemctl`, teenuste haldus, unit-failid, `journalctl`, ajastatud tööd (`cron`, systemd timer, `at`), ressursipiirangud (`ulimit`, `limits.conf`, systemd `MemoryMax=` ja `CPUQuota=`, `systemd-run`, `systemd-cgtop`).
+
+**Õpiväljundid:** õppija jälgib ja haldab protsesse, käivitab, peatab ja seadistab teenuseid ning leiab logidest vigu.
+
+**Iseõppeks:** B. Ward „How Linux Works“; Arch Wiki - systemd.
+
+### Moodul 6. Bashi skriptimine ja Git
+
+**Teemad:** skripti ülesehitus ja shebang, muutujad ja keskkonnamuutujad, jutumärgid, argumendid, tingimused (`if`, `test`, `[[ ]]`), tsüklid (`for`, `while`), funktsioonid, väljumiskoodid, sisend ja väljund, vigade käsitlemine (`set -euo pipefail`), ShellCheck, skriptide ajastamine, Git (sissekanded, harud, konfliktid, kaughoidla).
+
+**Õpiväljundid:** õppija kirjutab loetavaid ja töökindlaid skripte, mis automatiseerivad haldustoiminguid (nt varundus, kasutajate loomine, logide analüüs) ning hoiab need Git-hoidlas.
+
+**Iseõppeks:** Shotts (IV osa); Greg's Wiki „BashGuide“; MIT Missing Semester.
+
+### Moodul 7. Võrk ja SSH
+
+**Teemad:** IP-aadressid, alamvõrgud ja marsruutimine (`ip`), DNS ja nimelahendus (`/etc/hosts`, `dig`), pordid ja ühendused (`ss`), võrgu seadistamine (Debiani `ifupdown`, Ubuntu Netplan, AlmaLinuxi NetworkManager ja `nmcli`), SSH võtmepõhine autentimine, hüppeserver (`ProxyJump`), `scp`, `rsync`, tulemüür (`nftables`, `ufw`, `firewalld`), kellaaeg ja NTP (`timedatectl`, chrony, systemd-timesyncd), lokaat ja klaviatuur (`localectl`), WireGuard VPN, IPv6 (link-local, SLAAC), sild, VLAN ja liitliides (*bond*).
+
+**Õpiväljundid:** õppija seadistab võrguühenduse, diagnoosib võrguprobleeme, kasutab SSH-võtmeid ja seadistab tulemüüri.
+
+**Iseõppeks:** Linux Upskill Challenge; Arch Wiki - Network configuration.
+
+### Moodul 8. Kettad, failisüsteemid ja LVM
+
+**Teemad:** plokkseadmed (`lsblk`, `blkid`), partitsioonid (`fdisk`, `parted`, GPT ja MBR), failisüsteemid (ext4, XFS, Btrfs), haakimine (`mount`, `/etc/fstab`), saaleala (swap), LVM (PV, VG, LV), kettakasutuse jälgimine (`df`, `du`), ketta krüpteerimine (LUKS). RAID, ZFS, jõudlus ja taastamine on moodulis 9.
+
+**Õpiväljundid:** õppija lisab süsteemi uue ketta, loob failisüsteemi ja LVM-köite ning haagib selle püsivalt.
+
+**Iseõppeks:** „How Linux Works“; Red Hati dokumentatsioon (LVM).
+
+### Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine
+
+**Teemad:** RAID-i tasemed, riistvaraline ja tarkvaraline RAID (`mdadm`), ZFS (pool, vdev, dataset, hetktõmmised, `zfs send`, scrub; Proxmox ja TrueNAS), ketta jõudluse mõõtmine (`dd`, `fio`, `iostat`), ketaste tervis (SMART), partitsioonitabeli ja failide taastamine (TestDisk, PhotoRec).
+
+**Õpiväljundid:** õppija ehitab töökindla salvestuse, vahetab rikkis ketta, mõõdab ja jälgib ketaste jõudlust ning taastab kadunud partitsioonitabeli.
+
+**Iseõppeks:** OpenZFS dokumentatsioon; Arch Wiki - RAID, ZFS, S.M.A.R.T.
+
+### Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel
+
+**Teemad:** alglaadimise etapid (UEFI/BIOS, GRUB, kernel, initramfs, systemd), käivituseesmärgid (target), kerneli moodulid (`lsmod`, `modprobe`), `/proc` ja `/sys`, `dmesg`, kerneli parameetrid (`sysctl`), süsteemi taastamine (rescue-režiim, juurkasutaja parooli lähtestamine, GRUB-i parandamine taastemeedialt ja `chroot`-iga), kernelite vahetamine ja eemaldamine, DKMS, kerneli kompileerimine lähtekoodist.
+
+**Õpiväljundid:** õppija kirjeldab alglaadimise protsessi, diagnoosib käivitusprobleeme, taastab mittekäivituva süsteemi, vahetab kasutatavat kernelit ning kompileerib ja paigaldab kerneli lähtekoodist.
+
+**Iseõppeks:** „How Linux Works“; Linux From Scratch (süvenemiseks).
+
+### Moodul 11. Turvalisus ja logid
+
+**Teemad:** turvalisuse põhimõtted, SSH karastamine, automaatsed turvauuendused, `fail2ban`, logide asukohad ja `journald`, `rsyslog`, logide rotatsioon, kohustuslik juurdepääsukontroll: SELinux (AlmaLinux) ja AppArmor (Ubuntu), auditeerimine, SIEM-i (Wazuh) tutvustus ja automaatne reageerimine, fail2ban-i vajalikkus ja alternatiivid (OpenSSH `PerSourcePenalties`, CrowdSec).
+
+**Õpiväljundid:** õppija karastab serveri, jälgib logisid ja lahendab SELinuxi ning AppArmori põhjustatud probleeme.
+
+**Iseõppeks:** CIS Benchmarks; Red Hati SELinuxi dokumentatsioon.
+
+### Moodul 12. Konteinerid
+
+**Teemad:** konteinerite põhimõte (nimeruumid, cgroups) ja erinevus virtuaalmasinatest, Podman ja Docker, pildid ja registrid, köited, oma pilt (Containerfile), Compose, Quadlet, automaatsed pildiuuendused.
+
+**Õpiväljundid:** õppija käivitab teenuseid konteinerites, ehitab oma pildi ja haldab konteinereid systemd teenustena.
+
+**Iseõppeks:** Podmani dokumentatsioon; „Podman in Action“.
+
+### Moodul 13. Veebiserverid
+
+**Teemad:** serveriteenuse paigaldamise töövoog, nginx (virtuaalhostid, pöördpuhver), TLS ja oma CA, Let's Encrypt, Apache (`a2ensite`, `.htaccess`, AlmaLinuxi `httpd` ja SELinux), Caddy (automaatne HTTPS), lighttpd ja teised veebiserverid, koormuse jaotus (nginx `upstream`, HAProxy, Traefik), jaoturi rikkekindlus (keepalived, VRRP), koormustest (`ab`, `wrk`), veebiserveri valik.
+
+**Õpiväljundid:** õppija paigaldab ja turvab veebiserverid, seadistab pöördpuhvri ja koormuse jaotuse ning valib olukorrale sobiva tarkvara.
+
+**Iseõppeks:** nginx-i, Apache'i, Caddy ja HAProxy dokumentatsioon; Mozilla SSL Configuration Generator.
+
+### Moodul 14. Andmebaasid
+
+**Teemad:** andmebaaside liigid (relatsiooniline, manustatud, võti-väärtus, NoSQL), MariaDB (kasutajad ja õigused, kaugühendus, varundus, parooli taastamine, replikatsioon ja ülevõtt), PostgreSQL (`psql`, rollid, `pg_hba.conf`, `pg_dump`), SQLite, Valkey/Redis, nginx + PHP + MariaDB, andmebaaside turvalisus.
+
+**Õpiväljundid:** õppija paigaldab ja haldab levinumaid andmebaase, ühendab andmebaasi veebirakendusega ning varundab ja taastab andmeid.
+
+**Iseõppeks:** MariaDB Knowledge Base, PostgreSQL-i dokumentatsioon, SQLBolt.
+
+### Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus
+
+**Teemad:** DNS-server BIND9 ning võrdlus (Unbound, dnsmasq, CoreDNS, Pi-hole), failide jagamine (NFS ja autofs, Samba, TrueNAS), e-posti saatmine (Postfix relee), varundus (3-2-1, RPO ja RTO, restic) ja taastamistest, serveri dokumenteerimine, käsiraamat ja otsuste logi.
+
+**Õpiväljundid:** õppija lisab serverile sisevõrgu DNS-i, failijagamise ja e-posti teavitused, varundab selle, testib taastamist ja dokumenteerib serveri.
+
+**Iseõppeks:** BIND 9, Samba Wiki, Postfixi ja resticu dokumentatsioon.
+
+### Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
+
+**Teemad:** infrastruktuur koodina, idempotentsus, Ansible (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad, Vault, eri distrod, rollid ja muutujafailid), Ansible'i koodi testimine (`ansible-lint`, idempotentsuse test, Molecule), Vagrant laborikeskkonna loomiseks, virtuaalmasinad koodina (cloud-init, OpenTofu).
+
+**Õpiväljundid:** õppija seadistab mitu serverit korraga Ansible'iga ja loob korratava laborikeskkonna.
+
+**Iseõppeks:** Ansible'i dokumentatsioon; J. Geerling „Ansible for DevOps“.
+
+### Moodul 17. Seire ja jõudlus
+
+**Teemad:** mõõdikud, logid ja häired, USE meetod, `uptime`, `top`, `vmstat`, `iostat`, `pidstat`, `sar`, `strace`, `lsof`, jõudlusprofiilid (`tuned`), Prometheus, node_exporter ja Grafana, PromQL, häired, Uptime Kuma, Zabbixi tutvustus.
+
+**Õpiväljundid:** õppija leiab jõudlusprobleemi põhjuse süstemaatiliselt ja ehitab laborivõrgule seiresüsteemi.
+
+**Iseõppeks:** B. Gregg „Systems Performance“; Prometheuse ja Grafana dokumentatsioon.
+
+### Valikmoodul 18. BSD praktikas: OPNsense tulemüür
+
+**Teemad:** isoleeritud laborivõrgu kavandamine (WAN/LAN, Proxmoxi sild või SDN), OPNsense'i paigaldus ja konsoolimenüü, veebiliides, DHCP (Dnsmasq, Kea) ja Unbound DNS, tulemüürireeglid ja aliased, NAT ja pordisuunamine, logid, varundus, FreeBSD ja Linuxi käsud.
+
+**Õpiväljundid:** õppija ehitab OPNsense'iga isoleeritud laborivõrgu, seadistab selle DHCP, DNS-i ja tulemüürireeglid ning teeb teenuse kättesaadavaks pordisuunamisega.
+
+**Iseõppeks:** OPNsense'i dokumentatsioon (docs.opnsense.org).
+
+### Valikmoodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
+
+**Teemad:** DHCP tööpõhimõte (DORA, valikud, releed), Kea DHCP, ISC DHCP võrdlus, reserveeringud, PXE alglaadimine (TFTP, iPXE, BIOS ja UEFI, netboot.xyz, FOG), automaatne paigaldus (kickstart, preseed, autoinstall), iSCSI sihtmärk (`targetcli`) ja initsiaator (`iscsiadm`), CHAP.
+
+**Õpiväljundid:** õppija seadistab laborivõrgule Linuxi DHCP-serveri, võrgust alglaadimise ja iSCSI plokksalvestuse.
+
+**Iseõppeks:** Kea Administrator Reference Manual; Red Hati dokumentatsioon „Managing storage devices“.
+
+### Valikmoodul 20. Kataloogiteenused: OpenLDAP
+
+**Teemad:** tsentraalne autentimine, LDAP-i andmemudel (DIT, DN, objektiklassid, skeemid), OpenLDAP-i paigaldus ja `cn=config`, LDIF, otsingud ja muudatused, ligipääsureeglid, TLS, LDAP Account Manager, SSSD kliendid, varundus.
+
+**Õpiväljundid:** õppija paigaldab OpenLDAP-serveri, haldab kasutajaid ja gruppe ning seadistab Linuxi masinad kataloogist autentima.
+
+**Iseõppeks:** OpenLDAP Administrator's Guide; `man sssd-ldap`.
+
+### Valikmoodul 21. Active Directory Linuxis: Samba AD DC
+
+**Teemad:** Active Directory põhimõisted, Kerberos ja DNS, Samba AD domeenikontrolleri paigaldus, `samba-tool`, Windowsi kliendi liitmine ja RSAT, rühmapoliitika, Linuxi klientide liitmine (realmd, SSSD), ligipääsu ja `sudo` piiramine gruppidega, Windows Server AD-ga liitumine, veaotsing.
+
+**Õpiväljundid:** õppija loob vaba tarkvaraga AD domeeni ning liidab sellega Windowsi ja Linuxi masinad.
+
+**Iseõppeks:** Samba Wiki; Red Hati dokumentatsioon „Integrating RHEL systems directly with Windows Active Directory“.
+
+### Valikmoodul 22. Linux töölaual ja WSL
+
+**Teemad:** töölaua Linuxi suundumused (mängud ja SteamOS, digitaalne suveräänsus, Windows 10 toe lõpp), töölaua distrod ja muutumatud distrod, graafiline süsteem (Wayland, X11, sisselogimishaldur, töölauakeskkonnad), Flatpak ja Snap, Windowsi programmide alternatiivid, Proton, haldus (uuendused, printerid, Timeshift, ID-kaart, kaugtöölaud), Kali Linux, WSL.
+
+**Õpiväljundid:** õppija valib sobiva töölaua distro, haldab töölaua Linuxit, kasutab Kalit vastutustundlikult ja töötab Linuxiga Windowsi sees WSL-i abil.
+
+**Iseõppeks:** Flathubi ja ProtonDB veebilehed; Microsoft Learn - WSL; Kali dokumentatsioon.
+
+### Valikmoodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
+
+**Teemad:** hüperviisorite tüübid, riistvaraline tugi ja pesastatud virtualiseerimine, KVM, QEMU ja libvirt, Proxmox VE (paigaldus, hoidlad, uuendused, VM-id ja LXC, salvestus, sillad, VLAN-id, NAT, varundus, mallid ja cloud-init mall, klaster), XCP-ng ja Xen Orchestra. HKHK-s käsitletakse hüperviisoreid põhjalikumalt aines „Majutuskeskkonna riistvara“.
+
+**Õpiväljundid:** õppija paigaldab ja haldab avatud hüperviisoreid ning selgitab, kuidas Linux virtualiseerib.
+
+**Iseõppeks:** Proxmox VE dokumentatsioon ja wiki; XCP-ng dokumentatsioon.
+
+### Valikmoodul 24. Kubernetes: k3s
+
+**Teemad:** konteinerite orkestreerimine ja millal seda vaja ei ole, Kubernetese ülesehitus (juhtkiht, kubelet, containerd, CNI) ja deklaratiivne haldus, distributsioonide võrdlus (kubeadm, k3s, RKE2, k0s, MicroK8s, minikube, kind, Talos), k3s mitmesõlmelise klastri paigaldus, `kubectl`, Pod, Deployment, Service, Ingress (Traefik) ja TLS, skaleerimine, järkjärguline uuendus ja tagasivõtt, ConfigMap ja Secret, püsikettad (PVC, `local-path`), Helm, sõlme hooldus, uuendamine ja varundus, kõrge kättesaadavus etcd-ga, GitOps (Argo CD, Flux).
+
+**Õpiväljundid:** õppija ehitab k3s klastri, käivitab sellel rakenduse koos TLS-i ja püsiandmetega, uuendab ja hooldab klastrit ning oskab hinnata, millal Kubernetes on õige valik.
+
+**Iseõppeks:** k3s ja Kubernetese dokumentatsioon; minikube või kind oma arvutis; „Kubernetes the Hard Way“.
+
+### Proovieksam
+
+RHCSA stiilis praktiline eksam AlmaLinuxis: 2,5 tunniga tuleb täita 8 teemaplokki haldusülesandeid ning tulemust kontrollib automaatne skript. Juhend: [proovieksam](proovieksam.md).
+
+### Lõpuprojekt
+
+Täpsem juhend koos teemade, nõuete ja hindamiskriteeriumidega: [lõpuprojekt](lopuprojekt.md).
+
+Õppija ehitab ja dokumenteerib terviklahenduse ühel kolmest tasemest:
+
+| Tase | Eeldused | Maht | Näited |
+|---|---|---|---|
+| **Algtase** | moodulid 1–8 | 12 h | üks turvatud ja varundatud server, halduskriptide komplekt, oma systemd teenus |
+| **Edasijõudnud** | moodulid 1–17 | 16 h | veebirakenduse platvorm, Ansible'iga hallatav serveripark, labori infrastruktuuriteenused, konteinerplatvorm |
+| **Meister** | moodulid 1–17 + valikmoodulid | 24–32 h | kõrge kättesaadavusega teenus, virtualiseerimisplatvorm koodina, kooli võrk ja kasutajahaldus, turvaseire, Kubernetese platvorm |
+
+Projekti juurde kuuluvad kirjalik dokumentatsioon (soovitatavalt Git-repos) ja esitlus.
+
+## Hindamine
+
+Soovituslik hindamine (kohanda õppekava järgi):
+
+| Osa | Kaal | Arvestatud, kui |
+|---|---|---|
+| **Laboritööd** | 40% | kõik kohustuslikud osad on tehtud ja vähemalt 80% K-küsimustest on vastatud sisuliselt õigesti |
+| **Enesekontroll** | - | iseseisvaks kontrolliks; õpetaja võib kasutada küsimusi kontrolltöös |
+| **Proovieksam** | 20% | vähemalt 70% punktidest kontrollskripti järgi |
+| **Lõpuprojekt** | 40% | vt [lõpuprojekti hindamine](lopuprojekt.md) |
+
+### Laboritöö hindamisjuhend
+
+| Tase | Kirjeldus |
+|---|---|
+| **Suurepärane** | Kõik osad tehtud, ka lisaülesanne; vastused on põhjendatud ja seostavad teooriaga; aruandes on käsud ja väljundid; probleemid on kirjeldatud koos lahendusega |
+| **Hea** | Kõik kohustuslikud osad tehtud; vastused õiged, mõni põhjendus pinnapealne |
+| **Arvestatud** | Kohustuslikud osad tehtud; ≥ 80% küsimustest vastatud õigesti; masin on töö lõpus nõutud olekus |
+| **Mittearvestatud** | Osa kohustuslikest osadest tegemata või vastused kopeeritud ilma arusaamata (õppija ei oska suuliselt selgitada) |
+
+Hea tava: lase õppijal mõne laboritöö lõpus **suuliselt selgitada** ühte tehtud sammu („Miks kasutasid `nofail`-i?“). See näitab arusaamist paremini kui kirjalik vastus ja on hea vastumeede AI-l põhinevale kopeerimisele.
+
+## Lisad
+
+- [Linuxi distributsioonide ülevaade](lisad/distrod.md) - suuremad distrod perekondade kaupa, BSD ja Linuxi erinevused
+- [UNIX-i ja Linuxi ajalugu](lisad/ajalugu.md) - UNIX-ist Linuxi ja tänapäevani
+- [Sõnastik](lisad/sonastik.md) - mõisted eesti ja inglise keeles
+- [Laborikeskkond ja paigaldus](lisad/paigaldus.md) - HKHK Proxmoxi ligipääs, võrguplaan, virtuaalmasinad, distrode paigaldus, WSL-i kiirstart
+
+## Edasised sammud pärast kursust
+
+- **Sertifikaadid:** LPIC-1 või CompTIA Linux+ (distrost sõltumatu), Red Hat RHCSA (praktiline eksam).
+- **Süvenemine:** „UNIX and Linux System Administration Handbook“ (Nemeth jt), „The Linux Programming Interface“ (M. Kerrisk), Linux From Scratch.
+- **Viide:** Arch Wiki - parim Linuxi teatmeteos, ka siis, kui Archi ei kasuta.

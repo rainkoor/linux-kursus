@@ -1,0 +1,141 @@
+site_name: Linuxi kursus
+site_description: Eestikeelne Linuxi kursus nullist süsteemihalduseni
+docs_dir: docs
+copyright: "© 2026 Rain Koor, Haapsalu Kutsehariduskeskus · CC BY-SA 4.0"
+
+theme:
+  name: material
+  language: et
+  features:
+    - navigation.sections
+    - navigation.footer
+    - content.code.copy
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Tume režiim
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Hele režiim
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Avaleht: index.md
+  - Kursuse kava: kava.md
+  - Põhiosa:
+      - "Moodul 1. Linux ja käsurida":
+          - Teooria: moodul-01-sissejuhatus/index.md
+          - Laboritöö: moodul-01-sissejuhatus/labor.md
+          - Enesekontroll: moodul-01-sissejuhatus/enesekontroll.md
+      - "Moodul 2. Failid, tekst ja torud":
+          - Teooria: moodul-02-failid-tekst-torud/index.md
+          - Laboritöö: moodul-02-failid-tekst-torud/labor.md
+          - Enesekontroll: moodul-02-failid-tekst-torud/enesekontroll.md
+      - "Moodul 3. Kasutajad, grupid ja õigused":
+          - Teooria: moodul-03-kasutajad-oigused/index.md
+          - Laboritöö: moodul-03-kasutajad-oigused/labor.md
+          - Enesekontroll: moodul-03-kasutajad-oigused/enesekontroll.md
+      - "Moodul 4. Tarkvara ja pakihaldus":
+          - Teooria: moodul-04-pakihaldus/index.md
+          - Laboritöö: moodul-04-pakihaldus/labor.md
+          - Enesekontroll: moodul-04-pakihaldus/enesekontroll.md
+      - "Moodul 5. Protsessid, teenused ja systemd":
+          - Teooria: moodul-05-protsessid-teenused/index.md
+          - Laboritöö: moodul-05-protsessid-teenused/labor.md
+          - Enesekontroll: moodul-05-protsessid-teenused/enesekontroll.md
+      - "Moodul 6. Bashi skriptimine ja Git":
+          - Teooria: moodul-06-bash/index.md
+          - Laboritöö: moodul-06-bash/labor.md
+          - Enesekontroll: moodul-06-bash/enesekontroll.md
+      - "Moodul 7. Võrk ja SSH":
+          - Teooria: moodul-07-vork-ssh/index.md
+          - Laboritöö: moodul-07-vork-ssh/labor.md
+          - Enesekontroll: moodul-07-vork-ssh/enesekontroll.md
+      - "Moodul 8. Kettad, failisüsteemid ja LVM":
+          - Teooria: moodul-08-kettad-lvm/index.md
+          - Laboritöö: moodul-08-kettad-lvm/labor.md
+          - Enesekontroll: moodul-08-kettad-lvm/enesekontroll.md
+  - Süvendusosa:
+      - "Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine":
+          - Teooria: moodul-09-salvestus/index.md
+          - Laboritöö: moodul-09-salvestus/labor.md
+          - Enesekontroll: moodul-09-salvestus/enesekontroll.md
+      - "Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel":
+          - Teooria: moodul-10-alglaadimine-kernel/index.md
+          - Laboritöö: moodul-10-alglaadimine-kernel/labor.md
+          - Enesekontroll: moodul-10-alglaadimine-kernel/enesekontroll.md
+      - "Moodul 11. Turvalisus ja logid":
+          - Teooria: moodul-11-turvalisus-logid/index.md
+          - Laboritööd: moodul-11-turvalisus-logid/labor.md
+          - Enesekontroll: moodul-11-turvalisus-logid/enesekontroll.md
+      - "Moodul 12. Konteinerid":
+          - Teooria: moodul-12-konteinerid/index.md
+          - Laboritöö: moodul-12-konteinerid/labor.md
+          - Enesekontroll: moodul-12-konteinerid/enesekontroll.md
+      - "Moodul 13. Veebiserverid":
+          - Teooria: moodul-13-veebiserverid/index.md
+          - Laboritöö: moodul-13-veebiserverid/labor.md
+          - Enesekontroll: moodul-13-veebiserverid/enesekontroll.md
+      - "Moodul 14. Andmebaasid":
+          - Teooria: moodul-14-andmebaasid/index.md
+          - Laboritöö: moodul-14-andmebaasid/labor.md
+          - Enesekontroll: moodul-14-andmebaasid/enesekontroll.md
+      - "Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus":
+          - Teooria: moodul-15-vorguteenused/index.md
+          - Laboritööd: moodul-15-vorguteenused/labor.md
+          - Enesekontroll: moodul-15-vorguteenused/enesekontroll.md
+      - "Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina":
+          - Teooria: moodul-16-automatiseerimine/index.md
+          - Laboritöö: moodul-16-automatiseerimine/labor.md
+          - Enesekontroll: moodul-16-automatiseerimine/enesekontroll.md
+      - "Moodul 17. Seire ja jõudlus":
+          - Teooria: moodul-17-seire/index.md
+          - Laboritöö: moodul-17-seire/labor.md
+          - Enesekontroll: moodul-17-seire/enesekontroll.md
+      - Proovieksam: proovieksam.md
+      - Lõpuprojekt: lopuprojekt.md
+  - Valikmoodulid:
+      - "Moodul 18. BSD praktikas: OPNsense tulemüür":
+          - Teooria: moodul-18-opnsense/index.md
+          - Laboritöö: moodul-18-opnsense/labor.md
+          - Enesekontroll: moodul-18-opnsense/enesekontroll.md
+      - "Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI":
+          - Teooria: moodul-19-dhcp-pxe-iscsi/index.md
+          - Laboritöö: moodul-19-dhcp-pxe-iscsi/labor.md
+          - Enesekontroll: moodul-19-dhcp-pxe-iscsi/enesekontroll.md
+      - "Moodul 20. Kataloogiteenused: OpenLDAP":
+          - Teooria: moodul-20-openldap/index.md
+          - Laboritöö: moodul-20-openldap/labor.md
+          - Enesekontroll: moodul-20-openldap/enesekontroll.md
+      - "Moodul 21. Active Directory Linuxis: Samba AD DC":
+          - Teooria: moodul-21-samba-ad/index.md
+          - Laboritööd: moodul-21-samba-ad/labor.md
+          - Enesekontroll: moodul-21-samba-ad/enesekontroll.md
+      - "Moodul 22. Linux töölaual ja WSL":
+          - Teooria: moodul-22-toolaud-wsl/index.md
+          - Laboritöö: moodul-22-toolaud-wsl/labor.md
+          - Enesekontroll: moodul-22-toolaud-wsl/enesekontroll.md
+      - "Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng":
+          - Teooria: moodul-23-virtualiseerimine/index.md
+          - Laboritöö: moodul-23-virtualiseerimine/labor.md
+          - Enesekontroll: moodul-23-virtualiseerimine/enesekontroll.md
+      - "Moodul 24. Kubernetes: k3s":
+          - Teooria: moodul-24-kubernetes/index.md
+          - Laboritöö: moodul-24-kubernetes/labor.md
+          - Enesekontroll: moodul-24-kubernetes/enesekontroll.md
+  - Lisad:
+      - Laborikeskkond ja paigaldus: lisad/paigaldus.md
+      - Distrode ülevaade: lisad/distrod.md
+      - UNIX-i ja Linuxi ajalugu: lisad/ajalugu.md
+      - Sõnastik: lisad/sonastik.md

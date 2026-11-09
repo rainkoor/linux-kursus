@@ -1,0 +1,23 @@
+# MkDocsi genereeritud veebileht
+site/
+
+# Genereeritud väljundid (pandoc, slaidid jms)
+väljund/
+*.pdf
+*.docx
+*.pptx
+
+# Pythoni virtuaalkeskkond ja vahemälu (MkDocsi paigaldamiseks)
+.venv/
+venv/
+__pycache__/
+*.pyc
+.cache/
+
+# Redaktorite ja operatsioonisüsteemide ajutised failid
+*.swp
+*~
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
