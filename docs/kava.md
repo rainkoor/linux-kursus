@@ -56,7 +56,7 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 178 kontakttundi** ko
 | - | [Proovieksam](proovieksam.md) | 4 | AlmaLinux |
 | - | [Lõpuprojekt](lopuprojekt.md) (kolm taset) | 16 (12–32) | Õppija valik |
 
-Moodul 12 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodulites 13–15 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS, failid, e-post ja varundus), mida moodulites 16–17 automatiseeritakse ja seiratakse.
+Moodul 12 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodulites 13–15 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS, failid, e-post ja varundus), mida moodulites 16–17 automatiseeritakse ja seiratakse. Moodulid 16 ja 17 on **sissejuhatavad ja ülevaatlikud**: HKHK-s käsitletakse automatiseerimist ja seiret põhjalikult eraldi ainetes „IT-süsteemide automatiseerimine“ ja „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit.
 
 ### Valikmoodulid
 

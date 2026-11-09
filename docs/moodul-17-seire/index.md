@@ -2,6 +2,10 @@
 
 **Maht:** 8 tundi · **Laboritöö:** Debian ja Ubuntu (Docker) · **Eeldused:** moodulid 1–16
 
+> **Sissejuhatav moodul.** See moodul annab seirest ja jõudluse analüüsist **ülevaate ja alused**: kuidas leida ühe serveri jõudlusprobleemi põhjus käsurea tööriistadega ning kuidas on üles ehitatud seiresüsteemid (Prometheus, Grafana, Uptime Kuma, Zabbix). Eesmärk on mõista põhimõtteid ja ehitada laborile lihtne seire - mitte veel suurte seirelahenduste täielik valdamine.
+>
+> **HKHK õppijale:** seiret käsitletakse põhjalikult eraldi aines „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit. See moodul valmistab sind selleks ette.
+
 ## Õpiväljundid
 
 Mooduli läbinud õppija:
