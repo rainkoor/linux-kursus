@@ -5142,7 +5142,7 @@ pfctl<span class="w"> </span>-f<span class="w"> </span>/etc/pf.conf<span class="
 <p><strong>Lülita pf esimest korda sisse Proxmoxi konsoolist.</strong> Olemasoleva SSH-ühenduse pakettidel pole pf-i olekutabelis kirjet ja <code>block in all</code> võib seansi katkestada. Turvanõks kaugtööks: <code>pfctl -f /etc/pf.conf; sleep 60; pfctl -d</code> - kui sa ühendust ei kaota, katkesta <code>sleep</code> (Ctrl+C) enne tulemüüri väljalülitamist.</p>
 </div>
 <h2 id="2511-jailid">25.11 Jailid<a class="headerlink" href="#2511-jailid" title="Permanent link">&para;</a></h2>
-<p><strong>Jail</strong> on FreeBSD isoleeritud keskkond (aastast 2000 - üks konteinerite eelkäijaid): oma failisüsteemi juur, oma IP-aadress, oma kasutajad ja protsessid, kuid <strong>sama kernel</strong>. Jaili protsessid ei näe hosti ega teiste jailide protsesse. Jailis töötab tavaliselt üks teenus (veebiserver, andmebaas).</p>
+<p><strong>Jail</strong> on FreeBSD isoleeritud keskkond (aastast 2000 - üks konteinerite eelkäijaid). See sündis <code>chroot</code>-i (moodul 12) täiendusena: <code>chroot</code> eraldab ainult failisüsteemi, jail lisab eraldi protsessid, võrgu ja kasutajad. Jailil on oma failisüsteemi juur, oma IP-aadress, oma kasutajad ja protsessid, kuid <strong>sama kernel</strong>. Jaili protsessid ei näe hosti ega teiste jailide protsesse. Jailis töötab tavaliselt üks teenus (veebiserver, andmebaas).</p>
 <pre class="mermaid"><code>flowchart TB
     subgraph H ["FreeBSD host - üks kernel"]
         direction LR

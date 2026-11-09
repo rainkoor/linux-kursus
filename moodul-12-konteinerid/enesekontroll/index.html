@@ -4474,6 +4474,7 @@
 <li>Milleks on Compose? Kuidas leiavad Compose'i konteinerid üksteist?</li>
 <li>Mis on Quadlet ja miks seda kasutada?</li>
 <li>Kuidas uuendab Podman Quadleti konteinereid automaatselt ja mis juhtub, kui uus pilt ei käivitu?</li>
+<li>Mis on <code>chroot</code> ja miks ei ole see konteineri samaväärne asendus?</li>
 </ol>
 <h2 id="praktilised-miniulesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniulesanded" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4493,6 +4494,7 @@
 <li>Mitme konteineri rakenduse kirjeldamine ja käivitamine ühe failiga. Konteinerid leiavad üksteist teenuse nime järgi (nt <code>db</code>).</li>
 <li>Podmani võimalus kirjeldada konteiner systemd üksusena (<code>.container</code> fail). Nii käivitub konteiner alglaadimisel, taaskäivitub vea korral ja on hallatav <code>systemctl</code>/<code>journalctl</code> abil.</li>
 <li>Quadleti failis <code>AutoUpdate=registry</code> (täieliku pildinimega); <code>podman auto-update</code> (või taimer <code>podman-auto-update.timer</code>) laadib sama sildiga uuema pildi ja taaskäivitab teenuse. Kui teenus uue pildiga ei käivitu, võetakse muudatus tagasi ja kasutatakse vana pilti.</li>
+<li><code>chroot</code> käivitab protsessi nii, et valitud kataloog paistab talle juurkataloogina. See eraldab ainult failisüsteemi: protsessid, võrk ja kasutajad on hostiga ühised, ressursse ei piirata ja juurkasutaja saab sealt välja murda. Konteiner lisab nimeruumid, cgroupid ja turvapiirangud.</li>
 </ol>
 <h3 id="miniulesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniulesannete-lahendused" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>pg<span class="w"> </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>Salajane-123<span class="w"> </span><span class="se">\</span>

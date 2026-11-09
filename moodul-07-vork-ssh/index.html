@@ -1612,6 +1612,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="7.7 SSH-serveri karastamine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sftp-kasutajad-oma-kataloogis-chroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SFTP-kasutajad oma kataloogis (chroot)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5189,6 +5206,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="7.7 SSH-serveri karastamine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sftp-kasutajad-oma-kataloogis-chroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SFTP-kasutajad oma kataloogis (chroot)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -6014,6 +6048,29 @@ sudo<span class="w"> </span>sshd<span class="w"> </span>-T<span class="w"> </spa
 <li>Hoia käepärast konsool (Proxmoxi veebiliides), juhuks kui kõik läheb valesti.</li>
 </ol>
 </div>
+<h3 id="sftp-kasutajad-oma-kataloogis-chroot">SFTP-kasutajad oma kataloogis (chroot)<a class="headerlink" href="#sftp-kasutajad-oma-kataloogis-chroot" title="Permanent link">&para;</a></h3>
+<p>Sageli on vaja anda kellelegi ainult <strong>failide üleslaadimise</strong> õigus (nt veebilehe sisu, partneri aruanded), ilma käsurea ja ilma ligipääsuta ülejäänud failisüsteemile. Seda teeb SSH-server ise: grupi liikmed saavad kasutada ainult SFTP-d ja <code>chroot</code> lukustab nad oma kataloogi, kus <code>/</code> on nende jaoks kataloog <code>/srv/sftp/&lt;kasutaja&gt;</code>.</p>
+<div class="highlight"><pre><span></span><code># /etc/ssh/sshd_config.d/20-sftp.conf
+Match Group sftp-kasutajad
+    ChrootDirectory /srv/sftp/%u
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>groupadd<span class="w"> </span>sftp-kasutajad
+sudo<span class="w"> </span>useradd<span class="w"> </span>-M<span class="w"> </span>-s<span class="w"> </span>/usr/sbin/nologin<span class="w"> </span>-G<span class="w"> </span>sftp-kasutajad<span class="w"> </span>partner
+sudo<span class="w"> </span>passwd<span class="w"> </span>partner<span class="w">                             </span><span class="c1"># või lisa võti, kui paroolid on keelatud</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/sftp/partner/failid
+sudo<span class="w"> </span>chown<span class="w"> </span>root:root<span class="w"> </span>/srv/sftp<span class="w"> </span>/srv/sftp/partner<span class="w">          </span><span class="c1"># chroot-kataloog: omanik root</span>
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/srv/sftp<span class="w"> </span>/srv/sftp/partner<span class="w">                </span><span class="c1"># teised ei tohi sinna kirjutada</span>
+sudo<span class="w"> </span>chown<span class="w"> </span>partner:partner<span class="w"> </span>/srv/sftp/partner/failid<span class="w">       </span><span class="c1"># kasutaja kirjutab alamkataloogi</span>
+sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>ssh
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Oluline</p>
+<p><strong><code>ChrootDirectory</code> ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.</strong> Muidu keeldub <code>sshd</code> ühendusest (logis <code>bad ownership or modes for chroot directory</code>). Seepärast kirjutab kasutaja alamkataloogi <code>failid</code>, mitte otse chroot-kataloogi.</p>
+</div>
+<p>Kontrolli: <code>sftp partner@ubuntusrv</code> töötab ja <code>ls /</code> näitab ainult kataloogi <code>failid</code>; <code>ssh partner@ubuntusrv</code> aga ei ava käsurida (<em>This service allows sftp connections only</em>). Kui sul on <code>AllowGroups</code>, lisa sinna ka <code>sftp-kasutajad</code>. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga <code>sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot</code>.</p>
 <h2 id="78-tulemuur">7.8 Tulemüür<a class="headerlink" href="#78-tulemuur" title="Permanent link">&para;</a></h2>
 <p>Linuxi kernelis on pakettide filtreerimise raamistik <strong>netfilter</strong>. Selle reegleid hallatakse tänapäeval tööriistaga <strong>nftables</strong> (<code>nft</code>), vanemates süsteemides <strong>iptables</strong>-iga. Enamik administraatoreid kasutab aga lihtsamaid kasutajaliideseid:</p>
 <table>
