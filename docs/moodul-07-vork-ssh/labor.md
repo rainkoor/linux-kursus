@@ -145,6 +145,9 @@ nc -zv UBUNTU_IP 3306
 
 Lisad Ubuntu masinale teise IP-aadressi, säilitades olemasoleva DHCP-seadistuse.
 
+> [!IMPORTANT]
+> **Kontrolli enne, et `LISA_IP` on vaba.** Samas alamvõrgus ei tohi kahel masinal olla sama aadressi. Debiani masinast: `ping -c2 LISA_IP` ja `ip neigh show LISA_IP` - kui aadress vastab või naabertabelis on MAC-aadress, on see kasutusel ja vajad teist aadressi. Kooli laboris kasutab iga õppija ainult talle antud aadressi.
+
 **4.1** Proovi kõigepealt ajutiselt:
 
 ```bash

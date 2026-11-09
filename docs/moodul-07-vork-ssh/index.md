@@ -82,6 +82,32 @@ sudo ip route add 10.0.0.0/8 via 10.0.83.254   # lisa marsruut
 > [!WARNING]
 > **Hoiatus:** kui muudad SSH kaudu selle liidese seadistust, mille kaudu oled ühendatud, võid ühenduse kaotada. Hoia käepärast konsool (nt Proxmoxi veebiliidese konsool).
 
+### Iga masin vajab oma aadressi
+
+Samas alamvõrgus ei tohi kahel masinal olla **sama IP-aadress**. Kui kaks masinat kasutavad sama aadressi (*IP address conflict*), ei tea ülejäänud võrk, kummale pakette saata: ühendused katkevad juhuslikult, SSH ühendub vahel valesse masinasse ja viga on raske leida. DHCP-server jälgib, et ta ei jagaks sama aadressi kaks korda, kuid **staatilise aadressi** eest vastutad sina.
+
+Kursuse laboris on igal masinal oma aadress (vt lisa [Laborikeskkond ja paigaldus](../lisad/paigaldus.md)):
+
+| Masin | Aadress |
+|---|---|
+| `debian1` | `10.0.83.52/24` |
+| `debian2` | `10.0.83.53/24` |
+| `ubuntusrv` | `10.0.83.54/24` |
+| `alma` | `10.0.83.55/24` |
+
+Kõik masinad on samas alamvõrgus `10.0.83.0/24` ja kasutavad sama vaikelüüsi `10.0.83.1`, kuid aadressi viimane osa on igal masinal erinev. Selle mooduli näidetes kasutame samu aadresse: Ubuntu näited `.54`, Debiani näited `.52` ja AlmaLinuxi näited `.55`.
+
+> [!IMPORTANT]
+> **Enne staatilise aadressi kasutuselevõttu kontrolli, et see on vaba.** Kooli laboris annab aadressi õpetaja; ära võta suvalist aadressi. Kontrolli teisest masinast samas võrgus:
+>
+> ```bash
+> ping -c2 10.0.83.60                       # vastus = aadress on juba kasutusel
+> ip neigh show 10.0.83.60                  # kas aadressil on MAC-aadress (naabertabelis)?
+> sudo arping -D -I ens18 -c2 10.0.83.60    # duplikaadi tuvastus (pakett iputils-arping)
+> ```
+>
+> Ka `ping`-ile mittevastav aadress võib olla kasutusel (tulemüür, väljalülitatud masin), seega kontrolli kindlasti ka aadressiplaani.
+
 ### Masina nimi
 
 ```bash
@@ -101,7 +127,7 @@ Püsiva seadistuse viis erineb distrode kaupa - see on üks suurimaid erinevusi 
 | Ubuntu | Netplan (+ systemd-networkd) | `/etc/netplan/*.yaml` |
 | AlmaLinux | NetworkManager | `nmcli`, `nmtui`, `/etc/NetworkManager/system-connections/` |
 
-Kõigis näidetes määrame liidesele `ens18` staatilise aadressi `10.0.83.54/24`, vaikelüüsi `10.0.83.1` ja DNS-serveri `10.0.83.1`.
+Igas näites on vaikelüüs ja DNS-server `10.0.83.1`, kuid **aadress on igal masinal oma**: Ubuntu (`ubuntusrv`) `10.0.83.54/24`, Debian (`debian1`) `10.0.83.52/24` ja AlmaLinux (`alma`) `10.0.83.55/24`. Kui kopeerid näite, muuda aadress oma masina omaks.
 
 ### Ubuntu: Netplan
 
@@ -144,7 +170,7 @@ iface lo inet loopback
 
 auto ens18
 iface ens18 inet static
-    address 10.0.83.54/24
+    address 10.0.83.52/24
     gateway 10.0.83.1
 ```
 
@@ -168,7 +194,7 @@ nmcli connection show ens18          # ühenduse kõik seaded
 
 sudo nmcli connection modify ens18 \
     ipv4.method manual \
-    ipv4.addresses 10.0.83.54/24 \
+    ipv4.addresses 10.0.83.55/24 \
     ipv4.gateway 10.0.83.1 \
     ipv4.dns "10.0.83.1 1.1.1.1" \
     ipv4.dns-search lab.example
@@ -875,7 +901,7 @@ ip -d link show ens18.20
 
 ```bash
 sudo nmcli con add type bond con-name bond0 ifname bond0 \
-    bond.options "mode=active-backup,miimon=100" ipv4.method manual ipv4.addresses 10.0.83.52/24
+    bond.options "mode=active-backup,miimon=100" ipv4.method manual ipv4.addresses 10.0.83.55/24
 sudo nmcli con add type ethernet ifname ens18 master bond0
 sudo nmcli con add type ethernet ifname ens19 master bond0
 cat /proc/net/bonding/bond0

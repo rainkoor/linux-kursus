@@ -53,6 +53,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `ansible-vault` | Saladuste krüpteerimine | [16](../moodul-16-automatiseerimine/index.md) |
 | `apache2ctl` | Apache'i juhtimine ja `configtest` | [13](../moodul-13-veebiserverid/index.md) |
 | `apt` | Debiani ja Ubuntu pakihaldur (`update`, `upgrade`, `install`, `remove`, `search`) | [4](../moodul-04-pakihaldus/index.md) |
+| `arping` | Saadab ARP-päringu; `-D` kontrollib, kas IP-aadress on võrgus juba kasutusel | [7](../moodul-07-vork-ssh/index.md) |
 | `at` | Käivitab käsu üks kord kindlal ajal | [5](../moodul-05-protsessid-teenused/index.md) |
 | `atq` | Ootel `at`-tööd | [5](../moodul-05-protsessid-teenused/index.md) |
 | `atrm` | Eemaldab `at`-töö | [5](../moodul-05-protsessid-teenused/index.md) |
