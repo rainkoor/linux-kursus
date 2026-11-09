@@ -275,3 +275,9 @@ Seejärel taasta: `sudo timedatectl set-ntp true`.
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 21. Active Directory Linuxis: Samba AD DC](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 21. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

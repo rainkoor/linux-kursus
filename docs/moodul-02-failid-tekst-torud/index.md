@@ -504,3 +504,9 @@ Logide lugemist käsuga `journalctl` õpime moodulis 5.
 - MIT Missing Semester - „Shell Tools and Scripting“ ja „Editors (Vim)“ (missing.csail.mit.edu)
 - OverTheWire Bandit, tasemed 6–15
 - `vimtutor` - interaktiivne vim-i õpetus
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 1. Enesekontroll](../moodul-01-sissejuhatus/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 2. Logide analüüs ja failide haldus →](labor.md)
+<!-- /navigatsioon -->

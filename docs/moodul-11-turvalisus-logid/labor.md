@@ -547,3 +547,9 @@ Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 11. Turvalisus ja logid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 11. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

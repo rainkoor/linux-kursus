@@ -43,3 +43,9 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 ```bash
 ansible all -a "df -h /"
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 16. Ansible ja Vagrant](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 17. Seire ja jõudlus →](../moodul-17-seire/index.md)
+<!-- /navigatsioon -->

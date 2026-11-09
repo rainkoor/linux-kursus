@@ -377,3 +377,9 @@ Moodulis on üks süsteem - FreeBSD. Linuxi distrodega võrdlus on punktis 25.12
 - „Absolute FreeBSD“ (M. W. Lucas) - põhjalik halduse raamat
 - BastilleBSD (bastillebsd.org) - jailide haldur
 - FreeBSD Forums (forums.freebsd.org)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 24. Enesekontroll](../moodul-24-kubernetes/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 25. FreeBSD server →](labor.md)
+<!-- /navigatsioon -->

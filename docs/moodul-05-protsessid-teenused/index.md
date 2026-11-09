@@ -310,6 +310,8 @@ systemctl status minuteenus
 > [!NOTE]
 > **Programmi väljund läheb logisse.** Kõik, mida teenus kirjutab standardväljundisse või veaväljundisse, salvestab systemd journal'isse. Eraldi logifaili pole vaja.
 
+Sõltuvused, teenuse tüübid, mallid, pesa- ja teeüksused, kasutajateenused ning teenuste karastamine on põhjalikumalt [moodulis 10, punkt 10.11](../moodul-10-alglaadimine-kernel/index.md#1011-systemd-suvitsi).
+
 ## 5.7 Logid: journalctl
 
 systemd kogub kõigi teenuste ja kerneli logid ühte kohta - **journal'isse**. Seda loetakse käsuga `journalctl`.
@@ -538,3 +540,9 @@ Kasutajate seansid on systemd-s **lõikudes** (`user-1000.slice`) - piiranguid s
 - Brian Ward, „How Linux Works“ - protsesside ja systemd peatükid
 - Arch Wiki - systemd, systemd/Timers, systemd/Journal (wiki.archlinux.org)
 - `man systemd.service`, `man systemd.timer`, `man 5 crontab`
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 4. Enesekontroll](../moodul-04-pakihaldus/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 5. Protsessid, teenused ja ajastamine →](labor.md)
+<!-- /navigatsioon -->

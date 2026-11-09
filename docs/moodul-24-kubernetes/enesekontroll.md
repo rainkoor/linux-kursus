@@ -103,3 +103,9 @@ kubectl drain k3s3 --ignore-daemonsets --delete-emptydir-data
 # … hooldus …
 kubectl uncordon k3s3
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 24. k3s klaster](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 25. FreeBSD server →](../moodul-25-freebsd/index.md)
+<!-- /navigatsioon -->

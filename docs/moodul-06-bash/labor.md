@@ -451,3 +451,9 @@ git push -u github main
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 6. Bashi skriptimine ja Git](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 6. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

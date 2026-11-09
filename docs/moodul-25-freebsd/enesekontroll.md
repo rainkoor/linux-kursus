@@ -67,3 +67,9 @@ block in all
 pass out all keep state
 pass in on $ext_if proto tcp from 10.0.83.0/24 to port ssh keep state
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 25. FreeBSD server](labor.md) · [Sisukord](../../README.md#sisukord) · [Laborikeskkond ja serverite paigaldus →](../lisad/paigaldus.md)
+<!-- /navigatsioon -->

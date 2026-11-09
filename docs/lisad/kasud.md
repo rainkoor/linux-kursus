@@ -376,6 +376,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `systemctl` | systemd teenuste ja üksuste haldus (`start`, `enable`, `status`) | [5](../moodul-05-protsessid-teenused/index.md) |
 | `systemd-analyze` | Alglaadimise aeg ja aeglased üksused | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `systemd-cgtop` | Ressursikasutus cgroup'ide kaupa | [5](../moodul-05-protsessid-teenused/index.md) |
+| `systemd-delta` | Näitab, millised paketi üksused ja seadistusfailid on üle kirjutatud | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `systemd-run` | Käivitab käsu ajutise systemd üksusena (ka piirangutega) | [5](../moodul-05-protsessid-teenused/index.md) |
 
 ## T
@@ -462,3 +463,9 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `zcat` | Näitab pakitud faili sisu lahti pakkimata | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `zfs` | ZFS-i andmekogumid, hetktõmmised ja `send`/`receive` | [9](../moodul-09-salvestus/index.md) |
 | `zpool` | ZFS-i kogumite haldus (`create`, `status`, `scrub`) | [9](../moodul-09-salvestus/index.md) |
+
+<!-- navigatsioon -->
+---
+
+[← Sõnastik](sonastik.md) · [Sisukord](../../README.md#sisukord)
+<!-- /navigatsioon -->

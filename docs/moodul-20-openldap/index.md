@@ -438,3 +438,9 @@ Seepärast paigaldatakse selles moodulis OpenLDAP-server Debiani ja AlmaLinux on
 - Ubuntu Server dokumentatsioon - OpenLDAP (documentation.ubuntu.com)
 - LDAP Account Manager dokumentatsioon (ldap-account-manager.org)
 - SSSD dokumentatsioon (sssd.io) ja `man sssd-ldap`
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 19. Enesekontroll](../moodul-19-dhcp-pxe-iscsi/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid →](labor.md)
+<!-- /navigatsioon -->

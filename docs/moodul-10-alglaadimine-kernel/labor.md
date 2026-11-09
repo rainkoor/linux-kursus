@@ -3,11 +3,11 @@
 | | |
 |---|---|
 | **Distro** | Debian |
-| **Kestus** | 3 × 90 minutit (9. osa kompileerimine võib kesta kauem - selle võib teha ka iseseisvalt) |
+| **Kestus** | 4 × 90 minutit (9. osa kompileerimine võib kesta kauem - selle võib teha ka iseseisvalt) |
 | **Vajalik** | Debiani virtuaalmasin `sudo` õigusega kasutajaga ja **ligipääs masina konsoolile** (nt Proxmoxi veebiliides). Enne alustamist tee masinast **hetktõmmis** (*snapshot*). 9. osa jaoks soovitatavalt vähemalt 4 protsessorituuma, 4 GiB mälu ja 15 GiB vaba kettaruumi |
 | **Eesmärk** | Uurida alglaadimist ja kernelit, muuta GRUB-i ja kerneli seadistust ning taastada mittekäivituv süsteem |
 
-**Aruanne:** vasta küsimustele **K1–K24**.
+**Aruanne:** vasta küsimustele **K1–K30**.
 
 > [!WARNING]
 > **Selles laboris rikud teadlikult oma süsteemi.** Tee enne alustamist virtuaalmasinast hetktõmmis (Proxmoxis: masin → *Snapshots* → *Take Snapshot*). Kui midagi läheb lootusetult valesti, saad selle taastada. Osad 5–8 ja 10 tehakse **konsoolis**, mitte SSH kaudu.
@@ -485,9 +485,152 @@ Kui sinu Debianil on eraldi `/boot` või `/var` partitsioon, haagi need enne `ch
 
 ---
 
-## 11. osa. Kokkuvõte
+## 11. osa. systemd süvitsi
 
-**K24.** Täida tabel: millises alglaadimise etapis tekib probleem ja millise tööriista või meetodiga seda uurida/lahendada?
+Selles osas kasutad teooria punkti 10.11 näiteid. Kõik failid lähevad kataloogi `/etc/systemd/system/` ja pärast iga muudatust käivita `sudo systemctl daemon-reload`.
+
+**11.1 Sõltuvused**
+
+```bash
+systemctl list-dependencies multi-user.target | head -20
+systemctl list-dependencies --reverse ssh.service
+systemctl show -p Wants,Requires,After,Type ssh.service
+systemctl show -p Type chrony.service cron.service
+```
+
+**K24.** Mis on `ssh.service` seadete `Wants`/`Requires` ja `After` väärtused ning mille poolest need erinevad? Mis juhtuks, kui teenusel oleks `Requires=mariadb.service`, kuid puuduks `After=mariadb.service`? Millist `Type=` kasutavad `ssh`, `chrony` ja `cron`?
+
+**11.2 Mall** - loo teooria näite järgi `tervitaja@.service` ja käivita kaks eksemplari:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start tervitaja@mari tervitaja@jaan
+systemctl list-units 'tervitaja@*'
+journalctl -u 'tervitaja@*' --since "1 min ago"
+ps -o user,pid,cmd -C bash | grep Tere
+sudo systemctl stop 'tervitaja@*'
+```
+
+**K25.** Mitu protsessi töötas ja millise kasutajana (`DynamicUser=yes`)? Kas see kasutaja on failis `/etc/passwd`? Too üks näide mallist, mida süsteem ise kasutab (`systemctl list-units '*@*'`).
+
+**11.3 Pesa aktiveerimine** - loo `kell.socket` ja `kell@.service` teooria järgi:
+
+```bash
+sudo apt install -y netcat-openbsd
+sudo systemctl daemon-reload
+sudo systemctl enable --now kell.socket
+sudo ss -tlnp | grep 2000
+systemctl list-units 'kell@*'
+nc localhost 2000
+nc localhost 2000
+journalctl -u 'kell@*' --since "5 min ago" | tail
+```
+
+**K26.** Milline protsess kuulas pordil 2000 enne esimest ühendust? Mitu `kell@` eksemplari tekkis ja kas need jäid tööle? Nimeta kaks pesa aktiveerimise eelist.
+
+**11.4 Failide jälgimine** - loo `tootle.path` ja `tootle.service` teooria järgi:
+
+```bash
+sudo mkdir -p /srv/sisend /srv/valmis
+sudo systemctl daemon-reload
+sudo systemctl enable --now tootle.path
+sudo touch /srv/sisend/aruanne1.txt /srv/sisend/aruanne2.txt
+sleep 2
+ls /srv/sisend /srv/valmis
+journalctl -u tootle.service --since "5 min ago"
+```
+
+**K27.** Mitu korda teenus käivitus ja mida see logis? Miks peab teenus kataloogi tühjendama? Too üks näide, kus `.path` üksus oleks halduses kasulik.
+
+**11.5 Teenuse karastamine** - loo karastamata teenus:
+
+```bash
+sudo mkdir -p /var/lib/aeg
+sudo tee /etc/systemd/system/aeg.service <<'EOT'
+[Unit]
+Description=Kirjutab kellaaja faili
+
+[Service]
+Type=exec
+ExecStart=/bin/bash -c 'while true; do date >> /var/lib/aeg/aeg.txt; sleep 30; done'
+
+[Install]
+WantedBy=multi-user.target
+EOT
+sudo systemctl daemon-reload
+sudo systemctl enable --now aeg.service
+systemd-analyze security aeg.service | tail -3
+```
+
+Lisa seejärel karastus drop-in failina (`sudo systemctl edit aeg.service`):
+
+```ini
+[Service]
+DynamicUser=yes
+StateDirectory=aeg
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+PrivateNetwork=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+UMask=0077
+```
+
+```bash
+sudo rm -rf /var/lib/aeg                 # StateDirectory loob kataloogi ise
+sudo systemctl restart aeg.service
+systemctl status aeg.service
+sleep 35; sudo tail -3 /var/lib/aeg/aeg.txt
+systemd-analyze security aeg.service | tail -3
+sudo systemd-run --wait -p ProtectSystem=strict -p DynamicUser=yes touch /etc/proov
+```
+
+**K28.** Mis oli teenuse turvahinne enne ja pärast karastamist? Kas teenus töötas edasi? Kus asub `aeg.txt` nüüd tegelikult (`ls -l /var/lib/ | grep aeg`)? Miks ebaõnnestus `systemd-run` katse?
+
+**11.6 Tõrkeotsing** - loo kaks vigast teenust:
+
+```bash
+sudo tee /etc/systemd/system/vigane1.service <<'EOT'
+[Service]
+ExecStart=/usr/local/bin/olematu-programm
+EOT
+sudo tee /etc/systemd/system/vigane2.service <<'EOT'
+[Service]
+ExecStart=/bin/false
+Restart=always
+RestartSec=1
+EOT
+sudo systemctl daemon-reload
+sudo systemctl start vigane1; systemctl status vigane1 | head -8
+systemd-analyze verify /etc/systemd/system/vigane1.service
+sudo systemctl start vigane2; sleep 10; systemctl status vigane2 | head -8
+journalctl -xeu vigane2 | tail -15
+sudo systemctl reset-failed vigane2
+```
+
+**K29.** Millise oleku ja koodi (`status=…`) näitas `vigane1` ning mida ütles `systemd-analyze verify`? Mis juhtus `vigane2`-ga umbes viie sekundi pärast ja miks? Mida teeb `reset-failed`?
+
+---
+
+## 12. osa. Kokkuvõte
+
+**K30.** Täida tabel: millises alglaadimise etapis tekib probleem ja millise tööriista või meetodiga seda uurida/lahendada?
 
 | Sümptom | Etapp | Uurimine / lahendus |
 |---|---|---|
@@ -505,6 +648,7 @@ Kui sinu Debianil on eraldi `/boot` või `/var` partitsioon, haagi need enne `ch
 - Taasta failid `/etc/default/grub` ja `/etc/fstab` (kui veel tegemata) ning käivita `sudo update-grub`.
 - Eemalda `/etc/sysctl.d/90-labor.conf` ja käivita `sudo sysctl --system`, kui õpetaja ei ole teisiti öelnud.
 - Eemalda backports'i hoidla fail `/etc/apt/sources.list.d/backports.list`, kui sa seda enam ei vaja, ja sea `GRUB_DEFAULT=0`.
+- Eemalda 11. osa harjutused: `sudo systemctl disable --now kell.socket tootle.path aeg.service`, kustuta failid `tervitaja@.service`, `kell.socket`, `kell@.service`, `tootle.*`, `aeg.service` (ja kataloog `aeg.service.d`), `vigane1.service`, `vigane2.service` kataloogist `/etc/systemd/system/` ning käivita `sudo systemctl daemon-reload`.
 - Kui kõik töötab, kustuta laborieelne hetktõmmis (Proxmoxis *Snapshots* → *Remove*), et see ei võtaks ruumi.
 
 ---
@@ -520,3 +664,9 @@ Kui sinu Debianil on eraldi `/boot` või `/var` partitsioon, haagi need enne `ch
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 10. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

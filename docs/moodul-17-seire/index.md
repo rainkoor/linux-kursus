@@ -398,3 +398,9 @@ Veebiliideses lisatakse host ja seotakse **malliga** (nt *Linux by Zabbix agent*
 - Prometheuse dokumentatsioon (prometheus.io/docs) ja Grafana dokumentatsioon (grafana.com/docs)
 - Uptime Kuma (github.com/louislam/uptime-kuma)
 - Zabbixi dokumentatsioon (zabbix.com/documentation)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 16. Enesekontroll](../moodul-16-automatiseerimine/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 17. Seire ja jõudlus →](labor.md)
+<!-- /navigatsioon -->

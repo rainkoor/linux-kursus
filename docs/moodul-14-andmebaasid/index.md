@@ -382,3 +382,9 @@ Varundust automatiseeritakse koos muu serveriga (moodul 15, restic): dump-fail l
 - SQLite dokumentatsioon (sqlite.org/docs.html) ja „Appropriate Uses For SQLite“
 - Valkey dokumentatsioon (valkey.io)
 - SQLBolt (sqlbolt.com) - interaktiivne SQL-i õpetus
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 13. Enesekontroll](../moodul-13-veebiserverid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 14. Andmebaasid (kooli väikeserver, II osa) →](labor.md)
+<!-- /navigatsioon -->

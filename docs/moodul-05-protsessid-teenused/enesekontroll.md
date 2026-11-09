@@ -69,3 +69,9 @@ Crontab'i kirje (`crontab -e`):
 ```text
 0 4 * * * /usr/bin/find /home/KASUTAJA/tmp -type f -mtime +7 -delete
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 5. Protsessid, teenused ja ajastamine](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 6. Bashi skriptimine ja Git →](../moodul-06-bash/index.md)
+<!-- /navigatsioon -->

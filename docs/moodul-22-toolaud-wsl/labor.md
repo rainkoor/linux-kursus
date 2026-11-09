@@ -280,3 +280,9 @@ ssh kasutaja@SERVER_IP
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 22. Linux töölaual ja WSL](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 22. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

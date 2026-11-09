@@ -3,7 +3,7 @@
 **Maht:** 10 tundi · **Laboritöö:** AlmaLinux (juhtmasin), Debian ja Ubuntu (hallatavad) · **Eeldused:** moodulid 1–15
 
 > [!NOTE]
-> **Sissejuhatav moodul.** See moodul annab automatiseerimisest **ülevaate ja alused**: miks ja kuidas infrastruktuuri koodina hallata ning kuidas Ansible, Vagrant, cloud-init ja OpenTofu omavahel sobituvad. Eesmärk on, et oskaksid kursuse servereid korratavalt seadistada ja tunneksid vahendeid ära - mitte veel nende täielik valdamine.
+> **Sissejuhatav moodul.** See moodul annab automatiseerimisest **ülevaate ja alused**: alates lihtsatest vahenditest (Bashi skriptid, cron ja systemd taimerid) kuni infrastruktuurini koodina, ning kuidas Ansible, Vagrant, cloud-init ja OpenTofu omavahel sobituvad. Eesmärk on, et oskaksid kursuse servereid korratavalt seadistada ja tunneksid vahendeid ära - mitte veel nende täielik valdamine.
 >
 > **HKHK õppijale:** automatiseerimist käsitletakse põhjalikult eraldi aines „IT-süsteemide automatiseerimine“, mis läbitakse pärast Linuxi ja BSD halduse moodulit. See moodul valmistab sind selleks ette.
 
@@ -11,6 +11,7 @@
 
 Mooduli läbinud õppija:
 
+- võrdleb automatiseerimise astmeid (Bashi skript, cron/taimer, Git, konteinerid, Ansible) ja valib ülesandele sobiva;
 - selgitab infrastruktuuri koodina (IaC) põhimõtet ja idempotentsust;
 - seadistab mitu serverit korraga Ansible'iga (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad);
 - kirjutab mänguraamatu, mis töötab nii Debiani kui ka Red Hati perekonna distrol;
@@ -25,13 +26,17 @@ Mooduli läbinud õppija:
 
 Moodulites 13–15 seadistasid serveri käsitsi. See võttis mitu tundi ja kui server peaks homme uuesti üles ehitama, kuluks sama palju aega - ja tõenäoliselt jääks midagi kahe silma vahele. Kujuta ette sama tööd kümne või saja serveriga.
 
-Oled juba õppinud kahte tööriista, mis selle probleemi lahendavad, ja selles moodulis lisandub kolmas:
+Automatiseerimine ei alga Ansible'ist. Oled seda juba teinud - väiksemas mahus:
 
-| Tööriist | Lahendab |
-|---|---|
-| **Git** (moodul 6) | Kus on seadistus, kes ja miks seda muutis, kuidas eelmise versiooni juurde tagasi minna |
-| **Konteinerid** (moodul 12) | Rakendus koos kõigi sõltuvustega ühes pakis, mis töötab igal pool ühtemoodi |
-| **Ansible** | Serverite seadistamine koodina: üks käsk seadistab kõik serverid ühesuguseks |
+| Aste | Tööriist | Mida automatiseerib | Piirang |
+|---|---|---|---|
+| 1 | **Bashi skript** (moodul 6) | toimingute jada ühes masinas: kasutajate loomine CSV-st, varundus, kontrollid | kirjutad ise iga sammu ja veakontrolli; korduval käivitamisel võib tulemus muutuda |
+| 2 | **cron ja systemd taimer** (moodul 5) | käivitab skripti või käsu kindlal ajal: igaöine varundus, aruanded, koristamine | ainult ajastab; mida tehakse, sõltub skriptist |
+| 3 | **Git** (moodul 6) | seadistuse ja skriptide ajalugu: kes, mida ja miks muutis, tagasipöördumine | ei rakenda midagi serverisse ise |
+| 4 | **Konteinerid** (moodul 12) | rakendus koos sõltuvustega ühes pakis, mis töötab igal pool ühtemoodi | ei seadista hosti ennast |
+| 5 | **Ansible** (selles moodulis) | kogu serveri seadistus koodina, korraga kõigis serverites, ühesuguse tulemusega | vajab õppimist ja algset ajakulu |
+
+Bash ja cron on endiselt vajalikud - lihtne skript koos taimeriga on sageli parim lahendus ühe masina korduva ülesande jaoks. Mida rohkem on servereid ja mida olulisem on, et need oleksid **ühesugused**, seda rohkem võidad Ansible'ist ja teistest selle mooduli vahenditest. Tüüpiline töövoog ühendab kõik astmed: Ansible paigaldab serverisse skripti ja taimeri, kogu kood on Gitis.
 
 Ühine põhimõte on **infrastruktuur koodina** (*Infrastructure as Code*, IaC): serverite seadistus kirjeldatakse tekstifailides, mida hoitakse Gitis, vaadatakse üle nagu programmikoodi ja rakendatakse automaatselt.
 
@@ -511,3 +516,9 @@ OpenTofu peab **olekufaili** `terraform.tfstate`, kus on kirjas, mida ta on loon
 - Jeff Geerling, „Ansible for DevOps“ - praktiline Ansible'i raamat
 - Vagranti dokumentatsioon (developer.hashicorp.com/vagrant)
 - OpenTofu dokumentatsioon (opentofu.org)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 15. Enesekontroll](../moodul-15-vorguteenused/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 16. Ansible ja Vagrant →](labor.md)
+<!-- /navigatsioon -->

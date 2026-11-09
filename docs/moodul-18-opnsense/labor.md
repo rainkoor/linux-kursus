@@ -196,3 +196,9 @@ tcpdump -ni vtnet1 icmp
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 18. BSD praktikas: OPNsense tulemüür](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 18. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

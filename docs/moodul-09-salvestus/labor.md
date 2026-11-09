@@ -205,3 +205,9 @@ Eemalda `/etc/mdadm.conf` ja `/etc/fstab`-ist lisatud read ning seejärel kettad
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 9. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

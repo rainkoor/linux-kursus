@@ -606,3 +606,9 @@ Mõlemad on vabad ja tootmiskõlbulikud. Valiku määravad olemasolevad oskused,
 - XCP-ng dokumentatsioon (docs.xcp-ng.org) ja Xen Orchestra dokumentatsioon (docs.xen-orchestra.com)
 - libvirt'i dokumentatsioon (libvirt.org) ja Red Hati juhend „Configuring and managing virtualization“
 - Arch Wiki - KVM, QEMU, libvirt
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 22. Enesekontroll](../moodul-22-toolaud-wsl/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 23. KVM, Proxmox VE ja XCP-ng →](labor.md)
+<!-- /navigatsioon -->

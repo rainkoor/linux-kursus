@@ -465,3 +465,9 @@ Mitme ketta ühendamine töökindluseks (RAID, `mdadm`), ZFS, ketaste jõudluse 
 - Red Hat Enterprise Linux dokumentatsioon - „Managing file systems“, „Configuring and managing logical volumes“ (docs.redhat.com)
 - Arch Wiki - Partitioning, Fstab, LVM, Swap (wiki.archlinux.org)
 - Brian Ward, „How Linux Works“ - ketaste ja failisüsteemide peatükk
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 7. Enesekontroll](../moodul-07-vork-ssh/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 8. Kettad, failisüsteemid ja LVM →](labor.md)
+<!-- /navigatsioon -->

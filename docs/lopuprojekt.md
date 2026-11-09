@@ -225,3 +225,9 @@ Palju õnne - oled läbinud Linuxi ja BSD kursuse nullist süsteemihalduseni! J�
 - **süvenemine:** „UNIX and Linux System Administration Handbook“, „The Linux Programming Interface“, Linux From Scratch;
 - **praktika:** oma koduserver (nt Raspberry Pi või vana arvuti), avatud lähtekoodiga projektidesse panustamine, OverTheWire'i järgmised mängud;
 - **edasised teemad:** Kubernetese süvendamine (CKA), pilveplatvormid (AWS, Azure), suuremad IaC-projektid (OpenTofu), küberturvalisus.
+
+<!-- navigatsioon -->
+---
+
+[← Proovieksam: süvendusosa](proovieksam.md) · [Sisukord](../README.md#sisukord) · [Moodul 18. BSD praktikas: OPNsense tulemüür →](moodul-18-opnsense/index.md)
+<!-- /navigatsioon -->

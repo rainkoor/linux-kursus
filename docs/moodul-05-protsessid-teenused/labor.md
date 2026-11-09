@@ -384,3 +384,9 @@ systemd-analyze calendar "*-*-* 02:30:00"
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 5. Protsessid, teenused ja systemd](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 5. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

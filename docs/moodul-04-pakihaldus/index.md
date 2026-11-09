@@ -408,3 +408,9 @@ sudo reboot
 - Debian Reference - pakihalduse peatükk (debian.org/doc)
 - Ubuntu Server dokumentatsioon - pakihaldus (documentation.ubuntu.com)
 - AlmaLinux Wiki (wiki.almalinux.org) ja EPEL-i dokumentatsioon (docs.fedoraproject.org/en-US/epel)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 3. Enesekontroll](../moodul-03-kasutajad-oigused/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 4. Pakihaldus kolmel distrol →](labor.md)
+<!-- /navigatsioon -->

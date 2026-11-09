@@ -25,7 +25,7 @@ Kursuse läbinud õppija:
 
 ## Maht ja ülesehitus
 
-Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 180 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 82 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (76 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
+Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 182 kontakttundi** koos laboritöödega (põhiosa 76 h, süvendusosa 84 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (76 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
 
 ### Põhiosa: Linuxi kasutamine ja haldus
 
@@ -46,7 +46,7 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 180 kontakttundi** ko
 | Nr | Moodul | Maht (h) | Laboritöö distro |
 |---|---|---|---|
 | 9 | [Salvestus: RAID, ZFS, jõudlus ja taastamine](moodul-09-salvestus/index.md) | 8 | AlmaLinux, Ubuntu |
-| 10 | [Kuidas Linux töötab: alglaadimine ja kernel](moodul-10-alglaadimine-kernel/index.md) | 10 | Debian |
+| 10 | [Kuidas Linux töötab: alglaadimine ja kernel](moodul-10-alglaadimine-kernel/index.md) | 12 | Debian |
 | 11 | [Turvalisus ja logid](moodul-11-turvalisus-logid/index.md) | 10 | AlmaLinux, Ubuntu |
 | 12 | [Konteinerid](moodul-12-konteinerid/index.md) | 8 | AlmaLinux |
 | 13 | [Veebiserverid](moodul-13-veebiserverid/index.md) | 10 | Debian, AlmaLinux, Ubuntu |
@@ -152,9 +152,9 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 ### Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel
 
-**Teemad:** alglaadimise etapid (UEFI/BIOS, GRUB, kernel, initramfs, systemd), käivituseesmärgid (target), kerneli moodulid (`lsmod`, `modprobe`), `/proc` ja `/sys`, `dmesg`, kerneli parameetrid (`sysctl`), alglaadimise analüüs (`systemd-analyze`), süsteemi taastamine (rescue-režiim, juurkasutaja parooli lähtestamine, GRUB-i parandamine taastemeedialt ja `chroot`-iga), kernelite vahetamine ja eemaldamine, DKMS, kerneli kompileerimine lähtekoodist.
+**Teemad:** alglaadimise etapid (UEFI/BIOS, GRUB, kernel, initramfs, systemd), käivituseesmärgid (target), kerneli moodulid (`lsmod`, `modprobe`), `/proc` ja `/sys`, `dmesg`, kerneli parameetrid (`sysctl`), alglaadimise analüüs (`systemd-analyze`), süsteemi taastamine (rescue-režiim, juurkasutaja parooli lähtestamine, GRUB-i parandamine taastemeedialt ja `chroot`-iga), kernelite vahetamine ja eemaldamine, DKMS, kerneli kompileerimine lähtekoodist, systemd süvitsi (sõltuvused ja järjekord, teenuse tüübid, keskkond, mallid, pesa- ja teeüksused, `.mount`/`.automount`, kasutajateenused, teenuste karastamine `systemd-analyze security`-ga, tõrkeotsing).
 
-**Õpiväljundid:** õppija kirjeldab alglaadimise protsessi, diagnoosib käivitusprobleeme, taastab mittekäivituva süsteemi, vahetab kasutatavat kernelit ning kompileerib ja paigaldab kerneli lähtekoodist.
+**Õpiväljundid:** õppija kirjeldab alglaadimise protsessi, diagnoosib käivitusprobleeme, taastab mittekäivituva süsteemi, vahetab kasutatavat kernelit, kompileerib ja paigaldab kerneli lähtekoodist ning seadistab, karastab ja silub systemd teenuseid.
 
 **Iseõppeks:** „How Linux Works“; Linux From Scratch (süvenemiseks).
 
@@ -200,7 +200,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 ### Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
 
-**Teemad:** infrastruktuur koodina, idempotentsus, Ansible (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad, Vault, eri distrod, rollid ja muutujafailid), Ansible'i koodi testimine (`ansible-lint`, idempotentsuse test, Molecule), Vagrant laborikeskkonna loomiseks, virtuaalmasinad koodina (cloud-init, OpenTofu).
+**Teemad:** automatiseerimise astmed (Bashi skriptid, cron ja systemd taimerid, Git, konteinerid, Ansible), infrastruktuur koodina, idempotentsus, Ansible (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad, Vault, eri distrod, rollid ja muutujafailid), Ansible'i koodi testimine (`ansible-lint`, idempotentsuse test, Molecule), Vagrant laborikeskkonna loomiseks, virtuaalmasinad koodina (cloud-init, OpenTofu).
 
 **Õpiväljundid:** õppija seadistab mitu serverit korraga Ansible'i rollidega, testib automatiseerimiskoodi, loob virtuaalmasinad koodina ja korratava laborikeskkonna.
 
@@ -333,3 +333,9 @@ Hea tava: lase õppijal mõne laboritöö lõpus **suuliselt selgitada** ühte t
 - **Sertifikaadid:** LPIC-1 või CompTIA Linux+ (distrost sõltumatu), Red Hat RHCSA (praktiline eksam), hiljem RHCE või LPIC-2; Kubernetese puhul KCNA ja CKA.
 - **Süvenemine:** „UNIX and Linux System Administration Handbook“ (Nemeth jt), „The Linux Programming Interface“ (M. Kerrisk), Linux From Scratch.
 - **Viide:** Arch Wiki - parim Linuxi teatmeteos, ka siis, kui Archi ei kasuta.
+
+<!-- navigatsioon -->
+---
+
+[Sisukord](../README.md#sisukord) · [Moodul 1. Linux ja käsurida →](moodul-01-sissejuhatus/index.md)
+<!-- /navigatsioon -->

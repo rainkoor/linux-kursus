@@ -41,7 +41,7 @@ Turvalisus ei ole üks tööriist ega seadistus, vaid **kihiline kaitse** (*defe
 3. SSH: ainult võtmed, `PermitRootLogin no`, vajadusel `AllowGroups`.
 4. Tulemüür: keela vaikimisi sissetulev, luba ainult vajalikud teenused.
 5. Eemalda või keela mittevajalikud teenused (`ss -tulpn`, `systemctl list-unit-files --state=enabled`).
-6. Hoia SELinux/AppArmor sees.
+6. Hoia SELinux/AppArmor sees ja karasta oma teenuseid systemd turvaseadetega (`systemd-analyze security`, vt moodul 10, punkt 10.11).
 7. Seadista `fail2ban` avalikult kättesaadavatele teenustele.
 8. Veendu, et logid on püsivad ja neid jälgitakse.
 9. Seadista varundus ja **testi taastamist**.
@@ -630,3 +630,9 @@ Pärast muudatust taaskäivita server (`sudo docker compose restart wazuh.manage
 - Ubuntu Server dokumentatsioon - Security, AppArmor (documentation.ubuntu.com)
 - CIS Benchmarks (cisecurity.org) - karastamise juhendid
 - Debian Securing Manual (debian.org/doc)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 10. Enesekontroll](../moodul-10-alglaadimine-kernel/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 11. Turvalisus ja logid →](labor.md)
+<!-- /navigatsioon -->

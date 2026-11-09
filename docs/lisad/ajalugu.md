@@ -251,3 +251,9 @@ flowchart TD
 - Eric S. Raymond, „The Art of Unix Programming“ - UNIX-i filosoofia (tasuta veebis)
 - Dokumentaalfilm „Revolution OS“ (2001) - vaba tarkvara ja Linuxi ajalugu
 - Brian Kernighan, „UNIX: A History and a Memoir“ (2019) - UNIX-i ajalugu Bell Labsi töötaja pilgu läbi
+
+<!-- navigatsioon -->
+---
+
+[← Linuxi distributsioonide ülevaade](distrod.md) · [Sisukord](../../README.md#sisukord) · [Sõnastik →](sonastik.md)
+<!-- /navigatsioon -->

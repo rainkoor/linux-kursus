@@ -577,3 +577,9 @@ Kontrolli enne paigaldust k3s-i dokumentatsioonist (docs.k3s.io → *Installatio
 - Helmi dokumentatsioon (helm.sh/docs), Artifact Hub (artifacthub.io) - Helmi tabelite otsing
 - Kubernetes the Hard Way (K. Hightower) - klaster käsitsi, iga komponent eraldi (süvenemiseks)
 - Sertifikaadid: CKA (*Certified Kubernetes Administrator*), KCNA (algtase)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 23. Enesekontroll](../moodul-23-virtualiseerimine/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 24. k3s klaster →](labor.md)
+<!-- /navigatsioon -->

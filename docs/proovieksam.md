@@ -98,3 +98,9 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ku
 
 > [!NOTE]
 > **Õpetajale:** skript kontrollib ainult olekut. Ülesannete sõnastus on täpne (nimed, numbrid), et kontroll oleks automaatne. Lisaülesandeid saab hõlpsasti lisada funktsiooniga `kontroll PUNKTID "kirjeldus" käsk`. Skripti süntaks on kontrollitud (`bash -n`), kuid päris AlmaLinuxis ei ole seda testitud - tee eksam enne õppijatega kasutamist üks kord ise läbi.
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 17. Enesekontroll](moodul-17-seire/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Lõpuprojekt →](lopuprojekt.md)
+<!-- /navigatsioon -->

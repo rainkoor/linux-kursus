@@ -417,3 +417,9 @@ ning kustutada failist `/etc/fstab` vastavad read (või taastada varukoopia `sud
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 8. Kettad, failisüsteemid ja LVM](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 8. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

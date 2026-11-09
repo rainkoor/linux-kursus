@@ -744,3 +744,9 @@ esac
 - ShellCheck (shellcheck.net) - veebis saab skripte ka ilma paigaldamata kontrollida
 - MIT Missing Semester - „Shell Tools and Scripting“ ja „Version Control (Git)“
 - Pro Git (git-scm.com/book) - tasuta raamat
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 5. Enesekontroll](../moodul-05-protsessid-teenused/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 6. Halduskriptid ja Git →](labor.md)
+<!-- /navigatsioon -->

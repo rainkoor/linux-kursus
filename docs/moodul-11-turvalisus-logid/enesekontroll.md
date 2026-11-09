@@ -85,3 +85,9 @@ sudo augenrules --load
 # 6
 sudo aa-status | grep -A1 -i tcpdump
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 11. Turvalisus ja logid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 12. Konteinerid →](../moodul-12-konteinerid/index.md)
+<!-- /navigatsioon -->

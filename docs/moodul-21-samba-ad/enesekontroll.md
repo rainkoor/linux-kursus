@@ -70,3 +70,9 @@ sudo realm join -U Administrator --computer-ou="OU=Linux,DC=ad,DC=lab,DC=example
 ```text
 %domain\ admins@ad.lab.example ALL=(ALL:ALL) ALL
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 21. Samba AD domeen](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 22. Linux töölaual ja WSL →](../moodul-22-toolaud-wsl/index.md)
+<!-- /navigatsioon -->

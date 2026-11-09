@@ -72,3 +72,9 @@ sudo userdel -r ain && sudo groupdel opetajad
 ```
 
 `!` käsus `find` pöörab tingimuse ümber (omanik **ei ole** root).
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 3. Kasutajad, grupid ja jagatud kataloogid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 4. Tarkvara ja pakihaldus →](../moodul-04-pakihaldus/index.md)
+<!-- /navigatsioon -->

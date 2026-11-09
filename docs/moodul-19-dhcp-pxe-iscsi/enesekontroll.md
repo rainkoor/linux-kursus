@@ -86,3 +86,9 @@ host printer {
 sudo iscsiadm -m session
 sudo iscsiadm -m node --logoutall=all
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 19. DHCP, PXE ja iSCSI](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 20. Kataloogiteenused: OpenLDAP →](../moodul-20-openldap/index.md)
+<!-- /navigatsioon -->

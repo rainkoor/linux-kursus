@@ -528,3 +528,9 @@ Seepärast on selles moodulis domeenikontroller Debian ning Ubuntu ja AlmaLinux 
 - Samba Wiki: *Joining a Windows Client or Server to a Domain*
 - Red Hat dokumentatsioon: *Integrating RHEL systems directly with Windows Active Directory*
 - `man realm`, `man sssd-ad`, `man samba-tool`
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 20. Enesekontroll](../moodul-20-openldap/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 21. Samba AD domeen →](labor.md)
+<!-- /navigatsioon -->

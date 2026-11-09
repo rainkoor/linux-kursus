@@ -200,3 +200,9 @@ sudo sss_cache -E
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 20. Kataloogiteenused: OpenLDAP](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 20. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

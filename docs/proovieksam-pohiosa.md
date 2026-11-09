@@ -95,3 +95,9 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ar
 
 > [!NOTE]
 > **Õpetajale:** skript kontrollib ainult olekut. Selle süntaks ja abifunktsioonid on kontrollitud, kuid päris Debianis ei ole kogu eksamit läbi tehtud - tee see enne õppijatega kasutamist üks kord ise läbi.
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 8. Enesekontroll](moodul-08-kettad-lvm/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine →](moodul-09-salvestus/index.md)
+<!-- /navigatsioon -->

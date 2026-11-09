@@ -292,3 +292,9 @@ Andmete taastamise kuldreeglid:
 - Arch Wiki - RAID, ZFS, S.M.A.R.T., Benchmarking (wiki.archlinux.org)
 - `man mdadm`, `man fio`, `man smartctl`
 - TestDiski dokumentatsioon (cgsecurity.org)
+
+<!-- navigatsioon -->
+---
+
+[← Proovieksam: põhiosa](../proovieksam-pohiosa.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 9. Salvestus: RAID, jõudlus, taastamine ja ZFS →](labor.md)
+<!-- /navigatsioon -->

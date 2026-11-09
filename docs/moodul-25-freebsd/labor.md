@@ -300,3 +300,9 @@ Linuxi kliendist: `curl http://10.0.83.67` ja `curl http://10.0.83.66`. Lisa vaj
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 25. FreeBSD server](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 25. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

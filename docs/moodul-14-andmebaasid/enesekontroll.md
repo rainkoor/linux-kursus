@@ -61,3 +61,9 @@ host  moodle  moodle  10.0.83.55/32  scram-sha-256
 ```bash
 sqlite3 -csv -header kool.db "SELECT * FROM opilased;" > opilased.csv
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 14. Andmebaasid (kooli väikeserver, II osa)](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus →](../moodul-15-vorguteenused/index.md)
+<!-- /navigatsioon -->

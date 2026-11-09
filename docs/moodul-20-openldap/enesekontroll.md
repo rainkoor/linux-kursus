@@ -76,3 +76,9 @@ getent passwd kati
 ```bash
 ldapdelete -x -D cn=admin,dc=lab,dc=example -W "uid=test,ou=People,dc=lab,dc=example"
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 20. OpenLDAP-kataloog ja Linuxi kliendid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 21. Active Directory Linuxis: Samba AD DC →](../moodul-21-samba-ad/index.md)
+<!-- /navigatsioon -->

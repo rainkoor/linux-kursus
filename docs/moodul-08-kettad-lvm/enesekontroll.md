@@ -77,3 +77,9 @@ df -i /
 ```
 
 Ülesandes 3 näitab `tail -6` kuut rida, sest viimane rida on kataloog `/usr` ise koos kogusummaga.
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 8. Kettad, failisüsteemid ja LVM](labor.md) · [Sisukord](../../README.md#sisukord) · [Proovieksam: põhiosa →](../proovieksam-pohiosa.md)
+<!-- /navigatsioon -->

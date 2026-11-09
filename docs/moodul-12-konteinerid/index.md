@@ -301,3 +301,9 @@ sudo systemctl enable --now podman-auto-update.timer   # uuenda iga päev automa
 - Podmani dokumentatsioon (docs.podman.io), sh Quadlet (`man podman-systemd.unit`)
 - Dockeri dokumentatsioon (docs.docker.com)
 - „Podman in Action“ (D. Walsh) - tasuta e-raamat Red Hatilt
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 11. Enesekontroll](../moodul-11-turvalisus-logid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 12. Konteinerid →](labor.md)
+<!-- /navigatsioon -->

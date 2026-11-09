@@ -127,3 +127,9 @@ Git-ülesanded 6 ja 7:
 git log -3 --stat
 git checkout HEAD~2 -- seire.conf
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 6. Halduskriptid ja Git](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 7. Võrk ja SSH →](../moodul-07-vork-ssh/index.md)
+<!-- /navigatsioon -->

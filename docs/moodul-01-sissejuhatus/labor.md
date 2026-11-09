@@ -235,3 +235,9 @@ Jätka Banditiga tasemetel 6–15 - need kasutavad mooduli 2 teemasid (`find`, `
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 1. Linux ja käsurida](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 1. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

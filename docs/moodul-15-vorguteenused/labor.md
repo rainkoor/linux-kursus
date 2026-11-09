@@ -394,3 +394,9 @@ dig @localhost test.lab.example +short
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 15. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

@@ -1,6 +1,6 @@
 # Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel
 
-**Maht:** 10 tundi · **Laboritöö:** Debian · **Eeldused:** moodulid 1–8
+**Maht:** 12 tundi · **Laboritöö:** Debian · **Eeldused:** moodulid 1–8
 
 ## Õpiväljundid
 
@@ -15,7 +15,9 @@ Mooduli läbinud õppija:
 - muudab kerneli parameetreid käsuga `sysctl`;
 - taastab süsteemi, mis ei käivitu, parandab GRUB-i taastemeedialt ja lähtestab juurkasutaja parooli;
 - vahetab kasutatavat kernelit ja eemaldab vanu kerneleid;
-- kompileerib ja paigaldab kerneli lähtekoodist.
+- kompileerib ja paigaldab kerneli lähtekoodist;
+- seadistab teenuste sõltuvused ja tüübid, kasutab mallitud, pesa- ja teeüksuseid ning kasutajateenuseid;
+- karastab teenuse systemd turvaseadetega ja lahendab teenuste käivitusvigu.
 
 ---
 
@@ -589,6 +591,240 @@ Lähtekoodist saab kerneli paigaldada ka ilma paketita (`sudo make modules_insta
 > [!TIP]
 > **Hea tava:** hoia alati alles distro töötav kernel. Kui sinu kernel ei käivitu, vali GRUB-i menüüst „Advanced options“ ja käivita distro kernel. Seejärel eemalda katkine kernel käsuga `sudo apt remove linux-image-<versioon>-minu`.
 
+
+## 10.11 systemd süvitsi
+
+Moodulis 5 õppisid teenuseid käivitama, lubama ja lihtsat oma teenust looma. Siin vaatame, kuidas systemd tegelikult otsustab, **mida, millal ja kuidas** käivitada, ning kuidas teenuseid turvalisemaks teha.
+
+### Sõltuvused ja järjekord
+
+systemd-s on **sõltuvus** (kas teine üksus tuleb ka käivitada) ja **järjekord** (kumb enne) eraldi seaded. See on levinud viga: `Requires=` ilma `After=`-ita käivitab mõlemad üksused **samal ajal**.
+
+| Seade (`[Unit]`) | Tähendus |
+|---|---|
+| `Wants=b` | Käivita ka `b`; kui `b` ebaõnnestub, jätka siiski (nõrk sõltuvus, kõige levinum) |
+| `Requires=b` | Käivita ka `b`; kui `b` ei käivitu või peatatakse, peata ka see üksus |
+| `BindsTo=b` | Nagu `Requires`, kuid peatub ka siis, kui `b` kaob ootamatult (nt seade eemaldatakse) |
+| `PartOf=b` | `b` peatamine või taaskäivitamine mõjutab ka seda üksust (mitte vastupidi) |
+| `Conflicts=b` | Ei tohi töötada koos `b`-ga |
+| `After=b` / `Before=b` | **Ainult järjekord**: kui mõlemad käivitatakse, oota `b` ära / käivitu enne `b`-d |
+
+Tüüpiline andmebaasist sõltuv veebirakendus:
+
+```ini
+[Unit]
+Description=Kooli veebirakendus
+Wants=network-online.target
+After=network-online.target mariadb.service
+Requires=mariadb.service
+```
+
+`network.target` tähendab ainult, et võrgu haldamine on alanud - mitte et aadress on olemas. Teenus, mis peab käivitumisel võrku kasutama, vajab `network-online.target`-it (koos `Wants=` ja `After=`).
+
+```bash
+systemctl list-dependencies ssh.service             # millest teenus sõltub
+systemctl list-dependencies --reverse ssh.service   # mis sõltub teenusest
+systemctl show -p Wants,Requires,After ssh.service  # seaded ühe reana
+```
+
+### Teenuse tüübid
+
+`Type=` ütleb systemd-le, millal loetakse teenus käivitunuks - sellest sõltub, millal tohib käivitada `After=` järgi temale järgnevad üksused.
+
+| `Type=` | Millal on teenus „käivitunud“ | Kasutus |
+|---|---|---|
+| `simple` (vaikimisi) | kohe pärast protsessi loomist | lihtsad programmid ja skriptid |
+| `exec` | kui programm on edukalt käivitatud (viga, kui faili pole) | parem vaikeväärtus uutele teenustele |
+| `forking` | kui algprotsess on loonud lapse ja ise lõpetanud | vanad deemonid (`PIDFile=`) |
+| `oneshot` | kui protsess on **lõpetanud** | ühekordsed tööd, taimerite teenused; koos `RemainAfterExit=yes` jääb olekuks `active` |
+| `notify` | kui programm ise teatab „valmis“ (`sd_notify`) | nginx, PostgreSQL, Podman/Quadlet - kõige täpsem |
+
+### Keskkond ja käivitamine
+
+```ini
+[Service]
+Type=exec
+User=kool
+WorkingDirectory=/srv/kool
+Environment=REZIIM=tootmine
+EnvironmentFile=-/etc/default/kool       # "-" = fail võib puududa
+ExecStartPre=/usr/local/bin/kool-kontroll
+ExecStart=/usr/local/bin/kool-server --port 8080
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=5                         # kuni 5 käivitust minutis, siis loobu
+```
+
+Paroolid ja muud saladused pane `EnvironmentFile`-i (õigused `600`, omanik `root`), mitte otse üksuse faili - üksuse faile saab lugeda iga kasutaja (`systemctl cat`).
+
+### Mallid: üks fail, mitu eksemplari
+
+Kui failinimes on `@` (`tervitaja@.service`), on see **mall**. Eksemplar käivitatakse nimega `tervitaja@mari.service` ja failis asendub `%i` sõnaga `mari`.
+
+```ini
+# /etc/systemd/system/tervitaja@.service
+[Unit]
+Description=Tervitaja %i jaoks
+
+[Service]
+Type=exec
+ExecStart=/bin/bash -c 'while true; do echo "Tere, %i"; sleep 10; done'
+DynamicUser=yes
+```
+
+```bash
+sudo systemctl start tervitaja@mari tervitaja@jaan
+systemctl list-units 'tervitaja@*'
+journalctl -u 'tervitaja@*' -f
+```
+
+Malle kasutab süsteem ise palju: `getty@tty1.service` (sisselogimine konsoolis), `wg-quick@wg0.service` (WireGuard, moodul 7), `systemd-fsck@…`, `container-…`.
+
+### Pesa aktiveerimine (.socket)
+
+**Pesaüksus** (*socket unit*) laseb systemd-l kuulata porti **teenuse eest**. Teenus käivitatakse alles siis, kui tuleb esimene ühendus. Nii käivitub süsteem kiiremini, harva kasutatud teenus ei kuluta mälu ja teenust saab taaskäivitada ilma ühendusi kaotamata. Näiteks Ubuntu 24.04 kasutab SSH jaoks `ssh.socket`-it.
+
+Lihtne „kellaserver“, mis saadab igale ühendusele kellaaja:
+
+```ini
+# /etc/systemd/system/kell.socket
+[Unit]
+Description=Kellaserver pordil 2000
+
+[Socket]
+ListenStream=2000
+Accept=yes                  # iga ühendus saab oma teenuse eksemplari
+
+[Install]
+WantedBy=sockets.target
+```
+
+```ini
+# /etc/systemd/system/kell@.service
+[Unit]
+Description=Kellaserveri ühendus
+
+[Service]
+ExecStart=/usr/bin/date
+StandardOutput=socket
+DynamicUser=yes
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now kell.socket
+ss -tlnp | grep 2000        # porti hoiab systemd, mitte teenus
+nc localhost 2000           # vastus: kuupäev ja kellaaeg
+```
+
+### Failide jälgimine (.path)
+
+**Teeüksus** (*path unit*) käivitab samanimelise teenuse, kui fail või kataloog muutub - ilma, et skript peaks tsüklis kontrollima.
+
+| Seade (`[Path]`) | Käivitab teenuse, kui |
+|---|---|
+| `PathExists=` | fail või kataloog on olemas |
+| `PathChanged=` | faili muudeti ja suleti |
+| `PathModified=` | faili muudeti (ka kirjutamise ajal) |
+| `DirectoryNotEmpty=` | kataloogis on midagi |
+
+```ini
+# /etc/systemd/system/tootle.path
+[Path]
+DirectoryNotEmpty=/srv/sisend
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```ini
+# /etc/systemd/system/tootle.service
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'for f in /srv/sisend/*; do echo "Töötlen $f"; mv "$f" /srv/valmis/; done'
+```
+
+Teenus peab kataloogi tühjendama, muidu käivitatakse see kohe uuesti.
+
+### Haakimine (.mount ja .automount)
+
+systemd teeb faili `/etc/fstab` ridadest automaatselt `.mount` üksused (nt `/srv/andmed` → `srv-andmed.mount`). Seepärast saab haakimist kasutada sõltuvusena (`RequiresMountsFor=/srv/andmed`) ja pärast fstab-i muutmist on vaja `systemctl daemon-reload`. fstab-i valik `x-systemd.automount` haagib failisüsteemi alles esimesel kasutamisel - sobib võrgukettale (vrd autofs, moodul 15).
+
+```bash
+systemctl list-units --type=mount
+```
+
+### Kasutajateenused
+
+Iga kasutaja saab käivitada oma teenuseid ilma juurkasutaja õigusteta. Üksuse failid on kataloogis `~/.config/systemd/user/` ja käsud saavad võtme `--user`:
+
+```bash
+mkdir -p ~/.config/systemd/user
+systemctl --user daemon-reload
+systemctl --user enable --now minu.service
+journalctl --user -u minu.service
+sudo loginctl enable-linger kasutaja    # teenused töötavad ka siis, kui kasutaja pole sisse logitud
+```
+
+Nii töötavad ka juurkasutajata Podmani konteinerid (moodul 12).
+
+### Teenuse karastamine
+
+systemd oskab iga teenuse ümber ehitada liivakasti (*sandbox*): piirata, mida teenus näeb ja teha tohib, kasutades kerneli nimeruume, cgroupe ja seccompi. Kui teenusesse murtakse sisse, jääb ründaja sinna lõksu. `systemd-analyze security` hindab iga teenust skaalal 0-10 (väiksem on parem):
+
+```bash
+systemd-analyze security                 # kõik teenused
+systemd-analyze security nginx.service   # üksikasjad ja soovitused
+```
+
+| Seade | Mida teeb |
+|---|---|
+| `NoNewPrivileges=yes` | protsess ega selle lapsed ei saa õigusi juurde (nt SUID-programmidega) |
+| `DynamicUser=yes` | teenus töötab ajutise kasutajana, mis luuakse käivitusel ja kaob peatamisel |
+| `StateDirectory=nimi` | loob `/var/lib/nimi` teenuse kasutajale (koos `DynamicUser`-iga ainus kirjutatav koht) |
+| `ProtectSystem=strict` | kogu failisüsteem on ainult lugemiseks; erandid `ReadWritePaths=` |
+| `ProtectHome=yes` | `/home`, `/root` ja `/run/user` pole nähtavad |
+| `PrivateTmp=yes` | oma `/tmp`, teised teenused seda ei näe |
+| `PrivateDevices=yes` | ainult põhilised seadmed (`/dev/null`, `/dev/random` …) |
+| `PrivateNetwork=yes` | võrk puudub (ainult `lo`) - teenustele, mis võrku ei vaja |
+| `ProtectKernelTunables=yes`, `ProtectKernelModules=yes`, `ProtectControlGroups=yes` | kerneli seadeid, mooduleid ja cgroupe ei saa muuta |
+| `CapabilityBoundingSet=` | eemaldab juurkasutaja erivolitused (*capabilities*); tühi = kõik |
+| `RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX` | lubatud võrguprotokollid |
+| `SystemCallFilter=@system-service` | lubatud ainult tavateenustele vajalikud süsteemikutsed (seccomp) |
+
+Karastamist lisa **järk-järgult** ja testi pärast igat sammu - liiga range seade võib teenuse töö peatada. Veateated näed `journalctl -u teenus`-ist (sageli `Permission denied` või `Operation not permitted`). Ajutiselt saab seadeid proovida käsuga `systemd-run`:
+
+```bash
+sudo systemd-run --wait -p ProtectSystem=strict -p DynamicUser=yes touch /etc/proov
+```
+
+Paljud paketid (nt `chrony`, `systemd-resolved`) tulevad juba karastatuna. Oma teenustele lisa vähemalt `NoNewPrivileges`, `ProtectSystem`, `ProtectHome` ja `PrivateTmp` - see on vähese vaevaga suur võit.
+
+### Tõrkeotsing
+
+```bash
+systemctl status teenus                  # olek ja viimased logiread
+journalctl -xeu teenus                   # logi koos selgitustega, lõpust
+systemctl cat teenus                     # tegelik fail koos drop-in failidega
+systemctl show teenus -p ExecStart,User,Restart   # tegelikud seaded
+systemd-analyze verify /etc/systemd/system/teenus.service   # süntaksi ja viidete kontroll
+systemd-delta                            # millised paketi failid on üle kirjutatud
+sudo systemctl reset-failed teenus       # tühjenda `failed` olek ja käivituste loendur
+```
+
+| Teade | Põhjus |
+|---|---|
+| `status=203/EXEC` | `ExecStart` failitee on vale või fail pole käivitatav |
+| `status=217/USER` | `User=` kasutajat pole olemas |
+| `Start request repeated too quickly` | teenus jooksis korduvalt kokku ja ületas `StartLimitBurst`-i; vaata logist esimest viga, seejärel `reset-failed` |
+| `Unit … not found` | vale nimi või puudub `daemon-reload` |
+| `Dependency failed for …` | sõltuvus (`Requires=`) ei käivitunud |
+
 ---
 
 ## Distrode erinevused
@@ -629,6 +865,11 @@ sudo grubby --info=DEFAULT
 | *Rescue mode*, `mount --rbind`, `chroot`, `grub-install`, `update-grub` | GRUB-i parandamine taastemeedialt |
 | `grub-set-default`, `grub-reboot`, `grubby --set-default` | Vaikimisi kerneli vahetamine |
 | `make olddefconfig`, `make menuconfig`, `make bindeb-pkg` | Kerneli kompileerimine |
+| `Wants=`/`Requires=` + `After=`, `list-dependencies` | Teenuste sõltuvused ja järjekord |
+| `Type=exec/oneshot/notify`, `EnvironmentFile=` | Teenuse tüüp ja keskkond |
+| `teenus@.service`, `.socket`, `.path`, `systemctl --user` | Mallid, pesa- ja teeüksused, kasutajateenused |
+| `systemd-analyze security`, `ProtectSystem=`, `DynamicUser=` | Teenuse karastamine |
+| `journalctl -xeu`, `systemd-analyze verify`, `reset-failed` | Teenuste tõrkeotsing |
 
 **Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil.
 
@@ -637,4 +878,10 @@ sudo grubby --info=DEFAULT
 - Brian Ward, „How Linux Works“ - alglaadimise, kerneli ja seadmete peatükid
 - Arch Wiki - Arch boot process, GRUB, Kernel parameters, sysctl (wiki.archlinux.org)
 - Linux From Scratch (linuxfromscratch.org) - ehita süsteem ise ja näed iga osa oma silmaga
-- `man bootup`, `man systemd.special`, `man sysctl.d`
+- `man bootup`, `man systemd.special`, `man sysctl.d`, `man systemd.unit`, `man systemd.service`, `man systemd.exec`, `man systemd.socket`, `man systemd.path`
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 9. Enesekontroll](../moodul-09-salvestus/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 10. Alglaadimine, kernel ja taastamine →](labor.md)
+<!-- /navigatsioon -->

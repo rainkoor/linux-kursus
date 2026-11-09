@@ -76,3 +76,9 @@ grep '^Install:' /var/log/apt/history.log         # A
 ```
 
 Võti `-y` vastab kõigile küsimustele automaatselt „jah“. Seda kasutatakse skriptides, kuid käsitsi töötades on parem enne kinnitamist üle vaadata, mida pakihaldur teha kavatseb.
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 4. Pakihaldus kolmel distrol](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 5. Protsessid, teenused ja systemd →](../moodul-05-protsessid-teenused/index.md)
+<!-- /navigatsioon -->

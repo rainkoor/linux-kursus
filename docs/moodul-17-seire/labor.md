@@ -200,3 +200,9 @@ rm ~/katkine.sh
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 17. Seire ja jõudlus](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 17. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

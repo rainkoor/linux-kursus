@@ -199,3 +199,9 @@ flowchart LR
 Kui oskad Linuxit, saad BSD-ga põhimõtteliselt hakkama: failisüsteemis liikumine, failide haldus, torud ja enamik käske töötavad samamoodi. Erinevused tulevad välja süsteemi halduses (tarkvara paigaldus, teenused, võrgu ja tulemüüri seadistus) ning mõne käsu võtmetes. Näiteks GNU `sed -i 's/a/b/' fail` asemel tuleb BSD-s (ja macOS-is) kirjutada `sed -i '' 's/a/b/' fail`.
 
 Kursusel käsitletakse BSD-d kahes valikmoodulis: [moodul 18](../moodul-18-opnsense/index.md) (OPNsense tulemüür FreeBSD peal) ja [moodul 25](../moodul-25-freebsd/index.md) (FreeBSD server käsurealt).
+
+<!-- navigatsioon -->
+---
+
+[← Laborikeskkond ja serverite paigaldus](paigaldus.md) · [Sisukord](../../README.md#sisukord) · [UNIX-i ja Linuxi ajalugu →](ajalugu.md)
+<!-- /navigatsioon -->

@@ -447,3 +447,9 @@ Kui õpetaja ei ole teisiti öelnud, jäta seadistus alles. Iseõppija võib soo
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 7. Võrk ja SSH](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 7. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

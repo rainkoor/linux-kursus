@@ -55,3 +55,9 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 3. *Firewall* → *NAT* → *Port Forward*: liides WAN, TCP, sihtkoht *WAN address*, port 2222, suunamise siht Debiani aadress, port 22.
 4. `sockstat -4l` (või `sockstat -l`).
 5. `tcpdump -ni vtnet0 port 53`.
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 18. OPNsense laborivõrgu tulemüürina](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI →](../moodul-19-dhcp-pxe-iscsi/index.md)
+<!-- /navigatsioon -->

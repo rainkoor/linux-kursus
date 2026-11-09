@@ -1,16 +1,9 @@
 # Linuxi ja BSD kursus - nullist süsteemihalduseni
 
 <p align="center">
-  <img src="pildid/logod/tux.svg" alt="Tux, Linuxi pingviin" height="110">
+  <img src="pildid/logod/tux.svg" alt="Tux, Linuxi pingviin" title="Tux - Linuxi maskott (Larry Ewing)" height="110">
   &nbsp;&nbsp;
-  <img src="pildid/logod/bsd-daemon.svg" alt="BSD deemon" height="110">
-</p>
-<p align="center">
-  <a href="https://www.debian.org/"><img src="pildid/logod/debian.svg" alt="Debian" height="56"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://ubuntu.com/"><img src="pildid/logod/ubuntu.svg" alt="Ubuntu" height="56"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://almalinux.org/"><img src="pildid/logod/almalinux.svg" alt="AlmaLinux" height="56"></a>
+  <img src="pildid/logod/bsd-daemon.svg" alt="BSD deemon" title="BSD deemon ehk Beastie - BSD maskott (Marshall Kirk McKusick)" height="110">
 </p>
 
 Eestikeelne avatud õppematerjal Linuxi (ja BSD) õppimiseks: esimesest käsust kuni teenuste paigaldamise, skriptimise ja süsteemi sisemise toimimise mõistmiseni.
@@ -143,9 +136,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     ---
 
-    UEFI, GRUB, initramfs, kerneli moodulid ja süsteemi päästmine.
+    UEFI, GRUB, initramfs, kernel, systemd süvitsi ja süsteemi päästmine.
 
-    *10 h · Debian*
+    *12 h · Debian*
 
     [:octicons-arrow-right-24: Teooria](moodul-10-alglaadimine-kernel/index.md) · [Labor](moodul-10-alglaadimine-kernel/labor.md) · [Enesekontroll](moodul-10-alglaadimine-kernel/enesekontroll.md)
 
@@ -335,9 +328,9 @@ Kursusel kasutatakse kolme distributsiooni (distrot). **Need on Haapsalu Kutseha
 
 | Distro | Perekond | Pakihaldur | Miks | Koduleht |
 |---|---|---|---|---|
-| **Debian** | Debian | `apt` | Stabiilne, levinud serverites, paljude distrode alus | [debian.org](https://www.debian.org/) |
-| **Ubuntu** | Debian | `apt` | Kõige levinum pilves ja töölaual | [ubuntu.com](https://ubuntu.com/) |
-| **AlmaLinux** | Red Hat (RHEL) | `dnf` | Tasuta RHEL-iga ühilduv distro, ettevõtete standard | [almalinux.org](https://almalinux.org/) |
+| <a href="https://www.debian.org/"><img src="pildid/logod/debian.svg" alt="Debian" title="Debian - Debian Open Use Logo" height="28"></a> **Debian** | Debian | `apt` | Stabiilne, levinud serverites, paljude distrode alus | [debian.org](https://www.debian.org/) |
+| <a href="https://ubuntu.com/"><img src="pildid/logod/ubuntu.svg" alt="Ubuntu" title="Ubuntu - Canonical Ltd. kaubamärk" height="28"></a> **Ubuntu** | Debian | `apt` | Kõige levinum pilves ja töölaual | [ubuntu.com](https://ubuntu.com/) |
+| <a href="https://almalinux.org/"><img src="pildid/logod/almalinux.svg" alt="AlmaLinux" title="AlmaLinux - AlmaLinux OS Foundationi kaubamärk" height="28"></a> **AlmaLinux** | Red Hat (RHEL) | `dnf` | Tasuta RHEL-iga ühilduv distro, ettevõtete standard | [almalinux.org](https://almalinux.org/) |
 
 Need kolm katavad suurema osa reaalsetest Linuxi serveritest. Teiste distrode ülevaate leiad [distrode ülevaatest](lisad/distrod.md). **Iga laboritöö on kirjutatud ühe kindla distro jaoks** (see on märgitud laboritöö alguses). Teoorias on erinevused välja toodud lõikudes **„Distrode erinevused“**.
 

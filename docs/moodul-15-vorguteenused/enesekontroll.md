@@ -60,3 +60,9 @@ mail    IN  A   10.0.83.58
 sudo -E restic snapshots
 sudo -E restic restore <eelviimase ID> --target /tmp/taaste --include /etc/nginx
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina →](../moodul-16-automatiseerimine/index.md)
+<!-- /navigatsioon -->

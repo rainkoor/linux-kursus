@@ -63,3 +63,9 @@ rm -r ~/test
 ```
 
 Võti `-d` käsus `ls -d` näitab kataloogi ennast, mitte selle sisu.
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 1. Esimesed sammud käsureal](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 2. Failid, tekst ja torud →](../moodul-02-failid-tekst-torud/index.md)
+<!-- /navigatsioon -->

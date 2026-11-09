@@ -24,6 +24,11 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 18. Miks on parem paigaldada isekompileeritud kernel `.deb` paketina kui käsuga `make install`?
 19. Masin näitab `grub rescue>`. Kirjelda kahte viisi GRUB-i parandamiseks.
 20. Miks seotakse enne `chroot`-i kataloogid `/dev`, `/proc` ja `/sys`? Mida tuleb lisaks teha LVM-iga süsteemis?
+21. Mis vahe on `Requires=` ja `After=` seadetel? Miks on vaja `Wants=network-online.target` ja `After=network-online.target`, mitte ainult `network.target`?
+22. Millal kasutad `Type=oneshot` ja millal `Type=notify`? Mida teeb `RemainAfterExit=yes`?
+23. Mis on systemd mall (`nimi@.service`) ja pesa aktiveerimine? Too kummagi kohta üks näide.
+24. Mida teevad `DynamicUser=yes`, `ProtectSystem=strict` ja `NoNewPrivileges=yes`? Kuidas hinnata teenuse turvalisust?
+25. Teenus näitab `status=203/EXEC` ja teine teatab „Start request repeated too quickly“. Mida need tähendavad ja kuidas edasi uurid?
 
 ## Praktilised miniülesanded
 
@@ -59,6 +64,11 @@ Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontroll
 18. Pakihaldur teab kernelist: selle saab puhtalt eemaldada (`apt remove`), paigaldamisel genereeritakse automaatselt initramfs ja GRUB-i kirje ning paketti saab kopeerida ja paigaldada teistesse masinatesse.
 19. Debiani paigaldusmeedia taastamisrežiim → *Reinstall GRUB boot loader*; või live-meedia: haagi juurfailisüsteem kataloogi `/mnt`, seo `/dev`, `/proc`, `/sys`, `/run`, `chroot /mnt`, `grub-install /dev/sda`, `update-grub`.
 20. `chroot`-i sees töötavad programmid vajavad seadmefaile ja kerneli liideseid, mida tühi kataloog ei sisalda. LVM-i puhul tuleb enne haakimist köitegrupid aktiveerida: `vgscan`, `vgchange -ay`.
+21. `Requires=` on sõltuvus (käivita ka see; kui see ebaõnnestub, ebaõnnestu ka ise), `After=` ainult järjekord. Ilma `After`-ita käivitatakse mõlemad korraga. `network.target` tähendab ainult võrguhalduse alustamist; `network-online.target` ootab, kuni võrk on päriselt kasutatav - see tuleb `Wants`-iga tõmmata ja `After`-iga oodata.
+22. `oneshot` - ühekordne töö, mis lõpetab (varundus, taimeri teenus); systemd ootab lõpetamist. `notify` - programm teatab ise, et on valmis (nt nginx, PostgreSQL), kõige täpsem. `RemainAfterExit=yes` jätab oneshot-teenuse pärast lõpetamist olekusse `active` (nt seadistuse rakendamine).
+23. Mall on üksuse fail, millest käivitatakse mitu eksemplari, `%i` asendub eksemplari nimega (`getty@tty1`, `wg-quick@wg0`). Pesa aktiveerimisel kuulab systemd porti ja käivitab teenuse alles ühenduse saabumisel (`ssh.socket` Ubuntus, `kell.socket` laboris).
+24. `DynamicUser` - teenus töötab ajutise kasutajana; `ProtectSystem=strict` - failisüsteem on teenusele ainult lugemiseks; `NoNewPrivileges` - teenus ei saa õigusi juurde (SUID). Hinnang: `systemd-analyze security teenus` (0-10, väiksem parem) koos soovitustega.
+25. `203/EXEC` - `ExecStart` programmi ei leitud või see pole käivitatav. „Repeated too quickly“ - teenus jooksis korduvalt kokku ja ületas `StartLimitBurst`-i. Uuri `journalctl -xeu teenus` (esimene viga), `systemctl cat`, `systemd-analyze verify`; pärast parandust `systemctl reset-failed` ja uuesti käivitamine.
 
 ### Miniülesannete lahendused
 
@@ -72,3 +82,9 @@ sudo sysctl --system && sysctl vm.swappiness
 ```
 
 Ülesanne 6: muuda failis `/etc/default/grub` rida `GRUB_CMDLINE_LINUX="nomodeset"` ja käivita `sudo update-grub`. Kontrolli pärast taaskäivitust käsuga `cat /proc/cmdline`. (`GRUB_CMDLINE_LINUX` kehtib kõigile kirjetele, ka taastamisrežiimile, `GRUB_CMDLINE_LINUX_DEFAULT` ainult tavalisele käivitusele.)
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 10. Alglaadimine, kernel ja taastamine](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 11. Turvalisus ja logid →](../moodul-11-turvalisus-logid/index.md)
+<!-- /navigatsioon -->

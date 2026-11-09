@@ -156,6 +156,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | liides | interface | Võrguühenduse lõpp-punkt (nt `ens18`) |
 | liitliides | bond, link aggregation | Mitu füüsilist võrguliidest ühe loogilise liidesena (rikkekindlus või läbilaskevõime) |
 | liitmistaotlus | pull request, merge request | Ettepanek liita haru muudatused põhiharusse koos ülevaatusega |
+| liivakast | sandbox | Piiratud keskkond, kus programm näeb ja tohib teha ainult vähe (nt systemd turvaseaded) |
 | link-local aadress | link-local address | Ainult kohtvõrgus kehtiv aadress (IPv6-s `fe80::/10`) |
 | lisagrupp | supplementary group | Grupp, kuhu kasutaja kuulub lisaks põhigrupile |
 | live-süsteem | live system | Andmekandjalt käivituv OS, mis ei vaja paigaldust |
@@ -168,6 +169,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | lõhestunud aju | split brain | Olukord, kus kaks sõlme peavad end korraga põhisõlmeks ja andmed või aadressid lähevad lahku |
 | lähtekood | source code | Programmi inimloetav kood |
 | LXC | Linux Containers | Süsteemikonteinerid, mis käituvad nagu kerged virtuaalmasinad (Proxmox) |
+| mall (systemd) | template unit | Üksuse fail nimega `nimi@.service`, millest käivitatakse mitu eksemplari (`%i`) |
 | manifest | manifest | YAML-fail, mis kirjeldab Kubernetese objektide soovitud olekut |
 | manustatud andmebaas | embedded database | Andmebaas, mis on rakenduse sees ühe failina (SQLite) |
 | marsruut | route | Reegel, kuhu pakette saata |
@@ -207,6 +209,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | partitsioonitabel | partition table | Ketta partitsioonide kirjeldus (MBR, GPT) |
 | peidetud fail | hidden file | Punktiga algava nimega fail |
 | pesastatud virtualiseerimine | nested virtualization | Hüperviisori käitamine virtuaalmasinas |
+| pesa aktiveerimine | socket activation | systemd kuulab porti teenuse eest ja käivitab teenuse esimese ühenduse saabumisel |
 | PHP-FPM | PHP FastCGI Process Manager | Eraldi teenus, mis käivitab veebiserveri jaoks PHP-skripte |
 | PID | process ID | Protsessi numbriline tunnus |
 | pilet | ticket | Kerberose ajutine tõend autentimiseks (nt TGT) |
@@ -303,6 +306,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | taustserver | backend | Koormusejaoturi või pöördpuhvri taga töötav server |
 | tee | path | Faili või kataloogi asukoht |
 | teenus | service, daemon | Taustal töötav programm |
+| teeüksus | path unit | systemd üksus, mis käivitab teenuse faili või kataloogi muutumisel |
 | tekstiredaktor | text editor | Programm tekstifailide muutmiseks (nano, vim) |
 | terminal | terminal (emulator) | Tekstiakent kuvav programm |
 | Terraform | Terraform | HashiCorpi tööriist infrastruktuuri deklaratiivseks loomiseks koodi järgi (BSL-litsents) |
@@ -365,3 +369,9 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Xen Orchestra | Xen Orchestra (XO) | XCP-ng veebipõhine haldus- ja varunduslahendus |
 | XFS | XFS | AlmaLinuxi vaikimisi ajakirjaga failisüsteem; suurendada saab, vähendada mitte |
 | .htaccess | .htaccess | Apache'i kataloogipõhine seadistusfail |
+
+<!-- navigatsioon -->
+---
+
+[← UNIX-i ja Linuxi ajalugu](ajalugu.md) · [Sisukord](../../README.md#sisukord) · [Käskude loend →](kasud.md)
+<!-- /navigatsioon -->

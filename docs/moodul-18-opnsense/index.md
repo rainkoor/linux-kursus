@@ -306,3 +306,9 @@ Näed, et põhitööriistad (`ls`, `cd`, `grep`, `ps`, `top`, `tcpdump`, `ssh`) 
 - OPNsense'i dokumentatsioon (docs.opnsense.org) ja foorum (forum.opnsense.org)
 - FreeBSD Handbook (docs.freebsd.org/en/books/handbook) - eriti peatükid „Firewalls“ ja „Network“
 - pfSense'i dokumentatsioon (docs.netgate.com) - põhimõtted on samad
+
+<!-- navigatsioon -->
+---
+
+[← Lõpuprojekt](../lopuprojekt.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 18. OPNsense laborivõrgu tulemüürina →](labor.md)
+<!-- /navigatsioon -->

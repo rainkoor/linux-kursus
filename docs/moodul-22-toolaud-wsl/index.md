@@ -373,3 +373,9 @@ Alternatiivid Windowsis: virtuaalmasin (Hyper-V, VirtualBox), Docker Desktop (ka
 - Kali Linuxi dokumentatsioon (kali.org/docs)
 - Microsoft Learn: *Windows Subsystem for Linux Documentation*
 - ID-tarkvara paigaldamine Linuxis (id.ee)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 21. Enesekontroll](../moodul-21-samba-ad/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 22. Linux töölaual, Kali ja WSL →](labor.md)
+<!-- /navigatsioon -->

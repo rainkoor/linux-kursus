@@ -688,3 +688,9 @@ AlmaLinuxis tuleb arvestada SELinuxiga (moodul 11): veebifailid mittestandardses
 - HAProxy dokumentatsioon (docs.haproxy.org)
 - Mozilla SSL Configuration Generator (ssl-config.mozilla.org) - soovitatavad TLS-i seadistused
 - Let's Encrypt ja certbot (letsencrypt.org, certbot.eff.org)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 12. Enesekontroll](../moodul-12-konteinerid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 13. Veebiserverid (kooli väikeserver, I osa) →](labor.md)
+<!-- /navigatsioon -->

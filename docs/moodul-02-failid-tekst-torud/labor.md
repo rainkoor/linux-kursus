@@ -254,3 +254,9 @@ zgrep '" 500 ' /tmp/vana.log.gz
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 2. Failid, tekst ja torud](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 2. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

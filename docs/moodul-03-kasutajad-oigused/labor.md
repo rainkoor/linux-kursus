@@ -290,3 +290,9 @@ sudo rm -r /srv/firma
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 3. Kasutajad, grupid ja õigused](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 3. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

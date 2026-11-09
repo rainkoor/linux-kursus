@@ -67,3 +67,9 @@ tar -czf ~/ssh-varu.tar.gz /etc/ssh 2>/dev/null
 ```
 
 Viimases ülesandes jäävad privaatvõtmed (`ssh_host_*_key`) arhiivist välja, sest tavakasutajal pole neile lugemisõigust. Õigustest räägime moodulis 3. Võti `-maxdepth 1` piirab otsingu ainult kataloogi `/etc` enda sisuga.
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 2. Logide analüüs ja failide haldus](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 3. Kasutajad, grupid ja õigused →](../moodul-03-kasutajad-oigused/index.md)
+<!-- /navigatsioon -->

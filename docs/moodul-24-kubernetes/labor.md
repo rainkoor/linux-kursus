@@ -397,3 +397,9 @@ Kui klastrit enam ei vaja: `sudo /usr/local/bin/k3s-agent-uninstall.sh` agentide
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 24. Kubernetes: k3s](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 24. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

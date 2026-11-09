@@ -79,6 +79,7 @@ nav:
           - Teooria: moodul-08-kettad-lvm/index.md
           - Laboritöö: moodul-08-kettad-lvm/labor.md
           - Enesekontroll: moodul-08-kettad-lvm/enesekontroll.md
+      - "Proovieksam: põhiosa": proovieksam-pohiosa.md
   - Süvendusosa:
       - "Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine":
           - Teooria: moodul-09-salvestus/index.md
@@ -116,7 +117,6 @@ nav:
           - Teooria: moodul-17-seire/index.md
           - Laboritöö: moodul-17-seire/labor.md
           - Enesekontroll: moodul-17-seire/enesekontroll.md
-      - "Proovieksam: põhiosa": proovieksam-pohiosa.md
       - "Proovieksam: süvendusosa": proovieksam.md
       - Lõpuprojekt: lopuprojekt.md
   - Valikmoodulid:

@@ -459,3 +459,9 @@ Halduriõigusi ja `sudo` käsku käsitleme lähemalt moodulis 3.
 - William Shotts, „The Linux Command Line“ (I osa, tasuta: linuxcommand.org)
 - OverTheWire Bandit, tasemed 0–5 (overthewire.org/wargames/bandit)
 - Linux Foundation, „Introduction to Linux“ (LFS101, tasuta edX-is)
+
+<!-- navigatsioon -->
+---
+
+[← Kursuse kava](../kava.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 1. Esimesed sammud käsureal →](labor.md)
+<!-- /navigatsioon -->

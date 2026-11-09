@@ -475,3 +475,9 @@ AlmaLinuxis lisandub SELinux: TFTP failid peavad asuma kataloogis `/var/lib/tftp
 - FOG Project wiki ja foorum (fogproject.org)
 - Red Hati dokumentatsioon - „Managing storage devices“ → iSCSI (docs.redhat.com)
 - `man targetcli`, `man iscsiadm`
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 18. Enesekontroll](../moodul-18-opnsense/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 19. DHCP, PXE ja iSCSI →](labor.md)
+<!-- /navigatsioon -->

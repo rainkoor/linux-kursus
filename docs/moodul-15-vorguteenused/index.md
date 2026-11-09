@@ -555,3 +555,9 @@ AlmaLinuxis tuleb lisaks arvestada SELinuxiga (moodul 11): Samba jagamised (`sam
 - Samba Wiki (wiki.samba.org)
 - Postfix dokumentatsioon (www.postfix.org/documentation.html)
 - restic dokumentatsioon (restic.readthedocs.io)
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 14. Enesekontroll](../moodul-14-andmebaasid/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 15. Kooli väikeserver, III osa: DNS, failid, e-post ja varundus →](labor.md)
+<!-- /navigatsioon -->

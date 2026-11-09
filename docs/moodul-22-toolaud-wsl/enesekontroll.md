@@ -79,3 +79,9 @@ systemd=true
 [user]
 default=mari
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 22. Linux töölaual, Kali ja WSL](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng →](../moodul-23-virtualiseerimine/index.md)
+<!-- /navigatsioon -->

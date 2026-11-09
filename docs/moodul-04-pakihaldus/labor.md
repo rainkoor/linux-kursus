@@ -260,3 +260,9 @@ which -a hello
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 4. Tarkvara ja pakihaldus](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 4. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

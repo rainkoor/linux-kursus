@@ -901,3 +901,9 @@ Debianis (`ifupdown`) on vastavad read `bridge-ports`, `vlan-raw-device` ja `bon
 - Netplan dokumentatsioon (netplan.readthedocs.io)
 - Arch Wiki - Network configuration, OpenSSH, nftables (wiki.archlinux.org)
 - Linux Upskill Challenge - SSH ja tulemüüri päevad
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 6. Enesekontroll](../moodul-06-bash/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 7. Võrk, SSH ja tulemüür →](labor.md)
+<!-- /navigatsioon -->

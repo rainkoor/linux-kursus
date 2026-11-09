@@ -65,3 +65,9 @@ node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpo
 ```bash
 strace -e trace=openat ls /etc
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 17. Seire ja jõudlus](labor.md) · [Sisukord](../../README.md#sisukord) · [Proovieksam: süvendusosa →](../proovieksam.md)
+<!-- /navigatsioon -->

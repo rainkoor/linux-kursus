@@ -258,3 +258,9 @@ Kustuta testmasinad (`virsh undefine test1 --remove-all-storage`, `qm destroy`, 
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 23. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

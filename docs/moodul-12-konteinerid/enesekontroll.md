@@ -49,3 +49,9 @@ WORKDIR /app
 COPY rakendus.py .
 CMD ["python", "rakendus.py"]
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 12. Konteinerid](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 13. Veebiserverid →](../moodul-13-veebiserverid/index.md)
+<!-- /navigatsioon -->

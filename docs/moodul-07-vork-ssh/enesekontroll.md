@@ -89,3 +89,9 @@ sudo firewall-cmd --add-port=8443/tcp --permanent
 sudo firewall-cmd --reload
 sudo firewall-cmd --list-all
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 7. Võrk, SSH ja tulemüür](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 8. Kettad, failisüsteemid ja LVM →](../moodul-08-kettad-lvm/index.md)
+<!-- /navigatsioon -->

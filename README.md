@@ -1,21 +1,67 @@
 # Linuxi ja BSD kursus - nullist süsteemihalduseni
 
 <p align="center">
-  <img src="docs/pildid/logod/tux.svg" alt="Tux, Linuxi pingviin" height="110">
+  <img src="docs/pildid/logod/tux.svg" alt="Tux, Linuxi pingviin" title="Tux - Linuxi maskott (Larry Ewing)" height="110">
   &nbsp;&nbsp;
-  <img src="docs/pildid/logod/bsd-daemon.svg" alt="BSD deemon" height="110">
-</p>
-<p align="center">
-  <a href="https://www.debian.org/"><img src="docs/pildid/logod/debian.svg" alt="Debian" height="56"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://ubuntu.com/"><img src="docs/pildid/logod/ubuntu.svg" alt="Ubuntu" height="56"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://almalinux.org/"><img src="docs/pildid/logod/almalinux.svg" alt="AlmaLinux" height="56"></a>
+  <img src="docs/pildid/logod/bsd-daemon.svg" alt="BSD deemon" title="BSD deemon ehk Beastie - BSD maskott (Marshall Kirk McKusick)" height="110">
 </p>
 
 Eestikeelne avatud õppematerjal Linuxi (ja BSD) õppimiseks: esimesest käsust kuni teenuste paigaldamise, skriptimise ja süsteemi sisemise toimimise mõistmiseni.
 
 Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on kirjutatud nii, et sobib ka iseseisvaks õppimiseks.
+
+## Sisukord
+
+[Kursuse kava](docs/kava.md) kirjeldab iga mooduli teemasid ja õpiväljundeid; veebilehel on sama sisu menüüs. Iga mooduli juures on teooria, laboritöö ja enesekontroll.
+
+<!-- sisukord -->
+- [Kursuse kava](docs/kava.md)
+
+**Põhiosa**
+
+- [Moodul 1. Linux ja käsurida](docs/moodul-01-sissejuhatus/index.md) - [laboritöö](docs/moodul-01-sissejuhatus/labor.md) · [enesekontroll](docs/moodul-01-sissejuhatus/enesekontroll.md)
+- [Moodul 2. Failid, tekst ja torud](docs/moodul-02-failid-tekst-torud/index.md) - [laboritöö](docs/moodul-02-failid-tekst-torud/labor.md) · [enesekontroll](docs/moodul-02-failid-tekst-torud/enesekontroll.md)
+- [Moodul 3. Kasutajad, grupid ja õigused](docs/moodul-03-kasutajad-oigused/index.md) - [laboritöö](docs/moodul-03-kasutajad-oigused/labor.md) · [enesekontroll](docs/moodul-03-kasutajad-oigused/enesekontroll.md)
+- [Moodul 4. Tarkvara ja pakihaldus](docs/moodul-04-pakihaldus/index.md) - [laboritöö](docs/moodul-04-pakihaldus/labor.md) · [enesekontroll](docs/moodul-04-pakihaldus/enesekontroll.md)
+- [Moodul 5. Protsessid, teenused ja systemd](docs/moodul-05-protsessid-teenused/index.md) - [laboritöö](docs/moodul-05-protsessid-teenused/labor.md) · [enesekontroll](docs/moodul-05-protsessid-teenused/enesekontroll.md)
+- [Moodul 6. Bashi skriptimine ja Git](docs/moodul-06-bash/index.md) - [laboritöö](docs/moodul-06-bash/labor.md) · [enesekontroll](docs/moodul-06-bash/enesekontroll.md)
+- [Moodul 7. Võrk ja SSH](docs/moodul-07-vork-ssh/index.md) - [laboritöö](docs/moodul-07-vork-ssh/labor.md) · [enesekontroll](docs/moodul-07-vork-ssh/enesekontroll.md)
+- [Moodul 8. Kettad, failisüsteemid ja LVM](docs/moodul-08-kettad-lvm/index.md) - [laboritöö](docs/moodul-08-kettad-lvm/labor.md) · [enesekontroll](docs/moodul-08-kettad-lvm/enesekontroll.md)
+- [Proovieksam: põhiosa](docs/proovieksam-pohiosa.md)
+
+**Süvendusosa**
+
+- [Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine](docs/moodul-09-salvestus/index.md) - [laboritöö](docs/moodul-09-salvestus/labor.md) · [enesekontroll](docs/moodul-09-salvestus/enesekontroll.md)
+- [Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel](docs/moodul-10-alglaadimine-kernel/index.md) - [laboritöö](docs/moodul-10-alglaadimine-kernel/labor.md) · [enesekontroll](docs/moodul-10-alglaadimine-kernel/enesekontroll.md)
+- [Moodul 11. Turvalisus ja logid](docs/moodul-11-turvalisus-logid/index.md) - [laboritööd](docs/moodul-11-turvalisus-logid/labor.md) · [enesekontroll](docs/moodul-11-turvalisus-logid/enesekontroll.md)
+- [Moodul 12. Konteinerid](docs/moodul-12-konteinerid/index.md) - [laboritöö](docs/moodul-12-konteinerid/labor.md) · [enesekontroll](docs/moodul-12-konteinerid/enesekontroll.md)
+- [Moodul 13. Veebiserverid](docs/moodul-13-veebiserverid/index.md) - [laboritöö](docs/moodul-13-veebiserverid/labor.md) · [enesekontroll](docs/moodul-13-veebiserverid/enesekontroll.md)
+- [Moodul 14. Andmebaasid](docs/moodul-14-andmebaasid/index.md) - [laboritöö](docs/moodul-14-andmebaasid/labor.md) · [enesekontroll](docs/moodul-14-andmebaasid/enesekontroll.md)
+- [Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus](docs/moodul-15-vorguteenused/index.md) - [laboritööd](docs/moodul-15-vorguteenused/labor.md) · [enesekontroll](docs/moodul-15-vorguteenused/enesekontroll.md)
+- [Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](docs/moodul-16-automatiseerimine/index.md) - [laboritöö](docs/moodul-16-automatiseerimine/labor.md) · [enesekontroll](docs/moodul-16-automatiseerimine/enesekontroll.md)
+- [Moodul 17. Seire ja jõudlus](docs/moodul-17-seire/index.md) - [laboritöö](docs/moodul-17-seire/labor.md) · [enesekontroll](docs/moodul-17-seire/enesekontroll.md)
+- [Proovieksam: süvendusosa](docs/proovieksam.md)
+- [Lõpuprojekt](docs/lopuprojekt.md)
+
+**Valikmoodulid**
+
+- [Moodul 18. BSD praktikas: OPNsense tulemüür](docs/moodul-18-opnsense/index.md) - [laboritöö](docs/moodul-18-opnsense/labor.md) · [enesekontroll](docs/moodul-18-opnsense/enesekontroll.md)
+- [Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI](docs/moodul-19-dhcp-pxe-iscsi/index.md) - [laboritöö](docs/moodul-19-dhcp-pxe-iscsi/labor.md) · [enesekontroll](docs/moodul-19-dhcp-pxe-iscsi/enesekontroll.md)
+- [Moodul 20. Kataloogiteenused: OpenLDAP](docs/moodul-20-openldap/index.md) - [laboritöö](docs/moodul-20-openldap/labor.md) · [enesekontroll](docs/moodul-20-openldap/enesekontroll.md)
+- [Moodul 21. Active Directory Linuxis: Samba AD DC](docs/moodul-21-samba-ad/index.md) - [laboritööd](docs/moodul-21-samba-ad/labor.md) · [enesekontroll](docs/moodul-21-samba-ad/enesekontroll.md)
+- [Moodul 22. Linux töölaual ja WSL](docs/moodul-22-toolaud-wsl/index.md) - [laboritöö](docs/moodul-22-toolaud-wsl/labor.md) · [enesekontroll](docs/moodul-22-toolaud-wsl/enesekontroll.md)
+- [Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](docs/moodul-23-virtualiseerimine/index.md) - [laboritöö](docs/moodul-23-virtualiseerimine/labor.md) · [enesekontroll](docs/moodul-23-virtualiseerimine/enesekontroll.md)
+- [Moodul 24. Kubernetes: k3s](docs/moodul-24-kubernetes/index.md) - [laboritöö](docs/moodul-24-kubernetes/labor.md) · [enesekontroll](docs/moodul-24-kubernetes/enesekontroll.md)
+- [Moodul 25. FreeBSD server](docs/moodul-25-freebsd/index.md) - [laboritöö](docs/moodul-25-freebsd/labor.md) · [enesekontroll](docs/moodul-25-freebsd/enesekontroll.md)
+
+**Lisad**
+
+- [Laborikeskkond ja paigaldus](docs/lisad/paigaldus.md)
+- [Distrode ülevaade](docs/lisad/distrod.md)
+- [UNIX-i ja Linuxi ajalugu](docs/lisad/ajalugu.md)
+- [Sõnastik](docs/lisad/sonastik.md)
+- [Käskude loend](docs/lisad/kasud.md)
+<!-- /sisukord -->
 
 ## Kellele see kursus on mõeldud?
 
@@ -43,9 +89,9 @@ Kursusel kasutatakse kolme distributsiooni (distrot). **Need on Haapsalu Kutseha
 
 | Distro | Perekond | Pakihaldur | Miks | Koduleht |
 |---|---|---|---|---|
-| **Debian** | Debian | `apt` | Stabiilne, levinud serverites, paljude distrode alus | [debian.org](https://www.debian.org/) |
-| **Ubuntu** | Debian | `apt` | Kõige levinum pilves ja töölaual | [ubuntu.com](https://ubuntu.com/) |
-| **AlmaLinux** | Red Hat (RHEL) | `dnf` | Tasuta RHEL-iga ühilduv distro, ettevõtete standard | [almalinux.org](https://almalinux.org/) |
+| <a href="https://www.debian.org/"><img src="docs/pildid/logod/debian.svg" alt="Debian" title="Debian - Debian Open Use Logo" height="28"></a> **Debian** | Debian | `apt` | Stabiilne, levinud serverites, paljude distrode alus | [debian.org](https://www.debian.org/) |
+| <a href="https://ubuntu.com/"><img src="docs/pildid/logod/ubuntu.svg" alt="Ubuntu" title="Ubuntu - Canonical Ltd. kaubamärk" height="28"></a> **Ubuntu** | Debian | `apt` | Kõige levinum pilves ja töölaual | [ubuntu.com](https://ubuntu.com/) |
+| <a href="https://almalinux.org/"><img src="docs/pildid/logod/almalinux.svg" alt="AlmaLinux" title="AlmaLinux - AlmaLinux OS Foundationi kaubamärk" height="28"></a> **AlmaLinux** | Red Hat (RHEL) | `dnf` | Tasuta RHEL-iga ühilduv distro, ettevõtete standard | [almalinux.org](https://almalinux.org/) |
 
 Need kolm katavad suurema osa reaalsetest Linuxi serveritest. Teiste distrode ülevaate leiad failist [docs/lisad/distrod.md](docs/lisad/distrod.md). **Iga laboritöö on kirjutatud ühe kindla distro jaoks** (see on märgitud laboritöö alguses). Teoorias on erinevused välja toodud lõikudes **„Distrode erinevused“**.
 
@@ -101,3 +147,5 @@ Logod ja maskotid **ei kuulu** CC BY-SA litsentsi alla - need kuuluvad oma omani
 ## Panustamine
 
 Leidsid vea või on ettepanek? Ava *issue* või tee *pull request*.
+
+Kui lisad, kustutad või nimetad ümber lehti, muuda menüüd failis `mkdocs.yml` ja käivita seejärel `python3 tools/navigatsioon.py`. See uuendab selle README sisukorra ning iga lehe lõpus olevad lingid eelmisele ja järgmisele lehele.

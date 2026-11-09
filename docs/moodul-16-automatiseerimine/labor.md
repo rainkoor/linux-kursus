@@ -331,3 +331,9 @@ ja käivita idempotentsuse kontroll uuesti. Seejärel paranda ülesanne nii, et 
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 16. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

@@ -96,3 +96,9 @@ backend koolisait
 sudo a2enmod rewrite headers
 sudo apache2ctl configtest && sudo systemctl reload apache2
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 13. Veebiserverid (kooli väikeserver, I osa)](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 14. Andmebaasid →](../moodul-14-andmebaasid/index.md)
+<!-- /navigatsioon -->

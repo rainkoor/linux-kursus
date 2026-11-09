@@ -221,3 +221,9 @@ Pärast taaskäivitust: `df -h /mnt/iscsi && cat /mnt/iscsi/test.txt`.
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 19. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

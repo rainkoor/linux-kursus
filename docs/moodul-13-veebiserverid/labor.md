@@ -332,3 +332,9 @@ Ava brauseris `https://crt.sh/?q=debian.org` (või oma kooli domeen).
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 13. Veebiserverid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 13. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

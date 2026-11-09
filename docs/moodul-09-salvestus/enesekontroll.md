@@ -74,3 +74,9 @@ fio --name=lugemine --filename=/srv/test.fio --size=1G --rw=randread --bs=4k \
 sudo smartctl -H /dev/sda
 sudo smartctl -t short /dev/sda
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 9. Salvestus: RAID, jõudlus, taastamine ja ZFS](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel →](../moodul-10-alglaadimine-kernel/index.md)
+<!-- /navigatsioon -->

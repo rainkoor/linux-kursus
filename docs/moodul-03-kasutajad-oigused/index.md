@@ -532,3 +532,9 @@ Seepärast kasuta skriptides ja juhendites alati täielikku kuju `useradd -m -s 
 - William Shotts, „The Linux Command Line“ - peatükk õiguste kohta
 - Linux Upskill Challenge - kasutajate ja õiguste teemad
 - `man 5 passwd`, `man 5 shadow`, `man sudoers`
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 2. Enesekontroll](../moodul-02-failid-tekst-torud/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Laboritöö 3. Kasutajad, grupid ja jagatud kataloogid →](labor.md)
+<!-- /navigatsioon -->

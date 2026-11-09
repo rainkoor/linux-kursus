@@ -287,3 +287,9 @@ valkey-benchmark -q -n 20000 -t set,get
 
 > [!NOTE]
 > **Õpetajale:** kontrollvastused ja märkused on eraldi õpetaja materjalides (privaatne hoidla `linux-kursus-opetajale`).
+
+<!-- navigatsioon -->
+---
+
+[← Moodul 14. Andmebaasid](index.md) · [Sisukord](../../README.md#sisukord) · [Moodul 14. Enesekontroll →](enesekontroll.md)
+<!-- /navigatsioon -->

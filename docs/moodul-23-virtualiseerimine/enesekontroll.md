@@ -78,3 +78,9 @@ xe sr-create name-label=LocalISO type=iso device-config:location=/var/opt/xen/IS
 ls -l /dev/kvm
 virsh -c qemu:///system list
 ```
+
+<!-- navigatsioon -->
+---
+
+[← Laboritöö 23. KVM, Proxmox VE ja XCP-ng](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 24. Kubernetes: k3s →](../moodul-24-kubernetes/index.md)
+<!-- /navigatsioon -->
