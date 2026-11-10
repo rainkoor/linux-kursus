@@ -24,9 +24,15 @@ Mooduli läbinud õppija:
 - valib ja rakendab jõudlusprofiili (`tuned`);
 - seadistab serverile e-posti teavitused Postfixi relee kaudu.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 20.1 Miks seirata?
+
+> [!TIP]
+> **Lühidalt:** Seire vastab küsimustele: kas töötab, kui hästi ja millal läheb halvasti. Selleks on **mõõdikud**, **logid** ja **häired**. Jõudlusprobleemi otsi USE meetodiga: kasutus, küllastus, vead.
 
 Server, mille kohta keegi ei tea, kas see töötab, on ohtlik. Seire vastab küsimustele:
 
@@ -56,6 +62,9 @@ Kui server on aeglane, ära arva - kontrolli süstemaatiliselt iga ressurssi (pr
 ---
 
 ## 20.2 Jõudluse tööriistad
+
+> [!TIP]
+> **Lühidalt:** `uptime` - koormus, `top` - protsessid, `free -h` - mälu, `vmstat 1` ja `iostat -xz 1` - protsessor ja kettad, `sar` - ajalugu. `tuned` valib serverile sobiva jõudlusprofiili.
 
 ### Koormus
 
@@ -192,6 +201,9 @@ Mõõda enne ja pärast (`fio`, `sar`, moodul 10) - profiil ei ole imerohi.
 
 ## 20.3 Tõrkeotsing: strace ja lsof
 
+> [!TIP]
+> **Lühidalt:** `lsof` näitab, kes mida avatuna hoiab (failid, pordid). `strace` näitab programmi süsteemikutseid - nii näed, millist faili programm otsib või kus see ootab.
+
 ### lsof - avatud failid
 
 Linuxis on „kõik fail“: ka võrguühendused ja seadmed. `lsof` näitab, kes mida avatuna hoiab.
@@ -223,6 +235,9 @@ Tüüpiline leid: `openat(AT_FDCWD, "/etc/rakendus.conf", O_RDONLY) = -1 ENOENT 
 
 ## 20.4 Seiresüsteemid
 
+> [!TIP]
+> **Lühidalt:** Seiresüsteem kogub kõigi serverite mõõdikud, hoiab ajalugu, joonistab graafikud ja saadab häired. Levinud on Prometheus + Grafana, Zabbix ja Uptime Kuma.
+
 Kui servereid on rohkem kui paar, ei logi keegi igasse sisse `top`-i vaatama. **Seiresüsteem** kogub mõõdikud kõigist masinatest kokku, salvestab ajaloo, joonistab graafikud ja saadab häireid.
 
 | Süsteem | Põhimõte | Tugevused | Tüüpiline kasutus |
@@ -238,6 +253,9 @@ Logide kogumiseks kasutatakse **Grafana Lokit**, **Graylogi** või **OpenSearchi
 ---
 
 ## 20.5 Prometheus, node_exporter ja Grafana
+
+> [!TIP]
+> **Lühidalt:** **node_exporter** annab masina mõõdikud, **Prometheus** kogub ja hoiab neid (PromQL-päringud), **Grafana** joonistab armatuurlaudu. Häired saadab Alertmanager.
 
 ```mermaid
 flowchart LR
@@ -353,6 +371,9 @@ groups:
 
 ## 20.6 Kättesaadavus: Uptime Kuma
 
+> [!TIP]
+> **Lühidalt:** Uptime Kuma kontrollib väljastpoolt, kas sait või port vastab ja kui kaua sertifikaat kehtib, ning teatab rikkest.
+
 **Uptime Kuma** kontrollib väljastpoolt, kas teenus vastab (HTTP(S), TCP-port, ping, DNS) ja kui kaua sertifikaat veel kehtib.
 
 ```bash
@@ -368,6 +389,9 @@ Ava `http://<server>:3001`, loo administraator ja lisa jälgimised (*Add New Mon
 
 ## 20.7 Zabbix lühidalt
 
+> [!TIP]
+> **Lühidalt:** Zabbix on agendiga seiresüsteem, mida kasutavad paljud Eesti asutused. Server ja veebiliides paigaldatakse Zabbixi hoidlast, igasse masinasse `zabbix-agent2`.
+
 **Zabbix** on paljudes Eesti asutustes ja ettevõtetes kasutatav seiresüsteem. Server (PHP veebiliides + andmebaas) ja agendid paigaldatakse Zabbixi enda hoidlast (repo.zabbix.com, vali LTS-versioon). Agent:
 
 ```bash
@@ -379,6 +403,9 @@ sudo systemctl enable --now zabbix-agent2
 Veebiliideses lisatakse host ja seotakse **malliga** (nt *Linux by Zabbix agent*), mis toob kaasa sadu valmis mõõdikuid, graafikuid ja häirereegleid. Zabbixil on mallid ka Proxmoxi, võrguseadmete (SNMP) ja andmebaaside jaoks.
 
 ## 20.8 Teavitused e-postiga: Postfix relee
+
+> [!TIP]
+> **Lühidalt:** Iga server peab oskama e-kirju saata (cron'i vead, häired). Postfix **relee** saadab kõik kirjad edasi asutuse või teenusepakkuja SMTP-serverisse; testi `echo test | mail -s test sina@kool.ee`.
 
 Seire ja häired on kasulikud ainult siis, kui keegi neist teada saab. Täisväärtuslik e-posti server (vastuvõtmine, postkastid, rämpsposti filtreerimine, SPF/DKIM/DMARC) on valikmoodulis 23 ja asutused kasutavad selleks sageli pilveteenust. Iga Linuxi server peab aga oskama **e-kirju saata**: cron'i ja systemd taimerite tõrked, `smartd` hoiatused (moodul 10), `unattended-upgrades` aruanded, varunduse tulemused (moodul 9) ja omaenda skriptide teated.
 

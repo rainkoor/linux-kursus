@@ -12,8 +12,8 @@ Mooduli läbinud õppija:
 
 - rakendab serveri turvamise põhimõtteid;
 - seadistab automaatsed turvauuendused;
-- kaitseb SSH-teenust paroolirünnakute eest (`fail2ban`);
 - leiab olulised logid, haldab journal'it ja logide rotatsiooni;
+- kaitseb SSH-teenust paroolirünnakute eest (`fail2ban`);
 - selgitab kohustusliku juurdepääsukontrolli (MAC) põhimõtet;
 - lahendab SELinuxi põhjustatud probleeme AlmaLinuxis;
 - haldab AppArmori profiile Ubuntus;
@@ -21,9 +21,15 @@ Mooduli läbinud õppija:
 - hindab serveri turvalisust auditivahendiga;
 - selgitab SIEM-i rolli ja paigaldab Wazuhi koos agentidega (valikuline).
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 12.1 Turvalisuse põhimõtted
+
+> [!TIP]
+> **Lühidalt:** Turvalisus on **kihiline kaitse**: uuendused, vähe teenuseid, tulemüür, SSH-võtmed, õigused, MAC (SELinux/AppArmor), logid ja varukoopiad. Kui üks kiht murtakse, peatab ründaja järgmine.
 
 Turvalisus ei ole üks tööriist ega seadistus, vaid **kihiline kaitse** (*defense in depth*): kui üks kiht murtakse, peavad teised ründaja peatama.
 
@@ -35,7 +41,7 @@ Turvalisus ei ole üks tööriist ega seadistus, vaid **kihiline kaitse** (*defe
 | **Tugev autentimine** | SSH-võtmed, keelatud parooliga ja juurkasutaja sisselogimine | Moodul 7 |
 | **Võrgu filtreerimine** | Tulemüür lubab ainult vajaliku | Moodul 7 |
 | **Isoleerimine** | SELinux/AppArmor piiravad, mida ülevõetud teenus teha saab | Punktid 12.5–12.6 |
-| **Jälgimine** | Logid, audit, hoiatused - rünnakut tuleb märgata | Punktid 12.4, 11.7 |
+| **Jälgimine** | Logid, audit, hoiatused - rünnakut tuleb märgata | Punktid 12.3, 12.8 |
 | **Varundus** | Kui kõik muu ebaõnnestub, peab andmed saama taastada | Moodulid 6, 9, 10 |
 
 ### Serveri karastamise kontrollnimekiri
@@ -52,6 +58,9 @@ Turvalisus ei ole üks tööriist ega seadistus, vaid **kihiline kaitse** (*defe
 10. Dokumenteeri seadistus.
 
 ## 12.2 Automaatsed turvauuendused
+
+> [!TIP]
+> **Lühidalt:** Turvauuendused paigaldatakse automaatselt: Debianis ja Ubuntus `unattended-upgrades`, AlmaLinuxis `dnf-automatic`. Kontrolli logist, et need ka tegelikult töötavad.
 
 Enamik edukaid rünnakuid kasutab ära **teadaolevaid** turvaauke, millele on parandus juba olemas. Seepärast on turvauuenduste kiire paigaldamine üks tõhusamaid kaitsemeetmeid.
 
@@ -123,7 +132,8 @@ dnf updateinfo info <ID>                # ühe teate üksikasjad (CVE-numbrid)
 > [!NOTE]
 > **Automaatne taaskäivitus?** Kerneli ja põhiteekide uuendused rakenduvad alles pärast taaskäivitust. Mõne serveri puhul on automaatne öine taaskäivitus vastuvõetav, teiste puhul (andmebaasid, kriitilised teenused) planeeritakse see käsitsi hooldusaknasse. Igal juhul peab keegi jälgima, et taaskäivitus toimub.
 
-### Turvateated
+<details>
+<summary>Loe lähemalt: Turvateated</summary>
 
 Distrod avaldavad turvateateid:
 
@@ -133,61 +143,12 @@ Distrod avaldavad turvateateid:
 
 Turvaaugud tähistatakse rahvusvaheliselt **CVE** numbriga (nt `CVE-2024-3094` - xz tagauks, vt [ajalugu](../lisad/ajalugu.md)).
 
-## 12.3 fail2ban
+</details>
 
-Avalikult kättesaadavat SSH-serverit proovitakse pidevalt automaatselt paroolidega murda. `fail2ban` jälgib logisid ja **blokeerib tulemüüri abil** IP-aadressid, millelt tuleb liiga palju ebaõnnestunud katseid.
+## 12.3 Logid
 
-```bash
-sudo apt install fail2ban               # Debian, Ubuntu
-sudo dnf install epel-release && sudo dnf install fail2ban   # AlmaLinux
-```
-
-Seadistus kirjutatakse faili **`/etc/fail2ban/jail.local`** (mitte `jail.conf`, mille uuendus üle kirjutab):
-
-```ini
-[DEFAULT]
-bantime  = 1h
-findtime = 10m
-maxretry = 5
-ignoreip = 127.0.0.1/8 10.0.83.0/24
-
-[sshd]
-enabled = true
-backend = systemd
-```
-
-| Seade | Tähendus |
-|---|---|
-| `bantime` | Kui kauaks blokeeritakse |
-| `findtime`, `maxretry` | Blokeeri, kui `findtime` jooksul on `maxretry` ebaõnnestumist |
-| `ignoreip` | Aadressid, mida kunagi ei blokeerita (nt sinu kooli võrk) |
-| `backend = systemd` | Loe logisid journal'ist (vajalik Debianis, kus tekstilogi `auth.log` vaikimisi puudub) |
-
-```bash
-sudo systemctl enable --now fail2ban
-sudo fail2ban-client status                       # aktiivsed vanglad (jails)
-sudo fail2ban-client status sshd                  # blokeeritud aadressid
-sudo fail2ban-client set sshd unbanip 203.0.113.7 # vabasta aadress
-```
-
-### Kas fail2ban on vajalik?
-
-Pärast `PasswordAuthentication no` seadmist ei saa SSH-sse parooliga sisse murda, nii et SSH puhul on fail2ban pigem **lisakaitse** kui hädavajalik. Kus see on endiselt kasulik:
-
-| Olukord | Kas fail2ban aitab? |
-|---|---|
-| SSH ainult võtmetega, server sisevõrgus | vähe - piira SSH tulemüüris lubatud võrkudele |
-| SSH internetist kättesaadav | vähendab logide müra ja koormust |
-| Paroolipõhine teenus internetis (WordPressi sisselogimine, e-post, FTP, veebiliides) | **jah** - see on fail2ban-i peamine kasutus tänapäeval |
-| Hulk servereid, tahetakse jagada teavet ründajatest | vaata **CrowdSec**-i (fail2ban-i tänapäevane järeltulija, jagab blokeerimisloendeid) või Wazuhi automaatset reageerimist (punkt 12.11) |
-
-**OpenSSH 9.8** ja uuemad oskavad ka ise: seade `PerSourcePenalties` paneb liiga palju vigaseid ühendusi tegevale aadressile ajutise keelu ilma lisatarkvarata. Kontrolli, kas sinu versioonis see on olemas ja sees: `ssh -V` ja `sudo sshd -T | grep -i persourcepenalties`. (Ubuntu 24.04 OpenSSH 9.6 seda veel ei toeta.)
-
-Kokkuvõttes: fail2ban ei asenda võtmepõhist autentimist ega tulemüüri, kuid on lihtne ja levinud vahend paroolidega kaitstud teenuste jaoks - seepärast tasub seda osata.
-> [!NOTE]
-> **Kas fail2ban on vajalik, kui paroolid on keelatud?** Pärast `PasswordAuthentication no` seadmist ei saa parooliga sisse murda. `fail2ban` vähendab siiski logide müra ja koormust ning kaitseb ka teisi teenuseid (veebiserveri sisselogimine, e-post), mille jaoks saab samuti vanglaid seadistada.
-
-## 12.4 Logid
+> [!TIP]
+> **Lühidalt:** Logid näitavad, mis süsteemis juhtus. `journalctl` loeb journal'it, tekstilogid on kataloogis `/var/log`. Logide mahtu piirab `journald.conf`, tekstilogisid pöörab `logrotate`.
 
 Logid on peamine allikas, et mõista, mis süsteemis toimus - nii vigade kui ka rünnakute puhul.
 
@@ -279,7 +240,8 @@ sudo logrotate -f /etc/logrotate.d/minurakendus     # sunni roteerima
 
 logrotate'i käivitab igapäevaselt systemd taimer (`logrotate.timer`) või cron.
 
-### Tsentraalne logimine
+<details>
+<summary>Loe lähemalt: Tsentraalne logimine</summary>
 
 Ründaja, kes saab juurkasutaja õigused, võib logid kustutada. Seepärast saadetakse olulistes keskkondades logid **logiserverisse**. Lihtsaim viis on rsyslog:
 
@@ -290,7 +252,72 @@ Ründaja, kes saab juurkasutaja õigused, võib logid kustutada. Seepärast saad
 
 `@@` tähendab TCP-d, `@` UDP-d. Suuremates keskkondades kasutatakse logide kogumiseks ja analüüsimiseks lahendusi nagu Graylog, Elasticsearch/OpenSearch või Grafana Loki.
 
+</details>
+
+## 12.4 fail2ban
+
+> [!TIP]
+> **Lühidalt:** `fail2ban` loeb logisid ja blokeerib tulemüüris IP-aadressid, millelt tuleb liiga palju valesid sisselogimiskatseid. Seadistus käib faili `/etc/fail2ban/jail.local`, olekut näitab `fail2ban-client status sshd`.
+
+Avalikult kättesaadavat SSH-serverit proovitakse pidevalt automaatselt paroolidega murda. `fail2ban` jälgib logisid ja **blokeerib tulemüüri abil** IP-aadressid, millelt tuleb liiga palju ebaõnnestunud katseid.
+
+```bash
+sudo apt install fail2ban               # Debian, Ubuntu
+sudo dnf install epel-release && sudo dnf install fail2ban   # AlmaLinux
+```
+
+Seadistus kirjutatakse faili **`/etc/fail2ban/jail.local`** (mitte `jail.conf`, mille uuendus üle kirjutab):
+
+```ini
+[DEFAULT]
+bantime  = 1h
+findtime = 10m
+maxretry = 5
+ignoreip = 127.0.0.1/8 10.0.83.0/24
+
+[sshd]
+enabled = true
+backend = systemd
+```
+
+| Seade | Tähendus |
+|---|---|
+| `bantime` | Kui kauaks blokeeritakse |
+| `findtime`, `maxretry` | Blokeeri, kui `findtime` jooksul on `maxretry` ebaõnnestumist |
+| `ignoreip` | Aadressid, mida kunagi ei blokeerita (nt sinu kooli võrk) |
+| `backend = systemd` | Loe logisid journal'ist (vajalik Debianis, kus tekstilogi `auth.log` vaikimisi puudub) |
+
+```bash
+sudo systemctl enable --now fail2ban
+sudo fail2ban-client status                       # aktiivsed vanglad (jails)
+sudo fail2ban-client status sshd                  # blokeeritud aadressid
+sudo fail2ban-client set sshd unbanip 203.0.113.7 # vabasta aadress
+```
+
+<details>
+<summary>Loe lähemalt: Kas fail2ban on vajalik?</summary>
+
+Pärast `PasswordAuthentication no` seadmist ei saa SSH-sse parooliga sisse murda, nii et SSH puhul on fail2ban pigem **lisakaitse** kui hädavajalik. Kus see on endiselt kasulik:
+
+| Olukord | Kas fail2ban aitab? |
+|---|---|
+| SSH ainult võtmetega, server sisevõrgus | vähe - piira SSH tulemüüris lubatud võrkudele |
+| SSH internetist kättesaadav | vähendab logide müra ja koormust |
+| Paroolipõhine teenus internetis (WordPressi sisselogimine, e-post, FTP, veebiliides) | **jah** - see on fail2ban-i peamine kasutus tänapäeval |
+| Hulk servereid, tahetakse jagada teavet ründajatest | vaata **CrowdSec**-i (fail2ban-i tänapäevane järeltulija, jagab blokeerimisloendeid) või Wazuhi automaatset reageerimist (punkt 12.11) |
+
+**OpenSSH 9.8** ja uuemad oskavad ka ise: seade `PerSourcePenalties` paneb liiga palju vigaseid ühendusi tegevale aadressile ajutise keelu ilma lisatarkvarata. Kontrolli, kas sinu versioonis see on olemas ja sees: `ssh -V` ja `sudo sshd -T | grep -i persourcepenalties`. (Ubuntu 24.04 OpenSSH 9.6 seda veel ei toeta.)
+
+Kokkuvõttes: fail2ban ei asenda võtmepõhist autentimist ega tulemüüri, kuid on lihtne ja levinud vahend paroolidega kaitstud teenuste jaoks - seepärast tasub seda osata.
+> [!NOTE]
+> **Kas fail2ban on vajalik, kui paroolid on keelatud?** Pärast `PasswordAuthentication no` seadmist ei saa parooliga sisse murda. `fail2ban` vähendab siiski logide müra ja koormust ning kaitseb ka teisi teenuseid (veebiserveri sisselogimine, e-post), mille jaoks saab samuti vanglaid seadistada.
+
+</details>
+
 ## 12.5 Kohustuslik juurdepääsukontroll
+
+> [!TIP]
+> **Lühidalt:** Tavalised õigused (`rwx`) määrab faili omanik ja juurkasutajale need ei kehti. **Kohustuslik juurdepääsukontroll** (MAC) piirab ka juurkasutajana töötavat teenust: AlmaLinuxis SELinux, Ubuntus AppArmor.
 
 Moodulis 3 õpitud tavalised õigused (`rwx`, omanik, grupp) on **valikuline juurdepääsukontroll** (DAC, *Discretionary Access Control*): faili omanik otsustab ise, kes tohib faili kasutada, ja juurkasutajale need piirangud ei kehti.
 
@@ -316,6 +343,9 @@ flowchart LR
 > **Ära lülita SELinuxit ega AppArmorit välja!** Internetis soovitavad paljud juhendid probleemi korral SELinuxi lihtsalt välja lülitada. See on sama, mis tulemüüri väljalülitamine, sest port ei avane. Õige lahendus on probleem diagnoosida ja poliitikat kohandada - tavaliselt on see üks käsk.
 
 ## 12.6 SELinux (AlmaLinux)
+
+> [!TIP]
+> **Lühidalt:** SELinux märgistab iga faili ja protsessi **kontekstiga**. Kui teenus ei pääse failile ligi, vaata `ausearch -m AVC` ja paranda kontekst (`semanage fcontext` + `restorecon`). Ära lülita SELinuxit välja.
 
 ### Režiimid
 
@@ -417,6 +447,9 @@ Loe nii: protsess `httpd` (`httpd_t`) tahtis **lugeda** faili `index.html`, mill
 
 ## 12.7 AppArmor (Ubuntu)
 
+> [!TIP]
+> **Lühidalt:** AppArmor piirab programme profiilidega kataloogis `/etc/apparmor.d/`. `aa-status` näitab profiile, `aa-complain` lubab ja ainult logib, `aa-enforce` keelab.
+
 AppArmor piirab programme **profiilide** abil. Profiil on tekstifail kataloogis `/etc/apparmor.d/`, mis loetleb failid ja võimalused, mida programm tohib kasutada.
 
 ```bash
@@ -483,6 +516,9 @@ requested_mask="r" denied_mask="r"
 
 ## 12.8 Auditeerimine: auditd
 
+> [!TIP]
+> **Lühidalt:** `auditd` logib kerneli tasemel, kes mida tegi, näiteks kes muutis faili `/etc/passwd`: `auditctl -w /etc/passwd -p wa -k kasutajad`, otsing `ausearch -k kasutajad`.
+
 **auditd** salvestab kerneli tasemel üksikasjalikult, kes mida süsteemis tegi. Sellega saab näiteks jälgida oluliste failide muutmist. AlmaLinuxis on `auditd` vaikimisi paigaldatud, Debianis ja Ubuntus tuleb paigaldada pakett `auditd`.
 
 ```bash
@@ -505,6 +541,9 @@ sudo aureport --summary                               # kokkuvõte
 Auditilogi näitab ka **algset kasutajat** (`auid`), isegi kui tegevus tehti `sudo` abil juurkasutajana - nii on näha, kes muudatuse tegelikult tegi.
 
 ## 12.9 Turvaaudit
+
+> [!TIP]
+> **Lühidalt:** `lynis audit system` kontrollib serverit sadade turvanõuete vastu ja annab soovitusi. Kasuta seda karastamise kontrollnimekirjana.
 
 **Lynis** kontrollib süsteemi sadade turvanõuete vastu ja annab soovitusi:
 
@@ -529,6 +568,9 @@ Muud kasulikud tööriistad:
 > **Ainult oma süsteemid!** Pordiskannimine ja turvatestimine võõraste süsteemide vastu ilma loata on ebaseaduslik. Kooli laboris tee neid ainult oma virtuaalmasinate vastu või õpetaja loal.
 
 ## 12.10 Kontrollsummad ja GnuPG
+
+> [!TIP]
+> **Lühidalt:** Kontrollsumma (`sha256sum`) näitab, kas fail on muutumatu. GnuPG allkiri tõendab ka, kes faili avaldas. Kontrolli nii paigaldusmeediat ja allalaaditud tarkvara.
 
 ### Kontrollsummad
 
@@ -564,6 +606,9 @@ gpg --verify SHA256SUMS.sig SHA256SUMS               # kontrolli allkirja: "Good
 Debiani ISO kontroll näeb välja nii: impordi Debiani allkirjavõti (sõrmejälg on lehel debian.org/CD/verify), kontrolli `gpg --verify SHA256SUMS.sign SHA256SUMS` ja seejärel `sha256sum -c`. Võtme ehtsuse kontrollimiseks võrdle alati **sõrmejälge** (`gpg --fingerprint`) usaldusväärsest allikast saadud väärtusega.
 
 ## 12.11 Turvasündmuste haldus: Wazuh
+
+> [!TIP]
+> **Lühidalt:** SIEM (nt **Wazuh**) kogub kõigi serverite logid ja turvasündmused ühte kohta, analüüsib neid ja annab häire. Wazuh koosneb serverist ja igasse masinasse paigaldatud agendist.
 
 Kui servereid on palju, ei jõua keegi iga masina logisid käsitsi lugeda. **SIEM** (*Security Information and Event Management*) kogub logid ja sündmused kõigist masinatest kokku, analüüsib neid reeglite järgi ja annab märku kahtlastest tegevustest.
 
@@ -693,10 +738,10 @@ OpenBSD programmid piiravad ise oma õigusi süsteemikutsetega `pledge` (mida pr
 | Käsk või fail | Tegevus |
 |---|---|
 | `unattended-upgrades`, `dnf-automatic` | Automaatsed turvauuendused |
-| `/etc/fail2ban/jail.local`, `fail2ban-client` | Rünnakute blokeerimine |
 | `journalctl`, `last`, `lastb`, `logger` | Logide lugemine ja kirjutamine |
 | `journald.conf.d/`, `journalctl --vacuum-size` | journal'i haldus |
 | `/etc/logrotate.d/`, `logrotate -d` | Logide rotatsioon |
+| `/etc/fail2ban/jail.local`, `fail2ban-client` | Rünnakute blokeerimine |
 | `getenforce`, `setenforce`, `sestatus` | SELinuxi režiim |
 | `ls -Z`, `restorecon`, `semanage fcontext` | SELinuxi kontekstid |
 | `semanage port`, `setsebool -P` | SELinuxi pordid ja tõeväärtused |

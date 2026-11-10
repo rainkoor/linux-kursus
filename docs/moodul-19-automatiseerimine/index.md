@@ -24,9 +24,15 @@ Mooduli läbinud õppija:
 - jagab Ansible'i projekti rollideks ja muutujafailideks ning testib seda (`--check`, idempotentsuse test, `ansible-lint`, Molecule);
 - loob virtuaalmasinaid koodina (cloud-init, OpenTofu) ja seadistab need Ansible'iga.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 19.1 Miks automatiseerida?
+
+> [!TIP]
+> **Lühidalt:** Käsitsi seadistamine on aeglane ja vigaderohke. Automatiseerimine algab skriptist ja taimerist; Ansible ja infrastruktuur koodina teevad sama serveri sekunditega uuesti.
 
 Moodulites 15–17 seadistasid serveri käsitsi. See võttis mitu tundi ja kui server peaks homme uuesti üles ehitama, kuluks sama palju aega - ja tõenäoliselt jääks midagi kahe silma vahele. Kujuta ette sama tööd kümne või saja serveriga.
 
@@ -45,6 +51,9 @@ Bash ja cron on endiselt vajalikud - lihtne skript koos taimeriga on sageli pari
 Ühine põhimõte on **infrastruktuur koodina** (*Infrastructure as Code*, IaC): serverite seadistus kirjeldatakse tekstifailides, mida hoitakse Gitis, vaadatakse üle nagu programmikoodi ja rakendatakse automaatselt.
 
 ## 19.2 Ansible
+
+> [!TIP]
+> **Lühidalt:** Ansible seadistab servereid üle SSH ilma agendita. Inventuur (`inventuur.ini`) ütleb, millised masinad, **mänguraamat** (YAML) kirjeldab soovitud oleku. `ansible-playbook veebiserver.yml --check --diff` näitab enne, mida muudetaks.
 
 **Ansible** seadistab servereid üle SSH. Erinevalt mõnest teisest automatiseerimisvahendist ei vaja hallatavad serverid eraldi agenti - piisab SSH-st ja Pythonist.
 
@@ -204,7 +213,8 @@ ansible-vault create saladused.yml
 ansible-playbook mänguraamat.yml --ask-vault-pass
 ```
 
-### Ansible ja teised tööriistad
+<details>
+<summary>Loe lähemalt: Ansible ja teised tööriistad</summary>
 
 | Tööriist | Kasutus |
 |---|---|
@@ -215,7 +225,12 @@ ansible-playbook mänguraamat.yml --ask-vault-pass
 | **Vagrant** | Arenduse ja labori virtuaalmasinad oma arvutis (punkt 19.3) |
 | **Kubernetes** | Konteinerite käitamine paljudes serverites korraga (valikmoodul 28) |
 
+</details>
+
 ## 19.3 Laborikeskkond koodina: Vagrant
+
+> [!TIP]
+> **Lühidalt:** Vagrant loob `Vagrantfile`'i järgi sinu arvutisse virtuaalmasinad: `vagrant up` loob, `vagrant ssh` ühendub, `vagrant destroy` kustutab.
 
 **Vagrant** (HashiCorp) loob ja seadistab virtuaalmasinaid tekstifaili `Vagrantfile` järgi. Ühe käsuga saad oma arvutisse terve labori - näiteks kolm masinat Ansible'i harjutamiseks - ja sama käsuga selle kustutada ning uuesti luua. Vagrant kasutab virtualiseerimiseks pakkujat (*provider*), tavaliselt **VirtualBoxi** (ka libvirt, Hyper-V, VMware).
 
@@ -289,8 +304,10 @@ end
 
 Nii on kogu labor - masinad ja nende seadistus - kirjas Giti hoidlas ning iga õppija saab sama keskkonna käskudega `git clone` ja `vagrant up`.
 
-
 ## 19.4 Suurem projekt: rollid, muutujad ja testimine
+
+> [!TIP]
+> **Lühidalt:** Suurem projekt jagatakse **rollideks** (`roles/veebiserver/tasks/main.yml`) ja muutujafailideks. Testi proovirežiimiga (`--check --diff`), korduskäivitusega (idempotentsus) ja `ansible-lint`-iga.
 
 Üks pikk mänguraamat muutub kiiresti loetamatuks. Päris projektis jagatakse kood **rollideks** - iga roll on üks iseseisev ülesanne (nt `baas`, `veebiserver`, `andmebaas`), mida saab kasutada mitmes mänguraamatus.
 
@@ -392,6 +409,9 @@ Molecule'i stsenaariumi loomise käsk ja failide täpne kuju sõltuvad versiooni
 > **Konteiner ei ole päris server:** konteineris pole tavaliselt systemd-d ega kernelit. Teenuste käivitamise test vajab systemd-ga pilti või virtuaalmasinat (Vagrant). Seepärast testitakse Molecule'iga sageli just paigaldust ja seadistusfaile, teenuseid aga päris testmasinas.
 
 ## 19.5 Virtuaalmasinad koodina: cloud-init ja OpenTofu
+
+> [!TIP]
+> **Lühidalt:** **cloud-init** seadistab uue VM-i esimesel alglaadimisel (hostinimi, kasutaja, SSH-võti). **OpenTofu** loob virtuaalmasinad koodi järgi (`tofu plan`, `tofu apply`).
 
 Ansible seadistab olemasolevaid masinaid. Masinad ise saab samuti luua koodi järgi - siis on kogu keskkond nullist uuesti ehitatav.
 

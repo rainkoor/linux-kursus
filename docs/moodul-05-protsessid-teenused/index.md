@@ -342,7 +342,29 @@ sudo systemctl daemon-reload          # loe üksuste failid pärast käsitsi muu
 
 ### Oma teenuse loomine
 
-Teenuse fail `/etc/systemd/system/minuteenus.service`:
+Näide: teenus `minuteenus`, mis kirjutab iga 10 sekundi järel logisse rea. Samamoodi teed teenuseks iga programmi või skripti, mis peab pidevalt töötama.
+
+**1. Kirjuta programm või skript.** Loo see kohe õigesse kohta (AlmaLinuxis on see SELinuxi pärast oluline, vt *Distrode erinevused*):
+
+```bash
+sudo nano /usr/local/bin/minuteenus.sh
+```
+
+```bash
+#!/bin/bash
+# Kirjutab iga 10 sekundi järel rea - väljund läheb journal'isse
+while true; do
+    echo "minuteenus töötab: $(date '+%T')"
+    sleep 10
+done
+```
+
+```bash
+sudo chmod 755 /usr/local/bin/minuteenus.sh
+/usr/local/bin/minuteenus.sh          # proovi käsitsi, lõpeta Ctrl+C-ga
+```
+
+**2. Kirjuta üksuse fail** `/etc/systemd/system/minuteenus.service` (`sudo nano /etc/systemd/system/minuteenus.service`):
 
 ```ini
 [Unit]
@@ -365,19 +387,36 @@ WantedBy=multi-user.target
 | `[Unit] Description` | Kirjeldus, mida näitab `systemctl status` |
 | `[Unit] After` | Käivita pärast neid üksusi |
 | `[Service] ExecStart` | Käivitatav programm (**täielik tee!**) |
-| `[Service] User` | Kasutaja, kelle õigustes teenus töötab |
+| `[Service] User` | Kasutaja, kelle õigustes teenus töötab (mitte `root`, kui pole vaja) |
 | `[Service] Restart` | Millal teenus automaatselt taaskäivitada (`on-failure`, `always`, `no`) |
 | `[Install] WantedBy` | Millise eesmärgiga koos teenus `enable` korral käivitub |
 
-Seejärel:
+**3. Anna systemd-le teada, luba ja käivita:**
 
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl enable --now minuteenus
-systemctl status minuteenus
+sudo systemctl daemon-reload              # loe uus fail sisse
+sudo systemctl enable --now minuteenus    # käivita kohe ja igal alglaadimisel
+```
+
+**4. Kontrolli:**
+
+```bash
+systemctl status minuteenus               # Active: active (running)
+journalctl -u minuteenus -f               # iga 10 s uus rida; Ctrl+C lõpetab
+```
+
+**5. Proovi automaatset taaskäivitust:**
+
+```bash
+sudo systemctl kill -s KILL minuteenus    # „jookse kokku“
+sleep 6; systemctl status minuteenus      # systemd käivitas teenuse uuesti
 ```
 
 `Restart=on-failure` taaskäivitab teenuse, kui see lõpetab veakoodiga või sunnitakse lõpetama (nt `SIGKILL`). Viisaka lõpetamise (`SIGTERM`) või `systemctl stop` järel taaskäivitust ei toimu.
+
+**Kui teenus ei käivitu** (`Active: failed`): vaata `journalctl -u minuteenus -n 30`. Levinud põhjused: `ExecStart`-is pole täielikku teed, skriptil puudub käivitusõigus (`chmod 755`) või esimene rida `#!/bin/bash`, faili muutmise järel jäi `daemon-reload` tegemata, AlmaLinuxis vale SELinuxi märgis (`restorecon -v /usr/local/bin/minuteenus.sh`).
+
+**Teenuse eemaldamine:** `sudo systemctl disable --now minuteenus`, kustuta üksuse fail ja tee `sudo systemctl daemon-reload`.
 
 > [!NOTE]
 > **Programmi väljund läheb logisse.** Kõik, mida teenus kirjutab standardväljundisse või veaväljundisse, salvestab systemd journal'isse. Eraldi logifaili pole vaja.
@@ -502,6 +541,8 @@ sudo systemctl enable --now varundus.timer
 systemctl list-timers                         # kõik taimerid ja järgmised käivitused
 systemd-analyze calendar "*-*-* 02:30:00"     # kontrolli ajaavaldist
 ```
+
+Testi tööd kohe, ootamata määratud aega: `sudo systemctl start varundus.service` ja vaata tulemust `journalctl -u varundus`. Skript `/usr/local/bin/varundus.sh` peab olema olemas ja käivitatav, nagu oma teenuse puhul (samm 1).
 
 `OnCalendar` näited: `daily`, `weekly`, `Mon..Fri 08:00`, `*:0/15` (iga 15 minuti järel). `Persistent=true` tähendab, et kui masin oli ettenähtud ajal väljas, käivitatakse töö pärast alglaadimist.
 

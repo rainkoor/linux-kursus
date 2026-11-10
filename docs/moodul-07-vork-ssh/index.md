@@ -123,94 +123,236 @@ Uus nimi tuleks lisada ka faili `/etc/hosts`.
 ## 7.2 Püsiv võrguseadistus
 
 > [!TIP]
-> **Lühidalt:** Püsiv seadistus sõltub distrost: Ubuntus **Netplan**, Debianis `/etc/network/interfaces`, AlmaLinuxis **NetworkManager** (`nmcli`).
+> **Lühidalt:** `ip` käsuga tehtud muudatus kaob taaskäivitusel. Püsiv seadistus käib igas distros erinevalt: Ubuntus fail `/etc/netplan/*.yaml`, Debianis fail `/etc/network/interfaces`, AlmaLinuxis käsk `nmcli` või menüü `nmtui`. Töökäik on alati sama: vaata praegust seadistust → tee varukoopia → muuda → rakenda → kontrolli.
 
-Püsiva seadistuse viis erineb distrode kaupa - see on üks suurimaid erinevusi Debiani, Ubuntu ja AlmaLinuxi vahel.
+| Distro | Võrguhaldur | Kus seadistus on | Kuidas rakendada |
+|---|---|---|---|
+| Ubuntu | Netplan | `/etc/netplan/*.yaml` | `sudo netplan try` |
+| Debian (server) | ifupdown | `/etc/network/interfaces`, DNS `/etc/resolv.conf` | `sudo ifdown ens18 && sudo ifup ens18` |
+| AlmaLinux | NetworkManager | `nmcli` või `nmtui` | `sudo nmcli connection up ens18` |
 
-| Distro | Vahend | Seadistus |
+Näidetes on igal masinal oma aadress (punkt 7.1): Ubuntu (`ubuntusrv`) `10.0.83.54/24`, Debian (`debian1`) `10.0.83.52/24` ja AlmaLinux (`alma`) `10.0.83.55/24`. Vaikelüüs ja DNS-server on `10.0.83.1`, domeen `lab.example`. **Kui kopeerid näite, kirjuta sinna oma masina aadress ja liidese nimi.**
+
+**Kiirviited:**
+
+| | Staatiline IP | DHCP |
 |---|---|---|
-| Debian (server) | ifupdown | `/etc/network/interfaces` |
-| Ubuntu | Netplan (+ systemd-networkd) | `/etc/netplan/*.yaml` |
-| AlmaLinux | NetworkManager | `nmcli`, `nmtui`, `/etc/NetworkManager/system-connections/` |
+| **Ubuntu** (Netplan) | [Ubuntu: staatiline IP](#ubuntu-staatiline-ip) | [Ubuntu: DHCP](#ubuntu-dhcp) |
+| **Debian** (ifupdown) | [Debian: staatiline IP](#debian-staatiline-ip) | [Debian: DHCP](#debian-dhcp) |
+| **AlmaLinux** (NetworkManager) | [nmcli](#almalinux-staatiline-ip-nmcli) või [nmtui](#almalinux-nmtui) | [nmcli](#almalinux-dhcp-nmcli) |
 
-Igas näites on vaikelüüs ja DNS-server `10.0.83.1`, kuid **aadress on igal masinal oma**: Ubuntu (`ubuntusrv`) `10.0.83.54/24`, Debian (`debian1`) `10.0.83.52/24` ja AlmaLinux (`alma`) `10.0.83.55/24`. Kui kopeerid näite, muuda aadress oma masina omaks.
+Pärast igat muudatust: [Kontrolli tulemust](#kontrolli-tulemust).
+
+### Enne alustamist
+
+1. **Hoia konsool lahti.** Kui muudad aadressi SSH kaudu, katkeb ühendus. Tee muudatus Proxmoxi konsoolist või ole valmis uue aadressiga uuesti ühenduma.
+2. **Leia liidese nimi ja praegune seadistus:**
+
+    ```bash
+    ip -br a             # liidese nimi (nt ens18) ja praegune aadress
+    ip r                 # praegune vaikelüüs
+    ```
+
+3. **Vaata, milline võrguhaldur masinas töötab.** Tavaliselt määrab selle distro (tabel ülal), kuid näiteks töölauaga Debianis on kasutusel NetworkManager - siis kasuta AlmaLinuxi juhendit.
+
+    ```bash
+    ls /etc/netplan/                       # failid olemas → Netplan (Ubuntu)
+    systemctl is-active NetworkManager     # active → NetworkManager (AlmaLinux, töölauad)
+    cat /etc/network/interfaces            # liidese plokk olemas → ifupdown (Debian)
+    ```
+
+4. **Kontrolli, et uus aadress on vaba** (punkt 7.1) ja et tead vaikelüüsi ning DNS-serverit.
 
 ### Ubuntu: Netplan
 
-Netplan loeb YAML-vormingus faile kataloogist `/etc/netplan/` ja genereerib nende põhjal seadistuse.
+Netplan loeb kõik `.yaml` failid kataloogist `/etc/netplan/` ja paneb need kokku. Paigaldaja on sinna juba ühe faili teinud - **muuda seda faili**, ära lisa teist, muidu võivad kaks faili teineteist segada (nt üks tahab DHCP-d, teine staatilist aadressi).
+
+#### Ubuntu: staatiline IP
+
+1. Vaata, mis fail seal on ja mida see sisaldab:
+
+    ```bash
+    ls /etc/netplan/                  # nt 50-cloud-init.yaml (24.04) või 00-installer-config.yaml (22.04)
+    sudo cat /etc/netplan/50-cloud-init.yaml
+    ```
+
+2. Tee varukoopia **väljapoole** kataloogi (Netplan loeb kõiki `.yaml` faile, ka koopiaid):
+
+    ```bash
+    sudo cp /etc/netplan/50-cloud-init.yaml /root/netplan-varu.yaml
+    ```
+
+3. Ava fail (`sudo nano /etc/netplan/50-cloud-init.yaml`) ja kirjuta sisu selliseks:
+
+    ```yaml
+    network:
+      version: 2
+      ethernets:
+        ens18:
+          dhcp4: false
+          addresses:
+            - 10.0.83.54/24
+          routes:
+            - to: default
+              via: 10.0.83.1
+          nameservers:
+            addresses: [10.0.83.1, 1.1.1.1]
+            search: [lab.example]
+    ```
+
+4. Rakenda ja testi:
+
+    ```bash
+    sudo netplan try        # rakendab; vajuta 120 s jooksul Enter, muidu võetakse tagasi
+    ```
+
+    Kui `netplan try` annab vea, on viga failis (enamasti taanded). Kui uus seadistus katkestab SSH-ühenduse, siis ära vajuta midagi - 120 sekundi pärast taastatakse vana seadistus.
+
+5. Kontrolli (vt [Kontrolli tulemust](#kontrolli-tulemust)).
+
+> [!WARNING]
+> **YAML-is on taanded olulised!** Kasuta ainult tühikuid (mitte tabulaatoreid) ja hoia sama tase sama kaugel. Vanemates juhendites kasutatav `gateway4` on aegunud - kasuta `routes`.
+
+> [!NOTE]
+> **Fail `50-cloud-init.yaml`.** Kui masin on tehtud pilvepildist (nt Proxmoxi cloud-init mall), võib cloud-init selle faili taaskäivitusel üle kirjutada. Siis keela cloud-init võrguseadistus: `echo 'network: {config: disabled}' | sudo tee /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`. Failiõigused peavad olema `600` (`sudo chmod 600 /etc/netplan/*.yaml`), muidu hoiatab Netplan.
+
+#### Ubuntu: DHCP
+
+Aadress tuleb automaatselt DHCP-serverilt. Sama fail, kuid liidese all on ainult üks rida:
 
 ```yaml
-# /etc/netplan/50-staatiline.yaml
 network:
   version: 2
   ethernets:
     ens18:
-      dhcp4: false
-      addresses:
-        - 10.0.83.54/24
-      routes:
-        - to: default
-          via: 10.0.83.1
-      nameservers:
-        addresses: [10.0.83.1, 1.1.1.1]
-        search: [lab.example]
+      dhcp4: true
 ```
 
-```bash
-sudo chmod 600 /etc/netplan/50-staatiline.yaml
-sudo netplan try                 # rakenda; kui 120 s jooksul ei kinnitata, võetakse tagasi
-sudo netplan apply               # rakenda püsivalt
-```
-
-> [!WARNING]
-> **YAML-is on taanded olulised!** Kasuta tühikuid, mitte tabulaatoreid, ja hoia sama tase sama kaugel. Üks vale tühik muudab faili vigaseks.
-
-**`netplan try` on SSH kaudu töötades kohustuslik:** kui uus seadistus katkestab ühenduse, taastatakse vana automaatselt. Vanemates juhendites kasutatav võti `gateway4` on aegunud, selle asemel kasutatakse `routes`.
+Rakenda samamoodi: `sudo netplan try`.
 
 ### Debian: /etc/network/interfaces
 
-```text
-# /etc/network/interfaces
-auto lo
-iface lo inet loopback
+Debiani serveris (ilma töölauata) seadistab võrku **ifupdown** failist `/etc/network/interfaces`. DNS-serverid on eraldi failis `/etc/resolv.conf`.
 
-auto ens18
-iface ens18 inet static
-    address 10.0.83.52/24
-    gateway 10.0.83.1
+#### Debian: staatiline IP
+
+1. Tee varukoopia ja ava fail:
+
+    ```bash
+    sudo cp /etc/network/interfaces /root/interfaces-varu
+    sudo nano /etc/network/interfaces
+    ```
+
+2. Paigaldaja on teinud DHCP seadistuse (`iface ens18 inet dhcp`). Muuda liidese plokk selliseks - **`dhcp` asemel `static`** ja lisa aadress ning lüüs:
+
+    ```text
+    # /etc/network/interfaces
+    auto lo
+    iface lo inet loopback
+
+    auto ens18
+    iface ens18 inet static
+        address 10.0.83.52/24
+        gateway 10.0.83.1
+    ```
+
+    Maski võib kirjutada ka eraldi reale: `address 10.0.83.52` ja `netmask 255.255.255.0`.
+
+3. Kirjuta DNS-serverid faili `/etc/resolv.conf` (`sudo nano /etc/resolv.conf`):
+
+    ```text
+    nameserver 10.0.83.1
+    nameserver 1.1.1.1
+    search lab.example
+    ```
+
+4. Rakenda - lülita liides välja ja kohe uuesti sisse (ühel real, et see toimiks ka SSH kaudu):
+
+    ```bash
+    sudo ifdown ens18 && sudo ifup ens18
+    ```
+
+    Teine võimalus: `sudo systemctl restart networking` või taaskäivitus.
+
+5. Kontrolli (vt [Kontrolli tulemust](#kontrolli-tulemust)).
+
+#### Debian: DHCP
+
+Liidese plokk on lühike, lüüsi ja DNS-i annab DHCP-server ise:
+
+```text
+allow-hotplug ens18
+iface ens18 inet dhcp
 ```
 
-DNS-serverid kirjutatakse faili `/etc/resolv.conf`:
-
-```text
-nameserver 10.0.83.1
-search lab.example
-```
-
-Muudatuse rakendamiseks: `sudo systemctl restart networking` või taaskäivitus. DHCP jaoks on rida `iface ens18 inet dhcp`.
+Rakenda samamoodi: `sudo ifdown ens18 && sudo ifup ens18`.
 
 ### AlmaLinux: NetworkManager
 
-NetworkManager haldab **ühendusi** (*connections*), mis on seotud liidestega.
+NetworkManager hoiab seadeid **ühendustes** (*connection*). Ühendusel on nimi ja see on seotud liidesega. AlmaLinuxis on ühenduse nimi tavaliselt sama mis liidesel (`ens18`), kuid võib olla ka nt `Wired connection 1` - vaata see kõigepealt järele.
 
 ```bash
-nmcli device                         # liidesed ja nende ühendused
-nmcli connection show                # kõik ühendused
-nmcli connection show ens18          # ühenduse kõik seaded
-
-sudo nmcli connection modify ens18 \
-    ipv4.method manual \
-    ipv4.addresses 10.0.83.55/24 \
-    ipv4.gateway 10.0.83.1 \
-    ipv4.dns "10.0.83.1 1.1.1.1" \
-    ipv4.dns-search lab.example
-
-sudo nmcli connection up ens18       # rakenda
+nmcli device                   # liides → ühenduse nimi (veerg CONNECTION)
+nmcli connection show          # kõik ühendused
 ```
 
-DHCP-le tagasi: `sudo nmcli connection modify ens18 ipv4.method auto ipv4.addresses "" ipv4.gateway ""`.
+#### AlmaLinux: staatiline IP (nmcli)
 
-Menüüpõhine tööriist **`nmtui`** on mugav, kui `nmcli` süntaksit ei mäleta. Ühenduste failid on kataloogis `/etc/NetworkManager/system-connections/`.
+1. Muuda ühenduse seaded (kõik ühe käsuga):
+
+    ```bash
+    sudo nmcli connection modify ens18 \
+        ipv4.method manual \
+        ipv4.addresses 10.0.83.55/24 \
+        ipv4.gateway 10.0.83.1 \
+        ipv4.dns "10.0.83.1 1.1.1.1" \
+        ipv4.dns-search lab.example
+    ```
+
+2. Rakenda:
+
+    ```bash
+    sudo nmcli connection up ens18
+    ```
+
+3. Kontrolli (vt [Kontrolli tulemust](#kontrolli-tulemust)) ja vaata seaded üle: `nmcli connection show ens18 | grep ipv4`.
+
+#### AlmaLinux: DHCP (nmcli)
+
+`method auto` ja tühjenda käsitsi pandud väärtused:
+
+```bash
+sudo nmcli connection modify ens18 ipv4.method auto ipv4.addresses "" ipv4.gateway "" ipv4.dns "" ipv4.dns-search ""
+sudo nmcli connection up ens18
+```
+
+#### AlmaLinux: nmtui
+
+Menüüga tööriist on mugav, kui `nmcli` süntaksit ei mäleta:
+
+1. `sudo nmtui` → **Edit a connection** → vali ühendus (nt `ens18`) → **Edit**.
+2. **IPv4 CONFIGURATION**: muuda `<Automatic>` → `<Manual>` ja vali `<Show>`.
+3. Täida väljad: **Addresses** `10.0.83.55/24`, **Gateway** `10.0.83.1`, **DNS servers** `10.0.83.1`, **Search domains** `lab.example`. Liigu väljade vahel **Tab**-iga.
+4. **OK** → **Back** → **Activate a connection** → vali ühendus ja tee **Deactivate**, seejärel **Activate**, et muudatus jõustuks.
+5. **Quit** ja kontrolli.
+
+DHCP jaoks vali punktis 2 `<Automatic>` ja kustuta väljadelt käsitsi pandud väärtused.
+
+<!-- PILT: ../pildid/m07-nmtui-ipv4.png | nmtui ühenduse muutmise aken, IPv4 CONFIGURATION <Manual> ja täidetud väljad -->
+
+### Kontrolli tulemust
+
+Kontrolli pärast iga muudatust samade käskudega - igas distros ühtemoodi:
+
+```bash
+ip -br a                       # kas liidesel on õige aadress?
+ip r                           # kas vaikelüüs on õige (default via 10.0.83.1)?
+ping -c3 10.0.83.1             # kas lüüs vastab?
+ping -c3 1.1.1.1               # kas internet vastab IP-aadressiga?
+getent hosts www.debian.org    # kas nimelahendus töötab?
+```
+
+Kui `ping 1.1.1.1` töötab, aga nimega mitte, on viga DNS-i seadistuses (punkt 7.3). Kui midagi ei tööta, otsi viga punkti 7.5 sammude järgi. Lõpuks **taaskäivita masin** (`sudo reboot`) ja kontrolli uuesti - alles siis tead, et seadistus on püsiv.
 
 <details>
 <summary>Loe lähemalt: Püsivad staatilised marsruudid</summary>
@@ -697,6 +839,20 @@ Linuxi kernelis on pakettide filtreerimise raamistik **netfilter**. Selle reegle
 | AlmaLinux | `firewalld` | Sisse lülitatud, lubatud on SSH (ja Cockpit) |
 
 **Põhimõte:** keela kõik sissetulev liiklus ja luba ainult vajalik (*default deny*).
+
+**Kiirjuhend** - sama ülesanne kolme tööriistaga (üksikasjad allpool):
+
+| Ülesanne | Ubuntu: `ufw` | AlmaLinux: `firewalld` | Debian: `nftables` |
+|---|---|---|---|
+| Kas tulemüür töötab? | `sudo ufw status verbose` | `sudo firewall-cmd --state` | `sudo nft list ruleset` |
+| Luba SSH | `sudo ufw allow OpenSSH` | lubatud vaikimisi | rida `tcp dport 22 accept` failis `/etc/nftables.conf` |
+| Lülita sisse (püsivalt) | `sudo ufw enable` | `sudo systemctl enable --now firewalld` | `sudo systemctl enable --now nftables` |
+| Luba HTTP ja HTTPS püsivalt | `sudo ufw allow 80,443/tcp` | `sudo firewall-cmd --permanent --add-service={http,https}` ja `sudo firewall-cmd --reload` | lisa `tcp dport { 80, 443 } accept`, siis `sudo systemctl reload nftables` |
+| Luba port ainult laborivõrgust | `sudo ufw allow from 10.0.83.0/24 to any port 3306` | `sudo firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=10.0.83.0/24 port port=3306 protocol=tcp accept'` | `ip saddr 10.0.83.0/24 tcp dport 3306 accept` |
+| Vaata reegleid | `sudo ufw status numbered` | `sudo firewall-cmd --list-all` | `sudo nft list ruleset` |
+| Eemalda reegel | `sudo ufw delete <nr>` | `sudo firewall-cmd --permanent --remove-service=http` + `--reload` | kustuta rida failist, `sudo systemctl reload nftables` |
+
+Kontrolli alati **teisest masinast**, kas port on avatud või suletud: `nc -zv 10.0.83.54 80`.
 
 ```mermaid
 flowchart LR

@@ -23,9 +23,15 @@ Mooduli läbinud õppija:
 - seadistab teenuste sõltuvused ja tüübid, kasutab mallitud, pesa- ja teeüksuseid ning kasutajateenuseid;
 - karastab teenuse systemd turvaseadetega ja lahendab teenuste käivitusvigu.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 11.1 Alglaadimise ülevaade
+
+> [!TIP]
+> **Lühidalt:** Alglaadimine käib etappidena: püsivara (BIOS/UEFI) → alglaadija GRUB → kernel ja initramfs → systemd → teenused ja sisselogimine. Kui süsteem ei käivitu, otsi viga etapi kaupa.
 
 Kui vajutad arvuti toitenuppu, toimub enne sisselogimisviipa mitu etappi. Iga etapp laadib järgmise:
 
@@ -49,6 +55,9 @@ Kui tead, millises etapis probleem tekib, tead ka, kust lahendust otsida.
 
 ## 11.2 Püsivara: BIOS ja UEFI
 
+> [!TIP]
+> **Lühidalt:** Püsivara käivitub esimesena ja leiab alglaadija. UEFI kasutab FAT32 partitsiooni `/boot/efi`, vana BIOS ketta algust (MBR). `ls /sys/firmware/efi` näitab, kas süsteem käivitus UEFI-ga.
+
 **Püsivara** (*firmware*) on emaplaadi mälus olev programm, mis käivitub esimesena.
 
 | | **BIOS** (ka *legacy*) | **UEFI** |
@@ -69,6 +78,9 @@ Proxmoxi virtuaalmasinad kasutavad vaikimisi BIOS-i (SeaBIOS), UEFI (OVMF) tuleb
 Püsivara valib alglaadimise järjekorra järgi seadme, millelt käivitada: ketas, USB, CD/DVD või **võrk (PXE)**. Proxmoxis muudetakse järjekorda *Options* → *Boot Order*; käivitamisel avab ühekordse valikumenüü klahv **Esc**.
 
 ## 11.3 Alglaadija GRUB
+
+> [!TIP]
+> **Lühidalt:** GRUB-i seadistus on failis `/etc/default/grub`; pärast muutmist käivita `update-grub` (Debian, Ubuntu) või `grub2-mkconfig` (AlmaLinux). Ühekordse muudatuse saad teha GRUB-i menüüs klahviga **e**.
 
 **GRUB** (*GRand Unified Bootloader*) on enamiku Linuxi distrode alglaadija. See:
 
@@ -138,6 +150,9 @@ Muudatus ei salvestu - järgmisel käivitusel on kõik endine. Nii saab mittekä
 
 ## 11.4 Kernel ja initramfs
 
+> [!TIP]
+> **Lühidalt:** Kernel on fail kataloogis `/boot` (`vmlinuz-…`). **initramfs** on väike ajutine juurfailisüsteem, mis sisaldab draivereid päris juurfailisüsteemi haakimiseks. Uuenda seda käsuga `update-initramfs -u` või `dracut -f`.
+
 **Kernel** asub failina kataloogis `/boot`:
 
 ```bash
@@ -174,6 +189,9 @@ lsinitrd | head
 ```
 
 ## 11.5 systemd ja eesmärgid
+
+> [!TIP]
+> **Lühidalt:** systemd (PID 1) käivitab vaike-**eesmärgi** teenused: server `multi-user.target`, töölaud `graphical.target`. `systemd-analyze blame` näitab, mis alglaadimist aeglustab.
 
 Kui kernel on juurfailisüsteemi haakinud, käivitab see protsessi **PID 1** - **systemd**. systemd loeb seadistuse ja käivitab teenused, mis kuuluvad vaike-**eesmärgile** (*target*).
 
@@ -226,6 +244,9 @@ journalctl -k                    # kerneli teated journal'ist
 
 ## 11.6 /proc ja /sys
 
+> [!TIP]
+> **Lühidalt:** `/proc` ja `/sys` on virtuaalsed failisüsteemid, mille sisu kernel loob lugemise hetkel: protsessid, protsessor, mälu, seadmed. `/proc/sys` all on muudetavad kerneli parameetrid.
+
 Linuxis on kõik fail - ka kerneli andmed. Kaks **virtuaalset failisüsteemi** ei asu kettal, vaid kernel genereerib nende sisu lugemise hetkel.
 
 ### /proc
@@ -266,6 +287,9 @@ cat /sys/block/sda/size                  # ketta suurus 512-baidistes sektorites
 Riistvara uurimiseks on ka mugavamad käsud: `lscpu`, `lspci`, `lsusb` (paketid `pciutils`, `usbutils`), `lsblk`, `sudo dmidecode` (emaplaadi ja BIOS-i info).
 
 ## 11.7 Kerneli moodulid
+
+> [!TIP]
+> **Lühidalt:** Draiverid on kerneli moodulid: `lsmod` - laaditud moodulid, `modinfo` - info, `modprobe` - laadi. Püsivad seaded ja keelamine käivad kataloogis `/etc/modprobe.d/`.
 
 Linuxi kernel on **monoliitne**, kuid **modulaarne**: draivereid ja muid osi saab laadida ja eemaldada töö ajal **moodulitena**, ilma kernelit uuesti kompileerimata või taaskäivitamata. Moodulid asuvad kataloogis `/lib/modules/$(uname -r)/`.
 
@@ -321,6 +345,9 @@ blacklist pcspkr
 
 ## 11.8 Kerneli parameetrid: sysctl
 
+> [!TIP]
+> **Lühidalt:** `sysctl` muudab töötava kerneli parameetreid (nt `net.ipv4.ip_forward`). Püsivad seaded kirjuta faili `/etc/sysctl.d/*.conf` ja rakenda `sysctl --system`.
+
 Töötava kerneli käitumist saab muuta parameetritega, mis on failidena kataloogis `/proc/sys/`. Neid hallatakse käsuga `sysctl`:
 
 ```bash
@@ -353,6 +380,9 @@ Levinud parameetrid:
 | `kernel.dmesg_restrict` | Kas tavakasutaja tohib `dmesg`-i lugeda |
 
 ## 11.9 Süsteemi taastamine
+
+> [!TIP]
+> **Lühidalt:** Kui süsteem ei käivitu, kasuta GRUB-is parameetrit `systemd.unit=rescue.target`, `init=/bin/bash` või AlmaLinuxis `rd.break`. GRUB-i parandad taastemeedialt `chroot`-iga. Nii saad lähtestada ka juurkasutaja parooli.
 
 ### Kui süsteem satub hädaolukorra režiimi
 
@@ -461,6 +491,9 @@ sudo mount /dev/sda2 /mnt/boot                       # /boot on LVM-ist väljas
 
 ## 11.10 Kernelite haldus ja kompileerimine
 
+> [!TIP]
+> **Lühidalt:** Süsteemis võib olla mitu kernelit; GRUB käivitab vaikimisi uusima. Vaikimisi kernelit saab vahetada, vanu eemaldada (`apt autoremove`) ja vajadusel kerneli ise kompileerida.
+
 ### Paigaldatud kernelid
 
 Süsteemis võib olla korraga mitu kernelit. GRUB käivitab vaikimisi uusima, kuid teisi saab valida menüüst „Advanced options“.
@@ -520,7 +553,8 @@ sudo grubby --set-default /boot/vmlinuz-<versioon>     # püsivalt
 sudo grub2-reboot <index>                             # ainult järgmiseks alglaadimiseks
 ```
 
-### Uuemad kernelid
+<details>
+<summary>Loe lähemalt: Uuemad kernelid</summary>
 
 Stabiilsete distrode kernel on teadlikult vanem, kuid saab turvaparandusi. Uuemat kernelit võib vaja minna uue riistvara toe jaoks.
 
@@ -529,6 +563,8 @@ Stabiilsete distrode kernel on teadlikult vanem, kuid saab turvaparandusi. Uuema
 | Debian | **backports** - uuem kernel stabiilsele Debianile | `sudo apt install -t <koodnimi>-backports linux-image-amd64` |
 | Ubuntu | **HWE** (*Hardware Enablement*) - uuemate Ubuntu väljalasete kernelid LTS-ile | `sudo apt install linux-generic-hwe-<versioon>` |
 | AlmaLinux | **ELRepo** - kolmanda osapoole hoidla (`kernel-ml` uusim, `kernel-lt` pikaajalise toega) | vt elrepo.org |
+
+</details>
 
 ### Vanade kernelite eemaldamine
 
@@ -542,7 +578,8 @@ sudo dnf remove kernel-core-<versioon>           # AlmaLinux
 
 AlmaLinuxis määrab alles hoitavate kernelite arvu failis `/etc/dnf/dnf.conf` rida `installonly_limit=3`. **Töötavat kernelit ei saa eemaldada** ja alati tasub alles hoida vähemalt üks varukernel.
 
-### Kernelivälised moodulid ja DKMS
+<details>
+<summary>Loe lähemalt: Kernelivälised moodulid ja DKMS</summary>
 
 Mõned draiverid (nt NVIDIA graafikadraiver, ZFS, VirtualBoxi moodulid) ei ole kerneli osa. Need tuleb iga uue kerneli jaoks uuesti kompileerida. Seda teeb automaatselt **DKMS** (*Dynamic Kernel Module Support*):
 
@@ -551,6 +588,8 @@ dkms status                      # millised moodulid on DKMS-i all ja millistele
 ```
 
 Kui pärast kerneli uuendust mõni draiver ei tööta, on põhjus sageli DKMS-i kompileerimisvea taga (`journalctl -b | grep -i dkms`).
+
+</details>
 
 ### Oma kerneli kompileerimine
 
@@ -622,8 +661,10 @@ Lähtekoodist saab kerneli paigaldada ka ilma paketita (`sudo make modules_insta
 > [!TIP]
 > **Hea tava:** hoia alati alles distro töötav kernel. Kui sinu kernel ei käivitu, vali GRUB-i menüüst „Advanced options“ ja käivita distro kernel. Seejärel eemalda katkine kernel käsuga `sudo apt remove linux-image-<versioon>-minu`.
 
-
 ## 11.11 systemd süvitsi
+
+> [!TIP]
+> **Lühidalt:** Teenuse käivitumist juhivad sõltuvused (`Wants=`, `Requires=`) ja järjekord (`After=`). Lisaks on mallid (`teenus@.service`), pesa- ja teeüksused, kasutajateenused ning turvaseaded (`systemd-analyze security`).
 
 Moodulis 5 õppisid teenuseid käivitama, lubama ja lihtsat oma teenust looma. Siin vaatame, kuidas systemd tegelikult otsustab, **mida, millal ja kuidas** käivitada, ning kuidas teenuseid turvalisemaks teha.
 

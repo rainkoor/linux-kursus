@@ -20,9 +20,15 @@ Mooduli läbinud õppija:
 - varundab failiserveri ja võrdleb isehallatavat failiserverit NAS-lahendustega (TrueNAS);
 - dokumenteerib serveri seadistuse ning koostab käsiraamatu (*runbook*) ja otsuste logi.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 18.1 Failide jagamise viisid
+
+> [!TIP]
+> **Lühidalt:** Linuxile jagatakse faile **NFS**-iga, Windowsile **Samba** (SMB) abil, üksikutele kasutajatele **SFTP**-ga. iSCSI jagab terve ketta, mida kasutab üks klient korraga.
 
 | Viis | Protokoll | Kellele | Tüüpiline kasutus |
 |---|---|---|---|
@@ -35,6 +41,9 @@ Mooduli läbinud õppija:
 NFS ja SMB on **failitasandi** jagamised: server haldab failisüsteemi ja mitu klienti saavad sama kausta korraga kasutada. iSCSI jagab **plokkseadet** nagu võrgu kaudu ühendatud ketast - sama ketast tohib üldjuhul kasutada ainult üks klient korraga.
 
 ## 18.2 NFS: failide jagamine Linuxile
+
+> [!TIP]
+> **Lühidalt:** NFS: serveris kirjuta jagamine faili `/etc/exports` ja rakenda `exportfs -ra`, kliendis `mount -t nfs server:/kataloog /mnt/…`. Kasutajad tuvastatakse UID-numbri järgi.
 
 **NFS** (*Network File System*) võimaldab haakida teise Linuxi masina kataloogi üle võrgu nagu kohaliku ketta.
 
@@ -76,7 +85,6 @@ Püsivalt (`/etc/fstab`):
 > [!NOTE]
 > **NFS ja kasutajad:** lihtsas NFS-is tuvastatakse kasutajad **UID-numbri järgi**. Kui kasutaja `mari` on serveris UID 1001 ja kliendis 1002, ei klapi failide omanikud. Suuremates keskkondades kasutatakse kesksest kataloogist (LDAP, Active Directory - valikmoodulid 24 ja 25) pärit kasutajaid ja Kerberost. Lisaks muudetakse kliendi juurkasutaja serveris vaikimisi õigusteta kasutajaks `nobody` (**root_squash**), et kliendi juurkasutaja ei saaks serveris kõike teha.
 
-
 ### Ekspordi valikud
 
 | Valik | Tähendus |
@@ -93,6 +101,9 @@ Mitu klienti eri õigustega: `/srv/nfs/jagatud  10.0.83.0/24(ro,sync) 10.0.83.53
 **Tulemüür:** NFSv4 vajab ainult porti **2049/tcp** (`sudo ufw allow from 10.0.83.0/24 to any port nfs`, `sudo firewall-cmd --permanent --add-service=nfs`). Vana NFSv3 ja `showmount` kasutavad lisaks `rpcbind`-i ja muutuvaid porte (`--add-service=rpc-bind --add-service=mountd`).
 
 ## 18.3 autofs: haakimine vajadusel
+
+> [!TIP]
+> **Lühidalt:** autofs haagib võrgukataloogi alles siis, kui seda kasutatakse, ja haagib tegevusetuse järel lahti. Nii ei takista kättesaamatu server alglaadimist.
 
 `/etc/fstab`-is olev NFS-jagamine haagitakse alglaadimisel. Kui server ei ole sel hetkel kättesaadav, aeglustab see alglaadimist ja haakimine jääb tegemata. **autofs** haagib jagamise alles siis, kui keegi kataloogi poole pöördub, ja haagib selle tegevusetuse järel lahti.
 
@@ -124,6 +135,9 @@ Kodukataloogide jaoks kasutatakse metamärki: `* -rw,sync server:/srv/kodu/&` (`
 Lihtsam systemd alternatiiv: fstab-is valik `x-systemd.automount` (nt `debian1:/srv/nfs/jagatud /mnt/nfs nfs defaults,_netdev,x-systemd.automount 0 0`).
 
 ## 18.4 Samba: failide jagamine Windowsile
+
+> [!TIP]
+> **Lühidalt:** Samba jagamine kirjeldatakse failis `/etc/samba/smb.conf`. Kasutajal peab olema Samba parool (`smbpasswd -a`). Kontrolli seadistust `testparm` ja ühendust `smbclient -L`.
 
 **Samba** rakendab Windowsi failijagamise protokolli **SMB**. Sellega saab Linuxi server jagada kaustu Windowsi arvutitele (ja vastupidi). Samba võib olla ka Active Directory domeenikontroller (valikmoodul 25).
 
@@ -163,6 +177,9 @@ sudo systemctl restart smbd
 
 ## 18.5 Ühiskausta õigused: SGID ja ACL
 
+> [!TIP]
+> **Lühidalt:** Ühiskaustas peavad kõik saama muuta teiste faile: kataloogile **SGID** (`chmod 2770`) ja **vaike-ACL** (`setfacl -d -m g:grupp:rwx`).
+
 Ühiskaustas peavad kõik grupi liikmed saama muuta ka **teiste** loodud faile. Moodulis 3 õpitud vahenditest on siin vaja kahte:
 
 1. **SGID kataloogil** (`chmod 2770`) - uued failid kuuluvad kataloogi grupile, mitte looja põhigrupile;
@@ -186,6 +203,9 @@ Samba jaoks lisa jagamisele `inherit acls = yes` (või `create mask`/`force grou
 > **Õiguste kujundamise rusikareegel:** õigused antakse **gruppidele**, mitte üksikutele kasutajatele. Kui Mari liigub teise rolli, muudetakse tema grupid, mitte kümnete kaustade õigusi. Suurtes asutustes tulevad grupid kataloogiteenusest (valikmoodulid 24-25).
 
 ## 18.6 Samba ja SELinux, kasutajad ja prügikast
+
+> [!TIP]
+> **Lühidalt:** AlmaLinuxis vajab Samba kataloog SELinuxi konteksti `samba_share_t`. Samba prügikast (`vfs objects = recycle`) aitab kogemata kustutatud faile taastada.
 
 **AlmaLinuxis** lubab SELinux Sambale ligipääsu ainult õige kontekstiga kataloogidele:
 
@@ -220,6 +240,9 @@ sudo smbstatus                   # kes on ühendatud, millised failid lukus
 ```
 
 ## 18.7 Valmis NAS-lahendused: TrueNAS
+
+> [!TIP]
+> **Lühidalt:** TrueNAS on valmis NAS-süsteem ZFS-iga: jagamised, hetktõmmised ja replikatsioon on veebiliideses. See sobib, kui on vaja ainult failiserverit, mitte üldotstarbelist serverit.
 
 Eespool seadistasid failiserveri käsitsi: Debian, `/etc/exports`, `smb.conf`, kasutajad ja õigused. Paljudes asutustes ja kodudes kasutatakse selle asemel **NAS-i** (*Network Attached Storage*) - seadet või distrot, mis on loodud ainult failide hoidmiseks ja jagamiseks ning mida hallatakse veebiliidesest.
 
@@ -258,6 +281,9 @@ Mida TrueNASi puhul arvestada:
 
 ## 18.8 Failiserveri varundus
 
+> [!TIP]
+> **Lühidalt:** Failiserveri andmed on kõige väärtuslikumad. Varunda need teise masinasse (restic, `zfs send`) ja hoia mitu ajalist koopiat lunavara ja kogemata kustutamise vastu.
+
 Failiserveri andmed on sageli asutuse kõige väärtuslikum osa ja just neid kustutatakse kogemata või krüpteerib lunavara. Moodulis 9 õpitud põhimõtted kehtivad siin täies ulatuses:
 
 | Kiht | Mida annab | Mida ei asenda |
@@ -278,6 +304,9 @@ sudo -E restic forget --keep-daily 14 --keep-weekly 8 --keep-monthly 12 --prune
 Varunda koos andmetega ka **õigused ja ACL-id** (restic ja `tar --acls` teevad seda) ning seadistus (`/etc/exports`, `/etc/samba/smb.conf`, Samba kasutajate andmebaas `/var/lib/samba/private/`). Ilma õigusteta taastatud ühiskaust tähendab tunde käsitsi parandamist.
 
 ## 18.9 Serveri dokumenteerimine
+
+> [!TIP]
+> **Lühidalt:** Dokumenteeri, **mis** on seadistatud, **miks** ja **kuidas** see taastada. Hoia dokumentatsioon Gitis koos seadistusfailidega.
 
 Hästi seadistatud, kuid dokumenteerimata server on ohtlik: keegi (ka sina ise poole aasta pärast) ei tea, miks miski on seadistatud nii, nagu on. Serveri dokumentatsioon peaks sisaldama:
 

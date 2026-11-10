@@ -17,9 +17,15 @@ Mooduli läbinud õppija:
 - jälgib ketaste tervist SMART-iga;
 - taastab kadunud partitsioonitabeli TestDiskiga ja kirjeldab andmete taastamise reegleid.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 10.1 RAID ja mdadm
+
+> [!TIP]
+> **Lühidalt:** RAID ühendab mitu ketast: **RAID 1** peegeldab, **RAID 5/6** talub ühe või kahe ketta riket, **RAID 10** on kiire ja töökindel. Linuxis teeb tarkvaralise RAID-i `mdadm`, olekut näeb failist `/proc/mdstat`. RAID ei ole varukoopia.
 
 **RAID** (*Redundant Array of Independent Disks*) ühendab mitu ketast, et saavutada töökindlus või kiirus.
 
@@ -64,6 +70,9 @@ Massiivi saab kasutada otse failisüsteemina või LVM-i PV-na (moodul 8). Debian
 > **RAID ei ole varukoopia!** RAID kaitseb ketta rikke eest, kuid mitte kogemata kustutamise, viiruse, lunavara ega tulekahju eest.
 
 ## 10.2 ZFS
+
+> [!TIP]
+> **Lühidalt:** ZFS on failisüsteem ja köitehaldur ühes: kettad lähevad kogumisse (`zpool`), sealt luuakse andmekogumid (`zfs create`). Tal on kontrollsummad, hetktõmmised (`zfs snapshot`) ja koopia teise masinasse (`zfs send`).
 
 **ZFS** (algselt Sun Microsystems, 2005; tänapäeval avatud projekt **OpenZFS**) on failisüsteem ja köitehaldur ühes: see teeb ühe tööriistaga ära selle, milleks muidu on vaja `mdadm`-i (RAID), LVM-i ja failisüsteemi. ZFS-i kasutavad näiteks **Proxmox VE** (sh kõik HKHK Proxmoxi sõlmed), **TrueNAS** ja FreeBSD.
 
@@ -132,12 +141,16 @@ sudo zfs send tank/kodu@enne-uuendust | ssh varuserver sudo zfs receive varu/kod
 
 Ketta vahetus peeglis: `sudo zpool replace tank /dev/sdc /dev/sdf` ja jälgi `zpool status` (*resilvering*).
 
-### ZFS Proxmoxis ja TrueNASis
+<details>
+<summary>Loe lähemalt: ZFS Proxmoxis ja TrueNASis</summary>
 
 - **Proxmox VE:** paigaldaja pakub süsteemikettale ZFS-i (nt *ZFS RAID1*), pool nimega `rpool`. Virtuaalmasinate kettad on zvol-id (`rpool/data/vm-101-disk-0`), Proxmoxi hetktõmmised on ZFS-i hetktõmmised ja **Storage Replication** kasutab `zfs send`-i, et kopeerida VM-e teise sõlme. Mälu: ARC võtab vaikimisi kuni poole RAM-ist (uuemates versioonides väiksema piiriga) - seda saab piirata failis `/etc/modprobe.d/zfs.conf` (`options zfs zfs_arc_max=…`).
 - **TrueNAS** (Community Edition põhineb Debianil, vanem CORE FreeBSD-l) on ZFS-ile ehitatud NAS: poolid, dataset'id, SMB- ja NFS-jagamised, automaatsed hetktõmmised ja replikatsioon on veebiliideses. TrueNASi kasutamist failiserverina käsitleb moodul 18 (punkt 18.7).
 
-### ZFS eri distrodes
+</details>
+
+<details>
+<summary>Loe lähemalt: ZFS eri distrodes</summary>
 
 | | Debian | Ubuntu | AlmaLinux |
 |---|---|---|---|
@@ -145,6 +158,8 @@ Ketta vahetus peeglis: `sudo zpool replace tank /dev/sdc /dev/sdf` ja jälgi `zp
 | Juurfailisüsteem ZFS-il | võimalik käsitsi | paigaldajas oli eksperimentaalne | ei ole tavapärane |
 
 ZFS-i CDDL-litsents ei ühildu Linuxi kerneli GPL-iga, mistõttu ZFS ei ole kerneli osa. Seepärast eelistab Red Hat oma lahendusi (XFS, LVM, Stratis) ja Btrfs on Linuxi kernelis sisalduv sarnaste võimalustega alternatiiv (copy-on-write, hetktõmmised, kontrollsummad).
+
+</details>
 
 <details>
 <summary>Loe lähemalt: ZFS FreeBSD-s</summary>
@@ -156,6 +171,9 @@ FreeBSD paigaldaja pakub vaikimisi juurfailisüsteemi ZFS-il (*Auto (ZFS)*, kogu
 </details>
 
 ## 10.3 Ketta kiiruse mõõtmine
+
+> [!TIP]
+> **Lühidalt:** Ketta kiirust mõõdetakse **läbilaskevõime** (MB/s) ja **IOPS**-i järgi. `dd` annab kiire hinnangu, `fio` täpse mõõtmise, `iostat -xz` näitab koormust töö ajal.
 
 Ketta jõudlust on vaja hinnata, kui server on aeglane, kui võrreldakse salvestuslahendusi (kohalik SSD, Proxmoxi Ceph, iSCSI - moodul 22) või kui kahtlustatakse riistvara riket. Olulised näitajad:
 
@@ -227,6 +245,9 @@ Tulemusi võrreldes kasuta **samu parameetreid**, korda testi mitu korda ja pane
 
 ## 10.4 Ketta tervis: SMART
 
+> [!TIP]
+> **Lühidalt:** SMART näitab ketta tervist: `smartctl -H` - üldhinnang, `smartctl -a` - kõik näitajad. Ümberpaigutatud ja ootel sektorid tähendavad, et ketas tuleb vahetada. `smartd` jälgib kettaid pidevalt.
+
 Kettad annavad oma tervise kohta infot tehnoloogiaga **S.M.A.R.T.** Riknev ketas hakkab sageli enne lõplikku riket vigu näitama.
 
 ```bash
@@ -246,6 +267,9 @@ Teenus `smartd` jälgib kettaid pidevalt ja saadab probleemist teate (`/etc/smar
 > **Virtuaalmasinas** ei ole SMART-i infot - virtuaalne ketas ei ole füüsiline seade. Ketaste tervist jälgitakse hüperviisori (Proxmoxi sõlme) tasemel.
 
 ## 10.5 Partitsioonide ja failide taastamine: TestDisk
+
+> [!TIP]
+> **Lühidalt:** Kustutatud partitsioonitabeli taastab **TestDisk**, üksikuid faile **PhotoRec**. Rikkis kettast tee enne kõike koopia (`ddrescue`) ja tööta koopiaga - iga kirjutamine algsele kettale võib andmed hävitada.
 
 Kui partitsioonitabel on kogemata kustutatud või üle kirjutatud (nt valele kettale tehtud `fdisk`), on andmed kettal tavaliselt veel alles - kadunud on ainult „sisukord“. **TestDisk** otsib kettalt failisüsteemide algusi ja taastab partitsioonitabeli. Sama projekti **PhotoRec** taastab üksikuid faile (pildid, dokumendid) ka siis, kui failisüsteem on rikutud.
 

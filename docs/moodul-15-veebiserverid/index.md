@@ -6,6 +6,11 @@
 
 **Maht:** 10 tundi · **Laboritöö:** Debian, AlmaLinux, Ubuntu · **Eeldused:** moodulid 1–8, 12–14
 
+> [!NOTE]
+> **Süsteemihalduri vaade veebiserveritele.** See moodul õpetab veebiserverit paigaldama, seadistama ja hoidma nii, nagu Linuxi serveri haldur seda vajab: nginx ja Apache saidid, HTTPS ja sertifikaadid, koormuse jaotus ja varundus. Eesmärk on töötav ja turvaline veebiserver laboris - mitte veebirakenduste arendus ega suurte veebiplatvormide täielik valdamine.
+>
+> **HKHK õppijale:** veebiservereid ja rakendusservereid käsitletakse põhjalikumalt eraldi moodulites (nt veebiserveri paigaldus, rakendusserverid). See moodul annab neile Linuxi serveri poolt vaadates aluse.
+
 ## Õpiväljundid
 
 Mooduli läbinud õppija:
@@ -19,9 +24,15 @@ Mooduli läbinud õppija:
 - teeb koormusejaoturi rikkekindlaks virtuaalse IP-aadressiga (keepalived, VRRP) ja mõõdab veebiserveri jõudlust koormustestiga;
 - valib olukorrale sobiva veebiserveri.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 15.1 Serveriteenuste ülevaade
+
+> [!TIP]
+> **Lühidalt:** Iga serveriteenus käib sama töövooga: paigalda → seadista → kontrolli süntaksit → käivita ja luba → ava tulemüür → testi → vaata logisid → varunda.
 
 Moodulites 15–18 paneme kokku kõik varem õpitu: pakihaldus, teenused, võrk, tulemüür, õigused, skriptid ja varundus. Selles moodulis tegeleme veebiserveritega, moodulis 16 andmebaasidega, moodulis 17 DNS-iga ja moodulis 18 failiserveri, varunduse ja dokumentatsiooniga. Tüüpiline väikese asutuse server pakub järgmisi teenuseid:
 
@@ -49,6 +60,9 @@ Iga teenuse puhul kehtib sama töövoog:
 9. dokumenteeri.
 
 ## 15.2 Veebiserver nginx
+
+> [!TIP]
+> **Lühidalt:** nginx teenindab mitut saiti **serveriplokkidega**: seadistus `/etc/nginx/sites-available/`, lubamiseks viit `sites-enabled/`-isse. Enne `reload`-i kontrolli alati `nginx -t`.
 
 **nginx** on tänapäeval üks levinumaid veebiservereid. See on kiire, kasutab vähe mälu ja sobib nii staatiliste failide serveerimiseks kui ka pöördpuhverserveriks. Teine levinud veebiserver on **Apache** (`apache2`, AlmaLinuxis `httpd`).
 
@@ -142,6 +156,9 @@ Nii saab mitu rakendust töötada ühe IP-aadressi ja pordi 443 taga, TLS-i hald
 
 ## 15.3 TLS ja HTTPS
 
+> [!TIP]
+> **Lühidalt:** HTTPS vajab sertifikaati. Avalikule saidile annab selle tasuta Let's Encrypt (`certbot`), laboris kasutame oma CA-d. Sertifikaat ja võti lisatakse serveriplokki (`listen 443 ssl`).
+
 **TLS** (*Transport Layer Security*) krüpteerib ühenduse brauseri ja serveri vahel ning tõendab, et server on see, kelleks ta end nimetab. HTTP koos TLS-iga on **HTTPS** (port 443).
 
 ### Sertifikaadid
@@ -179,7 +196,8 @@ Sertifikaadis peab serveri nimi olema väljal **SAN** (*Subject Alternative Name
 
 <!-- PILT: ../pildid/m15-brauseri-hoiatus.png | Brauseri hoiatus isesigneeritud sertifikaadi korral -->
 
-### Avaliku sertifikaadi hankimine
+<details>
+<summary>Loe lähemalt: Avaliku sertifikaadi hankimine</summary>
 
 **1. Domeen ja DNS.** Saidil peab olema avalik domeeninimi (nt `minukool.ee`, `.ee` domeenid registreeritakse akrediteeritud registripidaja kaudu) ja avalikus DNS-is kirje, mis osutab serveri avalikule IP-aadressile (`A`/`AAAA`, moodul 17).
 
@@ -250,8 +268,9 @@ CSR (mitte võti!) saadetakse CA-le, CA valideerib domeeni ja organisatsiooni ni
 - **Privaatvõti** jääb serverisse (`chmod 600`), seda ei saadeta kunagi kellelegi. Kui võti lekib, **tühista** sertifikaat (`sudo certbot revoke --cert-name minukool.ee`) ja hangi uus uue võtmega.
 - Kontrolli seadistust tööriistaga **SSL Labs Server Test** (ssllabs.com/ssltest) - see hindab protokolle, šifreid ja sertifikaadiahelat.
 
-### Oma CA (sisevõrk ja labor)
+</details>
 
+### Oma CA (sisevõrk ja labor)
 
 Sisevõrgu teenustele ja laborile saab luua oma sertifitseerimiskeskuse. Põhimõte on sama mis päris CA-l (CSR → allkiri → ahel), ainult CA ise on sinu oma ja kliendid peavad selle juursertifikaati usaldama:
 
@@ -325,6 +344,9 @@ openssl s_client -connect kool.lab.example:443 -servername kool.lab.example </de
 
 ## 15.4 Apache HTTP Server
 
+> [!TIP]
+> **Lühidalt:** Apache saidid on Debianis ja Ubuntus `/etc/apache2/sites-available/` (`a2ensite`, `apachectl configtest`), AlmaLinuxis `/etc/httpd/conf.d/*.conf`. Teenus on vastavalt `apache2` või `httpd`.
+
 **Apache** (`httpd`) on vanim endiselt laialt kasutatav veebiserver. nginx on uutes paigaldustes levinum, kuid Apache on paljude rakenduste (Moodle, vanemad PHP-rakendused, paljud hostingupakkujad) juhendites vaikimisi valik ja oskab mõnda asja, mida nginx ei oska, nt kataloogipõhist seadistust failiga `.htaccess`.
 
 | | nginx | Apache |
@@ -380,6 +402,9 @@ Seadistus: `/etc/httpd/conf/httpd.conf`, virtuaalhostid failidena `/etc/httpd/co
 
 ## 15.5 Caddy
 
+> [!TIP]
+> **Lühidalt:** Caddy hangib avaliku nimega saidile HTTPS-sertifikaadi ise. Seadistus failis `Caddyfile` on väga lühike; laboris annab sertifikaadi `tls internal`.
+
 **Caddy** on Go-s kirjutatud moodne veebiserver, mille eripära on **automaatne HTTPS**: avaliku DNS-nimega saidile hangib ja uuendab Caddy sertifikaadi Let's Encryptilt ise. Seadistus (`Caddyfile`) on väga lühike.
 
 ```bash
@@ -425,6 +450,9 @@ sudo systemctl reload caddy
 
 ## 15.6 lighttpd ja teised
 
+> [!TIP]
+> **Lühidalt:** lighttpd on väga väikese mälukasutusega veebiserver manussüsteemidele ja väikestele seadmetele. Teisi veebiservereid tunned ära, kui neid kohtad.
+
 **lighttpd** („lighty“) on väga väikese mälukasutusega veebiserver. Seda kasutatakse manussüsteemides, ruuterites ja väikestes seadmetes; Pi-hole kasutas seda versioonini 5.
 
 ```bash
@@ -447,6 +475,9 @@ Teised, mida tasub teada:
 | **Python `http.server`** | kiire test: `python3 -m http.server 8000` (mitte tootmises!) |
 
 ## 15.7 Pöördpuhvrid ja koormuse jaotus
+
+> [!TIP]
+> **Lühidalt:** Koormusejaotur (nginx `upstream`, HAProxy) jagab päringud mitme taustserveri vahel. keepalived annab jaoturile virtuaalse IP, mis liigub rikke korral teise masinasse.
 
 Kui üks server ei jaksa või peab teenus töötama ka ühe serveri rikke korral, pannakse mitu **taustserverit** (*backend*) ühe **koormusejaoturi** (*load balancer*) taha.
 
@@ -608,7 +639,8 @@ Teised tööriistad: **`wrk`** (`apt install wrk`; kiirem, kestusepõhine: `wrk 
 > [!WARNING]
 > **Testi ainult enda servereid.** Koormustest võõra saidi vastu on sisuliselt teenusetõkestusrünnak (DoS). Laboris jälgi testi ajal taustserverites `top`-i ja HAProxy statistikalehte (moodul 20): kas pudelikael on protsessor, võrk või rakendus?
 
-### Traefik
+<details>
+<summary>Loe lähemalt: Traefik</summary>
 
 **Traefik** on konteinerimaailma pöördpuhver: see loeb Dockeri või Podmani konteinerite **siltidelt** (*labels*), milline nimi millisele konteinerile suunata, ja hangib sertifikaadid automaatselt. Näide `compose.yaml`-ist (moodul 14):
 
@@ -625,7 +657,10 @@ services:
       - "traefik.http.routers.vile.rule=Host(`vile.lab.example`)"
 ```
 
-### Koormusejaoturi mõisted
+</details>
+
+<details>
+<summary>Loe lähemalt: Koormusejaoturi mõisted</summary>
 
 | Mõiste | Tähendus |
 |---|---|
@@ -636,7 +671,12 @@ services:
 | **TLS-i lõpetamine** | HTTPS lõpeb jaoturis, taustal HTTP sisevõrgus |
 | **`X-Forwarded-For`** | päis, milles jaotur edastab kliendi tegeliku IP-aadressi |
 
+</details>
+
 ## 15.8 Millist veebiserverit valida?
+
+> [!TIP]
+> **Lühidalt:** nginx on hea vaikevalik, Apache rakenduste juhendite pärast, Caddy automaatse HTTPS-i pärast. Töövoog on kõigil sama: seadista → kontrolli → `reload` → testi → logid.
 
 | Olukord | Soovitus |
 |---|---|
@@ -650,6 +690,9 @@ services:
 Kõigi veebiserverite puhul kehtib sama töövoog (punkt 15.1): seadista → kontrolli süntaksit → `reload` → testi → vaata logisid.
 
 ## 15.9 Veebiserveri varundus
+
+> [!TIP]
+> **Lühidalt:** Varunda saidi failid, seadistus (`/etc/nginx`, `/etc/apache2`), sertifikaadid ja eriti **oma CA võti** - Let's Encrypti sertifikaadi saab uuesti, oma CA-d mitte.
 
 Veebiserveri taastamiseks on vaja rohkem kui veebisaidi faile. Varunda (moodul 9):
 

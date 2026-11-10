@@ -20,6 +20,7 @@ Materjalis on peidetud kohatäited kujul `<!-- PILT: ../pildid/FAIL.png | kirjel
 | `lisa-ubuntu-openssh.png` | Ubuntu paigaldaja *SSH configuration* (Install OpenSSH server märgitud) | `docs/lisad/paigaldus.md`, 5. Ubuntu Server 24.04 LTS paigaldus |
 | `lisa-alma-paigalduse-kokkuvote.png` | AlmaLinuxi paigaldaja *Installation Summary* (Minimal Install, ketas, kasutaja) | `docs/lisad/paigaldus.md`, 6. AlmaLinux 10 paigaldus |
 | `m01-esimene-ssh-uhendus.png` | Windows Terminal: esimene `ssh` ühendus koos sõrmejälje küsimusega | `docs/moodul-01-sissejuhatus/index.md`, 1.4 Ühendumine serveriga SSH kaudu |
+| `m07-nmtui-ipv4.png` | nmtui ühenduse muutmise aken, IPv4 CONFIGURATION <Manual> ja täidetud väljad | `docs/moodul-07-vork-ssh/index.md`, 7.2 Püsiv võrguseadistus |
 | `m12-wazuh-armatuurlaud.png` | Wazuhi veebiliidese ülevaade (agentide olek, turvasündmused) | `docs/moodul-12-turvalisus-logid/index.md`, 12.11 Turvasündmuste haldus: Wazuh |
 | `m15-brauseri-hoiatus.png` | Brauseri hoiatus isesigneeritud sertifikaadi korral | `docs/moodul-15-veebiserverid/index.md`, Labor ja päris maailm |
 | `m15-sertifikaadi-ahel.png` | Brauseri sertifikaadivaade: labori CA → serveri sertifikaat (pärast CA usaldamist) | `docs/moodul-15-veebiserverid/index.md`, Oma CA (sisevõrk ja labor) |

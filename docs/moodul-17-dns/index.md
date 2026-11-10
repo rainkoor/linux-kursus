@@ -20,9 +20,15 @@ Mooduli läbinud õppija:
 - selgitab DNS-i turvariske ja kaitsevõtteid (avatud resolver, DNSSEC, DoT/DoH, *split-horizon*);
 - leiab ja parandab tüüpilisi DNS-i vigu ning varundab DNS-i seadistuse.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 17.1 Nimelahendus Linuxis
+
+> [!TIP]
+> **Lühidalt:** Linux otsib nime failide `/etc/nsswitch.conf` järjekorras: `/etc/hosts`, siis DNS. Ubuntus vahendab päringuid `systemd-resolved` (`127.0.0.53`, `resolvectl`). `getent hosts` lahendab nagu programmid.
 
 Moodulis 7 nägid, et nime lahendamise järjekorra määrab `/etc/nsswitch.conf`. Täpsemalt:
 
@@ -69,6 +75,9 @@ sudo resolvectl domain wg0 '~lab.example'      # tilde: ainult marsruutimiseks, 
 ```
 
 ## 17.2 Kuidas DNS töötab
+
+> [!TIP]
+> **Lühidalt:** DNS on hierarhiline: juur → tippdomeen (`.ee`) → domeen. Rekursiivne resolver küsib läbi kogu ahela ja jätab vastuse **TTL**-i ajaks vahemällu. `dig +trace` näitab teekonda.
 
 DNS on **hierarhiline** ja **hajutatud** andmebaas: ükski server ei tea kõike, iga tase teab ainult järgmise taseme servereid.
 
@@ -129,6 +138,9 @@ dig www.debian.org | grep -A2 "ANSWER SECTION"     # TTL on teine väli; korda -
 
 ## 17.3 Kirjete tüübid
 
+> [!TIP]
+> **Lühidalt:** Põhikirjed: `A`/`AAAA` - nimi → IP, `CNAME` - teine nimi, `MX` - e-posti server, `NS` - nimeserverid, `PTR` - IP → nimi, `TXT` - tekst (SPF, DKIM).
+
 | Kirje | Tähendus | Näide |
 |---|---|---|
 | `SOA` | Tsooni põhiandmed | seerianumber, aegumisajad |
@@ -145,6 +157,9 @@ dig www.debian.org | grep -A2 "ANSWER SECTION"     # TTL on teine väli; korda -
 Reeglid: `CNAME` ei tohi olla samal nimel ühegi teise kirjega (seega mitte tsooni juurel `@`) ning `MX` ja `NS` peavad osutama nimele, millel on `A`-kirje, mitte `CNAME`-le.
 
 ## 17.4 BIND9: autoriteetne server
+
+> [!TIP]
+> **Lühidalt:** BIND9 tsoon kirjeldatakse failis `named.conf.local`, kirjed tsoonifailis. Iga muudatuse järel **suurenda seerianumbrit**, kontrolli `named-checkzone` ja tee `systemctl reload named`.
 
 **BIND9** oskab nii autoriteetset kui ka rekursiivset rolli ja on DNS-i õppimiseks klassikaline valik.
 
@@ -200,9 +215,29 @@ dig @localhost www.lab.example
 
 BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (`allow-recursion` vaikimisi `localnets; localhost;`), nii et kliendid saavad sama serveri kaudu lahendada ka internetinimesid. Kliendid tuleb seadistada kasutama seda serverit (Netplan, `nmcli`, `/etc/resolv.conf` - vt moodul 7) ja tulemüüris peab olema avatud port 53 (UDP ja TCP).
 
+**Uue kirje lisamine samm-sammult** (nt uus server `seire` aadressiga `10.0.83.54`) - see on DNS-i haldaja kõige sagedasem töö:
+
+1. Ava tsoonifail: `sudo nano /etc/bind/db.lab.example`.
+2. Lisa kirje: `seire   IN  A   10.0.83.54`.
+3. **Suurenda seerianumbrit** SOA-s (nt `2026110801` → `2026110802`). Kui unustad, ei saa sekundaarserver muudatusest teada.
+4. Kontrolli ja rakenda:
+
+    ```bash
+    sudo named-checkzone lab.example /etc/bind/db.lab.example   # peab lõppema: OK
+    sudo systemctl reload named
+    ```
+
+5. Kontrolli vastust - ka sekundaarserverist, kui see on olemas:
+
+    ```bash
+    dig @localhost seire.lab.example +short          # 10.0.83.54
+    dig @10.0.83.53 seire.lab.example +short         # sekundaar (punkt 17.5)
+    ```
+
+6. Kui on pöördtsoon, lisa sinna ka `PTR`-kirje (allpool) ja suurenda ka selle seerianumbrit.
+
 > [!NOTE]
 > **Domeeninimed:** `.example` on reserveeritud näidete jaoks ja ei kuulu kunagi kellelegi. Sisevõrgus kasutatakse sageli oma domeeni alamdomeeni (nt `lab.hkhk.ee`) või tippdomeeni `.internal`. Lõpuga `.local` tasub vältida, sest seda kasutab mDNS.
-
 
 ### Pöördtsoon
 
@@ -267,6 +302,9 @@ sudo rndc flush                  # tühjenda vahemälu
 
 ## 17.5 Sekundaarserver ja tsooniülekanne
 
+> [!TIP]
+> **Lühidalt:** Igal tsoonil peab olema vähemalt kaks nimeserverit. Sekundaar saab tsooni primaarilt tsooniülekandega (`allow-transfer`, `also-notify`) ja uueneb seerianumbri järgi.
+
 Üks DNS-server on **üksik rikkekoht**: kui see on maas, ei tööta midagi. Iga tsoonil peab olema vähemalt **kaks** nimeserverit (domeeni registripidajad nõuavad seda). Sekundaarserver saab tsooni koopia primaarilt **tsooniülekandega** (AXFR, muudatuste korral IXFR).
 
 ```mermaid
@@ -319,6 +357,9 @@ SOA-kirje ajad juhivad sekundaari käitumist: `refresh` - kui tihti kontrollib m
 > Tsooniülekanne on vana ja usaldusväärne lahendus. Alternatiiv on hoida tsoonifailid **Gitis** ja lasta mõlemal serveril neid sealt tõmmata (näide punktis 17.6, CoreDNS) või kasutada andmebaasipõhist serverit (PowerDNS).
 
 ## 17.6 Teised DNS-serverid
+
+> [!TIP]
+> **Lühidalt:** Lihtsamad DNS-serverid: **dnsmasq** (väike võrk, `/etc/hosts`), **CoreDNS** (konteinerid, Kubernetes), **Pi-hole** (reklaamide ja jälgimise blokeerimine).
 
 BIND9 on klassika, kuid praktikas kasutatakse sageli kergemaid või kitsama otstarbega servereid:
 
@@ -431,6 +472,9 @@ Pi-hole'i võib käivitada ka konteinerina (pilt `pihole/pihole`). Teadmiseks: P
 
 ## 17.7 DNS-i turvalisus
 
+> [!TIP]
+> **Lühidalt:** Ära jäta avatud resolverit internetti (`allow-recursion` ainult oma võrgule). DNSSEC kaitseb võltsitud vastuste eest, DoT/DoH krüpteerib päringud.
+
 | Oht | Mis juhtub | Kaitse |
 |---|---|---|
 | **Avatud resolver** | Server võimendab rünnakuid teiste vastu | `allow-recursion` ainult sisevõrgule |
@@ -450,6 +494,9 @@ resolvectl query --legend=no www.ria.ee   # "authenticated: yes"
 systemd-resolved oskab DoT-i (`DNSOverTLS=opportunistic` failis `/etc/systemd/resolved.conf`).
 
 ## 17.8 DNS-i tõrkeotsing
+
+> [!TIP]
+> **Lühidalt:** Otsi viga järjest: kas server vastab (`dig @server nimi`), kas vastus on autoriteetne (`aa`), kas tsoon laadis (`journalctl -u named`), kas seerianumber suurenes, kas tulemüür lubab porti 53.
 
 | Sümptom | Mida kontrollida |
 |---|---|
@@ -471,6 +518,9 @@ sudo ss -tulpn | grep ':53 '         # kas server kuulab?
 ```
 
 ## 17.9 DNS-i seadistuse varundus
+
+> [!TIP]
+> **Lühidalt:** Varunda `/etc/bind` (seadistus ja tsoonifailid) või hoia tsoonifailid Gitis. Sekundaarserver ei ole varukoopia - vead kopeeritakse sinna samuti.
 
 DNS-i andmed on väikesed, kuid kriitilised. Varunda:
 

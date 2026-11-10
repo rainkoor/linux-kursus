@@ -221,7 +221,7 @@ tcpdump -ni vtnet1 icmp
 1. **WireGuard VPN:** seadista OPNsense'is WireGuardi server (*VPN* → *WireGuard*) ja ühenda oma arvuti laborivõrku turvaliselt ilma pordisuunamisteta.
 2. **IDS/IPS:** lülita sisse *Services* → *Intrusion Detection*, laadi ET Open reeglid ja vaata, milliseid hoiatusi tekib, kui Ubuntust skannid oma võrku `nmap`-iga (ainult oma laborivõrk!).
 3. **pfSense:** paigalda pfSense CE teise virtuaalmasinasse ja võrdle veebiliidest ning seadistuse loogikat.
-4. **FreeBSD:** paigalda tavaline FreeBSD virtuaalmasinasse (moodul 1 laboritöö FreeBSD-s): `pkg install nginx`, `sysrc nginx_enable=YES`, `service nginx start`. Võrdle Linuxiga.
+4. **FreeBSD:** paigalda tavaline FreeBSD virtuaalmasinasse (valikmoodul 29): `pkg install nginx`, `sysrc nginx_enable=YES`, `service nginx start`. Võrdle Linuxiga.
 
 ---
 

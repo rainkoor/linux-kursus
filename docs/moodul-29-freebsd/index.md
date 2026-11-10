@@ -4,7 +4,7 @@
 
 # Moodul 29. FreeBSD server
 
-**Maht:** 10 tundi · **Laboritöö:** FreeBSD 15 · **Eeldused:** moodulid 1–8, soovitatavalt 10 (ZFS) ja 21 · **Valikmoodul**
+**Maht:** 10 tundi · **Laboritöö:** FreeBSD 15 · **Eeldused:** moodulid 1–9, soovitatavalt 10 (ZFS) ja 21 · **Valikmoodul**
 
 Kogu kursus on seni olnud Linuxi keskne. Moodulis 21 kasutasid FreeBSD-d OPNsense'i sees, kus seda hallatakse veebiliidesest. Selles moodulis haldad **puhast FreeBSD serverit** käsurealt: paigaldus, paketid ja uuendused, teenused, kasutajad, võrk, ZFS ja alglaadimiskeskkonnad, tulemüür pf ning jailid. Moodul näitab, millised oskused on kõigis UNIX-i laadsetes süsteemides ühised ja mis on Linuxi omapära.
 

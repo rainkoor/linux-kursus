@@ -6,6 +6,11 @@
 
 **Maht:** 8 tundi · **Laboritöö:** Debian (ja AlmaLinux kliendina) · **Eeldused:** moodul 15
 
+> [!NOTE]
+> **Süsteemihalduri vaade andmebaasidele.** See moodul õpetab andmebaasiserverit paigaldama ja hoidma: kasutajad ja õigused, turvaline ligipääs, varundus ja taastamine ning replikatsiooni põhimõte. Eesmärk on, et oskaksid rakendusele andmebaasi valmis seada ja seda hallata - mitte SQL-i ega andmebaaside disaini põhjalik õppimine.
+>
+> **HKHK õppijale:** andmebaase ja SQL-i käsitletakse põhjalikumalt eraldi ainetes. See moodul annab andmebaasiserveri haldamiseks vajaliku aluse.
+
 ## Õpiväljundid
 
 Mooduli läbinud õppija:
@@ -18,9 +23,15 @@ Mooduli läbinud õppija:
 - varundab ja taastab andmebaase ning taastab unustatud administraatori parooli;
 - kirjeldab replikatsiooni põhimõtet ning viib rikke korral koopia põhiserveriks (ülevõtt).
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 16.1 Andmebaaside ülevaade
+
+> [!TIP]
+> **Lühidalt:** Relatsiooniline andmebaas (MariaDB, PostgreSQL) on server tabelitega ja SQL-iga, SQLite on üks fail, Valkey/Redis on mälus olev võti-väärtus hoidla. Haldur paigaldab, annab õigused, varundab ja taastab.
 
 Peaaegu iga rakendus hoiab oma andmeid andmebaasis. Administraator ei pea olema andmebaasiekspert, kuid peab oskama andmebaasi paigaldada, kasutajaid ja õigusi hallata, varundada ja taastada ning probleeme leida.
 
@@ -47,6 +58,9 @@ Peaaegu iga rakendus hoiab oma andmeid andmebaasis. Administraator ei pea olema 
 > **NoSQL** ei tähenda „parem“ ega „uuem“. Enamiku rakenduste jaoks on relatsiooniline andmebaas õige valik. NoSQL-andmebaasid lahendavad kitsamaid ülesandeid (vahemälu, väga suured andmemahud, paindlik struktuur).
 
 ## 16.2 MariaDB ja MySQL
+
+> [!TIP]
+> **Lühidalt:** MariaDB: `sudo mariadb` avab kliendi, `CREATE DATABASE`, `CREATE USER`, `GRANT` annavad rakendusele oma andmebaasi ja kasutaja. Vaikimisi kuulab server ainult `127.0.0.1`-l.
 
 ```bash
 sudo apt install mariadb-server
@@ -186,6 +200,9 @@ PostgreSQL-is tehakse koopiast põhiserver käsuga `SELECT pg_promote();` (või 
 
 ## 16.3 PostgreSQL
 
+> [!TIP]
+> **Lühidalt:** PostgreSQL-i haldab kasutaja `postgres`: `sudo -u postgres psql`, `createuser`, `createdb`. Kaugühendused lubatakse failides `postgresql.conf` ja `pg_hba.conf`.
+
 **PostgreSQL** on võimas avatud lähtekoodiga andmebaas, mida eelistatakse uutes rakendustes (nt GitLab, Mastodon, paljud ettevõtte süsteemid) ja keerukamate andmete jaoks.
 
 ```bash
@@ -245,6 +262,9 @@ sudo -u postgres pg_dumpall > koik.sql               # kõik andmebaasid ja roll
 
 ## 16.4 SQLite
 
+> [!TIP]
+> **Lühidalt:** SQLite ei ole server, vaid **üks fail**, mida rakendus otse kasutab. Varunda see käsuga `sqlite3 fail.db ".backup koopia.db"`, mitte töötava faili kopeerimisega.
+
 **SQLite** ei ole server, vaid teek: kogu andmebaas on **üks fail**, mida rakendus otse loeb ja kirjutab. Ei ole kasutajaid, porti ega teenust. SQLite on maailma enim kasutatud andmebaas - see on igas telefonis, brauseris (Firefoxi järjehoidjad) ja paljudes serveriprogrammides (Grafana, Uptime Kuma, Home Assistant, Pi-hole'i päringulogi).
 
 ```bash
@@ -286,6 +306,9 @@ Millal SQLite sobib ja millal mitte:
 
 ## 16.5 Võti-väärtus hoidla: Valkey ja Redis
 
+> [!TIP]
+> **Lühidalt:** Valkey (Redise vaba haru) hoiab andmeid mälus ja vastab mikrosekunditega. Seda kasutatakse vahemälu ja seansside jaoks. `valkey-cli ping` kontrollib, kas teenus töötab.
+
 **Redis** on mälupõhine võti-väärtus andmebaas, mis vastab mikrosekunditega. 2024. aastal muutis Redis oma litsentsi ja kogukond jätkas vaba haruna **Valkey** (Linux Foundation); käsud ja protokoll on samad. AlmaLinux 10 ja uuemad distrod pakuvad Valkeyt.
 
 Tüüpiline kasutus:
@@ -313,6 +336,9 @@ Turvalisus: vaikimisi kuulab ainult `127.0.0.1` ja `protected-mode yes`. **Ära 
 
 ## 16.6 Dünaamiline veebirakendus: nginx + PHP + MariaDB
 
+> [!TIP]
+> **Lühidalt:** Dünaamiline sait: nginx saadab `.php` päringud **PHP-FPM**-ile ja PHP loeb andmed MariaDB-st. Nii töötavad WordPress ja Moodle.
+
 Klassikaline veebirakenduse virn on **LEMP** (*Linux, nginx, MariaDB/MySQL, PHP*) või Apache'iga **LAMP**. Nii töötavad näiteks WordPress ja Moodle.
 
 ```mermaid
@@ -338,8 +364,10 @@ location ~ \.php$ {
 
 Lisa serveriplokis ka `index index.php index.html;`.
 
-
 ## 16.7 Andmebaaside turvalisus ja varundus
+
+> [!TIP]
+> **Lühidalt:** Andmebaasi varundatakse **dump**-iga (`mariadb-dump`, `pg_dump`), mitte failide kopeerimisega. Rakendus saab oma kasutaja ainult oma andmebaasile, mitte `root`-i. Tee taastamistest.
 
 | Reegel | Miks |
 |---|---|

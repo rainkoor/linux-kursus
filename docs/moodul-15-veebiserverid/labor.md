@@ -290,7 +290,7 @@ for i in $(seq 6); do curl -s -H "Host: kool.lab.example" http://localhost:8080/
 
 ## 7. osa. Päris sertifikaadid
 
-Laboris kasutasid oma CA-d ja Caddy CA-d. Selles osas uurid, kuidas näevad välja **avalikud** sertifikaadid (teooria punkt 15.3, „Avaliku sertifikaadi hankimine“). Internetiühendusega masinast:
+Laboris kasutasid oma CA-d ja Caddy CA-d. Selles osas uurid, kuidas näevad välja **avalikud** sertifikaadid (teooria punkt 15.3, plokk „Loe lähemalt: Avaliku sertifikaadi hankimine“). Internetiühendusega masinast:
 
 **7.1** Vaata päris saidi sertifikaati ja ahelat:
 

@@ -16,9 +16,15 @@ Mooduli läbinud õppija:
 - käivitab mitmest konteinerist koosneva rakenduse Compose-failiga;
 - käivitab konteineri systemd teenusena (Quadlet) ja seadistab pildi automaatse uuendamise.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 14.1 Konteinerid
+
+> [!TIP]
+> **Lühidalt:** Konteiner on isoleeritud protsess, mis jagab hosti kernelit, kuid näeb oma failisüsteemi, protsesse ja võrku. See käivitub **pildist** (*image*), mis tuleb registrist. Podman ja Docker kasutavad samu pilte ja peaaegu samu käske.
 
 Konteinerid on tänapäeva serverihalduse igapäevane tööriist. Õpime neid enne serveriteenuseid, sest järgmistes moodulites käivitatakse osa teenuseid (CoreDNS, Pi-hole, Mailpit, Adminer, Prometheus, Grafana, Uptime Kuma) just konteineritena.
 
@@ -117,7 +123,8 @@ Jaile käsitleme lähemalt moodulis 29 (punkt 29.11).
 
 </details>
 
-### Millel konteinerid põhinevad
+<details>
+<summary>Loe lähemalt: Millel konteinerid põhinevad</summary>
 
 Konteinerid põhinevad Linuxi kerneli võimalustel:
 
@@ -136,6 +143,8 @@ flowchart LR
     I -- "podman run" --> C2["Konteiner 2"]
     C1 -. "andmed" .-> V[("Köide<br>(volume)")]
 ```
+
+</details>
 
 ### Pildid ja registrid
 
@@ -166,6 +175,9 @@ Pildi nimi: `register/nimeruum/nimi:silt`, nt `docker.io/library/nginx:1.27-alpi
 Käsud on peaaegu identsed - `alias docker=podman` töötab enamasti. Selles moodulis kasutame Podmani.
 
 ## 14.2 Podmani kasutamine
+
+> [!TIP]
+> **Lühidalt:** `podman run -d --name veeb -p 8080:80 nginx` käivitab konteineri, `podman ps` näitab töötavaid, `podman logs` logisid, `podman exec -it` avab kesta. Andmed hoia köites (`-v`), muidu kaovad need konteineri kustutamisel.
 
 ```bash
 sudo dnf install podman
@@ -231,6 +243,9 @@ Piirangud: tavakasutaja ei saa avada porte alla 1024 (kasuta nt 8080) ja tema ko
 
 ## 14.3 Oma konteinerpilt
 
+> [!TIP]
+> **Lühidalt:** Oma pilt kirjeldatakse failis `Containerfile` (`FROM`, `COPY`, `RUN`, `CMD`) ja ehitatakse käsuga `podman build -t nimi .`.
+
 Pilt kirjeldatakse failis **`Containerfile`** (Dockeri terminoloogias `Dockerfile` - mõlemad nimed töötavad):
 
 ```dockerfile
@@ -261,6 +276,9 @@ curl http://localhost:8081
 Pildi saab saata registrisse (`podman push`), et seda saaks kasutada ka teistes masinates.
 
 ## 14.4 Mitu konteinerit: Compose
+
+> [!TIP]
+> **Lühidalt:** Mitme konteineri rakendus kirjeldatakse failis `compose.yaml`. `podman compose up -d` käivitab kõik korraga, `down` peatab.
 
 Tegelik rakendus koosneb sageli mitmest konteinerist (veebirakendus, andmebaas, vahemälu). Need kirjeldatakse ühes failis **`compose.yaml`**:
 
@@ -300,6 +318,9 @@ podman-compose down                          # peata ja kustuta konteinerid (kö
 Compose'i võrgus leiavad konteinerid üksteist **teenuse nime** järgi: Adminer ühendub andmebaasiga aadressil `db`. Dockeriga on sama käsk `docker compose up -d`.
 
 ## 14.5 Konteiner systemd teenusena: Quadlet
+
+> [!TIP]
+> **Lühidalt:** **Quadlet** teeb konteinerist systemd teenuse: fail `/etc/containers/systemd/nimi.container`, siis `systemctl daemon-reload` ja `systemctl start nimi`. Konteiner käivitub alglaadimisel ja taaskäivitub vea korral.
 
 Serveris peavad konteinerid käivituma koos süsteemiga ja taaskäivituma vea korral - täpselt nagu tavalised teenused. Podmani **Quadlet** võimaldab kirjeldada konteineri systemd üksusena:
 

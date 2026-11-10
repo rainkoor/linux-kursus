@@ -6,6 +6,11 @@
 
 **Maht:** 10 tundi · **Laboritöö:** Ubuntu (server), Debian (DNS), Ubuntu töölaud (klient, valikuline) · **Eeldused:** moodulid 1–20 (eriti 12, 15, 17 ja 20) · **Valikmoodul**
 
+> [!NOTE]
+> **Süsteemihalduri vaade e-postile.** See moodul näitab, kuidas e-posti server Linuxis kokku pannakse ja kuidas see DNS-i, TLS-i ja turvalisusega seotud on. Eesmärk on töötav laboriserver ja e-posti toimimise mõistmine - mitte suure e-posti teenuse täielik valdamine.
+>
+> **HKHK õppijale:** e-posti serveri paigaldust käsitletakse põhjalikumalt eraldi moodulis. See valikmoodul annab Linuxi poolt vaadates aluse ja seob e-posti kursuse teiste teemadega (DNS, TLS, seire).
+
 E-post on üks vanimaid ja kõige laiemalt kasutatud internetiteenuseid. Paljud asutused kasutavad täna pilveposti (Microsoft 365, Google Workspace, Zone jt), kuid süsteemihaldur peab ka siis mõistma, kuidas e-post liigub, miks kiri jõuab rämpsposti ja kuidas DNS-kirjed (MX, SPF, DKIM, DMARC) toimivad. Selles moodulis ehitame laborivõrku täieliku e-posti serveri: Postfix võtab kirju vastu ja saadab neid, Dovecot hoiab postkaste ja annab neile ligipääsu ning OpenDKIM allkirjastab väljuvad kirjad.
 
 > [!NOTE]

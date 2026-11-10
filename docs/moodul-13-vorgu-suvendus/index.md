@@ -20,9 +20,15 @@ Mooduli läbinud õppija:
 - loob WireGuardiga VPN-tunneli;
 - analüüsib võrguliiklust `tcpdump`-iga.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 13.1 IPv6
+
+> [!TIP]
+> **Lühidalt:** IPv6 aadress on 128-bitine ja kirjutatakse kuueteistkümnendsüsteemis (`fd83::54/64`). Masin saab aadressi tavaliselt ise (SLAAC), serverile antakse staatiline. Käsud on samad mis IPv4-l, võtmega `-6`.
 
 IPv4-aadresse on umbes 4 miljardit ja need on ammu otsas - internet on seni toiminud NAT-i abil. **IPv6** aadressid on **128-bitised** (IPv4 on 32-bitine), seega jätkub neid igale seadmele. Suur osa mobiilivõrkudest ja koduühendustest kasutab juba IPv6-t ning serveriadministraator kohtab seda kindlasti.
 
@@ -53,7 +59,8 @@ Seega sama aadress on `2001:db8:83::52`. Alamvõrk kirjutatakse nagu IPv4-s pref
 
 Igal IPv6-liidesel on korraga **mitu aadressi**: vähemalt link-local ja sageli ka globaalne ja/või ULA. See on normaalne.
 
-### Kuidas masin aadressi saab?
+<details>
+<summary>Loe lähemalt: Kuidas masin aadressi saab?</summary>
 
 | Viis | Kuidas töötab |
 |---|---|
@@ -62,6 +69,8 @@ Igal IPv6-liidesel on korraga **mitu aadressi**: vähemalt link-local ja sageli 
 | **Staatiline** | Serveritele, nagu IPv4-s. |
 
 Serverile antakse üldjuhul staatiline aadress, et DNS-kirje (`AAAA`) ja tulemüüri reeglid püsiksid. Töölaudadel kasutatakse SLAAC-i koos **privaatsuslaienditega** (*privacy extensions*): liidese osa vahetub regulaarselt, et seadet ei saaks aadressi järgi jälgida.
+
+</details>
 
 ### IPv6 käsud
 
@@ -118,6 +127,9 @@ IPv6-s ei kasutata tavaliselt NAT-i: iga masin on globaalse aadressiga otse adre
 Veebiserver kuulab IPv6-l nginx-is reaga `listen [::]:80;` ja Apache'is `Listen 80` (mõlemad). DNS-is lisatakse `AAAA`-kirje (moodul 17).
 
 ## 13.2 Sild (bridge)
+
+> [!TIP]
+> **Lühidalt:** **Sild** on tarkvaraline kommutaator: sellega lisatud liidesed on samas võrgus. Sildu kasutavad virtuaalmasinad ja konteinerid (Proxmoxi `vmbr0`).
 
 **Sild** on Linuxi kernelis töötav **tarkvaraline kommutaator** (*switch*). Silda lisatud liidesed on samas võrgulõigus (L2): sild õpib MAC-aadresse ja edastab kaadreid nagu päris kommutaator.
 
@@ -183,6 +195,9 @@ ip -d link show br0             # silla seaded
 
 ## 13.3 VLAN
 
+> [!TIP]
+> **Lühidalt:** **VLAN** jagab ühe füüsilise võrgu mitmeks loogiliseks võrguks märgisega (802.1Q). Linuxis luuakse VLAN-liides (`ens19.20`) ja see seadistatakse nagu tavaline liides.
+
 **VLAN** (*Virtual LAN*, standard **802.1Q**) jagab ühe füüsilise võrgu mitmeks loogiliseks võrguks. Iga Ethernet-kaadri sisse lisatakse **4-baidine märgis** (*tag*), milles on VLAN-i number (1-4094). Kommutaator hoiab eri VLAN-ide liikluse lahus nagu eraldi kommutaatorid.
 
 ```mermaid
@@ -235,6 +250,9 @@ VLAN-e kasutatakse koolides ja ettevõtetes võrkude eraldamiseks (õpetajad, õ
 > **Proxmoxis** saab VM-i võrgukaardile määrata VLAN-i (*VLAN Tag*), kui sild on *VLAN aware*. Siis märgistab Proxmox kaadrid ise ja VM näeb tavalist märgistamata võrku. Kui VM peab ise mitut VLAN-i nägema (nt tulemüür), jäetakse märgis tühjaks ja VLAN-id seadistatakse VM-is nagu eespool.
 
 ## 13.4 Bond (liideste koondamine)
+
+> [!TIP]
+> **Lühidalt:** **Bond** ühendab mitu võrgukaarti üheks liideseks töökindluse (`active-backup`) või suurema läbilaskevõime (`802.3ad`/LACP) jaoks. Olekut näeb failist `/proc/net/bonding/bond0`.
 
 **Bond** (ka *link aggregation*, *teaming*, *NIC teaming*) ühendab mitu võrgukaarti üheks loogiliseks liideseks `bond0`. Eesmärk on **töökindlus** (kaabli, kaardi või kommutaatori pordi rikke korral ühendus jätkub) ja/või suurem **läbilaskevõime**.
 
@@ -294,6 +312,9 @@ ip -br link                     # bond0 ja selle liikmed (master bond0)
 
 ## 13.5 Linux ruuterina: edastamine ja NAT
 
+> [!TIP]
+> **Lühidalt:** Linux saab olla ruuter: luba edastamine (`net.ipv4.ip_forward=1`) ja lisa NAT (`masquerade`), et sisevõrgu masinad pääseksid välja. Pordi edasisuunamine (`dnat`) avab sisevõrgu teenuse väljapoole.
+
 Linux saab olla **ruuter**: võtta pakette vastu ühest võrgust ja saata teise. Nii töötavad ka OPNsense, kodu-WiFi-ruuterid ja kõik konteineri- ja VPN-lahendused. Vaikimisi on edastamine välja lülitatud:
 
 ```bash
@@ -335,6 +356,9 @@ sudo conntrack -L               # aktiivsed NAT-ühendused (pakett conntrack)
 > Ruuteril peab lisaks NAT-ile tulemüür lubama edastatavat liiklust (ahel `forward`). firewalld ja ufw keelavad edastamise vaikimisi; ufw-s muuda `DEFAULT_FORWARD_POLICY` failis `/etc/default/ufw` või lisa `ufw route allow` reeglid.
 
 ## 13.6 VPN: WireGuard
+
+> [!TIP]
+> **Lühidalt:** WireGuard loob kiire krüpteeritud VPN-tunneli. Igal osapoolel on võtmepaar, seadistus on failis `/etc/wireguard/wg0.conf`, käivitus `systemctl enable --now wg-quick@wg0`, olek `wg show`.
 
 **VPN** (*Virtual Private Network*) loob kahe võrgu või seadme vahele krüpteeritud tunneli üle interneti. Nii pääseb nt kodust turvaliselt kooli labori sisevõrku, kuigi labori masinatel pole avalikke aadresse.
 
@@ -406,6 +430,9 @@ Serveri tulemüüris ava **51820/udp** (`sudo ufw allow 51820/udp`, `sudo firewa
 Teisi VPN-e: **OpenVPN** (vanem, TLS-põhine, töötab ka TCP-pordil 443 piiravates võrkudes) ja **IPsec** (standardne, ühildub ruuterite ja tulemüüridega, keerulisem seadistada).
 
 ## 13.7 Liikluse analüüs: tcpdump
+
+> [!TIP]
+> **Lühidalt:** `tcpdump` näitab liidesel liikuvaid pakette: `sudo tcpdump -i ens18 -n port 53`. Salvesta püüdmine faili (`-w`) ja ava see Wiresharkis.
 
 Kui ühendus ei tööta ja tavalised käsud (moodul 7, punkt 7.5) põhjust ei näita, vaata pakette endid. **tcpdump** püüab võrguliidesel liikuvaid pakette ja näitab neid terminalis.
 

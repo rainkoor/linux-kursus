@@ -23,6 +23,21 @@ Mooduli läbinud õppija:
 > **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
 
 ---
+
+**Kuidas kõik kokku käib.** Uue ketta kasutuselevõtt käib alati samas järjekorras. Selle mooduli punktid järgivad seda teed:
+
+```mermaid
+flowchart LR
+    A["1. leia ketas<br>lsblk (8.1)"] --> B["2. partitsioon<br>fdisk (8.2)"]
+    B --> C["3. failisüsteem<br>mkfs (8.3)"]
+    C --> D["4. haagi<br>mount (8.4)"]
+    D --> E["5. püsivaks<br>/etc/fstab (8.5)"]
+    B -. "või" .-> L["LVM: PV → VG → LV<br>(8.7)"]
+    L --> C
+```
+
+Kogu tee ühe juhendina on punkti 8.5 lõpus: [Uus ketas kasutusele samm-sammult](#uus-ketas-kasutusele-samm-sammult).
+
 ## 8.1 Plokkseadmed
 
 > [!TIP]
@@ -68,6 +83,7 @@ sr0                 11:0    1  1.0G  0 rom
 ```
 
 Siin on näha, et süsteemiketas `sda` on jagatud kolmeks partitsiooniks ja kolmas partitsioon on LVM-i all jagatud juur- ja saalealaks. Ketas `sdb` on tühi.
+
 ## 8.2 Partitsioonitabelid
 
 > [!TIP]
@@ -113,6 +129,20 @@ sudo fdisk /dev/sdb
 
 `fdisk` ei muuda midagi enne, kui vajutad `w`. Kuni selleni saab alati `q`-ga katkestada.
 
+**Näide: kogu ketas `/dev/sdb` üheks partitsiooniks.** Kirjuta klahv ja vajuta Enter; kus allpool on „Enter“, nõustu vaikeväärtusega:
+
+| fdisk küsib | Sina vastad | Mida see teeb |
+|---|---|---|
+| `Command (m for help):` | `g` | loob tühja GPT-tabeli |
+| `Command (m for help):` | `n` | uus partitsioon |
+| `Partition number (1-128, default 1):` | Enter | partitsioon nr 1 |
+| `First sector (…, default 2048):` | Enter | algab 1 MiB juurest |
+| `Last sector, +/-sectors or +/-size{K,M,G,T,P} …:` | Enter (või nt `+2G`) | kogu ketas (või 2 GiB) |
+| `Command (m for help):` | `p` | kontrolli tulemust |
+| `Command (m for help):` | `w` | kirjuta kettale ja välju |
+
+Tulemus: `lsblk` näitab ketta all partitsiooni `sdb1`. Kui ketas oli enne kasutusel, võib `fdisk` küsida *Do you want to remove the signature?* - vasta `Y` ainult siis, kui oled kindel, et see on õige ketas.
+
 **parted** (sobib skriptidesse):
 
 ```bash
@@ -128,6 +158,7 @@ Pärast partitsioonide muutmist kontrolli tulemust käsuga `lsblk`. Kui kernel u
 
 > [!WARNING]
 > **Hoiatus:** partitsioonitööriist teeb täpselt seda, mida käsid. Vale ketta tähe korral kustutad töötava süsteemi andmed. **Kontrolli enne iga muudatust `lsblk`-iga, et töötad õige kettaga.**
+
 ## 8.3 Failisüsteemid
 
 > [!TIP]
@@ -180,6 +211,7 @@ sudo xfs_info /dev/sdb2                      # XFS ülevaade
 ```
 
 ext4 jätab vaikimisi 5% ruumist juurkasutajale, et süsteem töötaks ka siis, kui tavakasutajad on ketta täis kirjutanud. Suurel andmekettal on see palju raisatud ruumi, seepärast vähendatakse seda sageli (`tune2fs -m`).
+
 ## 8.4 Haakimine
 
 > [!TIP]
@@ -209,6 +241,7 @@ Haakimisvalikud:
 sudo mount -o ro /dev/sdb1 /mnt/andmed       # ainult lugemiseks
 sudo mount -o remount,rw /mnt/andmed         # haagi uuesti kirjutamiseks
 ```
+
 ## 8.5 Püsiv haakimine: /etc/fstab
 
 > [!TIP]
@@ -255,6 +288,65 @@ df -h
 
 > [!WARNING]
 > **Vigane fstab võib takistada süsteemi käivitumist!** Kui alglaadimisel ei leita seadet, mis ei ole märgitud valikuga `nofail`, satub süsteem hädaolukorra režiimi (*emergency mode*), kust saab parandada ainult konsooli kaudu. Seepärast: kasuta lisaketastel `nofail`, kontrolli muudatusi `findmnt --verify` ja `mount -a` abil ning hoia konsool käepärast.
+
+### Uus ketas kasutusele samm-sammult
+
+Näide: virtuaalmasinale on lisatud uus tühi ketas ja see peab olema kataloogis `/srv/andmed` ka pärast taaskäivitust. Sama töökäik sobib igale distrole.
+
+1. **Leia ketas** - otsi ketast, millel pole partitsioone ega haakepunkti (siin `sdb`):
+
+    ```bash
+    lsblk
+    ```
+
+2. **Tee partitsioon** (vt fdiski näide punktis 8.2) ja kontrolli:
+
+    ```bash
+    sudo fdisk /dev/sdb          # g, n, Enter, Enter, Enter, w
+    lsblk /dev/sdb               # nüüd on olemas sdb1
+    ```
+
+3. **Loo failisüsteem:**
+
+    ```bash
+    sudo mkfs.ext4 /dev/sdb1     # AlmaLinuxis sageli: sudo mkfs.xfs /dev/sdb1
+    ```
+
+4. **Loo haakepunkt ja proovi käsitsi haakida:**
+
+    ```bash
+    sudo mkdir -p /srv/andmed
+    sudo mount /dev/sdb1 /srv/andmed
+    df -h /srv/andmed
+    sudo umount /srv/andmed      # haagi lahti - järgmises sammus teeb seda fstab
+    ```
+
+5. **Leia UUID ja lisa rida faili `/etc/fstab`:**
+
+    ```bash
+    sudo blkid /dev/sdb1         # kopeeri UUID="…" väärtus
+    sudo nano /etc/fstab
+    ```
+
+    Lisa faili lõppu (UUID asemele oma väärtus, failisüsteemi tüüp nagu sammus 3):
+
+    ```text
+    UUID=7746b4aa-dffc-47bd-9f2e-db9e95649cbe  /srv/andmed  ext4  defaults,nofail  0  2
+    ```
+
+6. **Kontrolli enne taaskäivitust:**
+
+    ```bash
+    sudo findmnt --verify        # vigu ei tohi olla
+    sudo systemctl daemon-reload
+    sudo mount -a                # haagib fstab-i järgi
+    findmnt /srv/andmed          # on haagitud
+    ```
+
+7. **Taaskäivita** (`sudo reboot`) ja kontrolli uuesti `df -h /srv/andmed`. Alles siis tead, et seadistus on püsiv.
+
+Kui tahad hiljem köidet suurendada, kasuta partitsiooni asemel LVM-i (punkt 8.7) - sammud 3-7 jäävad samaks, ainult seade on `/dev/vg_andmed/lv_andmed`.
+
 ## 8.6 Saaleala (swap)
 
 > [!TIP]
@@ -283,6 +375,7 @@ Püsivaks muutmiseks lisa faili `/etc/fstab` rida:
 ```
 
 Kui palju saaleala on vaja, sõltub kasutusest. Serveritel on tavaliselt piisav 1–4 GiB. Kui server kasutab saaleala pidevalt ja palju, on vaja rohkem mälu, mitte rohkem saaleala.
+
 ## 8.7 LVM
 
 > [!TIP]
@@ -332,6 +425,14 @@ sudo mount /dev/vg_andmed/lv_andmed /srv/andmed  # 5. haagi
 ```
 
 Köite tee on kujul `/dev/VG/LV` või `/dev/mapper/VG-LV` - mõlemad viitavad samale seadmele.
+
+**6. Tee haakimine püsivaks** nagu punktis 8.5 - fstab-i rida kas UUID-ga (`sudo blkid /dev/vg_andmed/lv_andmed`) või köite teega, mis LVM-i puhul ei muutu:
+
+```text
+/dev/vg_andmed/lv_andmed  /srv/andmed  xfs  defaults,nofail  0  0
+```
+
+Kontrolli: `sudo findmnt --verify && sudo systemctl daemon-reload && sudo mount -a`.
 
 Ülevaade:
 
@@ -384,6 +485,7 @@ sudo lvremove /dev/vg_andmed/lv_andmed
 sudo vgremove vg_andmed
 sudo pvremove /dev/sdb
 ```
+
 ## 8.8 Kettakasutuse jälgimine
 
 > [!TIP]
@@ -406,6 +508,7 @@ Levinud põhjused, miks ketas täis saab:
 - pakihalduri vahemälu (`apt clean`, `dnf clean all`);
 - vanad kernelid ja varukoopiad;
 - kustutatud fail, mida mõni protsess veel avatuna hoiab - ruum vabaneb alles protsessi lõppedes (`sudo lsof +L1`).
+
 ## 8.9 Virtuaalmasina ketta suurendamine
 
 > [!TIP]
@@ -428,7 +531,16 @@ sudo lvextend -r -l +100%FREE /dev/almalinux/root   # suurenda LV ja failisüste
 df -h /
 ```
 
-Ilma LVM-ita: `growpart`, seejärel `resize2fs` (ext4) või `xfs_growfs` (XFS).
+Teistes distrodes on sammud samad, erinevad partitsiooni number ja köite nimi (vaata need `lsblk`-iga):
+
+| Distro (vaikepaigaldus) | Käsud pärast ketta suurendamist hüperviisoris |
+|---|---|
+| AlmaLinux (LVM, XFS) | `sudo growpart /dev/sda 3`, `sudo pvresize /dev/sda3`, `sudo lvextend -r -l +100%FREE /dev/almalinux/root` |
+| Ubuntu Server (LVM, ext4) | `sudo growpart /dev/sda 3`, `sudo pvresize /dev/sda3`, `sudo lvextend -r -l +100%FREE /dev/ubuntu-vg/ubuntu-lv` |
+| Debian (ilma LVM-ita, ext4) | `sudo growpart /dev/sda N`, `sudo resize2fs /dev/sdaN` - N on juurpartitsiooni number `lsblk`-ist |
+
+Debianis on juurpartitsiooni taga sageli saaleala partitsioon - siis `growpart` ei saa juurpartitsiooni suurendada. Lihtsaim lahendus on lisada uus ketas (punkt 8.5 juhend) või kasutada juba paigaldusel LVM-i.
+
 ## 8.10 Ketta krüpteerimine: LUKS
 
 > [!TIP]

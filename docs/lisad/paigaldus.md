@@ -348,7 +348,7 @@ wsl --shutdown                   # peata kõik
 
 Windowsi kettad on Linuxis kataloogis `/mnt/c`, Linuxi failid Windowsis aadressil `\\wsl.localhost\Debian`. Täpsemalt (seadistus, systemd, failid, varundus) vt valikmoodul 26, punkt 26.9.
 
-**Piirangud:** WSL ei sobi serverilaboriteks (moodulid 5, 7–17, 20–27), sest võrk on vaikimisi NAT-i taga ning alglaadimine, GRUB, kettahaldus ja tulemüür erinevad päris süsteemist. Kui jõuad moodulini 5, loo virtuaalmasinad (punktid 3–7) - VirtualBoxis (punkt 9) või oma Proxmoxis.
+**Piirangud:** WSL sobib moodulitele 1–4 ja 6 (osaliselt 14 ja 19), kuid ei sobi ülejäänud serverilaboriteks, sest võrk on vaikimisi NAT-i taga ning alglaadimine, GRUB, kettahaldus ja tulemüür erinevad päris süsteemist. Kui jõuad moodulini 5, loo virtuaalmasinad (punktid 3–7) - VirtualBoxis (punkt 9) või oma Proxmoxis.
 
 <!-- navigatsioon -->
 ---

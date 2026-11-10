@@ -230,6 +230,48 @@ sudo groupdel tarkvara                 # kustuta grupp
 getent group tarkvara                  # vaata grupi liikmeid
 ```
 
+### Uus halduriõigustega kasutaja samm-sammult
+
+Näide: uus kolleeg `mari` peab saama serverisse sisse logida ja kasutada `sudo`-t. Ainuke erinevus distrode vahel on halduri grupi nimi: Debianis ja Ubuntus `sudo`, AlmaLinuxis `wheel`.
+
+1. **Loo kasutaja** koos kodukataloogi ja kestaga:
+
+    ```bash
+    sudo useradd -m -s /bin/bash -c "Mari Maasikas" mari
+    ```
+
+2. **Määra parool** (või sunni see esimesel sisselogimisel vahetama):
+
+    ```bash
+    sudo passwd mari
+    sudo chage -d 0 mari                 # valikuline: vaheta parool esimesel sisselogimisel
+    ```
+
+3. **Anna halduriõigus** - lisa kasutaja halduri gruppi (`-aG`, mitte `-G`!):
+
+    | Debian, Ubuntu | AlmaLinux |
+    |---|---|
+    | `sudo usermod -aG sudo mari` | `sudo usermod -aG wheel mari` |
+
+4. **Kontrolli:**
+
+    ```bash
+    id mari                              # gruppide seas on sudo või wheel
+    sudo -l -U mari                      # mida mari tohib sudo-ga teha
+    ```
+
+5. **Proovi uue kasutajana** - teises aknas või `su`-ga:
+
+    ```bash
+    su - mari
+    sudo whoami                          # küsib mari parooli, vastus: root
+    exit
+    ```
+
+Kui kolleeg logib sisse SSH-võtmega (moodul 7), kopeerib ta oma avaliku võtme serverisse käsuga `ssh-copy-id mari@server` või lisad selle tema faili `/home/mari/.ssh/authorized_keys`.
+
+**Kasutaja eemaldamine**, kui kolleeg lahkub: lukusta kohe (`sudo usermod -L mari`, `sudo chage -E 0 mari`), andmed varunda ja alles siis kustuta (`sudo userdel -r mari`).
+
 ## 3.6 Failiõigused
 
 > [!TIP]
