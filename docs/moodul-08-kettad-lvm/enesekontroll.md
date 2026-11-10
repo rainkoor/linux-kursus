@@ -1,5 +1,5 @@
 <!-- navigatsioon -->
-[← Laboritöö 8. Kettad, failisüsteemid ja LVM](labor.md) · [Sisukord](../../README.md#sisukord) · [Proovieksam: põhiosa →](../proovieksam-pohiosa.md)
+[← Laboritöö 8. Kettad, failisüsteemid ja LVM](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 9. Varundus ja taastamine →](../moodul-09-varundus/index.md)
 <!-- /navigatsioon -->
 
 # Moodul 8. Enesekontroll
@@ -241,5 +241,5 @@ df -i /
 <!-- navigatsioon -->
 ---
 
-[← Laboritöö 8. Kettad, failisüsteemid ja LVM](labor.md) · [Sisukord](../../README.md#sisukord) · [Proovieksam: põhiosa →](../proovieksam-pohiosa.md)
+[← Laboritöö 8. Kettad, failisüsteemid ja LVM](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 9. Varundus ja taastamine →](../moodul-09-varundus/index.md)
 <!-- /navigatsioon -->

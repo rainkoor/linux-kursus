@@ -4,7 +4,7 @@
 
 # Moodul 7. Võrk ja SSH
 
-**Maht:** 12 tundi · **Laboritöö:** Ubuntu · **Eeldused:** moodulid 1–6, võrgu alused (IP-aadress, alamvõrk, vaikelüüs)
+**Maht:** 10 tundi · **Laboritöö:** Ubuntu · **Eeldused:** moodulid 1–6, võrgu alused (IP-aadress, alamvõrk, vaikelüüs)
 
 ## Õpiväljundid
 
@@ -20,14 +20,17 @@ Mooduli läbinud õppija:
 - kopeerib faile käskudega `scp` ja `rsync`;
 - seadistab tulemüüri (`ufw`, `firewalld`, `nftables`);
 - seadistab ajavööndi ja ajasünkroonimise (systemd-timesyncd, chrony) ning sisevõrgu ajaserveri;
-- seadistab süsteemi lokaadi ja klaviatuuripaigutuse;
-- loob WireGuardiga VPN-tunneli;
-- kasutab SSH hüppeserverit (`ProxyJump`);
-- selgitab IPv6 aadresside põhimõtteid ning seadistab silla, VLAN-i ja bond-liidese.
+- kasutab SSH hüppeserverit (`ProxyJump`).
+
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
 
 ---
 
 ## 7.1 Võrguliidesed ja aadressid
+
+> [!TIP]
+> **Lühidalt:** `ip -br a` näitab liideseid ja aadresse, `ip r` marsruute ja vaikelüüsi. Samas võrgus ei tohi kahel masinal olla sama IP-aadress.
 
 Võrgu seadistust vaadatakse ja muudetakse käsuga **`ip`** (pakett `iproute2`). Vanemates juhendites kasutatav `ifconfig` on aegunud ega pruugi olla paigaldatud.
 
@@ -119,6 +122,9 @@ Uus nimi tuleks lisada ka faili `/etc/hosts`.
 
 ## 7.2 Püsiv võrguseadistus
 
+> [!TIP]
+> **Lühidalt:** Püsiv seadistus sõltub distrost: Ubuntus **Netplan**, Debianis `/etc/network/interfaces`, AlmaLinuxis **NetworkManager** (`nmcli`).
+
 Püsiva seadistuse viis erineb distrode kaupa - see on üks suurimaid erinevusi Debiani, Ubuntu ja AlmaLinuxi vahel.
 
 | Distro | Vahend | Seadistus |
@@ -206,7 +212,8 @@ DHCP-le tagasi: `sudo nmcli connection modify ens18 ipv4.method auto ipv4.addres
 
 Menüüpõhine tööriist **`nmtui`** on mugav, kui `nmcli` süntaksit ei mäleta. Ühenduste failid on kataloogis `/etc/NetworkManager/system-connections/`.
 
-### Püsivad staatilised marsruudid
+<details>
+<summary>Loe lähemalt: Püsivad staatilised marsruudid</summary>
 
 Vaikelüüs saadab kõik paketid, mille sihtvõrku masin ei tunne, ühte ruuterisse. Kui mõni võrk on kättesaadav **teise ruuteri** kaudu (nt haldusvõrk `10.10.0.0/16` ruuteri `10.0.83.254` taga), lisatakse **staatiline marsruut**. `ip route add` (punkt 7.1) kaob taaskäivitusel; püsivaks tuleb see kirjutada võrguseadistusse:
 
@@ -233,7 +240,12 @@ sudo nmcli connection up ens18
 
 Kontrolli: `ip route` (marsruut on tabelis) ja `ip route get 10.10.1.5` (milline marsruut ja liides valitakse). IPv6 marsruudid lisatakse samamoodi (`ipv6.routes`, Netplanis `to: 2001:db8::/32`).
 
+</details>
+
 ## 7.3 Nimelahendus ja DNS
+
+> [!TIP]
+> **Lühidalt:** Nimi lahendatakse kõigepealt failist `/etc/hosts`, siis DNS-ist. `getent hosts nimi` lahendab nagu programmid, `dig nimi` küsib ainult DNS-ilt.
 
 Kui kirjutad `ping www.hkhk.edu.ee`, peab süsteem nime kõigepealt IP-aadressiks teisendama. Järjekorra määrab fail `/etc/nsswitch.conf`:
 
@@ -298,6 +310,9 @@ host www.debian.org                  # lihtne päring
 
 ## 7.4 Pordid ja ühendused
 
+> [!TIP]
+> **Lühidalt:** Teenus kuulab **pordil** (SSH 22, HTTP 80, HTTPS 443). `sudo ss -tulpn` näitab, millised programmid millistel portidel kuulavad.
+
 Võrguteenus kuulab kindlat **porti**. IP-aadress ütleb, millise masinaga ühenduda, port ütleb, millise teenusega.
 
 | Port | Protokoll | Teenus |
@@ -342,6 +357,9 @@ Vanemates juhendites kasutatav `netstat` (pakett `net-tools`) teeb sama, kuid on
 
 ## 7.5 Võrguprobleemide diagnoosimine
 
+> [!TIP]
+> **Lühidalt:** Otsi viga kihtide kaupa alt üles: liides ja aadress → lüüs (`ping`) → internet → DNS (`dig`) → teenus ja port (`curl`, `nc`).
+
 Kui „internet ei tööta“, liigu **altpoolt üles**, kihthaaval. Iga samm kontrollib üht asja:
 
 | Samm | Käsk | Kui ei tööta, siis probleem on… |
@@ -382,6 +400,9 @@ sudo tcpdump -i ens18 port 53    # vaata võrguliiklust (pakett tcpdump)
 > **Pea meeles:** `ping` võib olla tulemüüriga keelatud. Kui `ping` ei vasta, kuid `curl` töötab, on võrk korras.
 
 ## 7.6 SSH lähemalt
+
+> [!TIP]
+> **Lühidalt:** Logi sisse **SSH-võtmega**, mitte parooliga: `ssh-keygen -t ed25519`, siis `ssh-copy-id kasutaja@server`. Faile kopeerivad `scp` ja `rsync`.
 
 SSH-d oled kasutanud alates 1. moodulist. Nüüd vaatame, kuidas seda turvaliselt ja mugavalt kasutada.
 
@@ -503,7 +524,8 @@ rsync -avz ubuntusrv:/var/www/ ./veebi-varu/         # -z: paki ülekandmisel
 
 Mõlemad nõuavad, et `rsync` oleks paigaldatud mõlemas masinas.
 
-### Tunnelid
+<details>
+<summary>Loe lähemalt: Tunnelid</summary>
 
 SSH abil saab suunata võrguliiklust turvalise ühenduse kaudu:
 
@@ -513,7 +535,10 @@ ssh -L 8080:localhost:80 ubuntusrv
 
 Nüüd avab sinu arvutis aadress `http://localhost:8080` serveri `ubuntusrv` pordi 80 - isegi kui tulemüür laseb serverisse ainult SSH-d. Sama moodi saab turvaliselt ühenduda näiteks andmebaasiga, mis kuulab ainult `127.0.0.1`-l.
 
-### Hüppeserver: ProxyJump
+</details>
+
+<details>
+<summary>Loe lähemalt: Hüppeserver: ProxyJump</summary>
 
 Sageli ei ole sisevõrgu masinad otse ligipääsetavad, vaid ainult läbi **hüppeserveri** (*bastion*, *jump host*). Selle asemel, et logida esmalt hüppeserverisse ja sealt edasi, teeb SSH seda ühe käsuga:
 
@@ -539,7 +564,12 @@ Host labor-debian1
 
 Nüüd `ssh labor-debian1` ühendub läbi hüppeserveri. Privaatvõti jääb sinu arvutisse - hüppeserver ainult edastab krüpteeritud ühenduse (erinevalt `ssh -A` agendi edastamisest, mida tasub vältida).
 
+</details>
+
 ## 7.7 SSH-serveri karastamine
+
+> [!TIP]
+> **Lühidalt:** Karasta SSH-server: keela juurkasutaja sisselogimine ja paroolid, luba ainult võtmed. Testi uues aknas, enne kui vana ühenduse sulged.
 
 SSH-serveri seadistus on failis `/etc/ssh/sshd_config`. Tänapäevastes distrodes loetakse lisaks faile kataloogist **`/etc/ssh/sshd_config.d/*.conf`** - oma muudatused on parem kirjutada sinna eraldi faili.
 
@@ -581,7 +611,8 @@ sudo sshd -T | grep -i passwordauth  # vaata tegelikult kehtivat väärtust
 > 3. Testi uut seadistust **uues** aknas enne vanast väljumist.
 > 4. Hoia käepärast konsool (Proxmoxi veebiliides), juhuks kui kõik läheb valesti.
 
-### SFTP-kasutajad oma kataloogis (chroot)
+<details>
+<summary>Loe lähemalt: SFTP-kasutajad oma kataloogis (chroot)</summary>
 
 Sageli on vaja anda kellelegi ainult **failide üleslaadimise** õigus (nt veebilehe sisu, partneri aruanded), ilma käsurea ja ilma ligipääsuta ülejäänud failisüsteemile. Seda teeb SSH-server ise: grupi liikmed saavad kasutada ainult SFTP-d ja `chroot` lukustab nad oma kataloogi, kus `/` on nende jaoks kataloog `/srv/sftp/<kasutaja>`.
 
@@ -610,7 +641,10 @@ sudo sshd -t && sudo systemctl reload ssh
 
 Kontrolli: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult kataloogi `failid`; `ssh partner@ubuntusrv` aga ei ava käsurida (*This service allows sftp connections only*). Kui sul on `AllowGroups`, lisa sinna ka `sftp-kasutajad`. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga `sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot`.
 
-### Kaheastmeline autentimine (TOTP)
+</details>
+
+<details>
+<summary>Loe lähemalt: Kaheastmeline autentimine (TOTP)</summary>
 
 Võtmepõhine sisselogimine on juba tugev. Eriti oluliste serverite (nt internetist kättesaadav hüppeserver) puhul lisatakse **teine tegur**: lisaks võtmele küsitakse telefoni rakenduse (nt Aegis, Google Authenticator, Microsoft Authenticator) näidatud **ühekordset koodi** (*TOTP, Time-based One-Time Password*). Kood muutub iga 30 sekundi järel ja arvutatakse ühisest saladusest ning kellaajast, seega peab serveri kell olema täpne (punkt 7.9).
 
@@ -647,7 +681,12 @@ ssh mari@ubuntusrv               # UUES aknas: kõigepealt võti, siis küsitaks
 
 `nullok` lubab kasutajatel, kellel TOTP pole veel seadistatud, sisse logida ainult võtmega - nii saab TOTP-i järk-järgult kasutusele võtta. Kui kõik kasutajad on selle seadistanud, eemalda `nullok`. Kaota telefon → kasuta varukoodi või logi sisse konsoolist.
 
+</details>
+
 ## 7.8 Tulemüür
+
+> [!TIP]
+> **Lühidalt:** Tulemüür lubab ainult vajalikud pordid: Ubuntus `ufw`, AlmaLinuxis `firewalld`, Debianis `nftables`. Luba SSH **enne** tulemüüri sisselülitamist.
 
 Linuxi kernelis on pakettide filtreerimise raamistik **netfilter**. Selle reegleid hallatakse tänapäeval tööriistaga **nftables** (`nft`), vanemates süsteemides **iptables**-iga. Enamik administraatoreid kasutab aga lihtsamaid kasutajaliideseid:
 
@@ -751,11 +790,14 @@ Soovi korral saab ka Debianis kasutada `ufw`-d (`sudo apt install ufw`). **Kasut
 
 ## 7.9 Kellaaeg ja ajasünkroonimine (NTP)
 
+> [!TIP]
+> **Lühidalt:** Serverite kell peab olema täpne (logid, sertifikaadid, Kerberos). `timedatectl` näitab ajavööndit ja sünkroonimist, kella hoiavad õigena `chrony` või `systemd-timesyncd`.
+
 Õige kellaaeg ei ole ainult mugavus. Kui serverite kellad erinevad:
 
 - logide sündmusi ei saa eri masinate vahel ajaliselt kõrvutada;
 - TLS-sertifikaate peetakse kehtetuks („not yet valid“ või „expired“);
-- Kerberos ja Active Directory keelduvad autentimast, kui erinevus on üle 5 minuti (valikmoodul 21);
+- Kerberos ja Active Directory keelduvad autentimast, kui erinevus on üle 5 minuti (valikmoodul 25);
 - ajastatud tööd (cron, systemd taimerid) käivituvad valel ajal;
 - failide muutmisajad, varundus ja replikatsioon lähevad sassi.
 
@@ -823,7 +865,8 @@ sudo chronyc makestep                    # paranda suur viga kohe (muidu korrige
 
 `pool.ntp.org` on vabatahtlike ajaserverite kogum; `ee.pool.ntp.org` annab Eestis asuvad serverid. Distrod kasutavad vaikimisi oma kogumeid (`debian.pool.ntp.org`, `ntp.ubuntu.com`, `2.almalinux.pool.ntp.org`).
 
-### Oma ajaserver sisevõrgule
+<details>
+<summary>Loe lähemalt: Oma ajaserver sisevõrgule</summary>
 
 Suuremas võrgus ei küsi iga masin aega internetist, vaid üks-kaks sisevõrgu serverit sünkroniseerivad end välisallikatega ja ülejäänud masinad küsivad neilt. Laboris sobib selleks OPNsense (*Services* → *Network Time*) või Linuxi server chronyga:
 
@@ -839,190 +882,12 @@ sudo ufw allow from 10.0.83.0/24 to any port 123 proto udp
 chronyc clients             # kes on aega küsinud
 ```
 
-Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 19).
+Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 22).
 
 > [!NOTE]
 > **Virtuaalmasinad:** Proxmoxi VM-ides tuleb NTP klient hoida tööl ka siis, kui kasutatakse QEMU agenti. Pärast hetktõmmise taastamist võib kell olla väga vale - chrony parandab selle (`makestep` seadistusfailis lubab suure hüppe esimestel uuendustel).
 
-## 7.10 Keel, lokaat ja klaviatuur
-
-**Lokaat** (*locale*) määrab, millises keeles programmid teateid näitavad ning kuidas vormindatakse kuupäevi, arve ja tähestikulist järjestust. Eesti keele ja tähtede (õ, ä, ö, ü, š, ž) jaoks peab süsteem kasutama **UTF-8** kodeeringut.
-
-```bash
-localectl                       # süsteemi lokaat ja klaviatuur
-locale                          # praeguse seansi seaded (LANG, LC_*)
-locale -a                       # paigaldatud lokaadid
-```
-
-Serverites on levinud jätta süsteemi keeleks inglise keel (`en_US.UTF-8` või `C.UTF-8`) - veateateid on siis lihtsam otsida. Kuupäevade ja arvude vorming võib siiski olla eesti oma:
-
-```bash
-# Debian ja Ubuntu: lokaadi genereerimine
-sudo dpkg-reconfigure locales          # vali et_EE.UTF-8 ja en_US.UTF-8
-# AlmaLinux: keelepaketid
-sudo dnf install glibc-langpack-et
-
-sudo localectl set-locale LANG=en_US.UTF-8 LC_TIME=et_EE.UTF-8
-date                                   # uues seansis eesti kuupäevavorming
-```
-
-Ühekordselt saab keelt muuta ühe käsu jaoks: `LANG=et_EE.UTF-8 date`, `LC_ALL=C sort fail.txt` (järjestus baitide järgi - skriptides sageli soovitatav, et tulemus ei sõltuks lokaadist).
-
-**Klaviatuur** konsoolis (füüsiline ekraan või Proxmoxi konsool):
-
-```bash
-localectl list-keymaps | grep -i ee
-sudo localectl set-keymap ee                   # konsooli paigutus
-sudo localectl set-x11-keymap ee               # graafiline (X11) paigutus
-```
-
-> [!NOTE]
-> SSH-ühenduses määrab klaviatuuri **sinu arvuti**, mitte server. Konsoolis tuleb paigutus seadistada serveris; paigaldusprogramm küsib seda (moodul 1, paigalduslisa).
-
-## 7.11 VPN: WireGuard
-
-**VPN** (*Virtual Private Network*) loob kahe võrgu või seadme vahele krüpteeritud tunneli üle interneti. Nii pääseb nt kodust turvaliselt kooli labori sisevõrku, kuigi labori masinatel pole avalikke aadresse.
-
-**WireGuard** on Linuxi kernelis sisalduv kaasaegne VPN: väike, kiire ja lihtsa seadistusega. Iga osapool (*peer*) on tuvastatud **võtmepaariga** (nagu SSH-võtmed).
-
-```mermaid
-flowchart LR
-    S["sülearvuti<br>10.99.0.2"] -- "krüpteeritud UDP 51820" --> V["VPN-server<br>10.99.0.1"]
-    V --> L["labori võrk<br>10.0.83.0/24"]
-```
-
-Võtmed (mõlemas masinas):
-
-```bash
-sudo apt install wireguard-tools         # AlmaLinux: sudo dnf install wireguard-tools
-umask 077
-wg genkey | tee privaat.key | wg pubkey > avalik.key
-```
-
-Server, `/etc/wireguard/wg0.conf`:
-
-```ini
-[Interface]
-Address = 10.99.0.1/24
-ListenPort = 51820
-PrivateKey = <serveri privaatvõti>
-# luba VPN-i klientidel labori võrku pääseda:
-PostUp = sysctl -w net.ipv4.ip_forward=1; iptables -t nat -A POSTROUTING -s 10.99.0.0/24 -o ens18 -j MASQUERADE
-PostDown = iptables -t nat -D POSTROUTING -s 10.99.0.0/24 -o ens18 -j MASQUERADE
-
-[Peer]
-# Mari sülearvuti
-PublicKey = <kliendi avalik võti>
-AllowedIPs = 10.99.0.2/32
-```
-
-Klient, `/etc/wireguard/wg0.conf` (Windowsis ja telefonis sama sisuga fail WireGuardi rakendusse):
-
-```ini
-[Interface]
-Address = 10.99.0.2/24
-PrivateKey = <kliendi privaatvõti>
-
-[Peer]
-PublicKey = <serveri avalik võti>
-Endpoint = vpn.example.ee:51820
-AllowedIPs = 10.99.0.0/24, 10.0.83.0/24     # mis liiklus läheb tunnelisse
-PersistentKeepalive = 25
-```
-
-```bash
-sudo systemctl enable --now wg-quick@wg0
-sudo wg show                          # partnerid, viimane ühenduse kinnitus (handshake), liiklus
-ping 10.99.0.1
-```
-
-Serveri tulemüüris ava **51820/udp** (`sudo ufw allow 51820/udp`). `AllowedIPs` on korraga marsruutimistabel ja juurdepääsukontroll: server võtab partnerilt vastu ainult nende aadresside pakette.
-
-> [!NOTE]
-> OPNsense'is (moodul 18) on WireGuard veebiliideses (*VPN* → *WireGuard*). Kooli võrgust välja ühendudes järgi alati asutuse IT-reegleid - ära ava omavoliliselt tunneleid sisevõrku.
-
-## 7.12 Võrgu süvendus: IPv6, sild, VLAN ja bond
-
-### IPv6 põhitõed
-
-IPv4-aadressid on otsas; **IPv6** aadressid on 128-bitised ja kirjutatakse kuueteistkümnendsüsteemis (`2001:db8:83::52`). Järjestikused nullid võib asendada `::`-ga (ühes kohas).
-
-| Aadress | Tähendus |
-|---|---|
-| `::1` | localhost |
-| `fe80::/10` | **link-local** - igal liidesel automaatselt, töötab ainult samas võrgulõigus |
-| `2000::/3` | globaalne (avalik) aadress |
-| `fd00::/8` | ULA - privaatvõrk (nagu `10.0.0.0/8`) |
-| `/64` | tavaline alamvõrgu suurus |
-
-Aadressi saab masin sageli ise ruuteri teadete järgi (**SLAAC**) või DHCPv6-st. NAT-i IPv6-s tavaliselt ei kasutata - iga masin on otse adresseeritav, seega **tulemüür on veel olulisem**.
-
-```bash
-ip -6 address
-ip -6 route
-ping -6 -c2 ipv6.google.com
-ss -6 -tlpn
-dig AAAA debian.org
-```
-
-Netplan (staatiline IPv6): `addresses: [10.0.83.54/24, "fd83::54/64"]`. Veebiserveris `listen [::]:80;` (moodul 13).
-
-### Sild (bridge)
-
-**Sild** on tarkvaraline kommutaator: ühendab mitu liidest (või virtuaalmasinat) samasse võrgulõiku. Seda kasutavad hüperviisorid (moodul 23) ja konteinerid.
-
-```bash
-# NetworkManager (AlmaLinux)
-sudo nmcli con add type bridge ifname br0 con-name br0 ipv4.method manual ipv4.addresses 10.0.83.55/24
-sudo nmcli con add type bridge-slave ifname ens19 master br0
-bridge link
-```
-
-### VLAN
-
-**VLAN** (802.1Q) jagab ühe füüsilise võrgu mitmeks loogiliseks võrguks. Kommutaatori pordist tulevad märgistatud (*tagged*) kaadrid; Linux loob iga VLAN-i jaoks eraldi liidese:
-
-```bash
-sudo nmcli con add type vlan con-name vlan20 dev ens18 id 20 \
-    ipv4.method manual ipv4.addresses 10.20.0.5/24
-ip -d link show ens18.20
-```
-
-### Bond (liideste koondamine)
-
-**Bond** (ka *teaming*, *LACP*) ühendab mitu võrgukaarti üheks loogiliseks liideseks: kaabli või kaardi rikke korral jätkub ühendus (`active-backup`) või liiklus jaotatakse (`802.3ad`/LACP, vajab kommutaatori tuge).
-
-```bash
-sudo nmcli con add type bond con-name bond0 ifname bond0 \
-    bond.options "mode=active-backup,miimon=100" ipv4.method manual ipv4.addresses 10.0.83.55/24
-sudo nmcli con add type ethernet ifname ens18 master bond0
-sudo nmcli con add type ethernet ifname ens19 master bond0
-cat /proc/net/bonding/bond0
-```
-
-Netplanis (Ubuntu) kirjeldatakse samad asjad jaotistes `bridges:`, `vlans:` ja `bonds:`:
-
-```yaml
-network:
-  version: 2
-  ethernets:
-    ens18: {}
-    ens19: {}
-  bonds:
-    bond0:
-      interfaces: [ens18, ens19]
-      parameters: {mode: active-backup, mii-monitor-interval: 100}
-  vlans:
-    vlan20:
-      id: 20
-      link: bond0
-      addresses: [10.20.0.5/24]
-```
-
-Debianis (`ifupdown`) on vastavad read `bridge-ports`, `vlan-raw-device` ja `bond-slaves` failis `/etc/network/interfaces` (paketid `bridge-utils`, `vlan`, `ifenslave`).
-
-> [!NOTE]
-> Virtuaalmasinas on bond'il ja VLAN-il vähe mõtet (hüperviisor teeb selle juba ära), kuid füüsilistes serverites on need tavalised. Harjutamiseks lisa Proxmoxis VM-ile teine võrguliides.
+</details>
 
 ---
 
@@ -1036,10 +901,30 @@ Debianis (`ifupdown`) on vastavad read `bridge-ports`, `vlan-raw-device` ja `bon
 | Tulemüür | Vaikimisi puudub, soovitatav `nftables` | `ufw` (vaikimisi väljas) | `firewalld` (vaikimisi sees) |
 | `dig` pakett | `bind9-dnsutils` | `bind9-dnsutils` | `bind-utils` |
 | Ajasünkroonimine | `systemd-timesyncd` | `systemd-timesyncd` (24.04) | `chronyd` |
-| Lokaadid | `dpkg-reconfigure locales` | `locale-gen et_EE.UTF-8` | `glibc-langpack-et` |
 
 > [!NOTE]
 > **Ubuntu ja SSH pordi muutmine:** Ubuntu uuemates versioonides käivitab SSH-serveri vajadusel `ssh.socket`. Kui muudad SSH porti, tuleb pärast seadistuse muutmist käivitada `sudo systemctl daemon-reload` ja `sudo systemctl restart ssh.socket`, muidu jääb kuulama vana port.
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+Võrgu põhimõtted (aadress, mask, lüüs, DNS, pordid) ja OpenSSH on FreeBSD-s samad - OpenSSH ongi pärit OpenBSD projektist. Käsud ja seadistusfailid on teised (vt moodul 29, punktid 29.8 ja 29.10):
+
+| | Linux | FreeBSD |
+|---|---|---|
+| Liidesed ja aadressid | `ip -br a` | `ifconfig` |
+| Marsruudid | `ip r` | `netstat -rn` |
+| Kuulavad pordid | `ss -tulpn` | `sockstat -4l` |
+| Liidese nimi VM-is | `ens18`, `eth0` | `vtnet0` |
+| Püsiv seadistus | Netplan, ifupdown, NetworkManager | `/etc/rc.conf`: `ifconfig_vtnet0="inet 10.0.83.66/24"`, `defaultrouter="10.0.83.1"` |
+| DNS | systemd-resolved või `/etc/resolv.conf` | `/etc/resolv.conf` |
+| SSH-server | `ssh`/`sshd` teenus | `sshd` baassüsteemis, `sysrc sshd_enable=YES` |
+| Tulemüür | nftables, ufw, firewalld | **pf** (OpenBSD-st) või ipfw |
+| Ajasünkroonimine | `chronyd`, `systemd-timesyncd` | `ntpd` baassüsteemis (`sysrc ntpd_enable=YES`) |
+
+pf-i reeglid on loetavamad kui nftables'i omad, kuid kehtib **viimane sobiv reegel**, kui reeglil pole võtmesõna `quick`. Sama pf on OPNsense'i tulemüüri aluseks (moodul 21).
+
+</details>
 
 ---
 
@@ -1059,13 +944,9 @@ Debianis (`ifupdown`) on vastavad read `bridge-ports`, `vlan-raw-device` ja `bon
 | `scp`, `rsync -av` | Failide kopeerimine |
 | `ufw`, `firewall-cmd`, `nft` | Tulemüür |
 | `timedatectl`, `chronyc sources`, `chronyc tracking` | Kellaaeg ja NTP |
-| `localectl`, `locale`, `dpkg-reconfigure locales` | Lokaat ja klaviatuur |
-| `wg genkey`, `/etc/wireguard/wg0.conf`, `wg-quick@wg0`, `wg show` | WireGuard VPN |
 | `ssh -J`, `ProxyJump` | Hüppeserver |
-| `ip -6 a`, `ping -6`, `dig AAAA` | IPv6 |
-| `nmcli con add type bridge/vlan/bond`, Netplani `bridges/vlans/bonds` | Sild, VLAN, bond |
 
-**Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil.
+**Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil. IPv6, sild, VLAN, bond ja WireGuard VPN on süvendusosa moodulis 13; lokaat ja klaviatuur moodulis 3.
 
 ## Lisamaterjal
 

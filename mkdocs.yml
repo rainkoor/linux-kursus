@@ -86,79 +86,95 @@ nav:
           - Teooria: moodul-08-kettad-lvm/index.md
           - Laboritöö: moodul-08-kettad-lvm/labor.md
           - Enesekontroll: moodul-08-kettad-lvm/enesekontroll.md
+      - "Moodul 9. Varundus ja taastamine":
+          - Teooria: moodul-09-varundus/index.md
+          - Laboritöö: moodul-09-varundus/labor.md
+          - Enesekontroll: moodul-09-varundus/enesekontroll.md
       - "Proovieksam: põhiosa": proovieksam-pohiosa.md
   - Süvendusosa:
-      - "Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine":
-          - Teooria: moodul-09-salvestus/index.md
-          - Laboritöö: moodul-09-salvestus/labor.md
-          - Enesekontroll: moodul-09-salvestus/enesekontroll.md
-      - "Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel":
-          - Teooria: moodul-10-alglaadimine-kernel/index.md
-          - Laboritöö: moodul-10-alglaadimine-kernel/labor.md
-          - Enesekontroll: moodul-10-alglaadimine-kernel/enesekontroll.md
-      - "Moodul 11. Turvalisus ja logid":
-          - Teooria: moodul-11-turvalisus-logid/index.md
-          - Laboritööd: moodul-11-turvalisus-logid/labor.md
-          - Enesekontroll: moodul-11-turvalisus-logid/enesekontroll.md
-      - "Moodul 12. Konteinerid":
-          - Teooria: moodul-12-konteinerid/index.md
-          - Laboritöö: moodul-12-konteinerid/labor.md
-          - Enesekontroll: moodul-12-konteinerid/enesekontroll.md
-      - "Moodul 13. Veebiserverid":
-          - Teooria: moodul-13-veebiserverid/index.md
-          - Laboritöö: moodul-13-veebiserverid/labor.md
-          - Enesekontroll: moodul-13-veebiserverid/enesekontroll.md
-      - "Moodul 14. Andmebaasid":
-          - Teooria: moodul-14-andmebaasid/index.md
-          - Laboritöö: moodul-14-andmebaasid/labor.md
-          - Enesekontroll: moodul-14-andmebaasid/enesekontroll.md
-      - "Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus":
-          - Teooria: moodul-15-vorguteenused/index.md
-          - Laboritööd: moodul-15-vorguteenused/labor.md
-          - Enesekontroll: moodul-15-vorguteenused/enesekontroll.md
-      - "Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina":
-          - Teooria: moodul-16-automatiseerimine/index.md
-          - Laboritöö: moodul-16-automatiseerimine/labor.md
-          - Enesekontroll: moodul-16-automatiseerimine/enesekontroll.md
-      - "Moodul 17. Seire ja jõudlus":
-          - Teooria: moodul-17-seire/index.md
-          - Laboritöö: moodul-17-seire/labor.md
-          - Enesekontroll: moodul-17-seire/enesekontroll.md
+      - "Moodul 10. Salvestus: RAID, ZFS, jõudlus ja taastamine":
+          - Teooria: moodul-10-salvestus/index.md
+          - Laboritöö: moodul-10-salvestus/labor.md
+          - Enesekontroll: moodul-10-salvestus/enesekontroll.md
+      - "Moodul 11. Kuidas Linux töötab: alglaadimine ja kernel":
+          - Teooria: moodul-11-alglaadimine-kernel/index.md
+          - Laboritöö: moodul-11-alglaadimine-kernel/labor.md
+          - Enesekontroll: moodul-11-alglaadimine-kernel/enesekontroll.md
+      - "Moodul 12. Turvalisus ja logid":
+          - Teooria: moodul-12-turvalisus-logid/index.md
+          - Laboritööd: moodul-12-turvalisus-logid/labor.md
+          - Enesekontroll: moodul-12-turvalisus-logid/enesekontroll.md
+      - "Moodul 13. Võrgu süvendus: IPv6, sild, VLAN, bond ja VPN":
+          - Teooria: moodul-13-vorgu-suvendus/index.md
+          - Laboritöö: moodul-13-vorgu-suvendus/labor.md
+          - Enesekontroll: moodul-13-vorgu-suvendus/enesekontroll.md
+      - "Moodul 14. Konteinerid":
+          - Teooria: moodul-14-konteinerid/index.md
+          - Laboritöö: moodul-14-konteinerid/labor.md
+          - Enesekontroll: moodul-14-konteinerid/enesekontroll.md
+      - "Moodul 15. Veebiserverid":
+          - Teooria: moodul-15-veebiserverid/index.md
+          - Laboritöö: moodul-15-veebiserverid/labor.md
+          - Enesekontroll: moodul-15-veebiserverid/enesekontroll.md
+      - "Moodul 16. Andmebaasid":
+          - Teooria: moodul-16-andmebaasid/index.md
+          - Laboritöö: moodul-16-andmebaasid/labor.md
+          - Enesekontroll: moodul-16-andmebaasid/enesekontroll.md
+      - "Moodul 17. DNS ja nimelahendus":
+          - Teooria: moodul-17-dns/index.md
+          - Laboritööd: moodul-17-dns/labor.md
+          - Enesekontroll: moodul-17-dns/enesekontroll.md
+      - "Moodul 18. Failiserverid":
+          - Teooria: moodul-18-failiserverid/index.md
+          - Laboritöö: moodul-18-failiserverid/labor.md
+          - Enesekontroll: moodul-18-failiserverid/enesekontroll.md
+      - "Moodul 19. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina":
+          - Teooria: moodul-19-automatiseerimine/index.md
+          - Laboritöö: moodul-19-automatiseerimine/labor.md
+          - Enesekontroll: moodul-19-automatiseerimine/enesekontroll.md
+      - "Moodul 20. Seire ja jõudlus":
+          - Teooria: moodul-20-seire/index.md
+          - Laboritöö: moodul-20-seire/labor.md
+          - Enesekontroll: moodul-20-seire/enesekontroll.md
       - "Proovieksam: süvendusosa": proovieksam.md
       - Lõpuprojekt: lopuprojekt.md
   - Valikmoodulid:
-      - "Moodul 18. BSD praktikas: OPNsense tulemüür":
-          - Teooria: moodul-18-opnsense/index.md
-          - Laboritöö: moodul-18-opnsense/labor.md
-          - Enesekontroll: moodul-18-opnsense/enesekontroll.md
-      - "Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI":
-          - Teooria: moodul-19-dhcp-pxe-iscsi/index.md
-          - Laboritöö: moodul-19-dhcp-pxe-iscsi/labor.md
-          - Enesekontroll: moodul-19-dhcp-pxe-iscsi/enesekontroll.md
-      - "Moodul 20. Kataloogiteenused: OpenLDAP":
-          - Teooria: moodul-20-openldap/index.md
-          - Laboritöö: moodul-20-openldap/labor.md
-          - Enesekontroll: moodul-20-openldap/enesekontroll.md
-      - "Moodul 21. Active Directory Linuxis: Samba AD DC":
-          - Teooria: moodul-21-samba-ad/index.md
-          - Laboritööd: moodul-21-samba-ad/labor.md
-          - Enesekontroll: moodul-21-samba-ad/enesekontroll.md
-      - "Moodul 22. Linux töölaual ja WSL":
-          - Teooria: moodul-22-toolaud-wsl/index.md
-          - Laboritöö: moodul-22-toolaud-wsl/labor.md
-          - Enesekontroll: moodul-22-toolaud-wsl/enesekontroll.md
-      - "Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng":
-          - Teooria: moodul-23-virtualiseerimine/index.md
-          - Laboritöö: moodul-23-virtualiseerimine/labor.md
-          - Enesekontroll: moodul-23-virtualiseerimine/enesekontroll.md
-      - "Moodul 24. Kubernetes: k3s":
-          - Teooria: moodul-24-kubernetes/index.md
-          - Laboritöö: moodul-24-kubernetes/labor.md
-          - Enesekontroll: moodul-24-kubernetes/enesekontroll.md
-      - "Moodul 25. FreeBSD server":
-          - Teooria: moodul-25-freebsd/index.md
-          - Laboritöö: moodul-25-freebsd/labor.md
-          - Enesekontroll: moodul-25-freebsd/enesekontroll.md
+      - "Moodul 21. BSD praktikas: OPNsense tulemüür":
+          - Teooria: moodul-21-opnsense/index.md
+          - Laboritöö: moodul-21-opnsense/labor.md
+          - Enesekontroll: moodul-21-opnsense/enesekontroll.md
+      - "Moodul 22. Võrgu infrastruktuur: DHCP, PXE ja iSCSI":
+          - Teooria: moodul-22-dhcp-pxe-iscsi/index.md
+          - Laboritöö: moodul-22-dhcp-pxe-iscsi/labor.md
+          - Enesekontroll: moodul-22-dhcp-pxe-iscsi/enesekontroll.md
+      - "Moodul 23. E-posti server":
+          - Teooria: moodul-23-e-post/index.md
+          - Laboritöö: moodul-23-e-post/labor.md
+          - Enesekontroll: moodul-23-e-post/enesekontroll.md
+      - "Moodul 24. Kataloogiteenused: OpenLDAP":
+          - Teooria: moodul-24-openldap/index.md
+          - Laboritöö: moodul-24-openldap/labor.md
+          - Enesekontroll: moodul-24-openldap/enesekontroll.md
+      - "Moodul 25. Active Directory Linuxis: Samba AD DC":
+          - Teooria: moodul-25-samba-ad/index.md
+          - Laboritööd: moodul-25-samba-ad/labor.md
+          - Enesekontroll: moodul-25-samba-ad/enesekontroll.md
+      - "Moodul 26. Linux töölaual ja WSL":
+          - Teooria: moodul-26-toolaud-wsl/index.md
+          - Laboritöö: moodul-26-toolaud-wsl/labor.md
+          - Enesekontroll: moodul-26-toolaud-wsl/enesekontroll.md
+      - "Moodul 27. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng":
+          - Teooria: moodul-27-virtualiseerimine/index.md
+          - Laboritöö: moodul-27-virtualiseerimine/labor.md
+          - Enesekontroll: moodul-27-virtualiseerimine/enesekontroll.md
+      - "Moodul 28. Kubernetes: k3s":
+          - Teooria: moodul-28-kubernetes/index.md
+          - Laboritöö: moodul-28-kubernetes/labor.md
+          - Enesekontroll: moodul-28-kubernetes/enesekontroll.md
+      - "Moodul 29. FreeBSD server":
+          - Teooria: moodul-29-freebsd/index.md
+          - Laboritöö: moodul-29-freebsd/labor.md
+          - Enesekontroll: moodul-29-freebsd/enesekontroll.md
   - Lisad:
       - Laborikeskkond ja paigaldus: lisad/paigaldus.md
       - Distrode ülevaade: lisad/distrod.md

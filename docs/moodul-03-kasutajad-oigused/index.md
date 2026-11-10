@@ -18,11 +18,18 @@ Mooduli läbinud õppija:
 - selgitab `umask`-i ja eriliste õiguste (SUID, SGID, sticky bit) tähendust;
 - seadistab gruppidele jagatud kataloogi;
 - rakendab vähima õiguse põhimõtet;
-- seadistab uute kasutajate vaikeseaded (`/etc/skel`, `login.defs`) ning paroolipoliitika ja lukustamise PAM-i abil (`pam_pwquality`, `pam_faillock`).
+- seadistab uute kasutajate vaikeseaded (`/etc/skel`, `login.defs`) ning paroolipoliitika ja lukustamise PAM-i abil (`pam_pwquality`, `pam_faillock`);
+- seadistab süsteemi lokaadi ja klaviatuuripaigutuse.
+
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
 
 ---
 
 ## 3.1 Miks kasutajad ja õigused?
+
+> [!TIP]
+> **Lühidalt:** Igal inimesel ja teenusel on oma kasutaja. Õigused määravad, kes võib faile lugeda, muuta ja käivitada. Anna igale ainult nii palju õigusi, kui tööks vaja.
 
 Linux on **mitme kasutajaga** süsteem: ühes masinas võivad korraga töötada paljud inimesed ja teenused. Kasutajad ja õigused tagavad, et:
 
@@ -33,6 +40,9 @@ Linux on **mitme kasutajaga** süsteem: ühes masinas võivad korraga töötada 
 See on **vähima õiguse põhimõte** (*principle of least privilege*): iga kasutaja ja programm saab täpselt need õigused, mida ta oma töö tegemiseks vajab, mitte rohkem.
 
 ## 3.2 Kasutajad
+
+> [!TIP]
+> **Lühidalt:** Kasutajad on failis `/etc/passwd`, paroolide räsid failis `/etc/shadow`. Käsk `id` näitab sinu kasutajat ja gruppe.
 
 Igal kasutajal on **kasutajanimi** ja numbriline **UID** (*user ID*). Süsteem kasutab sisemiselt just numbrit, nimi on inimeste jaoks.
 
@@ -87,6 +97,9 @@ last                   # viimased sisselogimised
 
 ## 3.3 Grupid
 
+> [!TIP]
+> **Lühidalt:** Grupid lubavad anda õigusi korraga mitmele kasutajale. Igal kasutajal on üks põhigrupp ja võib olla mitu lisagruppi.
+
 **Grupp** koondab kasutajaid, et anda neile ühiseid õigusi. Igal kasutajal on:
 
 - **põhigrupp** (*primary group*) - määratud failis `/etc/passwd`, sellele grupile kuuluvad kasutaja loodud failid. Tavaliselt on see kasutajaga samanimeline grupp;
@@ -101,6 +114,9 @@ tarkvara:x:1010:mari,jaan
 Väljad: grupi nimi, parooli kohatäide, GID, liikmed (komaga eraldatud).
 
 ## 3.4 Juurkasutaja ja sudo
+
+> [!TIP]
+> **Lühidalt:** Juurkasutaja `root` võib kõike. Haldustoiminguid tee `sudo`-ga: käsk käivitub juurkasutajana ja jääb logisse.
 
 **Juurkasutaja** (*root*, UID 0) võib süsteemis teha kõike: lugeda kõiki faile, kustutada mida tahes, muuta iga seadistust. Juurkasutajana pidevalt töötamine on ohtlik - üks trükiviga võib süsteemi hävitada.
 
@@ -157,6 +173,9 @@ Reegli kuju: `kes  kus=(kellena)  millised_käsud`. Märk `%` tähistab gruppi.
 
 ## 3.5 Kasutajate ja gruppide haldus
 
+> [!TIP]
+> **Lühidalt:** `useradd -m` loob kasutaja, `usermod -aG grupp kasutaja` lisab gruppi, `passwd` muudab parooli, `userdel -r` kustutab.
+
 Kõik haldustoimingud vajavad halduriõigusi (`sudo`).
 
 ### Kasutajad
@@ -212,6 +231,9 @@ getent group tarkvara                  # vaata grupi liikmeid
 ```
 
 ## 3.6 Failiõigused
+
+> [!TIP]
+> **Lühidalt:** Igal failil on omanik, grupp ja õigused kolmele: omanik, grupp, teised. `r` - lugemine, `w` - kirjutamine, `x` - käivitamine. Vaata käsuga `ls -l`.
 
 Iga faili ja kataloogi kohta on määratud **omanik** (kasutaja), **grupp** ja **õigused** kolmele kategooriale.
 
@@ -270,6 +292,9 @@ flowchart TD
 Juurkasutajale õiguste kontroll üldjuhul ei kehti.
 
 ## 3.7 Õiguste muutmine: chmod
+
+> [!TIP]
+> **Lühidalt:** `chmod u+x fail` lisab omanikule käivitusõiguse. Numbrina: `r=4`, `w=2`, `x=1`, nt `chmod 640` = omanik loeb ja kirjutab, grupp loeb, teised mitte midagi.
 
 Õigusi muudab faili omanik või juurkasutaja käsuga `chmod`. Õigusi saab anda kahel kujul.
 
@@ -333,6 +358,9 @@ chmod 755 skript.sh
 
 ## 3.8 Omaniku muutmine: chown ja chgrp
 
+> [!TIP]
+> **Lühidalt:** `chown kasutaja:grupp fail` muudab omanikku ja gruppi, `chgrp` ainult gruppi. Kataloogi koos sisuga: `-R`.
+
 Faili omanikku saab muuta ainult juurkasutaja:
 
 ```bash
@@ -344,6 +372,9 @@ chgrp tarkvara plaan.txt               # muuda gruppi (omanik võib anda oma gru
 ```
 
 ## 3.9 Vaikimisi õigused: umask
+
+> [!TIP]
+> **Lühidalt:** `umask` määrab, millised õigused uutel failidel **puuduvad**. Tavaline `022` annab failidele `644` ja kataloogidele `755`.
 
 Uue faili või kataloogi õigused määrab **umask** - mask, mis näitab, millised õigused vaikimisi **ära võetakse**.
 
@@ -363,6 +394,9 @@ umask 0077             # muuda ainult selles seansis
 Vaikimisi umask sõltub distrost ja seadistusest. Paljudes süsteemides saavad tavakasutajad, kelle põhigrupp on nendega samanimeline, umaski `0002`, muidu on see `0022`. Kontrolli alati käsuga `umask`.
 
 ## 3.10 Erilised õigused
+
+> [!TIP]
+> **Lühidalt:** **SUID** käivitab programmi omaniku õigustega, **SGID** kataloogil annab uutele failidele kataloogi grupi, **sticky bit** lubab kustutada ainult enda faile (nt `/tmp`).
 
 Lisaks `rwx`-le on kolm erilist õigust. Neid tähistab numbrilisel kujul neljas, kõige esimene number.
 
@@ -395,6 +429,9 @@ Kui `ls -l` näitab suurtähte (`S` või `T`), on eriline õigus määratud, kui
 
 ## 3.11 Grupi jagatud kataloog
 
+> [!TIP]
+> **Lühidalt:** Ühise kausta jaoks: grupp, kataloog `chmod 2770` (SGID) ja kasutajad gruppi. Siis kuuluvad kõik uued failid grupile.
+
 Tüüpiline ülesanne: meeskonna liikmed peavad saama ühes kataloogis üksteise faile lugeda ja muuta, kuid teised kasutajad ei tohi sinna ligi pääseda.
 
 ```bash
@@ -414,6 +451,9 @@ Mida see teeb:
 
 ## 3.12 Täpsemad õigused: ACL
 
+> [!TIP]
+> **Lühidalt:** ACL lubab anda õigusi üksikutele kasutajatele ja gruppidele lisaks omanikule ja grupile: `setfacl -m u:mari:rw fail`, vaata `getfacl`.
+
 Tavalised õigused lubavad määrata ainult ühe omaniku ja ühe grupi. Kui on vaja anda õigus veel kellelegi, saab kasutada **ACL-e** (*Access Control Lists*):
 
 ```bash
@@ -428,6 +468,9 @@ Kui failil on ACL, näitab `ls -l` õiguste järel plussmärki: `-rw-r-----+`. K
 ACL-id on kasulikud, kuid teevad õiguste süsteemi keerulisemaks. Kasuta neid ainult siis, kui gruppidega ei saa hakkama.
 
 ## 3.13 Kasutajate vaikeseaded ja paroolipoliitika
+
+> [!TIP]
+> **Lühidalt:** Uue kasutaja algfailid tulevad kataloogist `/etc/skel`. Paroolinõudeid ja lukustamist valede katsete järel seadistatakse PAM-i moodulitega.
 
 ### Uue kasutaja vaikeseaded
 
@@ -450,7 +493,8 @@ Muud vaikeseaded:
 
 `login.defs` mõjutab ainult **uusi** kasutajaid; olemasolevatel muudab aegumist `chage` (punkt 3.5).
 
-### PAM - kuidas sisselogimine töötab
+<details>
+<summary>Loe lähemalt: PAM - kuidas sisselogimine töötab</summary>
 
 **PAM** (*Pluggable Authentication Modules*) on raamistik, mille kaudu kõik programmid (`login`, `sshd`, `sudo`, `su`, graafiline sisselogimine) kasutajaid autendivad. Iga programmi seadistus on kataloogis `/etc/pam.d/` ja koosneb **moodulitest**:
 
@@ -470,10 +514,12 @@ flowchart LR
     A4 -.- M4["pam_mkhomedir<br>pam_limits"]
 ```
 
-Näiteks moodulid: `pam_unix` (tavaline parool), `pam_pwquality` (parooli tugevus), `pam_faillock` (lukustamine valede katsete järel), `pam_limits` (ressursipiirangud, moodul 5), `pam_mkhomedir` (kodukataloog, moodulid 20–21), `pam_sss` (LDAP/AD).
+Näiteks moodulid: `pam_unix` (tavaline parool), `pam_pwquality` (parooli tugevus), `pam_faillock` (lukustamine valede katsete järel), `pam_limits` (ressursipiirangud, moodul 5), `pam_mkhomedir` (kodukataloog, moodulid 24–25), `pam_sss` (LDAP/AD).
 
 > [!WARNING]
 > **Hoiatus:** vigane PAM-i seadistus võib takistada **kõigil** sisselogimist, ka `sudo`-t. Hoia muutmise ajal teises aknas juurkasutaja kest lahti ja testi uues aknas. Debianis ja Ubuntus muuda PAM-i võimalusel käsuga `pam-auth-update`, AlmaLinuxis käsuga `authselect`, mitte faile käsitsi.
+
+</details>
 
 ### Parooli tugevus: pam_pwquality
 
@@ -510,7 +556,45 @@ sudo faillock --user mari --reset                # ava lukk
 ```
 
 > [!NOTE]
-> SSH-ga võtmepõhise autentimise korral (moodul 7) PAM-i parooliseadeid ei kasutata; võrgust tulevate rünnakute vastu kasutatakse lisaks fail2ban-i (moodul 11).
+> SSH-ga võtmepõhise autentimise korral (moodul 7) PAM-i parooliseadeid ei kasutata; võrgust tulevate rünnakute vastu kasutatakse lisaks fail2ban-i (moodul 12).
+
+## 3.14 Keel, lokaat ja klaviatuur
+
+> [!TIP]
+> **Lühidalt:** `localectl` näitab ja muudab süsteemi keelt ja klaviatuuri. Serveris on tavaline inglise keel (`en_US.UTF-8`), kuupäevavorming võib olla eesti oma.
+
+**Lokaat** (*locale*) määrab, millises keeles programmid teateid näitavad ning kuidas vormindatakse kuupäevi, arve ja tähestikulist järjestust. Eesti keele ja tähtede (õ, ä, ö, ü, š, ž) jaoks peab süsteem kasutama **UTF-8** kodeeringut.
+
+```bash
+localectl                       # süsteemi lokaat ja klaviatuur
+locale                          # praeguse seansi seaded (LANG, LC_*)
+locale -a                       # paigaldatud lokaadid
+```
+
+Serverites on levinud jätta süsteemi keeleks inglise keel (`en_US.UTF-8` või `C.UTF-8`) - veateateid on siis lihtsam otsida. Kuupäevade ja arvude vorming võib siiski olla eesti oma:
+
+```bash
+# Debian ja Ubuntu: lokaadi genereerimine
+sudo dpkg-reconfigure locales          # vali et_EE.UTF-8 ja en_US.UTF-8
+# AlmaLinux: keelepaketid
+sudo dnf install glibc-langpack-et
+
+sudo localectl set-locale LANG=en_US.UTF-8 LC_TIME=et_EE.UTF-8
+date                                   # uues seansis eesti kuupäevavorming
+```
+
+Ühekordselt saab keelt muuta ühe käsu jaoks: `LANG=et_EE.UTF-8 date`, `LC_ALL=C sort fail.txt` (järjestus baitide järgi - skriptides sageli soovitatav, et tulemus ei sõltuks lokaadist).
+
+**Klaviatuur** konsoolis (füüsiline ekraan või Proxmoxi konsool):
+
+```bash
+localectl list-keymaps | grep -i ee
+sudo localectl set-keymap ee                   # konsooli paigutus
+sudo localectl set-x11-keymap ee               # graafiline (X11) paigutus
+```
+
+> [!NOTE]
+> SSH-ühenduses määrab klaviatuuri **sinu arvuti**, mitte server. Konsoolis tuleb paigutus seadistada serveris; paigaldusprogramm küsib seda (moodul 1, paigalduslisa).
 
 ---
 
@@ -524,8 +608,26 @@ sudo faillock --user mari --reset                # ava lukk
 | `useradd` vaikekest | `/bin/sh` | `/bin/sh` | `/bin/bash` |
 | `adduser` | Interaktiivne mugavuskäsk | Interaktiivne mugavuskäsk | Viit käsule `useradd` (küsimusi ei esita) |
 | Lisaturvalisus | AppArmor | AppArmor | SELinux |
+| Lokaadid | `dpkg-reconfigure locales` | `locale-gen et_EE.UTF-8` | `glibc-langpack-et` |
 
-Seepärast kasuta skriptides ja juhendites alati täielikku kuju `useradd -m -s /bin/bash`, mis töötab kõigis distrodes ühtemoodi. AppArmorit ja SELinuxit käsitleme moodulis 11.
+Seepärast kasuta skriptides ja juhendites alati täielikku kuju `useradd -m -s /bin/bash`, mis töötab kõigis distrodes ühtemoodi. AppArmorit ja SELinuxit käsitleme moodulis 12.
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+Kasutajate ja õiguste põhimõtted (omanik, grupp, `rwx`, `chmod`, `chown`, `umask`, SUID/SGID/sticky bit) on FreeBSD-s samad, sest need pärinevad ühisest Unixi taustast. Erinevad on haldustööriistad:
+
+| | Linux | FreeBSD |
+|---|---|---|
+| Kasutaja loomine | `useradd -m`, `adduser` | `adduser` (interaktiivne) või `pw useradd mari -m` |
+| Gruppi lisamine | `usermod -aG grupp mari` | `pw groupmod grupp -m mari` |
+| Paroolide räsid | `/etc/shadow` | `/etc/master.passwd` (muuda käsuga `vipw`) |
+| Halduriõigus | `sudo` (grupp `sudo` või `wheel`) | `su` ainult grupi `wheel` liikmetele; `sudo` või `doas` paigalda paketina |
+| ACL | `setfacl`, `getfacl` | samad käsud, UFS-il tuleb ACL haakimisel lubada, ZFS-il on NFSv4 ACL-id |
+
+Lähemalt vt moodul 29, punkt 29.7.
+
+</details>
 
 ---
 
@@ -548,6 +650,7 @@ Seepärast kasuta skriptides ja juhendites alati täielikku kuju `useradd -m -s 
 | `setfacl`, `getfacl` | ACL-id |
 | `/etc/skel`, `/etc/login.defs` | Uue kasutaja vaikeseaded |
 | `/etc/pam.d/`, `pwquality.conf`, `faillock` | PAM, paroolinõuded, lukustamine |
+| `localectl`, `locale`, `dpkg-reconfigure locales` | Lokaat ja klaviatuur |
 
 **Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil.
 

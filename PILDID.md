@@ -20,30 +20,30 @@ Materjalis on peidetud kohatäited kujul `<!-- PILT: ../pildid/FAIL.png | kirjel
 | `lisa-ubuntu-openssh.png` | Ubuntu paigaldaja *SSH configuration* (Install OpenSSH server märgitud) | `docs/lisad/paigaldus.md`, 5. Ubuntu Server 24.04 LTS paigaldus |
 | `lisa-alma-paigalduse-kokkuvote.png` | AlmaLinuxi paigaldaja *Installation Summary* (Minimal Install, ketas, kasutaja) | `docs/lisad/paigaldus.md`, 6. AlmaLinux 10 paigaldus |
 | `m01-esimene-ssh-uhendus.png` | Windows Terminal: esimene `ssh` ühendus koos sõrmejälje küsimusega | `docs/moodul-01-sissejuhatus/index.md`, 1.4 Ühendumine serveriga SSH kaudu |
-| `m11-wazuh-armatuurlaud.png` | Wazuhi veebiliidese ülevaade (agentide olek, turvasündmused) | `docs/moodul-11-turvalisus-logid/index.md`, 11.10 Turvasündmuste haldus: Wazuh |
-| `m13-brauseri-hoiatus.png` | Brauseri hoiatus isesigneeritud sertifikaadi korral | `docs/moodul-13-veebiserverid/index.md`, Labor ja päris maailm |
-| `m13-sertifikaadi-ahel.png` | Brauseri sertifikaadivaade: labori CA → serveri sertifikaat (pärast CA usaldamist) | `docs/moodul-13-veebiserverid/index.md`, Oma CA (sisevõrk ja labor) |
-| `m17-grafana-node-exporter.png` | Grafana töölaud *Node Exporter Full* (CPU, mälu, ketas) | `docs/moodul-17-seire/index.md`, Grafana |
-| `m17-uptime-kuma.png` | Uptime Kuma jälgitavate teenuste nimekiri | `docs/moodul-17-seire/index.md`, 17.6 Kättesaadavus: Uptime Kuma |
-| `m18-konsoolimenuu.png` | OPNsense'i konsoolimenüü (liidesed ja aadressid, valikud 0-13) | `docs/moodul-18-opnsense/index.md`, Konsoolimenüü |
-| `m18-armatuurlaud.png` | OPNsense'i veebiliidese armatuurlaud (*Lobby → Dashboard*) | `docs/moodul-18-opnsense/index.md`, Veebiliides |
-| `m18-tulemuurireeglid.png` | *Firewall → Rules → LAN* reeglite loend | `docs/moodul-18-opnsense/index.md`, Reegli osad |
-| `m18-pordisuunamine.png` | *Firewall → NAT → Port Forward* reegli vorm | `docs/moodul-18-opnsense/index.md`, NAT ja pordisuunamine |
-| `m19-netbootxyz-menuu.png` | netboot.xyz menüü võrgust alglaadimisel | `docs/moodul-19-dhcp-pxe-iscsi/index.md`, Automaatne paigaldus: kickstart, preseed ja autoinstall |
-| `m20-lam-kasutajad.png` | LAM-i kasutajate loend (`ou=kasutajad`) | `docs/moodul-20-openldap/index.md`, 20.4 LDIF ja kirjete haldus |
-| `m21-aduc.png` | *Active Directory Users and Computers* Samba domeeniga | `docs/moodul-21-samba-ad/index.md`, RSAT - haldus Windowsist |
-| `m21-gpo-haldus.png` | *Group Policy Management* - lingitud rühmapoliitika | `docs/moodul-21-samba-ad/index.md`, Rühmapoliitika näide |
-| `m22-gnome-toolaud.png` | Ubuntu GNOME töölaud (*Activities* vaade) | `docs/moodul-22-toolaud-wsl/index.md`, 22.3 Graafiline süsteem |
-| `m22-wsl-terminal.png` | Windows Terminal: PowerShell `wsl -l -v` ja Ubuntu vahekaart | `docs/moodul-22-toolaud-wsl/index.md`, Paigaldus ja põhikäsud (PowerShell) |
-| `m23-proxmox-ulevaade.png` | Proxmoxi veebiliides: sõlm, VM-id ja konteinerid, *Summary* | `docs/moodul-23-virtualiseerimine/index.md`, Virtuaalmasinad |
-| `m23-proxmox-varunduse-too.png` | *Datacenter → Backup* ajastatud varunduse töö | `docs/moodul-23-virtualiseerimine/index.md`, Varundus, mallid ja kloonid |
-| `m23-pbs-andmehoidla.png` | PBS-i andmehoidla *Summary* koos deduplitseerimisteguriga | `docs/moodul-23-virtualiseerimine/index.md`, Proxmox Backup Server |
-| `m23-cloud-init.png` | VM-i vahekaart *Cloud-Init* (kasutaja, SSH-võti, IP) | `docs/moodul-23-virtualiseerimine/index.md`, Cloud-init mall |
-| `m23-xen-orchestra.png` | Xen Orchestra VM-ide loend | `docs/moodul-23-virtualiseerimine/index.md`, Xen Orchestra |
-| `m25-bsdinstall-zfs.png` | bsdinstall *ZFS Configuration* aken | `docs/moodul-25-freebsd/index.md`, 25.2 Paigaldus |
-| `m25-alglaadija-be.png` | FreeBSD alglaadija menüü, *Boot Environments* valik | `docs/moodul-25-freebsd/index.md`, 25.9 ZFS ja alglaadimiskeskkonnad |
+| `m12-wazuh-armatuurlaud.png` | Wazuhi veebiliidese ülevaade (agentide olek, turvasündmused) | `docs/moodul-12-turvalisus-logid/index.md`, 12.11 Turvasündmuste haldus: Wazuh |
+| `m15-brauseri-hoiatus.png` | Brauseri hoiatus isesigneeritud sertifikaadi korral | `docs/moodul-15-veebiserverid/index.md`, Labor ja päris maailm |
+| `m15-sertifikaadi-ahel.png` | Brauseri sertifikaadivaade: labori CA → serveri sertifikaat (pärast CA usaldamist) | `docs/moodul-15-veebiserverid/index.md`, Oma CA (sisevõrk ja labor) |
+| `m20-grafana-node-exporter.png` | Grafana töölaud *Node Exporter Full* (CPU, mälu, ketas) | `docs/moodul-20-seire/index.md`, Grafana |
+| `m20-uptime-kuma.png` | Uptime Kuma jälgitavate teenuste nimekiri | `docs/moodul-20-seire/index.md`, 20.6 Kättesaadavus: Uptime Kuma |
+| `m21-konsoolimenuu.png` | OPNsense'i konsoolimenüü (liidesed ja aadressid, valikud 0-13) | `docs/moodul-21-opnsense/index.md`, Konsoolimenüü |
+| `m21-armatuurlaud.png` | OPNsense'i veebiliidese armatuurlaud (*Lobby → Dashboard*) | `docs/moodul-21-opnsense/index.md`, Veebiliides |
+| `m21-tulemuurireeglid.png` | *Firewall → Rules → LAN* reeglite loend | `docs/moodul-21-opnsense/index.md`, Reegli osad |
+| `m21-pordisuunamine.png` | *Firewall → NAT → Port Forward* reegli vorm | `docs/moodul-21-opnsense/index.md`, NAT ja pordisuunamine |
+| `m22-netbootxyz-menuu.png` | netboot.xyz menüü võrgust alglaadimisel | `docs/moodul-22-dhcp-pxe-iscsi/index.md`, Automaatne paigaldus: kickstart, preseed ja autoinstall |
+| `m24-lam-kasutajad.png` | LAM-i kasutajate loend (`ou=kasutajad`) | `docs/moodul-24-openldap/index.md`, 24.4 LDIF ja kirjete haldus |
+| `m25-aduc.png` | *Active Directory Users and Computers* Samba domeeniga | `docs/moodul-25-samba-ad/index.md`, RSAT - haldus Windowsist |
+| `m25-gpo-haldus.png` | *Group Policy Management* - lingitud rühmapoliitika | `docs/moodul-25-samba-ad/index.md`, Rühmapoliitika näide |
+| `m26-gnome-toolaud.png` | Ubuntu GNOME töölaud (*Activities* vaade) | `docs/moodul-26-toolaud-wsl/index.md`, 26.3 Graafiline süsteem |
+| `m26-wsl-terminal.png` | Windows Terminal: PowerShell `wsl -l -v` ja Ubuntu vahekaart | `docs/moodul-26-toolaud-wsl/index.md`, Paigaldus ja põhikäsud (PowerShell) |
+| `m27-proxmox-ulevaade.png` | Proxmoxi veebiliides: sõlm, VM-id ja konteinerid, *Summary* | `docs/moodul-27-virtualiseerimine/index.md`, Virtuaalmasinad |
+| `m27-proxmox-varunduse-too.png` | *Datacenter → Backup* ajastatud varunduse töö | `docs/moodul-27-virtualiseerimine/index.md`, Varundus, mallid ja kloonid |
+| `m27-pbs-andmehoidla.png` | PBS-i andmehoidla *Summary* koos deduplitseerimisteguriga | `docs/moodul-27-virtualiseerimine/index.md`, Proxmox Backup Server |
+| `m27-cloud-init.png` | VM-i vahekaart *Cloud-Init* (kasutaja, SSH-võti, IP) | `docs/moodul-27-virtualiseerimine/index.md`, Cloud-init mall |
+| `m27-xen-orchestra.png` | Xen Orchestra VM-ide loend | `docs/moodul-27-virtualiseerimine/index.md`, Xen Orchestra |
+| `m29-bsdinstall-zfs.png` | bsdinstall *ZFS Configuration* aken | `docs/moodul-29-freebsd/index.md`, 29.2 Paigaldus |
+| `m29-alglaadija-be.png` | FreeBSD alglaadija menüü, *Boot Environments* valik | `docs/moodul-29-freebsd/index.md`, 29.9 ZFS ja alglaadimiskeskkonnad |
 
-Kokku 28 pilti. Kõige suurem mõju on OPNsense'i (moodul 18), Proxmoxi ja PBS-i (moodul 23) ning paigalduslisa piltidel - neid samme tehakse veebiliideses ja tekst üksi on algajale raske.
+Kokku 28 pilti. Kõige suurem mõju on OPNsense'i (moodul 21), Proxmoxi ja PBS-i (moodul 27) ning paigalduslisa piltidel - neid samme tehakse veebiliideses ja tekst üksi on algajale raske.
 
 ## Logod ja maskotid (README ja avaleht)
 

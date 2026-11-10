@@ -289,6 +289,7 @@ sudo rm -r /srv/firma
 1. Ettevõtte juht Kati peab saama lugeda tarkvaraosakonna faili `kood.py`, kuid mitte muuta ega näha teisi tarkvaraosakonna faile. Lahenda see ACL-ide abil. Vihje: Kati vajab kataloogile `tarkvara` ainult õigust `x` ja failile õigust `r`.
 2. Kirjuta üles, mis juhtub, kui jätad punktis 4.2 SGID-õiguse ära (`chmod 770`) ja korrata teste T1–T2.
 3. **Paroolipoliitika:** paigalda `libpam-pwquality`, sea `/etc/security/pwquality.conf`-is `minlen = 12` ja `minclass = 3` ning proovi testkasutajana `passwd`-iga seada nõrka parooli. Lisa `/etc/skel`-i fail `LOEMIND.txt` ja loo uus kasutaja - kas fail kopeeriti?
+4. **Lokaat:** sea süsteemi keeleks inglise keel, kuid kuupäevade vorminguks eesti oma (`LC_TIME=et_EE.UTF-8`), ja konsooli klaviatuur eesti paigutusele (teooria punkt 3.14). Kontrolli `date` ja `localectl` väljundit uues seansis.
 
 ---
 

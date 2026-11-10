@@ -4,7 +4,7 @@
 
 # Moodul 4. Tarkvara ja pakihaldus
 
-**Maht:** 6 tundi · **Laboritöö:** Debian, Ubuntu ja AlmaLinux · **Eeldused:** moodulid 1–3
+**Maht:** 8 tundi · **Laboritöö:** Debian, Ubuntu ja AlmaLinux · **Eeldused:** moodulid 1–3
 
 ## Õpiväljundid
 
@@ -19,9 +19,15 @@ Mooduli läbinud õppija:
 - kirjeldab distro uuele väljalaskele uuendamise protsessi ja riske;
 - võrdleb Debiani ja Red Hati perekonna pakihaldust.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 4.1 Kuidas Linuxis tarkvara paigaldatakse?
+
+> [!TIP]
+> **Lühidalt:** Linuxis paigaldatakse tarkvara **pakihalduriga** usaldusväärsetest **hoidlatest**. Pakihaldur leiab ise vajalikud sõltuvused ja uuendab kõike korraga.
 
 Windowsis laaditakse programm sageli tootja kodulehelt alla ja käivitatakse paigaldusfail. Linuxis paigaldatakse tarkvara peaaegu alati **pakihalduri** abil distro **hoidlast**.
 
@@ -51,7 +57,8 @@ Pakihalduri eelised:
 > [!TIP]
 > **Reegel:** paigalda tarkvara võimalusel alati distro ametlikust hoidlast. Allalaaditud skriptide ja tundmatute paigaldusfailide käivitamine juurkasutajana on üks levinumaid viise süsteemi rikkuda või nakatada.
 
-### Kaks perekonda, kaks süsteemi
+<details>
+<summary>Loe lähemalt: Kaks perekonda, kaks süsteemi</summary>
 
 | | **Debiani perekond** | **Red Hati perekond** |
 |---|---|---|
@@ -65,7 +72,12 @@ Pakihalduri eelised:
 
 Kolmas suurem perekond on **SUSE** (openSUSE, SUSE Linux Enterprise): see kasutab samuti `.rpm` pakette, kuid kõrge taseme pakihaldur on **`zypper`** (`zypper refresh`, `zypper install`, `zypper update`, `zypper search`). Selle kursuse distrodes seda ei ole, kuid käsud on sarnased.
 
+</details>
+
 ## 4.2 apt - Debian ja Ubuntu
+
+> [!TIP]
+> **Lühidalt:** Debianis ja Ubuntus: `sudo apt update` (uuenda loendit), `sudo apt upgrade` (uuenda pakette), `sudo apt install pakett`, `sudo apt remove pakett`.
 
 ### Süsteemi uuendamine
 
@@ -115,6 +127,9 @@ Kõik `apt` toimingud logitakse failidesse `/var/log/apt/history.log` (mis paiga
 > **apt või apt-get?** `apt` on uuem ja mugavam käsk interaktiivseks kasutamiseks. Vanemates juhendites ja skriptides kasutatakse käske `apt-get` ja `apt-cache`, mis teevad sama, kuid mille väljund on skriptidele stabiilsem.
 
 ## 4.3 dnf - AlmaLinux
+
+> [!TIP]
+> **Lühidalt:** AlmaLinuxis: `sudo dnf upgrade`, `sudo dnf install pakett`, `sudo dnf remove pakett`. `dnf history` näitab ja võtab tagasi varasemad toimingud.
 
 ### Süsteemi uuendamine
 
@@ -167,6 +182,9 @@ rpm -qf /usr/bin/ls          # millisesse paketti fail kuulub
 
 ## 4.4 apt ja dnf kõrvuti
 
+> [!TIP]
+> **Lühidalt:** Käsud on erinevad, kuid tegevused samad. Ka sama programmi pakett võib eri distrodes olla erineva nimega (nt `apache2` ja `httpd`).
+
 | Tegevus | Debian / Ubuntu | AlmaLinux |
 |---|---|---|
 | Värskenda pakettide loend | `apt update` | (automaatne) `dnf makecache` |
@@ -196,6 +214,9 @@ Sama tarkvara pakett võib perekondades olla eri nimega. Näiteks:
 Kui paketti ei leia, otsi seda käsuga `apt search` / `dnf search` või failinime järgi `dnf provides`.
 
 ## 4.5 Hoidlad
+
+> [!TIP]
+> **Lühidalt:** Hoidlate loend on Debianis ja Ubuntus kataloogis `/etc/apt/sources.list.d/`, AlmaLinuxis `/etc/yum.repos.d/`. Iga hoidla paketid on allkirjastatud.
 
 ### Debian ja Ubuntu
 
@@ -243,6 +264,9 @@ sudo dnf config-manager --set-enabled crb    # luba hoidla
 
 ## 4.6 Kolmandate osapoolte hoidlad
 
+> [!TIP]
+> **Lühidalt:** Kolmanda osapoole hoidla (nt EPEL, tootja hoidla) annab tarkvara, mida distros pole. Lisa ainult usaldusväärseid hoidlaid - need saavad sinu serverisse tarkvara paigaldada.
+
 Kui vajalikku tarkvara ametlikus hoidlas pole või sealne versioon on liiga vana, saab lisada täiendavaid hoidlaid.
 
 | Hoidla | Distro | Kirjeldus |
@@ -275,6 +299,9 @@ sudo apt update
 
 ## 4.7 Tarkvara kompileerimine lähtekoodist
 
+> [!TIP]
+> **Lühidalt:** Kui paketti pole, saab programmi kompileerida lähtekoodist (`./configure`, `make`, `make install`). Pane see kataloogi `/usr/local`, et see ei segaks pakihaldurit.
+
 Mõnikord tuleb programm ise **lähtekoodist kompileerida**, näiteks kui seda pole üheski hoidlas või on vaja erilisi seadistusi. Klassikaline töövoog on:
 
 ```bash
@@ -296,7 +323,8 @@ sudo dnf group install "Development Tools"       # AlmaLinux
 
 Käsitsi paigaldatud tarkvara paigutatakse kataloogi `/usr/local` (või `/opt`), et see ei läheks segi pakihalduri hallatavate failidega kataloogis `/usr`.
 
-### Jagatud teegid
+<details>
+<summary>Loe lähemalt: Jagatud teegid</summary>
 
 Enamik programme ei sisalda kogu koodi ise, vaid kasutab **jagatud teeke** (*shared libraries*, failid `*.so`, nt `libc.so.6`, `libssl.so.3`). Teek laaditakse mällu programmi käivitamisel ja seda kasutavad korraga paljud programmid. Seepärast parandab näiteks OpenSSL-i turvauuendus kõik seda kasutavad programmid korraga (pärast nende taaskäivitust, punkt 4.9).
 
@@ -307,7 +335,12 @@ ldconfig -p | grep libssl              # teekide vahemälu: kas teek on süsteem
 
 Teeke otsitakse standardkataloogidest (`/lib`, `/usr/lib` ja nende alamkataloogid) ning failis `/etc/ld.so.conf` ja kataloogis `/etc/ld.so.conf.d/` loetletud kataloogidest. Kui paigaldad lähtekoodist teegi kataloogi `/usr/local/lib` ja programm ei leia seda (`error while loading shared libraries: libxyz.so.1: cannot open shared object file`), lisa kataloog faili `/etc/ld.so.conf.d/kohalik.conf` ja uuenda vahemälu käsuga `sudo ldconfig`. Ajutiselt (testimiseks) saab kataloogi anda keskkonnamuutujaga `LD_LIBRARY_PATH`.
 
+</details>
+
 ## 4.8 Universaalsed paketid: Snap ja Flatpak
+
+> [!TIP]
+> **Lühidalt:** Snap ja Flatpak on distrost sõltumatud paketid, mis toovad oma teegid kaasa. Neid kasutatakse peamiselt töölaual.
 
 **Snap** ja **Flatpak** on distrost sõltumatud paketivormingud. Pakett sisaldab programmi koos kõigi selle sõltuvustega ja töötab isoleeritult ülejäänud süsteemist.
 
@@ -325,11 +358,14 @@ Serverites eelistatakse üldjuhul distro tavapakette. Ubuntu serveris on Snap va
 
 ## 4.9 Uuenduste hea tava
 
+> [!TIP]
+> **Lühidalt:** Uuenda regulaarselt, turvauuendused kohe. Vaata enne üle, mida uuendatakse, ja taaskäivita pärast teegi uuendust teenused (`needrestart`).
+
 - uuenda süsteeme **regulaarselt**, eriti turvauuendused;
 - loe enne uuenduse kinnitamist, mida pakihaldur teha kavatseb, eriti kui midagi **eemaldatakse**;
 - tee olulisest serverist enne suurt uuendust **varukoopia või hetktõmmis** (nt Proxmoxis *snapshot*);
 - pärast kerneli uuendust on vaja **taaskäivitust**. Ubuntu loob sel juhul faili `/var/run/reboot-required`, AlmaLinuxis aitab käsk `dnf needs-restarting -r`, Debianis tasub pärast kerneli uuendust võrrelda töötavat kernelit (`uname -r`) paigaldatutega;
-- automaatseid turvauuendusi (`unattended-upgrades`, `dnf-automatic`) käsitleme moodulis 11;
+- automaatseid turvauuendusi (`unattended-upgrades`, `dnf-automatic`) käsitleme moodulis 12;
 - väljalaske uuendus (nt Debian 12 → 13) on eraldi protsess, vt punkt 4.10.
 
 ### Pärast uuendust: millised teenused vajavad taaskäivitust?
@@ -352,9 +388,12 @@ Mõnikord ei tohi paketti uuendada: uus versioon ei ühildu rakendusega või oot
 | Näita lukustatuid | `apt-mark showhold` | `dnf versionlock list` |
 | Eemalda lukk | `sudo apt-mark unhold nginx` | `sudo dnf versionlock delete nginx` |
 
-AlmaLinuxis vajab `versionlock` paketti `python3-dnf-plugin-versionlock`. Kerneli uuendamist ei ole tavaliselt vaja lukustada: alles jäetakse mitu vana kerneli versiooni ja alglaadimisel saab valida eelmise (moodul 10).
+AlmaLinuxis vajab `versionlock` paketti `python3-dnf-plugin-versionlock`. Kerneli uuendamist ei ole tavaliselt vaja lukustada: alles jäetakse mitu vana kerneli versiooni ja alglaadimisel saab valida eelmise (moodul 11).
 
 ## 4.10 Väljalaske uuendamine
+
+> [!TIP]
+> **Lühidalt:** Uus väljalase (nt Debian 12 → 13) on suur muudatus: loe väljalaske märkmeid, tee varukoopia või hetktõmmis ja uuenda kõigepealt testmasinas.
 
 Tavaline `apt upgrade` või `dnf upgrade` uuendab pakette **sama väljalaske piires**. Uuele väljalaskele (nt Debian 12 *bookworm* → Debian 13 *trixie*) üleminek muudab hoidlaid, sadu pakette ja sageli ka seadistusfailide vormingut. See on eraldi protsess.
 
@@ -367,7 +406,8 @@ Enne iga väljalaske uuendust:
 5. eemalda või keela kolmandate osapoolte hoidlad;
 6. tee uuendust **konsoolis** (Proxmoxi konsool) või `tmux`/`screen` sessioonis - kui SSH-ühendus katkeb, ei katke uuendus.
 
-### Debian 12 → 13
+<details>
+<summary>Loe lähemalt: Debian 12 → 13</summary>
 
 ```bash
 sudo apt update && sudo apt full-upgrade     # bookworm lõpuni uuendatud
@@ -391,7 +431,10 @@ sudo apt modernize-sources
 
 Lõpuks eemalda pakid, mida enam ei vajata: `sudo apt autoremove --purge`.
 
-### Ubuntu 22.04 → 24.04
+</details>
+
+<details>
+<summary>Loe lähemalt: Ubuntu 22.04 → 24.04</summary>
 
 Ubuntul on selleks eraldi tööriist, mis kontrollib eeldusi, muudab hoidlad ja teeb uuenduse:
 
@@ -402,7 +445,10 @@ sudo do-release-upgrade
 
 LTS-versioonilt pakutakse vaikimisi uuendust järgmisele LTS-ile alles pärast selle esimest punktväljalaset (nt 24.04.1). Seadistus on failis `/etc/update-manager/release-upgrades` (`Prompt=lts`). SSH kaudu käivitades avab `do-release-upgrade` turvalisuse mõttes lisapordi 1022 varuühenduse jaoks.
 
-### AlmaLinux 9 → 10
+</details>
+
+<details>
+<summary>Loe lähemalt: AlmaLinux 9 → 10</summary>
 
 RHEL-i perekonnas **ei ole väljalaske uuendus tavapärane** - soovitatav on paigaldada uus server ja kolida teenused üle. Kui uuendus on siiski vaja teha, kasutatakse projekti **ELevate** (tööriist `leapp`):
 
@@ -419,6 +465,8 @@ sudo reboot
 > [!WARNING]
 > **Tähtis:** AlmaLinux 10 nõuab protsessorilt x86-64-v3 tuge (vt [paigalduslisa](../lisad/paigaldus.md)). Kontrolli enne uuendust Proxmoxis VM-i protsessori tüüpi.
 
+</details>
+
 ---
 
 ## Distrode erinevused
@@ -432,6 +480,29 @@ sudo reboot
 | Snap vaikimisi | Ei | Jah | Ei |
 | Toimingute tagasivõtmine | Ei ole sisseehitatud | Ei ole sisseehitatud | `dnf history undo` |
 | Väljalaske uuendus | hoidlate muutmine + `apt full-upgrade` | `do-release-upgrade` | ELevate (`leapp`), soovitatav uus paigaldus |
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+FreeBSD-s on tarkvara jagatud kaheks (vt moodul 29, punkt 29.5):
+
+- **Baassüsteem** (kernel, põhikäsud, `/etc`) arendatakse ühes projektis ja seda uuendab `freebsd-update`.
+- **Lisatarkvara** (nginx, bash, Python) paigaldab pakihaldur `pkg` ja see läheb kataloogi `/usr/local`, seadistus `/usr/local/etc`.
+
+| Tegevus | Debian, Ubuntu | AlmaLinux | FreeBSD |
+|---|---|---|---|
+| Loendi värskendamine | `apt update` | (automaatne) | `pkg update` |
+| Paigaldus | `apt install nginx` | `dnf install nginx` | `pkg install nginx` |
+| Eemaldus | `apt remove` | `dnf remove` | `pkg delete` |
+| Pakettide uuendus | `apt upgrade` | `dnf upgrade` | `pkg upgrade` |
+| Mis pakett faili paigaldas | `dpkg -S` | `rpm -qf` | `pkg which` |
+| Teadaolevad haavatavused | `debsecan` | `dnf updateinfo` | `pkg audit -F` |
+| Kompileerimine | lähtekood käsitsi | lähtekood käsitsi | **pordid** (`/usr/ports`) - valmis retseptid ~36 000 programmile |
+| Väljalaske uuendus | `apt full-upgrade` / `do-release-upgrade` | ELevate | `freebsd-update upgrade -r <versioon>` |
+
+FreeBSD 15-s saab ka baassüsteemi paigaldada pakettidena (**pkgbase**); siis uuendab kogu süsteemi `pkg upgrade`, nagu Linuxi distrodes.
+
+</details>
 
 ---
 

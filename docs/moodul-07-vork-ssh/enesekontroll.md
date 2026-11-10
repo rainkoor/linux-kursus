@@ -152,25 +152,7 @@ Logisid ei saa võrrelda, TLS-sertifikaadid tunduvad kehtetud, Kerberos/AD keeld
 
 </details>
 
-**17.** Mis on lokaat ja milleks kasutatakse skriptides `LC_ALL=C`?
-
-<details>
-<summary>Vastus</summary>
-
-Lokaat määrab keele, kuupäevade ja arvude vormingu ning järjestuse (nt `et_EE.UTF-8`). `LC_ALL=C` annab ühtse, lokaadist sõltumatu käitumise (järjestus, vead inglise keeles), mistõttu skripti tulemus on igas masinas sama.
-
-</details>
-
-**18.** Mis on WireGuardis `AllowedIPs` kahekordne roll?
-
-<details>
-<summary>Vastus</summary>
-
-See on marsruutimistabel (millised aadressid saadetakse sellele partnerile tunnelisse) ja juurdepääsukontroll (millise lähteaadressiga pakette sellelt partnerilt vastu võetakse).
-
-</details>
-
-**19.** Mis on hüppeserver ja kuidas ühenduda sisevõrgu masinaga ühe SSH käsuga?
+**17.** Mis on hüppeserver ja kuidas ühenduda sisevõrgu masinaga ühe SSH käsuga?
 
 <details>
 <summary>Vastus</summary>
@@ -179,25 +161,7 @@ Server, mille kaudu pääseb sisevõrku (bastion). `ssh -J kasutaja@hupe kasutaj
 
 </details>
 
-**20.** Mis on IPv6 link-local aadress ja miks on IPv6 puhul tulemüür eriti oluline?
-
-<details>
-<summary>Vastus</summary>
-
-`fe80::`-ga algav aadress, mis on igal liidesel automaatselt ja töötab ainult samas võrgulõigus. IPv6-s NAT-i tavaliselt pole, masinad on otse adresseeritavad - ainult tulemüür kaitseb neid.
-
-</details>
-
-**21.** Mis vahe on sillal, VLAN-il ja bond-liidesel?
-
-<details>
-<summary>Vastus</summary>
-
-Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator); VLAN jagab ühe füüsilise võrgu mitmeks loogiliseks (märgistusega); bond koondab mitu füüsilist liidest üheks töökindluse või läbilaskevõime jaoks.
-
-</details>
-
-**22.** Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?
+**18.** Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?
 
 <details>
 <summary>Vastus</summary>
@@ -206,7 +170,7 @@ Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): 
 
 </details>
 
-**23.** Kuidas lubad kasutajal ainult SFTP kaudu faile laadida, nii et ta ei näe ülejäänud failisüsteemi? Millised nõuded on chroot-kataloogi omanikule ja õigustele?
+**19.** Kuidas lubad kasutajal ainult SFTP kaudu faile laadida, nii et ta ei näe ülejäänud failisüsteemi? Millised nõuded on chroot-kataloogi omanikule ja õigustele?
 
 <details>
 <summary>Vastus</summary>
@@ -215,7 +179,7 @@ Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): 
 
 </details>
 
-**24.** Mis on TOTP ja miks peab serveri kell selle kasutamisel täpne olema? Mida tähendab `AuthenticationMethods publickey,keyboard-interactive`?
+**20.** Mis on TOTP ja miks peab serveri kell selle kasutamisel täpne olema? Mida tähendab `AuthenticationMethods publickey,keyboard-interactive`?
 
 <details>
 <summary>Vastus</summary>
@@ -224,7 +188,7 @@ Ajapõhine ühekordne kood, mille telefonirakendus ja server arvutavad ühisest 
 
 </details>
 
-**25.** Võrk `10.10.0.0/16` on kättesaadav ruuteri `10.0.83.254` kaudu. Kuidas lisad selle marsruudi püsivalt AlmaLinuxis ja kuidas kontrollid, millist marsruuti kasutatakse?
+**21.** Võrk `10.10.0.0/16` on kättesaadav ruuteri `10.0.83.254` kaudu. Kuidas lisad selle marsruudi püsivalt AlmaLinuxis ja kuidas kontrollid, millist marsruuti kasutatakse?
 
 <details>
 <summary>Vastus</summary>

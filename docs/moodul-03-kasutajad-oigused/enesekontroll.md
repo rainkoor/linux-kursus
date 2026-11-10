@@ -170,6 +170,15 @@ Autentimise raamistik, mille kaudu programmid kasutajaid kontrollivad. `auth` - 
 
 </details>
 
+**19.** Mis on lokaat ja milleks kasutatakse skriptides `LC_ALL=C`?
+
+<details>
+<summary>Vastus</summary>
+
+Lokaat määrab keele, kuupäevade ja arvude vormingu ning järjestuse (nt `et_EE.UTF-8`). `LC_ALL=C` annab ühtse, lokaadist sõltumatu käitumise (järjestus, vead inglise keeles), mistõttu skripti tulemus on igas masinas sama.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Loo grupp `opetajad` ja kasutaja `ain`, kes kuulub sellesse gruppi ja kelle kest on `/bin/bash`.

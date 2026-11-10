@@ -114,7 +114,7 @@ Linuxi kernel ja GNU tööriistad sobisid nagu valatult kokku: GNU-l oli kõik p
 
 ### Tanenbaumi ja Torvaldsi vaidlus
 
-1992. aastal kirjutas Tanenbaum uudistegruppi postituse „Linux on vananenud“. Tema arvates oli Linuxi **monoliitne kernel** (kogu kernel töötab ühe programmina) vanamoodne ja tulevik kuulus **mikrokernelitele** (kernel on väike, ülejäänu töötab eraldi programmidena). Järgnenud vaidlus on üks kuulsamaid arutelusid informaatika ajaloos. Linux on monoliitne tänini, kuid saab laadida mooduleid (vt moodul 10).
+1992. aastal kirjutas Tanenbaum uudistegruppi postituse „Linux on vananenud“. Tema arvates oli Linuxi **monoliitne kernel** (kogu kernel töötab ühe programmina) vanamoodne ja tulevik kuulus **mikrokernelitele** (kernel on väike, ülejäänu töötab eraldi programmidena). Järgnenud vaidlus on üks kuulsamaid arutelusid informaatika ajaloos. Linux on monoliitne tänini, kuid saab laadida mooduleid (vt moodul 11).
 
 ### Linux 1.0
 
@@ -151,7 +151,7 @@ Samal ajal arenes edasi BSD. AT&T ja Berkeley vaheline kohtuvaidlus (1992–1994
 | 2010 | **Lennart Poettering** ja **Kay Sievers** alustavad **systemd** arendust (vt punkt 6.3 ja moodul 5) |
 | 2011 | Esimesed **Chromebookid** - Google'i ChromeOS põhineb Linuxil |
 | 2012 | **Raspberry Pi** - odav pisiarvuti, millest sai Linuxi õppimise ja sardsüsteemide lemmik |
-| 2013 | **Docker** teeb konteinerid populaarseks (vt moodul 12). Valve kuulutab välja **SteamOS**-i (vt moodul 22) |
+| 2013 | **Docker** teeb konteinerid populaarseks (vt moodul 14). Valve kuulutab välja **SteamOS**-i (vt moodul 26) |
 | 2014 | Google avaldab konteinerite orkestreerimissüsteemi **Kubernetes** |
 | 2016 | Microsoft lisab Windowsi **WSL**-i (*Windows Subsystem for Linux*), 2019 tuleb WSL 2 päris Linuxi kerneliga |
 | 2017 | Kõik TOP500 nimekirja superarvutid töötavad Linuxil |
@@ -205,7 +205,7 @@ Juhtum näitas korraga avatud lähtekoodi tugevust ja nõrkust:
 - **tugevus:** kuna kood on avatud, sai üks tähelepanelik inimene probleemi leida ja kogu maailm sai kohe reageerida;
 - **nõrkus:** paljud olulised projektid sõltuvad ühest-kahest vabatahtlikust hooldajast, kellel puudub abi ja rahastus.
 
-Õppetund administraatorile: kasuta distro stabiilseid väljalaseid, uuenda süsteeme regulaarselt ja jälgi turvateateid (vt moodul 11).
+Õppetund administraatorile: kasuta distro stabiilseid väljalaseid, uuenda süsteeme regulaarselt ja jälgi turvateateid (vt moodul 12).
 
 ## UNIX täna
 

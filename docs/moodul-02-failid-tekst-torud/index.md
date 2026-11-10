@@ -20,9 +20,15 @@ Mooduli läbinud õppija:
 - arhiveerib ja pakib faile käsuga `tar`;
 - võrdleb faile (`diff`), rakendab paiku (`patch`) ja edastab käskude väljundi argumentideks (`xargs`).
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 2.1 Miks tekst?
+
+> [!TIP]
+> **Lühidalt:** Linuxis on seadistus, logid ja süsteemi info **tekstina**. Väikesed käsud teevad igaüks ühe asja ja neid ühendatakse torudega - nii lahendad ka keerulise ülesande.
 
 Linuxis on peaaegu kõik konfiguratsioonid, logid ja süsteemi info **tekstifailid**. Linuxi tööriistad järgivad **UNIX-i filosoofiat**:
 
@@ -55,7 +61,8 @@ cut -d: -f7 /etc/passwd | sort | uniq -c | sort -rn
 
 Neljas põhimõte, **kõik on fail** (moodul 1), tähendab, et samade tööriistadega saab lugeda ka süsteemi infot: `cat /proc/cpuinfo`, `grep MemTotal /proc/meminfo`, `cat /sys/class/net/ens18/address`.
 
-### Kust käsud pärinevad?
+<details>
+<summary>Loe lähemalt: Kust käsud pärinevad?</summary>
 
 Käsud nagu `ls`, `grep` või `ps` ei ole kerneli ega kesta osa, vaid eraldi programmid failidena kataloogis `/usr/bin`. Need pärinevad mõnest **paketist** (moodul 4) ja enamik neist on **GNU projekti** tööriistad:
 
@@ -81,12 +88,17 @@ ls --version                # versioon ja projekt (GNU coreutils)
 | Kus | Tööriistad | Mida arvestada |
 |---|---|---|
 | Debian, Ubuntu, AlmaLinux | GNU | Kõik selle kursuse näited |
-| FreeBSD, macOS | BSD | Võtmed osaliselt erinevad (`sed -i ''`, `ls -G`), vt moodul 25 |
+| FreeBSD, macOS | BSD | Võtmed osaliselt erinevad (`sed -i ''`, `ls -G`), vt moodul 29 |
 | Alpine, konteinerid, ruuterid | **BusyBox**: üks väike programm, mis asendab sadu käske | Ainult põhivõtmed; pikki GNU võtmeid sageli pole |
 
 Kui kirjutad skripti, mis peab töötama igal pool, kasuta ainult POSIX-võtmeid. Kui skript töötab ainult sinu Linuxi serverites, võid GNU lisavõimalusi julgelt kasutada.
 
+</details>
+
 ## 2.2 Tekstiredaktorid
+
+> [!TIP]
+> **Lühidalt:** Serveris muudad faile terminalis. **nano** on lihtne (salvesta **Ctrl+O**, välju **Ctrl+X**). **vim** on võimsam, kuid tal on režiimid: `i` - kirjuta, **Esc** - tagasi, `:wq` - salvesta ja välju.
 
 Serveris ei ole graafilist redaktorit, seega tuleb konfiguratsioonifaile muuta terminalis.
 
@@ -149,6 +161,9 @@ Vim-i õppimiseks sobivad:
 
 ## 2.3 Standardvood ja ümbersuunamine
 
+> [!TIP]
+> **Lühidalt:** Igal programmil on sisend (0), väljund (1) ja veateated (2). `>` kirjutab väljundi faili üle, `>>` lisab lõppu, `2>` suunab veateated.
+
 Igal programmil on kolm **standardvoogu**:
 
 | Voog | Number | Vaikimisi |
@@ -192,6 +207,9 @@ find / -name "*.conf" 2> /dev/null   # peida veateated
 
 ## 2.4 Torud
 
+> [!TIP]
+> **Lühidalt:** Toru `|` saadab ühe käsu väljundi järgmise käsu sisendiks: `cat fail | grep viga | wc -l`.
+
 **Toru** (*pipe*) `|` suunab ühe käsu väljundi järgmise käsu sisendiks:
 
 ```bash
@@ -228,6 +246,9 @@ ls -l /etc | tee failid.txt | wc -l
 Käsk `tee` kirjutab sisendi faili ja annab selle ka edasi. Võti `-a` lisab faili lõppu.
 
 ## 2.5 Teksti töötlemine
+
+> [!TIP]
+> **Lühidalt:** `grep` otsib ridu, `sort` sorteerib, `uniq -c` loendab kordusi, `wc -l` loeb ridu, `cut` ja `awk` võtavad välja veerge.
 
 Näidetes kasutame faili `/etc/passwd`, kus on iga kasutaja kohta üks rida ja väljad on eraldatud kooloniga:
 
@@ -333,6 +354,9 @@ Iga samm teeb üht asja: `cut` võtab 7. välja, `sort` sorteerib, `uniq -c` loe
 
 ## 2.6 Regulaaravaldised
 
+> [!TIP]
+> **Lühidalt:** Regulaaravaldis on otsingumuster: `^` - rea algus, `$` - rea lõpp, `.` - mis tahes märk, `*` - kordus. Neid kasutavad `grep -E` ja `sed`.
+
 **Regulaaravaldis** (*regular expression*, *regex*) on muster teksti otsimiseks. Seda kasutavad `grep`, `sed`, `awk`, `vim` ja paljud programmeerimiskeeled.
 
 > [!WARNING]
@@ -388,6 +412,9 @@ sed '/^#/d' fail.txt                 # kustuta kommentaariread
 
 ## 2.7 Failide otsimine
 
+> [!TIP]
+> **Lühidalt:** `find` otsib faile nime, suuruse, aja ja muu järgi (`find /etc -name '*.conf'`). `which` ja `type` näitavad, kus käsk asub.
+
 ### find
 
 `find` otsib faile reaalajas failisüsteemist. Süntaks: `find kust mida`.
@@ -416,15 +443,21 @@ find . -name "*.sh" -exec ls -l {} \;       # käivita iga leitud faili kohta k�
 > [!NOTE]
 > Kui otsid kogu süsteemist (`find / ...`), suuna veateated `2>/dev/null`, sest tavakasutajal pole paljudesse kataloogidesse ligipääsu.
 
-### locate
+<details>
+<summary>Loe lähemalt: locate</summary>
 
 `locate` otsib eelnevalt koostatud andmebaasist, mistõttu on see väga kiire, kuid ei pruugi näha päris uusi faile. Andmebaasi uuendab käsk `updatedb`. Sageli pole `locate` vaikimisi paigaldatud (pakett `plocate` või `mlocate`) - tarkvara paigaldamist õpime moodulis 4.
+
+</details>
 
 ### which ja type
 
 Programmi asukoha leidmiseks kasuta `which` või `type` (vt moodul 1).
 
 ## 2.8 Viidad
+
+> [!TIP]
+> **Lühidalt:** **Nimeviit** (`ln -s`) on otsetee teisele failile. **Kõvaviit** (`ln`) on sama faili teine nimi.
 
 Linuxis on kaks liiki viitu.
 
@@ -459,6 +492,9 @@ ls -li                               # -i näitab i-sõlme numbrit
 Igapäevatöös kasutatakse peamiselt sümbolviitu. Nagu nägid moodulis 1, on ka `/bin` tänapäeval sümbolviit kataloogile `/usr/bin`.
 
 ## 2.9 Arhiveerimine ja pakkimine
+
+> [!TIP]
+> **Lühidalt:** `tar -czf arhiiv.tar.gz kataloog` pakib kokku, `tar -xzf arhiiv.tar.gz` pakib lahti, `tar -tzf` näitab sisu.
 
 Linuxis on **arhiveerimine** (mitu faili üheks failiks) ja **pakkimine** (faili väiksemaks tegemine) eraldi toimingud, kuid `tar` oskab mõlemat korraga.
 
@@ -500,6 +536,9 @@ Vanemad logifailid on sageli pakitud (`syslog.2.gz`), seetõttu on `zcat` ja `zg
 ZIP-failide jaoks on käsud `zip` ja `unzip`, kuid need ei pruugi olla vaikimisi paigaldatud.
 
 ## 2.10 Võrdlemine, paigad ja xargs
+
+> [!TIP]
+> **Lühidalt:** `diff` näitab kahe faili erinevusi, `patch` rakendab muudatuse ja `xargs` teeb ühe käsu väljundist teise käsu argumendid.
 
 ### diff - mis on erinev?
 
@@ -552,6 +591,26 @@ find . -name "*.png" -print0 | xargs -0 -P4 -n1 optipng   # 4 paralleelset prots
 | `locate` pakett | `plocate` | `plocate` | `plocate` või `mlocate` (sõltub versioonist) |
 
 Logide lugemist käsuga `journalctl` õpime moodulis 5.
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+FreeBSD kasutab GNU tööriistade asemel **BSD tööriistu** (vt punkt 2.1). Sama on macOS-is, nii et need erinevused tulevad ette ka Maci terminalis.
+
+| Teema | GNU (selle kursuse distrod) | BSD (FreeBSD, macOS) |
+|---|---|---|
+| Faili muutmine kohapeal | `sed -i 's/a/b/' fail` | `sed -i '' 's/a/b/' fail` (`-i` vajab argumenti) |
+| `find` ilma kataloogita | `find -name '*.conf'` töötab | kataloog on kohustuslik: `find . -name '*.conf'` |
+| `tar` | GNU tar | bsdtar (libarchive) - samad põhivõtmed `-czf`, `-xzf`, `-tzf` |
+| Värviline `ls` | `ls --color` | `ls -G` |
+| Pikad võtmed (`--help`) | peaaegu kõigil käskudel | enamasti puuduvad - vaata `man käsk` |
+| Redaktorid | `nano`, `vim` | baassüsteemis `vi` ja lihtne `ee`; `nano` ja `vim` paigalda `pkg install`-iga |
+| Süsteemilogi | journald, osaliselt `/var/log/syslog` või `/var/log/messages` | ainult tekstifailid, peamine `/var/log/messages` |
+| `locate` andmebaas | `plocate` uuendab ise | uuendab iganädalane `periodic`-töö (`/usr/libexec/locate.updatedb`) |
+
+Torud, ümbersuunamine, `grep`, `sort`, `uniq`, `cut`, `awk` ja regulaaravaldised töötavad samamoodi. FreeBSD-ga tutvume moodulis 29.
+
+</details>
 
 ---
 

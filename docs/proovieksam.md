@@ -1,14 +1,14 @@
 <!-- navigatsioon -->
-[← Moodul 17. Enesekontroll](moodul-17-seire/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Lõpuprojekt →](lopuprojekt.md)
+[← Moodul 20. Enesekontroll](moodul-20-seire/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Lõpuprojekt →](lopuprojekt.md)
 <!-- /navigatsioon -->
 
 # Proovieksam: süvendusosa
 
-**Maht:** 4 tundi (eksam 2,5 h + arutelu) · **Distro:** AlmaLinux 10 · **Eeldused:** moodulid 1–17
+**Maht:** 4 tundi (eksam 2,5 h + arutelu) · **Distro:** AlmaLinux 10 · **Eeldused:** moodulid 1–20
 
 Proovieksam on RHCSA eksami stiilis praktiline töö: tühjas virtuaalmasinas tuleb piiratud aja jooksul täita hulk haldusülesandeid. Hinnatakse **tulemust** (kas süsteem on õiges olekus, ka pärast taaskäivitust), mitte käskude kirjutamise viisi. Pärast eksamit kontrollib tulemust automaatne skript.
 
-Põhiosa (moodulid 1–8) järel on lühem [proovieksam Debianis](proovieksam-pohiosa.md).
+Põhiosa (moodulid 1–9) järel on lühem [proovieksam Debianis](proovieksam-pohiosa.md).
 
 Eksam aitab õppijal näha, milliseid teemasid ta valdab iseseisvalt, ja õpetajal, mida enne lõpuprojekti korrata.
 
@@ -106,5 +106,5 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ku
 <!-- navigatsioon -->
 ---
 
-[← Moodul 17. Enesekontroll](moodul-17-seire/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Lõpuprojekt →](lopuprojekt.md)
+[← Moodul 20. Enesekontroll](moodul-20-seire/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Lõpuprojekt →](lopuprojekt.md)
 <!-- /navigatsioon -->

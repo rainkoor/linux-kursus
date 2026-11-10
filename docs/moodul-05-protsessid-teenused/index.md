@@ -21,9 +21,15 @@ Mooduli läbinud õppija:
 - ajastab ühekordse töö käsuga `at`;
 - piirab kasutajate (`ulimit`, `limits.conf`) ja teenuste (`MemoryMax=`, `CPUQuota=`) ressursikasutust.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 5.1 Protsessid
+
+> [!TIP]
+> **Lühidalt:** Iga töötav programm on **protsess**, millel on number (PID), omanik ja vanemprotsess. Kõige esimene protsess on `systemd` (PID 1).
 
 **Protsess** on töötav programm. Kui käivitad käsu `ls`, loob kernel protsessi, mis töötab, kuni `ls` on oma töö teinud. Serveris töötavad pidevalt sajad protsessid: teenused, kasutajate kestad, taustatööd.
 
@@ -39,7 +45,8 @@ Igal protsessil on:
 
 Kõik protsessid moodustavad puu. Selle juur on protsess **PID 1** - tänapäeva distrodes **systemd**, mis käivitatakse alglaadimisel esimesena ja mis käivitab kõik ülejäänud teenused.
 
-### Protsesside olekud
+<details>
+<summary>Loe lähemalt: Protsesside olekud</summary>
 
 | Täht | Olek | Selgitus |
 |---|---|---|
@@ -67,7 +74,12 @@ stateDiagram-v2
     Z --> [*]: vanem luges tulemuse
 ```
 
+</details>
+
 ## 5.2 Protsesside vaatamine
+
+> [!TIP]
+> **Lühidalt:** `ps aux` näitab kõiki protsesse, `top` ja `htop` reaalajas koormust, `pgrep nimi` leiab protsessi numbri.
 
 ### ps
 
@@ -143,6 +155,9 @@ Klahvid `top`-is:
 
 ## 5.3 Signaalid
 
+> [!TIP]
+> **Lühidalt:** Signaal on teade protsessile: `kill PID` palub lõpetada (TERM), `kill -9 PID` lõpetab jõuga (KILL) - kasuta seda viimase võimalusena.
+
 **Signaal** on teade, mille kernel või teine protsess protsessile saadab. Protsess võib signaalile reageerida, seda ignoreerida või kasutada vaikekäitumist.
 
 | Nr | Nimi | Vaikekäitumine | Kasutus |
@@ -170,6 +185,9 @@ kill -l                      # kõik signaalid
 Tavakasutaja saab signaale saata ainult oma protsessidele, juurkasutaja kõigile.
 
 ## 5.4 Esi- ja taustatööd
+
+> [!TIP]
+> **Lühidalt:** `käsk &` käivitab taustal, **Ctrl+Z** peatab, `bg` ja `fg` jätkavad. Pika töö jaoks, mis peab SSH katkemise üle elama, kasuta `tmux`-i.
 
 Tavaliselt töötab käsk **esiplaanil**: kest ootab, kuni see lõpetab. Pikaajalise käsu saab käivitada ka **taustal**, et terminal jääks vabaks.
 
@@ -217,6 +235,9 @@ Mugavam lahendus on terminali multiplekser **tmux** (või vanem **screen**): sel
 
 ## 5.5 Prioriteedid
 
+> [!TIP]
+> **Lühidalt:** `nice` ja `renice` muudavad protsessi prioriteeti: suurem number = vähem protsessoriaega. Nii ei aeglusta varundus teisi teenuseid.
+
 Protsessori jagamist mõjutab protsessi **nice-väärtus** vahemikus **−20** (kõrgeim prioriteet) kuni **19** (madalaim). Vaikimisi on see 0. Mida „kenam“ (*nicer*) protsess on, seda rohkem annab ta teistele protsessorit.
 
 ```bash
@@ -228,6 +249,9 @@ sudo renice -5 -p 2345       # kõrgemat prioriteeti saab anda ainult juurkasuta
 Prioriteeti tasub alandada näiteks varundus- ja arhiveerimistöödel, et need ei aeglustaks teenuseid.
 
 ## 5.6 systemd ja teenused
+
+> [!TIP]
+> **Lühidalt:** Teenuseid haldab **systemd**: `systemctl status`, `start`, `stop`, `restart`, `enable` (käivita alglaadimisel). Oma teenuse saab kirjutada `.service` failina.
 
 **Teenus** (*service*, UNIX-is ka *daemon*) on taustal pidevalt töötav programm, näiteks SSH-server, veebiserver või andmebaas. Tänapäeva distrodes haldab teenuseid **systemd**.
 
@@ -358,9 +382,12 @@ systemctl status minuteenus
 > [!NOTE]
 > **Programmi väljund läheb logisse.** Kõik, mida teenus kirjutab standardväljundisse või veaväljundisse, salvestab systemd journal'isse. Eraldi logifaili pole vaja.
 
-Sõltuvused, teenuse tüübid, mallid, pesa- ja teeüksused, kasutajateenused ning teenuste karastamine on põhjalikumalt [moodulis 10, punkt 10.11](../moodul-10-alglaadimine-kernel/index.md#1011-systemd-süvitsi).
+Sõltuvused, teenuse tüübid, mallid, pesa- ja teeüksused, kasutajateenused ning teenuste karastamine on põhjalikumalt [moodulis 11, punkt 11.11](../moodul-11-alglaadimine-kernel/index.md#1111-systemd-süvitsi).
 
 ## 5.7 Logid: journalctl
+
+> [!TIP]
+> **Lühidalt:** `journalctl` näitab logisid: `-u teenus` - ühe teenuse logi, `-f` - jälgi reaalajas, `-p err` - ainult vead, `-b` - selle alglaadimise logi.
 
 systemd kogub kõigi teenuste ja kerneli logid ühte kohta - **journal'isse**. Seda loetakse käsuga `journalctl`.
 
@@ -392,9 +419,12 @@ sudo mkdir -p /var/log/journal
 sudo systemctl restart systemd-journald
 ```
 
-Lisaks journal'ile kirjutab mõnes distros **rsyslog** logisid ka tavalistesse tekstifailidesse (`/var/log/messages`, `/var/log/syslog`). Logide haldusest räägime täpsemalt moodulis 11.
+Lisaks journal'ile kirjutab mõnes distros **rsyslog** logisid ka tavalistesse tekstifailidesse (`/var/log/messages`, `/var/log/syslog`). Logide haldusest räägime täpsemalt moodulis 12.
 
 ## 5.8 Ülesannete ajastamine
+
+> [!TIP]
+> **Lühidalt:** Korduvaid töid ajastab **cron** (`crontab -e`) või systemd **taimer**. Taimer logib journal'isse ja käivitab vahele jäänud töö hiljem.
 
 ### cron
 
@@ -485,6 +515,9 @@ systemd-analyze calendar "*-*-* 02:30:00"     # kontrolli ajaavaldist
 
 ## 5.9 Ühekordne ajastamine: at
 
+> [!TIP]
+> **Lühidalt:** `at` käivitab käsu üks kord kindlal ajal: `echo 'käsk' | at 22:00`.
+
 cron ja systemd taimerid on korduvate tööde jaoks. **Ühekordse** töö (nt „taaskäivita teenus täna kell 22“) jaoks on `at`:
 
 ```bash
@@ -498,9 +531,12 @@ at -c 3                             # töö nr 3 sisu
 atrm 3                              # kustuta
 ```
 
-Väljund saadetakse kasutajale e-postiga (moodul 15). systemd alternatiiv: `sudo systemd-run --on-active=30min systemctl restart nginx`.
+Väljund saadetakse kasutajale e-postiga (moodul 20). systemd alternatiiv: `sudo systemd-run --on-active=30min systemctl restart nginx`.
 
 ## 5.10 Ressursipiirangud: ulimit ja systemd
+
+> [!TIP]
+> **Lühidalt:** `ulimit` piirab seansi ressursse (nt avatud failide arv). Teenustele seatakse piirangud systemd-s (`MemoryMax=`, `CPUQuota=`).
 
 Üks vigane programm või kasutaja võib võtta kogu mälu või protsessori. Linux võimaldab piirata ressursse kahel tasemel.
 
@@ -544,7 +580,7 @@ systemd-cgtop                                                # ressursikasutus c
 sudo systemd-run --scope -p MemoryMax=200M -p CPUQuota=20% stress-ng --vm 1 --vm-bytes 500M   # piiratud ühekordne käsk
 ```
 
-Kasutajate seansid on systemd-s **lõikudes** (`user-1000.slice`) - piiranguid saab seada ka neile (`systemctl set-property user-1000.slice MemoryMax=2G`). Samal mehhanismil põhinevad konteinerite piirangud (moodul 12).
+Kasutajate seansid on systemd-s **lõikudes** (`user-1000.slice`) - piiranguid saab seada ka neile (`systemctl set-property user-1000.slice MemoryMax=2G`). Samal mehhanismil põhinevad konteinerite piirangud (moodul 14).
 
 ---
 
@@ -561,7 +597,27 @@ Kasutajate seansid on systemd-s **lõikudes** (`user-1000.slice`) - piiranguid s
 | SELinux mõjutab teenuseid | Ei (AppArmor) | Ei (AppArmor) | **Jah** - vt märkust allpool |
 
 > [!NOTE]
-> **AlmaLinux ja SELinux:** SELinux märgistab iga faili. Kui teenus peab käivitama skripti, mis on loodud kodukataloogis ja seejärel käsuga `mv` kausta `/usr/local/bin` teisaldatud, jääb sellele kodukataloogi märgis ja SELinux keelab käivitamise. Lahendus: loo fail otse sihtkataloogis või taasta õige märgis käsuga `sudo restorecon -v /usr/local/bin/skript.sh`. SELinuxit käsitleme lähemalt moodulis 11.
+> **AlmaLinux ja SELinux:** SELinux märgistab iga faili. Kui teenus peab käivitama skripti, mis on loodud kodukataloogis ja seejärel käsuga `mv` kausta `/usr/local/bin` teisaldatud, jääb sellele kodukataloogi märgis ja SELinux keelab käivitamise. Lahendus: loo fail otse sihtkataloogis või taasta õige märgis käsuga `sudo restorecon -v /usr/local/bin/skript.sh`. SELinuxit käsitleme lähemalt moodulis 12.
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+Protsessid, signaalid, `ps`, `top`, `kill`, `nice`, esi- ja taustatööd ning `cron` töötavad FreeBSD-s samamoodi. Käsu `ps aux` võtmed ongi pärit BSD-st. FreeBSD-s pole aga systemd-d - teenuseid haldavad lihtsad shelliskriptid **rc.d** ja üks seadistusfail `/etc/rc.conf` (vt moodul 29, punkt 29.6):
+
+| Linux (systemd) | FreeBSD (rc.d) |
+|---|---|
+| `systemctl enable --now sshd` | `sysrc sshd_enable=YES && service sshd start` |
+| `systemctl status sshd` | `service sshd status` |
+| `systemctl list-unit-files --state=enabled` | `service -e` |
+| `journalctl -u nginx` | logifail `/var/log/` all, nt `/var/log/messages` |
+| `/etc/systemd/system/x.service` | shelliskript `/usr/local/etc/rc.d/x` |
+| systemd taimer | `cron` ja igapäevased kontrollid `periodic` |
+| `logrotate` | `newsyslog` |
+| `MemoryMax=`, `CPUQuota=` | `rctl` (ressursipiirangud) |
+
+systemd teeb rohkem (sõltuvused, paralleelne käivitamine, cgroups, journal). rc.d on lihtsam: iga teenus on loetav shelliskript.
+
+</details>
 
 ---
 

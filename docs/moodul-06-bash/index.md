@@ -26,16 +26,23 @@ Mooduli läbinud õppija:
 - silub skripte ja ajastab nende käivitamise;
 - versioonib skripte ja seadistusfaile Gitiga (sissekanded, harud, konfliktid, kaughoidla).
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 6.1 Mis on skript?
 
+> [!TIP]
+> **Lühidalt:** Skript on tekstifail käskudega. Esimene rida `#!/bin/bash` ütleb, millise kestaga see käivitada. Käivitamiseks: `chmod +x skript.sh` ja `./skript.sh`.
+
 **Skript** on tekstifail, mis sisaldab kesta käske, mida täidetakse järjest. Kõik, mida saad kirjutada käsureale, saad panna ka skripti. Skriptid on süsteemiadministraatori põhitööriist korduvate tööde automatiseerimiseks: varundus, kasutajate loomine, logide analüüs, seire.
 
 > [!TIP]
-> **Millal skript, millal midagi muud?** Bash sobib hästi käskude ühendamiseks ja failidega töötamiseks. Kui skript kasvab üle paarisaja rea või vajab keerulisi andmestruktuure, on parem kasutada Pythonit. Mitme serveri seadistamiseks sobib Ansible (moodul 16).
+> **Millal skript, millal midagi muud?** Bash sobib hästi käskude ühendamiseks ja failidega töötamiseks. Kui skript kasvab üle paarisaja rea või vajab keerulisi andmestruktuure, on parem kasutada Pythonit. Mitme serveri seadistamiseks sobib Ansible (moodul 19).
 
-### Kestad: bash, sh, zsh, fish
+<details>
+<summary>Loe lähemalt: Kestad: bash, sh, zsh, fish</summary>
 
 Kest on tavaline programm ja neid on mitu. Igal kasutajal on oma **sisselogimiskest** (failis `/etc/passwd` viimane väli), mille ta saab ise valida.
 
@@ -53,6 +60,8 @@ Kest on tavaline programm ja neid on mitu. Igal kasutajal on oma **sisselogimisk
 
 > [!TIP]
 > **Interaktiivne kest ja skriptikest on eri asjad.** Igapäevatööks võid valida endale meeldiva kesta (`zsh`, `fish`), kuid **skriptid kirjuta Bashis või POSIX `sh`-s** ja määra kest skripti esimesel real (`#!/bin/bash`). Skripti käivitab see kest, mis on esimesel real, mitte sinu sisselogimiskest. Süsteemikasutajatele ja juurkasutajale jäta vaikekest.
+
+</details>
 
 ### Kesta vahetamine
 
@@ -73,7 +82,8 @@ sudo usermod -s /bin/bash mari   # administraator muudab teise kasutaja kesta (m
 > [!WARNING]
 > **Ära muuda juurkasutaja ega süsteemikasutajate kesta mitte-POSIX-kestaks** (nt `fish`). Mõned hooldusskriptid ja `su -c` eeldavad POSIX-kesta ning kui kest on vigane või eemaldatakse, ei pääse sa kasutajana enam sisse. Proovi uut kesta kõigepealt käsuga `zsh` või `fish`, enne kui teed selle sisselogimiskestaks.
 
-### Kesta seadistusfailid
+<details>
+<summary>Loe lähemalt: Kesta seadistusfailid</summary>
 
 Kest loeb käivitumisel seadistusfaile. Millised, sõltub sellest, kas tegu on **sisselogimiskestaga** (SSH, konsool, `su -`) või tavalise **interaktiivse kestaga** (uus terminaliaken, käsk `bash`):
 
@@ -84,6 +94,8 @@ Kest loeb käivitumisel seadistusfaile. Millised, sõltub sellest, kas tegu on *
 | `fish` | - | `~/.config/fish/config.fish` |
 
 Debiani ja Ubuntu `~/.profile` loeb omakorda `~/.bashrc`-i, seega piisab tavaliselt sellest, kui kirjutad aliased ja muutujad faili `~/.bashrc` (punkt 6.2). Uute kasutajate algfailid tulevad kataloogist `/etc/skel` (moodul 3). Muudatuse rakendamiseks avatud kestas: `source ~/.bashrc`.
+
+</details>
 
 ### Esimene skript
 
@@ -122,6 +134,9 @@ chmod +x tere.sh
 Kui skript on `PATH`-is, saab seda käivitada nime järgi nagu tavalist käsku.
 
 ## 6.2 Muutujad
+
+> [!TIP]
+> **Lühidalt:** Muutuja omistatakse ilma tühikuteta: `nimi=Mari`, kasutatakse `$nimi`-ga. Käsu väljund muutujasse: `kuupaev=$(date +%F)`.
 
 ```bash
 nimi="Mari"
@@ -200,6 +215,9 @@ Kaks lõksu:
 
 ## 6.3 Jutumärgid
 
+> [!TIP]
+> **Lühidalt:** Kasuta muutujate ümber alati **jutumärke**: `"$fail"`. Ühekordsed `'...'` ei asenda midagi, kahekordsed `"..."` asendavad muutujad.
+
 Jutumärkide õige kasutamine on Bashi skriptides **kõige olulisem** ja kõige sagedasemate vigade allikas.
 
 | Kuju | Mis juhtub | Näide | Tulemus |
@@ -220,6 +238,9 @@ rm "$fail"        # kustutab faili "minu aruanne.txt"
 > **Reegel:** pane muutujad **alati** jutumärkidesse: `"$muutuja"`, `"$1"`, `"$@"`. Erandeid on vähe ja kui sa pole kindel, kasuta jutumärke.
 
 ## 6.4 Argumendid
+
+> [!TIP]
+> **Lühidalt:** `$1`, `$2` … on skripti argumendid, `$#` nende arv, `"$@"` kõik argumendid. Kontrolli alati, et vajalik argument on antud.
 
 Skriptile käsurealt antud väärtused on erimuutujates:
 
@@ -262,6 +283,9 @@ arv="${2:-5}"                # vaikimisi 5
 
 ## 6.5 Väljumiskoodid
 
+> [!TIP]
+> **Lühidalt:** Iga käsk lõpetab koodiga: `0` - õnnestus, muu - viga. Viimase käsu kood on `$?`. Skript lõpetab koodiga `exit 1` vea korral.
+
 Iga käsk lõpetab **väljumiskoodiga** (*exit code*): **0 tähendab edu**, kõik muu viga. Viimase käsu väljumiskood on muutujas `$?`.
 
 ```bash
@@ -298,6 +322,9 @@ echo "VIGA: faili ei leitud" >&2     # >&2 suunab veaväljundisse
 Nii saab skripti kasutaja väljundi ja vead eraldi suunata (vt moodul 2).
 
 ## 6.6 Tingimused
+
+> [!TIP]
+> **Lühidalt:** `if [[ tingimus ]]; then … fi` - nt `[[ -f fail ]]` (fail on olemas), `[[ $a -gt 5 ]]` (arv on suurem). Mitme valiku jaoks `case`.
 
 ### if
 
@@ -403,6 +430,9 @@ Iga haru lõpeb kahe semikooloniga `;;`. `*` sobib kõigega ja on vaikeharu. `|`
 
 ## 6.7 Tsüklid
 
+> [!TIP]
+> **Lühidalt:** `for f in *.log; do … done` kordab iga elemendi kohta, `while` kordab, kuni tingimus kehtib. Faili ridade lugemiseks `while read -r rida`.
+
 ### for
 
 ```bash
@@ -492,6 +522,9 @@ done < <(cut -d: -f1 /etc/passwd)
 
 ## 6.8 Kasutaja sisend
 
+> [!TIP]
+> **Lühidalt:** `read -p "Nimi: " nimi` küsib kasutajalt sisendit muutujasse.
+
 ```bash
 read -r -p "Sisesta oma nimi: " nimi
 echo "Tere, $nimi!"
@@ -510,6 +543,9 @@ fi
 > Halduskriptid peaksid töötama ka **ilma kasutajata** (nt cron'ist või taimerist käivitades). Seepärast eelista argumente ja seadistusfaile ning kasuta `read`-i ainult siis, kui see on tõesti vajalik (nt ohtliku toimingu kinnitamiseks).
 
 ## 6.9 Funktsioonid
+
+> [!TIP]
+> **Lühidalt:** Funktsioon on korduvkasutatav käskude plokk: `nimi() { … }`. Kohalikud muutujad märgi `local`-iga.
 
 Funktsioon on korduvkasutatav koodiplokk:
 
@@ -563,6 +599,9 @@ viga() {
 
 ## 6.10 Massiivid
 
+> [!TIP]
+> **Lühidalt:** Massiiv hoiab mitut väärtust: `serverid=(web1 web2)`, kõik elemendid `"${serverid[@]}"`.
+
 ```bash
 serverid=("web1" "web2" "db1")
 echo "${serverid[0]}"          # esimene element: web1
@@ -576,6 +615,9 @@ done
 ```
 
 ## 6.11 Töökindlad skriptid
+
+> [!TIP]
+> **Lühidalt:** Alusta skripti reaga `set -euo pipefail` - skript peatub vea korral. Kontrolli skripti tööriistaga `shellcheck`.
 
 ### set -euo pipefail
 
@@ -641,6 +683,9 @@ Iga hoiatus sisaldab koodi (nt `SC2086`), mille selgituse leiad aadressilt `http
 
 ## 6.12 Silumine
 
+> [!TIP]
+> **Lühidalt:** `bash -x skript.sh` näitab iga käsku enne käivitamist - nii leiad, kus skript valesti läheb.
+
 ```bash
 bash -x skript.sh            # näita iga käsku enne käivitamist
 bash -n skript.sh            # kontrolli ainult süntaksit, ära käivita
@@ -656,6 +701,9 @@ set +x                       # silumine välja
 
 ## 6.13 Skriptide ajastamine
 
+> [!TIP]
+> **Lühidalt:** Skripti saab ajastada cron'i või systemd taimeriga (moodul 5). Kasuta täisteid ja kirjuta tulemus logisse.
+
 Valmis skripti saab ajastada cron'i või systemd taimeriga (vt moodul 5). Pea meeles:
 
 - kasuta skriptis täielikke teid või määra `PATH` skripti alguses;
@@ -664,6 +712,9 @@ Valmis skripti saab ajastada cron'i või systemd taimeriga (vt moodul 5). Pea me
 - testi skripti enne ajastamist käsitsi.
 
 ## 6.14 Git
+
+> [!TIP]
+> **Lühidalt:** Git hoiab failide ajalugu: `git add`, `git commit -m`, `git log`, `git diff`. Skriptid ja seadistusfailid hoia Gitis - nii näed, mis ja millal muutus.
 
 **Git** on versioonihaldussüsteem, mille lõi Linus Torvalds 2005. aastal Linuxi kerneli arenduse jaoks (vt [ajalugu](../lisad/ajalugu.md)). Git salvestab failide muudatuste ajaloo: iga muudatuse kohta on teada, kes, millal ja miks selle tegi, ning alati saab minna tagasi mis tahes varasemasse olekusse.
 
@@ -804,6 +855,26 @@ case "$ID" in
     *) echo "Tundmatu distro: $ID" >&2; exit 1 ;;
 esac
 ```
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+FreeBSD vaikekest on `/bin/sh` - POSIX-ühilduv kest, mis on `dash`-iga sama perekonnast. Alates FreeBSD 14-st on `sh` ka juurkasutaja kest (varem `tcsh`). **Bashi baassüsteemis pole**: see paigaldatakse paketina ja asub kataloogis `/usr/local/bin/bash`.
+
+```sh
+pkg install bash
+chsh -s /usr/local/bin/bash      # vaheta oma kest
+```
+
+Seepärast:
+
+- rida `#!/bin/bash` FreeBSD-s ei tööta (faili `/bin/bash` pole). Kasuta `#!/usr/bin/env bash` - `env` leiab bashi `PATH`-ist igas süsteemis;
+- kui skript peab töötama nii Linuxis kui ka FreeBSD-s ilma lisapaketita, kirjuta see POSIX-süntaksis ja alusta reaga `#!/bin/sh`. Kontrolli seda käsuga `shellcheck -s sh skript.sh`;
+- skriptis kasutatavad käsud võivad erineda (GNU ja BSD tööriistad, vt moodul 2), nt `sed -i` ja `date -d`.
+
+Distro järgi hargnev skript saab FreeBSD ära tunda käsuga `uname -s` (väljund `FreeBSD`), sest faili `/etc/os-release` seal tavaliselt ei kasutata.
+
+</details>
 
 ---
 

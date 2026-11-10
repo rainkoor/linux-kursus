@@ -109,8 +109,8 @@ HKHK õppijal on laborimasinad Proxmoxis olemas. Iseõppija saab kasutada oma ar
 
 - **HKHK Proxmoxi labor** - õppija saab oma virtuaalmasinad (Debian, Ubuntu, AlmaLinux) ja need on kursuse laboritööde põhikeskkond. Masinate loomine, paigaldus ja võrguplaan on kirjeldatud lisas [Laborikeskkond ja paigaldus](../lisad/paigaldus.md).
 - **Oma arvuti virtuaalmasin** - VirtualBox, VMware Workstation, Hyper-V või macOS-is UTM. Sobib iseõppijale ja koduseks tööks.
-- **WSL** (*Windows Subsystem for Linux*) - Linux otse Windowsi sees, ilma eraldi virtuaalmasinata. Paigaldus PowerShellis (administraatorina): `wsl --install -d Debian` (või `Ubuntu`, `AlmaLinux-10`; valikud näitab `wsl --list --online`). WSL sobib hästi käsurea, Bashi ja Giti harjutamiseks (moodulid 1–6, 12–16), kuid mitte kõigi laboritööde jaoks: alglaadimine, kettad, võrguseadistus ja tulemüür töötavad seal teisiti kui päris serveris.
-- **Pilveserver** - väike virtuaalserver mõne teenusepakkuja juures. Arvesta, et see on kohe internetis ja vajab algusest peale turvalist seadistust (moodulid 7 ja 11).
+- **WSL** (*Windows Subsystem for Linux*) - Linux otse Windowsi sees, ilma eraldi virtuaalmasinata. Paigaldus PowerShellis (administraatorina): `wsl --install -d Debian` (või `Ubuntu`, `AlmaLinux-10`; valikud näitab `wsl --list --online`). WSL sobib hästi käsurea, Bashi ja Giti harjutamiseks (moodulid 1–6, 14–19), kuid mitte kõigi laboritööde jaoks: alglaadimine, kettad, võrguseadistus ja tulemüür töötavad seal teisiti kui päris serveris.
+- **Pilveserver** - väike virtuaalserver mõne teenusepakkuja juures. Arvesta, et see on kohe internetis ja vajab algusest peale turvalist seadistust (moodulid 7 ja 12).
 
 </details>
 

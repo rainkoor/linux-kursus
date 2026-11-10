@@ -1,14 +1,14 @@
 <!-- navigatsioon -->
-[← Moodul 8. Enesekontroll](moodul-08-kettad-lvm/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine →](moodul-09-salvestus/index.md)
+[← Moodul 9. Enesekontroll](moodul-09-varundus/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Moodul 10. Salvestus: RAID, ZFS, jõudlus ja taastamine →](moodul-10-salvestus/index.md)
 <!-- /navigatsioon -->
 
 # Proovieksam: põhiosa
 
-**Maht:** 2 tundi (eksam 1,5 h + arutelu) · **Distro:** Debian 13 · **Eeldused:** moodulid 1–8
+**Maht:** 2 tundi (eksam 1,5 h + arutelu) · **Distro:** Debian 13 · **Eeldused:** moodulid 1–9
 
-See proovieksam kontrollib **põhiosa** oskusi: käsurida, failid ja tekst, kasutajad ja õigused, pakihaldus, teenused ja ajastamine, lihtne skript, võrk ja SSH ning kettad ja LVM. Tühjas virtuaalmasinas tuleb piiratud aja jooksul täita haldusülesanded. Hinnatakse **tulemust** - süsteemi olekut pärast taaskäivitust -, mitte käskude kirjutamise viisi. Tulemust kontrollib automaatne skript.
+See proovieksam kontrollib **põhiosa** oskusi: käsurida, failid ja tekst, kasutajad ja õigused, pakihaldus, teenused ja ajastamine, lihtne skript, võrk ja SSH, kettad ja LVM ning varundus ja taastamine. Tühjas virtuaalmasinas tuleb piiratud aja jooksul täita haldusülesanded. Hinnatakse **tulemust** - süsteemi olekut pärast taaskäivitust -, mitte käskude kirjutamise viisi. Tulemust kontrollib automaatne skript.
 
-Eksam sobib tegemiseks pärast moodulit 8 ja enne [lõpuprojekti algtaset](lopuprojekt.md). Süvendusosa järel on [teine proovieksam](proovieksam.md) AlmaLinuxis.
+Eksam sobib tegemiseks põhiosa lõpus (pärast moodulit 9) ja enne [lõpuprojekti algtaset](lopuprojekt.md). Süvendusosa järel on [teine proovieksam](proovieksam.md) AlmaLinuxis.
 
 ## Reeglid
 
@@ -33,7 +33,7 @@ Tee ülesanded juurkasutaja õigustes (`sudo`). Nimed, numbrid ja failiteed peav
 1. Sea masina hostinimeks `pohi.lab.example`.
 2. Sea ajavööndiks `Europe/Tallinn`.
 
-### 2. Kasutajad ja grupid (8 p)
+### 2. Kasutajad ja grupid (7 p)
 
 1. Loo grupp `opetajad` GID-ga `4000`.
 2. Loo kasutajad `anna` ja `peeter` kodukataloogi ja kestaga `/bin/bash`. Mõlemad kuuluvad lisagrupina gruppi `opetajad`.
@@ -41,16 +41,15 @@ Tee ülesanded juurkasutaja õigustes (`sudo`). Nimed, numbrid ja failiteed peav
 4. Loo kasutaja `varundus`, kes ei saa sisse logida (kest `/usr/sbin/nologin`).
 5. Kasutaja `peeter` parool peab aeguma iga 60 päeva järel.
 
-### 3. Failid, õigused ja tekst (13 p)
+### 3. Failid, õigused ja tekst (10 p)
 
 1. Loo kataloog `/srv/opetajad`, mille omanik on `root` ja grupp `opetajad`. Grupi liikmed saavad seal faile luua ja muuta, teised ei näe sisu. Uued failid kuuluvad automaatselt grupile `opetajad`.
 2. Loo kataloog `/srv/avalik`, kuhu kõik saavad faile kirjutada, kuid teiste faile kustutada ei saa.
 3. Loo sümbolviit `/root/hosts-viit`, mis viitab failile `/etc/hosts`.
-4. Tee kataloogist `/etc/ssh` gzip-iga pakitud tar-arhiiv `/root/ssh-varu.tar.gz`.
-5. **Pärast ülesande 2 tegemist** kirjuta faili `/root/bash-kasutajad.txt` kõigi nende kasutajate nimed, kelle kest on `/bin/bash`, iga nimi eraldi real ja tähestiku järjekorras. Kasuta käske, mitte käsitsi kirjutamist.
-6. Kirjuta faili `/root/tcp-arv.txt` ainult üks arv: mitu rida failis `/etc/services` sisaldab teksti `/tcp`.
+4. **Pärast ülesande 2 tegemist** kirjuta faili `/root/bash-kasutajad.txt` kõigi nende kasutajate nimed, kelle kest on `/bin/bash`, iga nimi eraldi real ja tähestiku järjekorras. Kasuta käske, mitte käsitsi kirjutamist.
+5. Kirjuta faili `/root/tcp-arv.txt` ainult üks arv: mitu rida failis `/etc/services` sisaldab teksti `/tcp`.
 
-### 4. Tarkvara, teenused ja ajastamine (10 p)
+### 4. Tarkvara, teenused ja ajastamine (9 p)
 
 1. Paigalda paketid `tree` ja `htop`.
 2. Paigalda veebiserver `nginx`. See peab töötama ja käivituma alglaadimisel.
@@ -62,7 +61,7 @@ Tee ülesanded juurkasutaja õigustes (`sudo`). Nimed, numbrid ja failiteed peav
 1. SSH: keela juurkasutaja sisselogimine.
 2. Paigalda ja lülita sisse tulemüür `ufw`, mis lubab ainult SSH (22) ja HTTP (80). **Luba SSH enne tulemüüri sisselülitamist!**
 
-### 6. Kettad ja LVM (10 p)
+### 6. Kettad ja LVM (9 p)
 
 Kasuta lisaketast (nt `/dev/sdb` või `/dev/vdb`).
 
@@ -80,6 +79,12 @@ Kirjuta skript `/usr/local/bin/tervitus`, mis:
 
 Skript peab olema käivitatav kõigile.
 
+### 8. Varundus ja taastamine (6 p)
+
+1. **Pärast ülesannete 1 ja 2 tegemist** varunda kogu kataloog `/etc` gzip-iga pakitud tar-arhiiviks kataloogi `/var/backups`. Faili nimi peab sisaldama tänast kuupäeva kujul `etc-AAAA-KK-PP.tar.gz` (nt `etc-2026-11-10.tar.gz`). Kasuta kuupäeva lisamiseks käsku, mitte käsitsi kirjutamist.
+2. Taasta sellest arhiivist **ainult** fail `etc/hostname` kataloogi `/root/taaste` (tulemus: `/root/taaste/etc/hostname`). Teisi faile sinna taastada ei tohi.
+3. Kopeeri `rsync`-iga kogu kataloogi `/home` sisu kataloogi `/var/backups/home` nii, et failide omanikud ja õigused säilivad (nt `/var/backups/home/anna` kuulub kasutajale `anna`).
+
 **Kokku: 56 punkti.**
 
 ## Kontroll
@@ -95,7 +100,7 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ar
 ## Pärast eksamit
 
 - Taasta hetktõmmis „eksami algus“ ja tee eksam uuesti - eesmärk on jõuda **90%+** ilma abita.
-- Kõige sagedasemad vead: kasutajal puudub `-a` (`usermod -G` kustutas teised grupid), fstab-is seadme nimi UUID asemel, unustatud `systemctl enable`, failisüsteem jäi köite suurendamisel samaks (`lvextend` ilma `-r`-ita).
+- Kõige sagedasemad vead: kasutajal puudub `-a` (`usermod -G` kustutas teised grupid), fstab-is seadme nimi UUID asemel, unustatud `systemctl enable`, failisüsteem jäi köite suurendamisel samaks (`lvextend` ilma `-r`-ita), arhiivist taastati kogu `/etc` ühe faili asemel.
 
 > [!NOTE]
 > **Õpetajale:** skript kontrollib ainult olekut. Selle süntaks ja abifunktsioonid on kontrollitud, kuid päris Debianis ei ole kogu eksamit läbi tehtud - tee see enne õppijatega kasutamist üks kord ise läbi.
@@ -103,5 +108,5 @@ Skript näitab iga kontrolli kohta `OK` või `VIGA`, punktisumma ja tulemuse. Ar
 <!-- navigatsioon -->
 ---
 
-[← Moodul 8. Enesekontroll](moodul-08-kettad-lvm/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine →](moodul-09-salvestus/index.md)
+[← Moodul 9. Enesekontroll](moodul-09-varundus/enesekontroll.md) · [Sisukord](../README.md#sisukord) · [Moodul 10. Salvestus: RAID, ZFS, jõudlus ja taastamine →](moodul-10-salvestus/index.md)
 <!-- /navigatsioon -->

@@ -9,6 +9,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Eesti keeles | Inglise keeles | Selgitus |
 |---|---|---|
 | absoluutne tee | absolute path | Juurkataloogist `/` algav tee |
+| access-port | access port | Kommutaatori port, mis edastab ühe VLAN-i kaadreid ilma märgiseta |
 | ACL | Access Control List | Täpsem õiguste loend lisaks omanikule ja grupile |
 | ACME | Automatic Certificate Management Environment | Protokoll sertifikaatide automaatseks hankimiseks ja uuendamiseks (Let's Encrypt, certbot) |
 | ajastaja | scheduler | Programm, mis käivitab töid kindlal ajal (cron) |
@@ -33,6 +34,8 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | auditd | Linux Audit daemon | Kerneli auditisündmusi (sh SELinuxi keelamised) logiv teenus; logi `/var/log/audit/audit.log` |
 | autofs | automounter | Teenus, mis haagib võrgukettad automaatselt esimesel kasutamisel ja lahutab jõudeolekus |
 | avalik võti | public key | Võtmepaari jagatav osa |
+| avatud relee | open relay | E-posti server, mis edastab kõigi kirju võõrastesse domeenidesse; rämpsposti tööriist |
+| avatud resolver | open resolver | Rekursiivne DNS-server, mis vastab kõigile internetis; kasutatakse rünnakuteks |
 | AVC | Access Vector Cache | SELinuxi keelamisteade auditilogis (`ausearch -m AVC`) |
 | baassüsteem | base system | FreeBSD-s koos arendatav ja väljastatav kernel, teegid, põhikäsud ja dokumentatsioon |
 | backports | backports | Debiani hoidla uuemate pakettide jaoks, mis on stabiilse väljalaske jaoks ümber ehitatud |
@@ -73,21 +76,25 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | deduplitseerimistegur | deduplication factor | Näitab, mitu korda vähem ruumi andmed deduplitseerimise tõttu võtavad |
 | Deployment | Deployment | Kubernetese objekt, mis hoiab rakenduse soovitud arvu pode ja haldab uuendusi |
 | DHCP | Dynamic Host Configuration Protocol | Protokoll, millega võrguseadmed saavad automaatselt IP-aadressi ja võrguseaded |
+| diferentsiaalvarundus | differential backup | Varundus, mis kopeerib kõik viimasest täisvarundusest muutunud andmed |
 | distributsioon, distro | distribution | Kernelist ja tarkvarast koosnev terviklik OS |
 | DIT | Directory Information Tree | LDAP-kataloogi puukujuline struktuur |
 | DKIM | DomainKeys Identified Mail | Väljuva e-kirja krüptograafiline allkiri, mida saaja kontrollib DNS-ist |
 | DKMS | Dynamic Kernel Module Support | Süsteem, mis kompileerib kernelivälised moodulid uue kerneli jaoks automaatselt uuesti |
 | DMARC | Domain-based Message Authentication, Reporting and Conformance | DNS-is avaldatud reegel, mida teha kirjaga, mis ei läbi SPF-i ega DKIM-i kontrolli |
 | DN | Distinguished Name | LDAP-kirje täisnimi puus, nt `uid=mari,ou=People,dc=lab,dc=example` |
+| DNAT | destination NAT | NAT, mis muudab sissetuleva paketi sihtaadressi (pordi edasisuunamine) |
 | DNS | Domain Name System | Nimede ja IP-aadresside teisendamise süsteem |
 | dnsmasq | dnsmasq | Kerge DNS-, DHCP- ja TFTP-server |
 | doas | doas | OpenBSD-st pärit lihtne `sudo` alternatiiv (`/usr/local/etc/doas.conf`) |
 | dom0, domU | domain 0, unprivileged domain | Xenis haldus-VM (dom0) ja tavalised külalismasinad (domU) |
 | domeenikontroller | domain controller (DC) | Server, mis hoiab AD kataloogi ja autendib kasutajaid |
 | domeen (AD) | domain | Ühise kataloogi ja turvapoliitikaga haldusala Active Directorys |
+| Dovecot | Dovecot | IMAP- ja POP3-server ning e-posti autentimisteenus |
 | DSA | Debian Security Advisory | Debiani turvateade parandatud haavatavuse kohta |
 | eesmärk | target | systemd üksuste rühm, mis kirjeldab süsteemi olekut |
 | eksportija | exporter | Programm, mis teeb mõõdikud Prometheusele kättesaadavaks (nt node_exporter) |
+| eksport (NFS) | export | NFS-serveri jagatud kataloog ja selle õigused (`/etc/exports`) |
 | EPEL | Extra Packages for Enterprise Linux | RHEL-i perekonna lisapakettide hoidla |
 | esiplaan | foreground | Töö, mille lõppu kest ootab |
 | etcd | etcd | Hajus võti-väärtus andmebaas, kus hoitakse Kubernetese klastri olekut |
@@ -149,6 +156,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | journald | systemd-journald | systemd logiteenus, mille logisid loetakse käsuga `journalctl` |
 | JSON | JavaScript Object Notation | Levinud tekstipõhine andmevorming (API-d, seadistusfailid) |
 | juhtsõlm | control node | Masin, kus Ansible töötab ja kust hallatakse teisi masinaid |
+| juurdekasvuvarundus | incremental backup | Varundus, mis kopeerib ainult eelmisest varundusest muutunud andmed |
 | juurkasutaja | root, superuser | Piiramatute õigustega kasutaja |
 | juurkataloog | root directory | Kataloogipuu algus `/` |
 | järkjärguline uuendus | rolling update | Uuendus, kus vanad koopiad asendatakse uutega järk-järgult, nii et teenus ei katke |
@@ -230,24 +238,29 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | lähtekood | source code | Programmi inimloetav kood |
 | LXC | Linux Containers | Süsteemikonteinerid, mis käituvad nagu kerged virtuaalmasinad (Proxmox) |
 | Lynis | Lynis | Süsteemi turvalisuse auditeerimise tööriist, mis annab karastamise soovitusi |
+| Maildir | Maildir | Postkasti vorming, kus iga kiri on eraldi fail |
 | mall (systemd) | template unit | Üksuse fail nimega `nimi@.service`, millest käivitatakse mitu eksemplari (`%i`) |
 | manifest | manifest | YAML-fail, mis kirjeldab Kubernetese objektide soovitud olekut |
 | manustatud andmebaas | embedded database | Andmebaas, mis on rakenduse sees ühe failina (SQLite) |
 | MariaDB | MariaDB | MySQL-i haru, levinud avatud lähtekoodiga andmebaasiserver |
 | marsruut | route | Reegel, kuhu pakette saata |
+| masquerade | masquerade (SNAT) | NAT, mis asendab väljuva paketi lähteaadressi ruuteri aadressiga |
 | massiiv | array | Mitut väärtust sisaldav muutuja |
+| MDA | Mail Delivery Agent | Programm, mis paneb kirja postkasti (Dovecot) |
 | mdadm | mdadm | Linuxi tarkvaralise RAID-i haldustööriist |
 | metamärk | wildcard, glob | Mitmele failinimele sobiv muster (`*`, `?`) |
 | mets | forest | Active Directory kõrgeim struktuur: üks või mitu ühise skeemiga domeeni |
 | minikube | minikube | Ühe sõlme Kubernetese klaster arendaja arvutis |
 | Molecule | Molecule | Ansible'i rollide testimise raamistik |
 | MTA | Mail Transfer Agent | E-kirju edastav server (nt Postfix) |
+| MUA | Mail User Agent | Kasutaja e-posti programm (Thunderbird, Outlook) |
 | muutuja | variable | Nimega väärtus |
 | muutumatu distro | immutable / atomic distribution | Ainult lugemiseks süsteem, mida uuendatakse tervikuna (SteamOS, Silverblue) |
 | mõõdik | metric | Arvuline näitaja ajas (nt protsessori kasutus) |
 | mänguraamat | playbook | Ansible'i ülesannete kirjeldus YAML-failis |
 | NAS | Network Attached Storage | Võrgu kaudu faile jagav salvestusseade või -süsteem (nt TrueNAS) |
 | NAT | Network Address Translation | Aadresside teisendus, millega sisevõrgu masinad kasutavad ühist avalikku aadressi |
+| NDP | Neighbor Discovery Protocol | IPv6 naabrite ja ruuterite leidmine (asendab ARP-i), kasutab ICMPv6-t |
 | netfilter | netfilter | Linuxi kerneli pakettide filtreerimise raamistik, mida kasutavad nftables ja iptables |
 | newsyslog | newsyslog | FreeBSD logide pööramise tööriist (Linuxi `logrotate` vaste) |
 | NFS | Network File System | Linuxi/UNIX-i võrgufailisüsteem kataloogide jagamiseks |
@@ -315,6 +328,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | põhigrupp | primary group | Kasutaja vaikegrupp, millele kuuluvad tema loodud failid |
 | päringute piirang | rate limit | Teenuse seatud piir, mitu päringut ajaühikus lubatakse (nt Let's Encrypt) |
 | pöördpuhverserver | reverse proxy | Server, mis edastab päringud taustal töötavale rakendusele |
+| pöördtsoon | reverse zone | DNS-tsoon, mis seob IP-aadressid nimedega (PTR-kirjed, `in-addr.arpa`) |
 | püsivara | firmware | Emaplaadi programm, mis käivitub esimesena (BIOS, UEFI) |
 | PXE | Preboot Execution Environment | Arvuti käivitamine võrgust |
 | QEMU | Quick Emulator | Riistvara emulaator, mis koos KVM-iga käitab virtuaalmasinaid |
@@ -336,6 +350,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | rikketest | failover test | Komponendi teadlik väljalülitamine, et kontrollida lahenduse töökindlust |
 | roll (Ansible) | role | Korduvkasutatav Ansible'i ülesannete, mallide ja muutujate komplekt kindlas kataloogistruktuuris |
 | roll (PostgreSQL) | role | PostgreSQL-i kasutaja või grupp |
+| root_squash | root squash | NFS-i vaikevalik, mis muudab kliendi juurkasutaja serveris õigusteta kasutajaks |
 | round robin | round robin | Koormuse jaotamine kordamööda kõigile serveritele |
 | RPO | Recovery Point Objective | Kui palju andmeid (ajas mõõdetuna) tohib rikke korral kaotada |
 | RSAT | Remote Server Administration Tools | Windowsi tööriistad AD ja serverite kaughalduseks |
@@ -350,6 +365,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | seansi püsivus | sticky sessions | Koormusejaoturi seade, mis saadab sama kliendi alati samale taustserverile |
 | seccomp | secure computing mode | Kerneli mehhanism, mis piirab protsessi lubatud süsteemikutseid |
 | Secret | Secret | Kubernetese objekt saladuste (paroolid, võtmed) hoidmiseks; vaikimisi ainult base64-kodeeritud |
+| sekundaarserver | secondary server | DNS-server, mis hoiab primaari tsoonist koopiat ja vastab samamoodi |
 | sertifikaat | certificate | Allkirjastatud dokument, mis seob avaliku võtme serveri nimega |
 | sertifitseerimiskeskus | certificate authority, CA | Asutus või süsteem, mis allkirjastab sertifikaate |
 | SFTP | SSH File Transfer Protocol | Failiedastus SSH kaudu |
@@ -371,6 +387,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | SLAAC | Stateless Address Autoconfiguration | IPv6 aadressi automaatne seadistamine ruuteri teadaannete põhjal |
 | SMART | Self-Monitoring, Analysis and Reporting Technology | Ketaste enesediagnostika (`smartctl`) |
 | SMB | Server Message Block | Windowsi failijagamise protokoll; Linuxis Samba |
+| SOA | Start of Authority | Tsooni põhikirje: nimeserver, seerianumber ja ajad |
 | SPF | Sender Policy Framework | DNS-kirje, mis loetleb domeeni nimel e-kirju saata lubatud serverid |
 | SPICE | Simple Protocol for Independent Computing Environments | Virtuaalmasina graafilise konsooli protokoll (Proxmox, virt-manager) |
 | SQL | Structured Query Language | Relatsiooniliste andmebaaside päringukeel |
@@ -404,6 +421,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | zsh | Z shell | Bashi-sarnane, peaaegu POSIX-ühilduv kest täiustatud lõpetamise ja pluginatega (macOS-i vaikekest) |
 | zvol | ZFS volume | ZFS-i pooli sees olev plokkseade |
 | taastamisrežiim | rescue mode | Vähendatud režiim süsteemi hoolduseks |
+| taastamistest | restore test | Päris taastamine testkeskkonda koos aja mõõtmisega, et kontrollida varukoopia kasutatavust |
 | tagasisidestus | loopback | Liides, mille kaudu masin räägib iseendaga (`lo`) |
 | taimer | timer | systemd üksus ajastatud käivitamiseks |
 | taust | background | Töö, mis töötab ilma kesta ootamata |
@@ -424,17 +442,21 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | TOTP | Time-based One-Time Password | Ajapõhine ühekordne kood (telefonirakendus), mida kasutatakse kaheastmelisel autentimisel |
 | TPM | Trusted Platform Module | Turvakiip (või virtuaalne vaste), mida nõuab nt Windows 11 |
 | Traefik | Traefik | Konteineritele mõeldud pöördpuhver ja koormusejaotur |
+| trunk-port | trunk port | Kommutaatori port, mis edastab mitme VLAN-i kaadreid märgistega |
 | tsoon | zone | DNS-is ühe domeeni kirjete kogum |
+| tsooniülekanne | zone transfer (AXFR/IXFR) | Tsooni kopeerimine primaarserverilt sekundaarserverile |
 | tsükkel | loop | Korduvalt täidetav koodiplokk |
 | tulemüür | firewall | Võrguliikluse filtreerimise süsteem |
 | tuned | tuned | Teenus, mis rakendab süsteemile jõudlusprofiile (`tuned-adm`) |
 | turvakontekst | security context | SELinuxi märgis failil, protsessil või pordil |
 | turvauuendus | security update | Turvaauku parandav tarkvarauuendus |
+| täisvarundus | full backup | Varundus, mis kopeerib kõik andmed |
 | töölauakeskkond | desktop environment | Graafiline kasutajaliides (GNOME, KDE Plasma, Xfce) |
 | udev | udev | Teenus, mis reageerib riistvara sündmustele: laadib moodulid, loob seadmefailid ja püsivad nimed, käivitab reeglid |
 | UDP | User Datagram Protocol | Ühenduseta transpordiprotokoll (DNS, DHCP, NTP, WireGuard) |
 | UEFI | Unified Extensible Firmware Interface | Tänapäevane püsivara liides, mis asendab BIOS-i; alglaadija on EFI süsteemipartitsioonil |
 | UID | user ID | Kasutaja numbriline tunnus |
+| ULA | Unique Local Address | IPv6 privaatvõrgu aadress (`fd00::/8`), IPv4 `10.0.0.0/8` vaste |
 | umask | umask | Mask, mis määrab uute failide vaikimisi õigused |
 | Unbound | Unbound | Rekursiivne ja vahemäluga DNS-lahendaja |
 | UNIX | UNIX | 1969. aastal Bell Labsis loodud operatsioonisüsteem, Linuxi ja BSD eeskuju |
@@ -451,6 +473,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | varundus | backup | Andmetest koopia tegemine taastamise jaoks |
 | vastustefail | answer file | Fail, mis vastab paigaldaja küsimustele ette (kickstart, preseed, autoinstall) |
 | vdev | virtual device | ZFS-i ketaste rühm (üksik, peegel, raidz) |
+| veth-paar | veth pair | Kaks omavahel ühendatud virtuaalset võrguliidest, millega ühendatakse konteiner sillaga |
 | viip | prompt | Kesta ooteteade, nt `mari@debian:~$` |
 | viit | symbolic link, symlink | Viide teisele failile või kataloogile |
 | VirtIO | VirtIO | Paravirtualiseeritud kiired virtuaalseadmed (ketas, võrk) |
@@ -463,6 +486,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | VRRP | Virtual Router Redundancy Protocol | Protokoll, millega masinad lepivad kokku, kes virtuaalset IP-aadressi hoiab |
 | VT-x / AMD-V | hardware virtualization extensions | Protsessori riistvaraline virtualiseerimise tugi |
 | võrgumask | netmask | Määrab, milline osa aadressist tähistab võrku (nt `/24`) |
+| võrgunimeruum | network namespace | Kerneli eraldatud võrgukeskkond oma liideste, aadresside ja marsruutidega (konteinerite alus) |
 | võti | option, flag | Käsu käitumist muutev parameeter, nt `-l` |
 | võti-väärtus hoidla | key-value store | Andmebaas, mis hoiab väärtusi võtme järgi (Valkey, Redis) |
 | vähima õiguse põhimõte | principle of least privilege | Igaüks saab ainult vajalikud õigused |

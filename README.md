@@ -27,32 +27,36 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 - [Moodul 6. Bashi skriptimine ja Git](docs/moodul-06-bash/index.md) - [laboritöö](docs/moodul-06-bash/labor.md) · [enesekontroll](docs/moodul-06-bash/enesekontroll.md)
 - [Moodul 7. Võrk ja SSH](docs/moodul-07-vork-ssh/index.md) - [laboritöö](docs/moodul-07-vork-ssh/labor.md) · [enesekontroll](docs/moodul-07-vork-ssh/enesekontroll.md)
 - [Moodul 8. Kettad, failisüsteemid ja LVM](docs/moodul-08-kettad-lvm/index.md) - [laboritöö](docs/moodul-08-kettad-lvm/labor.md) · [enesekontroll](docs/moodul-08-kettad-lvm/enesekontroll.md)
+- [Moodul 9. Varundus ja taastamine](docs/moodul-09-varundus/index.md) - [laboritöö](docs/moodul-09-varundus/labor.md) · [enesekontroll](docs/moodul-09-varundus/enesekontroll.md)
 - [Proovieksam: põhiosa](docs/proovieksam-pohiosa.md)
 
 **Süvendusosa**
 
-- [Moodul 9. Salvestus: RAID, ZFS, jõudlus ja taastamine](docs/moodul-09-salvestus/index.md) - [laboritöö](docs/moodul-09-salvestus/labor.md) · [enesekontroll](docs/moodul-09-salvestus/enesekontroll.md)
-- [Moodul 10. Kuidas Linux töötab: alglaadimine ja kernel](docs/moodul-10-alglaadimine-kernel/index.md) - [laboritöö](docs/moodul-10-alglaadimine-kernel/labor.md) · [enesekontroll](docs/moodul-10-alglaadimine-kernel/enesekontroll.md)
-- [Moodul 11. Turvalisus ja logid](docs/moodul-11-turvalisus-logid/index.md) - [laboritööd](docs/moodul-11-turvalisus-logid/labor.md) · [enesekontroll](docs/moodul-11-turvalisus-logid/enesekontroll.md)
-- [Moodul 12. Konteinerid](docs/moodul-12-konteinerid/index.md) - [laboritöö](docs/moodul-12-konteinerid/labor.md) · [enesekontroll](docs/moodul-12-konteinerid/enesekontroll.md)
-- [Moodul 13. Veebiserverid](docs/moodul-13-veebiserverid/index.md) - [laboritöö](docs/moodul-13-veebiserverid/labor.md) · [enesekontroll](docs/moodul-13-veebiserverid/enesekontroll.md)
-- [Moodul 14. Andmebaasid](docs/moodul-14-andmebaasid/index.md) - [laboritöö](docs/moodul-14-andmebaasid/labor.md) · [enesekontroll](docs/moodul-14-andmebaasid/enesekontroll.md)
-- [Moodul 15. Võrguteenused: DNS, failijagamine, e-post ja varundus](docs/moodul-15-vorguteenused/index.md) - [laboritööd](docs/moodul-15-vorguteenused/labor.md) · [enesekontroll](docs/moodul-15-vorguteenused/enesekontroll.md)
-- [Moodul 16. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](docs/moodul-16-automatiseerimine/index.md) - [laboritöö](docs/moodul-16-automatiseerimine/labor.md) · [enesekontroll](docs/moodul-16-automatiseerimine/enesekontroll.md)
-- [Moodul 17. Seire ja jõudlus](docs/moodul-17-seire/index.md) - [laboritöö](docs/moodul-17-seire/labor.md) · [enesekontroll](docs/moodul-17-seire/enesekontroll.md)
+- [Moodul 10. Salvestus: RAID, ZFS, jõudlus ja taastamine](docs/moodul-10-salvestus/index.md) - [laboritöö](docs/moodul-10-salvestus/labor.md) · [enesekontroll](docs/moodul-10-salvestus/enesekontroll.md)
+- [Moodul 11. Kuidas Linux töötab: alglaadimine ja kernel](docs/moodul-11-alglaadimine-kernel/index.md) - [laboritöö](docs/moodul-11-alglaadimine-kernel/labor.md) · [enesekontroll](docs/moodul-11-alglaadimine-kernel/enesekontroll.md)
+- [Moodul 12. Turvalisus ja logid](docs/moodul-12-turvalisus-logid/index.md) - [laboritööd](docs/moodul-12-turvalisus-logid/labor.md) · [enesekontroll](docs/moodul-12-turvalisus-logid/enesekontroll.md)
+- [Moodul 13. Võrgu süvendus: IPv6, sild, VLAN, bond ja VPN](docs/moodul-13-vorgu-suvendus/index.md) - [laboritöö](docs/moodul-13-vorgu-suvendus/labor.md) · [enesekontroll](docs/moodul-13-vorgu-suvendus/enesekontroll.md)
+- [Moodul 14. Konteinerid](docs/moodul-14-konteinerid/index.md) - [laboritöö](docs/moodul-14-konteinerid/labor.md) · [enesekontroll](docs/moodul-14-konteinerid/enesekontroll.md)
+- [Moodul 15. Veebiserverid](docs/moodul-15-veebiserverid/index.md) - [laboritöö](docs/moodul-15-veebiserverid/labor.md) · [enesekontroll](docs/moodul-15-veebiserverid/enesekontroll.md)
+- [Moodul 16. Andmebaasid](docs/moodul-16-andmebaasid/index.md) - [laboritöö](docs/moodul-16-andmebaasid/labor.md) · [enesekontroll](docs/moodul-16-andmebaasid/enesekontroll.md)
+- [Moodul 17. DNS ja nimelahendus](docs/moodul-17-dns/index.md) - [laboritööd](docs/moodul-17-dns/labor.md) · [enesekontroll](docs/moodul-17-dns/enesekontroll.md)
+- [Moodul 18. Failiserverid](docs/moodul-18-failiserverid/index.md) - [laboritöö](docs/moodul-18-failiserverid/labor.md) · [enesekontroll](docs/moodul-18-failiserverid/enesekontroll.md)
+- [Moodul 19. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](docs/moodul-19-automatiseerimine/index.md) - [laboritöö](docs/moodul-19-automatiseerimine/labor.md) · [enesekontroll](docs/moodul-19-automatiseerimine/enesekontroll.md)
+- [Moodul 20. Seire ja jõudlus](docs/moodul-20-seire/index.md) - [laboritöö](docs/moodul-20-seire/labor.md) · [enesekontroll](docs/moodul-20-seire/enesekontroll.md)
 - [Proovieksam: süvendusosa](docs/proovieksam.md)
 - [Lõpuprojekt](docs/lopuprojekt.md)
 
 **Valikmoodulid**
 
-- [Moodul 18. BSD praktikas: OPNsense tulemüür](docs/moodul-18-opnsense/index.md) - [laboritöö](docs/moodul-18-opnsense/labor.md) · [enesekontroll](docs/moodul-18-opnsense/enesekontroll.md)
-- [Moodul 19. Võrgu infrastruktuur: DHCP, PXE ja iSCSI](docs/moodul-19-dhcp-pxe-iscsi/index.md) - [laboritöö](docs/moodul-19-dhcp-pxe-iscsi/labor.md) · [enesekontroll](docs/moodul-19-dhcp-pxe-iscsi/enesekontroll.md)
-- [Moodul 20. Kataloogiteenused: OpenLDAP](docs/moodul-20-openldap/index.md) - [laboritöö](docs/moodul-20-openldap/labor.md) · [enesekontroll](docs/moodul-20-openldap/enesekontroll.md)
-- [Moodul 21. Active Directory Linuxis: Samba AD DC](docs/moodul-21-samba-ad/index.md) - [laboritööd](docs/moodul-21-samba-ad/labor.md) · [enesekontroll](docs/moodul-21-samba-ad/enesekontroll.md)
-- [Moodul 22. Linux töölaual ja WSL](docs/moodul-22-toolaud-wsl/index.md) - [laboritöö](docs/moodul-22-toolaud-wsl/labor.md) · [enesekontroll](docs/moodul-22-toolaud-wsl/enesekontroll.md)
-- [Moodul 23. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](docs/moodul-23-virtualiseerimine/index.md) - [laboritöö](docs/moodul-23-virtualiseerimine/labor.md) · [enesekontroll](docs/moodul-23-virtualiseerimine/enesekontroll.md)
-- [Moodul 24. Kubernetes: k3s](docs/moodul-24-kubernetes/index.md) - [laboritöö](docs/moodul-24-kubernetes/labor.md) · [enesekontroll](docs/moodul-24-kubernetes/enesekontroll.md)
-- [Moodul 25. FreeBSD server](docs/moodul-25-freebsd/index.md) - [laboritöö](docs/moodul-25-freebsd/labor.md) · [enesekontroll](docs/moodul-25-freebsd/enesekontroll.md)
+- [Moodul 21. BSD praktikas: OPNsense tulemüür](docs/moodul-21-opnsense/index.md) - [laboritöö](docs/moodul-21-opnsense/labor.md) · [enesekontroll](docs/moodul-21-opnsense/enesekontroll.md)
+- [Moodul 22. Võrgu infrastruktuur: DHCP, PXE ja iSCSI](docs/moodul-22-dhcp-pxe-iscsi/index.md) - [laboritöö](docs/moodul-22-dhcp-pxe-iscsi/labor.md) · [enesekontroll](docs/moodul-22-dhcp-pxe-iscsi/enesekontroll.md)
+- [Moodul 23. E-posti server](docs/moodul-23-e-post/index.md) - [laboritöö](docs/moodul-23-e-post/labor.md) · [enesekontroll](docs/moodul-23-e-post/enesekontroll.md)
+- [Moodul 24. Kataloogiteenused: OpenLDAP](docs/moodul-24-openldap/index.md) - [laboritöö](docs/moodul-24-openldap/labor.md) · [enesekontroll](docs/moodul-24-openldap/enesekontroll.md)
+- [Moodul 25. Active Directory Linuxis: Samba AD DC](docs/moodul-25-samba-ad/index.md) - [laboritööd](docs/moodul-25-samba-ad/labor.md) · [enesekontroll](docs/moodul-25-samba-ad/enesekontroll.md)
+- [Moodul 26. Linux töölaual ja WSL](docs/moodul-26-toolaud-wsl/index.md) - [laboritöö](docs/moodul-26-toolaud-wsl/labor.md) · [enesekontroll](docs/moodul-26-toolaud-wsl/enesekontroll.md)
+- [Moodul 27. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](docs/moodul-27-virtualiseerimine/index.md) - [laboritöö](docs/moodul-27-virtualiseerimine/labor.md) · [enesekontroll](docs/moodul-27-virtualiseerimine/enesekontroll.md)
+- [Moodul 28. Kubernetes: k3s](docs/moodul-28-kubernetes/index.md) - [laboritöö](docs/moodul-28-kubernetes/labor.md) · [enesekontroll](docs/moodul-28-kubernetes/enesekontroll.md)
+- [Moodul 29. FreeBSD server](docs/moodul-29-freebsd/index.md) - [laboritöö](docs/moodul-29-freebsd/labor.md) · [enesekontroll](docs/moodul-29-freebsd/enesekontroll.md)
 
 **Lisad**
 
@@ -75,21 +79,21 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 
 | Osa | Kellele | Mida õppija pärast oskab |
 |---|---|---|
-| **Põhiosa**<br>moodulid 1–8, ~76 h | Kõigile IT-õppijatele, kes alustavad Linuxiga nullist: kutseõppe esimese kursuse õppijad, iseõppijad, aga ka tugispetsialistid, võrguhaldurid ja arendajad, kes vajavad töös käsurida. Eeldab ainult arvuti tavakasutaja oskusi. | Kasutab käsurida enesekindlalt ja haldab iseseisvalt üht Linuxi serverit: kasutajad ja õigused, paketid, teenused, lihtsad skriptid, võrk, SSH ja kettad. Teemad katavad suures osas algtaseme sertifikaadi LPI Linux Essentials nõuded. |
-| **Süvendusosa**<br>moodulid 9–17, ~84 h + lõpuprojekt | Süsteemihalduse eriala õppijatele (nt IT-süsteemide nooremspetsialist) ja iseõppijatele, kes tahavad töötada Linuxi administraatorina. Eeldab põhiosa läbimist või samaväärset kogemust. | Paigaldab, turvab ja hooldab tüüpilisi serveriteenuseid (veeb, andmebaasid, DNS, failijagamine, e-post, varundus), lahendab alglaadimise ja jõudluse probleeme ning tunneb automatiseerimise ja seire põhimõtteid. Teemad ja tase on lähedased tuntud Linuxi sertifikaatide nõuetele: Red Hat RHCSA, Linux Foundation LFCS, CompTIA Linux+ ja LPI LPIC-1. Eksamiks valmistudes võrdle kursust sertifikaadi ametliku teemade loendiga. |
-| **Valikmoodulid**<br>moodulid 18–25 | Edasijõudnutele ja huvilistele, kes on süvendusosa (või selle vajalikud moodulid) läbinud ja tahavad mõnda valdkonda lähemalt tundma õppida. Õpetaja saab valida moodulid rühma vajaduste järgi; kiiremad õppijad saavad neid teha iseseisvalt. | Sõltub moodulist: tulemüür, võrgust paigaldus, kataloogiteenused ja domeen, töölaua Linux, virtualiseerimine, Kubernetes või FreeBSD. Osa mooduleid (nt Kubernetes) on sissejuhatavad: teema põhjalikum käsitlus on HKHK õppijal teistes erialaainetes. |
+| **Põhiosa**<br>moodulid 1–9, ~84 h | Kõigile IT-õppijatele, kes alustavad Linuxiga nullist: kutseõppe esimese kursuse õppijad, iseõppijad, aga ka tugispetsialistid, võrguhaldurid ja arendajad, kes vajavad töös käsurida. Eeldab ainult arvuti tavakasutaja oskusi. | Kasutab käsurida enesekindlalt ja haldab iseseisvalt üht Linuxi serverit: kasutajad ja õigused, paketid, teenused, lihtsad skriptid, võrk, SSH, kettad ning varundus ja taastamine. Teemad katavad suures osas algtaseme sertifikaadi LPI Linux Essentials nõuded. |
+| **Süvendusosa**<br>moodulid 10–20, ~98 h + lõpuprojekt | Süsteemihalduse eriala õppijatele (nt IT-süsteemide nooremspetsialist) ja iseõppijatele, kes tahavad töötada Linuxi administraatorina. Eeldab põhiosa läbimist või samaväärset kogemust. | Paigaldab, turvab ja hooldab tüüpilisi serveriteenuseid (veeb, andmebaasid, DNS, failiserver), seadistab keerukamaid võrke (IPv6, VLAN, VPN), lahendab alglaadimise ja jõudluse probleeme ning tunneb automatiseerimise ja seire põhimõtteid. Teemad ja tase on lähedased tuntud Linuxi sertifikaatide nõuetele: Red Hat RHCSA, Linux Foundation LFCS, CompTIA Linux+ ja LPI LPIC-1. Eksamiks valmistudes võrdle kursust sertifikaadi ametliku teemade loendiga. |
+| **Valikmoodulid**<br>moodulid 21–29 | Edasijõudnutele ja huvilistele, kes on süvendusosa (või selle vajalikud moodulid) läbinud ja tahavad mõnda valdkonda lähemalt tundma õppida. Õpetaja saab valida moodulid rühma vajaduste järgi; kiiremad õppijad saavad neid teha iseseisvalt. | Sõltub moodulist: tulemüür, võrgust paigaldus, e-posti server, kataloogiteenused ja domeen, töölaua Linux, virtualiseerimine, Kubernetes või FreeBSD. Osa mooduleid (nt Kubernetes) on sissejuhatavad: teema põhjalikum käsitlus on HKHK õppijal teistes erialaainetes. |
 
 Iga mooduli alguses on kirjas tema **eeldused**, nii et valikmooduleid ei pea tegema järjest.
 
 ## Ülesehitus
 
-Kursus koosneb **17 moodulist** (põhiosa 1–8 ja süvendusosa 9–17), kahest proovieksamist ([põhiosa](docs/proovieksam-pohiosa.md) ja [süvendusosa](docs/proovieksam.md)), [lõpuprojektist](docs/lopuprojekt.md) ning **8 valikmoodulist** (18–25: OPNsense, DHCP/PXE/iSCSI, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes, FreeBSD server). Iga moodul sisaldab kolme osa:
+Kursus koosneb **20 moodulist** (põhiosa 1–9 ja süvendusosa 10–20), kahest proovieksamist ([põhiosa](docs/proovieksam-pohiosa.md) ja [süvendusosa](docs/proovieksam.md)), [lõpuprojektist](docs/lopuprojekt.md) ning **9 valikmoodulist** (21–29: OPNsense, DHCP/PXE/iSCSI, e-posti server, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes, FreeBSD server). Iga moodul sisaldab kolme osa:
 
 | Fail | Sisu |
 |---|---|
 | `index.md` | Teooria koos näidetega |
 | `labor.md` | Praktiline laboritöö kindlal distributsioonil |
-| `enesekontroll.md` | Küsimused, praktilised miniülesanded ja vastused |
+| `enesekontroll.md` | Küsimused ja praktilised miniülesanded, vastused avatavates plokkides |
 
 Kursuse täielik kava on failis [docs/kava.md](docs/kava.md). Mõistete eesti-inglise sõnastik on failis [docs/lisad/sonastik.md](docs/lisad/sonastik.md) ja käskude loend failis [docs/lisad/kasud.md](docs/lisad/kasud.md). Laborikeskkonna (Proxmoxi virtuaalmasinate, võrguplaani ja distrode paigalduse) kirjeldus on failis [docs/lisad/paigaldus.md](docs/lisad/paigaldus.md).
 

@@ -332,7 +332,7 @@ git config --global init.defaultBranch main
 git config --global core.editor nano
 ```
 
-**7.2** Loo hoidla, kuhu kogud kõik selle kursuse skriptid ja seadistused (seda hoidlat kasutad edasi moodulites 12 ja 16):
+**7.2** Loo hoidla, kuhu kogud kõik selle kursuse skriptid ja seadistused (seda hoidlat kasutad edasi moodulites 14 ja 19):
 
 ```bash
 mkdir ~/infra && cd ~/infra

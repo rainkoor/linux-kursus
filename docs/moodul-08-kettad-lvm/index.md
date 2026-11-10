@@ -19,8 +19,14 @@ Mooduli läbinud õppija:
 - suurendab virtuaalmasina ketast ja failisüsteemi;
 - krüpteerib ketta LUKS-iga ja seadistab selle püsiva avamise.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 ## 8.1 Plokkseadmed
+
+> [!TIP]
+> **Lühidalt:** Kettad on **plokkseadmed** kataloogis `/dev` (nt `/dev/sda`, `/dev/vda`, `/dev/nvme0n1`). `lsblk` näitab kettaid, partitsioone ja haakepunkte.
 
 Kettaid nimetatakse Linuxis **plokkseadmeteks** (*block devices*), sest andmeid loetakse ja kirjutatakse plokkide kaupa. Iga seade on esitatud failina kataloogis `/dev`.
 
@@ -63,6 +69,9 @@ sr0                 11:0    1  1.0G  0 rom
 
 Siin on näha, et süsteemiketas `sda` on jagatud kolmeks partitsiooniks ja kolmas partitsioon on LVM-i all jagatud juur- ja saalealaks. Ketas `sdb` on tühi.
 ## 8.2 Partitsioonitabelid
+
+> [!TIP]
+> **Lühidalt:** Ketas jagatakse partitsioonideks. Tänapäeval kasutatakse **GPT**-d (vanem MBR). Partitsioone loovad `fdisk`, `gdisk` ja `parted`.
 
 Ketas jagatakse **partitsioonideks**, mille kirjeldus on ketta alguses **partitsioonitabelis**.
 
@@ -121,6 +130,9 @@ Pärast partitsioonide muutmist kontrolli tulemust käsuga `lsblk`. Kui kernel u
 > **Hoiatus:** partitsioonitööriist teeb täpselt seda, mida käsid. Vale ketta tähe korral kustutad töötava süsteemi andmed. **Kontrolli enne iga muudatust `lsblk`-iga, et töötad õige kettaga.**
 ## 8.3 Failisüsteemid
 
+> [!TIP]
+> **Lühidalt:** Failisüsteem korraldab andmed partitsioonil. Linuxis on levinud **ext4** ja **XFS**. Loomine: `mkfs.ext4 /dev/sdb1` - see kustutab kõik andmed.
+
 **Failisüsteem** määrab, kuidas faile ja katalooge partitsioonil hoitakse. Enne kasutamist tuleb partitsioonile failisüsteem luua (**vormindada**).
 
 | Failisüsteem | Iseloomustus | Kus vaikimisi |
@@ -170,6 +182,9 @@ sudo xfs_info /dev/sdb2                      # XFS ülevaade
 ext4 jätab vaikimisi 5% ruumist juurkasutajale, et süsteem töötaks ka siis, kui tavakasutajad on ketta täis kirjutanud. Suurel andmekettal on see palju raisatud ruumi, seepärast vähendatakse seda sageli (`tune2fs -m`).
 ## 8.4 Haakimine
 
+> [!TIP]
+> **Lühidalt:** Failisüsteem haagitakse kataloogi: `mount /dev/sdb1 /mnt/andmed`, lahti `umount`. `findmnt` ja `df -h` näitavad haagitud failisüsteeme.
+
 Failisüsteemi kasutamiseks tuleb see **haakida** (*mount*) mõnda kataloogi - **haakepunkti**. Pärast haakimist on failisüsteemi sisu selles kataloogis nähtav.
 
 ```bash
@@ -195,6 +210,9 @@ sudo mount -o ro /dev/sdb1 /mnt/andmed       # ainult lugemiseks
 sudo mount -o remount,rw /mnt/andmed         # haagi uuesti kirjutamiseks
 ```
 ## 8.5 Püsiv haakimine: /etc/fstab
+
+> [!TIP]
+> **Lühidalt:** Püsivalt haagitakse failisüsteemid failis `/etc/fstab`, eelistatult **UUID** järgi. Kontrolli alati `sudo mount -a` ja `findmnt --verify` enne taaskäivitust.
 
 Käsuga `mount` haagitud failisüsteem kaob taaskäivitusel. Püsiv haakimine kirjeldatakse failis **`/etc/fstab`**:
 
@@ -239,6 +257,9 @@ df -h
 > **Vigane fstab võib takistada süsteemi käivitumist!** Kui alglaadimisel ei leita seadet, mis ei ole märgitud valikuga `nofail`, satub süsteem hädaolukorra režiimi (*emergency mode*), kust saab parandada ainult konsooli kaudu. Seepärast: kasuta lisaketastel `nofail`, kontrolli muudatusi `findmnt --verify` ja `mount -a` abil ning hoia konsool käepärast.
 ## 8.6 Saaleala (swap)
 
+> [!TIP]
+> **Lühidalt:** Saaleala (swap) on kettal asuv mälu varuks. Seda saab teha partitsioonina või failina (`mkswap`, `swapon`).
+
 **Saaleala** on kettaruum, kuhu kernel tõstab vähe kasutatud mäluosad, kui füüsiline mälu (RAM) saab otsa. See on palju aeglasem kui RAM, kuid hoiab ära programmide kokkujooksmise mälupuuduse korral.
 
 ```bash
@@ -263,6 +284,9 @@ Püsivaks muutmiseks lisa faili `/etc/fstab` rida:
 
 Kui palju saaleala on vaja, sõltub kasutusest. Serveritel on tavaliselt piisav 1–4 GiB. Kui server kasutab saaleala pidevalt ja palju, on vaja rohkem mälu, mitte rohkem saaleala.
 ## 8.7 LVM
+
+> [!TIP]
+> **Lühidalt:** LVM paneb kettad kokku **köiterühma**, millest luuakse paindlikke **loogilisi köiteid**. Köidet saab hiljem suurendada ilma partitsioone muutmata.
 
 Tavalise partitsiooni suurust on raske muuta: partitsiooni taga ei pruugi olla vaba ruumi ja mitut ketast ühte partitsiooni ühendada ei saa. **LVM** (*Logical Volume Manager*) lisab ketaste ja failisüsteemide vahele paindliku kihi.
 
@@ -362,6 +386,9 @@ sudo pvremove /dev/sdb
 ```
 ## 8.8 Kettakasutuse jälgimine
 
+> [!TIP]
+> **Lühidalt:** `df -h` näitab vaba ruumi failisüsteemides, `du -sh *` kataloogide suurust. Täis ketas peatab teenused - jälgi seda.
+
 ```bash
 df -h                        # failisüsteemide täituvus
 df -i                        # i-sõlmede kasutus (ketas võib olla „täis“ ka siis, kui baite on vaba)
@@ -380,6 +407,9 @@ Levinud põhjused, miks ketas täis saab:
 - vanad kernelid ja varukoopiad;
 - kustutatud fail, mida mõni protsess veel avatuna hoiab - ruum vabaneb alles protsessi lõppedes (`sudo lsof +L1`).
 ## 8.9 Virtuaalmasina ketta suurendamine
+
+> [!TIP]
+> **Lühidalt:** Virtuaalmasina ketta suurendamine: suurenda ketast hüperviisoris, siis partitsiooni (`growpart`), LVM-i ja failisüsteemi.
 
 Virtualiseerimisplatvormil (nt Proxmox) saab virtuaalset ketast suurendada. Seejärel tuleb järjest suurendada kõiki kihte:
 
@@ -400,6 +430,9 @@ df -h /
 
 Ilma LVM-ita: `growpart`, seejärel `resize2fs` (ext4) või `xfs_growfs` (XFS).
 ## 8.10 Ketta krüpteerimine: LUKS
+
+> [!TIP]
+> **Lühidalt:** **LUKS** krüpteerib terve ketta või partitsiooni. Ilma paroolita on andmed loetamatud, näiteks varastatud sülearvutis või kõrvaldatud kettal.
 
 Kui sülearvuti varastatakse või serveri ketas visatakse ära ilma kustutamata, saab igaüks selle andmeid lugeda - failiõigused kehtivad ainult töötavas süsteemis. **LUKS** (*Linux Unified Key Setup*) krüpteerib terve partitsiooni või ketta. Avamiseks on vaja parooli või võtmefaili.
 
@@ -447,7 +480,10 @@ Süsteemiketta krüpteerimine valitakse tavaliselt **paigaldamisel** (Debian ja 
 
 ## 8.11 Edasi: RAID, ZFS ja salvestuse süvendus
 
-Mitme ketta ühendamine töökindluseks (RAID, `mdadm`), ZFS, ketaste jõudluse ja tervise mõõtmine ning andmete taastamine on **moodulis 9**.
+> [!TIP]
+> **Lühidalt:** RAID, ZFS ja salvestuse süvendus on moodulis 10.
+
+Mitme ketta ühendamine töökindluseks (RAID, `mdadm`), ZFS, ketaste jõudluse ja tervise mõõtmine ning andmete taastamine on **moodulis 10**.
 
 ---
 
@@ -463,6 +499,25 @@ Mitme ketta ühendamine töökindluseks (RAID, `mdadm`), ZFS, ketaste jõudluse 
 
 > [!WARNING]
 > **Ubuntu Serveri lõks:** Ubuntu paigaldusprogramm jätab LVM-i kasutades suure ketta korral osa köitegrupist kasutamata. Kui `df -h /` näitab oodatust väiksemat juurfailisüsteemi, kontrolli `sudo vgs` veergu `VFree` ja suurenda köidet: `sudo lvextend -r -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`.
+
+<details>
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+
+FreeBSD-s on samad mõisted (ketas, partitsioon, failisüsteem, haakimine, `/etc/fstab`, saaleala), kuid tööriistad on teised. LVM-i FreeBSD-s pole: selle asemel on modulaarne kettakiht **GEOM** ja eelkõige **ZFS**, mida paigaldaja pakub vaikimisi (vt moodul 29, punkt 29.9).
+
+| | Linux | FreeBSD |
+|---|---|---|
+| Ketaste nimed | `/dev/sda`, `/dev/vda`, `/dev/nvme0n1` | `/dev/ada0`, `/dev/da0`, `/dev/vtbd0`, `/dev/nda0` |
+| Ketaste ülevaade | `lsblk` | `geom disk list`, `gpart show` |
+| Partitsioonid | `fdisk`, `gdisk`, `parted` | `gpart create -s gpt`, `gpart add -t freebsd-ufs` |
+| Klassikaline failisüsteem | ext4, XFS | UFS (`newfs -U`) |
+| Köitehaldus | LVM | ZFS (või GEOM-i klassid, nt `gmirror`) |
+| Ketta krüpteerimine | LUKS (`cryptsetup`) | GELI (`geli`) |
+| Vaba ruum | `df -h`, `du -sh` | samad käsud; ZFS-il ka `zfs list` |
+
+`fstab`-is kasutatakse UUID asemel sageli GPT silte (`/dev/gpt/andmed`), mille annab `gpart add -l andmed`.
+
+</details>
 
 ---
 ## Kokkuvõte
