@@ -42,6 +42,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | box | box | Vagranti valmis põhitõmmis virtuaalmasina loomiseks |
 | BSD | Berkeley Software Distribution | UNIX-ist pärinev operatsioonisüsteemide perekond (FreeBSD, OpenBSD); OPNsense põhineb FreeBSD-l |
 | bsdinstall | bsdinstall | FreeBSD tekstipõhine paigaldusprogramm |
+| BusyBox | BusyBox | Üks väike programm, mis asendab sadu tavalisi käske; kasutatakse konteinerites, ruuterites ja päästesüsteemides |
 | Caddy | Caddy | Automaatse HTTPS-iga veebiserver |
 | cert-manager | cert-manager | Kubernetese lisa, mis hangib ja uuendab TLS-sertifikaate automaatselt (nt ACME kaudu) |
 | cgroup | control group | Kerneli mehhanism protsessirühmade ressursside (CPU, mälu, I/O) piiramiseks |
@@ -59,6 +60,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Containerfile | Containerfile | Juhiste fail konteinerpildi ehitamiseks (sama mis `Dockerfile`) |
 | copy-on-write | copy-on-write (CoW) | Andmeid ei kirjutata üle, vaid uude kohta (ZFS, Btrfs) |
 | CoreDNS | CoreDNS | Pistikprogrammidega DNS-server, seadistus failis `Corefile` |
+| coreutils | GNU core utilities | GNU põhikäskude pakett (`ls`, `cp`, `cat`, `sort` jt) |
 | CRB | CodeReady Builder | AlmaLinuxi/RHEL-i lisahoidla arenduspakettidega, vajalik osale EPEL-i paketile |
 | CrowdSec | CrowdSec | fail2bani-laadne ründetuvastus, mis jagab ründajate aadresse kogukonnaga |
 | CSR | Certificate Signing Request | Sertifikaaditaotlus, mille CA allkirjastab |
@@ -96,6 +98,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | failisüsteem | filesystem | Viis andmete korraldamiseks andmekandjal |
 | FHS | Filesystem Hierarchy Standard | Standard, mis määrab Linuxi kataloogide (`/etc`, `/var`, `/usr` jne) otstarbe |
 | filtreeriv DNS | filtering DNS | DNS, mis blokeerib soovimatuid domeene (nt Pi-hole) |
+| fish | friendly interactive shell | Kasutajasõbralik interaktiivne kest, mis ei ole POSIX-ühilduv |
 | Flatpak | Flatpak | Distrost sõltumatu liivakastis rakenduste vorming (Flathub) |
 | FOG | Free Open-source Ghost | Kettatõmmiste salvestamise ja masspaigalduse lahendus üle võrgu |
 | FQDN | Fully Qualified Domain Name | Täielik domeeninimi koos kõigi tasemetega (nt `dc1.ad.lab.example`) |
@@ -164,7 +167,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | kerneli moodul | kernel module | Töö ajal laaditav kerneli osa (nt draiver) |
 | kernel, tuum | kernel | Operatsioonisüsteemi riistvara haldav osa |
 | keskkonnamuutuja | environment variable | Muutuja, mis pärandatakse käivitatavatele programmidele |
-| kest | shell | Käske tõlgendav programm, nt Bash |
+| kest | shell | Käske tõlgendav programm, nt Bash, `sh`, `zsh` või `fish`; vt ka sisselogimiskest |
 | kickstart | kickstart | Red Hati perekonna automaatse paigalduse vastustefail (`inst.ks=`) |
 | kihiline kaitse | defense in depth | Mitme teineteist täiendava kaitsekihi kasutamine |
 | kodukataloog | home directory | Kasutaja isiklik kataloog, nt `/home/mari` |
@@ -295,6 +298,8 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | pordisuunamine | port forwarding | Välise pordi liikluse suunamine sisevõrgu masinale |
 | port | port | Teenust tähistav number (nt 22, 443) |
 | portaal (iSCSI) | portal | iSCSI sihtmärgi IP-aadress ja port, mille kaudu initsiaator ühendub |
+| POSIX | Portable Operating System Interface | Standard, mis kirjeldab Unixi-laadse süsteemi käske, kesta ja liideseid; POSIX-ile vastav skript töötab eri süsteemides |
+| POSIX-ühilduvus | POSIX compliance | Kesta või tööriista vastavus POSIX-standardile, nii et standardse süntaksiga skriptid töötavad selles |
 | PostgreSQL | PostgreSQL | Võimas avatud lähtekoodiga relatsiooniline andmebaas |
 | PPA | Personal Package Archive | Ubuntu isiklik pakettide hoidla |
 | preseed | preseed | Debiani automaatse paigalduse vastustefail |
@@ -359,6 +364,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | sisestusrežiim | insert mode | vim-i režiim teksti kirjutamiseks (`i`, väljumine `Esc`) |
 | sissekanne | commit | Gitis salvestatud hetkeseis koos kirjeldusega |
 | sisselogimishaldur | display manager | Graafiline sisselogimisekraan (GDM, SDDM, LightDM) |
+| sisselogimiskest | login shell | Kasutaja vaikekest failis `/etc/passwd`, mis käivitub sisselogimisel; muudetakse käsuga `chsh` |
 | skeem | schema | Reeglid, millised objektiklassid ja atribuudid kataloogis (LDAP, AD) lubatud on |
 | skeletikataloog | skeleton directory | `/etc/skel` - failid, mis kopeeritakse uue kasutaja kodukataloogi |
 | skript | script | Käskude jada sisaldav tekstifail |
@@ -395,6 +401,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | SYSVOL | SYSVOL | AD domeenikontrolleri jagatud kaust rühmapoliitikate ja sisselogimisskriptide jaoks |
 | Zabbix | Zabbix | Agendipõhine monitooringusüsteem häirete ja töölaudadega |
 | ZFS | ZFS | Failisüsteem ja köitehaldur ühes, kontrollsummade ja hetktõmmistega |
+| zsh | Z shell | Bashi-sarnane, peaaegu POSIX-ühilduv kest täiustatud lõpetamise ja pluginatega (macOS-i vaikekest) |
 | zvol | ZFS volume | ZFS-i pooli sees olev plokkseade |
 | taastamisrežiim | rescue mode | Vähendatud režiim süsteemi hoolduseks |
 | tagasisidestus | loopback | Liides, mille kaudu masin räägib iseendaga (`lo`) |
@@ -431,11 +438,13 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | umask | umask | Mask, mis määrab uute failide vaikimisi õigused |
 | Unbound | Unbound | Rekursiivne ja vahemäluga DNS-lahendaja |
 | UNIX | UNIX | 1969. aastal Bell Labsis loodud operatsioonisüsteem, Linuxi ja BSD eeskuju |
+| UNIX-i filosoofia | Unix philosophy | Põhimõtted: iga programm teeb üht asja hästi, programmid töötavad koos, tekst on universaalne liides |
 | Uptime Kuma | Uptime Kuma | Lihtne veebipõhine teenuste kättesaadavuse jälgija |
 | URL | Uniform Resource Locator | Veebiressursi aadress, nt `https://example.com/leht` |
 | USE meetod | Utilization, Saturation, Errors | Jõudlusanalüüsi meetod: iga ressursi kasutus, küllastus ja vead |
 | USN | Ubuntu Security Notice | Ubuntu turvateade parandatud haavatavuse kohta |
 | UTC | Coordinated Universal Time | Koordineeritud maailmaaeg; serverid hoiavad kella sageli UTC-s |
+| util-linux | util-linux | Linuxi süsteemikäskude pakett (`mount`, `lsblk`, `fdisk` jt) |
 | UUID | Universally Unique Identifier | Unikaalne identifikaator, millega nt failisüsteemi `/etc/fstab`-is tuvastatakse |
 | vaikelüüs | default gateway | Ruuter, kuhu saadetakse kohalikust võrgust väljuv liiklus |
 | Valkey | Valkey | Redisest tuletatud vaba võti-väärtus andmebaas |

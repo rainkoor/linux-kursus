@@ -161,6 +161,33 @@ Loendab, mitu korda iga rida esineb, ja kuvab 5 kõige sagedamini esinevat rida 
 
 </details>
 
+**18.** Selgita UNIX-i filosoofia põhimõtteid käsuahela `cut -d: -f7 /etc/passwd | sort | uniq -c | sort -rn` näitel.
+
+<details>
+<summary>Vastus</summary>
+
+Iga käsk teeb üht asja (`cut` võtab välja, `sort` sorteerib, `uniq -c` loendab, `sort -rn` järjestab arvu järgi), käsud töötavad koos torude kaudu ja nende vaheline liides on tekst. Ükski käsk ei tea, et tegu on kestadega - sama ahelaga saab loendada ka logide IP-aadresse.
+
+</details>
+
+**19.** Kust pärinevad käsud `ls`, `find` ja `mount`? Kuidas leiad, millisest paketist mõni käsk pärineb?
+
+<details>
+<summary>Vastus</summary>
+
+`ls` on GNU paketis `coreutils`, `find` GNU paketis `findutils` ja `mount` Linuxi projekti paketis `util-linux`. Paketi leiab Debianis/Ubuntus käsuga `dpkg -S /usr/bin/ls`, AlmaLinuxis `rpm -qf /usr/bin/ls`; `type käsk` näitab enne, kas tegu on üldse programmiga.
+
+</details>
+
+**20.** Miks võib Linuxis töötav skript FreeBSD-s, macOS-is või Alpine'i konteineris vea anda?
+
+<details>
+<summary>Vastus</summary>
+
+Linuxi distrodes on GNU tööriistad, millel on lisavõtmeid (`sed -i`, `grep -P`, `date -d`, pikad võtmed), mida POSIX ei nõua. FreeBSD-s ja macOS-is on BSD tööriistad, Alpine'is BusyBox, kus neid võtmeid pole või need töötavad teisiti. Kõikjal töötav skript peab kasutama ainult POSIX-võtmeid.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Loenda, mitu kasutajat on failis `/etc/passwd`.

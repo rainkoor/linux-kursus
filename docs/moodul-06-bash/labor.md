@@ -450,6 +450,7 @@ git push -u github main
 1. Täienda `loo_kasutajad` nii, et see genereerib igale kasutajale juhusliku parooli (`openssl rand -base64 12`), määrab selle (`chpasswd`), sunnib esimesel sisselogimisel parooli vahetama (`chage -d 0`) ja kirjutab kasutajanimed ja paroolid faili, millel on õigused `600`.
 2. Kirjuta skript `seire`, mis kontrollib ketta täituvust, mälu ja koormust ning kirjutab hoiatuse, kui mõni ületab skripti alguses määratud piiri. Kasuta väljumiskoode: 0 - kõik korras, 1 - hoiatus, 2 - kriitiline.
 3. Muuda `logianalyys` nii, et logifaili võib anda ka torust: `cat juurdepaas.log | logianalyys kokku -`.
+4. **Teised kestad:** paigalda `zsh` ja `fish` ning proovi neid käsuga `zsh` ja `fish` (ilma sisselogimiskesta muutmata). Kas `for i in {1..3}; do echo $i; done` ja `x=5; echo $x` töötavad mõlemas? Mis on `fish`-i vaste? Käivita mõlemast oma skript `~/bin/varunda` - miks see töötab? Kui tahad, muuda oma sisselogimiskest `chsh`-ga ja kontrolli uues SSH-seansis `echo $SHELL` ning `ps -p $$`.
 
 ---
 

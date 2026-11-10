@@ -125,7 +125,7 @@ Mõisted, mida tihti segi aetakse:
 
 - **Terminal** (terminaliemulaator) on programm, mis kuvab tekstiakent ja edastab sinu klahvivajutused, nt Windows Terminal, GNOME Terminal või PuTTY.
 - **Konsool** on otse arvuti külge ühendatud ekraan ja klaviatuur või virtuaalmasina konsooliaken (nt Proxmoxi veebiliideses).
-- **Kest** (*shell*) on programm, mis loeb sinu käske, tõlgendab neid ja käivitab vastavad programmid. Linuxi levinuim kest on **Bash**.
+- **Kest** (*shell*) on programm, mis loeb sinu käske, tõlgendab neid ja käivitab vastavad programmid. Linuxi levinuim kest on **Bash**. Kestasid on teisigi (nt `zsh`, `fish`) - neist ja kesta vahetamisest räägime moodulis 6.
 - **Käsurida** (*command line*) on üldnimetus tekstipõhisele töötamisele.
 
 Kuidas need osad kokku käivad, kui haldad serverit oma arvutist:

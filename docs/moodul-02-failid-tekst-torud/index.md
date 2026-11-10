@@ -32,6 +32,60 @@ Linuxis on peaaegu kõik konfiguratsioonid, logid ja süsteemi info **tekstifail
 
 Seetõttu ei ole Linuxis üht hiiglaslikku programmi logide analüüsimiseks. Selle asemel ühendatakse mitu väikest tööriista, millest igaüks teeb ühe sammu. Selle mooduli eesmärk on õppida neid tööriistu kombineerima.
 
+Näide: **mitu kasutajat kasutab millist kesta?** Ühtki käsku, mis just seda teeks, ei ole - aga neli väikest käsku koos annavad vastuse:
+
+```bash
+cut -d: -f7 /etc/passwd | sort | uniq -c | sort -rn
+```
+
+```text
+     19 /usr/sbin/nologin
+      3 /bin/bash
+      1 /bin/sync
+```
+
+| Samm | Mida teeb | Tulemus |
+|---|---|---|
+| `cut -d: -f7 /etc/passwd` | võtab igalt realt 7. välja (kest) | üks kest rea kohta |
+| `sort` | sorteerib | samad kestad kõrvuti |
+| `uniq -c` | loendab järjestikused korduvad read | arv + kest |
+| `sort -rn` | sorteerib arvu järgi kahanevalt | enim kasutatud ees |
+
+Ükski neist käskudest ei tea midagi kasutajatest ega kestadest - nad töötlevad lihtsalt teksti. Sama ahelat saab kasutada logides IP-aadresside, veakoodide või muu loendamiseks (punkt 2.4). Käske `cut`, `sort` ja `uniq` õpid selles moodulis lähemalt.
+
+Neljas põhimõte, **kõik on fail** (moodul 1), tähendab, et samade tööriistadega saab lugeda ka süsteemi infot: `cat /proc/cpuinfo`, `grep MemTotal /proc/meminfo`, `cat /sys/class/net/ens18/address`.
+
+### Kust käsud pärinevad?
+
+Käsud nagu `ls`, `grep` või `ps` ei ole kerneli ega kesta osa, vaid eraldi programmid failidena kataloogis `/usr/bin`. Need pärinevad mõnest **paketist** (moodul 4) ja enamik neist on **GNU projekti** tööriistad:
+
+| Pakett | Käsud (näited) | Päritolu |
+|---|---|---|
+| `coreutils` | `ls`, `cp`, `mv`, `rm`, `cat`, `cut`, `sort`, `uniq`, `wc`, `chmod`, `df`, `date` | GNU |
+| `findutils` | `find`, `xargs` | GNU |
+| `grep`, `sed`, `gawk`, `tar`, `gzip`, `diffutils` | samanimelised käsud, `diff` | GNU |
+| `bash` | kest ise | GNU |
+| `util-linux` | `mount`, `lsblk`, `fdisk`, `su`, `more`, `logger` | Linuxi projekt |
+| `procps` (AlmaLinuxis `procps-ng`) | `ps`, `top`, `free`, `kill`, `sysctl` | Linuxi projekt |
+| `iproute2` | `ip`, `ss` | Linuxi projekt |
+
+```bash
+type ls                     # kas käsk on programm, kesta sisekäsk või alias
+dpkg -S /usr/bin/ls         # Debian, Ubuntu: coreutils: /usr/bin/ls
+rpm -qf /usr/bin/ls         # AlmaLinux: coreutils-9...
+ls --version                # versioon ja projekt (GNU coreutils)
+```
+
+**GNU, POSIX, BSD ja BusyBox.** Standard **POSIX** kirjeldab, millised käsud ja võtmed peavad Unixi-laadses süsteemis olemas olema. GNU tööriistad teevad rohkem: neil on pikad võtmed (`--help`, `--human-readable`) ja lisavõimalused (`grep -P`, `sed -i`, `date -d`), mida mujal ei pruugi olla.
+
+| Kus | Tööriistad | Mida arvestada |
+|---|---|---|
+| Debian, Ubuntu, AlmaLinux | GNU | Kõik selle kursuse näited |
+| FreeBSD, macOS | BSD | Võtmed osaliselt erinevad (`sed -i ''`, `ls -G`), vt moodul 25 |
+| Alpine, konteinerid, ruuterid | **BusyBox**: üks väike programm, mis asendab sadu käske | Ainult põhivõtmed; pikki GNU võtmeid sageli pole |
+
+Kui kirjutad skripti, mis peab töötama igal pool, kasuta ainult POSIX-võtmeid. Kui skript töötab ainult sinu Linuxi serverites, võid GNU lisavõimalusi julgelt kasutada.
+
 ## 2.2 Tekstiredaktorid
 
 Serveris ei ole graafilist redaktorit, seega tuleb konfiguratsioonifaile muuta terminalis.

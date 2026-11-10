@@ -15,6 +15,7 @@
 
 Mooduli läbinud õppija:
 
+- selgitab kestade erinevusi ja POSIX-ühilduvust ning vahetab sisselogimiskesta;
 - loob ja käivitab Bashi skripte;
 - kasutab muutujaid, keskkonnamuutujaid ja käskude asendust;
 - kasutab jutumärke õigesti;
@@ -33,6 +34,56 @@ Mooduli läbinud õppija:
 
 > [!TIP]
 > **Millal skript, millal midagi muud?** Bash sobib hästi käskude ühendamiseks ja failidega töötamiseks. Kui skript kasvab üle paarisaja rea või vajab keerulisi andmestruktuure, on parem kasutada Pythonit. Mitme serveri seadistamiseks sobib Ansible (moodul 16).
+
+### Kestad: bash, sh, zsh, fish
+
+Kest on tavaline programm ja neid on mitu. Igal kasutajal on oma **sisselogimiskest** (failis `/etc/passwd` viimane väli), mille ta saab ise valida.
+
+| Kest | POSIX-ühilduv | Kus vaikimisi | Iseloomustus |
+|---|---|---|---|
+| **`bash`** | jah (+ laiendused) | Debian, Ubuntu, AlmaLinux kasutajatel | Linuxi standard; selle mooduli skriptid |
+| **`sh`** / **`dash`** | jah (ainult POSIX) | Debiani ja Ubuntu `/bin/sh` | Väike ja kiire; süsteemiskriptid |
+| **`zsh`** | peaaegu (+ omad laiendused) | macOS, Kali | Väga hea automaatne lõpetamine, pluginad (nt Oh My Zsh) |
+| **`fish`** | **ei** | - | Kõige kasutajasõbralikum: soovitused, värvid ja lõpetamine ilma seadistamata, kuid oma süntaks |
+| **`ksh`**, **`tcsh`** | `ksh` jah, `tcsh` ei | vanemad Unixid, FreeBSD juurkasutaja (`tcsh` kuni 13. versioonini) | Ajaloolised, kohtab vanades süsteemides |
+
+**POSIX-ühilduvus** tähendab, et kest mõistab standardiga (punkt 2.1 moodulis 2) kirjeldatud süntaksit: muutujad `nimi=väärtus`, `if … then … fi`, `for … do … done`, `$(käsk)`, `&&`, `||`, torud ja ümbersuunamised. POSIX-süntaksis kirjutatud skript töötab igas POSIX-kestas - `dash`-is, `bash`-is, `zsh`-is, FreeBSD `sh`-s ja BusyBoxis. Bashi laiendused (`[[ ]]`, massiivid, `{1..5}`, `(( ))`) töötavad ainult `bash`-is ja osaliselt `zsh`-is.
+
+`fish` ei ole POSIX-ühilduv: muutuja omistatakse käsuga `set nimi väärtus`, tingimus lõpeb sõnaga `end`, `&&` asemel on vanemates versioonides `; and`. Internetist kopeeritud Bashi käsurida ei pruugi `fish`-is töötada.
+
+> [!TIP]
+> **Interaktiivne kest ja skriptikest on eri asjad.** Igapäevatööks võid valida endale meeldiva kesta (`zsh`, `fish`), kuid **skriptid kirjuta Bashis või POSIX `sh`-s** ja määra kest skripti esimesel real (`#!/bin/bash`). Skripti käivitab see kest, mis on esimesel real, mitte sinu sisselogimiskest. Süsteemikasutajatele ja juurkasutajale jäta vaikekest.
+
+### Kesta vahetamine
+
+```bash
+echo $SHELL                 # sisselogimiskest (failist /etc/passwd)
+echo $0                     # praegu töötav kest
+ps -p $$                    # sama protsessi järgi ($$ = kesta PID)
+cat /etc/shells             # lubatud sisselogimiskestad
+
+sudo apt install zsh fish   # paigalda (AlmaLinuxis zsh hoidlast, fish EPEL-ist)
+zsh                         # proovi: käivita uus kest olemasoleva sees, välju käsuga exit
+chsh -s /usr/bin/zsh        # muuda oma sisselogimiskest (küsib parooli), kehtib järgmisest sisselogimisest
+sudo usermod -s /bin/bash mari   # administraator muudab teise kasutaja kesta (moodul 3)
+```
+
+`chsh` lubab ainult faili `/etc/shells` loetletud kestasid. Paigaldamisel lisab pakett oma kesta sinna ise.
+
+> [!WARNING]
+> **Ära muuda juurkasutaja ega süsteemikasutajate kesta mitte-POSIX-kestaks** (nt `fish`). Mõned hooldusskriptid ja `su -c` eeldavad POSIX-kesta ning kui kest on vigane või eemaldatakse, ei pääse sa kasutajana enam sisse. Proovi uut kesta kõigepealt käsuga `zsh` või `fish`, enne kui teed selle sisselogimiskestaks.
+
+### Kesta seadistusfailid
+
+Kest loeb käivitumisel seadistusfaile. Millised, sõltub sellest, kas tegu on **sisselogimiskestaga** (SSH, konsool, `su -`) või tavalise **interaktiivse kestaga** (uus terminaliaken, käsk `bash`):
+
+| Kest | Sisselogimisel | Iga interaktiivne kest |
+|---|---|---|
+| `bash` | `/etc/profile`, seejärel `~/.bash_profile` või `~/.profile` | `/etc/bash.bashrc` (Debian, Ubuntu) või `/etc/bashrc` (AlmaLinux), `~/.bashrc` |
+| `zsh` | `~/.zprofile` | `~/.zshrc` |
+| `fish` | - | `~/.config/fish/config.fish` |
+
+Debiani ja Ubuntu `~/.profile` loeb omakorda `~/.bashrc`-i, seega piisab tavaliselt sellest, kui kirjutad aliased ja muutujad faili `~/.bashrc` (punkt 6.2). Uute kasutajate algfailid tulevad kataloogist `/etc/skel` (moodul 3). Muudatuse rakendamiseks avatud kestas: `source ~/.bashrc`.
 
 ### Esimene skript
 

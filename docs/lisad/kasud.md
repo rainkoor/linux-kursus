@@ -86,6 +86,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `chown` | Muudab faili omanikku ja gruppi | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `chronyc` | chrony ajasünkroonimise olek (`sources`, `tracking`) | [7](../moodul-07-vork-ssh/index.md) |
 | `chroot` | Käivitab käsud teise juurkataloogi sees (süsteemi parandamine) | [10](../moodul-10-alglaadimine-kernel/index.md), [12](../moodul-12-konteinerid/index.md) |
+| `chsh` | Muudab kasutaja sisselogimiskesta (`-s /usr/bin/zsh`) | [6](../moodul-06-bash/index.md) |
 | `cloud-init` | VM-i esmase seadistuse olek (`status --long`) | [16](../moodul-16-automatiseerimine/index.md) |
 | `cp` | Kopeerib faile ja katalooge (`-r` rekursiivselt) | [1](../moodul-01-sissejuhatus/index.md) |
 | `crictl` | Konteinerikäituri (containerd) konteinerid sõlmes | [24](../moodul-24-kubernetes/index.md) |

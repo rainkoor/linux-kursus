@@ -47,7 +47,7 @@ See oli revolutsiooniline: operatsioonisüsteemi sai nüüd viia uuele arvutitü
 
 ### UNIX-i filosoofia
 
-UNIX-i loojad sõnastasid põhimõtted, mis kehtivad tänini (vt ka moodul 2):
+UNIX-i loojad sõnastasid põhimõtted, mis kehtivad tänini (näitega moodulis 2, punkt 2.1):
 
 - iga programm teeb üht asja ja teeb seda hästi;
 - programmid töötavad koos: ühe väljund on teise sisend (torud võeti kasutusele 1973);

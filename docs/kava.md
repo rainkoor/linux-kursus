@@ -92,7 +92,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 ### Moodul 2. Failid, tekst ja torud
 
-**Teemad:** tekstiredaktorid (`nano`, `vim` põhitõed), väljundi ümbersuunamine (`>`, `>>`, `2>`), torud (`|`, `tee`), tekstitöötlus (`grep`, `sort`, `uniq`, `wc`, `cut`, `tr`, `awk` alused, `sed`), failide otsimine (`find`, `locate`, `which`, `type`), lingid (`ln`), arhiveerimine ja pakkimine (`tar`, `gzip`), regulaaravaldiste alused, failide võrdlemine ja paikamine (`diff`, `patch`), `xargs`.
+**Teemad:** UNIX-i filosoofia ja käskude päritolu (GNU, POSIX, BusyBox), tekstiredaktorid (`nano`, `vim` põhitõed), väljundi ümbersuunamine (`>`, `>>`, `2>`), torud (`|`, `tee`), tekstitöötlus (`grep`, `sort`, `uniq`, `wc`, `cut`, `tr`, `awk` alused, `sed`), failide otsimine (`find`, `locate`, `which`, `type`), lingid (`ln`), arhiveerimine ja pakkimine (`tar`, `gzip`), regulaaravaldiste alused, failide võrdlemine ja paikamine (`diff`, `patch`), `xargs`.
 
 **Õpiväljundid:** õppija redigeerib konfiguratsioonifaile, kombineerib käske torude abil ja otsib infot failidest ning failisüsteemist.
 
@@ -124,7 +124,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 ### Moodul 6. Bashi skriptimine ja Git
 
-**Teemad:** skripti ülesehitus ja shebang, muutujad ja keskkonnamuutujad, jutumärgid, argumendid, tingimused (`if`, `test`, `[[ ]]`, `case`), tsüklid (`for`, `while`, faili lugemine rea kaupa), kasutaja sisend (`read`), funktsioonid, massiivid, väljumiskoodid, sisend ja väljund, vigade käsitlemine (`set -euo pipefail`, `trap`), ShellCheck, silumine (`bash -x`), skriptide ajastamine, Git (sissekanded, tagasivõtmine, `.gitignore`, harud, konfliktid, kaughoidla).
+**Teemad:** kestad (`bash`, `sh`/`dash`, `zsh`, `fish`), POSIX-ühilduvus, kesta vahetamine (`chsh`, `/etc/shells`) ja seadistusfailid, skripti ülesehitus ja shebang, muutujad ja keskkonnamuutujad, jutumärgid, argumendid, tingimused (`if`, `test`, `[[ ]]`, `case`), tsüklid (`for`, `while`, faili lugemine rea kaupa), kasutaja sisend (`read`), funktsioonid, massiivid, väljumiskoodid, sisend ja väljund, vigade käsitlemine (`set -euo pipefail`, `trap`), ShellCheck, silumine (`bash -x`), skriptide ajastamine, Git (sissekanded, tagasivõtmine, `.gitignore`, harud, konfliktid, kaughoidla).
 
 **Õpiväljundid:** õppija kirjutab loetavaid ja töökindlaid skripte, mis automatiseerivad haldustoiminguid (nt varundus, kasutajate loomine, logide analüüs) ning hoiab need Git-hoidlas.
 

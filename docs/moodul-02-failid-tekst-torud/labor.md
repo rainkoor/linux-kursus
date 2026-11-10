@@ -253,6 +253,7 @@ zgrep '" 500 ' /tmp/vana.log.gz
 1. Kirjuta üks käsuahel, mis näitab iga IP-aadressi kohta, mitu **404** vastust see sai.
 2. Jätka **OverTheWire Banditiga**, tasemed 6–15. Need tasemed nõuavad just selles moodulis õpitud käske (`find`, `grep`, `sort`, `uniq`, `tr`, `tar`, `gzip`).
 3. **diff ja xargs:** tee kataloogist `/etc` koopia (`sudo cp -a /etc ~/etc-varu`), muuda ühte faili ja leia muudatus käsuga `sudo diff -r /etc ~/etc-varu`. Leia `find`-i ja `xargs`-iga kõik `.conf` failid kataloogis `/etc`, mis sisaldavad sõna `Listen`, ja loenda need (`xargs grep -l … | wc -l`).
+4. **Kust käsud pärinevad:** leia paketid, millest pärinevad `ls`, `grep`, `find`, `ps`, `ip` ja `mount` (teooria punkt 2.1). Mitu käsku on paketis `coreutils` (`dpkg -L coreutils | grep -c /bin/`)? Käivita BusyBoxi kest (`sudo apt install busybox`, seejärel `busybox sh`) ja proovi `ls --human-readable -l` ning `grep -P '\d+' /etc/hosts` - mis töötab ja mis mitte?
 
 ---
 

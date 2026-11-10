@@ -188,6 +188,42 @@ Haru on eraldi arendusliin, mida kasutatakse uue funktsiooni või muudatuse kats
 
 </details>
 
+**21.** Mida tähendab, et kest on POSIX-ühilduv? Miks ei sobi `fish` skriptide kirjutamiseks ega juurkasutaja kestaks?
+
+<details>
+<summary>Vastus</summary>
+
+POSIX-ühilduv kest mõistab standardiga kirjeldatud süntaksit (muutujad, `if`, `for`, `$( )`, torud), nii et POSIX-skript töötab igas sellises kestas (`dash`, `bash`, `zsh`, FreeBSD `sh`, BusyBox). `fish` kasutab oma süntaksit (`set nimi väärtus`, `end`), mistõttu Bashi/POSIX-i käsud ja skriptid ei pruugi seal töötada; süsteemi hooldusskriptid ja `su -c` eeldavad POSIX-kesta.
+
+</details>
+
+**22.** Kuidas näed oma sisselogimiskesta ja praegu töötavat kesta? Kuidas muudad oma sisselogimiskesta ja millised kestad on lubatud?
+
+<details>
+<summary>Vastus</summary>
+
+`echo $SHELL` (sisselogimiskest), `echo $0` või `ps -p $$` (töötav kest). Muutmine: `chsh -s /usr/bin/zsh` (enda oma) või `sudo usermod -s … kasutaja`; lubatud on failis `/etc/shells` loetletud kestad. Muudatus kehtib järgmisest sisselogimisest.
+
+</details>
+
+**23.** Kasutaja sisselogimiskest on `zsh`. Millise kestaga käivitatakse tema skript, mille esimene rida on `#!/bin/bash`? Miks?
+
+<details>
+<summary>Vastus</summary>
+
+Bashiga: skripti käivitab esimesel real (*shebang*) nimetatud programm, mitte kasutaja sisselogimiskest. Seepärast saab interaktiivseks tööks valida mis tahes kesta ja skriptid töötavad ikka ühtemoodi.
+
+</details>
+
+**24.** Mis vahe on sisselogimiskestal ja tavalisel interaktiivsel kestal? Kuhu kirjutad Bashi aliased, et need kehtiksid alati?
+
+<details>
+<summary>Vastus</summary>
+
+Sisselogimiskest (SSH, konsool, `su -`) loeb `/etc/profile` ja `~/.profile` (või `~/.bash_profile`); iga interaktiivne Bash loeb `~/.bashrc`. Aliased kirjutatakse faili `~/.bashrc`, sest Debiani ja Ubuntu `~/.profile` loeb selle ka sisselogimisel.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** `paaris` - saab argumendina arvu ja ütleb, kas see on paaris või paaritu. Kui argument pole täisarv, kirjutab veateate ja lõpetab koodiga 1.
