@@ -62,7 +62,7 @@ kontroll 1 "Grupp 'opetajad' on olemas (GID 4000)" bash -c '[[ "$(getent group o
 kontroll 1 "Kasutaja 'anna' kuulub gruppi opetajad" on_grupis anna opetajad
 kontroll 1 "Kasutaja 'peeter' kuulub gruppi opetajad" on_grupis peeter opetajad
 kontroll 1 "Kasutajate anna ja peeter kest on /bin/bash" bash -c '[[ "$(getent passwd anna | cut -d: -f7)" == /bin/bash && "$(getent passwd peeter | cut -d: -f7)" == /bin/bash ]]'
-kontroll 2 "Kasutaja 'anna' saab kasutada sudo't (grupp sudo)" on_grupis anna sudo
+kontroll 1 "Kasutaja 'anna' saab kasutada sudo't (grupp sudo)" on_grupis anna sudo
 kontroll 1 "Kasutajal 'varundus' on kest /usr/sbin/nologin" kest_on varundus /usr/sbin/nologin
 kontroll 1 "Kasutaja peeter parool aegub iga 60 päeva järel" bash -c "chage -l peeter | grep -Eq 'Maximum.*: 60$'"
 
@@ -71,11 +71,9 @@ kontroll 1 "/srv/opetajad omanik on root:opetajad" omanik_on /srv/opetajad root:
 kontroll 2 "/srv/opetajad õigused on 2770 (SGID)" oigused_on /srv/opetajad 2770
 kontroll 2 "/srv/avalik õigused on 1777 (sticky bit)" oigused_on /srv/avalik 1777
 kontroll 2 "/root/hosts-viit on sümbolviit failile /etc/hosts" bash -c '[[ -L /root/hosts-viit && "$(readlink /root/hosts-viit)" == /etc/hosts ]]'
-kontroll 2 "Arhiiv /root/ssh-varu.tar.gz sisaldab faili etc/ssh/sshd_config" \
-    bash -c "tar -tzf /root/ssh-varu.tar.gz | grep -q 'etc/ssh/sshd_config'"
 kontroll 2 "/root/bash-kasutajad.txt: bash-kestaga kasutajad tähestiku järjekorras" \
     bash -c "diff <(cat /root/bash-kasutajad.txt) <(grep 'bash\$' /etc/passwd | cut -d: -f1 | sort)"
-kontroll 2 "/root/tcp-arv.txt sisaldab /etc/services TCP-ridade arvu" \
+kontroll 1 "/root/tcp-arv.txt sisaldab /etc/services TCP-ridade arvu" \
     bash -c '[[ "$(tr -d "[:space:]" < /root/tcp-arv.txt)" == "$(grep -c "/tcp" /etc/services)" ]]'
 
 pealkiri "4. Tarkvara, teenused ja ajastamine"
@@ -83,7 +81,7 @@ kontroll 1 "Paketid tree ja htop on paigaldatud" bash -c 'dpkg-query -W -f="\${S
 kontroll 1 "Pakett nginx on paigaldatud" pakett_on nginx
 kontroll 2 "nginx töötab ja käivitub alglaadimisel" lubatud_ja_aktiivne nginx
 kontroll 2 "Veebiserveri avaleht sisaldab sõna 'Põhiosa'" veebileht_sisaldab "Põhiosa"
-kontroll 3 "systemd taimer kettaaruanne.timer on lubatud ja aktiivne" lubatud_ja_aktiivne kettaaruanne.timer
+kontroll 2 "systemd taimer kettaaruanne.timer on lubatud ja aktiivne" lubatud_ja_aktiivne kettaaruanne.timer
 kontroll 1 "Taimer käivitub iga päev kell 06:00" bash -c "systemctl cat kettaaruanne.timer | grep -Eq '^OnCalendar=.*06:00'"
 
 pealkiri "5. Võrk, SSH ja tulemüür"
@@ -93,7 +91,7 @@ kontroll 1 "ufw lubab SSH (22)" ufw_lubab "22|OpenSSH"
 kontroll 1 "ufw lubab HTTP (80)" ufw_lubab "80|Nginx HTTP|Nginx Full|WWW"
 
 pealkiri "6. Kettad ja LVM"
-kontroll 2 "Köitegrupp vg_pohi on olemas" vgs vg_pohi
+kontroll 1 "Köitegrupp vg_pohi on olemas" vgs vg_pohi
 kontroll 2 "Köide lv_kodu on suurendatud ~600 MiB-ni (580–640)" lv_suurus_vahemikus vg_pohi/lv_kodu 580 640
 kontroll 2 "lv_kodu on ext4 ja haagitud /mnt/kodu" bash -c "findmnt -n -o FSTYPE /mnt/kodu | grep -qx ext4"
 kontroll 2 "Failisüsteem on koos köitega suurendatud (üle 500 MiB)" bash -c '(( $(df -BM --output=size /mnt/kodu | tail -1 | tr -dc 0-9) > 500 ))'
@@ -105,6 +103,14 @@ kontroll 1 "/usr/local/bin/tervitus on olemas ja käivitatav" test -x /usr/local
 kontroll 2 "'tervitus Mari' väljastab 'Tere, Mari!'" bash -c '[[ "$(/usr/local/bin/tervitus Mari)" == "Tere, Mari!" ]]'
 kontroll 2 "Ilma argumendita: veateade standardveaväljundisse ja väljumiskood 1" \
     bash -c 'out=$(/usr/local/bin/tervitus 2>/dev/null); kood=$?; [[ $kood -eq 1 && -z "$out" ]]'
+
+pealkiri "8. Varundus ja taastamine"
+kontroll 2 "/var/backups/etc-AAAA-KK-PP.tar.gz on olemas ja sisaldab kataloogi /etc" \
+    bash -c 'f=$(ls -1 /var/backups/etc-[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].tar.gz | tail -1) && tar -tzf "$f" | grep -Eq "^/?etc/passwd$"'
+kontroll 2 "Arhiivist on taastatud ainult /root/taaste/etc/hostname" \
+    bash -c '[[ -s /root/taaste/etc/hostname && ! -e /root/taaste/etc/passwd ]]'
+kontroll 2 "/home on kopeeritud kataloogi /var/backups/home koos omanikega" \
+    bash -c '[[ -d /var/backups/home/anna && "$(stat -c %U /var/backups/home/anna)" == anna && "$(stat -c %U /var/backups/home/peeter)" == peeter ]]'
 
 printf '\nKokku: %d / %d punkti (%d%%)\n' "$punkte" "$kokku" $(( punkte * 100 / kokku ))
 if (( punkte * 100 / kokku >= 70 )); then

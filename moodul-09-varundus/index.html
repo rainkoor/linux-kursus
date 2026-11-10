@@ -1,0 +1,5868 @@
+
+<!doctype html>
+<html lang="et" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Eestikeelne Linuxi ja BSD kursus nullist süsteemihalduseni">
+      
+      
+      
+      
+        <link rel="prev" href="../moodul-08-kettad-lvm/enesekontroll/">
+      
+      
+        <link rel="next" href="labor/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Teooria - Linuxi ja BSD kursus</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/kursus.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#moodul-9-varundus-ja-taastamine" class="md-skip">
+          Keri sisuni
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Päis">
+    <a href=".." title="Linuxi ja BSD kursus" class="md-header__button md-logo" aria-label="Linuxi ja BSD kursus" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linuxi ja BSD kursus
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Teooria
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Tume režiim"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Tume režiim" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Hele režiim"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Hele režiim" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Otsi" placeholder="Otsi" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Otsing">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Lähtesta" aria-label="Lähtesta" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Otsingu lähtestamine
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigatsioon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Linuxi ja BSD kursus" class="md-nav__button md-logo" aria-label="Linuxi ja BSD kursus" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Linuxi ja BSD kursus
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Avaleht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kava/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kursuse kava
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Põhiosa
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Põhiosa
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 1. Linux ja käsurida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 1. Linux ja käsurida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-01-sissejuhatus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-01-sissejuhatus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-01-sissejuhatus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 2. Failid, tekst ja torud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 2. Failid, tekst ja torud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-02-failid-tekst-torud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-02-failid-tekst-torud/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-02-failid-tekst-torud/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 3. Kasutajad, grupid ja õigused
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 3. Kasutajad, grupid ja õigused
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-03-kasutajad-oigused/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-03-kasutajad-oigused/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-03-kasutajad-oigused/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 4. Tarkvara ja pakihaldus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 4. Tarkvara ja pakihaldus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-04-pakihaldus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-04-pakihaldus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-04-pakihaldus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 5. Protsessid, teenused ja systemd
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 5. Protsessid, teenused ja systemd
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-05-protsessid-teenused/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-05-protsessid-teenused/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-05-protsessid-teenused/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 6. Bashi skriptimine ja Git
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 6. Bashi skriptimine ja Git
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-06-bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-06-bash/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-06-bash/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 7. Võrk ja SSH
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 7. Võrk ja SSH
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-07-vork-ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-07-vork-ssh/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-07-vork-ssh/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 8. Kettad, failisüsteemid ja LVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 8. Kettad, failisüsteemid ja LVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-08-kettad-lvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-08-kettad-lvm/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-08-kettad-lvm/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 9. Varundus ja taastamine
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 9. Varundus ja taastamine
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Sisukord">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sisukord
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#õpiväljundid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Õpiväljundid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-miks-varundada-ja-mis-ei-ole-varukoopia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Miks varundada ja mis ei ole varukoopia?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-3-2-1-reegel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 3-2-1 reegel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-taastamise-eesmärgid-rpo-ja-rto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Taastamise eesmärgid: RPO ja RTO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-mida-varundada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Mida varundada?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95-täis--juurdekasvu--ja-diferentsiaalvarundus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 Täis-, juurdekasvu- ja diferentsiaalvarundus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96-tar-arhiiv-varukoopiana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6 tar: arhiiv varukoopiana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97-rsync-koopia-teise-masinasse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7 rsync: koopia teise masinasse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#98-varundusskript-ja-ajastamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.8 Varundusskript ja ajastamine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#99-restic-krüpteeritud-ja-deduplitseeriv-varundus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.9 restic: krüpteeritud ja deduplitseeriv varundus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#910-taastamine-ja-taastamistest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.10 Taastamine ja taastamistest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#911-teised-tööriistad-ja-lahendused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.11 Teised tööriistad ja lahendused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distrode-erinevused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distrode erinevused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kokkuvõte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kokkuvõte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lisamaterjal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lisamaterjal
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proovieksam-pohiosa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: põhiosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Süvendusosa
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Süvendusosa
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 10. Salvestus: RAID, ZFS, jõudlus ja taastamine
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 10. Salvestus: RAID, ZFS, jõudlus ja taastamine
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-10-salvestus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-10-salvestus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-10-salvestus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 11. Kuidas Linux töötab: alglaadimine ja kernel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 11. Kuidas Linux töötab: alglaadimine ja kernel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-11-alglaadimine-kernel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-11-alglaadimine-kernel/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-11-alglaadimine-kernel/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 12. Turvalisus ja logid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 12. Turvalisus ja logid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-12-turvalisus-logid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-12-turvalisus-logid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritööd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-12-turvalisus-logid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 13. Võrgu süvendus: IPv6, sild, VLAN, bond ja VPN
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 13. Võrgu süvendus: IPv6, sild, VLAN, bond ja VPN
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-13-vorgu-suvendus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-13-vorgu-suvendus/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-13-vorgu-suvendus/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 14. Konteinerid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 14. Konteinerid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-14-konteinerid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-14-konteinerid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-14-konteinerid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 15. Veebiserverid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 15. Veebiserverid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-15-veebiserverid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-15-veebiserverid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-15-veebiserverid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 16. Andmebaasid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 16. Andmebaasid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-16-andmebaasid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-16-andmebaasid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-16-andmebaasid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 17. DNS ja nimelahendus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 17. DNS ja nimelahendus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-17-dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-17-dns/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritööd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-17-dns/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 18. Failiserverid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 18. Failiserverid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-18-failiserverid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-18-failiserverid/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-18-failiserverid/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 19. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 19. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-19-automatiseerimine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-19-automatiseerimine/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-19-automatiseerimine/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 20. Seire ja jõudlus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 20. Seire ja jõudlus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-20-seire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-20-seire/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-20-seire/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proovieksam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proovieksam: süvendusosa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lopuprojekt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lõpuprojekt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valikmoodulid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Valikmoodulid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 21. BSD praktikas: OPNsense tulemüür
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 21. BSD praktikas: OPNsense tulemüür
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-21-opnsense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-21-opnsense/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-21-opnsense/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 22. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 22. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-22-dhcp-pxe-iscsi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-22-dhcp-pxe-iscsi/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-22-dhcp-pxe-iscsi/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 23. E-posti server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 23. E-posti server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-23-e-post/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-23-e-post/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-23-e-post/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 24. Kataloogiteenused: OpenLDAP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 24. Kataloogiteenused: OpenLDAP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-24-openldap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-24-openldap/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-24-openldap/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 25. Active Directory Linuxis: Samba AD DC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 25. Active Directory Linuxis: Samba AD DC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-25-samba-ad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-25-samba-ad/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritööd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-25-samba-ad/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 26. Linux töölaual ja WSL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 26. Linux töölaual ja WSL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-26-toolaud-wsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-26-toolaud-wsl/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-26-toolaud-wsl/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 27. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 27. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-27-virtualiseerimine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-27-virtualiseerimine/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-27-virtualiseerimine/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_8" id="__nav_5_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 28. Kubernetes: k3s
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 28. Kubernetes: k3s
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-28-kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-28-kubernetes/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-28-kubernetes/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_9" id="__nav_5_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moodul 29. FreeBSD server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Moodul 29. FreeBSD server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-29-freebsd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teooria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-29-freebsd/labor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboritöö
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moodul-29-freebsd/enesekontroll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enesekontroll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lisad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lisad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/paigaldus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laborikeskkond ja paigaldus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/distrod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distrode ülevaade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/ajalugu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UNIX-i ja Linuxi ajalugu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/sonastik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sõnastik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lisad/kasud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Käskude loend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Sisukord">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sisukord
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#õpiväljundid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Õpiväljundid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-miks-varundada-ja-mis-ei-ole-varukoopia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Miks varundada ja mis ei ole varukoopia?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-3-2-1-reegel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 3-2-1 reegel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-taastamise-eesmärgid-rpo-ja-rto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Taastamise eesmärgid: RPO ja RTO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-mida-varundada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Mida varundada?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95-täis--juurdekasvu--ja-diferentsiaalvarundus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 Täis-, juurdekasvu- ja diferentsiaalvarundus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96-tar-arhiiv-varukoopiana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6 tar: arhiiv varukoopiana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97-rsync-koopia-teise-masinasse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7 rsync: koopia teise masinasse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#98-varundusskript-ja-ajastamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.8 Varundusskript ja ajastamine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#99-restic-krüpteeritud-ja-deduplitseeriv-varundus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.9 restic: krüpteeritud ja deduplitseeriv varundus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#910-taastamine-ja-taastamistest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.10 Taastamine ja taastamistest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#911-teised-tööriistad-ja-lahendused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.11 Teised tööriistad ja lahendused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distrode-erinevused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distrode erinevused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kokkuvõte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kokkuvõte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lisamaterjal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lisamaterjal
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="moodul-9-varundus-ja-taastamine">Moodul 9. Varundus ja taastamine<a class="headerlink" href="#moodul-9-varundus-ja-taastamine" title="Permanent link">&para;</a></h1>
+<p><strong>Maht:</strong> 8 tundi · <strong>Laboritöö:</strong> Debian, Ubuntu · <strong>Eeldused:</strong> moodulid 1–8</p>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Varukoopia, mida ei ole proovitud taastada, ei ole varukoopia.</strong></p>
+</div>
+<p>Iga süsteemihaldur kaotab kunagi andmeid: ketas rikneb, keegi kustutab vale kataloogi, uuendus rikub seadistuse või lunavara krüpteerib serveri. Vahe on selles, kas see on ebameeldiv pärastlõuna või asutuse katastroof. Selles moodulis paneme kokku varem õpitu - <code>tar</code> (moodul 2), <code>rsync</code> ja SSH (moodul 7), skriptid (moodul 6), taimerid (moodul 5) ja kettad (moodul 8) - ning ehitame töökindla varunduse, mida oskame ka <strong>taastada</strong>.</p>
+<p>Teenuste (veebisait, andmebaas, DNS, failiserver) eripärad on süvendusosa moodulites 15-18 - igaühes on oma alalõik varunduse kohta.</p>
+<h2 id="õpiväljundid">Õpiväljundid<a class="headerlink" href="#õpiväljundid" title="Permanent link">&para;</a></h2>
+<p>Mooduli läbinud õppija:</p>
+<ul>
+<li>selgitab, milliste ohtude eest varundus kaitseb ning miks RAID, hetktõmmis ja sünkroonimine ei ole varukoopia;</li>
+<li>planeerib varunduse 3-2-1 reegli ning taastamise eesmärkide (RPO, RTO) järgi;</li>
+<li>eristab täis-, juurdekasvu- ja diferentsiaalvarundust ning valib säilitamise reeglid;</li>
+<li>varundab ja taastab <code>tar</code>-iga ning <code>rsync</code>-iga teise masinasse;</li>
+<li>kirjutab varundusskripti, mis logib, kontrollib vigu ja kustutab vanad koopiad, ning ajastab selle systemd taimeriga;</li>
+<li>varundab ja taastab restic'uga kohalikku ja kaughoidlasse;</li>
+<li>teeb taastamistesti ja dokumenteerib taastamise sammud.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
+<hr />
+<h2 id="91-miks-varundada-ja-mis-ei-ole-varukoopia">9.1 Miks varundada ja mis ei ole varukoopia?<a class="headerlink" href="#91-miks-varundada-ja-mis-ei-ole-varukoopia" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Varundus kaitseb inimvea, rikke, lunavara ja õnnetuse eest. RAID, hetktõmmis ja sünkroonimine <strong>ei ole</strong> varukoopia.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Oht</th>
+<th>Näide</th>
+<th>Kas RAID aitab?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Riistvara rike</td>
+<td>ketas, kontroller, toiteplokk</td>
+<td>Ketas: jah; muu: ei</td>
+</tr>
+<tr>
+<td><strong>Inimviga</strong></td>
+<td><code>rm -rf</code> vales kataloogis, üle kirjutatud fail</td>
+<td>Ei</td>
+</tr>
+<tr>
+<td>Tarkvara viga</td>
+<td>uuendus rikub andmebaasi, skript kustutab valed failid</td>
+<td>Ei</td>
+</tr>
+<tr>
+<td><strong>Lunavara</strong></td>
+<td>ründaja krüpteerib serveri ja kõik, mida see näeb</td>
+<td>Ei</td>
+</tr>
+<tr>
+<td>Õnnetus</td>
+<td>tulekahju, vesi, vargus, elektrikatkestus</td>
+<td>Ei</td>
+</tr>
+<tr>
+<td>Pahatahtlik siseringi tegevus</td>
+<td>lahkuv töötaja kustutab andmed</td>
+<td>Ei</td>
+</tr>
+</tbody>
+</table>
+<p>Varukoopia on <strong>andmete eraldi koopia, mis on originaalist sõltumatu</strong> ja millest saab taastada <strong>varasema seisu</strong>. Seetõttu ei ole varukoopia:</p>
+<ul>
+<li><strong>RAID</strong> (moodul 10) - kaitseb ketta rikke eest, kuid kustutamine ja krüpteerimine jõuavad kohe kõigile ketastele;</li>
+<li><strong>hetktõmmis</strong> (LVM, ZFS, VM-i <em>snapshot</em>) - väga kasulik kiireks tagasivõtuks, kuid asub <strong>samas masinas</strong> ja kaob koos sellega;</li>
+<li><strong>sünkroonimine</strong> (<code>rsync --delete</code>, pilvekaust) - kustutatud või rikutud fail kopeeritakse ka teise kohta;</li>
+<li><strong>sama masina teine kataloog</strong> - masina või ketta kaotusel kaovad mõlemad.</li>
+</ul>
+<h2 id="92-3-2-1-reegel">9.2 3-2-1 reegel<a class="headerlink" href="#92-3-2-1-reegel" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Hoia <strong>3</strong> koopiat, <strong>2</strong> eri andmekandjal, neist <strong>1</strong> teises kohas.</p>
+</div>
+<ul>
+<li><strong>3</strong> koopiat andmetest (originaal + 2 varukoopiat);</li>
+<li><strong>2</strong> eri andmekandjal;</li>
+<li><strong>1</strong> koopia mujal (teises hoones, pilves) - tulekahju, varguse ja lunavara vastu.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    O[("Originaal&lt;br&gt;server")] --&gt; K1[("Koopia 1&lt;br&gt;teine ketas/server&lt;br&gt;samas kohas")]
+    O --&gt; K2[("Koopia 2&lt;br&gt;teises hoones või pilves,&lt;br&gt;muudetamatu")]
+    K1 -. "2 eri andmekandjat" .- K2</code></pre>
+<p>Lunavara vastu on oluline, et vähemalt üks koopia oleks <strong>muudetamatu</strong> või <strong>võrgust eraldatud</strong> - muidu krüpteerib ründaja ka varukoopiad.</p>
+<p>Kaasaegne laiendus on <strong>3-2-1-1-0</strong>: lisaks üks <strong>muudetamatu</strong> või võrgust eraldatud koopia ja <strong>0</strong> viga taastamistestil.</p>
+<h2 id="93-taastamise-eesmärgid-rpo-ja-rto">9.3 Taastamise eesmärgid: RPO ja RTO<a class="headerlink" href="#93-taastamise-eesmärgid-rpo-ja-rto" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>RPO</strong> - kui palju andmeid tohib kaotada, <strong>RTO</strong> - kui kiiresti peab teenus taas töötama. Nende järgi valitakse varunduse sagedus ja viis.</p>
+</div>
+<p>Varundusplaani koostamist alusta kahest küsimusest teenuse omanikule:</p>
+<table>
+<thead>
+<tr>
+<th>Mõiste</th>
+<th>Küsimus</th>
+<th>Näide</th>
+<th>Mõjutab</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RPO</strong> (<em>Recovery Point Objective</em>)</td>
+<td>Kui palju andmeid tohib kaotada?</td>
+<td>„Kaotada võib kuni ühe päeva töö“ → RPO 24 h</td>
+<td>kui tihti varundatakse (igaöine varundus → RPO kuni 24 h; replikatsioon → minutid)</td>
+</tr>
+<tr>
+<td><strong>RTO</strong> (<em>Recovery Time Objective</em>)</td>
+<td>Kui kiiresti peab teenus taas töötama?</td>
+<td>„Kooli koduleht peab töötama 4 tunni pärast“ → RTO 4 h</td>
+<td>kuidas taastatakse (failidest käsitsi → tunnid; valmis VM-i varukoopia või varuserver → minutid)</td>
+</tr>
+</tbody>
+</table>
+<p>Väiksem RPO ja RTO maksavad rohkem (sagedasem varundus, rohkem salvestust, dubleeritud serverid). Taastamistestil <strong>mõõda tegelik aeg</strong> ja võrdle seda RTO-ga - alles siis tead, kas plaan töötab.</p>
+<h2 id="94-mida-varundada">9.4 Mida varundada?<a class="headerlink" href="#94-mida-varundada" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Varunda seadistus (<code>/etc</code>), kasutajate ja teenuste andmed (<code>/home</code>, <code>/srv</code>) ning andmebaasid dump-ina. Ajutisi faile ja <code>/proc</code> ei varundata.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Mida</th>
+<th>Kus</th>
+<th>Märkus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seadistus</td>
+<td><code>/etc</code></td>
+<td>Väike, kuid selle taastamine käsitsi võtab tunde</td>
+</tr>
+<tr>
+<td>Kasutajate andmed</td>
+<td><code>/home</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Teenuste andmed</td>
+<td><code>/srv</code>, <code>/var/www</code>, <code>/opt</code></td>
+<td>Veebisaidid, failijagamised</td>
+</tr>
+<tr>
+<td>Andmebaasid</td>
+<td><code>mariadb-dump</code>, <code>pg_dump</code></td>
+<td><strong>Mitte</strong> andmefailid otse töötava serveri alt (moodul 16)</td>
+</tr>
+<tr>
+<td>Ajastatud tööd</td>
+<td><code>crontab -l</code>, <code>/etc/systemd/system</code>, <code>/var/spool/cron</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Paigaldatud pakettide loend</td>
+<td><code>dpkg --get-selections</code>, <code>rpm -qa</code></td>
+<td>Süsteemi kiiremaks taastamiseks</td>
+</tr>
+<tr>
+<td>Võtmed ja sertifikaadid</td>
+<td><code>/root/ca</code>, <code>/etc/ssl/private</code>, <code>/etc/ssh</code></td>
+<td>Hoia krüpteeritult</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mida mitte varundada:</strong> <code>/proc</code>, <code>/sys</code>, <code>/dev</code>, <code>/run</code>, <code>/tmp</code>, vahemälud (<code>/var/cache</code>), pakettide failid (need saab uuesti alla laadida). Operatsioonisüsteemi ennast varundatakse tavaliselt kas <strong>virtuaalmasinana tervikuna</strong> (Proxmox Backup Server, moodul 27) või üldse mitte - see paigaldatakse uuesti ja seadistus taastatakse varukoopiast või automaatikaga (moodul 19).</p>
+<h2 id="95-täis--juurdekasvu--ja-diferentsiaalvarundus">9.5 Täis-, juurdekasvu- ja diferentsiaalvarundus<a class="headerlink" href="#95-täis--juurdekasvu--ja-diferentsiaalvarundus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Täisvarundus kopeerib kõik, juurdekasvuvarundus ainult muutused. Säilitusreegel määrab, mitu vana koopiat alles hoida.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Liik</th>
+<th>Mis kopeeritakse</th>
+<th>Taastamiseks on vaja</th>
+<th>Plussid ja miinused</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Täisvarundus</strong> (<em>full</em>)</td>
+<td>Kõik</td>
+<td>Ühte koopiat</td>
+<td>Lihtne taastada; aeglane, võtab palju ruumi</td>
+</tr>
+<tr>
+<td><strong>Juurdekasvu</strong> (<em>incremental</em>)</td>
+<td>Muutused <strong>eelmisest varundusest</strong></td>
+<td>Viimast täisvarundust + kõiki järgnevaid juurdekasve</td>
+<td>Kiire ja väike; taastamine pikem, üks katkine lüli rikub ahela</td>
+</tr>
+<tr>
+<td><strong>Diferentsiaal</strong> (<em>differential</em>)</td>
+<td>Muutused <strong>viimasest täisvarundusest</strong></td>
+<td>Viimast täisvarundust + viimast diferentsiaali</td>
+<td>Vahepealne</td>
+</tr>
+</tbody>
+</table>
+<p>Tänapäevased tööriistad (restic, borg, Proxmox Backup Server) kasutavad <strong>deduplitseerimist</strong>: andmed jagatakse tükkideks ja iga tükk salvestatakse üks kord. Iga varundus on kiire nagu juurdekasv, kuid igast hetktõmmisest saab taastada nagu täisvarundusest.</p>
+<p><strong>Säilitamine</strong> (<em>retention</em>): kui palju vanu koopiaid alles hoida? Levinud on <strong>GFS</strong> (<em>grandfather-father-son</em>): näiteks 7 päevast, 4 nädalast ja 12 kuust koopiat. Nii saab taastada eilse faili ja ka eelmise kuu seisu, ilma et kõik koopiad alles oleksid.</p>
+<h2 id="96-tar-arhiiv-varukoopiana">9.6 tar: arhiiv varukoopiana<a class="headerlink" href="#96-tar-arhiiv-varukoopiana" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>tar --acls --xattrs -czpf arhiiv.tar.gz /etc</code> teeb arhiivi koos õigustega. Taasta alati kõigepealt ajutisse kataloogi (<code>-C /tmp/taaste</code>).</p>
+</div>
+<p><code>tar</code> (moodul 2) on igas süsteemis olemas ja tema arhiivi saab taastada ka 20 aasta pärast. Varunduses on olulised järgmised valikud:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tar<span class="w"> </span>--acls<span class="w"> </span>--xattrs<span class="w"> </span>-czpf<span class="w"> </span>/varu/etc-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.tar.gz<span class="w"> </span>/etc
+<span class="c1">#        └ ACL-id ja SELinuxi märgised  └ p = säilita õigused</span>
+sudo<span class="w"> </span>tar<span class="w"> </span>-tzvf<span class="w"> </span>/varu/etc-2026-11-10.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w">                       </span><span class="c1"># vaata sisu</span>
+sudo<span class="w"> </span>tar<span class="w"> </span>-xzpf<span class="w"> </span>/varu/etc-2026-11-10.tar.gz<span class="w"> </span>-C<span class="w"> </span>/tmp/taaste<span class="w"> </span>etc/ssh/sshd_config<span class="w">   </span><span class="c1"># taasta üks fail</span>
+</code></pre></div>
+<p><code>tar</code> salvestab teed <strong>ilma algusest <code>/</code>-ta</strong> (<code>etc/ssh/...</code>) - lahtipakkimine <code>-C kataloog</code> abil ei kirjuta kogemata päris süsteemi üle. Taasta alati kõigepealt ajutisse kataloogi, kontrolli ja kopeeri siis õigesse kohta.</p>
+<p>Mitme kataloogi ja välistustega:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tar<span class="w"> </span>--acls<span class="w"> </span>--xattrs<span class="w"> </span>-czpf<span class="w"> </span>/varu/kodu-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.tar.gz<span class="w">     </span>--exclude<span class="o">=</span><span class="s1">'*/.cache'</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s1">'*.iso'</span><span class="w"> </span>/home<span class="w"> </span>/srv
+</code></pre></div>
+<p><strong>Juurdekasvuga</strong> <code>tar</code> jätab meelde, mis on juba varundatud:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tar<span class="w"> </span>--listed-incremental<span class="o">=</span>/varu/kodu.snar<span class="w"> </span>-czpf<span class="w"> </span>/varu/kodu-0-taiel.tar.gz<span class="w"> </span>/home<span class="w">   </span><span class="c1"># esimene: täis</span>
+sudo<span class="w"> </span>tar<span class="w"> </span>--listed-incremental<span class="o">=</span>/varu/kodu.snar<span class="w"> </span>-czpf<span class="w"> </span>/varu/kodu-1.tar.gz<span class="w"> </span>/home<span class="w">         </span><span class="c1"># järgmised: ainult muutused</span>
+</code></pre></div>
+<h2 id="97-rsync-koopia-teise-masinasse">9.7 rsync: koopia teise masinasse<a class="headerlink" href="#97-rsync-koopia-teise-masinasse" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>rsync -aAX</code> kopeerib teise masinasse ainult muutunud failid. <code>--delete</code> teeb peegli, mis kopeerib ka vead - see ei ole varukoopia.</p>
+</div>
+<p><code>rsync</code> (moodul 7) kopeerib SSH kaudu ainult muutunud failid - see on lihtsaim viis saada koopia <strong>teise masinasse</strong>.</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-aAXv<span class="w"> </span>--delete<span class="w"> </span>/srv/andmed/<span class="w"> </span>varu@ubuntusrv:/varu/debian1/andmed/
+<span class="c1">#      │││   └ kustuta sihtkohast failid, mida allikas enam pole (peegel!)</span>
+<span class="c1">#      ││└ laiendatud atribuudid</span>
+<span class="c1">#      │└ ACL-id</span>
+<span class="c1">#      └ arhiivirežiim: õigused, omanikud, ajad, viidad</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong><code>--delete</code> teeb peegli, mitte varukoopia.</strong> Kui fail allikas kustutatakse või lunavara selle krüpteerib, jõuab ka see muudatus järgmisel käivitusel koopiasse. Kasuta <code>rsync</code>-i varunduseks koos <strong>ajaliste koopiatega</strong> (allpool) või hetktõmmistega sihtmasinas.</p>
+</div>
+<p><strong>Ajalised koopiad <code>--link-dest</code>-iga:</strong> iga päev luuakse uus kataloog, kuid muutmata failid on eelmise päeva failide <strong>kõvaviited</strong> (moodul 2) ega võta lisaruumi. Iga päeva kataloog näeb välja nagu täiskoopia.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">TANA</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="nv">EILE</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>-d<span class="w"> </span>yesterday<span class="w"> </span>+%F<span class="k">)</span>
+rsync<span class="w"> </span>-aAX<span class="w"> </span>--delete<span class="w"> </span>--link-dest<span class="o">=</span>/varu/debian1/<span class="nv">$EILE</span><span class="w"> </span>/srv/andmed/<span class="w"> </span>/varu/debian1/<span class="nv">$TANA</span>/
+du<span class="w"> </span>-sh<span class="w"> </span>/varu/debian1/*<span class="w">        </span><span class="c1"># tegelik ruum: ainult muutused</span>
+</code></pre></div>
+<p>Varundamiseks kasuta sihtmasinas eraldi kasutajat (<code>varu</code>) ja <strong>SSH-võtit</strong> ilma paroolita, kuid piira, mida see võti teha saab (vt lisaülesanne laboris).</p>
+<h2 id="98-varundusskript-ja-ajastamine">9.8 Varundusskript ja ajastamine<a class="headerlink" href="#98-varundusskript-ja-ajastamine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Varundus peab olema automaatne: skript + systemd taimer, mis logib ja teatab veast (<code>OnFailure=</code>).</p>
+</div>
+<p>Käsitsi tehtud varundus jääb ühel päeval tegemata. Varundus peab olema <strong>automaatne</strong>, <strong>logima</strong> oma tulemuse ja <strong>teatama</strong> veast. Moodulis 6 kirjutasid skripti <code>varunda</code>; tootmisskript näeb välja umbes nii:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># /usr/local/sbin/varunda-seadistus - /etc ja /home igaöine varundus</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">SIHT</span><span class="o">=</span>/varu
+<span class="nv">HOIA</span><span class="o">=</span><span class="m">14</span><span class="w">                                        </span><span class="c1"># mitu päeva alles hoida</span>
+<span class="nv">NIMI</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>date<span class="w"> </span>+%F_%H%M<span class="k">)</span><span class="s2">"</span>
+
+logger<span class="w"> </span>-t<span class="w"> </span>varundus<span class="w"> </span><span class="s2">"algus: </span><span class="nv">$NIMI</span><span class="s2">"</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$SIHT</span><span class="s2">"</span>
+tar<span class="w"> </span>--acls<span class="w"> </span>--xattrs<span class="w"> </span>-czpf<span class="w"> </span><span class="s2">"</span><span class="nv">$SIHT</span><span class="s2">/</span><span class="nv">$NIMI</span><span class="s2">.tar.gz"</span><span class="w"> </span>/etc<span class="w"> </span>/home<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>logger<span class="w"> </span>-t<span class="w"> </span>varundus<span class="w"> </span>-p<span class="w"> </span>user.err<span class="w"> </span><span class="s2">"VIGA: tar ebaõnnestus"</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+tar<span class="w"> </span>-tzf<span class="w"> </span><span class="s2">"</span><span class="nv">$SIHT</span><span class="s2">/</span><span class="nv">$NIMI</span><span class="s2">.tar.gz"</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w">      </span><span class="c1"># kontrolli, et arhiiv on loetav</span>
+find<span class="w"> </span><span class="s2">"</span><span class="nv">$SIHT</span><span class="s2">"</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">-*.tar.gz"</span><span class="w"> </span>-mtime<span class="w"> </span>+<span class="s2">"</span><span class="nv">$HOIA</span><span class="s2">"</span><span class="w"> </span>-delete
+logger<span class="w"> </span>-t<span class="w"> </span>varundus<span class="w"> </span><span class="s2">"valmis: </span><span class="nv">$NIMI</span><span class="s2"> (</span><span class="k">$(</span>du<span class="w"> </span>-h<span class="w"> </span><span class="s2">"</span><span class="nv">$SIHT</span><span class="s2">/</span><span class="nv">$NIMI</span><span class="s2">.tar.gz"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f1<span class="k">)</span><span class="s2">)"</span>
+</code></pre></div>
+<p>Ajasta systemd taimeriga (moodul 5):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/varundus.service</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Seadistuse ja kodukataloogide varundus</span>
+<span class="na">OnFailure</span><span class="o">=</span><span class="s">varundus-viga.service</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/sbin/varunda-seadistus</span>
+<span class="na">Nice</span><span class="o">=</span><span class="s">10</span>
+<span class="na">IOSchedulingClass</span><span class="o">=</span><span class="s">idle</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/varundus.timer</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Varundus iga öö 02:30</span>
+
+<span class="k">[Timer]</span>
+<span class="na">OnCalendar</span><span class="o">=</span><span class="s">*-*-* 02:30:00</span>
+<span class="na">RandomizedDelaySec</span><span class="o">=</span><span class="s">15min</span>
+<span class="na">Persistent</span><span class="o">=</span><span class="s">true</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>varundus.timer
+systemctl<span class="w"> </span>list-timers<span class="w"> </span>varundus.timer
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>varundus.service<span class="w">        </span><span class="c1"># proovi kohe</span>
+journalctl<span class="w"> </span>-t<span class="w"> </span>varundus<span class="w">                       </span><span class="c1"># skripti logi</span>
+</code></pre></div>
+<ul>
+<li><code>Persistent=true</code> - kui masin oli kell 02:30 väljas, tehakse varundus kohe pärast käivitust;</li>
+<li><code>Nice</code> ja <code>IOSchedulingClass=idle</code> - varundus ei aeglusta teenuseid;</li>
+<li><code>OnFailure=</code> käivitab vea korral teise üksuse, mis teatab veast (näide laboritöös; e-posti teavitused ja seire on moodulis 20).</li>
+</ul>
+<p><strong>Kontrolli varundust regulaarselt:</strong> taimer, mis on pool aastat vaikselt vigadega töötanud, on halvem kui varunduse puudumine, sest see annab vale kindlustunde.</p>
+<h2 id="99-restic-krüpteeritud-ja-deduplitseeriv-varundus">9.9 restic: krüpteeritud ja deduplitseeriv varundus<a class="headerlink" href="#99-restic-krüpteeritud-ja-deduplitseeriv-varundus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>restic</strong> teeb krüpteeritud ja deduplitseeritud hetktõmmiseid kohalikku või kaughoidlasse. Hoia parooli kindlas kohas - ilma selleta andmeid ei taasta.</p>
+</div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>restic
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/varundus
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Väga-pikk-varunduse-parool"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/root/.restic-parool<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/root/.restic-parool
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_REPOSITORY</span><span class="o">=</span>/srv/varundus/restic
+<span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_PASSWORD_FILE</span><span class="o">=</span>/root/.restic-parool
+
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>init<span class="w">                                 </span><span class="c1"># loo hoidla (üks kord)</span>
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>backup<span class="w"> </span>/etc<span class="w"> </span>/var/www<span class="w">                 </span><span class="c1"># varunda</span>
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>snapshots<span class="w">                            </span><span class="c1"># hetktõmmised</span>
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>restore<span class="w"> </span>latest<span class="w"> </span>--target<span class="w"> </span>/tmp/taaste<span class="w">  </span><span class="c1"># taasta</span>
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>forget<span class="w"> </span>--keep-daily<span class="w"> </span><span class="m">7</span><span class="w"> </span>--keep-weekly<span class="w"> </span><span class="m">4</span><span class="w"> </span>--keep-monthly<span class="w"> </span><span class="m">6</span><span class="w"> </span>--prune<span class="w">   </span><span class="c1"># vanade kustutamine</span>
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>check<span class="w">                                </span><span class="c1"># hoidla terviklikkuse kontroll</span>
+</code></pre></div>
+<p>Teise serverisse saab varundada SFTP kaudu: <code>RESTIC_REPOSITORY=sftp:varu@varuserver:/srv/restic</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Kaota parool - kaota andmed.</strong> restic'u hoidla on krüpteeritud. Hoia parooli turvaliselt ka väljaspool serverit.</p>
+</div>
+<p><strong>Kaughoidla SFTP kaudu</strong> (sihtmasinas on kasutaja <code>varu</code> ja SSH-võti, moodul 7):</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_REPOSITORY</span><span class="o">=</span>sftp:varu@ubuntusrv:/varu/restic-debian1
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>init
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>backup<span class="w"> </span>/etc<span class="w"> </span>/home<span class="w"> </span>/srv<span class="w"> </span>--exclude-caches
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>diff<span class="w"> </span>&lt;vanem-ID&gt;<span class="w"> </span>&lt;uuem-ID&gt;<span class="w">                </span><span class="c1"># mis muutus kahe koopia vahel</span>
+sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>mount<span class="w"> </span>/mnt/restic<span class="w">                         </span><span class="c1"># sirvi koopiaid nagu katalooge (vajab FUSE-i)</span>
+</code></pre></div>
+<p>restic'u koopiad on <strong>hetktõmmised</strong> (<em>snapshots</em>): iga <code>restic backup</code> loob uue, kuid salvestab ainult uued andmetükid (deduplitseerimine). <code>forget</code> märgib vanad hetktõmmised kustutamiseks, <code>--prune</code> vabastab ruumi. <code>check --read-data-subset=10%</code> loeb osa andmetest läbi ja kontrollib, et need on terved.</p>
+<h2 id="910-taastamine-ja-taastamistest">9.10 Taastamine ja taastamistest<a class="headerlink" href="#910-taastamine-ja-taastamistest" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Ainult taastamine näitab, kas varukoopia töötab. Tee regulaarselt taastamistest ja mõõda aega.</p>
+</div>
+<p>Taastamise kohta tuleb ette teada:</p>
+<ol>
+<li><strong>Mida</strong> taastada: üks fail, kataloog, terve server?</li>
+<li><strong>Kust</strong>: milline koopia (kuupäev) ja kus see asub?</li>
+<li><strong>Kuidas</strong>: sammud, mida saab järgida ka keegi teine (moodul 18, käsiraamat);</li>
+<li><strong>Kui kaua</strong> see võtab - kas mahub RTO sisse?</li>
+</ol>
+<p>Taastamise reeglid:</p>
+<ul>
+<li>taasta <strong>ajutisse kataloogi</strong> ja kontrolli enne, kui kirjutad üle päris andmed;</li>
+<li>säilita õigused ja omanikud (<code>tar -p</code>, <code>rsync -aAX</code>, restic teeb seda ise);</li>
+<li>kontrolli tulemust: kas teenus käivitub, kas failid avanevad, kas õigused on õiged;</li>
+<li><strong>kirjuta üles</strong>, kui kaua läks ja mis ei olnud dokumenteeritud.</li>
+</ul>
+<p><strong>Taastamistest</strong> on harjutus, kus teed taastamise päriselt (testmasinasse või ajutisse kataloogi) ja mõõdad aega. Tee seda regulaarselt (nt kord kvartalis) ja alati pärast varunduse muutmist. Paljud asutused avastavad alles katastroofi ajal, et varukoopiad olid tühjad, krüpteeritud tundmatu parooliga või ei sisaldanud kõige olulisemat.</p>
+<h2 id="911-teised-tööriistad-ja-lahendused">9.11 Teised tööriistad ja lahendused<a class="headerlink" href="#911-teised-tööriistad-ja-lahendused" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Lisaks on borg, Proxmox Backup Server ja hetktõmmised. Lunavara vastu peab üks koopia olema muudetamatu või võrgust eraldatud.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Tööriist</th>
+<th>Iseloomustus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tar</code>, <code>rsync</code></td>
+<td>Lihtsad, igal pool olemas</td>
+</tr>
+<tr>
+<td><strong>restic</strong></td>
+<td>Krüpteeritud, deduplitseeriv; sihtkohaks kataloog, SFTP, S3, Backblaze jt</td>
+</tr>
+<tr>
+<td><strong>borg</strong> (BorgBackup)</td>
+<td>Sarnane restic'uga, väga tõhus; vajab sihtmasinas samuti borg'i</td>
+</tr>
+<tr>
+<td><strong>Proxmox Backup Server</strong></td>
+<td>Virtuaalmasinate ja konteinerite deduplitseeriv varundus (valikmoodul 27)</td>
+</tr>
+<tr>
+<td>LVM ja ZFS hetktõmmised</td>
+<td>Järjepidev seis varundamise ajaks (moodulid 8, 10); ZFS <code>send/receive</code> teise masinasse</td>
+</tr>
+<tr>
+<td>Bacula, Bareos, Veeam</td>
+<td>Suurte asutuste tsentraalsed varunduslahendused</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lunavara vastu:</strong> varundusserver ei tohiks olla varundatavast masinast kirjutatav ega kustutatav. Võimalused: varundusserver tõmbab andmed ise (<em>pull</em>), <code>restic</code>-u <em>append-only</em> režiim (<code>rest-server --append-only</code>), muudetamatud hoidlad (S3 <em>Object Lock</em>), võrgust eraldatud kettad.</p>
+<hr />
+<h2 id="distrode-erinevused">Distrode erinevused<a class="headerlink" href="#distrode-erinevused" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Debian</strong></th>
+<th><strong>Ubuntu</strong></th>
+<th><strong>AlmaLinux</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>restic</td>
+<td><code>apt install restic</code></td>
+<td><code>apt install restic</code></td>
+<td>EPEL-ist <code>dnf install restic</code></td>
+</tr>
+<tr>
+<td>borg</td>
+<td><code>borgbackup</code></td>
+<td><code>borgbackup</code></td>
+<td>EPEL-ist <code>borgbackup</code></td>
+</tr>
+<tr>
+<td>Pakettide loend</td>
+<td><code>dpkg --get-selections</code></td>
+<td>sama</td>
+<td><code>rpm -qa</code> või <code>dnf repoquery --userinstalled</code></td>
+</tr>
+<tr>
+<td>ACL-id ja SELinux tar-is</td>
+<td><code>--acls</code></td>
+<td><code>--acls</code></td>
+<td><code>--acls --xattrs</code> (SELinuxi märgised)</td>
+</tr>
+</tbody>
+</table>
+<p>Varundustööriistad töötavad kõigis distrodes ühtemoodi; erinevus on peamiselt paketi nimes ja hoidlas.</p>
+<details class="note">
+<summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
+<p>Varunduse põhimõtted (3-2-1, RPO/RTO, taastamise test) ei sõltu süsteemist. <code>tar</code> (FreeBSD-s bsdtar), <code>rsync</code> ja <code>restic</code> (<code>pkg install rsync restic</code>) töötavad samamoodi. FreeBSD-s on lisaks kaks ZFS-i võimalust (vt moodul 29, punkt 29.9):</p>
+<div class="highlight"><pre><span></span><code>zfs<span class="w"> </span>snapshot<span class="w"> </span>-r<span class="w"> </span>zroot/usr/home@2026-11-10<span class="w">        </span><span class="c1"># hetktõmmis kõigist kodukataloogidest</span>
+zfs<span class="w"> </span>send<span class="w"> </span>-R<span class="w"> </span>zroot/usr/home@2026-11-10<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>varu<span class="w"> </span>zfs<span class="w"> </span>receive<span class="w"> </span>-u<span class="w"> </span>varu/fbsd-home<span class="w">   </span><span class="c1"># koopia teise masinasse</span>
+bectl<span class="w"> </span>create<span class="w"> </span>enne-uuendust<span class="w">                       </span><span class="c1"># alglaadimiskeskkond enne süsteemi uuendust</span>
+</code></pre></div>
+<ul>
+<li><strong>ZFS-i hetktõmmis</strong> on kohe olemas ega võta alguses ruumi. Samas masinas on see ikkagi ainult tagasivõtu võimalus, mitte varukoopia (punkt 9.1).</li>
+<li><strong><code>zfs send</code></strong> kopeerib hetktõmmise teise masinasse ja edaspidi ainult muutused (<code>zfs send -i</code>). Nii töötavad ka Proxmoxi replikatsioon ja TrueNASi varundus (moodulid 10 ja 18).</li>
+<li><strong>Alglaadimiskeskkond</strong> (<code>bectl</code>) on süsteemiketta kloon, kuhu saab ebaõnnestunud uuenduse järel tagasi minna. See ei asenda andmete varundust.</li>
+</ul>
+</details>
+<hr />
+<h2 id="kokkuvõte">Kokkuvõte<a class="headerlink" href="#kokkuvõte" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Käsk või mõiste</th>
+<th>Tegevus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-2-1, RPO, RTO</td>
+<td>Varundusplaani alus</td>
+</tr>
+<tr>
+<td><code>tar --acls --xattrs -czpf</code>, <code>tar -xzpf … -C</code></td>
+<td>Arhiiv koos õigustega, taastamine ajutisse kataloogi</td>
+</tr>
+<tr>
+<td><code>tar --listed-incremental</code></td>
+<td>Juurdekasvuga tar</td>
+</tr>
+<tr>
+<td><code>rsync -aAX</code>, <code>--link-dest</code></td>
+<td>Koopia teise masinasse, ajalised koopiad</td>
+</tr>
+<tr>
+<td><code>logger -t</code>, <code>journalctl -t</code></td>
+<td>Skripti logi</td>
+</tr>
+<tr>
+<td><code>.timer</code> + <code>.service</code>, <code>Persistent=</code>, <code>OnFailure=</code></td>
+<td>Ajastamine ja vigadest teatamine</td>
+</tr>
+<tr>
+<td><code>restic init/backup/snapshots/restore/forget/check</code></td>
+<td>Krüpteeritud deduplitseeriv varundus</td>
+</tr>
+<tr>
+<td>Taastamistest</td>
+<td>Varunduse ainus tõeline kontroll</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Järgmised sammud:</strong> tee <a href="labor/">laboritöö</a> ja kontrolli oma teadmisi <a href="enesekontroll/">enesekontrolli</a> abil.</p>
+<h2 id="lisamaterjal">Lisamaterjal<a class="headerlink" href="#lisamaterjal" title="Permanent link">&para;</a></h2>
+<ul>
+<li>restic dokumentatsioon (restic.readthedocs.io)</li>
+<li>BorgBackup dokumentatsioon (borgbackup.readthedocs.io)</li>
+<li>Arch Wiki - <em>System backup</em>, <em>Rsync</em> (wiki.archlinux.org)</li>
+<li><code>man tar</code>, <code>man rsync</code>, <code>man systemd.timer</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Jalus" >
+        
+          
+          <a href="../moodul-08-kettad-lvm/enesekontroll/" class="md-footer__link md-footer__link--prev" aria-label="Eelmine: Enesekontroll">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Eelmine
+              </span>
+              <div class="md-ellipsis">
+                Enesekontroll
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="labor/" class="md-footer__link md-footer__link--next" aria-label="Järgmine: Laboritöö">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Järgmine
+              </span>
+              <div class="md-ellipsis">
+                Laboritöö
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Rain Koor, Haapsalu Kutsehariduskeskus · CC BY-SA 4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.footer", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Kopeeritud", "clipboard.copy": "Kopeeri l\u00f5ikelauale", "search.result.more.one": "1 veel sellel lehel", "search.result.more.other": "# veel sellel lehel", "search.result.none": "Otsingule ei leitud \u00fchtegi vastet", "search.result.one": "Leiti \u00fcks tulemus", "search.result.other": "Leiti # tulemust", "search.result.placeholder": "Otsimiseks kirjuta siia", "search.result.term.missing": "Puudub", "select.version": "Vali versioon"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
