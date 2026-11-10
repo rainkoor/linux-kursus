@@ -6063,7 +6063,21 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span 
 </code></pre></div>
 <p><code>systemctl edit</code> loob faili <code>/etc/systemd/system/httpd.service.d/override.conf</code>, kuhu kirjutad ainult muudetavad read. Nii jääb paketi originaalfail puutumata.</p>
 <h3 id="oma-teenuse-loomine">Oma teenuse loomine<a class="headerlink" href="#oma-teenuse-loomine" title="Permanent link">&para;</a></h3>
-<p>Teenuse fail <code>/etc/systemd/system/minuteenus.service</code>:</p>
+<p>Näide: teenus <code>minuteenus</code>, mis kirjutab iga 10 sekundi järel logisse rea. Samamoodi teed teenuseks iga programmi või skripti, mis peab pidevalt töötama.</p>
+<p><strong>1. Kirjuta programm või skript.</strong> Loo see kohe õigesse kohta (AlmaLinuxis on see SELinuxi pärast oluline, vt <em>Distrode erinevused</em>):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/usr/local/bin/minuteenus.sh
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Kirjutab iga 10 sekundi järel rea - väljund läheb journal'isse</span>
+<span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"minuteenus töötab: </span><span class="k">$(</span>date<span class="w"> </span><span class="s1">'+%T'</span><span class="k">)</span><span class="s2">"</span>
+<span class="w">    </span>sleep<span class="w"> </span><span class="m">10</span>
+<span class="k">done</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/usr/local/bin/minuteenus.sh
+/usr/local/bin/minuteenus.sh<span class="w">          </span><span class="c1"># proovi käsitsi, lõpeta Ctrl+C-ga</span>
+</code></pre></div>
+<p><strong>2. Kirjuta üksuse fail</strong> <code>/etc/systemd/system/minuteenus.service</code> (<code>sudo nano /etc/systemd/system/minuteenus.service</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">Minu näidisteenus</span>
 <span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
@@ -6100,7 +6114,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span 
 </tr>
 <tr>
 <td><code>[Service] User</code></td>
-<td>Kasutaja, kelle õigustes teenus töötab</td>
+<td>Kasutaja, kelle õigustes teenus töötab (mitte <code>root</code>, kui pole vaja)</td>
 </tr>
 <tr>
 <td><code>[Service] Restart</code></td>
@@ -6112,12 +6126,21 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span 
 </tr>
 </tbody>
 </table>
-<p>Seejärel:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
-sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>minuteenus
-systemctl<span class="w"> </span>status<span class="w"> </span>minuteenus
+<p><strong>3. Anna systemd-le teada, luba ja käivita:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="w">              </span><span class="c1"># loe uus fail sisse</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>minuteenus<span class="w">    </span><span class="c1"># käivita kohe ja igal alglaadimisel</span>
+</code></pre></div>
+<p><strong>4. Kontrolli:</strong></p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>minuteenus<span class="w">               </span><span class="c1"># Active: active (running)</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>minuteenus<span class="w"> </span>-f<span class="w">               </span><span class="c1"># iga 10 s uus rida; Ctrl+C lõpetab</span>
+</code></pre></div>
+<p><strong>5. Proovi automaatset taaskäivitust:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-s<span class="w"> </span>KILL<span class="w"> </span>minuteenus<span class="w">    </span><span class="c1"># „jookse kokku“</span>
+sleep<span class="w"> </span><span class="m">6</span><span class="p">;</span><span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>minuteenus<span class="w">      </span><span class="c1"># systemd käivitas teenuse uuesti</span>
 </code></pre></div>
 <p><code>Restart=on-failure</code> taaskäivitab teenuse, kui see lõpetab veakoodiga või sunnitakse lõpetama (nt <code>SIGKILL</code>). Viisaka lõpetamise (<code>SIGTERM</code>) või <code>systemctl stop</code> järel taaskäivitust ei toimu.</p>
+<p><strong>Kui teenus ei käivitu</strong> (<code>Active: failed</code>): vaata <code>journalctl -u minuteenus -n 30</code>. Levinud põhjused: <code>ExecStart</code>-is pole täielikku teed, skriptil puudub käivitusõigus (<code>chmod 755</code>) või esimene rida <code>#!/bin/bash</code>, faili muutmise järel jäi <code>daemon-reload</code> tegemata, AlmaLinuxis vale SELinuxi märgis (<code>restorecon -v /usr/local/bin/minuteenus.sh</code>).</p>
+<p><strong>Teenuse eemaldamine:</strong> <code>sudo systemctl disable --now minuteenus</code>, kustuta üksuse fail ja tee <code>sudo systemctl daemon-reload</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
 <p><strong>Programmi väljund läheb logisse.</strong> Kõik, mida teenus kirjutab standardväljundisse või veaväljundisse, salvestab systemd journal'isse. Eraldi logifaili pole vaja.</p>
@@ -6234,6 +6257,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 systemctl<span class="w"> </span>list-timers<span class="w">                         </span><span class="c1"># kõik taimerid ja järgmised käivitused</span>
 systemd-analyze<span class="w"> </span>calendar<span class="w"> </span><span class="s2">"*-*-* 02:30:00"</span><span class="w">     </span><span class="c1"># kontrolli ajaavaldist</span>
 </code></pre></div>
+<p>Testi tööd kohe, ootamata määratud aega: <code>sudo systemctl start varundus.service</code> ja vaata tulemust <code>journalctl -u varundus</code>. Skript <code>/usr/local/bin/varundus.sh</code> peab olema olemas ja käivitatav, nagu oma teenuse puhul (samm 1).</p>
 <p><code>OnCalendar</code> näited: <code>daily</code>, <code>weekly</code>, <code>Mon..Fri 08:00</code>, <code>*:0/15</code> (iga 15 minuti järel). <code>Persistent=true</code> tähendab, et kui masin oli ettenähtud ajal väljas, käivitatakse töö pärast alglaadimist.</p>
 <table>
 <thead>

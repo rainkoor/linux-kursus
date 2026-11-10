@@ -5417,7 +5417,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 </div>
 <hr />
 <h2 id="7-osa-päris-sertifikaadid">7. osa. Päris sertifikaadid<a class="headerlink" href="#7-osa-päris-sertifikaadid" title="Permanent link">&para;</a></h2>
-<p>Laboris kasutasid oma CA-d ja Caddy CA-d. Selles osas uurid, kuidas näevad välja <strong>avalikud</strong> sertifikaadid (teooria punkt 15.3, „Avaliku sertifikaadi hankimine“). Internetiühendusega masinast:</p>
+<p>Laboris kasutasid oma CA-d ja Caddy CA-d. Selles osas uurid, kuidas näevad välja <strong>avalikud</strong> sertifikaadid (teooria punkt 15.3, plokk „Loe lähemalt: Avaliku sertifikaadi hankimine“). Internetiühendusega masinast:</p>
 <p><strong>7.1</strong> Vaata päris saidi sertifikaati ja ahelat:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>www.debian.org:443<span class="w"> </span>-servername<span class="w"> </span>www.debian.org<span class="w"> </span>-showcerts<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"^ *[0-9] s:|^ *i:"</span>

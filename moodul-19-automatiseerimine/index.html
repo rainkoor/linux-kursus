@@ -3190,17 +3190,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#ansible-ja-teised-tööriistad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ansible ja teised tööriistad
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5308,17 +5297,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#ansible-ja-teised-tööriistad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ansible ja teised tööriistad
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5521,8 +5499,16 @@
 <li>jagab Ansible'i projekti rollideks ja muutujafailideks ning testib seda (<code>--check</code>, idempotentsuse test, <code>ansible-lint</code>, Molecule);</li>
 <li>loob virtuaalmasinaid koodina (cloud-init, OpenTofu) ja seadistab need Ansible'iga.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="191-miks-automatiseerida">19.1 Miks automatiseerida?<a class="headerlink" href="#191-miks-automatiseerida" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Käsitsi seadistamine on aeglane ja vigaderohke. Automatiseerimine algab skriptist ja taimerist; Ansible ja infrastruktuur koodina teevad sama serveri sekunditega uuesti.</p>
+</div>
 <p>Moodulites 15–17 seadistasid serveri käsitsi. See võttis mitu tundi ja kui server peaks homme uuesti üles ehitama, kuluks sama palju aega - ja tõenäoliselt jääks midagi kahe silma vahele. Kujuta ette sama tööd kümne või saja serveriga.</p>
 <p>Automatiseerimine ei alga Ansible'ist. Oled seda juba teinud - väiksemas mahus:</p>
 <table>
@@ -5570,6 +5556,10 @@
 <p>Bash ja cron on endiselt vajalikud - lihtne skript koos taimeriga on sageli parim lahendus ühe masina korduva ülesande jaoks. Mida rohkem on servereid ja mida olulisem on, et need oleksid <strong>ühesugused</strong>, seda rohkem võidad Ansible'ist ja teistest selle mooduli vahenditest. Tüüpiline töövoog ühendab kõik astmed: Ansible paigaldab serverisse skripti ja taimeri, kogu kood on Gitis.</p>
 <p>Ühine põhimõte on <strong>infrastruktuur koodina</strong> (<em>Infrastructure as Code</em>, IaC): serverite seadistus kirjeldatakse tekstifailides, mida hoitakse Gitis, vaadatakse üle nagu programmikoodi ja rakendatakse automaatselt.</p>
 <h2 id="192-ansible">19.2 Ansible<a class="headerlink" href="#192-ansible" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Ansible seadistab servereid üle SSH ilma agendita. Inventuur (<code>inventuur.ini</code>) ütleb, millised masinad, <strong>mänguraamat</strong> (YAML) kirjeldab soovitud oleku. <code>ansible-playbook veebiserver.yml --check --diff</code> näitab enne, mida muudetaks.</p>
+</div>
 <p><strong>Ansible</strong> seadistab servereid üle SSH. Erinevalt mõnest teisest automatiseerimisvahendist ei vaja hallatavad serverid eraldi agenti - piisab SSH-st ja Pythonist.</p>
 <table>
 <thead>
@@ -5760,7 +5750,8 @@ ansible-playbook<span class="w"> </span>veebiserver.yml<span class="w"> </span>-
 <div class="highlight"><pre><span></span><code>ansible-vault<span class="w"> </span>create<span class="w"> </span>saladused.yml
 ansible-playbook<span class="w"> </span>mänguraamat.yml<span class="w"> </span>--ask-vault-pass
 </code></pre></div>
-<h3 id="ansible-ja-teised-tööriistad">Ansible ja teised tööriistad<a class="headerlink" href="#ansible-ja-teised-tööriistad" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Ansible ja teised tööriistad</summary>
 <table>
 <thead>
 <tr>
@@ -5795,7 +5786,12 @@ ansible-playbook<span class="w"> </span>mänguraamat.yml<span class="w"> </span>
 </tr>
 </tbody>
 </table>
+</details>
 <h2 id="193-laborikeskkond-koodina-vagrant">19.3 Laborikeskkond koodina: Vagrant<a class="headerlink" href="#193-laborikeskkond-koodina-vagrant" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Vagrant loob <code>Vagrantfile</code>'i järgi sinu arvutisse virtuaalmasinad: <code>vagrant up</code> loob, <code>vagrant ssh</code> ühendub, <code>vagrant destroy</code> kustutab.</p>
+</div>
 <p><strong>Vagrant</strong> (HashiCorp) loob ja seadistab virtuaalmasinaid tekstifaili <code>Vagrantfile</code> järgi. Ühe käsuga saad oma arvutisse terve labori - näiteks kolm masinat Ansible'i harjutamiseks - ja sama käsuga selle kustutada ning uuesti luua. Vagrant kasutab virtualiseerimiseks pakkujat (<em>provider</em>), tavaliselt <strong>VirtualBoxi</strong> (ka libvirt, Hyper-V, VMware).</p>
 <table>
 <thead>
@@ -5874,6 +5870,10 @@ vagrant<span class="w"> </span>box<span class="w"> </span>list
 </code></pre></div>
 <p>Nii on kogu labor - masinad ja nende seadistus - kirjas Giti hoidlas ning iga õppija saab sama keskkonna käskudega <code>git clone</code> ja <code>vagrant up</code>.</p>
 <h2 id="194-suurem-projekt-rollid-muutujad-ja-testimine">19.4 Suurem projekt: rollid, muutujad ja testimine<a class="headerlink" href="#194-suurem-projekt-rollid-muutujad-ja-testimine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Suurem projekt jagatakse <strong>rollideks</strong> (<code>roles/veebiserver/tasks/main.yml</code>) ja muutujafailideks. Testi proovirežiimiga (<code>--check --diff</code>), korduskäivitusega (idempotentsus) ja <code>ansible-lint</code>-iga.</p>
+</div>
 <p>Üks pikk mänguraamat muutub kiiresti loetamatuks. Päris projektis jagatakse kood <strong>rollideks</strong> - iga roll on üks iseseisev ülesanne (nt <code>baas</code>, <code>veebiserver</code>, <code>andmebaas</code>), mida saab kasutada mitmes mänguraamatus.</p>
 <h3 id="projekti-ülesehitus">Projekti ülesehitus<a class="headerlink" href="#projekti-ülesehitus" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>ansible/
@@ -5980,6 +5980,10 @@ molecule<span class="w"> </span>destroy
 <p>Konteineris pole tavaliselt systemd-d ega kernelit. Teenuste käivitamise test vajab systemd-ga pilti või virtuaalmasinat (Vagrant). Seepärast testitakse Molecule'iga sageli just paigaldust ja seadistusfaile, teenuseid aga päris testmasinas.</p>
 </div>
 <h2 id="195-virtuaalmasinad-koodina-cloud-init-ja-opentofu">19.5 Virtuaalmasinad koodina: cloud-init ja OpenTofu<a class="headerlink" href="#195-virtuaalmasinad-koodina-cloud-init-ja-opentofu" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>cloud-init</strong> seadistab uue VM-i esimesel alglaadimisel (hostinimi, kasutaja, SSH-võti). <strong>OpenTofu</strong> loob virtuaalmasinad koodi järgi (<code>tofu plan</code>, <code>tofu apply</code>).</p>
+</div>
 <p>Ansible seadistab olemasolevaid masinaid. Masinad ise saab samuti luua koodi järgi - siis on kogu keskkond nullist uuesti ehitatav.</p>
 <h3 id="cloud-init">cloud-init<a class="headerlink" href="#cloud-init" title="Permanent link">&para;</a></h3>
 <p><strong>cloud-init</strong> on tööriist, mis käivitub virtuaalmasina <strong>esimesel alglaadimisel</strong> ja seadistab selle vastavalt hüperviisori või pilve antud andmetele: hostinimi, IP-aadress, kasutaja, SSH-võti, paketid. Distrod pakuvad selleks spetsiaalseid <strong>pilvetõmmiseid</strong> (<em>cloud images</em>, nt <code>debian-13-genericcloud-amd64.qcow2</code>), millest tehakse <strong>mall</strong>.</p>

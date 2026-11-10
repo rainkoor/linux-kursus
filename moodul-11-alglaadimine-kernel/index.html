@@ -2286,32 +2286,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#uuemad-kernelid" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Uuemad kernelid
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vanade-kernelite-eemaldamine" class="md-nav__link">
     <span class="md-ellipsis">
       
         Vanade kernelite eemaldamine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kernelivälised-moodulid-ja-dkms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kernelivälised moodulid ja DKMS
       
     </span>
   </a>
@@ -5804,32 +5782,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#uuemad-kernelid" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Uuemad kernelid
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vanade-kernelite-eemaldamine" class="md-nav__link">
     <span class="md-ellipsis">
       
         Vanade kernelite eemaldamine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kernelivälised-moodulid-ja-dkms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kernelivälised moodulid ja DKMS
       
     </span>
   </a>
@@ -6064,8 +6020,16 @@
 <li>seadistab teenuste sõltuvused ja tüübid, kasutab mallitud, pesa- ja teeüksuseid ning kasutajateenuseid;</li>
 <li>karastab teenuse systemd turvaseadetega ja lahendab teenuste käivitusvigu.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="111-alglaadimise-ülevaade">11.1 Alglaadimise ülevaade<a class="headerlink" href="#111-alglaadimise-ülevaade" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Alglaadimine käib etappidena: püsivara (BIOS/UEFI) → alglaadija GRUB → kernel ja initramfs → systemd → teenused ja sisselogimine. Kui süsteem ei käivitu, otsi viga etapi kaupa.</p>
+</div>
 <p>Kui vajutad arvuti toitenuppu, toimub enne sisselogimisviipa mitu etappi. Iga etapp laadib järgmise:</p>
 <pre class="mermaid"><code>flowchart LR
     A["Püsivara&lt;br&gt;UEFI/BIOS&lt;br&gt;riistvara test,&lt;br&gt;alglaadimisseade"] --&gt; B["Alglaadija&lt;br&gt;GRUB&lt;br&gt;valib kerneli&lt;br&gt;ja parameetrid"]
@@ -6110,6 +6074,10 @@
 </table>
 <p>Kui tead, millises etapis probleem tekib, tead ka, kust lahendust otsida.</p>
 <h2 id="112-püsivara-bios-ja-uefi">11.2 Püsivara: BIOS ja UEFI<a class="headerlink" href="#112-püsivara-bios-ja-uefi" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Püsivara käivitub esimesena ja leiab alglaadija. UEFI kasutab FAT32 partitsiooni <code>/boot/efi</code>, vana BIOS ketta algust (MBR). <code>ls /sys/firmware/efi</code> näitab, kas süsteem käivitus UEFI-ga.</p>
+</div>
 <p><strong>Püsivara</strong> (<em>firmware</em>) on emaplaadi mälus olev programm, mis käivitub esimesena.</p>
 <table>
 <thead>
@@ -6148,6 +6116,10 @@
 <p>Proxmoxi virtuaalmasinad kasutavad vaikimisi BIOS-i (SeaBIOS), UEFI (OVMF) tuleb masina loomisel eraldi valida.</p>
 <p>Püsivara valib alglaadimise järjekorra järgi seadme, millelt käivitada: ketas, USB, CD/DVD või <strong>võrk (PXE)</strong>. Proxmoxis muudetakse järjekorda <em>Options</em> → <em>Boot Order</em>; käivitamisel avab ühekordse valikumenüü klahv <strong>Esc</strong>.</p>
 <h2 id="113-alglaadija-grub">11.3 Alglaadija GRUB<a class="headerlink" href="#113-alglaadija-grub" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>GRUB-i seadistus on failis <code>/etc/default/grub</code>; pärast muutmist käivita <code>update-grub</code> (Debian, Ubuntu) või <code>grub2-mkconfig</code> (AlmaLinux). Ühekordse muudatuse saad teha GRUB-i menüüs klahviga <strong>e</strong>.</p>
+</div>
 <p><strong>GRUB</strong> (<em>GRand Unified Bootloader</em>) on enamiku Linuxi distrode alglaadija. See:</p>
 <ul>
 <li>näitab menüüd, kust saab valida kerneli (sh vanema versiooni) või muu operatsioonisüsteemi;</li>
@@ -6250,6 +6222,10 @@ sudo<span class="w"> </span>grub2-mkconfig<span class="w"> </span>-o<span class=
 </ol>
 <p>Muudatus ei salvestu - järgmisel käivitusel on kõik endine. Nii saab mittekäivituvat süsteemi taastada.</p>
 <h2 id="114-kernel-ja-initramfs">11.4 Kernel ja initramfs<a class="headerlink" href="#114-kernel-ja-initramfs" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Kernel on fail kataloogis <code>/boot</code> (<code>vmlinuz-…</code>). <strong>initramfs</strong> on väike ajutine juurfailisüsteem, mis sisaldab draivereid päris juurfailisüsteemi haakimiseks. Uuenda seda käsuga <code>update-initramfs -u</code> või <code>dracut -f</code>.</p>
+</div>
 <p><strong>Kernel</strong> asub failina kataloogis <code>/boot</code>:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>/boot
 </code></pre></div>
@@ -6272,6 +6248,10 @@ sudo<span class="w"> </span>dracut<span class="w"> </span>-f<span class="w">    
 lsinitrd<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
 </code></pre></div>
 <h2 id="115-systemd-ja-eesmärgid">11.5 systemd ja eesmärgid<a class="headerlink" href="#115-systemd-ja-eesmärgid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Systemd (PID 1) käivitab vaike-<strong>eesmärgi</strong> teenused: server <code>multi-user.target</code>, töölaud <code>graphical.target</code>. <code>systemd-analyze blame</code> näitab, mis alglaadimist aeglustab.</p>
+</div>
 <p>Kui kernel on juurfailisüsteemi haakinud, käivitab see protsessi <strong>PID 1</strong> - <strong>systemd</strong>. systemd loeb seadistuse ja käivitab teenused, mis kuuluvad vaike-<strong>eesmärgile</strong> (<em>target</em>).</p>
 <table>
 <thead>
@@ -6343,6 +6323,10 @@ sudo<span class="w"> </span>dmesg<span class="w"> </span>-T<span class="w"> </sp
 journalctl<span class="w"> </span>-k<span class="w">                    </span><span class="c1"># kerneli teated journal'ist</span>
 </code></pre></div>
 <h2 id="116-proc-ja-sys">11.6 /proc ja /sys<a class="headerlink" href="#116-proc-ja-sys" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>/proc</code> ja <code>/sys</code> on virtuaalsed failisüsteemid, mille sisu kernel loob lugemise hetkel: protsessid, protsessor, mälu, seadmed. <code>/proc/sys</code> all on muudetavad kerneli parameetrid.</p>
+</div>
 <p>Linuxis on kõik fail - ka kerneli andmed. Kaks <strong>virtuaalset failisüsteemi</strong> ei asu kettal, vaid kernel genereerib nende sisu lugemise hetkel.</p>
 <h3 id="proc">/proc<a class="headerlink" href="#proc" title="Permanent link">&para;</a></h3>
 <table>
@@ -6407,6 +6391,10 @@ cat<span class="w"> </span>/sys/block/sda/size<span class="w">                  
 </code></pre></div>
 <p>Riistvara uurimiseks on ka mugavamad käsud: <code>lscpu</code>, <code>lspci</code>, <code>lsusb</code> (paketid <code>pciutils</code>, <code>usbutils</code>), <code>lsblk</code>, <code>sudo dmidecode</code> (emaplaadi ja BIOS-i info).</p>
 <h2 id="117-kerneli-moodulid">11.7 Kerneli moodulid<a class="headerlink" href="#117-kerneli-moodulid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Draiverid on kerneli moodulid: <code>lsmod</code> - laaditud moodulid, <code>modinfo</code> - info, <code>modprobe</code> - laadi. Püsivad seaded ja keelamine käivad kataloogis <code>/etc/modprobe.d/</code>.</p>
+</div>
 <p>Linuxi kernel on <strong>monoliitne</strong>, kuid <strong>modulaarne</strong>: draivereid ja muid osi saab laadida ja eemaldada töö ajal <strong>moodulitena</strong>, ilma kernelit uuesti kompileerimata või taaskäivitamata. Moodulid asuvad kataloogis <code>/lib/modules/$(uname -r)/</code>.</p>
 <div class="highlight"><pre><span></span><code>lsmod<span class="w">                            </span><span class="c1"># laaditud moodulid</span>
 modinfo<span class="w"> </span>e1000<span class="w">                    </span><span class="c1"># mooduli info (kirjeldus, parameetrid, litsents)</span>
@@ -6455,6 +6443,10 @@ blacklist pcspkr
 </code></pre></div>
 <p><code>blacklist</code> takistab mooduli automaatset laadimist. Kui moodul on initramfs-is, tuleb pärast muudatust uuendada ka initramfs.</p>
 <h2 id="118-kerneli-parameetrid-sysctl">11.8 Kerneli parameetrid: sysctl<a class="headerlink" href="#118-kerneli-parameetrid-sysctl" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>sysctl</code> muudab töötava kerneli parameetreid (nt <code>net.ipv4.ip_forward</code>). Püsivad seaded kirjuta faili <code>/etc/sysctl.d/*.conf</code> ja rakenda <code>sysctl --system</code>.</p>
+</div>
 <p>Töötava kerneli käitumist saab muuta parameetritega, mis on failidena kataloogis <code>/proc/sys/</code>. Neid hallatakse käsuga <code>sysctl</code>:</p>
 <div class="highlight"><pre><span></span><code>sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w">                         </span><span class="c1"># kõik parameetrid</span>
 sysctl<span class="w"> </span>net.ipv4.ip_forward<span class="w">               </span><span class="c1"># ühe parameetri väärtus</span>
@@ -6503,6 +6495,10 @@ net.ipv4.ip_forward = 1
 </tbody>
 </table>
 <h2 id="119-süsteemi-taastamine">11.9 Süsteemi taastamine<a class="headerlink" href="#119-süsteemi-taastamine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Kui süsteem ei käivitu, kasuta GRUB-is parameetrit <code>systemd.unit=rescue.target</code>, <code>init=/bin/bash</code> või AlmaLinuxis <code>rd.break</code>. GRUB-i parandad taastemeedialt <code>chroot</code>-iga. Nii saad lähtestada ka juurkasutaja parooli.</p>
+</div>
 <h3 id="kui-süsteem-satub-hädaolukorra-režiimi">Kui süsteem satub hädaolukorra režiimi<a class="headerlink" href="#kui-süsteem-satub-hädaolukorra-režiimi" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>You are in emergency mode. After logging in, type "journalctl -xb" to view
 system logs, "systemctl reboot" to reboot, "systemctl default" or "exit"
@@ -6587,6 +6583,10 @@ sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sda2<span class="w
 <p>Püsivara saab süsteemi käivitada ka <strong>võrgust</strong> (PXE). Nii töötavad võrgupaigaldus, kettatõmmiste levitamine (FOG) ja ka võrgust käivitatavad taastetööriistad - vt valikmoodul 22.</p>
 </div>
 <h2 id="1110-kernelite-haldus-ja-kompileerimine">11.10 Kernelite haldus ja kompileerimine<a class="headerlink" href="#1110-kernelite-haldus-ja-kompileerimine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Süsteemis võib olla mitu kernelit; GRUB käivitab vaikimisi uusima. Vaikimisi kernelit saab vahetada, vanu eemaldada (<code>apt autoremove</code>) ja vajadusel kerneli ise kompileerida.</p>
+</div>
 <h3 id="paigaldatud-kernelid">Paigaldatud kernelid<a class="headerlink" href="#paigaldatud-kernelid" title="Permanent link">&para;</a></h3>
 <p>Süsteemis võib olla korraga mitu kernelit. GRUB käivitab vaikimisi uusima, kuid teisi saab valida menüüst „Advanced options“.</p>
 <div class="highlight"><pre><span></span><code>uname<span class="w"> </span>-r<span class="w">                                   </span><span class="c1"># töötav kernel</span>
@@ -6626,7 +6626,8 @@ sudo<span class="w"> </span>grubby<span class="w"> </span>--default-kernel<span 
 sudo<span class="w"> </span>grubby<span class="w"> </span>--set-default<span class="w"> </span>/boot/vmlinuz-&lt;versioon&gt;<span class="w">     </span><span class="c1"># püsivalt</span>
 sudo<span class="w"> </span>grub2-reboot<span class="w"> </span>&lt;index&gt;<span class="w">                             </span><span class="c1"># ainult järgmiseks alglaadimiseks</span>
 </code></pre></div>
-<h3 id="uuemad-kernelid">Uuemad kernelid<a class="headerlink" href="#uuemad-kernelid" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Uuemad kernelid</summary>
 <p>Stabiilsete distrode kernel on teadlikult vanem, kuid saab turvaparandusi. Uuemat kernelit võib vaja minna uue riistvara toe jaoks.</p>
 <table>
 <thead>
@@ -6654,6 +6655,7 @@ sudo<span class="w"> </span>grub2-reboot<span class="w"> </span>&lt;index&gt;<sp
 </tr>
 </tbody>
 </table>
+</details>
 <h3 id="vanade-kernelite-eemaldamine">Vanade kernelite eemaldamine<a class="headerlink" href="#vanade-kernelite-eemaldamine" title="Permanent link">&para;</a></h3>
 <p>Kernelid võtavad kataloogis <code>/boot</code> ruumi, mis on mõnikord eraldi väike partitsioon.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>autoremove<span class="w">                              </span><span class="c1"># Debian/Ubuntu: eemaldab mittevajalikud vanad kernelid</span>
@@ -6661,11 +6663,13 @@ sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </
 sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>kernel-core-&lt;versioon&gt;<span class="w">           </span><span class="c1"># AlmaLinux</span>
 </code></pre></div>
 <p>AlmaLinuxis määrab alles hoitavate kernelite arvu failis <code>/etc/dnf/dnf.conf</code> rida <code>installonly_limit=3</code>. <strong>Töötavat kernelit ei saa eemaldada</strong> ja alati tasub alles hoida vähemalt üks varukernel.</p>
-<h3 id="kernelivälised-moodulid-ja-dkms">Kernelivälised moodulid ja DKMS<a class="headerlink" href="#kernelivälised-moodulid-ja-dkms" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Kernelivälised moodulid ja DKMS</summary>
 <p>Mõned draiverid (nt NVIDIA graafikadraiver, ZFS, VirtualBoxi moodulid) ei ole kerneli osa. Need tuleb iga uue kerneli jaoks uuesti kompileerida. Seda teeb automaatselt <strong>DKMS</strong> (<em>Dynamic Kernel Module Support</em>):</p>
 <div class="highlight"><pre><span></span><code>dkms<span class="w"> </span>status<span class="w">                      </span><span class="c1"># millised moodulid on DKMS-i all ja millistele kernelitele kompileeritud</span>
 </code></pre></div>
 <p>Kui pärast kerneli uuendust mõni draiver ei tööta, on põhjus sageli DKMS-i kompileerimisvea taga (<code>journalctl -b | grep -i dkms</code>).</p>
+</details>
 <h3 id="oma-kerneli-kompileerimine">Oma kerneli kompileerimine<a class="headerlink" href="#oma-kerneli-kompileerimine" title="Permanent link">&para;</a></h3>
 <p>Enamasti pole oma kernelit vaja kompileerida - distro kernel on testitud ja saab turvauuendusi. Oma kernel võib siiski olla vajalik, kui:</p>
 <ul>
@@ -6747,6 +6751,10 @@ uname<span class="w"> </span>-r
 <p>Hoia alati alles distro töötav kernel. Kui sinu kernel ei käivitu, vali GRUB-i menüüst „Advanced options“ ja käivita distro kernel. Seejärel eemalda katkine kernel käsuga <code>sudo apt remove linux-image-&lt;versioon&gt;-minu</code>.</p>
 </div>
 <h2 id="1111-systemd-süvitsi">11.11 systemd süvitsi<a class="headerlink" href="#1111-systemd-süvitsi" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Teenuse käivitumist juhivad sõltuvused (<code>Wants=</code>, <code>Requires=</code>) ja järjekord (<code>After=</code>). Lisaks on mallid (<code>teenus@.service</code>), pesa- ja teeüksused, kasutajateenused ning turvaseaded (<code>systemd-analyze security</code>).</p>
+</div>
 <p>Moodulis 5 õppisid teenuseid käivitama, lubama ja lihtsat oma teenust looma. Siin vaatame, kuidas systemd tegelikult otsustab, <strong>mida, millal ja kuidas</strong> käivitada, ning kuidas teenuseid turvalisemaks teha.</p>
 <h3 id="sõltuvused-ja-järjekord">Sõltuvused ja järjekord<a class="headerlink" href="#sõltuvused-ja-järjekord" title="Permanent link">&para;</a></h3>
 <p>systemd-s on <strong>sõltuvus</strong> (kas teine üksus tuleb ka käivitada) ja <strong>järjekord</strong> (kumb enne) eraldi seaded. See on levinud viga: <code>Requires=</code> ilma <code>After=</code>-ita käivitab mõlemad üksused <strong>samal ajal</strong>.</p>

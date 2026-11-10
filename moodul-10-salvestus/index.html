@@ -1866,28 +1866,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#zfs-proxmoxis-ja-truenasis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ZFS Proxmoxis ja TrueNASis
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zfs-eri-distrodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ZFS eri distrodes
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5153,28 +5131,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#zfs-proxmoxis-ja-truenasis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ZFS Proxmoxis ja TrueNASis
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zfs-eri-distrodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ZFS eri distrodes
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5314,8 +5270,16 @@
 <li>jälgib ketaste tervist SMART-iga;</li>
 <li>taastab kadunud partitsioonitabeli TestDiskiga ja kirjeldab andmete taastamise reegleid.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="101-raid-ja-mdadm">10.1 RAID ja mdadm<a class="headerlink" href="#101-raid-ja-mdadm" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>RAID ühendab mitu ketast: <strong>RAID 1</strong> peegeldab, <strong>RAID 5/6</strong> talub ühe või kahe ketta riket, <strong>RAID 10</strong> on kiire ja töökindel. Linuxis teeb tarkvaralise RAID-i <code>mdadm</code>, olekut näeb failist <code>/proc/mdstat</code>. RAID ei ole varukoopia.</p>
+</div>
 <p><strong>RAID</strong> (<em>Redundant Array of Independent Disks</em>) ühendab mitu ketast, et saavutada töökindlus või kiirus.</p>
 <table>
 <thead>
@@ -5415,6 +5379,10 @@ sudo<span class="w"> </span>mdadm<span class="w"> </span>/dev/md0<span class="w"
 <p><strong>RAID ei ole varukoopia!</strong> RAID kaitseb ketta rikke eest, kuid mitte kogemata kustutamise, viiruse, lunavara ega tulekahju eest.</p>
 </div>
 <h2 id="102-zfs">10.2 ZFS<a class="headerlink" href="#102-zfs" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>ZFS on failisüsteem ja köitehaldur ühes: kettad lähevad kogumisse (<code>zpool</code>), sealt luuakse andmekogumid (<code>zfs create</code>). Tal on kontrollsummad, hetktõmmised (<code>zfs snapshot</code>) ja koopia teise masinasse (<code>zfs send</code>).</p>
+</div>
 <p><strong>ZFS</strong> (algselt Sun Microsystems, 2005; tänapäeval avatud projekt <strong>OpenZFS</strong>) on failisüsteem ja köitehaldur ühes: see teeb ühe tööriistaga ära selle, milleks muidu on vaja <code>mdadm</code>-i (RAID), LVM-i ja failisüsteemi. ZFS-i kasutavad näiteks <strong>Proxmox VE</strong> (sh kõik HKHK Proxmoxi sõlmed), <strong>TrueNAS</strong> ja FreeBSD.</p>
 <p>Põhiomadused:</p>
 <ul>
@@ -5531,12 +5499,15 @@ sudo<span class="w"> </span>zfs<span class="w"> </span>rollback<span class="w"> 
 sudo<span class="w"> </span>zfs<span class="w"> </span>send<span class="w"> </span>tank/kodu@enne-uuendust<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>varuserver<span class="w"> </span>sudo<span class="w"> </span>zfs<span class="w"> </span>receive<span class="w"> </span>varu/kodu
 </code></pre></div>
 <p>Ketta vahetus peeglis: <code>sudo zpool replace tank /dev/sdc /dev/sdf</code> ja jälgi <code>zpool status</code> (<em>resilvering</em>).</p>
-<h3 id="zfs-proxmoxis-ja-truenasis">ZFS Proxmoxis ja TrueNASis<a class="headerlink" href="#zfs-proxmoxis-ja-truenasis" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: ZFS Proxmoxis ja TrueNASis</summary>
 <ul>
 <li><strong>Proxmox VE:</strong> paigaldaja pakub süsteemikettale ZFS-i (nt <em>ZFS RAID1</em>), pool nimega <code>rpool</code>. Virtuaalmasinate kettad on zvol-id (<code>rpool/data/vm-101-disk-0</code>), Proxmoxi hetktõmmised on ZFS-i hetktõmmised ja <strong>Storage Replication</strong> kasutab <code>zfs send</code>-i, et kopeerida VM-e teise sõlme. Mälu: ARC võtab vaikimisi kuni poole RAM-ist (uuemates versioonides väiksema piiriga) - seda saab piirata failis <code>/etc/modprobe.d/zfs.conf</code> (<code>options zfs zfs_arc_max=…</code>).</li>
 <li><strong>TrueNAS</strong> (Community Edition põhineb Debianil, vanem CORE FreeBSD-l) on ZFS-ile ehitatud NAS: poolid, dataset'id, SMB- ja NFS-jagamised, automaatsed hetktõmmised ja replikatsioon on veebiliideses. TrueNASi kasutamist failiserverina käsitleb moodul 18 (punkt 18.7).</li>
 </ul>
-<h3 id="zfs-eri-distrodes">ZFS eri distrodes<a class="headerlink" href="#zfs-eri-distrodes" title="Permanent link">&para;</a></h3>
+</details>
+<details class="note">
+<summary>Loe lähemalt: ZFS eri distrodes</summary>
 <table>
 <thead>
 <tr>
@@ -5562,12 +5533,17 @@ sudo<span class="w"> </span>zfs<span class="w"> </span>send<span class="w"> </sp
 </tbody>
 </table>
 <p>ZFS-i CDDL-litsents ei ühildu Linuxi kerneli GPL-iga, mistõttu ZFS ei ole kerneli osa. Seepärast eelistab Red Hat oma lahendusi (XFS, LVM, Stratis) ja Btrfs on Linuxi kernelis sisalduv sarnaste võimalustega alternatiiv (copy-on-write, hetktõmmised, kontrollsummad).</p>
+</details>
 <details class="note">
 <summary>Loe lähemalt: ZFS FreeBSD-s</summary>
 <p>FreeBSD on ZFS-i teine kodu. ZFS lisati FreeBSD-sse juba 2008. aastal (versioon 7.0), ammu enne kui see Linuxis kasutatavaks muutus. BSD litsents ühildub CDDL-iga, nii et ZFS on FreeBSD baassüsteemi osa ja kerneli kaasas - eraldi moodulit ega DKMS-i pole vaja. Alates FreeBSD 13-st kasutavad FreeBSD ja Linux sama <strong>OpenZFS</strong>-i koodi, seega selle punkti käsud (<code>zpool</code>, <code>zfs</code>) töötavad FreeBSD-s samamoodi.</p>
 <p>FreeBSD paigaldaja pakub vaikimisi juurfailisüsteemi ZFS-il (<em>Auto (ZFS)</em>, kogum <code>zroot</code>). Koos alglaadimiskeskkondadega (<code>bectl</code>) saab süsteemi pärast ebaõnnestunud uuendust sekunditega eelmisse olekusse tagasi viia. Vanem TrueNAS CORE ja paljud salvestusseadmed põhinevad seetõttu FreeBSD-l. Vt moodul 29, punkt 29.9.</p>
 </details>
 <h2 id="103-ketta-kiiruse-mõõtmine">10.3 Ketta kiiruse mõõtmine<a class="headerlink" href="#103-ketta-kiiruse-mõõtmine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Ketta kiirust mõõdetakse <strong>läbilaskevõime</strong> (MB/s) ja <strong>IOPS</strong>-i järgi. <code>dd</code> annab kiire hinnangu, <code>fio</code> täpse mõõtmise, <code>iostat -xz</code> näitab koormust töö ajal.</p>
+</div>
 <p>Ketta jõudlust on vaja hinnata, kui server on aeglane, kui võrreldakse salvestuslahendusi (kohalik SSD, Proxmoxi Ceph, iSCSI - moodul 22) või kui kahtlustatakse riistvara riket. Olulised näitajad:</p>
 <table>
 <thead>
@@ -5669,6 +5645,10 @@ sudo<span class="w"> </span>iotop<span class="w">            </span><span class=
 </code></pre></div>
 <p>Tulemusi võrreldes kasuta <strong>samu parameetreid</strong>, korda testi mitu korda ja pane kirja keskkond (VM-i ketta seaded, vahemälu režiim Proxmoxis, failisüsteem).</p>
 <h2 id="104-ketta-tervis-smart">10.4 Ketta tervis: SMART<a class="headerlink" href="#104-ketta-tervis-smart" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>SMART näitab ketta tervist: <code>smartctl -H</code> - üldhinnang, <code>smartctl -a</code> - kõik näitajad. Ümberpaigutatud ja ootel sektorid tähendavad, et ketas tuleb vahetada. <code>smartd</code> jälgib kettaid pidevalt.</p>
+</div>
 <p>Kettad annavad oma tervise kohta infot tehnoloogiaga <strong>S.M.A.R.T.</strong> Riknev ketas hakkab sageli enne lõplikku riket vigu näitama.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>smartmontools<span class="w">            </span><span class="c1"># AlmaLinux: sudo dnf install smartmontools</span>
 sudo<span class="w"> </span>smartctl<span class="w"> </span>-i<span class="w"> </span>/dev/sda<span class="w">                 </span><span class="c1"># mudel, seerianumber, kas SMART on toetatud</span>
@@ -5684,6 +5664,10 @@ sudo<span class="w"> </span>smartctl<span class="w"> </span>-a<span class="w"> <
 <p><strong>Virtuaalmasinas</strong> ei ole SMART-i infot - virtuaalne ketas ei ole füüsiline seade. Ketaste tervist jälgitakse hüperviisori (Proxmoxi sõlme) tasemel.</p>
 </div>
 <h2 id="105-partitsioonide-ja-failide-taastamine-testdisk">10.5 Partitsioonide ja failide taastamine: TestDisk<a class="headerlink" href="#105-partitsioonide-ja-failide-taastamine-testdisk" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Kustutatud partitsioonitabeli taastab <strong>TestDisk</strong>, üksikuid faile <strong>PhotoRec</strong>. Rikkis kettast tee enne kõike koopia (<code>ddrescue</code>) ja tööta koopiaga - iga kirjutamine algsele kettale võib andmed hävitada.</p>
+</div>
 <p>Kui partitsioonitabel on kogemata kustutatud või üle kirjutatud (nt valele kettale tehtud <code>fdisk</code>), on andmed kettal tavaliselt veel alles - kadunud on ainult „sisukord“. <strong>TestDisk</strong> otsib kettalt failisüsteemide algusi ja taastab partitsioonitabeli. Sama projekti <strong>PhotoRec</strong> taastab üksikuid faile (pildid, dokumendid) ka siis, kui failisüsteem on rikutud.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>testdisk<span class="w">      </span><span class="c1"># AlmaLinux: EPEL-ist, sudo dnf install testdisk</span>
 sudo<span class="w"> </span>testdisk<span class="w"> </span>/dev/sdb

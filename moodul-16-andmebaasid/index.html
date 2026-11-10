@@ -5282,6 +5282,11 @@
 
 <h1 id="moodul-16-andmebaasid">Moodul 16. Andmebaasid<a class="headerlink" href="#moodul-16-andmebaasid" title="Permanent link">&para;</a></h1>
 <p><strong>Maht:</strong> 8 tundi · <strong>Laboritöö:</strong> Debian (ja AlmaLinux kliendina) · <strong>Eeldused:</strong> moodul 15</p>
+<div class="admonition note">
+<p class="admonition-title">Märkus</p>
+<p><strong>Süsteemihalduri vaade andmebaasidele.</strong> See moodul õpetab andmebaasiserverit paigaldama ja hoidma: kasutajad ja õigused, turvaline ligipääs, varundus ja taastamine ning replikatsiooni põhimõte. Eesmärk on, et oskaksid rakendusele andmebaasi valmis seada ja seda hallata - mitte SQL-i ega andmebaaside disaini põhjalik õppimine.</p>
+<p><strong>HKHK õppijale:</strong> andmebaase ja SQL-i käsitletakse põhjalikumalt eraldi ainetes. See moodul annab andmebaasiserveri haldamiseks vajaliku aluse.</p>
+</div>
 <h2 id="õpiväljundid">Õpiväljundid<a class="headerlink" href="#õpiväljundid" title="Permanent link">&para;</a></h2>
 <p>Mooduli läbinud õppija:</p>
 <ul>
@@ -5293,8 +5298,16 @@
 <li>varundab ja taastab andmebaase ning taastab unustatud administraatori parooli;</li>
 <li>kirjeldab replikatsiooni põhimõtet ning viib rikke korral koopia põhiserveriks (ülevõtt).</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="161-andmebaaside-ülevaade">16.1 Andmebaaside ülevaade<a class="headerlink" href="#161-andmebaaside-ülevaade" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Relatsiooniline andmebaas (MariaDB, PostgreSQL) on server tabelitega ja SQL-iga, SQLite on üks fail, Valkey/Redis on mälus olev võti-väärtus hoidla. Haldur paigaldab, annab õigused, varundab ja taastab.</p>
+</div>
 <p>Peaaegu iga rakendus hoiab oma andmeid andmebaasis. Administraator ei pea olema andmebaasiekspert, kuid peab oskama andmebaasi paigaldada, kasutajaid ja õigusi hallata, varundada ja taastada ning probleeme leida.</p>
 <table>
 <thead>
@@ -5392,6 +5405,10 @@
 <p><strong>NoSQL</strong> ei tähenda „parem“ ega „uuem“. Enamiku rakenduste jaoks on relatsiooniline andmebaas õige valik. NoSQL-andmebaasid lahendavad kitsamaid ülesandeid (vahemälu, väga suured andmemahud, paindlik struktuur).</p>
 </div>
 <h2 id="162-mariadb-ja-mysql">16.2 MariaDB ja MySQL<a class="headerlink" href="#162-mariadb-ja-mysql" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>MariaDB: <code>sudo mariadb</code> avab kliendi, <code>CREATE DATABASE</code>, <code>CREATE USER</code>, <code>GRANT</code> annavad rakendusele oma andmebaasi ja kasutaja. Vaikimisi kuulab server ainult <code>127.0.0.1</code>-l.</p>
+</div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mariadb-server
 sudo<span class="w"> </span>mariadb<span class="w">                         </span><span class="c1"># Debianis logib juurkasutaja sisse ilma paroolita (unix_socket)</span>
 </code></pre></div>
@@ -5513,6 +5530,10 @@ read_only = ON
 <p><strong>Automaatne ülevõtt on keerukam, kui tundub.</strong> Kõige raskem on otsustada, kas põhiserver on päriselt rikkis või on ainult võrk katkenud. Seepärast kasutavad automaatsed lahendused vähemalt kolme sõlme ja häälteenamust (<em>quorum</em>). Väikeses asutuses on sageli piisav <strong>dokumenteeritud ja harjutatud käsitsi ülevõtt</strong>.</p>
 </div>
 <h2 id="163-postgresql">16.3 PostgreSQL<a class="headerlink" href="#163-postgresql" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>PostgreSQL-i haldab kasutaja <code>postgres</code>: <code>sudo -u postgres psql</code>, <code>createuser</code>, <code>createdb</code>. Kaugühendused lubatakse failides <code>postgresql.conf</code> ja <code>pg_hba.conf</code>.</p>
+</div>
 <p><strong>PostgreSQL</strong> on võimas avatud lähtekoodiga andmebaas, mida eelistatakse uutes rakendustes (nt GitLab, Mastodon, paljud ettevõtte süsteemid) ja keerukamate andmete jaoks.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgresql<span class="w">              </span><span class="c1"># Debian 13: PostgreSQL 17, Ubuntu 24.04: 16</span>
 <span class="c1"># AlmaLinux:</span>
@@ -5582,6 +5603,10 @@ sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> <
 sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>pg_dumpall<span class="w"> </span>&gt;<span class="w"> </span>koik.sql<span class="w">               </span><span class="c1"># kõik andmebaasid ja rollid</span>
 </code></pre></div>
 <h2 id="164-sqlite">16.4 SQLite<a class="headerlink" href="#164-sqlite" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>SQLite ei ole server, vaid <strong>üks fail</strong>, mida rakendus otse kasutab. Varunda see käsuga <code>sqlite3 fail.db ".backup koopia.db"</code>, mitte töötava faili kopeerimisega.</p>
+</div>
 <p><strong>SQLite</strong> ei ole server, vaid teek: kogu andmebaas on <strong>üks fail</strong>, mida rakendus otse loeb ja kirjutab. Ei ole kasutajaid, porti ega teenust. SQLite on maailma enim kasutatud andmebaas - see on igas telefonis, brauseris (Firefoxi järjehoidjad) ja paljudes serveriprogrammides (Grafana, Uptime Kuma, Home Assistant, Pi-hole'i päringulogi).</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>sqlite3
 sqlite3<span class="w"> </span>kool.db
@@ -5630,6 +5655,10 @@ file<span class="w"> </span>kool.db
 <p>Haldaja jaoks on SQLite <strong>lihtsalt fail</strong>: varunda see (<code>.backup</code> või peatatud rakendusega koopia), ära kustuta kõrvalfaile <code>*-wal</code> ja <code>*-shm</code> töötava rakenduse ajal ning kontrolli õigusi - kes faili loeb, näeb kõiki andmeid.</p>
 </div>
 <h2 id="165-võti-väärtus-hoidla-valkey-ja-redis">16.5 Võti-väärtus hoidla: Valkey ja Redis<a class="headerlink" href="#165-võti-väärtus-hoidla-valkey-ja-redis" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Valkey (Redise vaba haru) hoiab andmeid mälus ja vastab mikrosekunditega. Seda kasutatakse vahemälu ja seansside jaoks. <code>valkey-cli ping</code> kontrollib, kas teenus töötab.</p>
+</div>
 <p><strong>Redis</strong> on mälupõhine võti-väärtus andmebaas, mis vastab mikrosekunditega. 2024. aastal muutis Redis oma litsentsi ja kogukond jätkas vaba haruna <strong>Valkey</strong> (Linux Foundation); käsud ja protokoll on samad. AlmaLinux 10 ja uuemad distrod pakuvad Valkeyt.</p>
 <p>Tüüpiline kasutus:</p>
 <ul>
@@ -5650,6 +5679,10 @@ valkey-cli<span class="w"> </span>ping<span class="w">                         <
 </code></pre></div>
 <p>Turvalisus: vaikimisi kuulab ainult <code>127.0.0.1</code> ja <code>protected-mode yes</code>. <strong>Ära ava Redise/Valkey porti 6379 võrku ilma paroolita</strong> (<code>requirepass</code> või ACL-id) - internetis on tuhandeid sel viisil häkitud servereid. Andmed on mälus; püsivuse tagavad RDB-hetktõmmised ja AOF-logi (<code>/var/lib/valkey/</code>).</p>
 <h2 id="166-dünaamiline-veebirakendus-nginx--php--mariadb">16.6 Dünaamiline veebirakendus: nginx + PHP + MariaDB<a class="headerlink" href="#166-dünaamiline-veebirakendus-nginx--php--mariadb" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Dünaamiline sait: nginx saadab <code>.php</code> päringud <strong>PHP-FPM</strong>-ile ja PHP loeb andmed MariaDB-st. Nii töötavad WordPress ja Moodle.</p>
+</div>
 <p>Klassikaline veebirakenduse virn on <strong>LEMP</strong> (<em>Linux, nginx, MariaDB/MySQL, PHP</em>) või Apache'iga <strong>LAMP</strong>. Nii töötavad näiteks WordPress ja Moodle.</p>
 <pre class="mermaid"><code>flowchart LR
     B["brauser"] --&gt; N["nginx&lt;br&gt;(staatilised failid)"]
@@ -5666,6 +5699,10 @@ ls<span class="w"> </span>/run/php/<span class="w">                          </s
 </code></pre></div>
 <p>Lisa serveriplokis ka <code>index index.php index.html;</code>.</p>
 <h2 id="167-andmebaaside-turvalisus-ja-varundus">16.7 Andmebaaside turvalisus ja varundus<a class="headerlink" href="#167-andmebaaside-turvalisus-ja-varundus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Andmebaasi varundatakse <strong>dump</strong>-iga (<code>mariadb-dump</code>, <code>pg_dump</code>), mitte failide kopeerimisega. Rakendus saab oma kasutaja ainult oma andmebaasile, mitte <code>root</code>-i. Tee taastamistest.</p>
+</div>
 <table>
 <thead>
 <tr>

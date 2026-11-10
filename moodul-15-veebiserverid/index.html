@@ -2622,17 +2622,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#avaliku-sertifikaadi-hankimine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Avaliku sertifikaadi hankimine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#oma-ca-sisevõrk-ja-labor" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2770,28 +2759,6 @@
     <span class="md-ellipsis">
       
         Koormustest
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#traefik" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Traefik
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#koormusejaoturi-mõisted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Koormusejaoturi mõisted
       
     </span>
   </a>
@@ -5359,17 +5326,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#avaliku-sertifikaadi-hankimine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Avaliku sertifikaadi hankimine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#oma-ca-sisevõrk-ja-labor" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5513,28 +5469,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#traefik" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Traefik
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#koormusejaoturi-mõisted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Koormusejaoturi mõisted
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5614,6 +5548,11 @@
 
 <h1 id="moodul-15-veebiserverid">Moodul 15. Veebiserverid<a class="headerlink" href="#moodul-15-veebiserverid" title="Permanent link">&para;</a></h1>
 <p><strong>Maht:</strong> 10 tundi · <strong>Laboritöö:</strong> Debian, AlmaLinux, Ubuntu · <strong>Eeldused:</strong> moodulid 1–8, 12–14</p>
+<div class="admonition note">
+<p class="admonition-title">Märkus</p>
+<p><strong>Süsteemihalduri vaade veebiserveritele.</strong> See moodul õpetab veebiserverit paigaldama, seadistama ja hoidma nii, nagu Linuxi serveri haldur seda vajab: nginx ja Apache saidid, HTTPS ja sertifikaadid, koormuse jaotus ja varundus. Eesmärk on töötav ja turvaline veebiserver laboris - mitte veebirakenduste arendus ega suurte veebiplatvormide täielik valdamine.</p>
+<p><strong>HKHK õppijale:</strong> veebiservereid ja rakendusservereid käsitletakse põhjalikumalt eraldi moodulites (nt veebiserveri paigaldus, rakendusserverid). See moodul annab neile Linuxi serveri poolt vaadates aluse.</p>
+</div>
 <h2 id="õpiväljundid">Õpiväljundid<a class="headerlink" href="#õpiväljundid" title="Permanent link">&para;</a></h2>
 <p>Mooduli läbinud õppija:</p>
 <ul>
@@ -5626,8 +5565,16 @@
 <li>teeb koormusejaoturi rikkekindlaks virtuaalse IP-aadressiga (keepalived, VRRP) ja mõõdab veebiserveri jõudlust koormustestiga;</li>
 <li>valib olukorrale sobiva veebiserveri.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="151-serveriteenuste-ülevaade">15.1 Serveriteenuste ülevaade<a class="headerlink" href="#151-serveriteenuste-ülevaade" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Iga serveriteenus käib sama töövooga: paigalda → seadista → kontrolli süntaksit → käivita ja luba → ava tulemüür → testi → vaata logisid → varunda.</p>
+</div>
 <p>Moodulites 15–18 paneme kokku kõik varem õpitu: pakihaldus, teenused, võrk, tulemüür, õigused, skriptid ja varundus. Selles moodulis tegeleme veebiserveritega, moodulis 16 andmebaasidega, moodulis 17 DNS-iga ja moodulis 18 failiserveri, varunduse ja dokumentatsiooniga. Tüüpiline väikese asutuse server pakub järgmisi teenuseid:</p>
 <table>
 <thead>
@@ -5693,6 +5640,10 @@
 <li>dokumenteeri.</li>
 </ol>
 <h2 id="152-veebiserver-nginx">15.2 Veebiserver nginx<a class="headerlink" href="#152-veebiserver-nginx" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Nginx teenindab mitut saiti <strong>serveriplokkidega</strong>: seadistus <code>/etc/nginx/sites-available/</code>, lubamiseks viit <code>sites-enabled/</code>-isse. Enne <code>reload</code>-i kontrolli alati <code>nginx -t</code>.</p>
+</div>
 <p><strong>nginx</strong> on tänapäeval üks levinumaid veebiservereid. See on kiire, kasutab vähe mälu ja sobib nii staatiliste failide serveerimiseks kui ka pöördpuhverserveriks. Teine levinud veebiserver on <strong>Apache</strong> (<code>apache2</code>, AlmaLinuxis <code>httpd</code>).</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nginx
 systemctl<span class="w"> </span>status<span class="w"> </span>nginx
@@ -5817,6 +5768,10 @@ curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: ko
 </code></pre></div>
 <p>Nii saab mitu rakendust töötada ühe IP-aadressi ja pordi 443 taga, TLS-i haldab ainult nginx ja rakendus ise ei ole otse internetist kättesaadav.</p>
 <h2 id="153-tls-ja-https">15.3 TLS ja HTTPS<a class="headerlink" href="#153-tls-ja-https" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>HTTPS vajab sertifikaati. Avalikule saidile annab selle tasuta Let's Encrypt (<code>certbot</code>), laboris kasutame oma CA-d. Sertifikaat ja võti lisatakse serveriplokki (<code>listen 443 ssl</code>).</p>
+</div>
 <p><strong>TLS</strong> (<em>Transport Layer Security</em>) krüpteerib ühenduse brauseri ja serveri vahel ning tõendab, et server on see, kelleks ta end nimetab. HTTP koos TLS-iga on <strong>HTTPS</strong> (port 443).</p>
 <h3 id="sertifikaadid">Sertifikaadid<a class="headerlink" href="#sertifikaadid" title="Permanent link">&para;</a></h3>
 <p>TLS põhineb <strong>sertifikaatidel</strong>:</p>
@@ -5889,7 +5844,8 @@ curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: ko
 </table>
 <!-- PILT: ../pildid/m15-brauseri-hoiatus.png | Brauseri hoiatus isesigneeritud sertifikaadi korral -->
 
-<h3 id="avaliku-sertifikaadi-hankimine">Avaliku sertifikaadi hankimine<a class="headerlink" href="#avaliku-sertifikaadi-hankimine" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Avaliku sertifikaadi hankimine</summary>
 <p><strong>1. Domeen ja DNS.</strong> Saidil peab olema avalik domeeninimi (nt <code>minukool.ee</code>, <code>.ee</code> domeenid registreeritakse akrediteeritud registripidaja kaudu) ja avalikus DNS-is kirje, mis osutab serveri avalikule IP-aadressile (<code>A</code>/<code>AAAA</code>, moodul 17).</p>
 <p><strong>2. Valideerimine.</strong> CA peab veenduma, et taotleja kontrollib domeeni. Valideerimise tasemed:</p>
 <table>
@@ -6006,6 +5962,7 @@ openssl<span class="w"> </span>req<span class="w"> </span>-in<span class="w"> </
 <li><strong>Privaatvõti</strong> jääb serverisse (<code>chmod 600</code>), seda ei saadeta kunagi kellelegi. Kui võti lekib, <strong>tühista</strong> sertifikaat (<code>sudo certbot revoke --cert-name minukool.ee</code>) ja hangi uus uue võtmega.</li>
 <li>Kontrolli seadistust tööriistaga <strong>SSL Labs Server Test</strong> (ssllabs.com/ssltest) - see hindab protokolle, šifreid ja sertifikaadiahelat.</li>
 </ul>
+</details>
 <h3 id="oma-ca-sisevõrk-ja-labor">Oma CA (sisevõrk ja labor)<a class="headerlink" href="#oma-ca-sisevõrk-ja-labor" title="Permanent link">&para;</a></h3>
 <p>Sisevõrgu teenustele ja laborile saab luua oma sertifitseerimiskeskuse. Põhimõte on sama mis päris CA-l (CSR → allkiri → ahel), ainult CA ise on sinu oma ja kliendid peavad selle juursertifikaati usaldama:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 1. CA (tehakse üks kord, CA võtit hoitakse väga hoolikalt)</span>
@@ -6065,6 +6022,10 @@ sudo<span class="w"> </span>update-ca-certificates
 openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>kool.lab.example:443<span class="w"> </span>-servername<span class="w"> </span>kool.lab.example<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
 </code></pre></div>
 <h2 id="154-apache-http-server">15.4 Apache HTTP Server<a class="headerlink" href="#154-apache-http-server" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Apache saidid on Debianis ja Ubuntus <code>/etc/apache2/sites-available/</code> (<code>a2ensite</code>, <code>apachectl configtest</code>), AlmaLinuxis <code>/etc/httpd/conf.d/*.conf</code>. Teenus on vastavalt <code>apache2</code> või <code>httpd</code>.</p>
+</div>
 <p><strong>Apache</strong> (<code>httpd</code>) on vanim endiselt laialt kasutatav veebiserver. nginx on uutes paigaldustes levinum, kuid Apache on paljude rakenduste (Moodle, vanemad PHP-rakendused, paljud hostingupakkujad) juhendites vaikimisi valik ja oskab mõnda asja, mida nginx ei oska, nt kataloogipõhist seadistust failiga <code>.htaccess</code>.</p>
 <table>
 <thead>
@@ -6129,6 +6090,10 @@ sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--permanent<span
 </code></pre></div>
 <p>Seadistus: <code>/etc/httpd/conf/httpd.conf</code>, virtuaalhostid failidena <code>/etc/httpd/conf.d/*.conf</code> (sama süntaks, kuid <code>a2ensite</code>-i pole), logid <code>/var/log/httpd/</code>, kontroll <code>sudo apachectl configtest</code>. Veebifailid mittestandardses kohas vajavad SELinuxi konteksti (moodul 12).</p>
 <h2 id="155-caddy">15.5 Caddy<a class="headerlink" href="#155-caddy" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Caddy hangib avaliku nimega saidile HTTPS-sertifikaadi ise. Seadistus failis <code>Caddyfile</code> on väga lühike; laboris annab sertifikaadi <code>tls internal</code>.</p>
+</div>
 <p><strong>Caddy</strong> on Go-s kirjutatud moodne veebiserver, mille eripära on <strong>automaatne HTTPS</strong>: avaliku DNS-nimega saidile hangib ja uuendab Caddy sertifikaadi Let's Encryptilt ise. Seadistus (<code>Caddyfile</code>) on väga lühike.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>caddy<span class="w">           </span><span class="c1"># Debian 13 / Ubuntu 24.04 (uusim versioon Caddy enda hoidlast)</span>
 </code></pre></div>
@@ -6165,6 +6130,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 <p>Caddy on hea valik, kui on vaja kiiresti panna HTTPS mõne rakenduse ette (nt konteineris töötav haldusliides). Suurtes ja keerukates seadistustes on nginx ja Apache endiselt levinumad.</p>
 </div>
 <h2 id="156-lighttpd-ja-teised">15.6 lighttpd ja teised<a class="headerlink" href="#156-lighttpd-ja-teised" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Lighttpd on väga väikese mälukasutusega veebiserver manussüsteemidele ja väikestele seadmetele. Teisi veebiservereid tunned ära, kui neid kohtad.</p>
+</div>
 <p><strong>lighttpd</strong> („lighty“) on väga väikese mälukasutusega veebiserver. Seda kasutatakse manussüsteemides, ruuterites ja väikestes seadmetes; Pi-hole kasutas seda versioonini 5.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lighttpd
 sudo<span class="w"> </span>lighty-enable-mod<span class="w"> </span>fastcgi<span class="w"> </span>fastcgi-php<span class="w">    </span><span class="c1"># PHP tugi</span>
@@ -6204,6 +6173,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 </tbody>
 </table>
 <h2 id="157-pöördpuhvrid-ja-koormuse-jaotus">15.7 Pöördpuhvrid ja koormuse jaotus<a class="headerlink" href="#157-pöördpuhvrid-ja-koormuse-jaotus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Koormusejaotur (nginx <code>upstream</code>, HAProxy) jagab päringud mitme taustserveri vahel. keepalived annab jaoturile virtuaalse IP, mis liigub rikke korral teise masinasse.</p>
+</div>
 <p>Kui üks server ei jaksa või peab teenus töötama ka ühe serveri rikke korral, pannakse mitu <strong>taustserverit</strong> (<em>backend</em>) ühe <strong>koormusejaoturi</strong> (<em>load balancer</em>) taha.</p>
 <pre class="mermaid"><code>flowchart LR
     K["klient"] --&gt; H["HAProxy&lt;br&gt;:80 / :443"]
@@ -6368,7 +6341,8 @@ ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Testi ainult enda servereid.</strong> Koormustest võõra saidi vastu on sisuliselt teenusetõkestusrünnak (DoS). Laboris jälgi testi ajal taustserverites <code>top</code>-i ja HAProxy statistikalehte (moodul 20): kas pudelikael on protsessor, võrk või rakendus?</p>
 </div>
-<h3 id="traefik">Traefik<a class="headerlink" href="#traefik" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Traefik</summary>
 <p><strong>Traefik</strong> on konteinerimaailma pöördpuhver: see loeb Dockeri või Podmani konteinerite <strong>siltidelt</strong> (<em>labels</em>), milline nimi millisele konteinerile suunata, ja hangib sertifikaadid automaatselt. Näide <code>compose.yaml</code>-ist (moodul 14):</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
@@ -6381,7 +6355,9 @@ ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><
 <span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"traefik.http.routers.vile.rule=Host(`vile.lab.example`)"</span>
 </code></pre></div>
-<h3 id="koormusejaoturi-mõisted">Koormusejaoturi mõisted<a class="headerlink" href="#koormusejaoturi-mõisted" title="Permanent link">&para;</a></h3>
+</details>
+<details class="note">
+<summary>Loe lähemalt: Koormusejaoturi mõisted</summary>
 <table>
 <thead>
 <tr>
@@ -6416,7 +6392,12 @@ ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><
 </tr>
 </tbody>
 </table>
+</details>
 <h2 id="158-millist-veebiserverit-valida">15.8 Millist veebiserverit valida?<a class="headerlink" href="#158-millist-veebiserverit-valida" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Nginx on hea vaikevalik, Apache rakenduste juhendite pärast, Caddy automaatse HTTPS-i pärast. Töövoog on kõigil sama: seadista → kontrolli → <code>reload</code> → testi → logid.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -6453,6 +6434,10 @@ ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><
 </table>
 <p>Kõigi veebiserverite puhul kehtib sama töövoog (punkt 15.1): seadista → kontrolli süntaksit → <code>reload</code> → testi → vaata logisid.</p>
 <h2 id="159-veebiserveri-varundus">15.9 Veebiserveri varundus<a class="headerlink" href="#159-veebiserveri-varundus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Varunda saidi failid, seadistus (<code>/etc/nginx</code>, <code>/etc/apache2</code>), sertifikaadid ja eriti <strong>oma CA võti</strong> - Let's Encrypti sertifikaadi saab uuesti, oma CA-d mitte.</p>
+</div>
 <p>Veebiserveri taastamiseks on vaja rohkem kui veebisaidi faile. Varunda (moodul 9):</p>
 <table>
 <thead>

@@ -5260,8 +5260,16 @@
 <li>varundab failiserveri ja võrdleb isehallatavat failiserverit NAS-lahendustega (TrueNAS);</li>
 <li>dokumenteerib serveri seadistuse ning koostab käsiraamatu (<em>runbook</em>) ja otsuste logi.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="181-failide-jagamise-viisid">18.1 Failide jagamise viisid<a class="headerlink" href="#181-failide-jagamise-viisid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Linuxile jagatakse faile <strong>NFS</strong>-iga, Windowsile <strong>Samba</strong> (SMB) abil, üksikutele kasutajatele <strong>SFTP</strong>-ga. iSCSI jagab terve ketta, mida kasutab üks klient korraga.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -5306,6 +5314,10 @@
 </table>
 <p>NFS ja SMB on <strong>failitasandi</strong> jagamised: server haldab failisüsteemi ja mitu klienti saavad sama kausta korraga kasutada. iSCSI jagab <strong>plokkseadet</strong> nagu võrgu kaudu ühendatud ketast - sama ketast tohib üldjuhul kasutada ainult üks klient korraga.</p>
 <h2 id="182-nfs-failide-jagamine-linuxile">18.2 NFS: failide jagamine Linuxile<a class="headerlink" href="#182-nfs-failide-jagamine-linuxile" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>NFS: serveris kirjuta jagamine faili <code>/etc/exports</code> ja rakenda <code>exportfs -ra</code>, kliendis <code>mount -t nfs server:/kataloog /mnt/…</code>. Kasutajad tuvastatakse UID-numbri järgi.</p>
+</div>
 <p><strong>NFS</strong> (<em>Network File System</em>) võimaldab haakida teise Linuxi masina kataloogi üle võrgu nagu kohaliku ketta.</p>
 <p><strong>Server:</strong></p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nfs-kernel-server
@@ -5369,6 +5381,10 @@ sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </sp
 <p>Mitu klienti eri õigustega: <code>/srv/nfs/jagatud  10.0.83.0/24(ro,sync) 10.0.83.53(rw,sync,no_root_squash)</code>. Tühikud on olulised: <code>10.0.83.0/24 (rw)</code> (tühikuga) annaks <code>rw</code> <strong>kõigile</strong>!</p>
 <p><strong>Tulemüür:</strong> NFSv4 vajab ainult porti <strong>2049/tcp</strong> (<code>sudo ufw allow from 10.0.83.0/24 to any port nfs</code>, <code>sudo firewall-cmd --permanent --add-service=nfs</code>). Vana NFSv3 ja <code>showmount</code> kasutavad lisaks <code>rpcbind</code>-i ja muutuvaid porte (<code>--add-service=rpc-bind --add-service=mountd</code>).</p>
 <h2 id="183-autofs-haakimine-vajadusel">18.3 autofs: haakimine vajadusel<a class="headerlink" href="#183-autofs-haakimine-vajadusel" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Autofs haagib võrgukataloogi alles siis, kui seda kasutatakse, ja haagib tegevusetuse järel lahti. Nii ei takista kättesaamatu server alglaadimist.</p>
+</div>
 <p><code>/etc/fstab</code>-is olev NFS-jagamine haagitakse alglaadimisel. Kui server ei ole sel hetkel kättesaadav, aeglustab see alglaadimist ja haakimine jääb tegemata. <strong>autofs</strong> haagib jagamise alles siis, kui keegi kataloogi poole pöördub, ja haagib selle tegevusetuse järel lahti.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>autofs<span class="w">                     </span><span class="c1"># AlmaLinux: sudo dnf install autofs</span>
 </code></pre></div>
@@ -5386,6 +5402,10 @@ findmnt<span class="w"> </span>/mnt/kool/jagatud
 <p>Kodukataloogide jaoks kasutatakse metamärki: <code>* -rw,sync server:/srv/kodu/&amp;</code> (<code>&amp;</code> asendatakse kataloogi nimega) - nii saab iga LDAP/AD kasutaja (moodulid 24–25) oma kodukataloogi failiserverist.</p>
 <p>Lihtsam systemd alternatiiv: fstab-is valik <code>x-systemd.automount</code> (nt <code>debian1:/srv/nfs/jagatud /mnt/nfs nfs defaults,_netdev,x-systemd.automount 0 0</code>).</p>
 <h2 id="184-samba-failide-jagamine-windowsile">18.4 Samba: failide jagamine Windowsile<a class="headerlink" href="#184-samba-failide-jagamine-windowsile" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Samba jagamine kirjeldatakse failis <code>/etc/samba/smb.conf</code>. Kasutajal peab olema Samba parool (<code>smbpasswd -a</code>). Kontrolli seadistust <code>testparm</code> ja ühendust <code>smbclient -L</code>.</p>
+</div>
 <p><strong>Samba</strong> rakendab Windowsi failijagamise protokolli <strong>SMB</strong>. Sellega saab Linuxi server jagada kaustu Windowsi arvutitele (ja vastupidi). Samba võib olla ka Active Directory domeenikontroller (valikmoodul 25).</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>samba
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/samba/jagatud
@@ -5414,6 +5434,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 <li><strong>Linux:</strong> <code>smbclient //10.0.83.52/jagatud -U mari</code> või haakimine <code>mount -t cifs</code> (pakett <code>cifs-utils</code>).</li>
 </ul>
 <h2 id="185-ühiskausta-õigused-sgid-ja-acl">18.5 Ühiskausta õigused: SGID ja ACL<a class="headerlink" href="#185-ühiskausta-õigused-sgid-ja-acl" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Ühiskaustas peavad kõik saama muuta teiste faile: kataloogile <strong>SGID</strong> (<code>chmod 2770</code>) ja <strong>vaike-ACL</strong> (<code>setfacl -d -m g:grupp:rwx</code>).</p>
+</div>
 <p>Ühiskaustas peavad kõik grupi liikmed saama muuta ka <strong>teiste</strong> loodud faile. Moodulis 3 õpitud vahenditest on siin vaja kahte:</p>
 <ol>
 <li><strong>SGID kataloogil</strong> (<code>chmod 2770</code>) - uued failid kuuluvad kataloogi grupile, mitte looja põhigrupile;</li>
@@ -5435,6 +5459,10 @@ getfacl<span class="w"> </span>/srv/jagatud/opetajad
 <p>Õigused antakse <strong>gruppidele</strong>, mitte üksikutele kasutajatele. Kui Mari liigub teise rolli, muudetakse tema grupid, mitte kümnete kaustade õigusi. Suurtes asutustes tulevad grupid kataloogiteenusest (valikmoodulid 24-25).</p>
 </div>
 <h2 id="186-samba-ja-selinux-kasutajad-ja-prügikast">18.6 Samba ja SELinux, kasutajad ja prügikast<a class="headerlink" href="#186-samba-ja-selinux-kasutajad-ja-prügikast" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>AlmaLinuxis vajab Samba kataloog SELinuxi konteksti <code>samba_share_t</code>. Samba prügikast (<code>vfs objects = recycle</code>) aitab kogemata kustutatud faile taastada.</p>
+</div>
 <p><strong>AlmaLinuxis</strong> lubab SELinux Sambale ligipääsu ainult õige kontekstiga kataloogidele:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>semanage<span class="w"> </span>fcontext<span class="w"> </span>-a<span class="w"> </span>-t<span class="w"> </span>samba_share_t<span class="w"> </span><span class="s2">"/srv/samba(/.*)?"</span>
 sudo<span class="w"> </span>restorecon<span class="w"> </span>-Rv<span class="w"> </span>/srv/samba
@@ -5460,6 +5488,10 @@ sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--permanent<span
 sudo<span class="w"> </span>smbstatus<span class="w">                   </span><span class="c1"># kes on ühendatud, millised failid lukus</span>
 </code></pre></div>
 <h2 id="187-valmis-nas-lahendused-truenas">18.7 Valmis NAS-lahendused: TrueNAS<a class="headerlink" href="#187-valmis-nas-lahendused-truenas" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>TrueNAS on valmis NAS-süsteem ZFS-iga: jagamised, hetktõmmised ja replikatsioon on veebiliideses. See sobib, kui on vaja ainult failiserverit, mitte üldotstarbelist serverit.</p>
+</div>
 <p>Eespool seadistasid failiserveri käsitsi: Debian, <code>/etc/exports</code>, <code>smb.conf</code>, kasutajad ja õigused. Paljudes asutustes ja kodudes kasutatakse selle asemel <strong>NAS-i</strong> (<em>Network Attached Storage</em>) - seadet või distrot, mis on loodud ainult failide hoidmiseks ja jagamiseks ning mida hallatakse veebiliidesest.</p>
 <table>
 <thead>
@@ -5573,6 +5605,10 @@ sudo<span class="w"> </span>smbstatus<span class="w">                   </span><
 <li><strong>RAID ja hetktõmmised ei ole varukoopia</strong> - andmed peavad olema ka teises masinas või asukohas (replikatsioon, 3-2-1 reegel, moodul 9).</li>
 </ul>
 <h2 id="188-failiserveri-varundus">18.8 Failiserveri varundus<a class="headerlink" href="#188-failiserveri-varundus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Failiserveri andmed on kõige väärtuslikumad. Varunda need teise masinasse (restic, <code>zfs send</code>) ja hoia mitu ajalist koopiat lunavara ja kogemata kustutamise vastu.</p>
+</div>
 <p>Failiserveri andmed on sageli asutuse kõige väärtuslikum osa ja just neid kustutatakse kogemata või krüpteerib lunavara. Moodulis 9 õpitud põhimõtted kehtivad siin täies ulatuses:</p>
 <table>
 <thead>
@@ -5613,6 +5649,10 @@ sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </s
 </code></pre></div>
 <p>Varunda koos andmetega ka <strong>õigused ja ACL-id</strong> (restic ja <code>tar --acls</code> teevad seda) ning seadistus (<code>/etc/exports</code>, <code>/etc/samba/smb.conf</code>, Samba kasutajate andmebaas <code>/var/lib/samba/private/</code>). Ilma õigusteta taastatud ühiskaust tähendab tunde käsitsi parandamist.</p>
 <h2 id="189-serveri-dokumenteerimine">18.9 Serveri dokumenteerimine<a class="headerlink" href="#189-serveri-dokumenteerimine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Dokumenteeri, <strong>mis</strong> on seadistatud, <strong>miks</strong> ja <strong>kuidas</strong> see taastada. Hoia dokumentatsioon Gitis koos seadistusfailidega.</p>
+</div>
 <p>Hästi seadistatud, kuid dokumenteerimata server on ohtlik: keegi (ka sina ise poole aasta pärast) ei tea, miks miski on seadistatud nii, nagu on. Serveri dokumentatsioon peaks sisaldama:</p>
 <ul>
 <li>serveri eesmärk, asukoht (nt Proxmoxi sõlm), IP-aadressid ja DNS-nimed;</li>

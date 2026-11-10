@@ -5494,8 +5494,16 @@
 <li>selgitab DNS-i turvariske ja kaitsevõtteid (avatud resolver, DNSSEC, DoT/DoH, <em>split-horizon</em>);</li>
 <li>leiab ja parandab tüüpilisi DNS-i vigu ning varundab DNS-i seadistuse.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="171-nimelahendus-linuxis">17.1 Nimelahendus Linuxis<a class="headerlink" href="#171-nimelahendus-linuxis" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Linux otsib nime failide <code>/etc/nsswitch.conf</code> järjekorras: <code>/etc/hosts</code>, siis DNS. Ubuntus vahendab päringuid <code>systemd-resolved</code> (<code>127.0.0.53</code>, <code>resolvectl</code>). <code>getent hosts</code> lahendab nagu programmid.</p>
+</div>
 <p>Moodulis 7 nägid, et nime lahendamise järjekorra määrab <code>/etc/nsswitch.conf</code>. Täpsemalt:</p>
 <div class="highlight"><pre><span></span><code># /etc/nsswitch.conf (Ubuntu)
 hosts: files mdns4_minimal [NOTFOUND=return] dns
@@ -5550,6 +5558,10 @@ sudo<span class="w"> </span>resolvectl<span class="w"> </span>flush-caches<span 
 sudo<span class="w"> </span>resolvectl<span class="w"> </span>domain<span class="w"> </span>wg0<span class="w"> </span><span class="s1">'~lab.example'</span><span class="w">      </span><span class="c1"># tilde: ainult marsruutimiseks, mitte search'iks</span>
 </code></pre></div>
 <h2 id="172-kuidas-dns-töötab">17.2 Kuidas DNS töötab<a class="headerlink" href="#172-kuidas-dns-töötab" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>DNS on hierarhiline: juur → tippdomeen (<code>.ee</code>) → domeen. Rekursiivne resolver küsib läbi kogu ahela ja jätab vastuse <strong>TTL</strong>-i ajaks vahemällu. <code>dig +trace</code> näitab teekonda.</p>
+</div>
 <p>DNS on <strong>hierarhiline</strong> ja <strong>hajutatud</strong> andmebaas: ükski server ei tea kõike, iga tase teab ainult järgmise taseme servereid.</p>
 <pre class="mermaid"><code>flowchart TB
     R["juur .&lt;br&gt;13 juurserverite rühma"] --&gt; EE["ee."]
@@ -5606,6 +5618,10 @@ sudo<span class="w"> </span>resolvectl<span class="w"> </span>domain<span class=
 <div class="highlight"><pre><span></span><code>dig<span class="w"> </span>www.debian.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A2<span class="w"> </span><span class="s2">"ANSWER SECTION"</span><span class="w">     </span><span class="c1"># TTL on teine väli; korda - TTL väheneb</span>
 </code></pre></div>
 <h2 id="173-kirjete-tüübid">17.3 Kirjete tüübid<a class="headerlink" href="#173-kirjete-tüübid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Põhikirjed: <code>A</code>/<code>AAAA</code> - nimi → IP, <code>CNAME</code> - teine nimi, <code>MX</code> - e-posti server, <code>NS</code> - nimeserverid, <code>PTR</code> - IP → nimi, <code>TXT</code> - tekst (SPF, DKIM).</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -5669,6 +5685,10 @@ sudo<span class="w"> </span>resolvectl<span class="w"> </span>domain<span class=
 </table>
 <p>Reeglid: <code>CNAME</code> ei tohi olla samal nimel ühegi teise kirjega (seega mitte tsooni juurel <code>@</code>) ning <code>MX</code> ja <code>NS</code> peavad osutama nimele, millel on <code>A</code>-kirje, mitte <code>CNAME</code>-le.</p>
 <h2 id="174-bind9-autoriteetne-server">17.4 BIND9: autoriteetne server<a class="headerlink" href="#174-bind9-autoriteetne-server" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>BIND9 tsoon kirjeldatakse failis <code>named.conf.local</code>, kirjed tsoonifailis. Iga muudatuse järel <strong>suurenda seerianumbrit</strong>, kontrolli <code>named-checkzone</code> ja tee <code>systemctl reload named</code>.</p>
+</div>
 <p><strong>BIND9</strong> oskab nii autoriteetset kui ka rekursiivset rolli ja on DNS-i õppimiseks klassikaline valik.</p>
 <h3 id="edasitsoon">Edasitsoon<a class="headerlink" href="#edasitsoon" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bind9<span class="w"> </span>bind9-dnsutils
@@ -5709,6 +5729,27 @@ dig<span class="w"> </span>@localhost<span class="w"> </span>kool.lab.example<sp
 dig<span class="w"> </span>@localhost<span class="w"> </span>www.lab.example
 </code></pre></div>
 <p>BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (<code>allow-recursion</code> vaikimisi <code>localnets; localhost;</code>), nii et kliendid saavad sama serveri kaudu lahendada ka internetinimesid. Kliendid tuleb seadistada kasutama seda serverit (Netplan, <code>nmcli</code>, <code>/etc/resolv.conf</code> - vt moodul 7) ja tulemüüris peab olema avatud port 53 (UDP ja TCP).</p>
+<p><strong>Uue kirje lisamine samm-sammult</strong> (nt uus server <code>seire</code> aadressiga <code>10.0.83.54</code>) - see on DNS-i haldaja kõige sagedasem töö:</p>
+<ol>
+<li>Ava tsoonifail: <code>sudo nano /etc/bind/db.lab.example</code>.</li>
+<li>Lisa kirje: <code>seire   IN  A   10.0.83.54</code>.</li>
+<li><strong>Suurenda seerianumbrit</strong> SOA-s (nt <code>2026110801</code> → <code>2026110802</code>). Kui unustad, ei saa sekundaarserver muudatusest teada.</li>
+<li>
+<p>Kontrolli ja rakenda:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>named-checkzone<span class="w"> </span>lab.example<span class="w"> </span>/etc/bind/db.lab.example<span class="w">   </span><span class="c1"># peab lõppema: OK</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>named
+</code></pre></div>
+</li>
+<li>
+<p>Kontrolli vastust - ka sekundaarserverist, kui see on olemas:</p>
+<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@localhost<span class="w"> </span>seire.lab.example<span class="w"> </span>+short<span class="w">          </span><span class="c1"># 10.0.83.54</span>
+dig<span class="w"> </span>@10.0.83.53<span class="w"> </span>seire.lab.example<span class="w"> </span>+short<span class="w">         </span><span class="c1"># sekundaar (punkt 17.5)</span>
+</code></pre></div>
+</li>
+<li>
+<p>Kui on pöördtsoon, lisa sinna ka <code>PTR</code>-kirje (allpool) ja suurenda ka selle seerianumbrit.</p>
+</li>
+</ol>
 <div class="admonition note">
 <p class="admonition-title">Domeeninimed</p>
 <p><code>.example</code> on reserveeritud näidete jaoks ja ei kuulu kunagi kellelegi. Sisevõrgus kasutatakse sageli oma domeeni alamdomeeni (nt <code>lab.hkhk.ee</code>) või tippdomeeni <code>.internal</code>. Lõpuga <code>.local</code> tasub vältida, sest seda kasutab mDNS.</p>
@@ -5760,6 +5801,10 @@ sudo<span class="w"> </span>rndc<span class="w"> </span>reload<span class="w"> <
 sudo<span class="w"> </span>rndc<span class="w"> </span>flush<span class="w">                  </span><span class="c1"># tühjenda vahemälu</span>
 </code></pre></div>
 <h2 id="175-sekundaarserver-ja-tsooniülekanne">17.5 Sekundaarserver ja tsooniülekanne<a class="headerlink" href="#175-sekundaarserver-ja-tsooniülekanne" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Igal tsoonil peab olema vähemalt kaks nimeserverit. Sekundaar saab tsooni primaarilt tsooniülekandega (<code>allow-transfer</code>, <code>also-notify</code>) ja uueneb seerianumbri järgi.</p>
+</div>
 <p>Üks DNS-server on <strong>üksik rikkekoht</strong>: kui see on maas, ei tööta midagi. Iga tsoonil peab olema vähemalt <strong>kaks</strong> nimeserverit (domeeni registripidajad nõuavad seda). Sekundaarserver saab tsooni koopia primaarilt <strong>tsooniülekandega</strong> (AXFR, muudatuste korral IXFR).</p>
 <pre class="mermaid"><code>sequenceDiagram
     participant P as ns1 (primaar)&lt;br&gt;10.0.83.52
@@ -5799,6 +5844,10 @@ dig<span class="w"> </span>@10.0.83.53<span class="w"> </span>lab.example<span c
 <p>Tsooniülekanne on vana ja usaldusväärne lahendus. Alternatiiv on hoida tsoonifailid <strong>Gitis</strong> ja lasta mõlemal serveril neid sealt tõmmata (näide punktis 17.6, CoreDNS) või kasutada andmebaasipõhist serverit (PowerDNS).</p>
 </div>
 <h2 id="176-teised-dns-serverid">17.6 Teised DNS-serverid<a class="headerlink" href="#176-teised-dns-serverid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Lihtsamad DNS-serverid: <strong>dnsmasq</strong> (väike võrk, <code>/etc/hosts</code>), <strong>CoreDNS</strong> (konteinerid, Kubernetes), <strong>Pi-hole</strong> (reklaamide ja jälgimise blokeerimine).</p>
+</div>
 <p>BIND9 on klassika, kuid praktikas kasutatakse sageli kergemaid või kitsama otstarbega servereid:</p>
 <table>
 <thead>
@@ -5924,6 +5973,10 @@ pihole<span class="w"> </span>tail<span class="w">                      </span><
 <p>Veebiliides on aadressil <code>http://&lt;IP&gt;/admin</code>. Seal saab lisada blokeerimisloendeid, lubatud domeene (<em>allowlist</em>), kohalikke DNS-kirjeid ja suunata kindla domeeni päringud teisele serverile (nt <code>lab.example</code> → BIND9).</p>
 <p>Pi-hole'i võib käivitada ka konteinerina (pilt <code>pihole/pihole</code>). Teadmiseks: Pi-hole ei blokeeri reklaame, mida serveeritakse samalt domeenilt kui sisu (nt YouTube), ja seadmed, mis kasutavad DNS-i üle HTTPS-i (DoH), võivad sellest mööda minna.</p>
 <h2 id="177-dns-i-turvalisus">17.7 DNS-i turvalisus<a class="headerlink" href="#177-dns-i-turvalisus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Ära jäta avatud resolverit internetti (<code>allow-recursion</code> ainult oma võrgule). DNSSEC kaitseb võltsitud vastuste eest, DoT/DoH krüpteerib päringud.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -5967,6 +6020,10 @@ resolvectl<span class="w"> </span>query<span class="w"> </span>--legend<span cla
 </code></pre></div>
 <p>systemd-resolved oskab DoT-i (<code>DNSOverTLS=opportunistic</code> failis <code>/etc/systemd/resolved.conf</code>).</p>
 <h2 id="178-dns-i-tõrkeotsing">17.8 DNS-i tõrkeotsing<a class="headerlink" href="#178-dns-i-tõrkeotsing" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Otsi viga järjest: kas server vastab (<code>dig @server nimi</code>), kas vastus on autoriteetne (<code>aa</code>), kas tsoon laadis (<code>journalctl -u named</code>), kas seerianumber suurenes, kas tulemüür lubab porti 53.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -6013,6 +6070,10 @@ sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w">
 sudo<span class="w"> </span>ss<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">':53 '</span><span class="w">         </span><span class="c1"># kas server kuulab?</span>
 </code></pre></div>
 <h2 id="179-dns-i-seadistuse-varundus">17.9 DNS-i seadistuse varundus<a class="headerlink" href="#179-dns-i-seadistuse-varundus" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Varunda <code>/etc/bind</code> (seadistus ja tsoonifailid) või hoia tsoonifailid Gitis. Sekundaarserver ei ole varukoopia - vead kopeeritakse sinna samuti.</p>
+</div>
 <p>DNS-i andmed on väikesed, kuid kriitilised. Varunda:</p>
 <ul>
 <li>seadistus ja tsoonifailid (<code>/etc/bind/</code>, AlmaLinuxis <code>/etc/named.conf</code> ja <code>/var/named/</code>);</li>

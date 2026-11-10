@@ -2420,17 +2420,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#millel-konteinerid-põhinevad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Millel konteinerid põhinevad
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#pildid-ja-registrid" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5182,17 +5171,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#millel-konteinerid-põhinevad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Millel konteinerid põhinevad
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#pildid-ja-registrid" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5391,8 +5369,16 @@
 <li>käivitab mitmest konteinerist koosneva rakenduse Compose-failiga;</li>
 <li>käivitab konteineri systemd teenusena (Quadlet) ja seadistab pildi automaatse uuendamise.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="141-konteinerid">14.1 Konteinerid<a class="headerlink" href="#141-konteinerid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Konteiner on isoleeritud protsess, mis jagab hosti kernelit, kuid näeb oma failisüsteemi, protsesse ja võrku. See käivitub <strong>pildist</strong> (<em>image</em>), mis tuleb registrist. Podman ja Docker kasutavad samu pilte ja peaaegu samu käske.</p>
+</div>
 <p>Konteinerid on tänapäeva serverihalduse igapäevane tööriist. Õpime neid enne serveriteenuseid, sest järgmistes moodulites käivitatakse osa teenuseid (CoreDNS, Pi-hole, Mailpit, Adminer, Prometheus, Grafana, Uptime Kuma) just konteineritena.</p>
 <h3 id="mis-on-konteiner">Mis on konteiner?<a class="headerlink" href="#mis-on-konteiner" title="Permanent link">&para;</a></h3>
 <p><strong>Konteiner</strong> on isoleeritud protsess (või protsesside rühm), millel on oma failisüsteem, võrk ja protsessipuu, kuid mis kasutab <strong>hostmasina kernelit</strong>. Konteineri <strong>pilt</strong> (<em>image</em>) sisaldab rakendust koos kõigi teekide ja sõltuvustega - seepärast töötab see igas Linuxis ühtemoodi.</p>
@@ -5543,7 +5529,8 @@ jexec<span class="w"> </span>www<span class="w"> </span>sh<span class="w">      
 </table>
 <p>Jaile käsitleme lähemalt moodulis 29 (punkt 29.11).</p>
 </details>
-<h3 id="millel-konteinerid-põhinevad">Millel konteinerid põhinevad<a class="headerlink" href="#millel-konteinerid-põhinevad" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Millel konteinerid põhinevad</summary>
 <p>Konteinerid põhinevad Linuxi kerneli võimalustel:</p>
 <ul>
 <li><strong>nimeruumid</strong> (<em>namespaces</em>) - konteiner näeb ainult oma protsesse, võrguliideseid, haakepunkte ja kasutajaid;</li>
@@ -5558,6 +5545,7 @@ jexec<span class="w"> </span>www<span class="w"> </span>sh<span class="w">      
     I -- "podman run" --&gt; C1["Konteiner 1"]
     I -- "podman run" --&gt; C2["Konteiner 2"]
     C1 -. "andmed" .-&gt; V[("Köide&lt;br&gt;(volume)")]</code></pre>
+</details>
 <h3 id="pildid-ja-registrid">Pildid ja registrid<a class="headerlink" href="#pildid-ja-registrid" title="Permanent link">&para;</a></h3>
 <p>Konteinerpildid laaditakse <strong>registritest</strong>:</p>
 <table>
@@ -5631,6 +5619,10 @@ jexec<span class="w"> </span>www<span class="w"> </span>sh<span class="w">      
 </table>
 <p>Käsud on peaaegu identsed - <code>alias docker=podman</code> töötab enamasti. Selles moodulis kasutame Podmani.</p>
 <h2 id="142-podmani-kasutamine">14.2 Podmani kasutamine<a class="headerlink" href="#142-podmani-kasutamine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>podman run -d --name veeb -p 8080:80 nginx</code> käivitab konteineri, <code>podman ps</code> näitab töötavaid, <code>podman logs</code> logisid, <code>podman exec -it</code> avab kesta. Andmed hoia köites (<code>-v</code>), muidu kaovad need konteineri kustutamisel.</p>
+</div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>podman
 podman<span class="w"> </span>--version
 podman<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
@@ -5708,6 +5700,10 @@ podman<span class="w"> </span>volume<span class="w"> </span>inspect<span class="
 <p>Podman käivitab tavakasutaja konteinerid <strong>ilma juurkasutaja õigusteta</strong>. Konteineri sees võib protsess olla <code>root</code>, kuid hostis töötab see sinu kasutajana. Kui ründaja konteinerist välja murrab, on tal ainult sinu kasutaja õigused.</p>
 <p>Piirangud: tavakasutaja ei saa avada porte alla 1024 (kasuta nt 8080) ja tema konteinerid töötavad ainult siis, kui ta on sisse logitud (või kui on lubatud <code>loginctl enable-linger kasutaja</code>).</p>
 <h2 id="143-oma-konteinerpilt">14.3 Oma konteinerpilt<a class="headerlink" href="#143-oma-konteinerpilt" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Oma pilt kirjeldatakse failis <code>Containerfile</code> (<code>FROM</code>, <code>COPY</code>, <code>RUN</code>, <code>CMD</code>) ja ehitatakse käsuga <code>podman build -t nimi .</code>.</p>
+</div>
 <p>Pilt kirjeldatakse failis <strong><code>Containerfile</code></strong> (Dockeri terminoloogias <code>Dockerfile</code> - mõlemad nimed töötavad):</p>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">docker.io/library/nginx:1.27-alpine</span>
 <span class="k">LABEL</span><span class="w"> </span><span class="nv">maintainer</span><span class="o">=</span><span class="s2">"mari@hkhk.edu.ee"</span>
@@ -5763,6 +5759,10 @@ curl<span class="w"> </span>http://localhost:8081
 </code></pre></div>
 <p>Pildi saab saata registrisse (<code>podman push</code>), et seda saaks kasutada ka teistes masinates.</p>
 <h2 id="144-mitu-konteinerit-compose">14.4 Mitu konteinerit: Compose<a class="headerlink" href="#144-mitu-konteinerit-compose" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Mitme konteineri rakendus kirjeldatakse failis <code>compose.yaml</code>. <code>podman compose up -d</code> käivitab kõik korraga, <code>down</code> peatab.</p>
+</div>
 <p>Tegelik rakendus koosneb sageli mitmest konteinerist (veebirakendus, andmebaas, vahemälu). Need kirjeldatakse ühes failis <strong><code>compose.yaml</code></strong>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">db</span><span class="p">:</span>
@@ -5795,6 +5795,10 @@ podman-compose<span class="w"> </span>down<span class="w">                      
 </code></pre></div>
 <p>Compose'i võrgus leiavad konteinerid üksteist <strong>teenuse nime</strong> järgi: Adminer ühendub andmebaasiga aadressil <code>db</code>. Dockeriga on sama käsk <code>docker compose up -d</code>.</p>
 <h2 id="145-konteiner-systemd-teenusena-quadlet">14.5 Konteiner systemd teenusena: Quadlet<a class="headerlink" href="#145-konteiner-systemd-teenusena-quadlet" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>Quadlet</strong> teeb konteinerist systemd teenuse: fail <code>/etc/containers/systemd/nimi.container</code>, siis <code>systemctl daemon-reload</code> ja <code>systemctl start nimi</code>. Konteiner käivitub alglaadimisel ja taaskäivitub vea korral.</p>
+</div>
 <p>Serveris peavad konteinerid käivituma koos süsteemiga ja taaskäivituma vea korral - täpselt nagu tavalised teenused. Podmani <strong>Quadlet</strong> võimaldab kirjeldada konteineri systemd üksusena:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/containers/systemd/veeb.container</span>
 <span class="k">[Unit]</span>

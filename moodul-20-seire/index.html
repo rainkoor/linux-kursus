@@ -5609,8 +5609,16 @@
 <li>valib ja rakendab jõudlusprofiili (<code>tuned</code>);</li>
 <li>seadistab serverile e-posti teavitused Postfixi relee kaudu.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="201-miks-seirata">20.1 Miks seirata?<a class="headerlink" href="#201-miks-seirata" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Seire vastab küsimustele: kas töötab, kui hästi ja millal läheb halvasti. Selleks on <strong>mõõdikud</strong>, <strong>logid</strong> ja <strong>häired</strong>. Jõudlusprobleemi otsi USE meetodiga: kasutus, küllastus, vead.</p>
+</div>
 <p>Server, mille kohta keegi ei tea, kas see töötab, on ohtlik. Seire vastab küsimustele:</p>
 <ul>
 <li><strong>Kas teenus töötab?</strong> (kättesaadavus - kas veebileht vastab?)</li>
@@ -5691,6 +5699,10 @@
 </table>
 <hr />
 <h2 id="202-jõudluse-tööriistad">20.2 Jõudluse tööriistad<a class="headerlink" href="#202-jõudluse-tööriistad" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>uptime</code> - koormus, <code>top</code> - protsessid, <code>free -h</code> - mälu, <code>vmstat 1</code> ja <code>iostat -xz 1</code> - protsessor ja kettad, <code>sar</code> - ajalugu. <code>tuned</code> valib serverile sobiva jõudlusprofiili.</p>
+</div>
 <h3 id="koormus">Koormus<a class="headerlink" href="#koormus" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>uptime
 </code></pre></div>
@@ -5826,6 +5838,10 @@ sudo<span class="w"> </span>tuned-adm<span class="w"> </span>profile<span class=
 </table>
 <p>Mõõda enne ja pärast (<code>fio</code>, <code>sar</code>, moodul 10) - profiil ei ole imerohi.</p>
 <h2 id="203-tõrkeotsing-strace-ja-lsof">20.3 Tõrkeotsing: strace ja lsof<a class="headerlink" href="#203-tõrkeotsing-strace-ja-lsof" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>lsof</code> näitab, kes mida avatuna hoiab (failid, pordid). <code>strace</code> näitab programmi süsteemikutseid - nii näed, millist faili programm otsib või kus see ootab.</p>
+</div>
 <h3 id="lsof---avatud-failid">lsof - avatud failid<a class="headerlink" href="#lsof---avatud-failid" title="Permanent link">&para;</a></h3>
 <p>Linuxis on „kõik fail“: ka võrguühendused ja seadmed. <code>lsof</code> näitab, kes mida avatuna hoiab.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>lsof<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span><span class="w">               </span><span class="c1"># protsessi 1234 avatud failid</span>
@@ -5847,6 +5863,10 @@ strace<span class="w"> </span>-c<span class="w"> </span>ls<span class="w"> </spa
 </div>
 <hr />
 <h2 id="204-seiresüsteemid">20.4 Seiresüsteemid<a class="headerlink" href="#204-seiresüsteemid" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Seiresüsteem kogub kõigi serverite mõõdikud, hoiab ajalugu, joonistab graafikud ja saadab häired. Levinud on Prometheus + Grafana, Zabbix ja Uptime Kuma.</p>
+</div>
 <p>Kui servereid on rohkem kui paar, ei logi keegi igasse sisse <code>top</code>-i vaatama. <strong>Seiresüsteem</strong> kogub mõõdikud kõigist masinatest kokku, salvestab ajaloo, joonistab graafikud ja saadab häireid.</p>
 <table>
 <thead>
@@ -5893,6 +5913,10 @@ strace<span class="w"> </span>-c<span class="w"> </span>ls<span class="w"> </spa
 <p>Logide kogumiseks kasutatakse <strong>Grafana Lokit</strong>, <strong>Graylogi</strong> või <strong>OpenSearchi</strong>, turvasündmuste jaoks SIEM-i (Wazuh, moodul 12).</p>
 <hr />
 <h2 id="205-prometheus-node_exporter-ja-grafana">20.5 Prometheus, node_exporter ja Grafana<a class="headerlink" href="#205-prometheus-node_exporter-ja-grafana" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>node_exporter</strong> annab masina mõõdikud, <strong>Prometheus</strong> kogub ja hoiab neid (PromQL-päringud), <strong>Grafana</strong> joonistab armatuurlaudu. Häired saadab Alertmanager.</p>
+</div>
 <pre class="mermaid"><code>flowchart LR
     D1["debian1&lt;br&gt;node_exporter :9100"]
     D2["alma&lt;br&gt;node_exporter :9100"]
@@ -6005,6 +6029,10 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9100/metr
 </div>
 <hr />
 <h2 id="206-kättesaadavus-uptime-kuma">20.6 Kättesaadavus: Uptime Kuma<a class="headerlink" href="#206-kättesaadavus-uptime-kuma" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Uptime Kuma kontrollib väljastpoolt, kas sait või port vastab ja kui kaua sertifikaat kehtib, ning teatab rikkest.</p>
+</div>
 <p><strong>Uptime Kuma</strong> kontrollib väljastpoolt, kas teenus vastab (HTTP(S), TCP-port, ping, DNS) ja kui kaua sertifikaat veel kehtib.</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>uptime-kuma<span class="w"> </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-p<span class="w"> </span><span class="m">3001</span>:3001<span class="w"> </span>-v<span class="w"> </span>uptime-kuma:/app/data<span class="w"> </span>docker.io/louislam/uptime-kuma:1
@@ -6014,6 +6042,10 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9100/metr
 
 <hr />
 <h2 id="207-zabbix-lühidalt">20.7 Zabbix lühidalt<a class="headerlink" href="#207-zabbix-lühidalt" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Zabbix on agendiga seiresüsteem, mida kasutavad paljud Eesti asutused. Server ja veebiliides paigaldatakse Zabbixi hoidlast, igasse masinasse <code>zabbix-agent2</code>.</p>
+</div>
 <p><strong>Zabbix</strong> on paljudes Eesti asutustes ja ettevõtetes kasutatav seiresüsteem. Server (PHP veebiliides + andmebaas) ja agendid paigaldatakse Zabbixi enda hoidlast (repo.zabbix.com, vali LTS-versioon). Agent:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zabbix-agent2<span class="w">          </span><span class="c1"># pärast Zabbixi hoidla lisamist</span>
 <span class="c1"># /etc/zabbix/zabbix_agent2.conf: Server=&lt;zabbixi server&gt;, ServerActive=&lt;zabbixi server&gt;, Hostname=debian1</span>
@@ -6021,6 +6053,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 </code></pre></div>
 <p>Veebiliideses lisatakse host ja seotakse <strong>malliga</strong> (nt <em>Linux by Zabbix agent</em>), mis toob kaasa sadu valmis mõõdikuid, graafikuid ja häirereegleid. Zabbixil on mallid ka Proxmoxi, võrguseadmete (SNMP) ja andmebaaside jaoks.</p>
 <h2 id="208-teavitused-e-postiga-postfix-relee">20.8 Teavitused e-postiga: Postfix relee<a class="headerlink" href="#208-teavitused-e-postiga-postfix-relee" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Iga server peab oskama e-kirju saata (cron'i vead, häired). Postfix <strong>relee</strong> saadab kõik kirjad edasi asutuse või teenusepakkuja SMTP-serverisse; testi <code>echo test | mail -s test sina@kool.ee</code>.</p>
+</div>
 <p>Seire ja häired on kasulikud ainult siis, kui keegi neist teada saab. Täisväärtuslik e-posti server (vastuvõtmine, postkastid, rämpsposti filtreerimine, SPF/DKIM/DMARC) on valikmoodulis 23 ja asutused kasutavad selleks sageli pilveteenust. Iga Linuxi server peab aga oskama <strong>e-kirju saata</strong>: cron'i ja systemd taimerite tõrked, <code>smartd</code> hoiatused (moodul 10), <code>unattended-upgrades</code> aruanded, varunduse tulemused (moodul 9) ja omaenda skriptide teated.</p>
 <p>Selleks paigaldatakse <strong>MTA</strong> (<em>Mail Transfer Agent</em>) - levinuim on <strong>Postfix</strong> - tavaliselt <strong>relee</strong> režiimis: server ei saada kirju otse adressaadi serverisse, vaid edastab need asutuse (või pakkuja) SMTP-serverile.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postfix<span class="w"> </span>mailutils<span class="w"> </span>libsasl2-modules

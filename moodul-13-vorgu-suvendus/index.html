@@ -2279,17 +2279,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#kuidas-masin-aadressi-saab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kuidas masin aadressi saab?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#ipv6-käsud" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5148,17 +5137,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#kuidas-masin-aadressi-saab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kuidas masin aadressi saab?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#ipv6-käsud" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5326,8 +5304,16 @@
 <li>loob WireGuardiga VPN-tunneli;</li>
 <li>analüüsib võrguliiklust <code>tcpdump</code>-iga.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Kuidas seda lehte lugeda</p>
+<p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
+</div>
 <hr />
 <h2 id="131-ipv6">13.1 IPv6<a class="headerlink" href="#131-ipv6" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>IPv6 aadress on 128-bitine ja kirjutatakse kuueteistkümnendsüsteemis (<code>fd83::54/64</code>). Masin saab aadressi tavaliselt ise (SLAAC), serverile antakse staatiline. Käsud on samad mis IPv4-l, võtmega <code>-6</code>.</p>
+</div>
 <p>IPv4-aadresse on umbes 4 miljardit ja need on ammu otsas - internet on seni toiminud NAT-i abil. <strong>IPv6</strong> aadressid on <strong>128-bitised</strong> (IPv4 on 32-bitine), seega jätkub neid igale seadmele. Suur osa mobiilivõrkudest ja koduühendustest kasutab juba IPv6-t ning serveriadministraator kohtab seda kindlasti.</p>
 <h3 id="aadressi-kirjutamine">Aadressi kirjutamine<a class="headerlink" href="#aadressi-kirjutamine" title="Permanent link">&para;</a></h3>
 <p>IPv6-aadress kirjutatakse kaheksa 16-bitise rühmana kuueteistkümnendsüsteemis:</p>
@@ -5383,7 +5369,8 @@
 </tbody>
 </table>
 <p>Igal IPv6-liidesel on korraga <strong>mitu aadressi</strong>: vähemalt link-local ja sageli ka globaalne ja/või ULA. See on normaalne.</p>
-<h3 id="kuidas-masin-aadressi-saab">Kuidas masin aadressi saab?<a class="headerlink" href="#kuidas-masin-aadressi-saab" title="Permanent link">&para;</a></h3>
+<details class="note">
+<summary>Loe lähemalt: Kuidas masin aadressi saab?</summary>
 <table>
 <thead>
 <tr>
@@ -5407,6 +5394,7 @@
 </tbody>
 </table>
 <p>Serverile antakse üldjuhul staatiline aadress, et DNS-kirje (<code>AAAA</code>) ja tulemüüri reeglid püsiksid. Töölaudadel kasutatakse SLAAC-i koos <strong>privaatsuslaienditega</strong> (<em>privacy extensions</em>): liidese osa vahetub regulaarselt, et seadet ei saaks aadressi järgi jälgida.</p>
+</details>
 <h3 id="ipv6-käsud">IPv6 käsud<a class="headerlink" href="#ipv6-käsud" title="Permanent link">&para;</a></h3>
 <p>Enamik käske töötab mõlemaga, IPv6 jaoks lisatakse sageli <code>-6</code>:</p>
 <div class="highlight"><pre><span></span><code>ip<span class="w"> </span>-6<span class="w"> </span>address<span class="w">                          </span><span class="c1"># IPv6-aadressid</span>
@@ -5446,6 +5434,10 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 </ul>
 <p>Veebiserver kuulab IPv6-l nginx-is reaga <code>listen [::]:80;</code> ja Apache'is <code>Listen 80</code> (mõlemad). DNS-is lisatakse <code>AAAA</code>-kirje (moodul 17).</p>
 <h2 id="132-sild-bridge">13.2 Sild (bridge)<a class="headerlink" href="#132-sild-bridge" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>Sild</strong> on tarkvaraline kommutaator: sellega lisatud liidesed on samas võrgus. Sildu kasutavad virtuaalmasinad ja konteinerid (Proxmoxi <code>vmbr0</code>).</p>
+</div>
 <p><strong>Sild</strong> on Linuxi kernelis töötav <strong>tarkvaraline kommutaator</strong> (<em>switch</em>). Silda lisatud liidesed on samas võrgulõigus (L2): sild õpib MAC-aadresse ja edastab kaadreid nagu päris kommutaator.</p>
 <p>Sildu kasutavad kõik virtualiseerimis- ja konteinerilahendused:</p>
 <pre class="mermaid"><code>flowchart TB
@@ -5496,6 +5488,10 @@ ip<span class="w"> </span>-d<span class="w"> </span>link<span class="w"> </span>
 <p><strong>Ära lisa silda liidest, mille kaudu oled SSH-ga ühendatud</strong>, ilma konsoolita: aadress kolib sillale ja ühendus katkeb, kui midagi läheb valesti. Laboris kasutame selleks teist võrgukaarti (<code>ens19</code>).</p>
 </div>
 <h2 id="133-vlan">13.3 VLAN<a class="headerlink" href="#133-vlan" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>VLAN</strong> jagab ühe füüsilise võrgu mitmeks loogiliseks võrguks märgisega (802.1Q). Linuxis luuakse VLAN-liides (<code>ens19.20</code>) ja see seadistatakse nagu tavaline liides.</p>
+</div>
 <p><strong>VLAN</strong> (<em>Virtual LAN</em>, standard <strong>802.1Q</strong>) jagab ühe füüsilise võrgu mitmeks loogiliseks võrguks. Iga Ethernet-kaadri sisse lisatakse <strong>4-baidine märgis</strong> (<em>tag</em>), milles on VLAN-i number (1-4094). Kommutaator hoiab eri VLAN-ide liikluse lahus nagu eraldi kommutaatorid.</p>
 <pre class="mermaid"><code>flowchart LR
     S["server&lt;br&gt;ens18.10 → 10.10.0.5&lt;br&gt;ens18.20 → 10.20.0.5"] == "trunk: VLAN 10 + 20&lt;br&gt;märgistatud kaadrid" ==&gt; SW["kommutaator"]
@@ -5551,6 +5547,10 @@ iface ens19.20 inet static
 <p><strong>Proxmoxis</strong> saab VM-i võrgukaardile määrata VLAN-i (<em>VLAN Tag</em>), kui sild on <em>VLAN aware</em>. Siis märgistab Proxmox kaadrid ise ja VM näeb tavalist märgistamata võrku. Kui VM peab ise mitut VLAN-i nägema (nt tulemüür), jäetakse märgis tühjaks ja VLAN-id seadistatakse VM-is nagu eespool.</p>
 </div>
 <h2 id="134-bond-liideste-koondamine">13.4 Bond (liideste koondamine)<a class="headerlink" href="#134-bond-liideste-koondamine" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><strong>Bond</strong> ühendab mitu võrgukaarti üheks liideseks töökindluse (<code>active-backup</code>) või suurema läbilaskevõime (<code>802.3ad</code>/LACP) jaoks. Olekut näeb failist <code>/proc/net/bonding/bond0</code>.</p>
+</div>
 <p><strong>Bond</strong> (ka <em>link aggregation</em>, <em>teaming</em>, <em>NIC teaming</em>) ühendab mitu võrgukaarti üheks loogiliseks liideseks <code>bond0</code>. Eesmärk on <strong>töökindlus</strong> (kaabli, kaardi või kommutaatori pordi rikke korral ühendus jätkub) ja/või suurem <strong>läbilaskevõime</strong>.</p>
 <table>
 <thead>
@@ -5622,6 +5622,10 @@ ip<span class="w"> </span>-br<span class="w"> </span>link<span class="w">       
 <p>Virtuaalmasinas on bond'il vähe mõtet - hüperviisor tagab juba töökindluse. Füüsilistes serverites ja hüperviisorites (Proxmox) on see aga tavaline. Laboris harjutame VM-is kahe virtuaalse võrgukaardiga.</p>
 </div>
 <h2 id="135-linux-ruuterina-edastamine-ja-nat">13.5 Linux ruuterina: edastamine ja NAT<a class="headerlink" href="#135-linux-ruuterina-edastamine-ja-nat" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>Linux saab olla ruuter: luba edastamine (<code>net.ipv4.ip_forward=1</code>) ja lisa NAT (<code>masquerade</code>), et sisevõrgu masinad pääseksid välja. Pordi edasisuunamine (<code>dnat</code>) avab sisevõrgu teenuse väljapoole.</p>
+</div>
 <p>Linux saab olla <strong>ruuter</strong>: võtta pakette vastu ühest võrgust ja saata teise. Nii töötavad ka OPNsense, kodu-WiFi-ruuterid ja kõik konteineri- ja VPN-lahendused. Vaikimisi on edastamine välja lülitatud:</p>
 <div class="highlight"><pre><span></span><code>sysctl<span class="w"> </span>net.ipv4.ip_forward<span class="w">                     </span><span class="c1"># 0 = väljas</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"net.ipv4.ip_forward = 1"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/90-ruuter.conf
@@ -5671,6 +5675,10 @@ sudo<span class="w"> </span>conntrack<span class="w"> </span>-L<span class="w"> 
 <p>Ruuteril peab lisaks NAT-ile tulemüür lubama edastatavat liiklust (ahel <code>forward</code>). firewalld ja ufw keelavad edastamise vaikimisi; ufw-s muuda <code>DEFAULT_FORWARD_POLICY</code> failis <code>/etc/default/ufw</code> või lisa <code>ufw route allow</code> reeglid.</p>
 </div>
 <h2 id="136-vpn-wireguard">13.6 VPN: WireGuard<a class="headerlink" href="#136-vpn-wireguard" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p>WireGuard loob kiire krüpteeritud VPN-tunneli. Igal osapoolel on võtmepaar, seadistus on failis <code>/etc/wireguard/wg0.conf</code>, käivitus <code>systemctl enable --now wg-quick@wg0</code>, olek <code>wg show</code>.</p>
+</div>
 <p><strong>VPN</strong> (<em>Virtual Private Network</em>) loob kahe võrgu või seadme vahele krüpteeritud tunneli üle interneti. Nii pääseb nt kodust turvaliselt kooli labori sisevõrku, kuigi labori masinatel pole avalikke aadresse.</p>
 <p><strong>WireGuard</strong> on Linuxi kernelis sisalduv kaasaegne VPN: väike, kiire ja lihtsa seadistusega. Iga osapool (<em>peer</em>) on tuvastatud <strong>võtmepaariga</strong> (nagu SSH-võtmed). WireGuard kasutab ainult <strong>UDP-d</strong> ja ei vasta valele võtmele üldse - väljast vaadates paistab port suletuna.</p>
 <pre class="mermaid"><code>flowchart LR
@@ -5736,6 +5744,10 @@ ping<span class="w"> </span><span class="m">10</span>.99.0.1
 </div>
 <p>Teisi VPN-e: <strong>OpenVPN</strong> (vanem, TLS-põhine, töötab ka TCP-pordil 443 piiravates võrkudes) ja <strong>IPsec</strong> (standardne, ühildub ruuterite ja tulemüüridega, keerulisem seadistada).</p>
 <h2 id="137-liikluse-analüüs-tcpdump">13.7 Liikluse analüüs: tcpdump<a class="headerlink" href="#137-liikluse-analüüs-tcpdump" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Lühidalt</p>
+<p><code>tcpdump</code> näitab liidesel liikuvaid pakette: <code>sudo tcpdump -i ens18 -n port 53</code>. Salvesta püüdmine faili (<code>-w</code>) ja ava see Wiresharkis.</p>
+</div>
 <p>Kui ühendus ei tööta ja tavalised käsud (moodul 7, punkt 7.5) põhjust ei näita, vaata pakette endid. <strong>tcpdump</strong> püüab võrguliidesel liikuvaid pakette ja näitab neid terminalis.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tcpdump<span class="w">              </span><span class="c1"># AlmaLinux: sudo dnf install tcpdump</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-n<span class="w"> </span>icmp<span class="w">         </span><span class="c1"># ainult ping-paketid, ilma nimelahenduseta (-n)</span>

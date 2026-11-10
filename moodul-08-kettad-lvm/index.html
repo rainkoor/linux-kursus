@@ -1539,6 +1539,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="8.5 Püsiv haakimine: /etc/fstab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uus-ketas-kasutusele-samm-sammult" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uus ketas kasutusele samm-sammult
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5278,6 +5295,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="8.5 Püsiv haakimine: /etc/fstab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uus-ketas-kasutusele-samm-sammult" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uus ketas kasutusele samm-sammult
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5488,6 +5522,15 @@
 <p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
 </div>
 <hr />
+<p><strong>Kuidas kõik kokku käib.</strong> Uue ketta kasutuselevõtt käib alati samas järjekorras. Selle mooduli punktid järgivad seda teed:</p>
+<pre class="mermaid"><code>flowchart LR
+    A["1. leia ketas&lt;br&gt;lsblk (8.1)"] --&gt; B["2. partitsioon&lt;br&gt;fdisk (8.2)"]
+    B --&gt; C["3. failisüsteem&lt;br&gt;mkfs (8.3)"]
+    C --&gt; D["4. haagi&lt;br&gt;mount (8.4)"]
+    D --&gt; E["5. püsivaks&lt;br&gt;/etc/fstab (8.5)"]
+    B -. "või" .-&gt; L["LVM: PV → VG → LV&lt;br&gt;(8.7)"]
+    L --&gt; C</code></pre>
+<p>Kogu tee ühe juhendina on punkti 8.5 lõpus: <a href="#uus-ketas-kasutusele-samm-sammult">Uus ketas kasutusele samm-sammult</a>.</p>
 <h2 id="81-plokkseadmed">8.1 Plokkseadmed<a class="headerlink" href="#81-plokkseadmed" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">Lühidalt</p>
@@ -5654,6 +5697,54 @@ sr0                 11:0    1  1.0G  0 rom
 </tbody>
 </table>
 <p><code>fdisk</code> ei muuda midagi enne, kui vajutad <code>w</code>. Kuni selleni saab alati <code>q</code>-ga katkestada.</p>
+<p><strong>Näide: kogu ketas <code>/dev/sdb</code> üheks partitsiooniks.</strong> Kirjuta klahv ja vajuta Enter; kus allpool on „Enter“, nõustu vaikeväärtusega:</p>
+<table>
+<thead>
+<tr>
+<th>fdisk küsib</th>
+<th>Sina vastad</th>
+<th>Mida see teeb</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Command (m for help):</code></td>
+<td><code>g</code></td>
+<td>loob tühja GPT-tabeli</td>
+</tr>
+<tr>
+<td><code>Command (m for help):</code></td>
+<td><code>n</code></td>
+<td>uus partitsioon</td>
+</tr>
+<tr>
+<td><code>Partition number (1-128, default 1):</code></td>
+<td>Enter</td>
+<td>partitsioon nr 1</td>
+</tr>
+<tr>
+<td><code>First sector (…, default 2048):</code></td>
+<td>Enter</td>
+<td>algab 1 MiB juurest</td>
+</tr>
+<tr>
+<td><code>Last sector, +/-sectors or +/-size{K,M,G,T,P} …:</code></td>
+<td>Enter (või nt <code>+2G</code>)</td>
+<td>kogu ketas (või 2 GiB)</td>
+</tr>
+<tr>
+<td><code>Command (m for help):</code></td>
+<td><code>p</code></td>
+<td>kontrolli tulemust</td>
+</tr>
+<tr>
+<td><code>Command (m for help):</code></td>
+<td><code>w</code></td>
+<td>kirjuta kettale ja välju</td>
+</tr>
+</tbody>
+</table>
+<p>Tulemus: <code>lsblk</code> näitab ketta all partitsiooni <code>sdb1</code>. Kui ketas oli enne kasutusel, võib <code>fdisk</code> küsida <em>Do you want to remove the signature?</em> - vasta <code>Y</code> ainult siis, kui oled kindel, et see on õige ketas.</p>
 <p><strong>parted</strong> (sobib skriptidesse):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>parted<span class="w"> </span>-s<span class="w"> </span>/dev/sdb<span class="w"> </span>mklabel<span class="w"> </span>gpt
 sudo<span class="w"> </span>parted<span class="w"> </span>-s<span class="w"> </span>/dev/sdb<span class="w"> </span>mkpart<span class="w"> </span>andmed<span class="w"> </span>ext4<span class="w"> </span>1MiB<span class="w"> </span>2GiB
@@ -5841,6 +5932,55 @@ df<span class="w"> </span>-h
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Vigane fstab võib takistada süsteemi käivitumist!</strong> Kui alglaadimisel ei leita seadet, mis ei ole märgitud valikuga <code>nofail</code>, satub süsteem hädaolukorra režiimi (<em>emergency mode</em>), kust saab parandada ainult konsooli kaudu. Seepärast: kasuta lisaketastel <code>nofail</code>, kontrolli muudatusi <code>findmnt --verify</code> ja <code>mount -a</code> abil ning hoia konsool käepärast.</p>
 </div>
+<h3 id="uus-ketas-kasutusele-samm-sammult">Uus ketas kasutusele samm-sammult<a class="headerlink" href="#uus-ketas-kasutusele-samm-sammult" title="Permanent link">&para;</a></h3>
+<p>Näide: virtuaalmasinale on lisatud uus tühi ketas ja see peab olema kataloogis <code>/srv/andmed</code> ka pärast taaskäivitust. Sama töökäik sobib igale distrole.</p>
+<ol>
+<li>
+<p><strong>Leia ketas</strong> - otsi ketast, millel pole partitsioone ega haakepunkti (siin <code>sdb</code>):</p>
+<div class="highlight"><pre><span></span><code>lsblk
+</code></pre></div>
+</li>
+<li>
+<p><strong>Tee partitsioon</strong> (vt fdiski näide punktis 8.2) ja kontrolli:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>fdisk<span class="w"> </span>/dev/sdb<span class="w">          </span><span class="c1"># g, n, Enter, Enter, Enter, w</span>
+lsblk<span class="w"> </span>/dev/sdb<span class="w">               </span><span class="c1"># nüüd on olemas sdb1</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Loo failisüsteem:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/sdb1<span class="w">     </span><span class="c1"># AlmaLinuxis sageli: sudo mkfs.xfs /dev/sdb1</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Loo haakepunkt ja proovi käsitsi haakida:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/andmed
+sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sdb1<span class="w"> </span>/srv/andmed
+df<span class="w"> </span>-h<span class="w"> </span>/srv/andmed
+sudo<span class="w"> </span>umount<span class="w"> </span>/srv/andmed<span class="w">      </span><span class="c1"># haagi lahti - järgmises sammus teeb seda fstab</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Leia UUID ja lisa rida faili <code>/etc/fstab</code>:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>blkid<span class="w"> </span>/dev/sdb1<span class="w">         </span><span class="c1"># kopeeri UUID="…" väärtus</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/fstab
+</code></pre></div>
+<p>Lisa faili lõppu (UUID asemele oma väärtus, failisüsteemi tüüp nagu sammus 3):</p>
+<div class="highlight"><pre><span></span><code>UUID=7746b4aa-dffc-47bd-9f2e-db9e95649cbe  /srv/andmed  ext4  defaults,nofail  0  2
+</code></pre></div>
+</li>
+<li>
+<p><strong>Kontrolli enne taaskäivitust:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>findmnt<span class="w"> </span>--verify<span class="w">        </span><span class="c1"># vigu ei tohi olla</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>mount<span class="w"> </span>-a<span class="w">                </span><span class="c1"># haagib fstab-i järgi</span>
+findmnt<span class="w"> </span>/srv/andmed<span class="w">          </span><span class="c1"># on haagitud</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Taaskäivita</strong> (<code>sudo reboot</code>) ja kontrolli uuesti <code>df -h /srv/andmed</code>. Alles siis tead, et seadistus on püsiv.</p>
+</li>
+</ol>
+<p>Kui tahad hiljem köidet suurendada, kasuta partitsiooni asemel LVM-i (punkt 8.7) - sammud 3-7 jäävad samaks, ainult seade on <code>/dev/vg_andmed/lv_andmed</code>.</p>
 <h2 id="86-saaleala-swap">8.6 Saaleala (swap)<a class="headerlink" href="#86-saaleala-swap" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">Lühidalt</p>
@@ -5921,6 +6061,10 @@ sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </sp
 sudo<span class="w"> </span>mount<span class="w"> </span>/dev/vg_andmed/lv_andmed<span class="w"> </span>/srv/andmed<span class="w">  </span><span class="c1"># 5. haagi</span>
 </code></pre></div>
 <p>Köite tee on kujul <code>/dev/VG/LV</code> või <code>/dev/mapper/VG-LV</code> - mõlemad viitavad samale seadmele.</p>
+<p><strong>6. Tee haakimine püsivaks</strong> nagu punktis 8.5 - fstab-i rida kas UUID-ga (<code>sudo blkid /dev/vg_andmed/lv_andmed</code>) või köite teega, mis LVM-i puhul ei muutu:</p>
+<div class="highlight"><pre><span></span><code>/dev/vg_andmed/lv_andmed  /srv/andmed  xfs  defaults,nofail  0  0
+</code></pre></div>
+<p>Kontrolli: <code>sudo findmnt --verify &amp;&amp; sudo systemctl daemon-reload &amp;&amp; sudo mount -a</code>.</p>
 <p>Ülevaade:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pvs<span class="w">                     </span><span class="c1"># füüsilised köited</span>
 sudo<span class="w"> </span>vgs<span class="w">                     </span><span class="c1"># köitegrupid (veerg VFree näitab vaba ruumi)</span>
@@ -5986,7 +6130,30 @@ sudo<span class="w"> </span>pvresize<span class="w"> </span>/dev/sda3<span class
 sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-l<span class="w"> </span>+100%FREE<span class="w"> </span>/dev/almalinux/root<span class="w">   </span><span class="c1"># suurenda LV ja failisüsteemi</span>
 df<span class="w"> </span>-h<span class="w"> </span>/
 </code></pre></div>
-<p>Ilma LVM-ita: <code>growpart</code>, seejärel <code>resize2fs</code> (ext4) või <code>xfs_growfs</code> (XFS).</p>
+<p>Teistes distrodes on sammud samad, erinevad partitsiooni number ja köite nimi (vaata need <code>lsblk</code>-iga):</p>
+<table>
+<thead>
+<tr>
+<th>Distro (vaikepaigaldus)</th>
+<th>Käsud pärast ketta suurendamist hüperviisoris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AlmaLinux (LVM, XFS)</td>
+<td><code>sudo growpart /dev/sda 3</code>, <code>sudo pvresize /dev/sda3</code>, <code>sudo lvextend -r -l +100%FREE /dev/almalinux/root</code></td>
+</tr>
+<tr>
+<td>Ubuntu Server (LVM, ext4)</td>
+<td><code>sudo growpart /dev/sda 3</code>, <code>sudo pvresize /dev/sda3</code>, <code>sudo lvextend -r -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</code></td>
+</tr>
+<tr>
+<td>Debian (ilma LVM-ita, ext4)</td>
+<td><code>sudo growpart /dev/sda N</code>, <code>sudo resize2fs /dev/sdaN</code> - N on juurpartitsiooni number <code>lsblk</code>-ist</td>
+</tr>
+</tbody>
+</table>
+<p>Debianis on juurpartitsiooni taga sageli saaleala partitsioon - siis <code>growpart</code> ei saa juurpartitsiooni suurendada. Lihtsaim lahendus on lisada uus ketas (punkt 8.5 juhend) või kasutada juba paigaldusel LVM-i.</p>
 <h2 id="810-ketta-krüpteerimine-luks">8.10 Ketta krüpteerimine: LUKS<a class="headerlink" href="#810-ketta-krüpteerimine-luks" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">Lühidalt</p>

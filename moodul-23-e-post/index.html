@@ -5338,6 +5338,11 @@
 
 <h1 id="moodul-23-e-posti-server">Moodul 23. E-posti server<a class="headerlink" href="#moodul-23-e-posti-server" title="Permanent link">&para;</a></h1>
 <p><strong>Maht:</strong> 10 tundi · <strong>Laboritöö:</strong> Ubuntu (server), Debian (DNS), Ubuntu töölaud (klient, valikuline) · <strong>Eeldused:</strong> moodulid 1–20 (eriti 12, 15, 17 ja 20) · <strong>Valikmoodul</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Märkus</p>
+<p><strong>Süsteemihalduri vaade e-postile.</strong> See moodul näitab, kuidas e-posti server Linuxis kokku pannakse ja kuidas see DNS-i, TLS-i ja turvalisusega seotud on. Eesmärk on töötav laboriserver ja e-posti toimimise mõistmine - mitte suure e-posti teenuse täielik valdamine.</p>
+<p><strong>HKHK õppijale:</strong> e-posti serveri paigaldust käsitletakse põhjalikumalt eraldi moodulis. See valikmoodul annab Linuxi poolt vaadates aluse ja seob e-posti kursuse teiste teemadega (DNS, TLS, seire).</p>
+</div>
 <p>E-post on üks vanimaid ja kõige laiemalt kasutatud internetiteenuseid. Paljud asutused kasutavad täna pilveposti (Microsoft 365, Google Workspace, Zone jt), kuid süsteemihaldur peab ka siis mõistma, kuidas e-post liigub, miks kiri jõuab rämpsposti ja kuidas DNS-kirjed (MX, SPF, DKIM, DMARC) toimivad. Selles moodulis ehitame laborivõrku täieliku e-posti serveri: Postfix võtab kirju vastu ja saadab neid, Dovecot hoiab postkaste ja annab neile ligipääsu ning OpenDKIM allkirjastab väljuvad kirjad.</p>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
