@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1742,34 +1744,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,68 +4407,119 @@
 
 
 <h1 id="moodul-9-enesekontroll">Moodul 9. Enesekontroll<a class="headerlink" href="#moodul-9-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis vahe on RAID 0, 1, 5, 6 ja 10 tasemel? Mitu ketta riket igaüks talub?</li>
-<li>Miks ei ole RAID varukoopia?</li>
-<li>Too riistvaralise ja tarkvaralise RAID-i üks eelis ja üks puudus.</li>
-<li>Kuidas vahetad <code>mdadm</code> massiivis rikkis ketta?</li>
-<li>Miks on suurte ketastega RAID 5 / raidz1 riskantne?</li>
-<li>Mis on ZFS-is pool, vdev ja dataset? Miks kaob kogu pool, kui üks vdev hävib?</li>
-<li>Mida tähendab copy-on-write ja kuidas see aitab ZFS-il?</li>
-<li>Mida teeb <code>zpool scrub</code> ja miks seda regulaarselt käivitatakse?</li>
-<li>Miks peab ZFS nägema päris kettaid (mitte riistvaralise RAID-kontrolleri loogilist ketast)?</li>
-<li>Mis vahe on läbilaskevõimel, IOPS-il ja latentsusel?</li>
-<li>Millise <code>fio</code> testiga mõõdad andmebaasiserveri ketast? Mida teeb valik <code>--direct=1</code>?</li>
-<li>Miks võib <code>dd if=/dev/zero</code> anda ebarealistlikult häid tulemusi?</li>
-<li>Millised SMART-i atribuudid viitavad ketta peatsele rikkele?</li>
-<li>Kogemata kustutati kettalt partitsioonitabel. Mida teed ja mida kindlasti ei tee?</li>
-<li>Mis vahe on TestDiskil ja PhotoRecil?</li>
-</ol>
+<p><strong>1.</strong> Mis vahe on RAID 0, 1, 5, 6 ja 10 tasemel? Mitu ketta riket igaüks talub?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>RAID 0 - jaotus, ei talu riket; RAID 1 - peegel, talub n − 1; RAID 5 - jaotus + paarsus, 1 ketas; RAID 6 - topeltpaarsus, 2 ketast; RAID 10 - peegeldatud paaride jaotus, 1 ketas igast paarist.</p>
+</details>
+<p><strong>2.</strong> Miks ei ole RAID varukoopia?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>RAID kaitseb ainult ketta riknemise eest. Kogemata kustutatud või lunavaraga krüpteeritud failid kaovad kõigilt ketastelt korraga, samuti ei kaitse RAID tulekahju ega varguse eest.</p>
+</details>
+<p><strong>3.</strong> Too riistvaralise ja tarkvaralise RAID-i üks eelis ja üks puudus.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Riistvaraline: läbipaistev OS-ile, akuga vahemälu; puudus: kontrolleri rikke korral on vaja samasugust kontrollerit. Tarkvaraline: tasuta ja kontrollerist sõltumatu; puudus: kasutab protsessorit ega tea andmete õigsusest.</p>
+</details>
+<p><strong>4.</strong> Kuidas vahetad <code>mdadm</code> massiivis rikkis ketta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>mdadm /dev/md0 --fail /dev/sdX</code>, <code>--remove /dev/sdX</code>, füüsiline vahetus, <code>--add /dev/sdY</code>, jälgi <code>cat /proc/mdstat</code>.</p>
+</details>
+<p><strong>5.</strong> Miks on suurte ketastega RAID 5 / raidz1 riskantne?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Taastamine kestab kaua ja loeb kõiki ülejäänud kettaid; selle ajal ei ole kaitset ning teise ketta rike või lugemisviga hävitab andmed.</p>
+</details>
+<p><strong>6.</strong> Mis on ZFS-is pool, vdev ja dataset? Miks kaob kogu pool, kui üks vdev hävib?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pool - kõigi ketaste ühine ruum; vdev - ketaste rühm (üksik, peegel, raidz); dataset - failisüsteem pooli sees. Andmed jaotatakse kõigi vdev-ide vahel, seega ühe vdev-i kadumisel puudub osa iga faili andmetest.</p>
+</details>
+<p><strong>7.</strong> Mida tähendab copy-on-write ja kuidas see aitab ZFS-il?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Andmeid ei kirjutata üle, vaid uude kohta ning viide muudetakse lõpuks korraga. Failisüsteem on alati järjepidev ja hetktõmmised on odavad.</p>
+</details>
+<p><strong>8.</strong> Mida teeb <code>zpool scrub</code> ja miks seda regulaarselt käivitatakse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Loeb kõik andmed ja kontrollib kontrollsummasid; leiab ja parandab vaikse andmeriknemise enne, kui seda vaja läheb.</p>
+</details>
+<p><strong>9.</strong> Miks peab ZFS nägema päris kettaid (mitte riistvaralise RAID-kontrolleri loogilist ketast)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>ZFS teeb ise RAID-i ja jälgib ketaste tervist; kontrolleri taga ei näe ta üksikuid kettaid, ei saa vigu parandada ega SMART-i lugeda.</p>
+</details>
+<p><strong>10.</strong> Mis vahe on läbilaskevõimel, IOPS-il ja latentsusel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Läbilaskevõime - MB/s; IOPS - operatsioone sekundis; latentsus - ühe operatsiooni ooteaeg.</p>
+</details>
+<p><strong>11.</strong> Millise <code>fio</code> testiga mõõdad andmebaasiserveri ketast? Mida teeb valik <code>--direct=1</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Juhuslik 4 KiB lugemine-kirjutamine (<code>--rw=randrw --bs=4k --iodepth=32 --numjobs=4 --direct=1</code>). <code>--direct=1</code> möödub lehevahemälust, et mõõdetaks ketast, mitte RAM-i.</p>
+</details>
+<p><strong>12.</strong> Miks võib <code>dd if=/dev/zero</code> anda ebarealistlikult häid tulemusi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Nullid on hästi pakitavad (ZFS, mõned SSD-d) ja ilma <code>oflag=dsync</code>/<code>conv=fdatasync</code>-ita mõõdetakse vahemälu.</p>
+</details>
+<p><strong>13.</strong> Millised SMART-i atribuudid viitavad ketta peatsele rikkele?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>Reallocated_Sector_Ct</code>, <code>Current_Pending_Sector</code>, <code>Offline_Uncorrectable</code>; NVMe-l <code>Media and Data Integrity Errors</code> ja <code>Percentage Used</code>.</p>
+</details>
+<p><strong>14.</strong> Kogemata kustutati kettalt partitsioonitabel. Mida teed ja mida kindlasti ei tee?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ei kirjuta kettale midagi (ei loo uut partitsiooni ega failisüsteemi); võimalusel teen kettast koopia; taastan partitsioonitabeli TestDiskiga (<em>Analyse</em> → <em>Quick Search</em> → kontroll <strong>P</strong> → <em>Write</em>); faile taastades salvestan need teisele kettale.</p>
+</details>
+<p><strong>15.</strong> Mis vahe on TestDiskil ja PhotoRecil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>TestDisk taastab partitsioonitabeli ja failisüsteemide asukohad; PhotoRec taastab üksikuid faile nende sisu järgi ka rikutud failisüsteemist.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Loo kahest kettast (<code>/dev/sdb</code>, <code>/dev/sdc</code>) RAID 1 massiiv <code>/dev/md1</code> ja näita selle olekut.</li>
-<li>Loo ZFS-i pool <code>andmed</code> peeglist (<code>/dev/sdb</code>, <code>/dev/sdc</code>) ja selles dataset <code>andmed/kodu</code> pakkimisega <code>zstd</code> ning kvoodiga 50 GiB.</li>
-<li>Tee dataset'ist <code>andmed/kodu</code> hetktõmmis nimega <code>eile</code> ja saada see masinasse <code>varu</code> pooli <code>varu</code>.</li>
-<li>Kirjuta <code>fio</code> käsk, mis mõõdab 60 sekundit 4 KiB juhuslikku lugemist failiga <code>/srv/test.fio</code> (1 GiB).</li>
-<li>Kontrolli ketta <code>/dev/sda</code> SMART-i üldist tervist ja käivita lühike enesetest.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>RAID 0 - jaotus, ei talu riket; RAID 1 - peegel, talub n − 1; RAID 5 - jaotus + paarsus, 1 ketas; RAID 6 - topeltpaarsus, 2 ketast; RAID 10 - peegeldatud paaride jaotus, 1 ketas igast paarist.</li>
-<li>RAID kaitseb ainult ketta riknemise eest. Kogemata kustutatud või lunavaraga krüpteeritud failid kaovad kõigilt ketastelt korraga, samuti ei kaitse RAID tulekahju ega varguse eest.</li>
-<li>Riistvaraline: läbipaistev OS-ile, akuga vahemälu; puudus: kontrolleri rikke korral on vaja samasugust kontrollerit. Tarkvaraline: tasuta ja kontrollerist sõltumatu; puudus: kasutab protsessorit ega tea andmete õigsusest.</li>
-<li><code>mdadm /dev/md0 --fail /dev/sdX</code>, <code>--remove /dev/sdX</code>, füüsiline vahetus, <code>--add /dev/sdY</code>, jälgi <code>cat /proc/mdstat</code>.</li>
-<li>Taastamine kestab kaua ja loeb kõiki ülejäänud kettaid; selle ajal ei ole kaitset ning teise ketta rike või lugemisviga hävitab andmed.</li>
-<li>Pool - kõigi ketaste ühine ruum; vdev - ketaste rühm (üksik, peegel, raidz); dataset - failisüsteem pooli sees. Andmed jaotatakse kõigi vdev-ide vahel, seega ühe vdev-i kadumisel puudub osa iga faili andmetest.</li>
-<li>Andmeid ei kirjutata üle, vaid uude kohta ning viide muudetakse lõpuks korraga. Failisüsteem on alati järjepidev ja hetktõmmised on odavad.</li>
-<li>Loeb kõik andmed ja kontrollib kontrollsummasid; leiab ja parandab vaikse andmeriknemise enne, kui seda vaja läheb.</li>
-<li>ZFS teeb ise RAID-i ja jälgib ketaste tervist; kontrolleri taga ei näe ta üksikuid kettaid, ei saa vigu parandada ega SMART-i lugeda.</li>
-<li>Läbilaskevõime - MB/s; IOPS - operatsioone sekundis; latentsus - ühe operatsiooni ooteaeg.</li>
-<li>Juhuslik 4 KiB lugemine-kirjutamine (<code>--rw=randrw --bs=4k --iodepth=32 --numjobs=4 --direct=1</code>). <code>--direct=1</code> möödub lehevahemälust, et mõõdetaks ketast, mitte RAM-i.</li>
-<li>Nullid on hästi pakitavad (ZFS, mõned SSD-d) ja ilma <code>oflag=dsync</code>/<code>conv=fdatasync</code>-ita mõõdetakse vahemälu.</li>
-<li><code>Reallocated_Sector_Ct</code>, <code>Current_Pending_Sector</code>, <code>Offline_Uncorrectable</code>; NVMe-l <code>Media and Data Integrity Errors</code> ja <code>Percentage Used</code>.</li>
-<li>Ei kirjuta kettale midagi (ei loo uut partitsiooni ega failisüsteemi); võimalusel teen kettast koopia; taastan partitsioonitabeli TestDiskiga (<em>Analyse</em> → <em>Quick Search</em> → kontroll <strong>P</strong> → <em>Write</em>); faile taastades salvestan need teisele kettale.</li>
-<li>TestDisk taastab partitsioonitabeli ja failisüsteemide asukohad; PhotoRec taastab üksikuid faile nende sisu järgi ka rikutud failisüsteemist.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Loo kahest kettast (<code>/dev/sdb</code>, <code>/dev/sdc</code>) RAID 1 massiiv <code>/dev/md1</code> ja näita selle olekut.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mdadm<span class="w"> </span>--create<span class="w"> </span>/dev/md1<span class="w"> </span>--level<span class="o">=</span><span class="m">1</span><span class="w"> </span>--raid-devices<span class="o">=</span><span class="m">2</span><span class="w"> </span>/dev/sdb<span class="w"> </span>/dev/sdc
 cat<span class="w"> </span>/proc/mdstat<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>mdadm<span class="w"> </span>--detail<span class="w"> </span>/dev/md1
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Loo ZFS-i pool <code>andmed</code> peeglist (<code>/dev/sdb</code>, <code>/dev/sdc</code>) ja selles dataset <code>andmed/kodu</code> pakkimisega <code>zstd</code> ning kvoodiga 50 GiB.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>zpool<span class="w"> </span>create<span class="w"> </span>andmed<span class="w"> </span>mirror<span class="w"> </span>/dev/sdb<span class="w"> </span>/dev/sdc
 sudo<span class="w"> </span>zfs<span class="w"> </span>create<span class="w"> </span>-o<span class="w"> </span><span class="nv">compression</span><span class="o">=</span>zstd<span class="w"> </span>-o<span class="w"> </span><span class="nv">quota</span><span class="o">=</span>50G<span class="w"> </span>andmed/kodu
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Tee dataset'ist <code>andmed/kodu</code> hetktõmmis nimega <code>eile</code> ja saada see masinasse <code>varu</code> pooli <code>varu</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>zfs<span class="w"> </span>snapshot<span class="w"> </span>andmed/kodu@eile
 sudo<span class="w"> </span>zfs<span class="w"> </span>send<span class="w"> </span>andmed/kodu@eile<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>varu<span class="w"> </span>sudo<span class="w"> </span>zfs<span class="w"> </span>receive<span class="w"> </span>varu/kodu
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta <code>fio</code> käsk, mis mõõdab 60 sekundit 4 KiB juhuslikku lugemist failiga <code>/srv/test.fio</code> (1 GiB).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>fio<span class="w"> </span>--name<span class="o">=</span>lugemine<span class="w"> </span>--filename<span class="o">=</span>/srv/test.fio<span class="w"> </span>--size<span class="o">=</span>1G<span class="w"> </span>--rw<span class="o">=</span>randread<span class="w"> </span>--bs<span class="o">=</span>4k<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--iodepth<span class="o">=</span><span class="m">32</span><span class="w"> </span>--ioengine<span class="o">=</span>libaio<span class="w"> </span>--direct<span class="o">=</span><span class="m">1</span><span class="w"> </span>--runtime<span class="o">=</span><span class="m">60</span><span class="w"> </span>--time_based
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Kontrolli ketta <code>/dev/sda</code> SMART-i üldist tervist ja käivita lühike enesetest.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>smartctl<span class="w"> </span>-H<span class="w"> </span>/dev/sda
 sudo<span class="w"> </span>smartctl<span class="w"> </span>-t<span class="w"> </span>short<span class="w"> </span>/dev/sda
 </code></pre></div>
+</details>
 
 
 

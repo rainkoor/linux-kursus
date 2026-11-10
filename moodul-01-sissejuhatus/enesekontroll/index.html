@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -527,34 +529,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,63 +4407,121 @@
 
 
 <h1 id="moodul-1-enesekontroll">Moodul 1. Enesekontroll<a class="headerlink" href="#moodul-1-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis vahe on Linuxi kernelil ja Linuxi distributsioonil?</li>
-<li>Millisesse perekonda kuuluvad Debian, Ubuntu ja AlmaLinux? Milliseid pakihaldureid need kasutavad?</li>
-<li>Mis vahe on terminalil ja kestal?</li>
-<li>Mida tähendab viip <code>root@server:/etc#</code>?</li>
-<li>Kas <code>ls -la</code> ja <code>ls -l -a</code> annavad sama tulemuse? Miks?</li>
-<li>Kuidas leida käsu kohta abi, kui sa tead käsu nime? Aga kui sa ei tea?</li>
-<li>Millises kataloogis asuvad tavaliselt süsteemi konfiguratsioonifailid? Aga logifailid?</li>
-<li>Mis vahe on absoluutsel ja suhtelisel teel? Too kummagi kohta näide.</li>
-<li>Oled kataloogis <code>/home/mari/dokumendid</code>. Millisesse kataloogi viib käsk <code>cd ../../jaan</code>?</li>
-<li>Mida teeb käsk <code>cd -</code>?</li>
-<li>Kuidas tunned ära peidetud faili? Kuidas seda näha?</li>
-<li>Miks on käsk <code>rm -r *</code> ohtlik? Mida peaks enne selle käivitamist kontrollima?</li>
-<li>Mida tähendavad metamärgid <code>*</code>, <code>?</code> ja <code>[ ]</code>?</li>
-<li>Miks ei saa Linuxis faili tüüpi alati laiendi järgi otsustada? Millise käsuga tüüpi kontrollida?</li>
-<li>Kuidas teada saada, milline distro ja versioon on masinal?</li>
-</ol>
+<p><strong>1.</strong> Mis vahe on Linuxi kernelil ja Linuxi distributsioonil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>Kernel</strong> on operatsioonisüsteemi tuum, mis haldab riistvara ja ressursse. <strong>Distributsioon</strong> on terviklik operatsioonisüsteem, mis koosneb kernelist ja selle ümber valitud tarkvarast, pakihaldurist ja seadistustest.</p>
+</details>
+<p><strong>2.</strong> Millisesse perekonda kuuluvad Debian, Ubuntu ja AlmaLinux? Milliseid pakihaldureid need kasutavad?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Debian ja Ubuntu kuuluvad <strong>Debiani</strong> perekonda ja kasutavad pakihaldurit <code>apt</code>. AlmaLinux kuulub <strong>Red Hati</strong> (RHEL) perekonda ja kasutab pakihaldurit <code>dnf</code>.</p>
+</details>
+<p><strong>3.</strong> Mis vahe on terminalil ja kestal?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>Terminal</strong> on programm, mis kuvab tekstiakent ja edastab klahvivajutused. <strong>Kest</strong> (nt Bash) on programm, mis tõlgendab käske ja käivitab neid.</p>
+</details>
+<p><strong>4.</strong> Mida tähendab viip <code>root@server:/etc#</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kasutaja on <code>root</code> (juurkasutaja), masina nimi on <code>server</code>, praegune kataloog on <code>/etc</code> ja märk <code>#</code> näitab, et töötad juurkasutaja õigustes.</p>
+</details>
+<p><strong>5.</strong> Kas <code>ls -la</code> ja <code>ls -l -a</code> annavad sama tulemuse? Miks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Jah. Lühikesi võtmeid võib kirjutada kokku, nii et <code>-la</code> on sama mis <code>-l -a</code>.</p>
+</details>
+<p><strong>6.</strong> Kuidas leida käsu kohta abi, kui sa tead käsu nime? Aga kui sa ei tea?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kui nimi on teada: <code>man käsk</code> või <code>käsk --help</code>. Kui nimi pole teada: <code>man -k märksõna</code> (ingliskeelne märksõna) või otsing distro dokumentatsioonist.</p>
+</details>
+<p><strong>7.</strong> Millises kataloogis asuvad tavaliselt süsteemi konfiguratsioonifailid? Aga logifailid?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Konfiguratsioonifailid asuvad kataloogis <code>/etc</code>, logifailid kataloogis <code>/var/log</code>.</p>
+</details>
+<p><strong>8.</strong> Mis vahe on absoluutsel ja suhtelisel teel? Too kummagi kohta näide.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>Absoluutne tee</strong> algab juurkataloogist ja kehtib igalt poolt, nt <code>/etc/hostname</code>. <strong>Suhteline tee</strong> algab praegusest kataloogist, nt <code>../pildid</code>.</p>
+</details>
+<p><strong>9.</strong> Oled kataloogis <code>/home/mari/dokumendid</code>. Millisesse kataloogi viib käsk <code>cd ../../jaan</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kataloogi <code>/home/jaan</code>.</p>
+</details>
+<p><strong>10.</strong> Mida teeb käsk <code>cd -</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Viib tagasi eelmisesse kataloogi, kus viimati olid.</p>
+</details>
+<p><strong>11.</strong> Kuidas tunned ära peidetud faili? Kuidas seda näha?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Peidetud faili nimi algab punktiga (nt <code>.bashrc</code>). Neid näeb käsuga <code>ls -a</code>.</p>
+</details>
+<p><strong>12.</strong> Miks on käsk <code>rm -r *</code> ohtlik? Mida peaks enne selle käivitamist kontrollima?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>See kustutab jäädavalt kõik praeguse kataloogi failid ja alamkataloogid koos sisuga ning prügikasti ei ole. Enne tuleb kontrollida käsuga <code>pwd</code>, kus oled, ja käsuga <code>ls</code>, mida kustutad.</p>
+</details>
+<p><strong>13.</strong> Mida tähendavad metamärgid <code>*</code>, <code>?</code> ja <code>[ ]</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>*</code> - suvaline hulk mis tahes märke (ka null märki); <code>?</code> - täpselt üks suvaline märk; <code>[ ]</code> - üks märk sulgudes toodud loetelust.</p>
+</details>
+<p><strong>14.</strong> Miks ei saa Linuxis faili tüüpi alati laiendi järgi otsustada? Millise käsuga tüüpi kontrollida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Linuxis on laiend lihtsalt osa failinimest ega määra faili tüüpi. Tüüpi saab kontrollida käsuga <code>file</code>, mis uurib faili sisu.</p>
+</details>
+<p><strong>15.</strong> Kuidas teada saada, milline distro ja versioon on masinal?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>cat /etc/os-release</code> või <code>hostnamectl</code>.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p>Tee need ülesanded oma laborimasinas.</p>
-<ol>
-<li>Loo <strong>ühe käsuga</strong> kataloogid <code>~/test/2024</code>, <code>~/test/2025</code> ja <code>~/test/2026</code>.</li>
-<li>Loo igasse neist fail <code>aruanne.txt</code>.</li>
-<li>Kopeeri kataloog <code>~/test/2026</code> koos sisuga nimega <code>~/test/2026-varu</code>.</li>
-<li>Loetle käsuga <code>ls</code> ainult need kataloogid, mille nimi on <code>2024</code> või <code>2025</code>, kasutades metamärke.</li>
-<li>Kuva faili <code>/etc/passwd</code> viimased 5 rida.</li>
-<li>Kustuta kataloog <code>~/test</code> koos kogu sisuga.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Kernel</strong> on operatsioonisüsteemi tuum, mis haldab riistvara ja ressursse. <strong>Distributsioon</strong> on terviklik operatsioonisüsteem, mis koosneb kernelist ja selle ümber valitud tarkvarast, pakihaldurist ja seadistustest.</li>
-<li>Debian ja Ubuntu kuuluvad <strong>Debiani</strong> perekonda ja kasutavad pakihaldurit <code>apt</code>. AlmaLinux kuulub <strong>Red Hati</strong> (RHEL) perekonda ja kasutab pakihaldurit <code>dnf</code>.</li>
-<li><strong>Terminal</strong> on programm, mis kuvab tekstiakent ja edastab klahvivajutused. <strong>Kest</strong> (nt Bash) on programm, mis tõlgendab käske ja käivitab neid.</li>
-<li>Kasutaja on <code>root</code> (juurkasutaja), masina nimi on <code>server</code>, praegune kataloog on <code>/etc</code> ja märk <code>#</code> näitab, et töötad juurkasutaja õigustes.</li>
-<li>Jah. Lühikesi võtmeid võib kirjutada kokku, nii et <code>-la</code> on sama mis <code>-l -a</code>.</li>
-<li>Kui nimi on teada: <code>man käsk</code> või <code>käsk --help</code>. Kui nimi pole teada: <code>man -k märksõna</code> (ingliskeelne märksõna) või otsing distro dokumentatsioonist.</li>
-<li>Konfiguratsioonifailid asuvad kataloogis <code>/etc</code>, logifailid kataloogis <code>/var/log</code>.</li>
-<li><strong>Absoluutne tee</strong> algab juurkataloogist ja kehtib igalt poolt, nt <code>/etc/hostname</code>. <strong>Suhteline tee</strong> algab praegusest kataloogist, nt <code>../pildid</code>.</li>
-<li>Kataloogi <code>/home/jaan</code>.</li>
-<li>Viib tagasi eelmisesse kataloogi, kus viimati olid.</li>
-<li>Peidetud faili nimi algab punktiga (nt <code>.bashrc</code>). Neid näeb käsuga <code>ls -a</code>.</li>
-<li>See kustutab jäädavalt kõik praeguse kataloogi failid ja alamkataloogid koos sisuga ning prügikasti ei ole. Enne tuleb kontrollida käsuga <code>pwd</code>, kus oled, ja käsuga <code>ls</code>, mida kustutad.</li>
-<li><code>*</code> - suvaline hulk mis tahes märke (ka null märki); <code>?</code> - täpselt üks suvaline märk; <code>[ ]</code> - üks märk sulgudes toodud loetelust.</li>
-<li>Linuxis on laiend lihtsalt osa failinimest ega määra faili tüüpi. Tüüpi saab kontrollida käsuga <code>file</code>, mis uurib faili sisu.</li>
-<li><code>cat /etc/os-release</code> või <code>hostnamectl</code>.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Loo <strong>ühe käsuga</strong> kataloogid <code>~/test/2024</code>, <code>~/test/2025</code> ja <code>~/test/2026</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/test/<span class="o">{</span><span class="m">2024</span>,2025,2026<span class="o">}</span>
-touch<span class="w"> </span>~/test/<span class="o">{</span><span class="m">2024</span>,2025,2026<span class="o">}</span>/aruanne.txt
-cp<span class="w"> </span>-r<span class="w"> </span>~/test/2026<span class="w"> </span>~/test/2026-varu
-ls<span class="w"> </span>-d<span class="w"> </span>~/test/202<span class="o">[</span><span class="m">45</span><span class="o">]</span>
-tail<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>/etc/passwd
-rm<span class="w"> </span>-r<span class="w"> </span>~/test
+</code></pre></div>
+</details>
+<p><strong>2.</strong> Loo igasse neist fail <code>aruanne.txt</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>touch<span class="w"> </span>~/test/<span class="o">{</span><span class="m">2024</span>,2025,2026<span class="o">}</span>/aruanne.txt
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Kopeeri kataloog <code>~/test/2026</code> koos sisuga nimega <code>~/test/2026-varu</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>-r<span class="w"> </span>~/test/2026<span class="w"> </span>~/test/2026-varu
+</code></pre></div>
+</details>
+<p><strong>4.</strong> Loetle käsuga <code>ls</code> ainult need kataloogid, mille nimi on <code>2024</code> või <code>2025</code>, kasutades metamärke.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-d<span class="w"> </span>~/test/202<span class="o">[</span><span class="m">45</span><span class="o">]</span>
 </code></pre></div>
 <p>Võti <code>-d</code> käsus <code>ls -d</code> näitab kataloogi ennast, mitte selle sisu.</p>
+</details>
+<p><strong>5.</strong> Kuva faili <code>/etc/passwd</code> viimased 5 rida.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>/etc/passwd
+</code></pre></div>
+</details>
+<p><strong>6.</strong> Kustuta kataloog <code>~/test</code> koos kogu sisuga.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>~/test
+</code></pre></div>
+</details>
 
 
 

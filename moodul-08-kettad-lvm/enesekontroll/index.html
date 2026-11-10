@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1514,34 +1516,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,77 +4407,133 @@
 
 
 <h1 id="moodul-8-enesekontroll">Moodul 8. Enesekontroll<a class="headerlink" href="#moodul-8-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mida tähendavad seadmenimed <code>/dev/sdb2</code>, <code>/dev/vda1</code> ja <code>/dev/nvme0n1p3</code>?</li>
-<li>Millised on GPT eelised MBR-i ees?</li>
-<li>Mis vahe on partitsioonil ja failisüsteemil?</li>
-<li>Millist failisüsteemi kasutab AlmaLinux vaikimisi? Millist piirangut tuleb sellega arvestada?</li>
-<li>Mis juhtub failidega, mis olid haakepunkti kataloogis enne haakimist?</li>
-<li>Mida tähendab veateade <code>target is busy</code> ja kuidas leida põhjus?</li>
-<li>Selgita <code>/etc/fstab</code> rea <code>UUID=1234-abcd /srv/andmed ext4 defaults,nofail 0 2</code> kõiki välju.</li>
-<li>Miks kasutada fstab-is UUID-d, mitte seadme nime?</li>
-<li>Mida tuleks teha pärast fstab-i muutmist enne taaskäivitust?</li>
-<li>Mis on saaleala ja millal seda kasutatakse?</li>
-<li>Selgita LVM-i kolme kihti: PV, VG ja LV.</li>
-<li>Nimeta kolm LVM-i eelist tavaliste partitsioonide ees.</li>
-<li>Mida teeb võti <code>-r</code> käsus <code>lvextend</code>?</li>
-<li>Mis kaitseb LUKS ja mille eest see ei kaitse?</li>
-<li>Ketas on <code>df -h</code> järgi täis, kuid <code>du</code> ei leia suuri faile. Mis võib olla põhjus?</li>
-<li>Millised failid on vaja muuta, et LUKS-iga krüpteeritud ketas avataks ja haagitaks alglaadimisel?</li>
-</ol>
+<p><strong>1.</strong> Mida tähendavad seadmenimed <code>/dev/sdb2</code>, <code>/dev/vda1</code> ja <code>/dev/nvme0n1p3</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>/dev/sdb2</code> - teise SATA/SCSI-ketta teine partitsioon; <code>/dev/vda1</code> - esimese VirtIO Block ketta esimene partitsioon; <code>/dev/nvme0n1p3</code> - esimese NVMe-ketta kolmas partitsioon.</p>
+</details>
+<p><strong>2.</strong> Millised on GPT eelised MBR-i ees?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Toetab üle 2 TiB kettaid, kuni 128 partitsiooni ja hoiab partitsioonitabeli koopiat ketta lõpus.</p>
+</details>
+<p><strong>3.</strong> Mis vahe on partitsioonil ja failisüsteemil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Partitsioon on ketta osa (ruum). Failisüsteem on selle ruumi korraldus, mis võimaldab sinna faile salvestada. Partitsioon tuleb enne kasutamist vormindada.</p>
+</details>
+<p><strong>4.</strong> Millist failisüsteemi kasutab AlmaLinux vaikimisi? Millist piirangut tuleb sellega arvestada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>XFS. XFS-i saab ainult suurendada, mitte vähendada.</p>
+</details>
+<p><strong>5.</strong> Mis juhtub failidega, mis olid haakepunkti kataloogis enne haakimist?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Need ei ole haakimise ajal nähtavad, kuid ei kao - need tulevad lahtihaakimisel tagasi.</p>
+</details>
+<p><strong>6.</strong> Mida tähendab veateade <code>target is busy</code> ja kuidas leida põhjus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mõni protsess kasutab failisüsteemi (nt avatud fail või kest selles kataloogis). Põhjuse leiab käsuga <code>fuser -vm haakepunkt</code> või <code>lsof</code>.</p>
+</details>
+<p><strong>7.</strong> Selgita <code>/etc/fstab</code> rea <code>UUID=1234-abcd /srv/andmed ext4 defaults,nofail 0 2</code> kõiki välju.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>UUID=1234-abcd</code> - failisüsteemi unikaalne tunnus; <code>/srv/andmed</code> - haakepunkt; <code>ext4</code> - failisüsteemi tüüp; <code>defaults,nofail</code> - tavalised valikud ja alglaadimine jätkub, kui seadet pole; <code>0</code> - dump (ei kasutata); <code>2</code> - kontrollitakse alglaadimisel pärast juurfailisüsteemi.</p>
+</details>
+<p><strong>8.</strong> Miks kasutada fstab-is UUID-d, mitte seadme nime?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Seadmenimed võivad ketaste lisamisel või eemaldamisel muutuda, UUID on failisüsteemi püsiv tunnus.</p>
+</details>
+<p><strong>9.</strong> Mida tuleks teha pärast fstab-i muutmist enne taaskäivitust?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>findmnt --verify</code>, <code>systemctl daemon-reload</code> ja <code>mount -a</code> ning kontrollida tulemust (<code>df -h</code>).</p>
+</details>
+<p><strong>10.</strong> Mis on saaleala ja millal seda kasutatakse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kettaruum, kuhu kernel tõstab vähe kasutatud mälu, kui RAM saab otsa. See hoiab ära mälupuudusest tingitud kokkujooksmise, kuid on RAM-ist palju aeglasem.</p>
+</details>
+<p><strong>11.</strong> Selgita LVM-i kolme kihti: PV, VG ja LV.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>PV</strong> - LVM-i jaoks ettevalmistatud ketas või partitsioon; <strong>VG</strong> - ühe või mitme PV ühendatud ruum; <strong>LV</strong> - VG-st eraldatud osa, mida kasutatakse nagu partitsiooni.</p>
+</details>
+<p><strong>12.</strong> Nimeta kolm LVM-i eelist tavaliste partitsioonide ees.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Näiteks: köiteid saab suurendada töö ajal; köitegruppi saab lisada uusi kettaid; köide võib ulatuda üle mitme ketta; hetktõmmised.</p>
+</details>
+<p><strong>13.</strong> Mida teeb võti <code>-r</code> käsus <code>lvextend</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Suurendab koos köitega ka failisüsteemi.</p>
+</details>
+<p><strong>14.</strong> Mis kaitseb LUKS ja mille eest see ei kaitse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>LUKS kaitseb seisvaid andmeid: varastatud või äravisatud kettalt ei saa andmeid lugeda ilma paroolita. See ei kaitse töötavat süsteemi - kui ketas on avatud, näevad seda kõik, kellel on failiõigused, ja ründaja, kes saab süsteemi ligi.</p>
+</details>
+<p><strong>15.</strong> Ketas on <code>df -h</code> järgi täis, kuid <code>du</code> ei leia suuri faile. Mis võib olla põhjus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Näiteks kustutatud fail, mida mõni protsess veel avatuna hoiab (<code>lsof +L1</code>); i-sõlmed on otsas (<code>df -i</code>); andmed on peidus haakepunkti all; <code>du</code> ei näe faile, millele kasutajal pole lugemisõigust.</p>
+</details>
+<p><strong>16.</strong> Millised failid on vaja muuta, et LUKS-iga krüpteeritud ketas avataks ja haagitaks alglaadimisel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>/etc/crypttab</code> (LUKS-seadme avamine: nimi, UUID, võti või <code>none</code>) ja <code>/etc/fstab</code> (avatud seadme <code>/dev/mapper/nimi</code> haakimine).</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p>Tee ülesanded laborimasinas, kus on vaba lisaketas (siin <code>/dev/sdd</code>).</p>
-<ol>
-<li>Loo kettale <code>/dev/sdd</code> GPT-tabel ja üks partitsioon, mis võtab kogu ketta.</li>
-<li>Loo partitsioonile ext4 failisüsteem sildiga <code>varu</code> ja haagi see püsivalt kataloogi <code>/varu</code>, kasutades fstab-is sildi (<code>LABEL=</code>) viidet.</li>
-<li>Leia kataloogis <code>/usr</code> viis suurimat alamkataloogi.</li>
-<li>Köitegrupis <code>vg_andmed</code> on 2 GiB vaba. Loo sinna 500 MiB köide <code>lv_logid</code> XFS-failisüsteemiga.</li>
-<li>Suurenda köidet <code>lv_logid</code> nii, et see kasutab kogu köitegrupi vaba ruumi.</li>
-<li>Kontrolli, mitu i-sõlme on juurfailisüsteemis kasutusel.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li><code>/dev/sdb2</code> - teise SATA/SCSI-ketta teine partitsioon; <code>/dev/vda1</code> - esimese VirtIO Block ketta esimene partitsioon; <code>/dev/nvme0n1p3</code> - esimese NVMe-ketta kolmas partitsioon.</li>
-<li>Toetab üle 2 TiB kettaid, kuni 128 partitsiooni ja hoiab partitsioonitabeli koopiat ketta lõpus.</li>
-<li>Partitsioon on ketta osa (ruum). Failisüsteem on selle ruumi korraldus, mis võimaldab sinna faile salvestada. Partitsioon tuleb enne kasutamist vormindada.</li>
-<li>XFS. XFS-i saab ainult suurendada, mitte vähendada.</li>
-<li>Need ei ole haakimise ajal nähtavad, kuid ei kao - need tulevad lahtihaakimisel tagasi.</li>
-<li>Mõni protsess kasutab failisüsteemi (nt avatud fail või kest selles kataloogis). Põhjuse leiab käsuga <code>fuser -vm haakepunkt</code> või <code>lsof</code>.</li>
-<li><code>UUID=1234-abcd</code> - failisüsteemi unikaalne tunnus; <code>/srv/andmed</code> - haakepunkt; <code>ext4</code> - failisüsteemi tüüp; <code>defaults,nofail</code> - tavalised valikud ja alglaadimine jätkub, kui seadet pole; <code>0</code> - dump (ei kasutata); <code>2</code> - kontrollitakse alglaadimisel pärast juurfailisüsteemi.</li>
-<li>Seadmenimed võivad ketaste lisamisel või eemaldamisel muutuda, UUID on failisüsteemi püsiv tunnus.</li>
-<li><code>findmnt --verify</code>, <code>systemctl daemon-reload</code> ja <code>mount -a</code> ning kontrollida tulemust (<code>df -h</code>).</li>
-<li>Kettaruum, kuhu kernel tõstab vähe kasutatud mälu, kui RAM saab otsa. See hoiab ära mälupuudusest tingitud kokkujooksmise, kuid on RAM-ist palju aeglasem.</li>
-<li><strong>PV</strong> - LVM-i jaoks ettevalmistatud ketas või partitsioon; <strong>VG</strong> - ühe või mitme PV ühendatud ruum; <strong>LV</strong> - VG-st eraldatud osa, mida kasutatakse nagu partitsiooni.</li>
-<li>Näiteks: köiteid saab suurendada töö ajal; köitegruppi saab lisada uusi kettaid; köide võib ulatuda üle mitme ketta; hetktõmmised.</li>
-<li>Suurendab koos köitega ka failisüsteemi.</li>
-<li>LUKS kaitseb seisvaid andmeid: varastatud või äravisatud kettalt ei saa andmeid lugeda ilma paroolita. See ei kaitse töötavat süsteemi - kui ketas on avatud, näevad seda kõik, kellel on failiõigused, ja ründaja, kes saab süsteemi ligi.</li>
-<li>Näiteks kustutatud fail, mida mõni protsess veel avatuna hoiab (<code>lsof +L1</code>); i-sõlmed on otsas (<code>df -i</code>); andmed on peidus haakepunkti all; <code>du</code> ei näe faile, millele kasutajal pole lugemisõigust.</li>
-<li><code>/etc/crypttab</code> (LUKS-seadme avamine: nimi, UUID, võti või <code>none</code>) ja <code>/etc/fstab</code> (avatud seadme <code>/dev/mapper/nimi</code> haakimine).</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1</span>
-sudo<span class="w"> </span>parted<span class="w"> </span>-s<span class="w"> </span>/dev/sdd<span class="w"> </span>mklabel<span class="w"> </span>gpt
+<p><strong>1.</strong> Loo kettale <code>/dev/sdd</code> GPT-tabel ja üks partitsioon, mis võtab kogu ketta.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>parted<span class="w"> </span>-s<span class="w"> </span>/dev/sdd<span class="w"> </span>mklabel<span class="w"> </span>gpt
 sudo<span class="w"> </span>parted<span class="w"> </span>-s<span class="w"> </span>/dev/sdd<span class="w"> </span>mkpart<span class="w"> </span>varu<span class="w"> </span>ext4<span class="w"> </span>1MiB<span class="w"> </span><span class="m">100</span>%
-<span class="c1"># 2</span>
-sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>varu<span class="w"> </span>/dev/sdd1
+</code></pre></div>
+</details>
+<p><strong>2.</strong> Loo partitsioonile ext4 failisüsteem sildiga <code>varu</code> ja haagi see püsivalt kataloogi <code>/varu</code>, kasutades fstab-is sildi (<code>LABEL=</code>) viidet.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>varu<span class="w"> </span>/dev/sdd1
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/varu
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"LABEL=varu  /varu  ext4  defaults,nofail  0  2"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/fstab
 sudo<span class="w"> </span>findmnt<span class="w"> </span>--verify<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>-a
-<span class="c1"># 3</span>
-sudo<span class="w"> </span>du<span class="w"> </span>-h<span class="w"> </span>--max-depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>/usr<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-6
-<span class="c1"># 4</span>
-sudo<span class="w"> </span>lvcreate<span class="w"> </span>-n<span class="w"> </span>lv_logid<span class="w"> </span>-L<span class="w"> </span>500M<span class="w"> </span>vg_andmed
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Leia kataloogis <code>/usr</code> viis suurimat alamkataloogi.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>du<span class="w"> </span>-h<span class="w"> </span>--max-depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>/usr<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-6
+</code></pre></div>
+<p><code>tail -6</code> näitab kuut rida, sest viimane rida on kataloog <code>/usr</code> ise koos kogusummaga.</p>
+</details>
+<p><strong>4.</strong> Köitegrupis <code>vg_andmed</code> on 2 GiB vaba. Loo sinna 500 MiB köide <code>lv_logid</code> XFS-failisüsteemiga.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>lvcreate<span class="w"> </span>-n<span class="w"> </span>lv_logid<span class="w"> </span>-L<span class="w"> </span>500M<span class="w"> </span>vg_andmed
 sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>/dev/vg_andmed/lv_logid
-<span class="c1"># 5 (failisüsteem peab olema haagitud, et XFS-i saaks suurendada)</span>
+</code></pre></div>
+</details>
+<p><strong>5.</strong> Suurenda köidet <code>lv_logid</code> nii, et see kasutab kogu köitegrupi vaba ruumi.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code><span class="c1"># (failisüsteem peab olema haagitud, et XFS-i saaks suurendada)</span>
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/logid<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/vg_andmed/lv_logid<span class="w"> </span>/srv/logid
 sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-l<span class="w"> </span>+100%FREE<span class="w"> </span>/dev/vg_andmed/lv_logid
-<span class="c1"># 6</span>
-df<span class="w"> </span>-i<span class="w"> </span>/
 </code></pre></div>
-<p>Ülesandes 3 näitab <code>tail -6</code> kuut rida, sest viimane rida on kataloog <code>/usr</code> ise koos kogusummaga.</p>
+</details>
+<p><strong>6.</strong> Kontrolli, mitu i-sõlme on juurfailisüsteemis kasutusel.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>df<span class="w"> </span>-i<span class="w"> </span>/
+</code></pre></div>
+</details>
 
 
 

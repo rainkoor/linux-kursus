@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1143,6 +1145,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4553,6 +4566,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4597,7 +4621,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K20</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K20</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <hr />
 <h2 id="1-osa-protsesside-uurimine">1. osa. Protsesside uurimine<a class="headerlink" href="#1-osa-protsesside-uurimine" title="Permanent link">&para;</a></h2>
 <p><strong>1.1</strong> Kuva protsesside puu ja leia protsess PID 1:</p>
@@ -4605,12 +4632,18 @@
 pstree<span class="w"> </span>-p<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
 </code></pre></div>
 <p>Kui <code>pstree</code> puudub, paigalda pakett <code>psmisc</code>.</p>
-<p><strong>K1.</strong> Mis on protsessi PID 1 nimi? Kes on sinu praeguse kesta (<code>bash</code>) vanemprotsess? (Vihje: <code>ps -ef | grep $$</code> - muutuja <code>$$</code> on praeguse kesta PID.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mis on protsessi PID 1 nimi? Kes on sinu praeguse kesta (<code>bash</code>) vanemprotsess? (Vihje: <code>ps -ef | grep $$</code> - muutuja <code>$$</code> on praeguse kesta PID.)</p>
+</div>
 <p><strong>1.2</strong> Leia viis kõige rohkem mälu kasutavat protsessi:</p>
 <div class="highlight"><pre><span></span><code>ps<span class="w"> </span>-eo<span class="w"> </span>pid,user,%mem,rss,cmd<span class="w"> </span>--sort<span class="o">=</span>-%mem<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-6
 </code></pre></div>
 <p><strong>1.3</strong> Ava <code>top</code>. Vajuta <strong>M</strong> (sorteeri mälu järgi), seejärel <strong>P</strong> (protsessori järgi) ja <strong>1</strong> (iga tuum eraldi). Välju klahviga <strong>q</strong>.</p>
-<p><strong>K2.</strong> Mis on süsteemi koormus (<em>load average</em>) ja mitu protsessorituuma on masinal (<code>nproc</code>)? Kui palju mälu on tegelikult saadaval (<code>avail Mem</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mis on süsteemi koormus (<em>load average</em>) ja mitu protsessorituuma on masinal (<code>nproc</code>)? Kui palju mälu on tegelikult saadaval (<code>avail Mem</code>)?</p>
+</div>
 <hr />
 <h2 id="2-osa-signaalid-ja-taustatööd">2. osa. Signaalid ja taustatööd<a class="headerlink" href="#2-osa-signaalid-ja-taustatööd" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Käivita kolm taustatööd ja vaata neid:</p>
@@ -4626,9 +4659,15 @@ sleep<span class="w"> </span><span class="m">3000</span><span class="w"> </span>
 <span class="nb">bg</span><span class="w"> </span>%2
 <span class="nb">jobs</span>
 </code></pre></div>
-<p><strong>K3.</strong> Mis olekus oli töö pärast Ctrl+Z vajutamist? Mis muutus pärast <code>bg</code> käsku?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Mis olekus oli töö pärast Ctrl+Z vajutamist? Mis muutus pärast <code>bg</code> käsku?</p>
+</div>
 <p><strong>2.3</strong> Lõpeta töö nr 1 käsuga <code>kill %1</code>. Lõpeta ülejäänud <code>sleep</code> protsessid <strong>ühe käsuga</strong>.</p>
-<p><strong>K4.</strong> Kirjuta käsk, millega lõpetasid kõik <code>sleep</code> protsessid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Kirjuta käsk, millega lõpetasid kõik <code>sleep</code> protsessid.</p>
+</div>
 <p><strong>2.4</strong> Koorma protsessorit. Käivita ühes SSH-seansis:</p>
 <div class="highlight"><pre><span></span><code>yes<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </code></pre></div>
@@ -4638,21 +4677,33 @@ sleep<span class="w"> </span><span class="m">3000</span><span class="w"> </span>
 renice<span class="w"> </span><span class="m">19</span><span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
 top
 </code></pre></div>
-<p><strong>K5.</strong> Kas protsessori kasutus muutus? Miks ei pruugi see tühjas virtuaalmasinas eriti muutuda? (Vihje: mille suhtes prioriteet kehtib?)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kas protsessori kasutus muutus? Miks ei pruugi see tühjas virtuaalmasinas eriti muutuda? (Vihje: mille suhtes prioriteet kehtib?)</p>
+</div>
 <p><strong>2.6</strong> Proovi prioriteeti tagasi tõsta tavakasutajana: <code>renice 0 -p &lt;PID&gt;</code>.</p>
-<p><strong>K6.</strong> Mis juhtus? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mis juhtus? Miks?</p>
+</div>
 <p><strong>2.7</strong> Saada protsessile signaal <code>SIGTERM</code>. Kui see ei lõpe, kasuta <code>SIGKILL</code>.</p>
 <hr />
 <h2 id="3-osa-teenuste-haldus">3. osa. Teenuste haldus<a class="headerlink" href="#3-osa-teenuste-haldus" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Vaata SSH teenuse olekut:</p>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>sshd
 </code></pre></div>
-<p><strong>K7.</strong> Kas teenus on lubatud (<code>enabled</code>)? Mis on selle põhiprotsessi PID? Millises failis on teenuse kirjeldus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kas teenus on lubatud (<code>enabled</code>)? Mis on selle põhiprotsessi PID? Millises failis on teenuse kirjeldus?</p>
+</div>
 <p><strong>3.2</strong> Paigalda veebiserver Apache:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>httpd
 systemctl<span class="w"> </span>status<span class="w"> </span>httpd
 </code></pre></div>
-<p><strong>K8.</strong> Kas teenus töötab kohe pärast paigaldamist? Kas see on lubatud? Kuidas erineb see Debianist ja Ubuntust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas teenus töötab kohe pärast paigaldamist? Kas see on lubatud? Kuidas erineb see Debianist ja Ubuntust?</p>
+</div>
 <p><strong>3.3</strong> Käivita teenus ja kontrolli, kas see vastab:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>httpd
 systemctl<span class="w"> </span>is-active<span class="w"> </span>httpd
@@ -4660,12 +4711,18 @@ systemctl<span class="w"> </span>is-enabled<span class="w"> </span>httpd
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
 </code></pre></div>
 <p><strong>3.4</strong> Taaskäivita virtuaalmasin (<code>sudo systemctl reboot</code>), logi uuesti sisse ja kontrolli, kas <code>httpd</code> töötab.</p>
-<p><strong>K9.</strong> Kas <code>httpd</code> töötas pärast taaskäivitust? Miks? Millise <strong>ühe</strong> käsuga oleksid saanud teenuse korraga käivitada ja lubada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kas <code>httpd</code> töötas pärast taaskäivitust? Miks? Millise <strong>ühe</strong> käsuga oleksid saanud teenuse korraga käivitada ja lubada?</p>
+</div>
 <p><strong>3.5</strong> Luba teenus ja kontrolli tulemust. Uuri, mida <code>enable</code> tegelikult tegi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>httpd
 ls<span class="w"> </span>-l<span class="w"> </span>/etc/systemd/system/multi-user.target.wants/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>httpd
 </code></pre></div>
-<p><strong>K10.</strong> Mis on <code>enable</code> tegelikult loonud?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mis on <code>enable</code> tegelikult loonud?</p>
+</div>
 <p><strong>3.6</strong> Uuri teenuse faili ja selle asukohta:</p>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>cat<span class="w"> </span>httpd
 </code></pre></div>
@@ -4683,13 +4740,19 @@ sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w">
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>sshd<span class="w"> </span>-f
 </code></pre></div>
 <p>Teises seansis (või oma arvutist) proovi ühenduda <strong>vale parooliga</strong> ja seejärel õigega.</p>
-<p><strong>K11.</strong> Kuidas on logis näha ebaõnnestunud ja õnnestunud sisselogimine? Kirjuta mõlema kohta üks logirida (IP-aadressi võid varjata).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Kuidas on logis näha ebaõnnestunud ja õnnestunud sisselogimine? Kirjuta mõlema kohta üks logirida (IP-aadressi võid varjata).</p>
+</div>
 <p><strong>4.3</strong> Leia käesoleva alglaadimise vead ja kontrolli, kas journal on püsiv:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span>-b<span class="w"> </span>-p<span class="w"> </span>err
 journalctl<span class="w"> </span>--list-boots
 ls<span class="w"> </span>-d<span class="w"> </span>/var/log/journal<span class="w"> </span>/run/log/journal<span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </code></pre></div>
-<p><strong>K12.</strong> Mitu alglaadimist on journal'is (punktis 3.4 tegid ühe taaskäivituse)? Kas journal on püsiv või ajutine? Kui ajutine, tee see püsivaks (vt teooria punkt 5.7).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Mitu alglaadimist on journal'is (punktis 3.4 tegid ühe taaskäivituse)? Kas journal on püsiv või ajutine? Kui ajutine, tee see püsivaks (vt teooria punkt 5.7).</p>
+</div>
 <hr />
 <h2 id="5-osa-oma-teenus">5. osa. Oma teenus<a class="headerlink" href="#5-osa-oma-teenus" title="Permanent link">&para;</a></h2>
 <p>Lood teenuse, mis kontrollib iga 10 sekundi järel juurfailisüsteemi täituvust ja hoiatab, kui see ületab piiri.</p>
@@ -4734,12 +4797,18 @@ ls<span class="w"> </span>-d<span class="w"> </span>/var/log/journal<span class=
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>kettakontroll
 systemctl<span class="w"> </span>status<span class="w"> </span>kettakontroll
 </code></pre></div>
-<p><strong>K13.</strong> Mille poolest erineb teenuse <code>kettakontroll</code> olek teenuse <code>httpd</code> omast? Millise kasutajana teenus töötab (<code>ps -fu nobody</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mille poolest erineb teenuse <code>kettakontroll</code> olek teenuse <code>httpd</code> omast? Millise kasutajana teenus töötab (<code>ps -fu nobody</code>)?</p>
+</div>
 <p><strong>5.4</strong> Vaata teenuse väljundit:</p>
 <div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>-u<span class="w"> </span>kettakontroll<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
 journalctl<span class="w"> </span>-u<span class="w"> </span>kettakontroll<span class="w"> </span>-f
 </code></pre></div>
-<p><strong>K14.</strong> Kuhu jõuab skripti <code>echo</code> väljund? Miks ei olnud vaja eraldi logifaili?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Kuhu jõuab skripti <code>echo</code> väljund? Miks ei olnud vaja eraldi logifaili?</p>
+</div>
 <p><strong>5.5</strong> Testi automaatset taaskäivitust. Leia teenuse põhiprotsessi PID (<code>systemctl status</code>) ja lõpeta see kõigepealt viisakalt, seejärel jõuga. Iga kord oota 10 sekundit ja vaata olekut:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>&lt;PID&gt;
 sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>kettakontroll
@@ -4747,7 +4816,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
 sudo<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span>&lt;uus<span class="w"> </span>PID&gt;
 sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>kettakontroll
 </code></pre></div>
-<p><strong>K15.</strong> Kummal juhul teenus taaskäivitati ja kummal mitte? Selgita seda seadistusega <code>Restart=on-failure</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Kummal juhul teenus taaskäivitati ja kummal mitte? Selgita seda seadistusega <code>Restart=on-failure</code>.</p>
+</div>
 <p><strong>5.6</strong> Muuda teenuse seadistust nii, et see taaskäivitub <strong>alati</strong>, kasutades käsku <code>systemctl edit</code> (mitte põhifaili muutmist):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>kettakontroll
 </code></pre></div>
@@ -4755,7 +4827,10 @@ sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><s
 <div class="highlight"><pre><span></span><code><span class="k">[Service]</span>
 <span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
 </code></pre></div>
-<p><strong>K16.</strong> Millise faili <code>systemctl edit</code> lõi? Miks on see parem kui põhifaili muutmine? Kontrolli tulemust käsuga <code>systemctl cat kettakontroll</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Millise faili <code>systemctl edit</code> lõi? Miks on see parem kui põhifaili muutmine? Kontrolli tulemust käsuga <code>systemctl cat kettakontroll</code>.</p>
+</div>
 <hr />
 <h2 id="6-osa-ajastamine">6. osa. Ajastamine<a class="headerlink" href="#6-osa-ajastamine" title="Permanent link">&para;</a></h2>
 <h3 id="cron">cron<a class="headerlink" href="#cron" title="Permanent link">&para;</a></h3>
@@ -4765,7 +4840,10 @@ sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><s
 <div class="highlight"><pre><span></span><code>* * * * * /usr/bin/uptime &gt;&gt; /home/SINU_KASUTAJA/koormus.log 2&gt;&amp;1
 </code></pre></div>
 <p>Asenda <code>SINU_KASUTAJA</code> oma kasutajanimega. Oota 2–3 minutit ja kontrolli: <code>cat ~/koormus.log</code>.</p>
-<p><strong>K17.</strong> Kirjuta crontab'i read, mis käivitaksid skripti <code>/usr/local/bin/aruanne.sh</code>: a) iga päev kell 06:45; b) tööpäeviti iga 30 minuti järel vahemikus 8–17; c) iga pühapäeva keskööl.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Kirjuta crontab'i read, mis käivitaksid skripti <code>/usr/local/bin/aruanne.sh</code>: a) iga päev kell 06:45; b) tööpäeviti iga 30 minuti järel vahemikus 8–17; c) iga pühapäeva keskööl.</p>
+</div>
 <p><strong>6.2</strong> Eemalda rida crontab'ist (<code>crontab -e</code>).</p>
 <h3 id="systemd-taimer">systemd taimer<a class="headerlink" href="#systemd-taimer" title="Permanent link">&para;</a></h3>
 <p><strong>6.3</strong> Loo varundusskript, mis arhiveerib kataloogi <code>/etc</code>:</p>
@@ -4806,13 +4884,22 @@ systemctl<span class="w"> </span>list-timers<span class="w"> </span>varundus.tim
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>/srv/varundus
 journalctl<span class="w"> </span>-u<span class="w"> </span>varundus.service
 </code></pre></div>
-<p><strong>K18.</strong> Millal käivitub taimer järgmisena? Mitu arhiivi tekkis? Mida näitab teenuse logi?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Millal käivitub taimer järgmisena? Mitu arhiivi tekkis? Mida näitab teenuse logi?</p>
+</div>
 <p><strong>6.6</strong> Muuda taimer igapäevaseks kell 02:30 ja kontrolli ajaavaldist:</p>
 <div class="highlight"><pre><span></span><code>systemd-analyze<span class="w"> </span>calendar<span class="w"> </span><span class="s2">"*-*-* 02:30:00"</span>
 </code></pre></div>
-<p><strong>K19.</strong> Mida tähendab <code>Persistent=true</code>? Miks on see varunduse puhul oluline?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K19</p>
+<p>Mida tähendab <code>Persistent=true</code>? Miks on see varunduse puhul oluline?</p>
+</div>
 <p><strong>6.7</strong> Koristamine: peata ja keela teenus <code>kettakontroll</code> ning taimer <code>varundus.timer</code>. Kustuta varundusarhiivid.</p>
-<p><strong>K20.</strong> Kirjuta koristamise käsud.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K20</p>
+<p>Kirjuta koristamise käsud.</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4821,6 +4908,34 @@ journalctl<span class="w"> </span>-u<span class="w"> </span>varundus.service
 <li><strong>at:</strong> ajasta <code>at</code>-iga 2 minuti pärast käsk, mis kirjutab kuupäeva faili <code>/tmp/at-test.txt</code>. Vaata <code>atq</code>-d ja kontrolli tulemust.</li>
 <li><strong>Ressursipiirangud:</strong> piira mõne teenuse mälu (<code>sudo systemctl set-property &lt;teenus&gt; MemoryMax=100M</code>), vaata <code>systemctl status &lt;teenus&gt;</code> rida <code>Memory:</code> ja <code>systemd-cgtop</code>-i. Käivita <code>systemd-run --scope -p CPUQuota=20%</code> abil protsessorit koormav käsk (<code>sha256sum /dev/zero</code>) ja vaata <code>top</code>-is, mitu protsenti see saab.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Mis on protsessi PID 1 nimi? Kes on sinu praeguse kesta (<code>bash</code>) vanemprotsess? (Vihje: <code>ps -ef | grep $$</code> - muutuja <code>$$</code> on praeguse kesta PID.)</li>
+<li><strong>K2.</strong> <em>(punkt 1.3)</em> Mis on süsteemi koormus (<em>load average</em>) ja mitu protsessorituuma on masinal (<code>nproc</code>)? Kui palju mälu on tegelikult saadaval (<code>avail Mem</code>)?</li>
+<li><strong>K3.</strong> <em>(punkt 2.2)</em> Mis olekus oli töö pärast Ctrl+Z vajutamist? Mis muutus pärast <code>bg</code> käsku?</li>
+<li><strong>K4.</strong> <em>(punkt 2.3)</em> Kirjuta käsk, millega lõpetasid kõik <code>sleep</code> protsessid.</li>
+<li><strong>K5.</strong> <em>(punkt 2.5)</em> Kas protsessori kasutus muutus? Miks ei pruugi see tühjas virtuaalmasinas eriti muutuda? (Vihje: mille suhtes prioriteet kehtib?)</li>
+<li><strong>K6.</strong> <em>(punkt 2.6)</em> Mis juhtus? Miks?</li>
+<li><strong>K7.</strong> <em>(punkt 3.1)</em> Kas teenus on lubatud (<code>enabled</code>)? Mis on selle põhiprotsessi PID? Millises failis on teenuse kirjeldus?</li>
+<li><strong>K8.</strong> <em>(punkt 3.2)</em> Kas teenus töötab kohe pärast paigaldamist? Kas see on lubatud? Kuidas erineb see Debianist ja Ubuntust?</li>
+<li><strong>K9.</strong> <em>(punkt 3.4)</em> Kas <code>httpd</code> töötas pärast taaskäivitust? Miks? Millise <strong>ühe</strong> käsuga oleksid saanud teenuse korraga käivitada ja lubada?</li>
+<li><strong>K10.</strong> <em>(punkt 3.5)</em> Mis on <code>enable</code> tegelikult loonud?</li>
+<li><strong>K11.</strong> <em>(punkt 4.2)</em> Kuidas on logis näha ebaõnnestunud ja õnnestunud sisselogimine? Kirjuta mõlema kohta üks logirida (IP-aadressi võid varjata).</li>
+<li><strong>K12.</strong> <em>(punkt 4.3)</em> Mitu alglaadimist on journal'is (punktis 3.4 tegid ühe taaskäivituse)? Kas journal on püsiv või ajutine? Kui ajutine, tee see püsivaks (vt teooria punkt 5.7).</li>
+<li><strong>K13.</strong> <em>(punkt 5.3)</em> Mille poolest erineb teenuse <code>kettakontroll</code> olek teenuse <code>httpd</code> omast? Millise kasutajana teenus töötab (<code>ps -fu nobody</code>)?</li>
+<li><strong>K14.</strong> <em>(punkt 5.4)</em> Kuhu jõuab skripti <code>echo</code> väljund? Miks ei olnud vaja eraldi logifaili?</li>
+<li><strong>K15.</strong> <em>(punkt 5.5)</em> Kummal juhul teenus taaskäivitati ja kummal mitte? Selgita seda seadistusega <code>Restart=on-failure</code>.</li>
+<li><strong>K16.</strong> <em>(punkt 5.6)</em> Millise faili <code>systemctl edit</code> lõi? Miks on see parem kui põhifaili muutmine? Kontrolli tulemust käsuga <code>systemctl cat kettakontroll</code>.</li>
+<li><strong>K17.</strong> <em>(punkt 6.1)</em> Kirjuta crontab'i read, mis käivitaksid skripti <code>/usr/local/bin/aruanne.sh</code>: a) iga päev kell 06:45; b) tööpäeviti iga 30 minuti järel vahemikus 8–17; c) iga pühapäeva keskööl.</li>
+<li><strong>K18.</strong> <em>(punkt 6.5)</em> Millal käivitub taimer järgmisena? Mitu arhiivi tekkis? Mida näitab teenuse logi?</li>
+<li><strong>K19.</strong> <em>(punkt 6.6)</em> Mida tähendab <code>Persistent=true</code>? Miks on see varunduse puhul oluline?</li>
+<li><strong>K20.</strong> <em>(punkt 6.7)</em> Kirjuta koristamise käsud.</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

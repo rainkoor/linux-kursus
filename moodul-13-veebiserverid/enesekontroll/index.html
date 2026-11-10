@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2309,34 +2311,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,90 +4407,162 @@
 
 
 <h1 id="moodul-13-enesekontroll">Moodul 13. Enesekontroll<a class="headerlink" href="#moodul-13-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjelda üldist töövoogu uue serveriteenuse paigaldamisel.</li>
-<li>Mis on virtuaalhost ja kuidas valib nginx, millist saiti näidata?</li>
-<li>Miks käivitatakse enne <code>systemctl reload nginx</code> käsku <code>nginx -t</code>?</li>
-<li>Mis on pöördpuhverserver ja milleks seda kasutatakse?</li>
-<li>Mida tõendab TLS-sertifikaat? Miks usaldab brauser Let's Encrypti sertifikaati, kuid mitte iseallkirjastatut?</li>
-<li>Mis on SAN ja miks see oluline on?</li>
-<li>Millal kasutada oma CA-d ja millal Let's Encrypti?</li>
-<li>Mis vahe on nginx-il ja Apache'il? Millal eelistaksid Apache'it?</li>
-<li>Mida teevad käsud <code>a2ensite</code>, <code>a2enmod</code> ja <code>apache2ctl configtest</code>? Mis on nende vasted AlmaLinuxis?</li>
-<li>Mis on <code>.htaccess</code> ja miks seda peetakse nii mugavaks kui ka problemaatiliseks?</li>
-<li>Mis on Caddy eripära? Mida tähendab Caddyfile'is <code>tls internal</code>?</li>
-<li>Milleks kasutatakse lighttpd-d?</li>
-<li>Mis on koormusejaotur ja tervisekontroll? Too kaks koormuse jaotamise algoritmi.</li>
-<li>Miks näeb taustserver logis koormusejaoturi IP-d ja kuidas saada kliendi tegelik aadress?</li>
-<li>Mis on Traefiki eripära võrreldes nginx-i ja HAProxyga?</li>
-<li>Kirjelda avaliku veebisaidi sertifikaadi hankimist algusest lõpuni: mida on vaja enne, kuidas CA domeeni kontrollib, kuidas sertifikaat uueneb?</li>
-<li>Mis vahe on ACME väljakutsetel HTTP-01 ja DNS-01? Millal on DNS-01 ainus võimalus?</li>
-<li>Mis on vahesertifikaat ja miks peab nginx-i <code>ssl_certificate</code> olema <code>fullchain.pem</code>?</li>
-<li>Miks lühenevad sertifikaatide kehtivusajad ja mida see administraatorile tähendab?</li>
-<li>Mis on üksik rikkepunkt (<em>single point of failure</em>) ja kuidas aitab keepalived seda koormusejaoturi puhul vältida?</li>
-<li>Kuidas VRRP otsustab, milline masin virtuaalset IP-aadressi hoiab? Mis juhtub, kui tulemüür VRRP-teated blokeerib?</li>
-<li>Milliseid näitajaid vaatad koormustesti (<code>ab</code>) väljundis ja miks on protsentiilid olulisemad kui keskmine?</li>
-</ol>
+<p><strong>1.</strong> Kirjelda üldist töövoogu uue serveriteenuse paigaldamisel.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Paigalda → seadista (varukoopia algsest failist) → kontrolli süntaksit → käivita ja luba → ava tulemüür → testi kohalikult ja väljast → vaata logisid → seadista varundus → dokumenteeri.</p>
+</details>
+<p><strong>2.</strong> Mis on virtuaalhost ja kuidas valib nginx, millist saiti näidata?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Üks veebiserver teenindab mitut saiti. Brauser saadab päringus päise <code>Host:</code>, nginx valib selle järgi serveriploki, mille <code>server_name</code> sobib. Kui ükski ei sobi, kasutatakse pordi vaikeserverit.</p>
+</details>
+<p><strong>3.</strong> Miks käivitatakse enne <code>systemctl reload nginx</code> käsku <code>nginx -t</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>nginx -t</code> kontrollib seadistuse süntaksit. Vigane seadistus võib teenuse taaskäivitamisel saidi maha võtta.</p>
+</details>
+<p><strong>4.</strong> Mis on pöördpuhverserver ja milleks seda kasutatakse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Server, mis võtab päringud vastu ja edastab need taustal töötavale rakendusele. Kasutatakse TLS-i lõpetamiseks, mitme rakenduse jagamiseks ühe aadressi taga ja rakenduse peitmiseks otse internetist.</p>
+</details>
+<p><strong>5.</strong> Mida tõendab TLS-sertifikaat? Miks usaldab brauser Let's Encrypti sertifikaati, kuid mitte iseallkirjastatut?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Et server on see, kelleks ta end nimetab (sertifikaadis olev nimi), ja et seda on tõendanud CA. Let's Encrypti juur-CA on brauseri usaldatud CA-de loendis, iseallkirjastatud sertifikaati pole keegi usaldusväärne tõendanud.</p>
+</details>
+<p><strong>6.</strong> Mis on SAN ja miks see oluline on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><em>Subject Alternative Name</em> - sertifikaadi väli, kus on nimed, millele sertifikaat kehtib. Brauserid kontrollivad serveri nime just selle välja järgi.</p>
+</details>
+<p><strong>7.</strong> Millal kasutada oma CA-d ja millal Let's Encrypti?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Oma CA sobib sisevõrgule ja laborile, kus nimed ei ole avalikud ja CA-d saab klientides usaldada. Let's Encrypt sobib avalikele saitidele, millel on avalik DNS-nimi.</p>
+</details>
+<p><strong>8.</strong> Mis vahe on nginx-il ja Apache'il? Millal eelistaksid Apache'it?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>nginx on sündmuspõhine ja kerge, sobib staatilistele failidele ja pöördpuhvriks; Apache on moodulipõhine ja paindlik ning toetab <code>.htaccess</code>-i. Apache'it eelistan, kui rakendus (nt vanem PHP-rakendus) või selle juhend seda eeldab.</p>
+</details>
+<p><strong>9.</strong> Mida teevad käsud <code>a2ensite</code>, <code>a2enmod</code> ja <code>apache2ctl configtest</code>? Mis on nende vasted AlmaLinuxis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>a2ensite</code> lubab saidi (viide <code>sites-enabled/</code>), <code>a2enmod</code> lubab mooduli, <code>apache2ctl configtest</code> kontrollib süntaksit. AlmaLinuxis on saidid failid <code>conf.d/</code> kataloogis (eraldi lubamist pole), moodulid <code>conf.modules.d/</code>, kontroll <code>apachectl configtest</code>.</p>
+</details>
+<p><strong>10.</strong> Mis on <code>.htaccess</code> ja miks seda peetakse nii mugavaks kui ka problemaatiliseks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kataloogis asuv fail, millega saab Apache'i seadistust kataloogi kaupa muuta ilma serveri seadistust puutumata (mugav jagatud hostingus). Probleem: Apache peab iga päringu juures neid faile otsima (aeglasem) ja seadistus on laiali.</p>
+</details>
+<p><strong>11.</strong> Mis on Caddy eripära? Mida tähendab Caddyfile'is <code>tls internal</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Automaatne HTTPS: avaliku nimega saidile hangib ja uuendab Caddy sertifikaadi ise; väga lühike seadistus. <code>tls internal</code> kasutab Caddy enda CA-d (sisevõrgu nimedele).</p>
+</details>
+<p><strong>12.</strong> Milleks kasutatakse lighttpd-d?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Väga väikese mälukasutusega veebiserver manussüsteemidele, ruuteritele ja väikestele seadmetele.</p>
+</details>
+<p><strong>13.</strong> Mis on koormusejaotur ja tervisekontroll? Too kaks koormuse jaotamise algoritmi.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Koormusejaotur jagab päringud mitme taustserveri vahel; tervisekontroll kontrollib regulaarselt, kas taustserver vastab, ja jätab rikkis serveri välja. Algoritmid: round robin, least connections (ka source/IP hash).</p>
+</details>
+<p><strong>14.</strong> Miks näeb taustserver logis koormusejaoturi IP-d ja kuidas saada kliendi tegelik aadress?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>TCP-ühendus tuleb jaoturist. Jaotur lisab päise <code>X-Forwarded-For</code> (HAProxy <code>option forwardfor</code>, nginx <code>proxy_set_header X-Forwarded-For</code>) ja taustserver seadistatakse seda usaldama (nginx <code>real_ip_header</code>).</p>
+</details>
+<p><strong>15.</strong> Mis on Traefiki eripära võrreldes nginx-i ja HAProxyga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Traefik leiab teenused automaatselt konteinerite siltidelt (Docker, Kubernetes) ja hangib sertifikaadid ise - sobib dünaamiliselt muutuvasse konteinerikeskkonda.</p>
+</details>
+<p><strong>16.</strong> Kirjelda avaliku veebisaidi sertifikaadi hankimist algusest lõpuni: mida on vaja enne, kuidas CA domeeni kontrollib, kuidas sertifikaat uueneb?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Vaja on avalikku domeeni ja DNS-kirjet serveri avalikule IP-le. ACME klient (certbot) taotleb sertifikaati, CA esitab väljakutse (HTTP-01: fail veebiserveris pordil 80; DNS-01: TXT-kirje), klient täidab selle ja CA väljastab DV-sertifikaadi. systemd taimer uuendab sertifikaati enne aegumist ja laadib veebiserveri uuesti; aegumist jälgitakse seiresüsteemiga.</p>
+</details>
+<p><strong>17.</strong> Mis vahe on ACME väljakutsetel HTTP-01 ja DNS-01? Millal on DNS-01 ainus võimalus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>HTTP-01 vajab, et server oleks internetist pordil 80 kättesaadav; DNS-01 tõendab domeeni kontrolli DNS-kirjega ja vajab DNS-i halduse ligipääsu. DNS-01 on ainus võimalus wildcard-sertifikaadiks ja sobib sisevõrgu serverile, mis ei ole internetist kättesaadav.</p>
+</details>
+<p><strong>18.</strong> Mis on vahesertifikaat ja miks peab nginx-i <code>ssl_certificate</code> olema <code>fullchain.pem</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Juur-CA ei allkirjasta serveri sertifikaate otse - seda teeb vahe-CA, mille sertifikaadi on allkirjastanud juur-CA. Klient vajab kogu ahelat; kui server saadab ainult oma sertifikaadi, ei saa paljud kliendid (curl, telefonid) ahelat kontrollida.</p>
+</details>
+<p><strong>19.</strong> Miks lühenevad sertifikaatide kehtivusajad ja mida see administraatorile tähendab?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Lühem kehtivus vähendab lekkinud võtmete ja vigaste sertifikaatide kahju ning sunnib automatiseerima. Administraatorile: kõik sertifikaadid peavad uuenema automaatselt (ACME) ja aegumist tuleb jälgida; käsitsi uuendamine ei ole enam realistlik.</p>
+</details>
+<p><strong>20.</strong> Mis on üksik rikkepunkt (<em>single point of failure</em>) ja kuidas aitab keepalived seda koormusejaoturi puhul vältida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Komponent, mille rikkel lakkab kogu teenus töötamast. Ühe HAProxy korral on selleks jaotur ise. keepalived hoiab kahe jaoturi vahel virtuaalset IP-d: kui põhimasin või selle HAProxy rikneb (<code>vrrp_script</code>), võtab varumasin VIP-i üle ja kliendid jätkavad sama aadressiga.</p>
+</details>
+<p><strong>21.</strong> Kuidas VRRP otsustab, milline masin virtuaalset IP-aadressi hoiab? Mis juhtub, kui tulemüür VRRP-teated blokeerib?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Masinad saadavad VRRP-teateid; VIP on suurima <code>priority</code>-ga töötava masina (MASTER) küljes. Kui varumasin teateid enam ei saa, võtab ta aadressi üle. Kui tulemüür blokeerib protokolli 112, ei näe masinad üksteist ja mõlemad muutuvad MASTER-iks (lõhestunud aju) - VIP on kahes kohas korraga.</p>
+</details>
+<p><strong>22.</strong> Milliseid näitajaid vaatad koormustesti (<code>ab</code>) väljundis ja miks on protsentiilid olulisemad kui keskmine?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>Requests per second</code> (läbilaskevõime), <code>Failed requests</code> (peab olema 0) ja vastamisaegade jaotus. Keskmine peidab aeglased päringud: kui 95% vastab 20 ms-ga ja 5% 3 sekundiga, on keskmine hea, aga iga kahekümnes kasutaja ootab kaua.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Leia, millal aegub serveri <code>www.debian.org</code> sertifikaat ja kes selle välja andis.</li>
-<li>Kirjuta nginx-i serveriplokk, mis suunab kõik nime <code>vana.lab.example</code> päringud aadressile <code>https://kool.lab.example</code>.</li>
-<li>Kirjuta Caddyfile, mis teenindab nime <code>info.lab.example</code> kataloogist <code>/var/www/info</code> Caddy enda sertifikaadiga.</li>
-<li>Kirjuta HAProxy taustserverite plokk, mis jagab päringud serveritele <code>10.0.83.52</code> ja <code>10.0.83.55</code> (port 80) vähima ühenduste arvu järgi ja kontrollib nende tervist.</li>
-<li>Luba Debianis Apache'i moodulid <code>rewrite</code> ja <code>headers</code> ning kontrolli seadistust.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Paigalda → seadista (varukoopia algsest failist) → kontrolli süntaksit → käivita ja luba → ava tulemüür → testi kohalikult ja väljast → vaata logisid → seadista varundus → dokumenteeri.</li>
-<li>Üks veebiserver teenindab mitut saiti. Brauser saadab päringus päise <code>Host:</code>, nginx valib selle järgi serveriploki, mille <code>server_name</code> sobib. Kui ükski ei sobi, kasutatakse pordi vaikeserverit.</li>
-<li><code>nginx -t</code> kontrollib seadistuse süntaksit. Vigane seadistus võib teenuse taaskäivitamisel saidi maha võtta.</li>
-<li>Server, mis võtab päringud vastu ja edastab need taustal töötavale rakendusele. Kasutatakse TLS-i lõpetamiseks, mitme rakenduse jagamiseks ühe aadressi taga ja rakenduse peitmiseks otse internetist.</li>
-<li>Et server on see, kelleks ta end nimetab (sertifikaadis olev nimi), ja et seda on tõendanud CA. Let's Encrypti juur-CA on brauseri usaldatud CA-de loendis, iseallkirjastatud sertifikaati pole keegi usaldusväärne tõendanud.</li>
-<li><em>Subject Alternative Name</em> - sertifikaadi väli, kus on nimed, millele sertifikaat kehtib. Brauserid kontrollivad serveri nime just selle välja järgi.</li>
-<li>Oma CA sobib sisevõrgule ja laborile, kus nimed ei ole avalikud ja CA-d saab klientides usaldada. Let's Encrypt sobib avalikele saitidele, millel on avalik DNS-nimi.</li>
-<li>nginx on sündmuspõhine ja kerge, sobib staatilistele failidele ja pöördpuhvriks; Apache on moodulipõhine ja paindlik ning toetab <code>.htaccess</code>-i. Apache'it eelistan, kui rakendus (nt vanem PHP-rakendus) või selle juhend seda eeldab.</li>
-<li><code>a2ensite</code> lubab saidi (viide <code>sites-enabled/</code>), <code>a2enmod</code> lubab mooduli, <code>apache2ctl configtest</code> kontrollib süntaksit. AlmaLinuxis on saidid failid <code>conf.d/</code> kataloogis (eraldi lubamist pole), moodulid <code>conf.modules.d/</code>, kontroll <code>apachectl configtest</code>.</li>
-<li>Kataloogis asuv fail, millega saab Apache'i seadistust kataloogi kaupa muuta ilma serveri seadistust puutumata (mugav jagatud hostingus). Probleem: Apache peab iga päringu juures neid faile otsima (aeglasem) ja seadistus on laiali.</li>
-<li>Automaatne HTTPS: avaliku nimega saidile hangib ja uuendab Caddy sertifikaadi ise; väga lühike seadistus. <code>tls internal</code> kasutab Caddy enda CA-d (sisevõrgu nimedele).</li>
-<li>Väga väikese mälukasutusega veebiserver manussüsteemidele, ruuteritele ja väikestele seadmetele.</li>
-<li>Koormusejaotur jagab päringud mitme taustserveri vahel; tervisekontroll kontrollib regulaarselt, kas taustserver vastab, ja jätab rikkis serveri välja. Algoritmid: round robin, least connections (ka source/IP hash).</li>
-<li>TCP-ühendus tuleb jaoturist. Jaotur lisab päise <code>X-Forwarded-For</code> (HAProxy <code>option forwardfor</code>, nginx <code>proxy_set_header X-Forwarded-For</code>) ja taustserver seadistatakse seda usaldama (nginx <code>real_ip_header</code>).</li>
-<li>Traefik leiab teenused automaatselt konteinerite siltidelt (Docker, Kubernetes) ja hangib sertifikaadid ise - sobib dünaamiliselt muutuvasse konteinerikeskkonda.</li>
-<li>Vaja on avalikku domeeni ja DNS-kirjet serveri avalikule IP-le. ACME klient (certbot) taotleb sertifikaati, CA esitab väljakutse (HTTP-01: fail veebiserveris pordil 80; DNS-01: TXT-kirje), klient täidab selle ja CA väljastab DV-sertifikaadi. systemd taimer uuendab sertifikaati enne aegumist ja laadib veebiserveri uuesti; aegumist jälgitakse seiresüsteemiga.</li>
-<li>HTTP-01 vajab, et server oleks internetist pordil 80 kättesaadav; DNS-01 tõendab domeeni kontrolli DNS-kirjega ja vajab DNS-i halduse ligipääsu. DNS-01 on ainus võimalus wildcard-sertifikaadiks ja sobib sisevõrgu serverile, mis ei ole internetist kättesaadav.</li>
-<li>Juur-CA ei allkirjasta serveri sertifikaate otse - seda teeb vahe-CA, mille sertifikaadi on allkirjastanud juur-CA. Klient vajab kogu ahelat; kui server saadab ainult oma sertifikaadi, ei saa paljud kliendid (curl, telefonid) ahelat kontrollida.</li>
-<li>Lühem kehtivus vähendab lekkinud võtmete ja vigaste sertifikaatide kahju ning sunnib automatiseerima. Administraatorile: kõik sertifikaadid peavad uuenema automaatselt (ACME) ja aegumist tuleb jälgida; käsitsi uuendamine ei ole enam realistlik.</li>
-<li>Komponent, mille rikkel lakkab kogu teenus töötamast. Ühe HAProxy korral on selleks jaotur ise. keepalived hoiab kahe jaoturi vahel virtuaalset IP-d: kui põhimasin või selle HAProxy rikneb (<code>vrrp_script</code>), võtab varumasin VIP-i üle ja kliendid jätkavad sama aadressiga.</li>
-<li>Masinad saadavad VRRP-teateid; VIP on suurima <code>priority</code>-ga töötava masina (MASTER) küljes. Kui varumasin teateid enam ei saa, võtab ta aadressi üle. Kui tulemüür blokeerib protokolli 112, ei näe masinad üksteist ja mõlemad muutuvad MASTER-iks (lõhestunud aju) - VIP on kahes kohas korraga.</li>
-<li><code>Requests per second</code> (läbilaskevõime), <code>Failed requests</code> (peab olema 0) ja vastamisaegade jaotus. Keskmine peidab aeglased päringud: kui 95% vastab 20 ms-ga ja 5% 3 sekundiga, on keskmine hea, aga iga kahekümnes kasutaja ootab kaua.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Leia, millal aegub serveri <code>www.debian.org</code> sertifikaat ja kes selle välja andis.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>www.debian.org:443<span class="w"> </span>-servername<span class="w"> </span>www.debian.org<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-issuer<span class="w"> </span>-enddate
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta nginx-i serveriplokk, mis suunab kõik nime <code>vana.lab.example</code> päringud aadressile <code>https://kool.lab.example</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="k">server</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
 <span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">vana.lab.example</span><span class="p">;</span>
 <span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">301</span><span class="w"> </span><span class="s">https://kool.lab.example</span><span class="nv">$request_uri</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta Caddyfile, mis teenindab nime <code>info.lab.example</code> kataloogist <code>/var/www/info</code> Caddy enda sertifikaadiga.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>info.lab.example {
     tls internal
     root * /var/www/info
     file_server
 }
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta HAProxy taustserverite plokk, mis jagab päringud serveritele <code>10.0.83.52</code> ja <code>10.0.83.55</code> (port 80) vähima ühenduste arvu järgi ja kontrollib nende tervist.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>backend koolisait
     balance leastconn
     server debian1 10.0.83.52:80 check
     server alma    10.0.83.55:80 check
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Luba Debianis Apache'i moodulid <code>rewrite</code> ja <code>headers</code> ning kontrolli seadistust.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>a2enmod<span class="w"> </span>rewrite<span class="w"> </span>headers
 sudo<span class="w"> </span>apache2ctl<span class="w"> </span>configtest<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>apache2
 </code></pre></div>
+</details>
 
 
 

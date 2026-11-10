@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2873,34 +2875,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,63 +4407,119 @@
 
 
 <h1 id="moodul-17-enesekontroll">Moodul 17. Enesekontroll<a class="headerlink" href="#moodul-17-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Millised on seire kolm alustala ja milleks igaüks on?</li>
-<li>Selgita USE meetodit. Too iga ressursi jaoks üks käsk, millega seda kontrollida.</li>
-<li>Mida tähendab koormus (<em>load average</em>) <code>4.00, 2.50, 1.20</code> 2 tuumaga masinas?</li>
-<li>Miks on <code>free -h</code> väljundis veerg <code>free</code> väike, kuigi server töötab hästi? Millist veergu tuleb vaadata?</li>
-<li>Mida näitavad <code>top</code> väljundis <code>wa</code> ja <code>st</code>?</li>
-<li>Mis vahe on <code>vmstat</code>-il ja <code>sar</code>-il?</li>
-<li>Milleks on <code>strace</code> ja millal seda kasutada?</li>
-<li>Kuidas leiad, milline protsess hoiab faili avatuna või kuulab kindlal pordil?</li>
-<li>Kuidas töötab Prometheus (<em>pull</em>) ja mis on eksportija?</li>
-<li>Mille poolest erinevad Prometheus ja Zabbix?</li>
-<li>Mida mõõdab Uptime Kuma ja mille poolest erineb see Prometheusest?</li>
-<li>Mis on häirete väsimus ja kuidas seda vältida?</li>
-<li>Miks peab seiresüsteemi port (nt 9100) olema tulemüüris lubatud ainult seireserverile?</li>
-<li>Mis on OOM killer ja kust selle tegevust näha?</li>
-<li>Miks on Proxmoxi VM-is kõrge <code>st</code> väärtus probleem, mida VM-i sees lahendada ei saa?</li>
-<li>Mis on tuned ja millise profiili soovitab see virtuaalmasinale?</li>
-</ol>
+<p><strong>1.</strong> Millised on seire kolm alustala ja milleks igaüks on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mõõdikud (arvud ajas: trendid, jõudlus), logid (sündmused: mis juhtus), häired (teade inimesele, kui on vaja tegutseda).</p>
+</details>
+<p><strong>2.</strong> Selgita USE meetodit. Too iga ressursi jaoks üks käsk, millega seda kontrollida.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Iga ressursi (CPU, mälu, ketas, võrk) kohta: kasutus (<em>Utilization</em>), küllastus ehk järjekord (<em>Saturation</em>), vead (<em>Errors</em>). Nt CPU - <code>mpstat</code>, <code>vmstat</code> <code>r</code>; mälu - <code>free</code>, <code>vmstat si/so</code>; ketas - <code>iostat -x</code> (<code>%util</code>, <code>aqu-sz</code>); võrk - <code>sar -n DEV</code>, <code>ip -s link</code>.</p>
+</details>
+<p><strong>3.</strong> Mida tähendab koormus (<em>load average</em>) <code>4.00, 2.50, 1.20</code> 2 tuumaga masinas?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Viimase minuti jooksul oli keskmiselt 4 protsessi, mis töötasid või ootasid - 2 tuuma jaoks kaks korda rohkem kui jõuab; koormus on kasvanud (15 min tagasi 1,2).</p>
+</details>
+<p><strong>4.</strong> Miks on <code>free -h</code> väljundis veerg <code>free</code> väike, kuigi server töötab hästi? Millist veergu tuleb vaadata?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Linux kasutab vaba mälu failide vahemäluna, mille saab vajadusel kohe vabastada. Vaadata tuleb veergu <code>available</code>.</p>
+</details>
+<p><strong>5.</strong> Mida näitavad <code>top</code> väljundis <code>wa</code> ja <code>st</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>wa</code> - protsessor ootab kettaoperatsioone; <code>st</code> - hüperviisor andis protsessoriaja teistele virtuaalmasinatele.</p>
+</details>
+<p><strong>6.</strong> Mis vahe on <code>vmstat</code>-il ja <code>sar</code>-il?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>vmstat</code> näitab praegust olekut reaalajas; <code>sar</code> kogub ja säilitab ajalugu, millest saab vaadata ka möödunud aega.</p>
+</details>
+<p><strong>7.</strong> Milleks on <code>strace</code> ja millal seda kasutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Näitab programmi süsteemikutseid (failide avamine, võrk, protsessid). Kasuta, kui programm ei tööta ja veateade ei ütle, miks - nt leiad, millist faili see otsib.</p>
+</details>
+<p><strong>8.</strong> Kuidas leiad, milline protsess hoiab faili avatuna või kuulab kindlal pordil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>lsof /tee/failini</code>, <code>lsof -i :port</code>, <code>ss -tlpn</code>, <code>fuser</code>.</p>
+</details>
+<p><strong>9.</strong> Kuidas töötab Prometheus (<em>pull</em>) ja mis on eksportija?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Prometheus küsib ise kindla intervalliga sihtmärkidelt HTTP kaudu (<code>/metrics</code>) mõõdikuid ja salvestab need. Eksportija on programm, mis teeb süsteemi või teenuse mõõdikud selles vormingus kättesaadavaks (nt node_exporter).</p>
+</details>
+<p><strong>10.</strong> Mille poolest erinevad Prometheus ja Zabbix?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Prometheus: <em>pull</em>, mõõdikud ja PromQL, konteinerimaailma standard, seadistus failides. Zabbix: agendid, valmis mallid, kõik veebiliideses, levinud klassikalises taristus ja võrguseadmete seires.</p>
+</details>
+<p><strong>11.</strong> Mida mõõdab Uptime Kuma ja mille poolest erineb see Prometheusest?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kättesaadavust väljastpoolt: kas teenus vastab ja kui kiiresti, sertifikaadi kehtivus. Prometheus mõõdab masina ja teenuste sisemisi näitajaid.</p>
+</details>
+<p><strong>12.</strong> Mis on häirete väsimus ja kuidas seda vältida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kui häireid on liiga palju ja enamik ei vaja tegutsemist, hakatakse neid ignoreerima. Häire ainult siis, kui inimene peab midagi tegema; ooteaeg (<code>for</code>); ülejäänu armatuurlauale.</p>
+</details>
+<p><strong>13.</strong> Miks peab seiresüsteemi port (nt 9100) olema tulemüüris lubatud ainult seireserverile?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mõõdikud avaldavad infot süsteemi kohta (tarkvara, kasutus, failisüsteemid) ja eksportijat võib rünnata - vähima õiguse põhimõte.</p>
+</details>
+<p><strong>14.</strong> Mis on OOM killer ja kust selle tegevust näha?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kerneli mehhanism, mis mälu otsasaamisel tapab protsessi. <code>journalctl -k | grep -i "out of memory"</code> või <code>dmesg</code>.</p>
+</details>
+<p><strong>15.</strong> Miks on Proxmoxi VM-is kõrge <code>st</code> väärtus probleem, mida VM-i sees lahendada ei saa?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>st</code> tähendab, et hüperviisori sõlm on ülekoormatud ja VM ei saa protsessoriaega; põhjus on väljaspool VM-i - lahendus on sõlme koormuse vähendamine või VM-i teisele sõlmele viimine.</p>
+</details>
+<p><strong>16.</strong> Mis on tuned ja millise profiili soovitab see virtuaalmasinale?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Teenus, mis rakendab terve komplekti jõudlusseadeid profiilina (<code>tuned-adm profile …</code>); virtuaalmasinale <code>virtual-guest</code>.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kuva iga 5 sekundi järel ketaste laiendatud statistika ilma jõudeolevate seadmeteta.</li>
-<li>Leia, millised protsessid kasutavad praegu kõige rohkem kettakirjutust.</li>
-<li>Näita eilse päeva (nt kuu 7. päev) protsessori kasutust Debianis.</li>
-<li>Kirjuta PromQL-päring, mis näitab masinaid, kus juurfailisüsteemis on vaba ruumi alla 10%.</li>
-<li>Jälgi, milliseid faile käsk <code>ls /etc</code> avab.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mõõdikud (arvud ajas: trendid, jõudlus), logid (sündmused: mis juhtus), häired (teade inimesele, kui on vaja tegutseda).</li>
-<li>Iga ressursi (CPU, mälu, ketas, võrk) kohta: kasutus (<em>Utilization</em>), küllastus ehk järjekord (<em>Saturation</em>), vead (<em>Errors</em>). Nt CPU - <code>mpstat</code>, <code>vmstat</code> <code>r</code>; mälu - <code>free</code>, <code>vmstat si/so</code>; ketas - <code>iostat -x</code> (<code>%util</code>, <code>aqu-sz</code>); võrk - <code>sar -n DEV</code>, <code>ip -s link</code>.</li>
-<li>Viimase minuti jooksul oli keskmiselt 4 protsessi, mis töötasid või ootasid - 2 tuuma jaoks kaks korda rohkem kui jõuab; koormus on kasvanud (15 min tagasi 1,2).</li>
-<li>Linux kasutab vaba mälu failide vahemäluna, mille saab vajadusel kohe vabastada. Vaadata tuleb veergu <code>available</code>.</li>
-<li><code>wa</code> - protsessor ootab kettaoperatsioone; <code>st</code> - hüperviisor andis protsessoriaja teistele virtuaalmasinatele.</li>
-<li><code>vmstat</code> näitab praegust olekut reaalajas; <code>sar</code> kogub ja säilitab ajalugu, millest saab vaadata ka möödunud aega.</li>
-<li>Näitab programmi süsteemikutseid (failide avamine, võrk, protsessid). Kasuta, kui programm ei tööta ja veateade ei ütle, miks - nt leiad, millist faili see otsib.</li>
-<li><code>lsof /tee/failini</code>, <code>lsof -i :port</code>, <code>ss -tlpn</code>, <code>fuser</code>.</li>
-<li>Prometheus küsib ise kindla intervalliga sihtmärkidelt HTTP kaudu (<code>/metrics</code>) mõõdikuid ja salvestab need. Eksportija on programm, mis teeb süsteemi või teenuse mõõdikud selles vormingus kättesaadavaks (nt node_exporter).</li>
-<li>Prometheus: <em>pull</em>, mõõdikud ja PromQL, konteinerimaailma standard, seadistus failides. Zabbix: agendid, valmis mallid, kõik veebiliideses, levinud klassikalises taristus ja võrguseadmete seires.</li>
-<li>Kättesaadavust väljastpoolt: kas teenus vastab ja kui kiiresti, sertifikaadi kehtivus. Prometheus mõõdab masina ja teenuste sisemisi näitajaid.</li>
-<li>Kui häireid on liiga palju ja enamik ei vaja tegutsemist, hakatakse neid ignoreerima. Häire ainult siis, kui inimene peab midagi tegema; ooteaeg (<code>for</code>); ülejäänu armatuurlauale.</li>
-<li>Mõõdikud avaldavad infot süsteemi kohta (tarkvara, kasutus, failisüsteemid) ja eksportijat võib rünnata - vähima õiguse põhimõte.</li>
-<li>Kerneli mehhanism, mis mälu otsasaamisel tapab protsessi. <code>journalctl -k | grep -i "out of memory"</code> või <code>dmesg</code>.</li>
-<li><code>st</code> tähendab, et hüperviisori sõlm on ülekoormatud ja VM ei saa protsessoriaega; põhjus on väljaspool VM-i - lahendus on sõlme koormuse vähendamine või VM-i teisele sõlmele viimine.</li>
-<li>Teenus, mis rakendab terve komplekti jõudlusseadeid profiilina (<code>tuned-adm profile …</code>); virtuaalmasinale <code>virtual-guest</code>.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kuva iga 5 sekundi järel ketaste laiendatud statistika ilma jõudeolevate seadmeteta.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>iostat<span class="w"> </span>-xz<span class="w"> </span><span class="m">5</span>
-pidstat<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w">            </span><span class="c1"># või: sudo iotop -o</span>
-sar<span class="w"> </span>-u<span class="w"> </span>-f<span class="w"> </span>/var/log/sysstat/sa07
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Leia, millised protsessid kasutavad praegu kõige rohkem kettakirjutust.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>pidstat<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w">            </span><span class="c1"># või: sudo iotop -o</span>
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Näita eilse päeva (nt kuu 7. päev) protsessori kasutust Debianis.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sar<span class="w"> </span>-u<span class="w"> </span>-f<span class="w"> </span>/var/log/sysstat/sa07
+</code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta PromQL-päring, mis näitab masinaid, kus juurfailisüsteemis on vaba ruumi alla 10%.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} &lt; 0.10
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Jälgi, milliseid faile käsk <code>ls /etc</code> avab.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>strace<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>openat<span class="w"> </span>ls<span class="w"> </span>/etc
 </code></pre></div>
+</details>
 
 
 

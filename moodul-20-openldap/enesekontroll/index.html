@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3411,34 +3413,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,70 +4407,121 @@
 
 
 <h1 id="moodul-20-enesekontroll">Moodul 20. Enesekontroll<a class="headerlink" href="#moodul-20-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Milliseid probleeme lahendab tsentraalne kasutajate kataloog võrreldes kohalike kontodega?</li>
-<li>Mis on DIT, DN ja RDN? Too näide.</li>
-<li>Mis on objektiklass? Mis vahe on kohustuslikul ja valikulisel atribuudil?</li>
-<li>Milliseid objektiklasse vajab Linuxi kasutaja LDAP-is ja milleks igaüht?</li>
-<li>Millised on LDAP-i pordid ja mis vahe on StartTLS-il ja LDAPS-il?</li>
-<li>Mis on <code>cn=config</code> ja miks ei muudeta OpenLDAP-i seadistust tekstifailis?</li>
-<li>Mida tähendab <code>ldapmodify -Y EXTERNAL -H ldapi:///</code>?</li>
-<li>Mida teeb filter <code>(&amp;(objectClass=posixAccount)(!(loginShell=/usr/sbin/nologin)))</code>?</li>
-<li>Miks ei tohi kasutajate parooli räsi olla anonüümselt loetav?</li>
-<li>Mis on SSSD roll Linuxi kliendis? Kuidas see seostub NSS-i ja PAM-iga?</li>
-<li>Mida teeb <code>cache_credentials = true</code> ja milline on selle eelis ning risk?</li>
-<li>Miks peavad UID- ja GID-numbrid olema kõigis masinates samad?</li>
-<li>Kuidas luuakse LDAP-i kasutajale kodukataloog esimesel sisselogimisel (Ubuntu ja AlmaLinux)?</li>
-<li>Miks pole AlmaLinuxis OpenLDAP-serverit ja mis on selle alternatiivid RHEL-i maailmas?</li>
-<li>Kuidas varundad ja taastad OpenLDAP-i?</li>
-</ol>
+<p><strong>1.</strong> Milliseid probleeme lahendab tsentraalne kasutajate kataloog võrreldes kohalike kontodega?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Üks konto ja parool kõigis masinates, kasutaja loomine ja kustutamine ühes kohas, ühtsed UID/GID-numbrid (NFS), lihtsam paroolipoliitika ja auditeerimine.</p>
+</details>
+<p><strong>2.</strong> Mis on DIT, DN ja RDN? Too näide.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>DIT - kataloogipuu; DN - kirje täisnimi puus (nt <code>uid=mari,ou=People,dc=lab,dc=example</code>); RDN - DN-i vasakpoolseim osa (<code>uid=mari</code>).</p>
+</details>
+<p><strong>3.</strong> Mis on objektiklass? Mis vahe on kohustuslikul ja valikulisel atribuudil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Objektiklass määrab, milliseid atribuute kirje peab (MUST) ja võib (MAY) sisaldada. Kohustuslikuta kirjet ei saa lisada.</p>
+</details>
+<p><strong>4.</strong> Milliseid objektiklasse vajab Linuxi kasutaja LDAP-is ja milleks igaüht?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>inetOrgPerson</code> - nimi, e-post jm isikuandmed; <code>posixAccount</code> - UID, GID, kodukataloog, kest; <code>shadowAccount</code> - parooli aegumise andmed.</p>
+</details>
+<p><strong>5.</strong> Millised on LDAP-i pordid ja mis vahe on StartTLS-il ja LDAPS-il?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>389 - LDAP (StartTLS-iga krüpteeritakse ühendus pärast ühendumist samas pordis); 636 - LDAPS (TLS kohe ühendumisel).</p>
+</details>
+<p><strong>6.</strong> Mis on <code>cn=config</code> ja miks ei muudeta OpenLDAP-i seadistust tekstifailis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Dünaamiline seadistus, mis on ise LDAP-puu; muudatused jõustuvad kohe, ilma teenust taaskäivitamata.</p>
+</details>
+<p><strong>7.</strong> Mida tähendab <code>ldapmodify -Y EXTERNAL -H ldapi:///</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ühendus kohaliku Unixi sokli kaudu, autentimine operatsioonisüsteemi kasutaja järgi (root → kataloogi haldaja <code>cn=config</code> jaoks).</p>
+</details>
+<p><strong>8.</strong> Mida teeb filter <code>(&amp;(objectClass=posixAccount)(!(loginShell=/usr/sbin/nologin)))</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Leiab kõik kasutajad, kelle kest ei ole <code>/usr/sbin/nologin</code>.</p>
+</details>
+<p><strong>9.</strong> Miks ei tohi kasutajate parooli räsi olla anonüümselt loetav?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Räsi saab võrguühenduseta (offline) murda; nõrgad paroolid leitakse kiiresti.</p>
+</details>
+<p><strong>10.</strong> Mis on SSSD roll Linuxi kliendis? Kuidas see seostub NSS-i ja PAM-iga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>SSSD on vahelüli: NSS küsib temalt kasutaja ja grupi infot (<code>getent</code>, <code>id</code>), PAM autentimist; SSSD suhtleb LDAP-iga ja hoiab vahemälu.</p>
+</details>
+<p><strong>11.</strong> Mida teeb <code>cache_credentials = true</code> ja milline on selle eelis ning risk?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kasutaja saab sisse logida ka siis, kui server pole kättesaadav. Risk: kataloogis keelatud või muudetud parool võib vahemälus veel mõnda aega kehtida.</p>
+</details>
+<p><strong>12.</strong> Miks peavad UID- ja GID-numbrid olema kõigis masinates samad?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Failide omanik salvestatakse numbrina; erinevad numbrid tähendaksid, et NFS-is või kettal kuuluvad failid valele kasutajale.</p>
+</details>
+<p><strong>13.</strong> Kuidas luuakse LDAP-i kasutajale kodukataloog esimesel sisselogimisel (Ubuntu ja AlmaLinux)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ubuntu: <code>pam-auth-update --enable mkhomedir</code>; AlmaLinux: <code>authselect select sssd with-mkhomedir --force</code> ja teenus <code>oddjobd</code>.</p>
+</details>
+<p><strong>14.</strong> Miks pole AlmaLinuxis OpenLDAP-serverit ja mis on selle alternatiivid RHEL-i maailmas?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Red Hat lõpetas OpenLDAP-serveri tarnimise; alternatiivid on 389 Directory Server ja FreeIPA / Red Hat IdM. Kliendid ja <code>openldap-clients</code> on olemas.</p>
+</details>
+<p><strong>15.</strong> Kuidas varundad ja taastad OpenLDAP-i?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>slapcat -n 0</code> (seadistus) ja <code>slapcat -n 1</code> (andmed); taastamisel peata <code>slapd</code>, tühjenda andmekataloog ja kasuta <code>slapadd</code>, siis paranda omanik (<code>openldap</code>).</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjuta LDIF, mis lisab kasutajale <code>uid=jaan,ou=People,dc=lab,dc=example</code> atribuudi <code>mail</code> väärtusega <code>jaan@lab.example</code>.</li>
-<li>Kirjuta <code>ldapsearch</code> käsk, mis leiab kõik grupid, mille liige on <code>mari</code>, ja kuvab ainult nende nime.</li>
-<li>Kirjuta LDIF, mis lisab grupi <code>opetajad</code> (GID 10100) ilma liikmeteta.</li>
-<li>Kirjuta käsk, millega kontrollid kliendis, kas SSSD näeb kasutajat <code>kati</code> ja tema gruppe.</li>
-<li>Kirjuta käsk, mis kustutab kasutaja <code>uid=test,ou=People,dc=lab,dc=example</code>.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Üks konto ja parool kõigis masinates, kasutaja loomine ja kustutamine ühes kohas, ühtsed UID/GID-numbrid (NFS), lihtsam paroolipoliitika ja auditeerimine.</li>
-<li>DIT - kataloogipuu; DN - kirje täisnimi puus (nt <code>uid=mari,ou=People,dc=lab,dc=example</code>); RDN - DN-i vasakpoolseim osa (<code>uid=mari</code>).</li>
-<li>Objektiklass määrab, milliseid atribuute kirje peab (MUST) ja võib (MAY) sisaldada. Kohustuslikuta kirjet ei saa lisada.</li>
-<li><code>inetOrgPerson</code> - nimi, e-post jm isikuandmed; <code>posixAccount</code> - UID, GID, kodukataloog, kest; <code>shadowAccount</code> - parooli aegumise andmed.</li>
-<li>389 - LDAP (StartTLS-iga krüpteeritakse ühendus pärast ühendumist samas pordis); 636 - LDAPS (TLS kohe ühendumisel).</li>
-<li>Dünaamiline seadistus, mis on ise LDAP-puu; muudatused jõustuvad kohe, ilma teenust taaskäivitamata.</li>
-<li>Ühendus kohaliku Unixi sokli kaudu, autentimine operatsioonisüsteemi kasutaja järgi (root → kataloogi haldaja <code>cn=config</code> jaoks).</li>
-<li>Leiab kõik kasutajad, kelle kest ei ole <code>/usr/sbin/nologin</code>.</li>
-<li>Räsi saab võrguühenduseta (offline) murda; nõrgad paroolid leitakse kiiresti.</li>
-<li>SSSD on vahelüli: NSS küsib temalt kasutaja ja grupi infot (<code>getent</code>, <code>id</code>), PAM autentimist; SSSD suhtleb LDAP-iga ja hoiab vahemälu.</li>
-<li>Kasutaja saab sisse logida ka siis, kui server pole kättesaadav. Risk: kataloogis keelatud või muudetud parool võib vahemälus veel mõnda aega kehtida.</li>
-<li>Failide omanik salvestatakse numbrina; erinevad numbrid tähendaksid, et NFS-is või kettal kuuluvad failid valele kasutajale.</li>
-<li>Ubuntu: <code>pam-auth-update --enable mkhomedir</code>; AlmaLinux: <code>authselect select sssd with-mkhomedir --force</code> ja teenus <code>oddjobd</code>.</li>
-<li>Red Hat lõpetas OpenLDAP-serveri tarnimise; alternatiivid on 389 Directory Server ja FreeIPA / Red Hat IdM. Kliendid ja <code>openldap-clients</code> on olemas.</li>
-<li><code>slapcat -n 0</code> (seadistus) ja <code>slapcat -n 1</code> (andmed); taastamisel peata <code>slapd</code>, tühjenda andmekataloog ja kasuta <code>slapadd</code>, siis paranda omanik (<code>openldap</code>).</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kirjuta LDIF, mis lisab kasutajale <code>uid=jaan,ou=People,dc=lab,dc=example</code> atribuudi <code>mail</code> väärtusega <code>jaan@lab.example</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>dn: uid=jaan,ou=People,dc=lab,dc=example
 changetype: modify
 add: mail
 mail: jaan@lab.example
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta <code>ldapsearch</code> käsk, mis leiab kõik grupid, mille liige on <code>mari</code>, ja kuvab ainult nende nime.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>ldapsearch<span class="w"> </span>-x<span class="w"> </span>-LLL<span class="w"> </span>-b<span class="w"> </span><span class="nv">ou</span><span class="o">=</span>Groups,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span><span class="s2">"(memberUid=mari)"</span><span class="w"> </span>cn
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta LDIF, mis lisab grupi <code>opetajad</code> (GID 10100) ilma liikmeteta.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>dn: cn=opetajad,ou=Groups,dc=lab,dc=example
 objectClass: posixGroup
 cn: opetajad
 gidNumber: 10100
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta käsk, millega kontrollid kliendis, kas SSSD näeb kasutajat <code>kati</code> ja tema gruppe.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>id<span class="w"> </span>kati
 getent<span class="w"> </span>passwd<span class="w"> </span>kati
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Kirjuta käsk, mis kustutab kasutaja <code>uid=test,ou=People,dc=lab,dc=example</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>ldapdelete<span class="w"> </span>-x<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W<span class="w"> </span><span class="s2">"uid=test,ou=People,dc=lab,dc=example"</span>
 </code></pre></div>
+</details>
 
 
 

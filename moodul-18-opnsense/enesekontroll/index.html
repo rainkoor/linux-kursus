@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3129,34 +3131,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,60 +4407,109 @@
 
 
 <h1 id="moodul-18-enesekontroll">Moodul 18. Enesekontroll<a class="headerlink" href="#moodul-18-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on OPNsense ja millisel operatsioonisüsteemil see põhineb? Kuidas on see seotud pfSense'iga?</li>
-<li>Mis on WAN ja LAN? Milline liiklus on nende vahel vaikimisi lubatud?</li>
-<li>Miks vajab OPNsense'i virtuaalmasin Proxmoxis isoleeritud silda või SDN VNet-i?</li>
-<li>Kuidas on OPNsense'i VirtIO võrguliidesed FreeBSD-s nimetatud?</li>
-<li>Mida teeb seade „Block private networks from entering via WAN“? Millal võib selle välja lülitada?</li>
-<li>Miks tohib võrgus olla ainult üks DHCP-server?</li>
-<li>Mis järjekorras OPNsense tulemüürireegleid töötleb? Mis juhtub, kui ükski reegel ei sobi?</li>
-<li>Mis vahe on reegli tegevustel <em>Block</em> ja <em>Reject</em>?</li>
-<li>Mis on alias ja miks seda kasutada?</li>
-<li>Mis on väljaminev NAT ja mis on pordisuunamine?</li>
-<li>Kus asub kogu OPNsense'i seadistus ja kuidas seda varundada?</li>
-<li>Miks ei tohi OPNsense'is süsteemifaile käsitsi muuta?</li>
-<li>Millised FreeBSD käsud vastavad Linuxi käskudele <code>ip a</code>, <code>ip r</code> ja <code>ss -tulpn</code>?</li>
-<li>Mida näitab käsk <code>pfctl -sr</code>?</li>
-<li>Miks ei tohi haldusliidest WAN-i poole avada?</li>
-</ol>
+<p><strong>1.</strong> Mis on OPNsense ja millisel operatsioonisüsteemil see põhineb? Kuidas on see seotud pfSense'iga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Avatud lähtekoodiga tulemüüri- ja marsruutimistarkvara, mis põhineb FreeBSD-l. OPNsense on 2015. aastal pfSense'ist hargnenud.</p>
+</details>
+<p><strong>2.</strong> Mis on WAN ja LAN? Milline liiklus on nende vahel vaikimisi lubatud?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>WAN on väline võrk (internet, kooli võrk), LAN sisevõrk. Vaikimisi on LAN-ist välja kõik lubatud ja WAN-ist sisse kõik keelatud.</p>
+</details>
+<p><strong>3.</strong> Miks vajab OPNsense'i virtuaalmasin Proxmoxis isoleeritud silda või SDN VNet-i?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>LAN peab olema eraldatud kooli võrgust, et laborivõrgu teenused (nt DHCP) ei segaks teisi ja et kogu laborivõrgu liiklus läbiks tulemüüri.</p>
+</details>
+<p><strong>4.</strong> Kuidas on OPNsense'i VirtIO võrguliidesed FreeBSD-s nimetatud?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>vtnet0</code>, <code>vtnet1</code> jne.</p>
+</details>
+<p><strong>5.</strong> Mida teeb seade „Block private networks from entering via WAN“? Millal võib selle välja lülitada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Keelab WAN-ist sisse tulevad paketid privaatvõrgu aadressidelt (RFC 1918). Välja võib selle lülitada laboris, kus WAN ise on privaatvõrk. Päris interneti ühenduse korral peab see olema sees.</p>
+</details>
+<p><strong>6.</strong> Miks tohib võrgus olla ainult üks DHCP-server?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mitu DHCP-serverit jagavad klientidele vastuolulisi aadresse, vaikelüüse ja DNS-servereid - kliendid saavad juhuslikult kas õige või vale seadistuse.</p>
+</details>
+<p><strong>7.</strong> Mis järjekorras OPNsense tulemüürireegleid töötleb? Mis juhtub, kui ükski reegel ei sobi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ülevalt alla, kehtib esimene sobiv reegel. Kui ükski reegel ei sobi, liiklus keelatakse.</p>
+</details>
+<p><strong>8.</strong> Mis vahe on reegli tegevustel <em>Block</em> ja <em>Reject</em>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><em>Block</em> viskab paketi vaikselt minema (saatja ootab aegumiseni), <em>Reject</em> saadab saatjale keeldumise (ühendus ebaõnnestub kohe).</p>
+</details>
+<p><strong>9.</strong> Mis on alias ja miks seda kasutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Nimega aadresside, võrkude või portide loend. Muudab reeglid loetavaks ja võimaldab muudatusi teha ühes kohas.</p>
+</details>
+<p><strong>10.</strong> Mis on väljaminev NAT ja mis on pordisuunamine?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Väljaminev NAT asendab sisevõrgu masinate aadressid WAN-aadressiga, et need pääseksid internetti. Pordisuunamine suunab WAN-aadressi kindlale pordile tuleva liikluse sisevõrgu masinale.</p>
+</details>
+<p><strong>11.</strong> Kus asub kogu OPNsense'i seadistus ja kuidas seda varundada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Failis <code>/conf/config.xml</code>. Varundamine: <em>System</em> → <em>Configuration</em> → <em>Backups</em> → <em>Download configuration</em>.</p>
+</details>
+<p><strong>12.</strong> Miks ei tohi OPNsense'is süsteemifaile käsitsi muuta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>OPNsense genereerib süsteemi seadistusfailid failist <code>config.xml</code> - käsitsi tehtud muudatused kirjutatakse järgmisel rakendamisel üle.</p>
+</details>
+<p><strong>13.</strong> Millised FreeBSD käsud vastavad Linuxi käskudele <code>ip a</code>, <code>ip r</code> ja <code>ss -tulpn</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>ifconfig</code>, <code>netstat -rn</code>, <code>sockstat -4l</code>.</p>
+</details>
+<p><strong>14.</strong> Mida näitab käsk <code>pfctl -sr</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kehtivad pf tulemüürireeglid (genereeritud OPNsense'i seadistusest).</p>
+</details>
+<p><strong>15.</strong> Miks ei tohi haldusliidest WAN-i poole avada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Haldusliidese kaudu saab muuta kogu tulemüüri seadistust. Avalik haldusliides on rünnakute (paroolide arvamine, turvaaugud) sihtmärk.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Loo alias <code>dns-serverid</code>, kuhu kuuluvad <code>1.1.1.1</code> ja <code>9.9.9.9</code>.</li>
-<li>Kirjuta LAN-i reegel, mis lubab laborivõrgust DNS-päringuid (UDP ja TCP 53) ainult aliase <code>dns-serverid</code> aadressidele ja OPNsense'ile endale.</li>
-<li>Tee pordisuunamine, mis teeb Debiani masina SSH (port 22) väljast kättesaadavaks pordil 2222.</li>
-<li>Leia FreeBSD käsurealt, millised pordid OPNsense'is kuulavad.</li>
-<li>Vaata <code>tcpdump</code>-iga WAN-i liidesel DNS-liiklust.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Avatud lähtekoodiga tulemüüri- ja marsruutimistarkvara, mis põhineb FreeBSD-l. OPNsense on 2015. aastal pfSense'ist hargnenud.</li>
-<li>WAN on väline võrk (internet, kooli võrk), LAN sisevõrk. Vaikimisi on LAN-ist välja kõik lubatud ja WAN-ist sisse kõik keelatud.</li>
-<li>LAN peab olema eraldatud kooli võrgust, et laborivõrgu teenused (nt DHCP) ei segaks teisi ja et kogu laborivõrgu liiklus läbiks tulemüüri.</li>
-<li><code>vtnet0</code>, <code>vtnet1</code> jne.</li>
-<li>Keelab WAN-ist sisse tulevad paketid privaatvõrgu aadressidelt (RFC 1918). Välja võib selle lülitada laboris, kus WAN ise on privaatvõrk. Päris interneti ühenduse korral peab see olema sees.</li>
-<li>Mitu DHCP-serverit jagavad klientidele vastuolulisi aadresse, vaikelüüse ja DNS-servereid - kliendid saavad juhuslikult kas õige või vale seadistuse.</li>
-<li>Ülevalt alla, kehtib esimene sobiv reegel. Kui ükski reegel ei sobi, liiklus keelatakse.</li>
-<li><em>Block</em> viskab paketi vaikselt minema (saatja ootab aegumiseni), <em>Reject</em> saadab saatjale keeldumise (ühendus ebaõnnestub kohe).</li>
-<li>Nimega aadresside, võrkude või portide loend. Muudab reeglid loetavaks ja võimaldab muudatusi teha ühes kohas.</li>
-<li>Väljaminev NAT asendab sisevõrgu masinate aadressid WAN-aadressiga, et need pääseksid internetti. Pordisuunamine suunab WAN-aadressi kindlale pordile tuleva liikluse sisevõrgu masinale.</li>
-<li>Failis <code>/conf/config.xml</code>. Varundamine: <em>System</em> → <em>Configuration</em> → <em>Backups</em> → <em>Download configuration</em>.</li>
-<li>OPNsense genereerib süsteemi seadistusfailid failist <code>config.xml</code> - käsitsi tehtud muudatused kirjutatakse järgmisel rakendamisel üle.</li>
-<li><code>ifconfig</code>, <code>netstat -rn</code>, <code>sockstat -4l</code>.</li>
-<li>Kehtivad pf tulemüürireeglid (genereeritud OPNsense'i seadistusest).</li>
-<li>Haldusliidese kaudu saab muuta kogu tulemüüri seadistust. Avalik haldusliides on rünnakute (paroolide arvamine, turvaaugud) sihtmärk.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
-<ol>
-<li><em>Firewall</em> → <em>Aliases</em> → <strong>+</strong>: nimi <code>dns-serverid</code>, tüüp <em>Host(s)</em>, sisu <code>1.1.1.1</code>, <code>9.9.9.9</code>.</li>
-<li><em>Firewall</em> → <em>Rules</em> → <em>LAN</em>, kaks reeglit vaikimisi lubava reegli kohale: <em>Pass</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <code>dns-serverid</code>, port 53; <em>Pass</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <em>This Firewall</em>, port 53; ning nende alla <em>Block</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <em>any</em>, port 53.</li>
-<li><em>Firewall</em> → <em>NAT</em> → <em>Port Forward</em>: liides WAN, TCP, sihtkoht <em>WAN address</em>, port 2222, suunamise siht Debiani aadress, port 22.</li>
-<li><code>sockstat -4l</code> (või <code>sockstat -l</code>).</li>
-<li><code>tcpdump -ni vtnet0 port 53</code>.</li>
-</ol>
+<p><strong>1.</strong> Loo alias <code>dns-serverid</code>, kuhu kuuluvad <code>1.1.1.1</code> ja <code>9.9.9.9</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<p><em>Firewall</em> → <em>Aliases</em> → <strong>+</strong>: nimi <code>dns-serverid</code>, tüüp <em>Host(s)</em>, sisu <code>1.1.1.1</code>, <code>9.9.9.9</code>.</p>
+</details>
+<p><strong>2.</strong> Kirjuta LAN-i reegel, mis lubab laborivõrgust DNS-päringuid (UDP ja TCP 53) ainult aliase <code>dns-serverid</code> aadressidele ja OPNsense'ile endale.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<p><em>Firewall</em> → <em>Rules</em> → <em>LAN</em>, kaks reeglit vaikimisi lubava reegli kohale: <em>Pass</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <code>dns-serverid</code>, port 53; <em>Pass</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <em>This Firewall</em>, port 53; ning nende alla <em>Block</em>, TCP/UDP, allikas <em>LAN net</em>, sihtkoht <em>any</em>, port 53.</p>
+</details>
+<p><strong>3.</strong> Tee pordisuunamine, mis teeb Debiani masina SSH (port 22) väljast kättesaadavaks pordil 2222.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<p><em>Firewall</em> → <em>NAT</em> → <em>Port Forward</em>: liides WAN, TCP, sihtkoht <em>WAN address</em>, port 2222, suunamise siht Debiani aadress, port 22.</p>
+</details>
+<p><strong>4.</strong> Leia FreeBSD käsurealt, millised pordid OPNsense'is kuulavad.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<p><code>sockstat -4l</code> (või <code>sockstat -l</code>).</p>
+</details>
+<p><strong>5.</strong> Vaata <code>tcpdump</code>-iga WAN-i liidesel DNS-liiklust.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<p><code>tcpdump -ni vtnet0 port 53</code>.</p>
+</details>
 
 
 

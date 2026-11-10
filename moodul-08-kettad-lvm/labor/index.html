@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1599,6 +1601,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4619,6 +4632,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4663,7 +4687,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K18</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K18</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <h3 id="lisaketaste-lisamine">Lisaketaste lisamine<a class="headerlink" href="#lisaketaste-lisamine" title="Permanent link">&para;</a></h3>
 <p><strong>Proxmoxis:</strong> vali virtuaalmasin → <em>Hardware</em> → <em>Add</em> → <em>Hard Disk</em>. Lisa kaks ketast suurusega 5 GiB ja 3 GiB (siini tüüp SCSI). Kettaid saab lisada ka töötavale masinale.</p>
 <p><strong>VirtualBoxis:</strong> masin peab olema välja lülitatud. <em>Settings</em> → <em>Storage</em> → kontrolleri juures <em>Add Hard Disk</em>.</p>
@@ -4676,7 +4703,10 @@ lsblk<span class="w"> </span>-f
 df<span class="w"> </span>-hT
 findmnt<span class="w"> </span>-t<span class="w"> </span>xfs,ext4,vfat
 </code></pre></div>
-<p><strong>K1.</strong> Joonista (või kirjelda) süsteemiketta struktuur: millised partitsioonid on, millised failisüsteemid neil on ja kuhu need on haagitud. Kas süsteem kasutab LVM-i?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Joonista (või kirjelda) süsteemiketta struktuur: millised partitsioonid on, millised failisüsteemid neil on ja kuhu need on haagitud. Kas süsteem kasutab LVM-i?</p>
+</div>
 <p><strong>1.2</strong> Uuri LVM-i ja saaleala:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pvs
 sudo<span class="w"> </span>vgs
@@ -4685,7 +4715,10 @@ swapon<span class="w"> </span>--show
 free<span class="w"> </span>-h
 cat<span class="w"> </span>/etc/fstab
 </code></pre></div>
-<p><strong>K2.</strong> Kuidas on juurfailisüsteem ja saaleala failis <code>/etc/fstab</code> kirjeldatud - UUID või LVM-i köite tee järgi? Kui palju on köitegrupis vaba ruumi?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Kuidas on juurfailisüsteem ja saaleala failis <code>/etc/fstab</code> kirjeldatud - UUID või LVM-i köite tee järgi? Kui palju on köitegrupis vaba ruumi?</p>
+</div>
 <p><strong>1.3</strong> Kontrolli, et lisakettad on olemas ja tühjad:</p>
 <div class="highlight"><pre><span></span><code>lsblk<span class="w"> </span>/dev/sdb<span class="w"> </span>/dev/sdc
 sudo<span class="w"> </span>fdisk<span class="w"> </span>-l<span class="w"> </span>/dev/sdb<span class="w"> </span>/dev/sdc
@@ -4701,7 +4734,10 @@ sudo<span class="w"> </span>parted<span class="w"> </span>/dev/sdb<span class="w
 lsblk<span class="w"> </span>/dev/sdb
 </code></pre></div>
 <p>või interaktiivset <code>fdisk</code>-i (<code>g</code>, <code>n</code>, <code>n</code>, <code>p</code>, <code>w</code>).</p>
-<p><strong>K3.</strong> Millised on partitsioonide suurused? Miks algab esimene partitsioon 1 MiB juurest, mitte ketta päris algusest?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Millised on partitsioonide suurused? Miks algab esimene partitsioon 1 MiB juurest, mitte ketta päris algusest?</p>
+</div>
 <p><strong>2.2</strong> Loo failisüsteemid:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>andmed<span class="w"> </span>/dev/sdb1
 sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>-L<span class="w"> </span>arhiiv<span class="w"> </span>/dev/sdb2
@@ -4723,7 +4759,10 @@ ls<span class="w"> </span>/mnt/andmed
 sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/andmed
 ls<span class="w"> </span>/mnt/andmed
 </code></pre></div>
-<p><strong>K4.</strong> Mis juhtus failiga <code>peidus.txt</code>, kui ketas oli haagitud? Kas fail kadus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mis juhtus failiga <code>peidus.txt</code>, kui ketas oli haagitud? Kas fail kadus?</p>
+</div>
 <p><strong>2.5</strong> Proovi lahti haakida kataloogi, kus oled:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/srv/arhiiv
 sudo<span class="w"> </span>umount<span class="w"> </span>/srv/arhiiv
@@ -4731,7 +4770,10 @@ sudo<span class="w"> </span>fuser<span class="w"> </span>-vm<span class="w"> </s
 <span class="nb">cd</span>
 sudo<span class="w"> </span>umount<span class="w"> </span>/srv/arhiiv
 </code></pre></div>
-<p><strong>K5.</strong> Mis veateate said ja miks? Mida näitas <code>fuser</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Mis veateate said ja miks? Mida näitas <code>fuser</code>?</p>
+</div>
 <hr />
 <h2 id="3-osa-püsiv-haakimine">3. osa. Püsiv haakimine<a class="headerlink" href="#3-osa-püsiv-haakimine" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Leia partitsioonide UUID-d:</p>
@@ -4753,13 +4795,19 @@ sudo<span class="w"> </span>mount<span class="w"> </span>-a
 df<span class="w"> </span>-hT<span class="w"> </span>/mnt/andmed<span class="w"> </span>/srv/arhiiv
 </code></pre></div>
 <p><strong>3.4</strong> Taaskäivita masin ja kontrolli, kas failisüsteemid haagiti.</p>
-<p><strong>K6.</strong> Miks kasutatakse failis <code>fstab</code> UUID-d, mitte seadme nime <code>/dev/sdb1</code>? Miks on XFS-i real viimane väli <code>0</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks kasutatakse failis <code>fstab</code> UUID-d, mitte seadme nime <code>/dev/sdb1</code>? Miks on XFS-i real viimane väli <code>0</code>?</p>
+</div>
 <p><strong>3.5</strong> Tee fstab-i meelega viga: muuda esimese rea UUID-s üks märk. Kontrolli:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>findmnt<span class="w"> </span>--verify
 sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/andmed
 sudo<span class="w"> </span>mount<span class="w"> </span>-a
 </code></pre></div>
-<p><strong>K7.</strong> Mida näitasid <code>findmnt --verify</code> ja <code>mount -a</code>? Mis juhtuks taaskäivitusel, kui real <strong>ei oleks</strong> valikut <code>nofail</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mida näitasid <code>findmnt --verify</code> ja <code>mount -a</code>? Mis juhtuks taaskäivitusel, kui real <strong>ei oleks</strong> valikut <code>nofail</code>?</p>
+</div>
 <p>Paranda viga ja kontrolli uuesti käsuga <code>findmnt --verify</code>.</p>
 <hr />
 <h2 id="4-osa-saaleala">4. osa. Saaleala<a class="headerlink" href="#4-osa-saaleala" title="Permanent link">&para;</a></h2>
@@ -4771,7 +4819,10 @@ sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile
 swapon<span class="w"> </span>--show
 free<span class="w"> </span>-h
 </code></pre></div>
-<p><strong>K8.</strong> Kui palju on nüüd saaleala kokku? Miks peavad saalefaili õigused olema <code>600</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kui palju on nüüd saaleala kokku? Miks peavad saalefaili õigused olema <code>600</code>?</p>
+</div>
 <p><strong>4.2</strong> Lisa saalefail faili <code>/etc/fstab</code> ja kontrolli:</p>
 <div class="highlight"><pre><span></span><code>/swapfile  none  swap  defaults  0  0
 </code></pre></div>
@@ -4794,7 +4845,10 @@ sudo<span class="w"> </span>lvcreate<span class="w"> </span>-n<span class="w"> <
 sudo<span class="w"> </span>lvs
 sudo<span class="w"> </span>vgs
 </code></pre></div>
-<p><strong>K9.</strong> Kui palju ruumi jäi köitegruppi vabaks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kui palju ruumi jäi köitegruppi vabaks?</p>
+</div>
 <p><strong>5.3</strong> Loo köidetele failisüsteemid ja haagi need püsivalt:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>/dev/vg_andmed/lv_veeb
 sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/vg_andmed/lv_db
@@ -4815,11 +4869,17 @@ df<span class="w"> </span>-h<span class="w"> </span>/srv/veeb
 sudo<span class="w"> </span>lvextend<span class="w"> </span>-r<span class="w"> </span>-L<span class="w"> </span>+500M<span class="w"> </span>/dev/vg_andmed/lv_veeb
 df<span class="w"> </span>-h<span class="w"> </span>/srv/veeb
 </code></pre></div>
-<p><strong>K10.</strong> Mis oli köite suurus ja täituvus enne ja pärast laiendamist? Kas fail <code>suur.fail</code> jäi alles? Mida tegi võti <code>-r</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mis oli köite suurus ja täituvus enne ja pärast laiendamist? Kas fail <code>suur.fail</code> jäi alles? Mida tegi võti <code>-r</code>?</p>
+</div>
 <p><strong>5.5</strong> Proovi XFS-köidet vähendada:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>lvreduce<span class="w"> </span>-r<span class="w"> </span>-L<span class="w"> </span>-200M<span class="w"> </span>/dev/vg_andmed/lv_veeb
 </code></pre></div>
-<p><strong>K11.</strong> Mis juhtus? Miks? (Vasta küsimusele „Do you want to…“ <code>n</code>, kui küsitakse.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mis juhtus? Miks? (Vasta küsimusele „Do you want to…“ <code>n</code>, kui küsitakse.)</p>
+</div>
 <h3 id="uue-ketta-lisamine-köitegruppi">Uue ketta lisamine köitegruppi<a class="headerlink" href="#uue-ketta-lisamine-köitegruppi" title="Permanent link">&para;</a></h3>
 <p>Ketta <code>sdb</code> partitsioonid ei ole enam vajalikud. Lisad selle ketta köitegruppi <code>vg_andmed</code>.</p>
 <p><strong>5.6</strong> Eemalda <code>sdb</code> failisüsteemid kasutusest:</p>
@@ -4830,7 +4890,10 @@ sudo<span class="w"> </span>wipefs<span class="w"> </span>-a<span class="w"> </s
 sudo<span class="w"> </span>wipefs<span class="w"> </span>-a<span class="w"> </span>/dev/sdb
 lsblk<span class="w"> </span>/dev/sdb
 </code></pre></div>
-<p><strong>K12.</strong> Mida teeb <code>wipefs</code>? Miks oli vaja enne kustutada fstab-i read?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Mida teeb <code>wipefs</code>? Miks oli vaja enne kustutada fstab-i read?</p>
+</div>
 <p><strong>5.7</strong> Lisa ketas köitegruppi ja kasuta kogu vaba ruum andmebaasi köite jaoks:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pvcreate<span class="w"> </span>/dev/sdb
 sudo<span class="w"> </span>vgextend<span class="w"> </span>vg_andmed<span class="w"> </span>/dev/sdb
@@ -4840,7 +4903,10 @@ sudo<span class="w"> </span>lvs
 df<span class="w"> </span>-h<span class="w"> </span>/srv/db
 lsblk
 </code></pre></div>
-<p><strong>K13.</strong> Kui suur on nüüd köitegrupp ja köide <code>lv_db</code>? Millistel füüsilistel ketastel köide <code>lv_db</code> asub (<code>sudo lvs -o +devices</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Kui suur on nüüd köitegrupp ja köide <code>lv_db</code>? Millistel füüsilistel ketastel köide <code>lv_db</code> asub (<code>sudo lvs -o +devices</code>)?</p>
+</div>
 <h3 id="hetktõmmis">Hetktõmmis<a class="headerlink" href="#hetktõmmis" title="Permanent link">&para;</a></h3>
 <p><strong>5.8</strong> Loo andmebaasi köitele faile, tee hetktõmmis ja „riku“ andmed:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"Oluline andmebaas"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/srv/db/andmed.txt
@@ -4857,7 +4923,10 @@ cat<span class="w"> </span>/srv/db/andmed.txt
 sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/snap
 sudo<span class="w"> </span>lvremove<span class="w"> </span>-y<span class="w"> </span>/dev/vg_andmed/lv_db_snap
 </code></pre></div>
-<p><strong>K14.</strong> Mis oli hetktõmmise failis? Miks ei ole hetktõmmis varukoopia asendus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Mis oli hetktõmmise failis? Miks ei ole hetktõmmis varukoopia asendus?</p>
+</div>
 <hr />
 <h2 id="6-osa-kettakasutuse-analüüs">6. osa. Kettakasutuse analüüs<a class="headerlink" href="#6-osa-kettakasutuse-analüüs" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Leia, mis süsteemis ruumi võtab:</p>
@@ -4867,7 +4936,10 @@ sudo<span class="w"> </span>find<span class="w"> </span>/<span class="w"> </span
 journalctl<span class="w"> </span>--disk-usage
 dnf<span class="w"> </span>clean<span class="w"> </span>all
 </code></pre></div>
-<p><strong>K15.</strong> Milline kataloog kataloogis <code>/var</code> on suurim? Leia kolm suurimat faili juurfailisüsteemis.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Milline kataloog kataloogis <code>/var</code> on suurim? Leia kolm suurimat faili juurfailisüsteemis.</p>
+</div>
 <p><strong>6.2</strong> Kustutatud, kuid avatud fail:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/srv/veeb/logi.log<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">200</span>
 df<span class="w"> </span>-h<span class="w"> </span>/srv/veeb
@@ -4878,7 +4950,10 @@ sudo<span class="w"> </span>lsof<span class="w"> </span>+L1<span class="w"> </sp
 sudo<span class="w"> </span>pkill<span class="w"> </span>-f<span class="w"> </span><span class="s2">"tail -f /srv/veeb/logi.log"</span>
 df<span class="w"> </span>-h<span class="w"> </span>/srv/veeb
 </code></pre></div>
-<p><strong>K16.</strong> Millal ruum vabanes - pärast <code>rm</code>-i või pärast protsessi lõpetamist? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Millal ruum vabanes - pärast <code>rm</code>-i või pärast protsessi lõpetamist? Miks?</p>
+</div>
 <hr />
 <h2 id="7-osa-krüpteeritud-köide-luks-iga">7. osa. Krüpteeritud köide LUKS-iga<a class="headerlink" href="#7-osa-krüpteeritud-köide-luks-iga" title="Permanent link">&para;</a></h2>
 <p>Harjutame faili peal, et lisakettaid mitte puutuda.</p>
@@ -4900,13 +4975,19 @@ sudo<span class="w"> </span>cryptsetup<span class="w"> </span>close<span class="
 sudo<span class="w"> </span>strings<span class="w"> </span>/dev/loop0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>konfidentsiaalne
 sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksDump<span class="w"> </span>/dev/loop0<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
 </code></pre></div>
-<p><strong>K17.</strong> Kas teksti leidus krüpteeritud seadmest? Milline krüpteerimisalgoritm ja mitu võtmepesa on kasutusel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Kas teksti leidus krüpteeritud seadmest? Milline krüpteerimisalgoritm ja mitu võtmepesa on kasutusel?</p>
+</div>
 <p><strong>7.3</strong> Lisa teine parool, kontrolli, et mõlemaga saab avada, ja tee päisest varukoopia:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksAddKey<span class="w"> </span>/dev/loop0
 sudo<span class="w"> </span>cryptsetup<span class="w"> </span>open<span class="w"> </span>--test-passphrase<span class="w"> </span>/dev/loop0<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>OK
 sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksHeaderBackup<span class="w"> </span>/dev/loop0<span class="w"> </span>--header-backup-file<span class="w"> </span>/root/salajane-header.img
 </code></pre></div>
-<p><strong>K18.</strong> Miks on päise varukoopia oluline? Kus tohib seda hoida ja kus mitte?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Miks on päise varukoopia oluline? Kus tohib seda hoida ja kus mitte?</p>
+</div>
 <p><strong>7.4</strong> Koristamine:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>losetup<span class="w"> </span>-d<span class="w"> </span>/dev/loop0
 rm<span class="w"> </span>/var/tmp/salajane.img
@@ -4927,6 +5008,32 @@ sudo<span class="w"> </span>pvremove<span class="w"> </span>/dev/sdb<span class=
 <li><strong>Juurfailisüsteemi suurendamine:</strong> suurenda Proxmoxis süsteemiketast 2 GiB võrra (<em>Hardware</em> → ketas → <em>Disk Action</em> → <em>Resize</em>). Suurenda seejärel partitsioon, PV, juurköide ja failisüsteem (vt teooria punkt 8.9).</li>
 <li><strong>Püsiv LUKS-köide:</strong> krüpteeri LVM-i köide <code>lv_db</code> (andmed kaovad - varunda enne!), lisa see faili <code>/etc/crypttab</code> võtmefailiga (<code>/root/db.key</code>, õigused <code>400</code>) ja <code>/etc/fstab</code>-i ning kontrolli, et see avaneb taaskäivitusel automaatselt.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Joonista (või kirjelda) süsteemiketta struktuur: millised partitsioonid on, millised failisüsteemid neil on ja kuhu need on haagitud. Kas süsteem kasutab LVM-i?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Kuidas on juurfailisüsteem ja saaleala failis <code>/etc/fstab</code> kirjeldatud - UUID või LVM-i köite tee järgi? Kui palju on köitegrupis vaba ruumi?</li>
+<li><strong>K3.</strong> <em>(punkt 2.1)</em> Millised on partitsioonide suurused? Miks algab esimene partitsioon 1 MiB juurest, mitte ketta päris algusest?</li>
+<li><strong>K4.</strong> <em>(punkt 2.4)</em> Mis juhtus failiga <code>peidus.txt</code>, kui ketas oli haagitud? Kas fail kadus?</li>
+<li><strong>K5.</strong> <em>(punkt 2.5)</em> Mis veateate said ja miks? Mida näitas <code>fuser</code>?</li>
+<li><strong>K6.</strong> <em>(punkt 3.4)</em> Miks kasutatakse failis <code>fstab</code> UUID-d, mitte seadme nime <code>/dev/sdb1</code>? Miks on XFS-i real viimane väli <code>0</code>?</li>
+<li><strong>K7.</strong> <em>(punkt 3.5)</em> Mida näitasid <code>findmnt --verify</code> ja <code>mount -a</code>? Mis juhtuks taaskäivitusel, kui real <strong>ei oleks</strong> valikut <code>nofail</code>?</li>
+<li><strong>K8.</strong> <em>(punkt 4.1)</em> Kui palju on nüüd saaleala kokku? Miks peavad saalefaili õigused olema <code>600</code>?</li>
+<li><strong>K9.</strong> <em>(punkt 5.2)</em> Kui palju ruumi jäi köitegruppi vabaks?</li>
+<li><strong>K10.</strong> <em>(punkt 5.4)</em> Mis oli köite suurus ja täituvus enne ja pärast laiendamist? Kas fail <code>suur.fail</code> jäi alles? Mida tegi võti <code>-r</code>?</li>
+<li><strong>K11.</strong> <em>(punkt 5.5)</em> Mis juhtus? Miks? (Vasta küsimusele „Do you want to…“ <code>n</code>, kui küsitakse.)</li>
+<li><strong>K12.</strong> <em>(punkt 5.6)</em> Mida teeb <code>wipefs</code>? Miks oli vaja enne kustutada fstab-i read?</li>
+<li><strong>K13.</strong> <em>(punkt 5.7)</em> Kui suur on nüüd köitegrupp ja köide <code>lv_db</code>? Millistel füüsilistel ketastel köide <code>lv_db</code> asub (<code>sudo lvs -o +devices</code>)?</li>
+<li><strong>K14.</strong> <em>(punkt 5.9)</em> Mis oli hetktõmmise failis? Miks ei ole hetktõmmis varukoopia asendus?</li>
+<li><strong>K15.</strong> <em>(punkt 6.1)</em> Milline kataloog kataloogis <code>/var</code> on suurim? Leia kolm suurimat faili juurfailisüsteemis.</li>
+<li><strong>K16.</strong> <em>(punkt 6.2)</em> Millal ruum vabanes - pärast <code>rm</code>-i või pärast protsessi lõpetamist? Miks?</li>
+<li><strong>K17.</strong> <em>(punkt 7.2)</em> Kas teksti leidus krüpteeritud seadmest? Milline krüpteerimisalgoritm ja mitu võtmepesa on kasutusel?</li>
+<li><strong>K18.</strong> <em>(punkt 7.3)</em> Miks on päise varukoopia oluline? Kus tohib seda hoida ja kus mitte?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

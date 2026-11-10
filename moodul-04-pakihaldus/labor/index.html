@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -980,6 +982,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4509,6 +4522,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4553,7 +4577,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> täida võrdlustabel (1. osa lõpus) ja vasta küsimustele <strong>K1–K16</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Täida võrdlustabel (1. osa lõpus) ja vasta küsimustele <strong>K1–K16</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
 <p><strong>Erandina kasutad selles laboris kõiki kolme distrot.</strong> Hoia kolm SSH-seanssi korraga lahti (nt Windows Terminali eri vahekaartidel), et saaksid tulemusi kohe võrrelda. Jälgi viipa, et teaksid, millises masinas oled.</p>
@@ -4570,12 +4597,18 @@
 uname<span class="w"> </span>-r
 </code></pre></div>
 <p><strong>1.2 Uuenda süsteem.</strong> Debianis ja Ubuntus värskenda kõigepealt pakettide loend ja vaata uuendatavaid pakette. AlmaLinuxis kontrolli uuendusi. Seejärel uuenda kõik süsteemid.</p>
-<p><strong>K1.</strong> Mitu paketti oli igas masinas uuendatav? Miks on Debianis ja Ubuntus vaja kahte käsku, AlmaLinuxis aga ühte?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mitu paketti oli igas masinas uuendatav? Miks on Debianis ja Ubuntus vaja kahte käsku, AlmaLinuxis aga ühte?</p>
+</div>
 <p><strong>1.3 Loe hoidlate seadistust.</strong> Leia ja kuva iga distro hoidlate seadistusfail(id).</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/apt/sources.list.d/<span class="w"> </span>/etc/apt/sources.list<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w">   </span><span class="c1"># Debian, Ubuntu</span>
 ls<span class="w"> </span>/etc/yum.repos.d/<span class="w">                                             </span><span class="c1"># AlmaLinux</span>
 </code></pre></div>
-<p><strong>K2.</strong> Millised hoidla osad (<em>components</em>) on Debianis ja Ubuntus lubatud? Millised hoidlad on AlmaLinuxis lubatud (<code>dnf repolist</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Millised hoidla osad (<em>components</em>) on Debianis ja Ubuntus lubatud? Millised hoidlad on AlmaLinuxis lubatud (<code>dnf repolist</code>)?</p>
+</div>
 <p><strong>1.4 Otsi ja uuri.</strong> Otsi paketti <code>tree</code> ja kuva selle info (versioon, suurus, kirjeldus).</p>
 <p><strong>1.5 Paigalda.</strong> Paigalda pakett <code>tree</code> ja proovi seda: <code>tree -L 1 /etc | head</code>.</p>
 <p><strong>1.6 Faili päritolu.</strong> Leia, millisesse paketti kuuluvad failid <code>/usr/bin/ls</code> ja <code>/etc/ssh/ssh_config</code> (SSH kliendi seadistus).</p>
@@ -4583,13 +4616,19 @@ ls<span class="w"> </span>/etc/yum.repos.d/<span class="w">                     
 <p class="admonition-title">Märkus</p>
 <p>Kui Debiani vanemas versioonis <code>dpkg -S /usr/bin/ls</code> vastust ei anna, proovi <code>dpkg -S /bin/ls</code>. Põhjus: vanemates versioonides registreeris pakihaldur faili vana tee all, kuigi <code>/bin</code> on viit kataloogile <code>/usr/bin</code>.</p>
 </div>
-<p><strong>K3.</strong> Kas paketid on kolmes distros samanimelised?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Kas paketid on kolmes distros samanimelised?</p>
+</div>
 <p><strong>1.7 Paketi sisu.</strong> Kuva kõik paketi <code>openssh-server</code> failid ja loenda need.</p>
 <p><strong>1.8 Paigaldatud pakettide arv.</strong> Loenda paigaldatud paketid:</p>
 <div class="highlight"><pre><span></span><code>dpkg<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'^ii'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">     </span><span class="c1"># Debian, Ubuntu</span>
 rpm<span class="w"> </span>-qa<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">                  </span><span class="c1"># AlmaLinux</span>
 </code></pre></div>
-<p><strong>K4.</strong> Milline masin sisaldab kõige rohkem pakette? Mis võib olla põhjus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Milline masin sisaldab kõige rohkem pakette? Mis võib olla põhjus?</p>
+</div>
 <p><strong>1.9 Eemalda.</strong> Eemalda pakett <code>tree</code>. Debianis ja Ubuntus kasuta <code>purge</code>. Seejärel eemalda mittevajalikud sõltuvused.</p>
 <p><strong>1.10 Ajalugu.</strong> Leia, millal ja mida pakihaldur viimati tegi.</p>
 <div class="highlight"><pre><span></span><code>tail<span class="w"> </span>-20<span class="w"> </span>/var/log/apt/history.log<span class="w">    </span><span class="c1"># Debian, Ubuntu</span>
@@ -4692,14 +4731,20 @@ dnf<span class="w"> </span><span class="nb">history</span><span class="w">      
 <p><strong>2.1</strong> Otsi paketti <code>ncdu</code> (kettakasutuse analüüsi tööriist):</p>
 <div class="highlight"><pre><span></span><code>dnf<span class="w"> </span>search<span class="w"> </span>ncdu
 </code></pre></div>
-<p><strong>K5.</strong> Kas pakett leiti? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kas pakett leiti? Miks?</p>
+</div>
 <p><strong>2.2</strong> Luba EPEL-i hoidla ja otsi uuesti:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>epel-release
 dnf<span class="w"> </span>repolist
 dnf<span class="w"> </span>search<span class="w"> </span>ncdu
 dnf<span class="w"> </span>info<span class="w"> </span>ncdu
 </code></pre></div>
-<p><strong>K6.</strong> Millised uued hoidlad lisandusid? Millisest hoidlast <code>ncdu</code> pärineb (rida <code>Repository</code> või <code>From repo</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Millised uued hoidlad lisandusid? Millisest hoidlast <code>ncdu</code> pärineb (rida <code>Repository</code> või <code>From repo</code>)?</p>
+</div>
 <p><strong>2.3</strong> Paigalda <code>ncdu</code> ja proovi seda kataloogil <code>/usr</code> (välju klahviga <code>q</code>):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>ncdu
 ncdu<span class="w"> </span>/usr
@@ -4709,18 +4754,27 @@ ncdu<span class="w"> </span>/usr
 sudo<span class="w"> </span>dnf<span class="w"> </span><span class="nb">history</span><span class="w"> </span>undo<span class="w"> </span>&lt;ID&gt;
 </code></pre></div>
 <p>Asenda <code>&lt;ID&gt;</code> paketi <code>ncdu</code> paigaldamise toimingu numbriga.</p>
-<p><strong>K7.</strong> Kas <code>ncdu</code> eemaldati? Mis juhtus EPEL-iga (<code>dnf repolist</code>)? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kas <code>ncdu</code> eemaldati? Mis juhtus EPEL-iga (<code>dnf repolist</code>)? Miks?</p>
+</div>
 <p><strong>2.5</strong> Leia, milline pakett sisaldab käsku <code>dig</code>, ja paigalda see:</p>
 <div class="highlight"><pre><span></span><code>dnf<span class="w"> </span>provides<span class="w"> </span><span class="s1">'*/bin/dig'</span>
 </code></pre></div>
-<p><strong>K8.</strong> Mis on paketi nimi AlmaLinuxis? Leia Debiani või Ubuntu masinas, mis on sama tööriista paketi nimi (<code>apt search dnsutils</code>).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mis on paketi nimi AlmaLinuxis? Leia Debiani või Ubuntu masinas, mis on sama tööriista paketi nimi (<code>apt search dnsutils</code>).</p>
+</div>
 <hr />
 <h2 id="3-osa-ubuntu-universe-ja-snap">3. osa. Ubuntu: universe ja Snap<a class="headerlink" href="#3-osa-ubuntu-universe-ja-snap" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Kuva paketi <code>ncdu</code> info ja leia, millisest hoidla osast see pärineb:</p>
 <div class="highlight"><pre><span></span><code>apt<span class="w"> </span>policy<span class="w"> </span>ncdu
 apt<span class="w"> </span>show<span class="w"> </span>ncdu
 </code></pre></div>
-<p><strong>K9.</strong> Kas <code>ncdu</code> on hoidla osas <code>main</code> või <code>universe</code>? Mis vahe neil on?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kas <code>ncdu</code> on hoidla osas <code>main</code> või <code>universe</code>? Mis vahe neil on?</p>
+</div>
 <p><strong>3.2</strong> Uuri Snapi:</p>
 <div class="highlight"><pre><span></span><code>snap<span class="w"> </span>list
 snap<span class="w"> </span>find<span class="w"> </span>hello
@@ -4731,14 +4785,20 @@ hello-world
 which<span class="w"> </span>hello-world
 sudo<span class="w"> </span>snap<span class="w"> </span>remove<span class="w"> </span>hello-world
 </code></pre></div>
-<p><strong>K10.</strong> Millised snapid olid süsteemis enne sinu paigaldust? Kuhu paigaldati <code>hello-world</code> käivitusfail? Kuidas erineb see apt-i paketist?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Millised snapid olid süsteemis enne sinu paigaldust? Kuhu paigaldati <code>hello-world</code> käivitusfail? Kuidas erineb see apt-i paketist?</p>
+</div>
 <hr />
 <h2 id="4-osa-debian-kompileerimine-lähtekoodist">4. osa. Debian: kompileerimine lähtekoodist<a class="headerlink" href="#4-osa-debian-kompileerimine-lähtekoodist" title="Permanent link">&para;</a></h2>
 <p>Selles osas kompileerid GNU projekti näidisprogrammi <code>hello</code> ja võrdled seda sama programmi paketiga.</p>
 <p><strong>4.1</strong> Paigalda kompileerimise tööriistad:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>wget
 </code></pre></div>
-<p><strong>K11.</strong> Mitu paketti paigaldati koos <code>build-essential</code>-iga? Miks nii palju?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mitu paketti paigaldati koos <code>build-essential</code>-iga? Miks nii palju?</p>
+</div>
 <p><strong>4.2</strong> Laadi lähtekood alla ja paki lahti:</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/labor04<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/labor04
 wget<span class="w"> </span>https://ftp.gnu.org/gnu/hello/hello-2.12.1.tar.gz
@@ -4757,7 +4817,10 @@ hello<span class="w"> </span>--greeting<span class="o">=</span><span class="s2">
 which<span class="w"> </span>hello
 dpkg<span class="w"> </span>-S<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>which<span class="w"> </span>hello<span class="k">)</span><span class="s2">"</span>
 </code></pre></div>
-<p><strong>K12.</strong> Kuhu programm paigaldati? Miks ütleb <code>dpkg -S</code>, et fail ei kuulu ühtegi paketti?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kuhu programm paigaldati? Miks ütleb <code>dpkg -S</code>, et fail ei kuulu ühtegi paketti?</p>
+</div>
 <p><strong>4.5</strong> Paigalda nüüd sama programm Debiani hoidlast ja võrdle:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>hello
 ls<span class="w"> </span>-l<span class="w"> </span>/usr/bin/hello<span class="w"> </span>/usr/local/bin/hello
@@ -4766,18 +4829,30 @@ hello<span class="w"> </span>--version<span class="w"> </span><span class="p">|<
 /usr/bin/hello<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
 </code></pre></div>
-<p><strong>K13.</strong> Mitu <code>hello</code> programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt <code>hello</code>, ja miks? (Vihje: vaata muutujat <code>PATH</code>.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mitu <code>hello</code> programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt <code>hello</code>, ja miks? (Vihje: vaata muutujat <code>PATH</code>.)</p>
+</div>
 <p><strong>4.6</strong> Eemalda mõlemad:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/labor04/hello-2.12.1
 sudo<span class="w"> </span>make<span class="w"> </span>uninstall
 sudo<span class="w"> </span>apt<span class="w"> </span>purge<span class="w"> </span>hello
 which<span class="w"> </span>-a<span class="w"> </span>hello
 </code></pre></div>
-<p><strong>K14.</strong> Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.</p>
+</div>
 <hr />
 <h2 id="5-osa-kokkuvõte">5. osa. Kokkuvõte<a class="headerlink" href="#5-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K15.</strong> Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript <code>curl ... | sudo bash</code>, EPEL (AlmaLinuxis).</p>
-<p><strong>K16.</strong> Mida tuleks teha enne olulise serveri suurt uuendust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript <code>curl ... | sudo bash</code>, EPEL (AlmaLinuxis).</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Mida tuleks teha enne olulise serveri suurt uuendust?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4786,6 +4861,30 @@ which<span class="w"> </span>-a<span class="w"> </span>hello
 <li><strong>Väljalaske uuendus:</strong> paigalda Proxmoxi uus Debian 12 VM (või klooni olemasolev), <strong>tee hetktõmmis</strong> ja uuenda see Debian 13-ks (teooria punkt 4.10). Pane kirja: mitu paketti uuendati, milliste seadistusfailide kohta küsiti ja mis on <code>cat /etc/debian_version</code> väljund enne ja pärast. Lõpuks teisenda hoidlad käsuga <code>apt modernize-sources</code> ja vaata faili <code>/etc/apt/sources.list.d/debian.sources</code>.</li>
 <li><strong>AlmaLinux 9 → 10 (ainult analüüs):</strong> AlmaLinux 9 hetktõmmisega VM-is paigalda ELevate ja käivita <code>sudo leapp preupgrade</code>. Uuri aruannet <code>/var/log/leapp/leapp-report.txt</code>: millised takistused (<em>inhibitor</em>) leiti?</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(1. osa)</em> Mitu paketti oli igas masinas uuendatav? Miks on Debianis ja Ubuntus vaja kahte käsku, AlmaLinuxis aga ühte?</li>
+<li><strong>K2.</strong> <em>(1. osa)</em> Millised hoidla osad (<em>components</em>) on Debianis ja Ubuntus lubatud? Millised hoidlad on AlmaLinuxis lubatud (<code>dnf repolist</code>)?</li>
+<li><strong>K3.</strong> <em>(1. osa)</em> Kas paketid on kolmes distros samanimelised?</li>
+<li><strong>K4.</strong> <em>(1. osa)</em> Milline masin sisaldab kõige rohkem pakette? Mis võib olla põhjus?</li>
+<li><strong>K5.</strong> <em>(punkt 2.1)</em> Kas pakett leiti? Miks?</li>
+<li><strong>K6.</strong> <em>(punkt 2.2)</em> Millised uued hoidlad lisandusid? Millisest hoidlast <code>ncdu</code> pärineb (rida <code>Repository</code> või <code>From repo</code>)?</li>
+<li><strong>K7.</strong> <em>(punkt 2.4)</em> Kas <code>ncdu</code> eemaldati? Mis juhtus EPEL-iga (<code>dnf repolist</code>)? Miks?</li>
+<li><strong>K8.</strong> <em>(punkt 2.5)</em> Mis on paketi nimi AlmaLinuxis? Leia Debiani või Ubuntu masinas, mis on sama tööriista paketi nimi (<code>apt search dnsutils</code>).</li>
+<li><strong>K9.</strong> <em>(punkt 3.1)</em> Kas <code>ncdu</code> on hoidla osas <code>main</code> või <code>universe</code>? Mis vahe neil on?</li>
+<li><strong>K10.</strong> <em>(punkt 3.3)</em> Millised snapid olid süsteemis enne sinu paigaldust? Kuhu paigaldati <code>hello-world</code> käivitusfail? Kuidas erineb see apt-i paketist?</li>
+<li><strong>K11.</strong> <em>(punkt 4.1)</em> Mitu paketti paigaldati koos <code>build-essential</code>-iga? Miks nii palju?</li>
+<li><strong>K12.</strong> <em>(punkt 4.4)</em> Kuhu programm paigaldati? Miks ütleb <code>dpkg -S</code>, et fail ei kuulu ühtegi paketti?</li>
+<li><strong>K13.</strong> <em>(punkt 4.5)</em> Mitu <code>hello</code> programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt <code>hello</code>, ja miks? (Vihje: vaata muutujat <code>PATH</code>.)</li>
+<li><strong>K14.</strong> <em>(punkt 4.6)</em> Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.</li>
+<li><strong>K15.</strong> <em>(5. osa)</em> Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript <code>curl ... | sudo bash</code>, EPEL (AlmaLinuxis).</li>
+<li><strong>K16.</strong> <em>(5. osa)</em> Mida tuleks teha enne olulise serveri suurt uuendust?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

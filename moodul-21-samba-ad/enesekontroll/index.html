@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3552,34 +3554,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,64 +4407,115 @@
 
 
 <h1 id="moodul-21-enesekontroll">Moodul 21. Enesekontroll<a class="headerlink" href="#moodul-21-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Millised tehnoloogiad moodustavad Active Directory? Mis on igaühe roll?</li>
-<li>Mis vahe on domeenil, domeenikontrolleril ja OU-l?</li>
-<li>Kuidas töötab Kerberose autentimine? Mis on TGT?</li>
-<li>Miks peab domeeni realm olema suurtähtedega?</li>
-<li>Miks ei tohi AD domeeni nimi lõppeda <code>.local</code>-iga?</li>
-<li>Miks paigaldatakse DC eraldi masinasse?</li>
-<li>Milliseid teenuseid tuleb Debianis enne provisioning'ut peatada ja miks?</li>
-<li>Mida teeb <code>samba-tool domain provision</code> valik <code>--use-rfc2307</code>?</li>
-<li>Miks vajab DC <code>chrony</code> seadistuses <code>ntpsigndsocket</code> rida?</li>
-<li>Kuidas leiab klient domeenikontrolleri?</li>
-<li>Mida teeb <code>realm join</code>?</li>
-<li>Mis vahe on SSSD seadetel <code>ldap_id_mapping = True</code> ja <code>False</code>?</li>
-<li>Kuidas piirata, millised AD grupid saavad Linuxi masinasse sisse logida?</li>
-<li>Miks pole AlmaLinuxis Samba AD DC-d ja mis on RHEL-i alternatiiv?</li>
-<li>Too kolm levinumat põhjust, miks domeeniga liitumine ebaõnnestub.</li>
-</ol>
+<p><strong>1.</strong> Millised tehnoloogiad moodustavad Active Directory? Mis on igaühe roll?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>LDAP - kataloog; Kerberos - autentimine; DNS - DC-de leidmine; SMB - failid, SYSVOL, sisselogimisskriptid; GPO - arvutite ja kasutajate seadistuste haldus.</p>
+</details>
+<p><strong>2.</strong> Mis vahe on domeenil, domeenikontrolleril ja OU-l?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Domeen - ühise kataloogi ja poliitikaga haldusala; DC - server, mis hoiab kataloogi ja autendib; OU - kaust objektide rühmitamiseks ja GPO-de sidumiseks.</p>
+</details>
+<p><strong>3.</strong> Kuidas töötab Kerberose autentimine? Mis on TGT?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Klient saab sisselogimisel KDC-lt TGT; TGT-ga küsib ta teenusepileteid, mida teenused kontrollivad. Parool ei liigu võrgus. TGT on „sissepääsupilet“, mis kehtib piiratud aja.</p>
+</details>
+<p><strong>4.</strong> Miks peab domeeni realm olema suurtähtedega?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kerberose realm on tõstutundlik ja AD tava on suurtähed; väiketähtedega realm ei klapi DC-ga.</p>
+</details>
+<p><strong>5.</strong> Miks ei tohi AD domeeni nimi lõppeda <code>.local</code>-iga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>.local</code> on reserveeritud mDNS-ile (Avahi, Bonjour) ja põhjustab nimelahenduse konflikte.</p>
+</details>
+<p><strong>6.</strong> Miks paigaldatakse DC eraldi masinasse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>DC on ise DNS-server (port 53) ja Kerberose KDC ning peab olema stabiilne; muud DNS/DHCP-teenused samas masinas lähevad konflikti ja turvarisk suureneb.</p>
+</details>
+<p><strong>7.</strong> Milliseid teenuseid tuleb Debianis enne provisioning'ut peatada ja miks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>smbd</code>, <code>nmbd</code> ja <code>winbind</code> - DC teenus <code>samba-ad-dc</code> käivitab vajalikud protsessid ise ja need pordid oleksid muidu hõivatud.</p>
+</details>
+<p><strong>8.</strong> Mida teeb <code>samba-tool domain provision</code> valik <code>--use-rfc2307</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Lisab skeemi Unixi atribuudid (<code>uidNumber</code>, <code>gidNumber</code>, <code>loginShell</code>, <code>unixHomeDirectory</code>).</p>
+</details>
+<p><strong>9.</strong> Miks vajab DC <code>chrony</code> seadistuses <code>ntpsigndsocket</code> rida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Windowsi kliendid nõuavad DC-lt allkirjastatud NTP vastuseid; allkirja annab Samba sokli kaudu.</p>
+</details>
+<p><strong>10.</strong> Kuidas leiab klient domeenikontrolleri?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>DNS-i SRV-kirjete kaudu (<code>_ldap._tcp.&lt;domeen&gt;</code>, <code>_kerberos._udp.&lt;domeen&gt;</code>).</p>
+</details>
+<p><strong>11.</strong> Mida teeb <code>realm join</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Avastab domeeni, loob AD-s arvutikonto, kirjutab <code>/etc/krb5.keytab</code>-i, seadistab SSSD, Kerberose ja PAM/NSS-i.</p>
+</details>
+<p><strong>12.</strong> Mis vahe on SSSD seadetel <code>ldap_id_mapping = True</code> ja <code>False</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>True</code> - UID/GID arvutatakse SID-ist automaatselt; <code>False</code> - kasutatakse AD-s salvestatud RFC2307 atribuute.</p>
+</details>
+<p><strong>13.</strong> Kuidas piirata, millised AD grupid saavad Linuxi masinasse sisse logida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>realm deny --all</code> ja <code>realm permit -g &lt;grupp&gt;</code> (või <code>simple_allow_groups</code> / <code>ad_access_filter</code> SSSD-s).</p>
+</details>
+<p><strong>14.</strong> Miks pole AlmaLinuxis Samba AD DC-d ja mis on RHEL-i alternatiiv?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>RHEL-i Samba on ehitatud MIT Kerberosega ja DC rolli ei toetata; alternatiiv on FreeIPA / Red Hat IdM.</p>
+</details>
+<p><strong>15.</strong> Too kolm levinumat põhjust, miks domeeniga liitumine ebaõnnestub.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kliendi DNS ei osuta DC-le; kellad erinevad; tulemüür blokeerib pordid; vale administraatori parool; hostinimi pole FQDN.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Loo kasutaja <code>peeter</code> ja lisa ta gruppi <code>opilased</code>.</li>
-<li>Lisa DNS-kirje <code>nas.ad.lab.example → 10.0.83.53</code>.</li>
-<li>Kirjuta käsk, mis näitab, kas DNS-is on Kerberose SRV-kirje.</li>
-<li>Liida AlmaLinuxi masin domeeniga nii, et arvutikonto tekib OU-sse <code>Linux</code>.</li>
-<li>Kirjuta sudoers-rida, mis annab AD grupile <code>Domain Admins</code> täisõigused (täisnimedega kasutajad).</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>LDAP - kataloog; Kerberos - autentimine; DNS - DC-de leidmine; SMB - failid, SYSVOL, sisselogimisskriptid; GPO - arvutite ja kasutajate seadistuste haldus.</li>
-<li>Domeen - ühise kataloogi ja poliitikaga haldusala; DC - server, mis hoiab kataloogi ja autendib; OU - kaust objektide rühmitamiseks ja GPO-de sidumiseks.</li>
-<li>Klient saab sisselogimisel KDC-lt TGT; TGT-ga küsib ta teenusepileteid, mida teenused kontrollivad. Parool ei liigu võrgus. TGT on „sissepääsupilet“, mis kehtib piiratud aja.</li>
-<li>Kerberose realm on tõstutundlik ja AD tava on suurtähed; väiketähtedega realm ei klapi DC-ga.</li>
-<li><code>.local</code> on reserveeritud mDNS-ile (Avahi, Bonjour) ja põhjustab nimelahenduse konflikte.</li>
-<li>DC on ise DNS-server (port 53) ja Kerberose KDC ning peab olema stabiilne; muud DNS/DHCP-teenused samas masinas lähevad konflikti ja turvarisk suureneb.</li>
-<li><code>smbd</code>, <code>nmbd</code> ja <code>winbind</code> - DC teenus <code>samba-ad-dc</code> käivitab vajalikud protsessid ise ja need pordid oleksid muidu hõivatud.</li>
-<li>Lisab skeemi Unixi atribuudid (<code>uidNumber</code>, <code>gidNumber</code>, <code>loginShell</code>, <code>unixHomeDirectory</code>).</li>
-<li>Windowsi kliendid nõuavad DC-lt allkirjastatud NTP vastuseid; allkirja annab Samba sokli kaudu.</li>
-<li>DNS-i SRV-kirjete kaudu (<code>_ldap._tcp.&lt;domeen&gt;</code>, <code>_kerberos._udp.&lt;domeen&gt;</code>).</li>
-<li>Avastab domeeni, loob AD-s arvutikonto, kirjutab <code>/etc/krb5.keytab</code>-i, seadistab SSSD, Kerberose ja PAM/NSS-i.</li>
-<li><code>True</code> - UID/GID arvutatakse SID-ist automaatselt; <code>False</code> - kasutatakse AD-s salvestatud RFC2307 atribuute.</li>
-<li><code>realm deny --all</code> ja <code>realm permit -g &lt;grupp&gt;</code> (või <code>simple_allow_groups</code> / <code>ad_access_filter</code> SSSD-s).</li>
-<li>RHEL-i Samba on ehitatud MIT Kerberosega ja DC rolli ei toetata; alternatiiv on FreeIPA / Red Hat IdM.</li>
-<li>Kliendi DNS ei osuta DC-le; kellad erinevad; tulemüür blokeerib pordid; vale administraatori parool; hostinimi pole FQDN.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Loo kasutaja <code>peeter</code> ja lisa ta gruppi <code>opilased</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>user<span class="w"> </span>create<span class="w"> </span>peeter
 sudo<span class="w"> </span>samba-tool<span class="w"> </span>group<span class="w"> </span>addmembers<span class="w"> </span>opilased<span class="w"> </span>peeter
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Lisa DNS-kirje <code>nas.ad.lab.example → 10.0.83.53</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>nas<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.53<span class="w"> </span>-U<span class="w"> </span>administrator
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta käsk, mis näitab, kas DNS-is on Kerberose SRV-kirje.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>host<span class="w"> </span>-t<span class="w"> </span>SRV<span class="w"> </span>_kerberos._udp.ad.lab.example
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Liida AlmaLinuxi masin domeeniga nii, et arvutikonto tekib OU-sse <code>Linux</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>realm<span class="w"> </span>join<span class="w"> </span>-U<span class="w"> </span>Administrator<span class="w"> </span>--computer-ou<span class="o">=</span><span class="s2">"OU=Linux,DC=ad,DC=lab,DC=example"</span><span class="w"> </span>ad.lab.example
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Kirjuta sudoers-rida, mis annab AD grupile <code>Domain Admins</code> täisõigused (täisnimedega kasutajad).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>%domain\ admins@ad.lab.example ALL=(ALL:ALL) ALL
 </code></pre></div>
+</details>
 
 
 

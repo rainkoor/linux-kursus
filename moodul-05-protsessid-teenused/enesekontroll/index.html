@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1091,34 +1093,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,68 +4407,132 @@
 
 
 <h1 id="moodul-5-enesekontroll">Moodul 5. Enesekontroll<a class="headerlink" href="#moodul-5-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on protsess, PID ja PPID?</li>
-<li>Milline protsess on PID 1 ja mis on selle roll?</li>
-<li>Mida tähendavad protsessi olekud <code>R</code>, <code>S</code>, <code>T</code> ja <code>Z</code>?</li>
-<li>Mida näitab koormus (<em>load average</em>)? Millal on see murettekitav?</li>
-<li>Mis vahe on signaalidel <code>SIGTERM</code> ja <code>SIGKILL</code>? Kumba peaks kasutama esimesena ja miks?</li>
-<li>Kuidas saata juba töötav käsk taustale?</li>
-<li>Miks lõpevad kesta taustatööd väljalogimisel? Kuidas seda vältida?</li>
-<li>Mida tähendab nice-väärtus 19? Kes saab nice-väärtust vähendada?</li>
-<li>Mis vahe on käskudel <code>systemctl start</code> ja <code>systemctl enable</code>?</li>
-<li>Mis vahe on käskudel <code>systemctl restart</code> ja <code>systemctl reload</code>?</li>
-<li>Miks ei tohi muuta faile kataloogis <code>/usr/lib/systemd/system/</code>? Kuidas teenuse seadistust õigesti muuta?</li>
-<li>Millal on vaja käivitada <code>systemctl daemon-reload</code>?</li>
-<li>Kuidas näha teenuse <code>nginx</code> viimase tunni logisid?</li>
-<li>Selgita crontab'i rida <code>15 3 * * 1 /usr/local/bin/puhastus.sh</code>.</li>
-<li>Nimeta kaks systemd taimeri eelist cron'i ees.</li>
-<li>Mis vahe on cron-il, systemd taimeril ja <code>at</code>-il?</li>
-<li>Miks ei mõju <code>/etc/security/limits.conf</code> systemd teenustele ja kuidas teenuse ressursse piirata?</li>
-</ol>
+<p><strong>1.</strong> Mis on protsess, PID ja PPID?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>Protsess</strong> on töötav programm. <strong>PID</strong> on protsessi unikaalne number. <strong>PPID</strong> on vanemprotsessi (selle protsessi käivitanud protsessi) PID.</p>
+</details>
+<p><strong>2.</strong> Milline protsess on PID 1 ja mis on selle roll?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>systemd</strong> - esimene protsess, mille kernel käivitab. See käivitab ja haldab kõiki teenuseid ning on kõigi protsesside puu juur.</p>
+</details>
+<p><strong>3.</strong> Mida tähendavad protsessi olekud <code>R</code>, <code>S</code>, <code>T</code> ja <code>Z</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>R</code> - töötab või ootab protsessorit, <code>S</code> - magab ja ootab sündmust, <code>T</code> - peatatud, <code>Z</code> - zombie: on lõpetanud, kuid vanem pole veel tulemust kätte saanud.</p>
+</details>
+<p><strong>4.</strong> Mida näitab koormus (<em>load average</em>)? Millal on see murettekitav?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Viimase 1, 5 ja 15 minuti keskmine protsesside arv, mis töötavad või ootavad protsessorit (või ketast). Murettekitav on, kui see on püsivalt suurem kui protsessorituumade arv.</p>
+</details>
+<p><strong>5.</strong> Mis vahe on signaalidel <code>SIGTERM</code> ja <code>SIGKILL</code>? Kumba peaks kasutama esimesena ja miks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>SIGTERM</code> palub protsessil lõpetada ja laseb tal korrektselt koristada (salvestada andmed, sulgeda failid). <code>SIGKILL</code> lõpetab protsessi kohe ja seda ei saa ignoreerida. Esimesena tuleks kasutada <code>SIGTERM</code>-i, <code>SIGKILL</code>-i alles siis, kui protsess ei reageeri.</p>
+</details>
+<p><strong>6.</strong> Kuidas saata juba töötav käsk taustale?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Vajuta <strong>Ctrl+Z</strong> (peatab) ja kirjuta <code>bg</code> (jätkab taustal).</p>
+</details>
+<p><strong>7.</strong> Miks lõpevad kesta taustatööd väljalogimisel? Kuidas seda vältida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Väljalogimisel saavad kesta tööd signaali <code>SIGHUP</code>. Vältimiseks: <code>nohup</code>, <code>tmux</code>/<code>screen</code> või püsiva programmi puhul systemd teenus.</p>
+</details>
+<p><strong>8.</strong> Mida tähendab nice-väärtus 19? Kes saab nice-väärtust vähendada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Madalaim prioriteet - protsess annab protsessori meelsasti teistele. Nice-väärtust vähendada (prioriteeti tõsta) saab ainult juurkasutaja.</p>
+</details>
+<p><strong>9.</strong> Mis vahe on käskudel <code>systemctl start</code> ja <code>systemctl enable</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>start</code> käivitab teenuse kohe. <code>enable</code> määrab, et teenus käivitub automaatselt alglaadimisel. Kumbki ei tee teise tööd; mõlema jaoks korraga on <code>enable --now</code>.</p>
+</details>
+<p><strong>10.</strong> Mis vahe on käskudel <code>systemctl restart</code> ja <code>systemctl reload</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>restart</code> peatab teenuse ja käivitab uuesti (lühike katkestus). <code>reload</code> palub teenusel seadistus uuesti lugeda ilma peatumata (kui teenus seda toetab).</p>
+</details>
+<p><strong>11.</strong> Miks ei tohi muuta faile kataloogis <code>/usr/lib/systemd/system/</code>? Kuidas teenuse seadistust õigesti muuta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Paketi uuendus kirjutab need failid üle ja muudatus kaob. Õige viis: <code>systemctl edit teenus</code> (loob muudatusfaili kataloogis <code>/etc/systemd/system/teenus.service.d/</code>) või koopia kataloogis <code>/etc/systemd/system/</code>.</p>
+</details>
+<p><strong>12.</strong> Millal on vaja käivitada <code>systemctl daemon-reload</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pärast üksuse failide käsitsi loomist või muutmist (<code>systemctl edit</code> teeb selle ise).</p>
+</details>
+<p><strong>13.</strong> Kuidas näha teenuse <code>nginx</code> viimase tunni logisid?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>journalctl -u nginx --since "1 hour ago"</code></p>
+</details>
+<p><strong>14.</strong> Selgita crontab'i rida <code>15 3 * * 1 /usr/local/bin/puhastus.sh</code>.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Iga esmaspäeva kell 03:15 käivitatakse skript <code>/usr/local/bin/puhastus.sh</code>.</p>
+</details>
+<p><strong>15.</strong> Nimeta kaks systemd taimeri eelist cron'i ees.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Näiteks: logid on automaatselt journal'is; <code>Persistent=true</code> käivitab vahelejäänud töö; olekut ja järgmist käivitust näeb käsuga <code>systemctl list-timers</code>; töö saab käivitada käsitsi <code>systemctl start</code>-iga.</p>
+</details>
+<p><strong>16.</strong> Mis vahe on cron-il, systemd taimeril ja <code>at</code>-il?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>cron ja taimer käivitavad tööd korduvalt kindla ajakava järgi; <code>at</code> käivitab töö ühe korra määratud ajal.</p>
+</details>
+<p><strong>17.</strong> Miks ei mõju <code>/etc/security/limits.conf</code> systemd teenustele ja kuidas teenuse ressursse piirata?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>limits.conf</code>-i rakendab <code>pam_limits</code> kasutaja sisselogimisel; teenused käivitab systemd ilma PAM-ita. Teenustele: üksuse seaded <code>MemoryMax=</code>, <code>CPUQuota=</code>, <code>TasksMax=</code>, <code>LimitNOFILE=</code> (<code>systemctl edit</code> või <code>set-property</code>).</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Leia kolm kõige rohkem protsessorit kasutavat protsessi.</li>
-<li>Leia, mitu protsessi töötab juurkasutaja õigustes.</li>
-<li>Käivita <code>sleep 500</code> taustal madalaima prioriteediga ja kontrolli selle nice-väärtust.</li>
-<li>Leia kõik teenused, mis on lubatud automaatselt käivituma.</li>
-<li>Kuva praeguse alglaadimise hoiatused ja vead.</li>
-<li>Loo crontab'i kirje, mis kustutab iga päev kell 04:00 kataloogist <code>~/tmp</code> failid, mis on vanemad kui 7 päeva.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Protsess</strong> on töötav programm. <strong>PID</strong> on protsessi unikaalne number. <strong>PPID</strong> on vanemprotsessi (selle protsessi käivitanud protsessi) PID.</li>
-<li><strong>systemd</strong> - esimene protsess, mille kernel käivitab. See käivitab ja haldab kõiki teenuseid ning on kõigi protsesside puu juur.</li>
-<li><code>R</code> - töötab või ootab protsessorit, <code>S</code> - magab ja ootab sündmust, <code>T</code> - peatatud, <code>Z</code> - zombie: on lõpetanud, kuid vanem pole veel tulemust kätte saanud.</li>
-<li>Viimase 1, 5 ja 15 minuti keskmine protsesside arv, mis töötavad või ootavad protsessorit (või ketast). Murettekitav on, kui see on püsivalt suurem kui protsessorituumade arv.</li>
-<li><code>SIGTERM</code> palub protsessil lõpetada ja laseb tal korrektselt koristada (salvestada andmed, sulgeda failid). <code>SIGKILL</code> lõpetab protsessi kohe ja seda ei saa ignoreerida. Esimesena tuleks kasutada <code>SIGTERM</code>-i, <code>SIGKILL</code>-i alles siis, kui protsess ei reageeri.</li>
-<li>Vajuta <strong>Ctrl+Z</strong> (peatab) ja kirjuta <code>bg</code> (jätkab taustal).</li>
-<li>Väljalogimisel saavad kesta tööd signaali <code>SIGHUP</code>. Vältimiseks: <code>nohup</code>, <code>tmux</code>/<code>screen</code> või püsiva programmi puhul systemd teenus.</li>
-<li>Madalaim prioriteet - protsess annab protsessori meelsasti teistele. Nice-väärtust vähendada (prioriteeti tõsta) saab ainult juurkasutaja.</li>
-<li><code>start</code> käivitab teenuse kohe. <code>enable</code> määrab, et teenus käivitub automaatselt alglaadimisel. Kumbki ei tee teise tööd; mõlema jaoks korraga on <code>enable --now</code>.</li>
-<li><code>restart</code> peatab teenuse ja käivitab uuesti (lühike katkestus). <code>reload</code> palub teenusel seadistus uuesti lugeda ilma peatumata (kui teenus seda toetab).</li>
-<li>Paketi uuendus kirjutab need failid üle ja muudatus kaob. Õige viis: <code>systemctl edit teenus</code> (loob muudatusfaili kataloogis <code>/etc/systemd/system/teenus.service.d/</code>) või koopia kataloogis <code>/etc/systemd/system/</code>.</li>
-<li>Pärast üksuse failide käsitsi loomist või muutmist (<code>systemctl edit</code> teeb selle ise).</li>
-<li><code>journalctl -u nginx --since "1 hour ago"</code></li>
-<li>Iga esmaspäeva kell 03:15 käivitatakse skript <code>/usr/local/bin/puhastus.sh</code>.</li>
-<li>Näiteks: logid on automaatselt journal'is; <code>Persistent=true</code> käivitab vahelejäänud töö; olekut ja järgmist käivitust näeb käsuga <code>systemctl list-timers</code>; töö saab käivitada käsitsi <code>systemctl start</code>-iga.</li>
-<li>cron ja taimer käivitavad tööd korduvalt kindla ajakava järgi; <code>at</code> käivitab töö ühe korra määratud ajal.</li>
-<li><code>limits.conf</code>-i rakendab <code>pam_limits</code> kasutaja sisselogimisel; teenused käivitab systemd ilma PAM-ita. Teenustele: üksuse seaded <code>MemoryMax=</code>, <code>CPUQuota=</code>, <code>TasksMax=</code>, <code>LimitNOFILE=</code> (<code>systemctl edit</code> või <code>set-property</code>).</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Leia kolm kõige rohkem protsessorit kasutavat protsessi.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>ps<span class="w"> </span>-eo<span class="w"> </span>pid,%cpu,cmd<span class="w"> </span>--sort<span class="o">=</span>-%cpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-4
-ps<span class="w"> </span>-U<span class="w"> </span>root<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>--no-headers<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
-nice<span class="w"> </span>-n<span class="w"> </span><span class="m">19</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="p">&amp;</span>
-ps<span class="w"> </span>-o<span class="w"> </span>pid,ni,cmd<span class="w"> </span>-C<span class="w"> </span>sleep
-systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>enabled
-journalctl<span class="w"> </span>-b<span class="w"> </span>-p<span class="w"> </span>warning
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Leia, mitu protsessi töötab juurkasutaja õigustes.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>ps<span class="w"> </span>-U<span class="w"> </span>root<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>--no-headers<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Käivita <code>sleep 500</code> taustal madalaima prioriteediga ja kontrolli selle nice-väärtust.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>nice<span class="w"> </span>-n<span class="w"> </span><span class="m">19</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="p">&amp;</span>
+ps<span class="w"> </span>-o<span class="w"> </span>pid,ni,cmd<span class="w"> </span>-C<span class="w"> </span>sleep
+</code></pre></div>
+</details>
+<p><strong>4.</strong> Leia kõik teenused, mis on lubatud automaatselt käivituma.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>enabled
+</code></pre></div>
+</details>
+<p><strong>5.</strong> Kuva praeguse alglaadimise hoiatused ja vead.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>-b<span class="w"> </span>-p<span class="w"> </span>warning
+</code></pre></div>
+</details>
+<p><strong>6.</strong> Loo crontab'i kirje, mis kustutab iga päev kell 04:00 kataloogist <code>~/tmp</code> failid, mis on vanemad kui 7 päeva.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <p>Crontab'i kirje (<code>crontab -e</code>):</p>
 <div class="highlight"><pre><span></span><code>0 4 * * * /usr/bin/find /home/KASUTAJA/tmp -type f -mtime +7 -delete
 </code></pre></div>
+</details>
 
 
 

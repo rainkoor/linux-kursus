@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -4068,6 +4070,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4629,6 +4642,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4673,7 +4697,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K14</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K14</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p>Tähised: <code>kasutaja</code> - sinu kasutajanimi. IP-aadressid on paigalduslisa plaanist (<code>10.0.83.61</code>–<code>63</code>); asenda <code>83</code> oma võrgu numbriga.</p>
 <hr />
 <h2 id="0-osa-ettevalmistus">0. osa. Ettevalmistus<a class="headerlink" href="#0-osa-ettevalmistus" title="Permanent link">&para;</a></h2>
@@ -4737,7 +4764,10 @@ kubectl<span class="w"> </span>version
 kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A
 </code></pre></div>
-<p><strong>K1.</strong> Milline Kubernetese versioon paigaldati? Milliseid pode on nimeruumis <code>kube-system</code> ja mis on igaühe ülesanne (teooria punkt 24.4)? Milline protsess kuulab pordil 6443?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Milline Kubernetese versioon paigaldati? Milliseid pode on nimeruumis <code>kube-system</code> ja mis on igaühe ülesanne (teooria punkt 24.4)? Milline protsess kuulab pordil 6443?</p>
+</div>
 <hr />
 <h2 id="2-osa-agendid">2. osa. Agendid<a class="headerlink" href="#2-osa-agendid" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> <code>k3s1</code>-s vaata liitumisluba:</p>
@@ -4754,7 +4784,10 @@ systemctl<span class="w"> </span>status<span class="w"> </span>k3s-agent
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>k3s2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A6<span class="w"> </span>-E<span class="w"> </span><span class="s2">"Capacity|Allocatable"</span>
 </code></pre></div>
-<p><strong>K2.</strong> Milline on iga sõlme roll (<code>ROLES</code>), sisemine IP ja konteinerikäitur (<code>CONTAINER-RUNTIME</code>)? Kui palju mälu ja protsessorit on sõlmel <code>k3s2</code> podide jaoks saadaval (<code>Allocatable</code>)? Miks on agendi liitumisluba saladus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Milline on iga sõlme roll (<code>ROLES</code>), sisemine IP ja konteinerikäitur (<code>CONTAINER-RUNTIME</code>)? Kui palju mälu ja protsessorit on sõlmel <code>k3s2</code> podide jaoks saadaval (<code>Allocatable</code>)? Miks on agendi liitumisluba saladus?</p>
+</div>
 <hr />
 <h2 id="3-osa-esimene-rakendus">3. osa. Esimene rakendus<a class="headerlink" href="#3-osa-esimene-rakendus" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Loo kataloog <code>~/k8s</code> ja sinna teooria punkti 24.5 manifest <code>kool.yaml</code> (Namespace, Deployment 3 koopiaga, Service). Rakenda:</p>
@@ -4763,7 +4796,10 @@ kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> <
 kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-n<span class="w"> </span>kool
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>-o<span class="w"> </span>wide
 </code></pre></div>
-<p><strong>K3.</strong> Millistes sõlmedes podid töötavad? Milline IP-aadress on igal podil ja milline teenusel <code>kool</code>? Millisest võrgust need aadressid on (teooria punkt 24.4)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Millistes sõlmedes podid töötavad? Milline IP-aadress on igal podil ja milline teenusel <code>kool</code>? Millisest võrgust need aadressid on (teooria punkt 24.4)?</p>
+</div>
 <p><strong>3.2</strong> Testi teenust klastri seest ajutise podiga:</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>run<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--image<span class="o">=</span>docker.io/library/busybox:1.37<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>wget<span class="w"> </span>-qO-<span class="w"> </span>http://kool.kool.svc.cluster.local<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
@@ -4773,7 +4809,10 @@ kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> <
 kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>&lt;ühe-podi-nimi&gt;
 kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-10
 </code></pre></div>
-<p><strong>K4.</strong> Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?</p>
+</div>
 <hr />
 <h2 id="4-osa-skaleerimine-uuendus-ja-tagasivõtt">4. osa. Skaleerimine, uuendus ja tagasivõtt<a class="headerlink" href="#4-osa-skaleerimine-uuendus-ja-tagasivõtt" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong></p>
@@ -4794,9 +4833,15 @@ kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment/kool<span class="w"> </span>-n<span class="w"> </span>kool
 kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deployment/kool<span class="w"> </span>-n<span class="w"> </span>kool
 </code></pre></div>
-<p><strong>K5.</strong> Mitu podi töötas vigase uuenduse ajal ja milline oli uue podi olek (<code>STATUS</code>) ning sündmus <code>describe</code> väljundis? Kas teenus katkes? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Mitu podi töötas vigase uuenduse ajal ja milline oli uue podi olek (<code>STATUS</code>) ning sündmus <code>describe</code> väljundis? Kas teenus katkes? Miks?</p>
+</div>
 <p><strong>4.3</strong> Muuda failis <code>kool.yaml</code> koopiate arvuks 3 ja pildiks <code>nginx:1.28-alpine</code> ning tee <code>kubectl apply -f kool.yaml</code>.</p>
-<p><strong>K6.</strong> Miks tuleb muudatus lõpuks teha manifesti, kui sama tulemuse saab ka käsuga <code>kubectl scale</code> või <code>set image</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks tuleb muudatus lõpuks teha manifesti, kui sama tulemuse saab ka käsuga <code>kubectl scale</code> või <code>set image</code>?</p>
+</div>
 <hr />
 <h2 id="5-osa-configmap-ja-secret">5. osa. ConfigMap ja Secret<a class="headerlink" href="#5-osa-configmap-ja-secret" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Lisa faili <code>kool.yaml</code> teooria punkti 24.7 ConfigMap <code>kool-leht</code> (oma kooli nimega) ja haagi see Deploymentis kataloogi <code>/usr/share/nginx/html</code>. Rakenda ja kontrolli punkti 3.2 käsuga.</p>
@@ -4808,7 +4853,10 @@ kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class=
 kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>db-parool<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>-o<span class="w"> </span>yaml
 kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>db-parool<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.parool}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
 </code></pre></div>
-<p><strong>K7.</strong> Kas lehe muudatus jõudis podidesse ilma taaskäivituseta (vihje: kulub kuni minut)? Milleks on <code>rollout restart</code>? Mida näitas Secret'i YAML ja miks ei tohi Secret'i manifesti Giti panna?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kas lehe muudatus jõudis podidesse ilma taaskäivituseta (vihje: kulub kuni minut)? Milleks on <code>rollout restart</code>? Mida näitas Secret'i YAML ja miks ei tohi Secret'i manifesti Giti panna?</p>
+</div>
 <hr />
 <h2 id="6-osa-ingress-ja-tls">6. osa. Ingress ja TLS<a class="headerlink" href="#6-osa-ingress-ja-tls" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Loo <code>debian1</code>-s labori CA-ga sertifikaat nimele <code>kool.k8s.lab.example</code> (moodul 13):</p>
@@ -4831,13 +4879,19 @@ shred<span class="w"> </span>-u<span class="w"> </span>k8s.key
 curl<span class="w"> </span>https://kool.k8s.lab.example
 curl<span class="w"> </span>--resolve<span class="w"> </span>kool.k8s.lab.example:443:10.0.83.63<span class="w"> </span>https://kool.k8s.lab.example
 </code></pre></div>
-<p><strong>K8.</strong> Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele <code>k3s3</code> - kas vastus tuli, isegi kui sellel sõlmel ei pruugi <code>kool</code> podi olla? Miks? Milline komponent päringu vastu võttis?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele <code>k3s3</code> - kas vastus tuli, isegi kui sellel sõlmel ei pruugi <code>kool</code> podi olla? Miks? Milline komponent päringu vastu võttis?</p>
+</div>
 <p><strong>6.4</strong> Sõlme rike: vaata, millistes sõlmedes <code>kool</code> podid on, ja <strong>lülita <code>k3s3</code> VM välja</strong> (Proxmoxis <em>Shutdown</em>). Jälgi <code>k3s1</code>-s:</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-w
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>-o<span class="w"> </span>wide<span class="w"> </span>-w
 </code></pre></div>
 <p>Oota vähemalt 6 minutit, seejärel käivita <code>k3s3</code> uuesti.</p>
-<p><strong>K9.</strong> Kui kiiresti muutus <code>k3s3</code> olekuks <code>NotReady</code>? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil <code>kool.k8s.lab.example</code> (kliendi <code>hosts</code> failis on <code>k3s1</code>)? Mis oleks juhtunud, kui välja oleks lülitatud <code>k3s1</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kui kiiresti muutus <code>k3s3</code> olekuks <code>NotReady</code>? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil <code>kool.k8s.lab.example</code> (kliendi <code>hosts</code> failis on <code>k3s1</code>)? Mis oleks juhtunud, kui välja oleks lülitatud <code>k3s1</code>?</p>
+</div>
 <hr />
 <h2 id="7-osa-püsiandmed">7. osa. Püsiandmed<a class="headerlink" href="#7-osa-püsiandmed" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Loo fail <code>andmed.yaml</code>: teooria punkti 24.9 PVC <code>andmed</code> ja Deployment <code>kirjutaja</code>, mis kirjutab iga 10 sekundi järel kellaaja püsikettale:</p>
@@ -4880,7 +4934,10 @@ kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w">
 kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>deploy/kirjutaja<span class="w"> </span>--<span class="w"> </span>head<span class="w"> </span>-3<span class="w"> </span>/andmed/aeg.txt
 </code></pre></div>
 <p>Leia andmed sõlmest, kus pod töötab: <code>sudo ls -R /var/lib/rancher/k3s/storage/</code>.</p>
-<p><strong>K10.</strong> Mis olekus oli PVC enne Deploymenti loomist ja pärast (vihje: <code>WaitForFirstConsumer</code>)? Kas andmed säilisid podi kustutamisel? Millises sõlmes ja kataloogis andmed asuvad ning mis juhtub selle sõlme rikke korral?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mis olekus oli PVC enne Deploymenti loomist ja pärast (vihje: <code>WaitForFirstConsumer</code>)? Kas andmed säilisid podi kustutamisel? Millises sõlmes ja kataloogis andmed asuvad ning mis juhtub selle sõlme rikke korral?</p>
+</div>
 <hr />
 <h2 id="8-osa-helm">8. osa. Helm<a class="headerlink" href="#8-osa-helm" title="Permanent link">&para;</a></h2>
 <p><strong>8.1</strong> Paigalda <code>k3s1</code>-sse Helm (teooria punkt 24.10) ja podinfo:</p>
@@ -4901,7 +4958,10 @@ helm<span class="w"> </span>rollback<span class="w"> </span>demo<span class="w">
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>demo
 helm<span class="w"> </span>list<span class="w"> </span>-A
 </code></pre></div>
-<p><strong>K11.</strong> Mitu Kubernetese objekti lõi üks <code>helm install</code> (<code>kubectl get all -n demo</code>)? Mis muutus pärast <code>upgrade</code> ja <code>rollback</code> käske? Kuidas hoiaksid Helmi paigalduse seadeid korratavana?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mitu Kubernetese objekti lõi üks <code>helm install</code> (<code>kubectl get all -n demo</code>)? Mis muutus pärast <code>upgrade</code> ja <code>rollback</code> käske? Kuidas hoiaksid Helmi paigalduse seadeid korratavana?</p>
+</div>
 <hr />
 <h2 id="9-osa-hooldus-ja-varundus">9. osa. Hooldus ja varundus<a class="headerlink" href="#9-osa-hooldus-ja-varundus" title="Permanent link">&para;</a></h2>
 <p><strong>9.1</strong> Tühjenda sõlm hoolduseks:</p>
@@ -4924,12 +4984,21 @@ sudo<span class="w"> </span>tar<span class="w"> </span>-czf<span class="w"> </sp
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>k3s
 ls<span class="w"> </span>-lh<span class="w"> </span>/root/k3s-varu-*.tar.gz
 </code></pre></div>
-<p><strong>K12.</strong> Millised podid jäid <code>k3s2</code>-sse pärast <code>drain</code>-i ja miks (vihje: DaemonSet)? Kas veebileht vastas <code>k3s1</code> teenuse peatamise ajal? Mis on sinu varukoopias ja mida see <strong>ei</strong> sisalda?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Millised podid jäid <code>k3s2</code>-sse pärast <code>drain</code>-i ja miks (vihje: DaemonSet)? Kas veebileht vastas <code>k3s1</code> teenuse peatamise ajal? Mis on sinu varukoopias ja mida see <strong>ei</strong> sisalda?</p>
+</div>
 <p><strong>9.4</strong> Kanna kõik manifestid (<code>~/k8s</code>) Git-hoidlasse (moodul 6). <strong>Ära lisa</strong> <code>k8s.key</code>, <code>kubeconfig</code>-faile ega Secret'ide väärtusi.</p>
 <hr />
 <h2 id="10-osa-kokkuvõte">10. osa. Kokkuvõte<a class="headerlink" href="#10-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K13.</strong> Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?</p>
-<p><strong>K14.</strong> Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus <code>kool</code>, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus <code>kool</code>, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.</p>
+</div>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <p>Kui klastrit enam ei vaja: <code>sudo /usr/local/bin/k3s-agent-uninstall.sh</code> agentides ja <code>sudo /usr/local/bin/k3s-uninstall.sh</code> serveris - või taasta hetktõmmis „enne k3s-i“. Lülita masinad välja, kui sa nendega ei tööta.</p>
@@ -4943,6 +5012,28 @@ ls<span class="w"> </span>-lh<span class="w"> </span>/root/k3s-varu-*.tar.gz
 <li><strong>minikube või kind oma arvutis:</strong> paigalda oma arvutisse (või WSL-i) minikube ja käivita seal sama <code>kool.yaml</code>. Mis on teisiti (sõlmede arv, Ingress, salvestus)?</li>
 <li><strong>Võrgupoliitika:</strong> k3s sisaldab võrgupoliitikate kontrollerit. Kirjuta <code>NetworkPolicy</code>, mis lubab nimeruumi <code>kool</code> podidele liiklust ainult Traefikilt (nimeruum <code>kube-system</code>), ja kontrolli punkti 3.2 testiga teisest nimeruumist.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.2)</em> Milline Kubernetese versioon paigaldati? Milliseid pode on nimeruumis <code>kube-system</code> ja mis on igaühe ülesanne (teooria punkt 24.4)? Milline protsess kuulab pordil 6443?</li>
+<li><strong>K2.</strong> <em>(punkt 2.3)</em> Milline on iga sõlme roll (<code>ROLES</code>), sisemine IP ja konteinerikäitur (<code>CONTAINER-RUNTIME</code>)? Kui palju mälu ja protsessorit on sõlmel <code>k3s2</code> podide jaoks saadaval (<code>Allocatable</code>)? Miks on agendi liitumisluba saladus?</li>
+<li><strong>K3.</strong> <em>(punkt 3.1)</em> Millistes sõlmedes podid töötavad? Milline IP-aadress on igal podil ja milline teenusel <code>kool</code>? Millisest võrgust need aadressid on (teooria punkt 24.4)?</li>
+<li><strong>K4.</strong> <em>(punkt 3.3)</em> Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?</li>
+<li><strong>K5.</strong> <em>(punkt 4.2)</em> Mitu podi töötas vigase uuenduse ajal ja milline oli uue podi olek (<code>STATUS</code>) ning sündmus <code>describe</code> väljundis? Kas teenus katkes? Miks?</li>
+<li><strong>K6.</strong> <em>(punkt 4.3)</em> Miks tuleb muudatus lõpuks teha manifesti, kui sama tulemuse saab ka käsuga <code>kubectl scale</code> või <code>set image</code>?</li>
+<li><strong>K7.</strong> <em>(punkt 5.3)</em> Kas lehe muudatus jõudis podidesse ilma taaskäivituseta (vihje: kulub kuni minut)? Milleks on <code>rollout restart</code>? Mida näitas Secret'i YAML ja miks ei tohi Secret'i manifesti Giti panna?</li>
+<li><strong>K8.</strong> <em>(punkt 6.3)</em> Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele <code>k3s3</code> - kas vastus tuli, isegi kui sellel sõlmel ei pruugi <code>kool</code> podi olla? Miks? Milline komponent päringu vastu võttis?</li>
+<li><strong>K9.</strong> <em>(punkt 6.4)</em> Kui kiiresti muutus <code>k3s3</code> olekuks <code>NotReady</code>? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil <code>kool.k8s.lab.example</code> (kliendi <code>hosts</code> failis on <code>k3s1</code>)? Mis oleks juhtunud, kui välja oleks lülitatud <code>k3s1</code>?</li>
+<li><strong>K10.</strong> <em>(punkt 7.2)</em> Mis olekus oli PVC enne Deploymenti loomist ja pärast (vihje: <code>WaitForFirstConsumer</code>)? Kas andmed säilisid podi kustutamisel? Millises sõlmes ja kataloogis andmed asuvad ning mis juhtub selle sõlme rikke korral?</li>
+<li><strong>K11.</strong> <em>(punkt 8.2)</em> Mitu Kubernetese objekti lõi üks <code>helm install</code> (<code>kubectl get all -n demo</code>)? Mis muutus pärast <code>upgrade</code> ja <code>rollback</code> käske? Kuidas hoiaksid Helmi paigalduse seadeid korratavana?</li>
+<li><strong>K12.</strong> <em>(punkt 9.3)</em> Millised podid jäid <code>k3s2</code>-sse pärast <code>drain</code>-i ja miks (vihje: DaemonSet)? Kas veebileht vastas <code>k3s1</code> teenuse peatamise ajal? Mis on sinu varukoopias ja mida see <strong>ei</strong> sisalda?</li>
+<li><strong>K13.</strong> <em>(10. osa)</em> Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?</li>
+<li><strong>K14.</strong> <em>(10. osa)</em> Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus <code>kool</code>, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

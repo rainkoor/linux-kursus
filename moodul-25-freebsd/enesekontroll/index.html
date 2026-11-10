@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -4116,34 +4118,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,65 +4407,107 @@
 
 
 <h1 id="moodul-25-enesekontroll">Moodul 25. Enesekontroll<a class="headerlink" href="#moodul-25-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on FreeBSD baassüsteem ja mille poolest erineb see Linuxi distrost?</li>
-<li>Miks on FreeBSD-s lisatarkvara seadistusfailid kataloogis <code>/usr/local/etc</code>, mitte <code>/etc</code>?</li>
-<li>Mis vahe on <code>pkg</code>-l, portidel ja <code>freebsd-update</code>-il? Mida tähendab pkgbase?</li>
-<li>Mis vahe on pakihoidla harudel <code>quarterly</code> ja <code>latest</code>?</li>
-<li>Kuidas lubad teenuse käivitumise alglaadimisel ja käivitad selle kohe? Milline fail seda seadistust hoiab?</li>
-<li>Mis on <code>/etc/master.passwd</code> ja miks muudetakse kasutajafaile <code>vipw</code>-ga?</li>
-<li>Mis tingimusel saab FreeBSD-s <code>su</code>-ga juurkasutajaks? Mis on <code>doas</code>?</li>
-<li>Kuidas seadistad FreeBSD-s püsiva staatilise IPv4 aadressi ja vaikelüüsi?</li>
-<li>Mis on alglaadimiskeskkond ja kuidas see aitab uuendusi turvaliselt teha? Mida see tagasi ei võta?</li>
-<li>Mida tähendab pf-is „viimane sobiv reegel kehtib“? Milleks on <code>quick</code>?</li>
-<li>Miks võib pf-i esmakordne sisselülitamine SSH kaudu ühenduse katkestada ja kuidas seda vältida?</li>
-<li>Mis on jail ja mille poolest erineb see virtuaalmasinast ning Linuxi konteinerist?</li>
-<li>Miks kirjutatakse FreeBSD-s skripti algusesse <code>#!/bin/sh</code> või <code>#!/usr/bin/env bash</code>, mitte <code>#!/bin/bash</code>?</li>
-<li>Nimeta kolm GNU ja BSD tööriistade erinevust, millega tuleb skriptides arvestada.</li>
-</ol>
+<p><strong>1.</strong> Mis on FreeBSD baassüsteem ja mille poolest erineb see Linuxi distrost?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Baassüsteem on kernel, C-teek, põhikäsud, alglaadija ja dokumentatsioon, mida arendatakse ühes hoidlas ja väljastatakse koos ühe versioonina. Linuxi distro paneb kokku kerneli ja eri projektide tööriistad.</p>
+</details>
+<p><strong>2.</strong> Miks on FreeBSD-s lisatarkvara seadistusfailid kataloogis <code>/usr/local/etc</code>, mitte <code>/etc</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Baassüsteem ja kolmanda osapoole tarkvara on rangelt eraldatud: baassüsteem <code>/</code>, <code>/usr</code>, <code>/etc</code>; paketid <code>/usr/local</code>. Nii ei kirjuta baassüsteemi uuendus pakettide faile üle ja vastupidi ning on selge, mis kust pärineb.</p>
+</details>
+<p><strong>3.</strong> Mis vahe on <code>pkg</code>-l, portidel ja <code>freebsd-update</code>-il? Mida tähendab pkgbase?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>pkg</code> paigaldab ja uuendab valmis kolmanda osapoole pakette; pordid on retseptid, millest saab tarkvara ise kompileerida (ka teiste valikutega); <code>freebsd-update</code> uuendab traditsioonilise paigalduse baassüsteemi ja kernelit. pkgbase - baassüsteem on samuti pakettidena ja kogu süsteemi uuendab <code>pkg</code>.</p>
+</details>
+<p><strong>4.</strong> Mis vahe on pakihoidla harudel <code>quarterly</code> ja <code>latest</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>quarterly</code> - stabiilne haru, uued versioonid kord kvartalis, vahepeal ainult turva- ja veaparandused (vaikimisi); <code>latest</code> - alati värskeimad versioonid.</p>
+</details>
+<p><strong>5.</strong> Kuidas lubad teenuse käivitumise alglaadimisel ja käivitad selle kohe? Milline fail seda seadistust hoiab?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>sysrc teenus_enable=YES</code> ja <code>service teenus start</code>; seade on failis <code>/etc/rc.conf</code>.</p>
+</details>
+<p><strong>6.</strong> Mis on <code>/etc/master.passwd</code> ja miks muudetakse kasutajafaile <code>vipw</code>-ga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kasutajakontode põhifail koos parooliräsidega (Linuxi <code>/etc/shadow</code> vaste); sellest genereeritakse <code>/etc/passwd</code> ja andmebaasid. <code>vipw</code> lukustab faili, kontrollib seda ja käivitab <code>pwd_mkdb</code>.</p>
+</details>
+<p><strong>7.</strong> Mis tingimusel saab FreeBSD-s <code>su</code>-ga juurkasutajaks? Mis on <code>doas</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kasutaja peab kuuluma gruppi <code>wheel</code>. <code>doas</code> on OpenBSD-st pärit lihtne <code>sudo</code> alternatiiv, mida seadistatakse failis <code>/usr/local/etc/doas.conf</code> (nt <code>permit persist :wheel</code>).</p>
+</details>
+<p><strong>8.</strong> Kuidas seadistad FreeBSD-s püsiva staatilise IPv4 aadressi ja vaikelüüsi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>sysrc ifconfig_vtnet0="inet 10.0.83.66/24"</code>, <code>sysrc defaultrouter="10.0.83.1"</code>, DNS <code>/etc/resolv.conf</code>; rakendamiseks <code>service netif restart &amp;&amp; service routing restart</code>.</p>
+</details>
+<p><strong>9.</strong> Mis on alglaadimiskeskkond ja kuidas see aitab uuendusi turvaliselt teha? Mida see tagasi ei võta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>ZFS-i juurfailisüsteemi kloon, millest saab alglaadida. Enne uuendust luuakse keskkond; kui uuendus ebaõnnestub, aktiveeritakse vana ja taaskäivitatakse. Eraldi andmekogumid (kodukataloogid, logid) ei lähe tagasi.</p>
+</details>
+<p><strong>10.</strong> Mida tähendab pf-is „viimane sobiv reegel kehtib“? Milleks on <code>quick</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pakettidele rakendatakse reegel, mis faili järjekorras <strong>viimasena</strong> sobib (erinevalt nftables'ist ja iptables'ist). <code>quick</code> lõpetab kontrolli kohe sellel reeglil.</p>
+</details>
+<p><strong>11.</strong> Miks võib pf-i esmakordne sisselülitamine SSH kaudu ühenduse katkestada ja kuidas seda vältida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Olemasoleva SSH-ühenduse pakettidel pole pf-i olekutabelis kirjet ja <code>block in all</code> võib need blokeerida. Lülita pf sisse konsoolist või kasuta ajutist laadimist (<code>pfctl -f …; sleep 60; pfctl -d</code>).</p>
+</details>
+<p><strong>12.</strong> Mis on jail ja mille poolest erineb see virtuaalmasinast ning Linuxi konteinerist?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Isoleeritud keskkond oma failisüsteemi juure, IP-aadressi, kasutajate ja protsessidega, kuid sama kerneliga. VM-il on oma kernel ja virtuaalne riistvara (raskem, isoleeritum). Linuxi konteiner kasutab nimeruume ja cgroupe ning tavaliselt registrist pärit pilte; jail on kerneli eraldi alamsüsteem ja põhineb baassüsteemi koopial või ZFS-i kloonil.</p>
+</details>
+<p><strong>13.</strong> Miks kirjutatakse FreeBSD-s skripti algusesse <code>#!/bin/sh</code> või <code>#!/usr/bin/env bash</code>, mitte <code>#!/bin/bash</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Bash ei ole baassüsteemis; pakett paigaldab selle <code>/usr/local/bin/bash</code>. <code>#!/bin/sh</code> on alati olemas; <code>#!/usr/bin/env bash</code> leiab bashi <code>PATH</code>-ist.</p>
+</details>
+<p><strong>14.</strong> Nimeta kolm GNU ja BSD tööriistade erinevust, millega tuleb skriptides arvestada.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Nt <code>sed -i</code> vajab BSD-s argumenti (<code>sed -i ''</code>); <code>ls --color</code> asemel <code>ls -G</code>; <code>grep -P</code> puudub; <code>date -d</code> asemel <code>date -v</code>/<code>-j -f</code>; <code>stat</code> võtmed erinevad (<code>stat -f</code>); <code>find</code> ja <code>xargs</code> võtmed erinevad osaliselt.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjuta käsud, mis paigaldavad PostgreSQL-i serveri paketi, lubavad selle alglaadimisel ja käivitavad.</li>
-<li>Kirjuta käsud, mis loovad grupi <code>arendajad</code>, kasutaja <code>liis</code> (kodukataloog, kest <code>sh</code>) ja lisavad <code>liis</code>-i gruppidesse <code>arendajad</code> ja <code>wheel</code>.</li>
-<li>Kirjuta <code>pf.conf</code>, mis blokeerib kõik sissetuleva, lubab väljuva liikluse ning sissetuleva SSH ainult võrgust <code>10.0.83.0/24</code>.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Baassüsteem on kernel, C-teek, põhikäsud, alglaadija ja dokumentatsioon, mida arendatakse ühes hoidlas ja väljastatakse koos ühe versioonina. Linuxi distro paneb kokku kerneli ja eri projektide tööriistad.</li>
-<li>Baassüsteem ja kolmanda osapoole tarkvara on rangelt eraldatud: baassüsteem <code>/</code>, <code>/usr</code>, <code>/etc</code>; paketid <code>/usr/local</code>. Nii ei kirjuta baassüsteemi uuendus pakettide faile üle ja vastupidi ning on selge, mis kust pärineb.</li>
-<li><code>pkg</code> paigaldab ja uuendab valmis kolmanda osapoole pakette; pordid on retseptid, millest saab tarkvara ise kompileerida (ka teiste valikutega); <code>freebsd-update</code> uuendab traditsioonilise paigalduse baassüsteemi ja kernelit. pkgbase - baassüsteem on samuti pakettidena ja kogu süsteemi uuendab <code>pkg</code>.</li>
-<li><code>quarterly</code> - stabiilne haru, uued versioonid kord kvartalis, vahepeal ainult turva- ja veaparandused (vaikimisi); <code>latest</code> - alati värskeimad versioonid.</li>
-<li><code>sysrc teenus_enable=YES</code> ja <code>service teenus start</code>; seade on failis <code>/etc/rc.conf</code>.</li>
-<li>Kasutajakontode põhifail koos parooliräsidega (Linuxi <code>/etc/shadow</code> vaste); sellest genereeritakse <code>/etc/passwd</code> ja andmebaasid. <code>vipw</code> lukustab faili, kontrollib seda ja käivitab <code>pwd_mkdb</code>.</li>
-<li>Kasutaja peab kuuluma gruppi <code>wheel</code>. <code>doas</code> on OpenBSD-st pärit lihtne <code>sudo</code> alternatiiv, mida seadistatakse failis <code>/usr/local/etc/doas.conf</code> (nt <code>permit persist :wheel</code>).</li>
-<li><code>sysrc ifconfig_vtnet0="inet 10.0.83.66/24"</code>, <code>sysrc defaultrouter="10.0.83.1"</code>, DNS <code>/etc/resolv.conf</code>; rakendamiseks <code>service netif restart &amp;&amp; service routing restart</code>.</li>
-<li>ZFS-i juurfailisüsteemi kloon, millest saab alglaadida. Enne uuendust luuakse keskkond; kui uuendus ebaõnnestub, aktiveeritakse vana ja taaskäivitatakse. Eraldi andmekogumid (kodukataloogid, logid) ei lähe tagasi.</li>
-<li>Pakettidele rakendatakse reegel, mis faili järjekorras <strong>viimasena</strong> sobib (erinevalt nftables'ist ja iptables'ist). <code>quick</code> lõpetab kontrolli kohe sellel reeglil.</li>
-<li>Olemasoleva SSH-ühenduse pakettidel pole pf-i olekutabelis kirjet ja <code>block in all</code> võib need blokeerida. Lülita pf sisse konsoolist või kasuta ajutist laadimist (<code>pfctl -f …; sleep 60; pfctl -d</code>).</li>
-<li>Isoleeritud keskkond oma failisüsteemi juure, IP-aadressi, kasutajate ja protsessidega, kuid sama kerneliga. VM-il on oma kernel ja virtuaalne riistvara (raskem, isoleeritum). Linuxi konteiner kasutab nimeruume ja cgroupe ning tavaliselt registrist pärit pilte; jail on kerneli eraldi alamsüsteem ja põhineb baassüsteemi koopial või ZFS-i kloonil.</li>
-<li>Bash ei ole baassüsteemis; pakett paigaldab selle <code>/usr/local/bin/bash</code>. <code>#!/bin/sh</code> on alati olemas; <code>#!/usr/bin/env bash</code> leiab bashi <code>PATH</code>-ist.</li>
-<li>Nt <code>sed -i</code> vajab BSD-s argumenti (<code>sed -i ''</code>); <code>ls --color</code> asemel <code>ls -G</code>; <code>grep -P</code> puudub; <code>date -d</code> asemel <code>date -v</code>/<code>-j -f</code>; <code>stat</code> võtmed erinevad (<code>stat -f</code>); <code>find</code> ja <code>xargs</code> võtmed erinevad osaliselt.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kirjuta käsud, mis paigaldavad PostgreSQL-i serveri paketi, lubavad selle alglaadimisel ja käivitavad.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>pkg<span class="w"> </span>search<span class="w"> </span>postgresql<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>server<span class="w">           </span><span class="c1"># vali versioon, nt postgresql17-server</span>
 pkg<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql17-server
 sysrc<span class="w"> </span><span class="nv">postgresql_enable</span><span class="o">=</span>YES
 service<span class="w"> </span>postgresql<span class="w"> </span>initdb
 service<span class="w"> </span>postgresql<span class="w"> </span>start
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta käsud, mis loovad grupi <code>arendajad</code>, kasutaja <code>liis</code> (kodukataloog, kest <code>sh</code>) ja lisavad <code>liis</code>-i gruppidesse <code>arendajad</code> ja <code>wheel</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>pw<span class="w"> </span>groupadd<span class="w"> </span>arendajad
 pw<span class="w"> </span>useradd<span class="w"> </span>liis<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/sh<span class="w"> </span>-G<span class="w"> </span>arendajad,wheel
 passwd<span class="w"> </span>liis
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta <code>pf.conf</code>, mis blokeerib kõik sissetuleva, lubab väljuva liikluse ning sissetuleva SSH ainult võrgust <code>10.0.83.0/24</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>ext_if = "vtnet0"
 set skip on lo0
 block in all
 pass out all keep state
 pass in on $ext_if proto tcp from 10.0.83.0/24 to port ssh keep state
 </code></pre></div>
+</details>
 
 
 

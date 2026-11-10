@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2165,34 +2167,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,61 +4407,104 @@
 
 
 <h1 id="moodul-12-enesekontroll">Moodul 12. Enesekontroll<a class="headerlink" href="#moodul-12-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis vahe on konteineril ja virtuaalmasinal?</li>
-<li>Millistel Linuxi kerneli võimalustel konteinerid põhinevad?</li>
-<li>Mis vahe on pildil ja konteineril?</li>
-<li>Miks ei tohiks tootmises kasutada pildisilti <code>latest</code>?</li>
-<li>Mis vahe on Podmanil ja Dockeril? Mis on juurkasutajata konteinerite eelis?</li>
-<li>Miks kaovad konteineri sisse kirjutatud andmed? Kuidas andmeid püsivalt hoida?</li>
-<li>Mida teeb AlmaLinuxis köite valik <code>:Z</code>?</li>
-<li>Milleks on Compose? Kuidas leiavad Compose'i konteinerid üksteist?</li>
-<li>Mis on Quadlet ja miks seda kasutada?</li>
-<li>Kuidas uuendab Podman Quadleti konteinereid automaatselt ja mis juhtub, kui uus pilt ei käivitu?</li>
-<li>Mis on <code>chroot</code> ja miks ei ole see konteineri samaväärne asendus?</li>
-<li>Miks ei saa juurkasutajata Podmani konteiner kuulata porti 80 ja kuidas seda lahendada? Mida teeb <code>loginctl enable-linger</code>?</li>
-<li>Mis vahe on köitel (<code>-v nimi:/tee</code>) ja hosti kataloogi sidumisel (<code>-v /srv/veeb:/tee</code>)? Millal kasutad kumba?</li>
-<li>Mis vahe on <code>-p 8080:80</code> ja <code>-p 127.0.0.1:8080:80</code> vahel? Miks on andmebaasi konteineri puhul teine turvalisem?</li>
-<li>Konteiner käivitub ja kustub kohe. Milliste käskudega leiad põhjuse?</li>
-</ol>
+<p><strong>1.</strong> Mis vahe on konteineril ja virtuaalmasinal?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Virtuaalmasinal on oma kernel ja terve operatsioonisüsteem (tugevam isolatsioon, rohkem ressursse). Konteiner jagab hosti kernelit ja sisaldab ainult rakendust koos sõltuvustega (kerge, kiire).</p>
+</details>
+<p><strong>2.</strong> Millistel Linuxi kerneli võimalustel konteinerid põhinevad?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Nimeruumid (isoleerivad protsessid, võrgu, haakepunktid, kasutajad) ja cgroups (piiravad ressursse); lisaks SELinux/AppArmor ja seccomp.</p>
+</details>
+<p><strong>3.</strong> Mis vahe on pildil ja konteineril?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pilt on muutumatu mall (rakendus koos failisüsteemiga). Konteiner on pildist käivitatud töötav eksemplar, millel on oma kirjutatav kiht.</p>
+</details>
+<p><strong>4.</strong> Miks ei tohiks tootmises kasutada pildisilti <code>latest</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>latest</code> võib iga kord tähendada uut versiooni, mis võib käitumist ootamatult muuta. Konkreetne versioon tagab korratavuse.</p>
+</details>
+<p><strong>5.</strong> Mis vahe on Podmanil ja Dockeril? Mis on juurkasutajata konteinerite eelis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Podman töötab ilma taustateenuseta ja vaikimisi juurkasutaja õigusteta. Docker kasutab juurkasutajana töötavat teenust <code>dockerd</code>. Juurkasutajata konteinerist välja murdnud ründajal on ainult tavakasutaja õigused.</p>
+</details>
+<p><strong>6.</strong> Miks kaovad konteineri sisse kirjutatud andmed? Kuidas andmeid püsivalt hoida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Konteineri kirjutatav kiht kustutatakse koos konteineriga. Püsivad andmed hoitakse köidetes (<code>-v nimi:/tee</code>) või hosti kataloogides.</p>
+</details>
+<p><strong>7.</strong> Mida teeb AlmaLinuxis köite valik <code>:Z</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Märgistab hosti kataloogi SELinuxi tüübiga, mida konteiner tohib kasutada (ainult selle konteineri jaoks; <code>:z</code> - jagatud mitme konteineri vahel).</p>
+</details>
+<p><strong>8.</strong> Milleks on Compose? Kuidas leiavad Compose'i konteinerid üksteist?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mitme konteineri rakenduse kirjeldamine ja käivitamine ühe failiga. Konteinerid leiavad üksteist teenuse nime järgi (nt <code>db</code>).</p>
+</details>
+<p><strong>9.</strong> Mis on Quadlet ja miks seda kasutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Podmani võimalus kirjeldada konteiner systemd üksusena (<code>.container</code> fail). Nii käivitub konteiner alglaadimisel, taaskäivitub vea korral ja on hallatav <code>systemctl</code>/<code>journalctl</code> abil.</p>
+</details>
+<p><strong>10.</strong> Kuidas uuendab Podman Quadleti konteinereid automaatselt ja mis juhtub, kui uus pilt ei käivitu?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Quadleti failis <code>AutoUpdate=registry</code> (täieliku pildinimega); <code>podman auto-update</code> (või taimer <code>podman-auto-update.timer</code>) laadib sama sildiga uuema pildi ja taaskäivitab teenuse. Kui teenus uue pildiga ei käivitu, võetakse muudatus tagasi ja kasutatakse vana pilti.</p>
+</details>
+<p><strong>11.</strong> Mis on <code>chroot</code> ja miks ei ole see konteineri samaväärne asendus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>chroot</code> käivitab protsessi nii, et valitud kataloog paistab talle juurkataloogina. See eraldab ainult failisüsteemi: protsessid, võrk ja kasutajad on hostiga ühised, ressursse ei piirata ja juurkasutaja saab sealt välja murda. Konteiner lisab nimeruumid, cgroupid ja turvapiirangud.</p>
+</details>
+<p><strong>12.</strong> Miks ei saa juurkasutajata Podmani konteiner kuulata porti 80 ja kuidas seda lahendada? Mida teeb <code>loginctl enable-linger</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Tavakasutaja ei tohi avada porte alla 1024. Kasuta kõrget porti (<code>-p 8080:80</code>) ja vajadusel pöördpuhvrit või tulemüüri suunamist pordilt 80; teine võimalus on konteiner juurkasutajana. <code>loginctl enable-linger kasutaja</code> laseb kasutaja teenustel (ka konteineritel) töötada ilma sisse logimata ja käivituda alglaadimisel.</p>
+</details>
+<p><strong>13.</strong> Mis vahe on köitel (<code>-v nimi:/tee</code>) ja hosti kataloogi sidumisel (<code>-v /srv/veeb:/tee</code>)? Millal kasutad kumba?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Köidet haldab Podman (<code>podman volume</code>), selle asukoht ja õigused on konteineri jaoks õiged; sobib andmebaasi andmetele. Hosti kataloog on tavaline kataloog, mida saab hostis otse muuta ja varundada; sobib nt veebisaidi failidele ja seadistusele (AlmaLinuxis vajab <code>:Z</code>/<code>:z</code>).</p>
+</details>
+<p><strong>14.</strong> Mis vahe on <code>-p 8080:80</code> ja <code>-p 127.0.0.1:8080:80</code> vahel? Miks on andmebaasi konteineri puhul teine turvalisem?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Esimene avaldab pordi kõigil hosti aadressidel (võrgust kättesaadav), teine ainult hostist endast. Andmebaasi ei pea võrku avama, kui rakendus töötab samas masinas või samas Compose'i võrgus.</p>
+</details>
+<p><strong>15.</strong> Konteiner käivitub ja kustub kohe. Milliste käskudega leiad põhjuse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>podman ps -a</code> (olek ja väljumiskood), <code>podman logs &lt;nimi&gt;</code> (rakenduse veateade), <code>podman inspect &lt;nimi&gt;</code> (seaded, nt keskkonnamuutujad, köited); Quadleti puhul <code>systemctl status</code> ja <code>journalctl -u</code>. Sageli puudub kohustuslik keskkonnamuutuja (nt andmebaasi parool) või on köite õigused valed.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Käivita PostgreSQL-i konteiner nimega <code>pg</code>, mis kasutab köidet <code>pgandmed</code> ja on kättesaadav ainult hostist (<code>127.0.0.1</code>) pordil 5432.</li>
-<li>Kirjuta <code>Containerfile</code>, mis põhineb pildil <code>docker.io/library/python:3.12-slim</code>, kopeerib faili <code>rakendus.py</code> kataloogi <code>/app</code> ja käivitab selle.</li>
-<li>Kirjuta <code>compose.yaml</code>, mis käivitab nginx-i (pordil 8080) ja Valkey (<code>docker.io/valkey/valkey:8</code>, ainult sisevõrgus, andmed köites <code>valkeyandmed</code>).</li>
-<li>Kirjuta Quadleti fail, mis käivitab süsteemi käivitumisel konteineri <code>docker.io/traefik/whoami</code> hosti pordil 8090 ja taaskäivitab selle rikke korral.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Virtuaalmasinal on oma kernel ja terve operatsioonisüsteem (tugevam isolatsioon, rohkem ressursse). Konteiner jagab hosti kernelit ja sisaldab ainult rakendust koos sõltuvustega (kerge, kiire).</li>
-<li>Nimeruumid (isoleerivad protsessid, võrgu, haakepunktid, kasutajad) ja cgroups (piiravad ressursse); lisaks SELinux/AppArmor ja seccomp.</li>
-<li>Pilt on muutumatu mall (rakendus koos failisüsteemiga). Konteiner on pildist käivitatud töötav eksemplar, millel on oma kirjutatav kiht.</li>
-<li><code>latest</code> võib iga kord tähendada uut versiooni, mis võib käitumist ootamatult muuta. Konkreetne versioon tagab korratavuse.</li>
-<li>Podman töötab ilma taustateenuseta ja vaikimisi juurkasutaja õigusteta. Docker kasutab juurkasutajana töötavat teenust <code>dockerd</code>. Juurkasutajata konteinerist välja murdnud ründajal on ainult tavakasutaja õigused.</li>
-<li>Konteineri kirjutatav kiht kustutatakse koos konteineriga. Püsivad andmed hoitakse köidetes (<code>-v nimi:/tee</code>) või hosti kataloogides.</li>
-<li>Märgistab hosti kataloogi SELinuxi tüübiga, mida konteiner tohib kasutada (ainult selle konteineri jaoks; <code>:z</code> - jagatud mitme konteineri vahel).</li>
-<li>Mitme konteineri rakenduse kirjeldamine ja käivitamine ühe failiga. Konteinerid leiavad üksteist teenuse nime järgi (nt <code>db</code>).</li>
-<li>Podmani võimalus kirjeldada konteiner systemd üksusena (<code>.container</code> fail). Nii käivitub konteiner alglaadimisel, taaskäivitub vea korral ja on hallatav <code>systemctl</code>/<code>journalctl</code> abil.</li>
-<li>Quadleti failis <code>AutoUpdate=registry</code> (täieliku pildinimega); <code>podman auto-update</code> (või taimer <code>podman-auto-update.timer</code>) laadib sama sildiga uuema pildi ja taaskäivitab teenuse. Kui teenus uue pildiga ei käivitu, võetakse muudatus tagasi ja kasutatakse vana pilti.</li>
-<li><code>chroot</code> käivitab protsessi nii, et valitud kataloog paistab talle juurkataloogina. See eraldab ainult failisüsteemi: protsessid, võrk ja kasutajad on hostiga ühised, ressursse ei piirata ja juurkasutaja saab sealt välja murda. Konteiner lisab nimeruumid, cgroupid ja turvapiirangud.</li>
-<li>Tavakasutaja ei tohi avada porte alla 1024. Kasuta kõrget porti (<code>-p 8080:80</code>) ja vajadusel pöördpuhvrit või tulemüüri suunamist pordilt 80; teine võimalus on konteiner juurkasutajana. <code>loginctl enable-linger kasutaja</code> laseb kasutaja teenustel (ka konteineritel) töötada ilma sisse logimata ja käivituda alglaadimisel.</li>
-<li>Köidet haldab Podman (<code>podman volume</code>), selle asukoht ja õigused on konteineri jaoks õiged; sobib andmebaasi andmetele. Hosti kataloog on tavaline kataloog, mida saab hostis otse muuta ja varundada; sobib nt veebisaidi failidele ja seadistusele (AlmaLinuxis vajab <code>:Z</code>/<code>:z</code>).</li>
-<li>Esimene avaldab pordi kõigil hosti aadressidel (võrgust kättesaadav), teine ainult hostist endast. Andmebaasi ei pea võrku avama, kui rakendus töötab samas masinas või samas Compose'i võrgus.</li>
-<li><code>podman ps -a</code> (olek ja väljumiskood), <code>podman logs &lt;nimi&gt;</code> (rakenduse veateade), <code>podman inspect &lt;nimi&gt;</code> (seaded, nt keskkonnamuutujad, köited); Quadleti puhul <code>systemctl status</code> ja <code>journalctl -u</code>. Sageli puudub kohustuslik keskkonnamuutuja (nt andmebaasi parool) või on köite õigused valed.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Käivita PostgreSQL-i konteiner nimega <code>pg</code>, mis kasutab köidet <code>pgandmed</code> ja on kättesaadav ainult hostist (<code>127.0.0.1</code>) pordil 5432.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>pg<span class="w"> </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>Salajane-123<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>pgandmed:/var/lib/postgresql/data<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:5432:5432<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>docker.io/library/postgres:17
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta <code>Containerfile</code>, mis põhineb pildil <code>docker.io/library/python:3.12-slim</code>, kopeerib faili <code>rakendus.py</code> kataloogi <code>/app</code> ja käivitab selle.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">docker.io/library/python:3.12-slim</span>
 <span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
 <span class="k">COPY</span><span class="w"> </span>rakendus.py<span class="w"> </span>.
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">"python"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rakendus.py"</span><span class="p">]</span>
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta <code>compose.yaml</code>, mis käivitab nginx-i (pordil 8080) ja Valkey (<code>docker.io/valkey/valkey:8</code>, ainult sisevõrgus, andmed köites <code>valkeyandmed</code>).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">veeb</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/library/nginx:1.27-alpine</span>
@@ -4532,6 +4521,10 @@
 <span class="w">  </span><span class="nt">valkeyandmed</span><span class="p">:</span>
 </code></pre></div>
 <p>Valkey'le pole <code>ports:</code> kirjet, seega on see kättesaadav ainult Compose'i võrgus nime <code>valkey</code> järgi.</p>
+</details>
+<p><strong>4.</strong> Kirjuta Quadleti fail, mis käivitab süsteemi käivitumisel konteineri <code>docker.io/traefik/whoami</code> hosti pordil 8090 ja taaskäivitab selle rikke korral.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/containers/systemd/whoami.container</span>
 <span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">whoami testteenus</span>
@@ -4547,6 +4540,7 @@
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </code></pre></div>
 <p>Seejärel <code>sudo systemctl daemon-reload &amp;&amp; sudo systemctl start whoami</code>.</p>
+</details>
 
 
 

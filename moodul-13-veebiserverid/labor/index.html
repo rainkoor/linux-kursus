@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2369,6 +2371,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4563,6 +4576,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4607,7 +4631,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K14</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K14</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Stsenaarium:</strong> kool vajab väikest serverit, mis pakub veebisaiti koos õpilaste andmebaasiga, sisevõrgu DNS-i, failide jagamist Linuxi ja Windowsi arvutitele ning igaöist varundust. Selles laboritöös paigaldad veebiserverid, <strong>laboritöös 14 lisad andmebaasid ja laboritöös 15</strong> DNS-i, failijagamise, e-posti, varunduse ja dokumentatsiooni.</p>
 <p>Laboris kasutatavad tähised:</p>
 <table>
@@ -4647,7 +4674,10 @@ ip<span class="w"> </span>-br<span class="w"> </span>address
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nginx<span class="w"> </span>curl
 </code></pre></div>
-<p><strong>K1.</strong> Millised teenused käivitusid pärast paigaldamist automaatselt? Millistel portidel need kuulavad (<code>sudo ss -tulpn</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Millised teenused käivitusid pärast paigaldamist automaatselt? Millistel portidel need kuulavad (<code>sudo ss -tulpn</code>)?</p>
+</div>
 <hr />
 <h2 id="1-osa-veebiserver-ja-virtuaalhostid">1. osa. Veebiserver ja virtuaalhostid<a class="headerlink" href="#1-osa-veebiserver-ja-virtuaalhostid" title="Permanent link">&para;</a></h2>
 <p>Loo kaks saiti: <code>kool.lab.example</code> (kooli sait) ja <code>info.lab.example</code> (infotahvel).</p>
@@ -4669,9 +4699,15 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: info.lab.example"</span><span class="w"> </span>http://localhost
 curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: midagi.muud"</span><span class="w"> </span>http://localhost
 </code></pre></div>
-<p><strong>K2.</strong> Mida näitas kolmas päring ja miks? (Vihje: kui ükski <code>server_name</code> ei sobi, kasutab nginx pordi <strong>vaikeserverit</strong> - kumb plokk see on?)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mida näitas kolmas päring ja miks? (Vihje: kui ükski <code>server_name</code> ei sobi, kasutab nginx pordi <strong>vaikeserverit</strong> - kumb plokk see on?)</p>
+</div>
 <p><strong>1.5</strong> Tee meelega süntaksiviga (kustuta mõne rea lõpust semikoolon) ja käivita <code>sudo nginx -t</code>. Paranda.</p>
-<p><strong>K3.</strong> Mida näitas <code>nginx -t</code>? Miks on oluline kontrollida süntaksit enne <code>reload</code>-i?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Mida näitas <code>nginx -t</code>? Miks on oluline kontrollida süntaksit enne <code>reload</code>-i?</p>
+</div>
 <hr />
 <h2 id="2-osa-nimed-klientides">2. osa. Nimed klientides<a class="headerlink" href="#2-osa-nimed-klientides" title="Permanent link">&para;</a></h2>
 <p>DNS-serveri seadistame moodulis 15. Seni lisa saitide nimed <strong>kõigi masinate</strong> (Ubuntu klient, <code>alma</code>, <code>ubuntusrv</code>) faili <code>/etc/hosts</code>:</p>
@@ -4705,7 +4741,10 @@ chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-I<span class="w"> </span>http://kool.lab.example
 curl<span class="w"> </span>https://kool.lab.example
 </code></pre></div>
-<p><strong>K4.</strong> Mida vastas esimene päring (olekukood ja päis <code>Location</code>)? Mis veateate andis teine päring ja miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mida vastas esimene päring (olekukood ja päis <code>Location</code>)? Mis veateate andis teine päring ja miks?</p>
+</div>
 <p><strong>3.6</strong> Kopeeri CA sertifikaat (mitte võti!) Ubuntu kliendile ja usalda seda. Serveris:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cp<span class="w"> </span>/root/ca/labori-ca.crt<span class="w"> </span>/tmp/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>/tmp/labori-ca.crt
 </code></pre></div>
@@ -4716,7 +4755,10 @@ sudo<span class="w"> </span>update-ca-certificates
 curl<span class="w"> </span>https://kool.lab.example
 openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>kool.lab.example:443<span class="w"> </span>-servername<span class="w"> </span>kool.lab.example<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"subject=|issuer=|Verify return"</span>
 </code></pre></div>
-<p><strong>K5.</strong> Mida näitas <code>openssl s_client</code> väljundis <code>Verify return code</code>? Miks ei tohi CA privaatvõtit (<code>labori-ca.key</code>) kunagi serverist välja anda?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Mida näitas <code>openssl s_client</code> väljundis <code>Verify return code</code>? Miks ei tohi CA privaatvõtit (<code>labori-ca.key</code>) kunagi serverist välja anda?</p>
+</div>
 <p><strong>3.7</strong> (Valikuline) Impordi CA sertifikaat oma arvuti brauserisse ja ava <code>https://kool.lab.example</code> (oma arvuti <code>hosts</code> failis peab olema nimi).</p>
 <hr />
 <h2 id="4-osa-apache-almalinuxis">4. osa. Apache AlmaLinuxis<a class="headerlink" href="#4-osa-apache-almalinuxis" title="Permanent link">&para;</a></h2>
@@ -4732,14 +4774,20 @@ curl<span class="w"> </span>-I<span class="w"> </span>http://localhost
 sudo<span class="w"> </span>apachectl<span class="w"> </span>configtest<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>httpd
 curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: kool.lab.example"</span><span class="w"> </span>http://localhost
 </code></pre></div>
-<p><strong>K6.</strong> Mis vastuse said ja miks? Leia põhjus <code>sudo ausearch -m AVC -ts recent</code> abil ja paranda see püsivalt (<code>semanage fcontext</code> + <code>restorecon</code>, moodul 11).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mis vastuse said ja miks? Leia põhjus <code>sudo ausearch -m AVC -ts recent</code> abil ja paranda see püsivalt (<code>semanage fcontext</code> + <code>restorecon</code>, moodul 11).</p>
+</div>
 <p><strong>4.3</strong> Loo kataloogi <code>.htaccess</code> fail, mis keelab ligipääsu failile <code>salajane.txt</code>, ja luba virtuaalhostis <code>AllowOverride All</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"salajane"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/srv/kool/salajane.txt
 <span class="nb">printf</span><span class="w"> </span><span class="s1">'&lt;Files "salajane.txt"&gt;\n    Require all denied\n&lt;/Files&gt;\n'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/srv/kool/.htaccess
 sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>httpd
 curl<span class="w"> </span>-I<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: kool.lab.example"</span><span class="w"> </span>http://localhost/salajane.txt
 </code></pre></div>
-<p><strong>K7.</strong> Mis olekukoodi said? Miks ei saa nginx <code>.htaccess</code>-faile kasutada ja miks peetakse neid jõudluse mõttes halvemaks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mis olekukoodi said? Miks ei saa nginx <code>.htaccess</code>-faile kasutada ja miks peetakse neid jõudluse mõttes halvemaks?</p>
+</div>
 <p><strong>4.4</strong> Lisa Apache'ile HTTPS <strong>sama labori CA</strong> sertifikaadiga, mille lõid 3. osas (sertifikaat kehtib nimele <code>kool.lab.example</code>, seega sobib ka <code>alma</code>-le). Kopeeri <code>debian1</code>-st failid <code>kool.crt</code> ja <code>kool.key</code> <code>alma</code>-sse:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/pki/tls/kool
 sudo<span class="w"> </span>cp<span class="w"> </span>kool.crt<span class="w"> </span>kool.key<span class="w"> </span>/etc/pki/tls/kool/
@@ -4775,7 +4823,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 curl<span class="w"> </span>-vk<span class="w"> </span>https://caddy.lab.example<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"issuer|HTTP/"</span>
 </code></pre></div>
 <p><strong>5.3</strong> Usalda Caddy CA-d kliendis: kopeeri <code>ubuntusrv</code>-st fail <code>/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt</code> Ubuntu kliendi kataloogi <code>/usr/local/share/ca-certificates/caddy-labor.crt</code> ja käivita <code>sudo update-ca-certificates</code>. Proovi uuesti ilma <code>-k</code>-ta.</p>
-<p><strong>K8.</strong> Mitu rida oli Caddyfile'is ja mitu rida vajaks sama nginx-is (koos sertifikaadi loomisega)? Kes oli sertifikaadi väljaandja? Mis juhtuks, kui nimi oleks avalik (nt <code>www.example.ee</code>) ja server internetis?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mitu rida oli Caddyfile'is ja mitu rida vajaks sama nginx-is (koos sertifikaadi loomisega)? Kes oli sertifikaadi väljaandja? Mis juhtuks, kui nimi oleks avalik (nt <code>www.example.ee</code>) ja server internetis?</p>
+</div>
 <p><strong>5.4</strong> (Valikuline) Kasuta Caddys Caddy enda CA asemel <strong>3. osa labori CA-d</strong>, et kõik laborimasinad usaldaksid ühte CA-d. Loo <code>debian1</code>-s (<code>/root/ca</code>) punkti 3.2 eeskujul sertifikaat nimele <code>caddy.lab.example</code>, kopeeri <code>caddy.crt</code> ja <code>caddy.key</code> <code>ubuntusrv</code> kataloogi <code>/etc/caddy/certs/</code> (omanik <code>caddy</code>, võtme õigused <code>600</code>) ja muuda Caddyfile'is <code>tls internal</code> → <code>tls /etc/caddy/certs/caddy.crt /etc/caddy/certs/caddy.key</code>. Kontrolli <code>curl -v</code>-ga, et väljaandja on nüüd sinu labori CA.</p>
 <hr />
 <h2 id="6-osa-koormuse-jaotus-haproxyga">6. osa. Koormuse jaotus HAProxyga<a class="headerlink" href="#6-osa-koormuse-jaotus-haproxyga" title="Permanent link">&para;</a></h2>
@@ -4786,11 +4837,20 @@ sudo<span class="w"> </span>haproxy<span class="w"> </span>-c<span class="w"> </
 sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>haproxy
 <span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">6</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: kool.lab.example"</span><span class="w"> </span>http://localhost:8080/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s2">"Server [a-z0-9]*"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 </code></pre></div>
-<p><strong>K9.</strong> Kuidas päringud serverite vahel jagunesid? Miks oli vaja saata päis <code>Host:</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kuidas päringud serverite vahel jagunesid? Miks oli vaja saata päis <code>Host:</code>?</p>
+</div>
 <p><strong>6.3</strong> Ava statistikaleht <code>http://ubuntusrv:8404</code>. Peata <code>alma</code>-s Apache (<code>sudo systemctl stop httpd</code>) ja korda <code>curl</code>-tsüklit. Käivita Apache uuesti.</p>
-<p><strong>K10.</strong> Mida näitas statistikaleht? Mitu päringut ebaõnnestus pärast Apache'i peatamist ja kui kiiresti HAProxy rikke avastas (<code>option httpchk</code>, <code>check</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mida näitas statistikaleht? Mitu päringut ebaõnnestus pärast Apache'i peatamist ja kui kiiresti HAProxy rikke avastas (<code>option httpchk</code>, <code>check</code>)?</p>
+</div>
 <p><strong>6.4</strong> Vaata <code>debian1</code> nginx-i juurdepääsulogi: mis IP-aadressilt päringud tulid?</p>
-<p><strong>K11.</strong> Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: <code>X-Forwarded-For</code>, HAProxy <code>option forwardfor</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: <code>X-Forwarded-For</code>, HAProxy <code>option forwardfor</code>)?</p>
+</div>
 <hr />
 <h2 id="7-osa-päris-sertifikaadid">7. osa. Päris sertifikaadid<a class="headerlink" href="#7-osa-päris-sertifikaadid" title="Permanent link">&para;</a></h2>
 <p>Laboris kasutasid oma CA-d ja Caddy CA-d. Selles osas uurid, kuidas näevad välja <strong>avalikud</strong> sertifikaadid (teooria punkt 13.3, „Avaliku sertifikaadi hankimine“). Internetiühendusega masinast:</p>
@@ -4805,11 +4865,20 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 dig<span class="w"> </span>+short<span class="w"> </span>CAA<span class="w"> </span>google.com
 </code></pre></div>
 <p>Ava brauseris <code>https://crt.sh/?q=debian.org</code> (või oma kooli domeen).</p>
-<p><strong>K12.</strong> Kes väljastas <code>www.debian.org</code> sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?</p>
-<p><strong>K13.</strong> Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (<code>proxmox1.lab.kool.ee</code>) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kes väljastas <code>www.debian.org</code> sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (<code>proxmox1.lab.kool.ee</code>) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?</p>
+</div>
 <hr />
 <h2 id="8-osa-kokkuvõte">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K14.</strong> Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4821,6 +4890,28 @@ dig<span class="w"> </span>+short<span class="w"> </span>CAA<span class="w"> </s
 <li><strong>Rikkekindel jaotur (keepalived):</strong> paigalda HAProxy ka <code>debian2</code>-sse sama seadistusega (port 8080) ning mõlemasse masinasse keepalived teooria punkti 13.7 järgi: <code>ubuntusrv</code> MASTER (<code>priority 150</code>), <code>debian2</code> BACKUP (<code>priority 100</code>), VIP <code>10.0.83.50</code>. Luba tulemüüris VRRP. Käivita kliendist <code>while true; do curl -s -m 1 http://10.0.83.50:8080/ | grep -o "Server [a-z0-9]*"; sleep 0.5; done</code> ja peata samal ajal <code>ubuntusrv</code>-s HAProxy (<code>sudo systemctl stop haproxy</code>). Kui kaua teenus katkes? Kumma masina küljes on VIP (<code>ip -br a</code>)? Mis juhtub, kui HAProxy uuesti käivitad?</li>
 <li><strong>Koormustest:</strong> mõõda <code>ab -n 2000 -c 50</code>-ga kooli saiti otse ühest taustserverist ja HAProxy kaudu. Võrdle <code>Requests per second</code> ja 95. protsentiili. Korda testi, kui üks taustserver on peatatud. Mis oli pudelikael (<code>top</code> taustserverites)?</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 0.2)</em> Millised teenused käivitusid pärast paigaldamist automaatselt? Millistel portidel need kuulavad (<code>sudo ss -tulpn</code>)?</li>
+<li><strong>K2.</strong> <em>(punkt 1.4)</em> Mida näitas kolmas päring ja miks? (Vihje: kui ükski <code>server_name</code> ei sobi, kasutab nginx pordi <strong>vaikeserverit</strong> - kumb plokk see on?)</li>
+<li><strong>K3.</strong> <em>(punkt 1.5)</em> Mida näitas <code>nginx -t</code>? Miks on oluline kontrollida süntaksit enne <code>reload</code>-i?</li>
+<li><strong>K4.</strong> <em>(punkt 3.5)</em> Mida vastas esimene päring (olekukood ja päis <code>Location</code>)? Mis veateate andis teine päring ja miks?</li>
+<li><strong>K5.</strong> <em>(punkt 3.6)</em> Mida näitas <code>openssl s_client</code> väljundis <code>Verify return code</code>? Miks ei tohi CA privaatvõtit (<code>labori-ca.key</code>) kunagi serverist välja anda?</li>
+<li><strong>K6.</strong> <em>(punkt 4.2)</em> Mis vastuse said ja miks? Leia põhjus <code>sudo ausearch -m AVC -ts recent</code> abil ja paranda see püsivalt (<code>semanage fcontext</code> + <code>restorecon</code>, moodul 11).</li>
+<li><strong>K7.</strong> <em>(punkt 4.3)</em> Mis olekukoodi said? Miks ei saa nginx <code>.htaccess</code>-faile kasutada ja miks peetakse neid jõudluse mõttes halvemaks?</li>
+<li><strong>K8.</strong> <em>(punkt 5.3)</em> Mitu rida oli Caddyfile'is ja mitu rida vajaks sama nginx-is (koos sertifikaadi loomisega)? Kes oli sertifikaadi väljaandja? Mis juhtuks, kui nimi oleks avalik (nt <code>www.example.ee</code>) ja server internetis?</li>
+<li><strong>K9.</strong> <em>(punkt 6.2)</em> Kuidas päringud serverite vahel jagunesid? Miks oli vaja saata päis <code>Host:</code>?</li>
+<li><strong>K10.</strong> <em>(punkt 6.3)</em> Mida näitas statistikaleht? Mitu päringut ebaõnnestus pärast Apache'i peatamist ja kui kiiresti HAProxy rikke avastas (<code>option httpchk</code>, <code>check</code>)?</li>
+<li><strong>K11.</strong> <em>(punkt 6.4)</em> Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: <code>X-Forwarded-For</code>, HAProxy <code>option forwardfor</code>)?</li>
+<li><strong>K12.</strong> <em>(punkt 7.2)</em> Kes väljastas <code>www.debian.org</code> sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?</li>
+<li><strong>K13.</strong> <em>(punkt 7.2)</em> Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (<code>proxmox1.lab.kool.ee</code>) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?</li>
+<li><strong>K14.</strong> <em>(8. osa)</em> Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

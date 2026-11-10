@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1232,34 +1234,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,66 +4407,112 @@
 
 
 <h1 id="moodul-6-enesekontroll">Moodul 6. Enesekontroll<a class="headerlink" href="#moodul-6-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on shebang ja miks see vajalik on?</li>
-<li>Miks ei saa skripti käivitada lihtsalt nimega <code>skript.sh</code>, kui see on praeguses kataloogis?</li>
-<li>Mis on viga reas <code>nimi = "Mari"</code>?</li>
-<li>Mis vahe on <code>"$USER"</code> ja <code>'$USER'</code> väljundil?</li>
-<li>Miks tuleb muutujad panna jutumärkidesse? Too näide, kus jutumärkide puudumine põhjustab vea.</li>
-<li>Mida sisaldavad <code>$0</code>, <code>$1</code>, <code>$#</code>, <code>"$@"</code> ja <code>$?</code>?</li>
-<li>Mida tähendab väljumiskood 0? Kuidas skript määrab oma väljumiskoodi?</li>
-<li>Mida teevad <code>käsk1 &amp;&amp; käsk2</code> ja <code>käsk1 || käsk2</code>?</li>
-<li>Miks on rida <code>if [$a -eq 5]; then</code> vigane?</li>
-<li>Millal kasutada <code>case</code>-konstruktsiooni?</li>
-<li>Miks ei tohi kirjutada <code>for f in $(ls *.txt)</code>? Kuidas õigesti?</li>
-<li>Kuidas lugeda faili rea kaupa? Miks kasutatakse võtit <code>read -r</code>?</li>
-<li>Mida teeb <code>local</code> funktsioonis?</li>
-<li>Mida teeb <code>set -euo pipefail</code>?</li>
-<li>Kuidas leida vigu skriptis, mis ei tööta ootuspäraselt?</li>
-<li>Miks võib <code>#!/bin/sh</code>-ga skript töötada AlmaLinuxis, kuid mitte Debianis?</li>
-<li>Selgita Giti töövoogu: töökataloog, ettevalmistusala, kohalik hoidla, kaughoidla.</li>
-<li>Mis on hea sissekande kirjeldus? Too näide heast ja halvast.</li>
-<li>Milleks on fail <code>.gitignore</code>? Mida ei tohi kunagi Giti panna?</li>
-<li>Mis on haru ja millal seda kasutada? Kuidas tekib konflikt?</li>
-</ol>
+<p><strong>1.</strong> Mis on shebang ja miks see vajalik on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Faili esimene rida kujul <code>#!/bin/bash</code>, mis määrab, millise programmiga skript käivitatakse.</p>
+</details>
+<p><strong>2.</strong> Miks ei saa skripti käivitada lihtsalt nimega <code>skript.sh</code>, kui see on praeguses kataloogis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Praegune kataloog ei ole muutujas <code>PATH</code>. Tuleb kirjutada <code>./skript.sh</code> või panna skript <code>PATH</code>-is olevasse kataloogi.</p>
+</details>
+<p><strong>3.</strong> Mis on viga reas <code>nimi = "Mari"</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Võrdusmärgi ümber ei tohi olla tühikuid. Kest tõlgendab <code>nimi</code> käsuna. Õige: <code>nimi="Mari"</code>.</p>
+</details>
+<p><strong>4.</strong> Mis vahe on <code>"$USER"</code> ja <code>'$USER'</code> väljundil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>"$USER"</code> asendab muutuja väärtusega (nt <code>mari</code>), <code>'$USER'</code> väljastab teksti <code>$USER</code> muutmata kujul.</p>
+</details>
+<p><strong>5.</strong> Miks tuleb muutujad panna jutumärkidesse? Too näide, kus jutumärkide puudumine põhjustab vea.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ilma jutumärkideta jagatakse muutuja väärtus tühikute kohalt osadeks ja metamärgid laiendatakse. Näiteks kui <code>fail="minu fail.txt"</code>, proovib <code>rm $fail</code> kustutada kaks faili <code>minu</code> ja <code>fail.txt</code>.</p>
+</details>
+<p><strong>6.</strong> Mida sisaldavad <code>$0</code>, <code>$1</code>, <code>$#</code>, <code>"$@"</code> ja <code>$?</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>$0</code> - skripti nimi, <code>$1</code> - esimene argument, <code>$#</code> - argumentide arv, <code>"$@"</code> - kõik argumendid eraldi sõnadena, <code>$?</code> - viimase käsu väljumiskood.</p>
+</details>
+<p><strong>7.</strong> Mida tähendab väljumiskood 0? Kuidas skript määrab oma väljumiskoodi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Edu. Skript määrab väljumiskoodi käsuga <code>exit N</code> (või on selleks viimase käsu väljumiskood).</p>
+</details>
+<p><strong>8.</strong> Mida teevad <code>käsk1 &amp;&amp; käsk2</code> ja <code>käsk1 || käsk2</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>&amp;&amp;</code> käivitab teise käsu ainult siis, kui esimene õnnestus. <code>||</code> käivitab teise käsu ainult siis, kui esimene ebaõnnestus.</p>
+</details>
+<p><strong>9.</strong> Miks on rida <code>if [$a -eq 5]; then</code> vigane?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Nurksulgude ümber peavad olema tühikud ja muutuja peaks olema jutumärkides: <code>if [ "$a" -eq 5 ]; then</code>.</p>
+</details>
+<p><strong>10.</strong> Millal kasutada <code>case</code>-konstruktsiooni?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kui üht väärtust on vaja võrrelda paljude võimalike väärtuste või mustritega (nt skripti alamkäsud <code>start</code>, <code>stop</code>, <code>status</code>).</p>
+</details>
+<p><strong>11.</strong> Miks ei tohi kirjutada <code>for f in $(ls *.txt)</code>? Kuidas õigesti?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>ls</code> väljund jagatakse tühikute kohalt ja tühikutega failinimed lähevad katki. Õige: <code>for f in *.txt; do ... done</code>.</p>
+</details>
+<p><strong>12.</strong> Kuidas lugeda faili rea kaupa? Miks kasutatakse võtit <code>read -r</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>while IFS= read -r rida; do ... done &lt; fail</code>. Võti <code>-r</code> takistab kaldkriipsude tõlgendamist erimärkidena.</p>
+</details>
+<p><strong>13.</strong> Mida teeb <code>local</code> funktsioonis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Muudab muutuja funktsiooni sisemiseks, nii et see ei mõjuta samanimelist muutujat ülejäänud skriptis.</p>
+</details>
+<p><strong>14.</strong> Mida teeb <code>set -euo pipefail</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>-e</code> - lõpeta skript esimese ebaõnnestunud käsu järel; <code>-u</code> - lõpeta, kui kasutatakse defineerimata muutujat; <code>-o pipefail</code> - toru ebaõnnestub, kui ükskõik milline selle osa ebaõnnestub.</p>
+</details>
+<p><strong>15.</strong> Kuidas leida vigu skriptis, mis ei tööta ootuspäraselt?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>shellcheck skript.sh</code> staatiliseks kontrolliks, <code>bash -n skript.sh</code> süntaksi kontrolliks, <code>bash -x skript.sh</code> (või <code>set -x</code>) iga käsu nägemiseks täitmise ajal.</p>
+</details>
+<p><strong>16.</strong> Miks võib <code>#!/bin/sh</code>-ga skript töötada AlmaLinuxis, kuid mitte Debianis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>AlmaLinuxis on <code>/bin/sh</code> viit Bashile, seega töötavad ka Bashi laiendused. Debianis on <code>/bin/sh</code> kest <code>dash</code>, mis neid ei toeta.</p>
+</details>
+<p><strong>17.</strong> Selgita Giti töövoogu: töökataloog, ettevalmistusala, kohalik hoidla, kaughoidla.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Muudatused tehakse töökataloogis, <code>git add</code> lisab need ettevalmistusalasse, <code>git commit</code> salvestab sissekandena kohalikku hoidlasse, <code>git push</code> saadab kaughoidlasse ja <code>git pull</code> toob sealt teiste muudatused.</p>
+</details>
+<p><strong>18.</strong> Mis on hea sissekande kirjeldus? Too näide heast ja halvast.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Lühidalt mida ja miks muudeti. Hea: <code>Lisa nginx-i HTTP → HTTPS suunamine</code>. Halb: <code>muudatused</code>, <code>parandus</code>, <code>asd</code>.</p>
+</details>
+<p><strong>19.</strong> Milleks on fail <code>.gitignore</code>? Mida ei tohi kunagi Giti panna?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Määrab failid, mida Git ei jälgi (logid, ajutised failid). Kunagi ei tohi Giti panna paroole, privaatvõtmeid ega API-võtmeid.</p>
+</details>
+<p><strong>20.</strong> Mis on haru ja millal seda kasutada? Kuidas tekib konflikt?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Haru on eraldi arendusliin, mida kasutatakse uue funktsiooni või muudatuse katsetamiseks põhiharu segamata. Konflikt tekib, kui kahes harus on muudetud sama faili sama kohta.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p>Kirjuta järgmised skriptid ja kontrolli neid ShellCheck'iga.</p>
-<ol>
-<li><code>paaris</code> - saab argumendina arvu ja ütleb, kas see on paaris või paaritu. Kui argument pole täisarv, kirjutab veateate ja lõpetab koodiga 1.</li>
-<li><code>suurimad</code> - näitab argumendina antud kataloogis (vaikimisi praegune kataloog) 5 suurimat faili.</li>
-<li><code>loenda</code> - loendab, mitu tavalist faili, kataloogi ja sümbolviita on argumendina antud kataloogis.</li>
-<li><code>pingi</code> - saab argumentidena hostinimed ja kontrollib iga kohta <code>ping -c1 -W1</code> abil, kas see vastab, kirjutades <code>OK</code> või <code>MAAS</code>.</li>
-<li><code>kinnita</code> - küsib „Kas oled kindel? (j/e)“ ja lõpetab koodiga 0, kui vastus algab tähega <code>j</code> või <code>J</code>, muidu koodiga 1.</li>
-<li>(Git) Näita oma Giti hoidla kolme viimase sissekande muudatusi koos failinimedega.</li>
-<li>(Git) Taasta failist <code>seire.conf</code> versioon, mis oli kaks sissekannet tagasi.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Faili esimene rida kujul <code>#!/bin/bash</code>, mis määrab, millise programmiga skript käivitatakse.</li>
-<li>Praegune kataloog ei ole muutujas <code>PATH</code>. Tuleb kirjutada <code>./skript.sh</code> või panna skript <code>PATH</code>-is olevasse kataloogi.</li>
-<li>Võrdusmärgi ümber ei tohi olla tühikuid. Kest tõlgendab <code>nimi</code> käsuna. Õige: <code>nimi="Mari"</code>.</li>
-<li><code>"$USER"</code> asendab muutuja väärtusega (nt <code>mari</code>), <code>'$USER'</code> väljastab teksti <code>$USER</code> muutmata kujul.</li>
-<li>Ilma jutumärkideta jagatakse muutuja väärtus tühikute kohalt osadeks ja metamärgid laiendatakse. Näiteks kui <code>fail="minu fail.txt"</code>, proovib <code>rm $fail</code> kustutada kaks faili <code>minu</code> ja <code>fail.txt</code>.</li>
-<li><code>$0</code> - skripti nimi, <code>$1</code> - esimene argument, <code>$#</code> - argumentide arv, <code>"$@"</code> - kõik argumendid eraldi sõnadena, <code>$?</code> - viimase käsu väljumiskood.</li>
-<li>Edu. Skript määrab väljumiskoodi käsuga <code>exit N</code> (või on selleks viimase käsu väljumiskood).</li>
-<li><code>&amp;&amp;</code> käivitab teise käsu ainult siis, kui esimene õnnestus. <code>||</code> käivitab teise käsu ainult siis, kui esimene ebaõnnestus.</li>
-<li>Nurksulgude ümber peavad olema tühikud ja muutuja peaks olema jutumärkides: <code>if [ "$a" -eq 5 ]; then</code>.</li>
-<li>Kui üht väärtust on vaja võrrelda paljude võimalike väärtuste või mustritega (nt skripti alamkäsud <code>start</code>, <code>stop</code>, <code>status</code>).</li>
-<li><code>ls</code> väljund jagatakse tühikute kohalt ja tühikutega failinimed lähevad katki. Õige: <code>for f in *.txt; do ... done</code>.</li>
-<li><code>while IFS= read -r rida; do ... done &lt; fail</code>. Võti <code>-r</code> takistab kaldkriipsude tõlgendamist erimärkidena.</li>
-<li>Muudab muutuja funktsiooni sisemiseks, nii et see ei mõjuta samanimelist muutujat ülejäänud skriptis.</li>
-<li><code>-e</code> - lõpeta skript esimese ebaõnnestunud käsu järel; <code>-u</code> - lõpeta, kui kasutatakse defineerimata muutujat; <code>-o pipefail</code> - toru ebaõnnestub, kui ükskõik milline selle osa ebaõnnestub.</li>
-<li><code>shellcheck skript.sh</code> staatiliseks kontrolliks, <code>bash -n skript.sh</code> süntaksi kontrolliks, <code>bash -x skript.sh</code> (või <code>set -x</code>) iga käsu nägemiseks täitmise ajal.</li>
-<li>AlmaLinuxis on <code>/bin/sh</code> viit Bashile, seega töötavad ka Bashi laiendused. Debianis on <code>/bin/sh</code> kest <code>dash</code>, mis neid ei toeta.</li>
-<li>Muudatused tehakse töökataloogis, <code>git add</code> lisab need ettevalmistusalasse, <code>git commit</code> salvestab sissekandena kohalikku hoidlasse, <code>git push</code> saadab kaughoidlasse ja <code>git pull</code> toob sealt teiste muudatused.</li>
-<li>Lühidalt mida ja miks muudeti. Hea: <code>Lisa nginx-i HTTP → HTTPS suunamine</code>. Halb: <code>muudatused</code>, <code>parandus</code>, <code>asd</code>.</li>
-<li>Määrab failid, mida Git ei jälgi (logid, ajutised failid). Kunagi ei tohi Giti panna paroole, privaatvõtmeid ega API-võtmeid.</li>
-<li>Haru on eraldi arendusliin, mida kasutatakse uue funktsiooni või muudatuse katsetamiseks põhiharu segamata. Konflikt tekib, kui kahes harus on muudetud sama faili sama kohta.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> <code>paaris</code> - saab argumendina arvu ja ütleb, kas see on paaris või paaritu. Kui argument pole täisarv, kirjutab veateate ja lõpetab koodiga 1.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># paaris - kas arv on paaris</span>
 <span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
@@ -4534,12 +4526,21 @@
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2"> on paaritu"</span>
 <span class="k">fi</span>
 </code></pre></div>
+<p><code>10#${1#-}</code> eemaldab arvu eest miinusmärgi ja sunnib selle tõlgendama kümnendarvuna - muidu annaks näiteks <code>08</code> vea (vt teooria punkt 6.2). <code>(( ))</code> puhul pole <code>set -e</code> probleemiks, sest <code>if</code>-tingimuses olevad käsud skripti ei lõpeta.</p>
+</details>
+<p><strong>2.</strong> <code>suurimad</code> - näitab argumendina antud kataloogis (vaikimisi praegune kataloog) 5 suurimat faili.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># suurimad - 5 suurimat faili kataloogis</span>
 <span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
 <span class="nv">kataloog</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="p">.</span><span class="si">}</span><span class="s2">"</span>
 find<span class="w"> </span><span class="s2">"</span><span class="nv">$kataloog</span><span class="s2">"</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-printf<span class="w"> </span><span class="s1">'%s\t%p\n'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
 </code></pre></div>
+</details>
+<p><strong>3.</strong> <code>loenda</code> - loendab, mitu tavalist faili, kataloogi ja sümbolviita on argumendina antud kataloogis.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># loenda - failide, kataloogide ja viitade arv</span>
 <span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
@@ -4549,6 +4550,10 @@ find<span class="w"> </span><span class="s2">"</span><span class="nv">$kataloog<
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"Katalooge: </span><span class="k">$(</span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$kataloog</span><span class="s2">"</span><span class="w"> </span>-mindepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"Viitu:     </span><span class="k">$(</span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$kataloog</span><span class="s2">"</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>l<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
 </code></pre></div>
+</details>
+<p><strong>4.</strong> <code>pingi</code> - saab argumentidena hostinimed ja kontrollib iga kohta <code>ping -c1 -W1</code> abil, kas see vastab, kirjutades <code>OK</code> või <code>MAAS</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># pingi - kas hostid vastavad</span>
 <span class="k">for</span><span class="w"> </span>host<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -4559,17 +4564,29 @@ find<span class="w"> </span><span class="s2">"</span><span class="nv">$kataloog<
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">done</span>
 </code></pre></div>
+</details>
+<p><strong>5.</strong> <code>kinnita</code> - küsib „Kas oled kindel? (j/e)“ ja lõpetab koodiga 0, kui vastus algab tähega <code>j</code> või <code>J</code>, muidu koodiga 1.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># kinnita - küsib kinnitust</span>
 <span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span><span class="s2">"Kas oled kindel? (j/e) "</span><span class="w"> </span>vastus
 <span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$vastus</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">[</span>jJ<span class="o">]</span>*<span class="w"> </span><span class="o">]]</span>
 </code></pre></div>
 <p>Skripti <code>kinnita</code> väljumiskoodiks on viimase käsu (<code>[[ ]]</code>) väljumiskood, seega <code>exit</code> pole vaja. Seda saab kasutada teistes skriptides: <code>kinnita &amp;&amp; rm -r vana_kataloog</code>.</p>
-<p><code>10#${1#-}</code> eemaldab arvu eest miinusmärgi ja sunnib selle tõlgendama kümnendarvuna - muidu annaks näiteks <code>08</code> vea (vt teooria punkt 6.2). <code>(( ))</code> puhul pole <code>set -e</code> probleemiks, sest <code>if</code>-tingimuses olevad käsud skripti ei lõpeta.</p>
-<p>Git-ülesanded 6 ja 7:</p>
+</details>
+<p><strong>6.</strong> (Git) Näita oma Giti hoidla kolme viimase sissekande muudatusi koos failinimedega.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>log<span class="w"> </span>-3<span class="w"> </span>--stat
-git<span class="w"> </span>checkout<span class="w"> </span>HEAD~2<span class="w"> </span>--<span class="w"> </span>seire.conf
 </code></pre></div>
+</details>
+<p><strong>7.</strong> (Git) Taasta failist <code>seire.conf</code> versioon, mis oli kaks sissekannet tagasi.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>HEAD~2<span class="w"> </span>--<span class="w"> </span>seire.conf
+</code></pre></div>
+</details>
 
 
 

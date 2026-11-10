@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1766,6 +1768,17 @@
     <span class="md-ellipsis">
       
         Koristamine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4497,6 +4510,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4541,7 +4565,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K14</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K14</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Hoiatus</p>
 <p>Tee enne alustamist mõlemast masinast hetktõmmis. <strong>Kontrolli enne iga ohtlikku käsku <code>lsblk</code>-iga, millise kettaga töötad.</strong></p>
@@ -4557,7 +4584,10 @@ sudo<span class="w"> </span>mdadm<span class="w"> </span>--create<span class="w"
 cat<span class="w"> </span>/proc/mdstat
 sudo<span class="w"> </span>mdadm<span class="w"> </span>--detail<span class="w"> </span>/dev/md0
 </code></pre></div>
-<p><strong>K1.</strong> Kui suur on massiiv? Mida näitab <code>/proc/mdstat</code> sünkroniseerimise ajal ja pärast seda (<code>[UU]</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Kui suur on massiiv? Mida näitab <code>/proc/mdstat</code> sünkroniseerimise ajal ja pärast seda (<code>[UU]</code>)?</p>
+</div>
 <p><strong>1.3</strong> Loo failisüsteem, haagi see ja salvesta massiivi seadistus:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>/dev/md0
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/raid
@@ -4572,14 +4602,23 @@ sudo<span class="w"> </span>mdadm<span class="w"> </span>--detail<span class="w"
 ls<span class="w"> </span>/srv/raid/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
 sudo<span class="w"> </span>mdadm<span class="w"> </span>/dev/md0<span class="w"> </span>--remove<span class="w"> </span>/dev/sde
 </code></pre></div>
-<p><strong>K2.</strong> Mis on massiivi olek pärast riket? Kas andmed olid loetavad?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mis on massiivi olek pärast riket? Kas andmed olid loetavad?</p>
+</div>
 <p><strong>1.5</strong> Lisa masinale kolmas 2 GiB ketas (<code>/dev/sdf</code>) ja lisa see massiivi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mdadm<span class="w"> </span>/dev/md0<span class="w"> </span>--add<span class="w"> </span>/dev/sdf
 watch<span class="w"> </span>-n1<span class="w"> </span>cat<span class="w"> </span>/proc/mdstat<span class="w">          </span><span class="c1"># välju Ctrl+C</span>
 </code></pre></div>
-<p><strong>K3.</strong> Kui kaua taastamine (<em>recovery</em>) kestis? Miks võtab suurte (nt 20 TB) ketaste taastamine päevi ja miks on see risk?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Kui kaua taastamine (<em>recovery</em>) kestis? Miks võtab suurte (nt 20 TB) ketaste taastamine päevi ja miks on see risk?</p>
+</div>
 <p><strong>1.6</strong> Taaskäivita masin ja kontrolli, kas massiiv pandi automaatselt kokku (<code>cat /proc/mdstat</code>). Lisa see vajadusel UUID-ga <code>/etc/fstab</code>-i (valikuga <code>nofail</code>).</p>
-<p><strong>K4.</strong> Mis on riistvaralise ja tarkvaralise RAID-i peamine erinevus, kui server ise (emaplaat või RAID-kontroller) rikneb?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mis on riistvaralise ja tarkvaralise RAID-i peamine erinevus, kui server ise (emaplaat või RAID-kontroller) rikneb?</p>
+</div>
 <h2 id="2-osa-ketta-kiirus-almalinux">2. osa. Ketta kiirus (AlmaLinux)<a class="headerlink" href="#2-osa-ketta-kiirus-almalinux" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Mõõda <code>dd</code>-ga laboritöö 8 köite <code>lv_veeb</code> (haagitud <code>/srv/veeb</code>) kirjutamise kiirust kahel viisil ja seejärel lugemiskiirust (teooria punkt 9.3):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/srv/veeb/test<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">oflag</span><span class="o">=</span>dsync<span class="w"> </span><span class="nv">status</span><span class="o">=</span>progress
@@ -4589,9 +4628,15 @@ sync<span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
 sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/srv/veeb/test<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/dev/null<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M
 sudo<span class="w"> </span>rm<span class="w"> </span>/srv/veeb/test
 </code></pre></div>
-<p><strong>K5.</strong> Pane tulemused tabelisse. Miks oli <code>oflag=dsync</code> kiirus väiksem? Miks erinesid kaks lugemise tulemust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Pane tulemused tabelisse. Miks oli <code>oflag=dsync</code> kiirus väiksem? Miks erinesid kaks lugemise tulemust?</p>
+</div>
 <p><strong>2.2</strong> Paigalda <code>fio</code> ja mõõda 4 KiB juhuslikku lugemist-kirjutamist ning 1 MiB järjestikust kirjutamist (failiga <code>/srv/veeb/fio.test</code>, suurus 512M, kestus 30 s). Ava teises terminalis samal ajal <code>iostat -xz 2</code> (pakett <code>sysstat</code>).</p>
-<p><strong>K6.</strong> Mitu IOPS-i ja MB/s said kummagi testiga? Miks on 4 KiB juhusliku testi MB/s palju väiksem? Mida näitas <code>iostat</code> veerg <code>%util</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mitu IOPS-i ja MB/s said kummagi testiga? Miks on 4 KiB juhusliku testi MB/s palju väiksem? Mida näitas <code>iostat</code> veerg <code>%util</code>?</p>
+</div>
 <p>Kustuta testfail: <code>sudo rm /srv/veeb/fio.test</code>.</p>
 <h2 id="3-osa-ketta-tervis-almalinux">3. osa. Ketta tervis (AlmaLinux)<a class="headerlink" href="#3-osa-ketta-tervis-almalinux" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Paigalda <code>smartmontools</code> ja uuri virtuaalset ketast:</p>
@@ -4599,7 +4644,10 @@ sudo<span class="w"> </span>rm<span class="w"> </span>/srv/veeb/test
 sudo<span class="w"> </span>smartctl<span class="w"> </span>-i<span class="w"> </span>/dev/sda
 sudo<span class="w"> </span>smartctl<span class="w"> </span>-H<span class="w"> </span>/dev/sda
 </code></pre></div>
-<p><strong>K7.</strong> Mida <code>smartctl</code> virtuaalse ketta kohta näitas? Kus tuleks virtuaalmasinate puhul ketaste tervist jälgida? Kui sul on ligipääs mõnele füüsilisele Linuxi arvutile, vaata seal <code>smartctl -a</code> väljundist atribuute <code>Reallocated_Sector_Ct</code> ja <code>Power_On_Hours</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mida <code>smartctl</code> virtuaalse ketta kohta näitas? Kus tuleks virtuaalmasinate puhul ketaste tervist jälgida? Kui sul on ligipääs mõnele füüsilisele Linuxi arvutile, vaata seal <code>smartctl -a</code> väljundist atribuute <code>Reallocated_Sector_Ct</code> ja <code>Power_On_Hours</code>.</p>
+</div>
 <h2 id="4-osa-partitsioonitabeli-taastamine-testdiskiga-almalinux">4. osa. Partitsioonitabeli taastamine TestDiskiga (AlmaLinux)<a class="headerlink" href="#4-osa-partitsioonitabeli-taastamine-testdiskiga-almalinux" title="Permanent link">&para;</a></h2>
 <p>Harjutame tõmmisfailiga, et päris kettaid mitte ohustada.</p>
 <p><strong>4.1</strong> Loo tõmmisfail, sellele partitsioon, failisüsteem ja failid:</p>
@@ -4620,7 +4668,10 @@ sudo<span class="w"> </span>losetup<span class="w"> </span>-d<span class="w"> </
 sudo<span class="w"> </span>losetup<span class="w"> </span>-fP<span class="w"> </span>--show<span class="w"> </span>/var/tmp/taaste.img
 lsblk<span class="w"> </span>/dev/loop0
 </code></pre></div>
-<p><strong>K8.</strong> Kas <code>loop0p1</code> on alles? Kas andmed on kustutatud?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas <code>loop0p1</code> on alles? Kas andmed on kustutatud?</p>
+</div>
 <p><strong>4.3</strong> Taasta partitsioonitabel:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>testdisk<span class="w"> </span>/dev/loop0
 </code></pre></div>
@@ -4630,7 +4681,10 @@ lsblk<span class="w"> </span>-f<span class="w"> </span>/dev/loop0
 sudo<span class="w"> </span>mount<span class="w"> </span>/dev/loop0p1<span class="w"> </span>/mnt/taaste
 cat<span class="w"> </span>/mnt/taaste/oluline.txt
 </code></pre></div>
-<p><strong>K9.</strong> Kas andmed taastusid? Milline oli taastatud partitsiooni algus ja nimi? Miks ei tohi kahjustatud kettale enne taastamist midagi kirjutada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kas andmed taastusid? Milline oli taastatud partitsiooni algus ja nimi? Miks ei tohi kahjustatud kettale enne taastamist midagi kirjutada?</p>
+</div>
 <p><strong>4.4</strong> Koristamine:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/taaste
 sudo<span class="w"> </span>losetup<span class="w"> </span>-d<span class="w"> </span>/dev/loop0
@@ -4650,12 +4704,27 @@ zfs<span class="w"> </span>list<span class="w"> </span>-o<span class="w"> </span
 <strong>5.2</strong> Laienda poolile teine peegel (<code>sudo zpool add labor mirror /var/tmp/zd3.img /var/tmp/zd4.img</code>) ja vaata <code>zpool list</code> mahtu.
 <strong>5.3</strong> Riku ühte peegli faili (<code>sudo dd if=/dev/urandom of=/var/tmp/zd1.img bs=1M count=50 seek=10 conv=notrunc</code>), käivita <code>sudo zpool scrub labor</code> ja vaata <code>zpool status -v</code> - mida ZFS leidis ja kas andmed jäid terveks?
 <strong>5.4</strong> Koristamine: <code>sudo zpool destroy labor &amp;&amp; rm /var/tmp/zd*.img</code>.</p>
-<p><strong>K10.</strong> Mis oli pakkimise suhe (<code>compressratio</code>)? Miks võib pakkimine kettatööd isegi kiirendada?</p>
-<p><strong>K11.</strong> Mitu viga <code>scrub</code> leidis ja parandas (veerg <code>CKSUM</code>)? Miks ei saaks tavaline RAID 1 (<code>mdadm</code>) seda viga ise parandada?</p>
-<p><strong>K12.</strong> Mis vahe on LVM-i ja ZFS-i hetktõmmisel? Miks ei asenda kumbki varukoopiat?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mis oli pakkimise suhe (<code>compressratio</code>)? Miks võib pakkimine kettatööd isegi kiirendada?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mitu viga <code>scrub</code> leidis ja parandas (veerg <code>CKSUM</code>)? Miks ei saaks tavaline RAID 1 (<code>mdadm</code>) seda viga ise parandada?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Mis vahe on LVM-i ja ZFS-i hetktõmmisel? Miks ei asenda kumbki varukoopiat?</p>
+</div>
 <h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K13.</strong> Täida tabel: RAID 1 (<code>mdadm</code>), LVM, ZFS mirror - töökindlus, hetktõmmised, andmete kontrollsummad, suurendamine, kus kasutada?</p>
-<p><strong>K14.</strong> Koostasid salvestuse kooli failiserverile, kus on 4 ketast. Milline lahendus (riistvaraline RAID, <code>mdadm</code> + LVM, ZFS raidz2 või kaks peeglit) valiksid ja miks? Mis on varunduse plaan?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Täida tabel: RAID 1 (<code>mdadm</code>), LVM, ZFS mirror - töökindlus, hetktõmmised, andmete kontrollsummad, suurendamine, kus kasutada?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Koostasid salvestuse kooli failiserverile, kus on 4 ketast. Milline lahendus (riistvaraline RAID, <code>mdadm</code> + LVM, ZFS raidz2 või kaks peeglit) valiksid ja miks? Mis on varunduse plaan?</p>
+</div>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>umount<span class="w"> </span>/srv/raid
@@ -4663,6 +4732,28 @@ sudo<span class="w"> </span>mdadm<span class="w"> </span>--stop<span class="w"> 
 sudo<span class="w"> </span>mdadm<span class="w"> </span>--zero-superblock<span class="w"> </span>/dev/sdd<span class="w"> </span>/dev/sdf
 </code></pre></div>
 <p>Eemalda <code>/etc/mdadm.conf</code> ja <code>/etc/fstab</code>-ist lisatud read ning seejärel kettad Proxmoxis.</p>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.2)</em> Kui suur on massiiv? Mida näitab <code>/proc/mdstat</code> sünkroniseerimise ajal ja pärast seda (<code>[UU]</code>)?</li>
+<li><strong>K2.</strong> <em>(punkt 1.4)</em> Mis on massiivi olek pärast riket? Kas andmed olid loetavad?</li>
+<li><strong>K3.</strong> <em>(punkt 1.5)</em> Kui kaua taastamine (<em>recovery</em>) kestis? Miks võtab suurte (nt 20 TB) ketaste taastamine päevi ja miks on see risk?</li>
+<li><strong>K4.</strong> <em>(punkt 1.6)</em> Mis on riistvaralise ja tarkvaralise RAID-i peamine erinevus, kui server ise (emaplaat või RAID-kontroller) rikneb?</li>
+<li><strong>K5.</strong> <em>(punkt 2.1)</em> Pane tulemused tabelisse. Miks oli <code>oflag=dsync</code> kiirus väiksem? Miks erinesid kaks lugemise tulemust?</li>
+<li><strong>K6.</strong> <em>(punkt 2.2)</em> Mitu IOPS-i ja MB/s said kummagi testiga? Miks on 4 KiB juhusliku testi MB/s palju väiksem? Mida näitas <code>iostat</code> veerg <code>%util</code>?</li>
+<li><strong>K7.</strong> <em>(punkt 3.1)</em> Mida <code>smartctl</code> virtuaalse ketta kohta näitas? Kus tuleks virtuaalmasinate puhul ketaste tervist jälgida? Kui sul on ligipääs mõnele füüsilisele Linuxi arvutile, vaata seal <code>smartctl -a</code> väljundist atribuute <code>Reallocated_Sector_Ct</code> ja <code>Power_On_Hours</code>.</li>
+<li><strong>K8.</strong> <em>(punkt 4.2)</em> Kas <code>loop0p1</code> on alles? Kas andmed on kustutatud?</li>
+<li><strong>K9.</strong> <em>(punkt 4.3)</em> Kas andmed taastusid? Milline oli taastatud partitsiooni algus ja nimi? Miks ei tohi kahjustatud kettale enne taastamist midagi kirjutada?</li>
+<li><strong>K10.</strong> <em>(punkt 5.4)</em> Mis oli pakkimise suhe (<code>compressratio</code>)? Miks võib pakkimine kettatööd isegi kiirendada?</li>
+<li><strong>K11.</strong> <em>(punkt 5.4)</em> Mitu viga <code>scrub</code> leidis ja parandas (veerg <code>CKSUM</code>)? Miks ei saaks tavaline RAID 1 (<code>mdadm</code>) seda viga ise parandada?</li>
+<li><strong>K12.</strong> <em>(punkt 5.4)</em> Mis vahe on LVM-i ja ZFS-i hetktõmmisel? Miks ei asenda kumbki varukoopiat?</li>
+<li><strong>K13.</strong> <em>(6. osa)</em> Täida tabel: RAID 1 (<code>mdadm</code>), LVM, ZFS mirror - töökindlus, hetktõmmised, andmete kontrollsummad, suurendamine, kus kasutada?</li>
+<li><strong>K14.</strong> <em>(6. osa)</em> Koostasid salvestuse kooli failiserverile, kus on 4 ketast. Milline lahendus (riistvaraline RAID, <code>mdadm</code> + LVM, ZFS raidz2 või kaks peeglit) valiksid ja miks? Mis on varunduse plaan?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

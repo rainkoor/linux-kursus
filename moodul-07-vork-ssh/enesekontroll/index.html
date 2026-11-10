@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1373,34 +1375,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,90 +4407,173 @@
 
 
 <h1 id="moodul-7-enesekontroll">Moodul 7. Enesekontroll<a class="headerlink" href="#moodul-7-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Millise käsuga näed liideste IP-aadresse ja millisega marsruute?</li>
-<li>Mis on vaikelüüs?</li>
-<li>Miks kaovad käsuga <code>ip address add</code> tehtud muudatused pärast taaskäivitust?</li>
-<li>Kus seadistatakse püsiv IP-aadress Debianis, Ubuntus ja AlmaLinuxis?</li>
-<li>Mis järjekorras otsitakse nimele IP-aadressi? Millises failis see järjekord on määratud?</li>
-<li>Miks ei tohi Ubuntus faili <code>/etc/resolv.conf</code> käsitsi muuta?</li>
-<li>Mis vahe on teenusel, mis kuulab aadressil <code>0.0.0.0:3306</code>, ja teenusel, mis kuulab aadressil <code>127.0.0.1:3306</code>?</li>
-<li>Kirjelda samm-sammult, kuidas diagnoosida olukorda „veebileht ei avane“.</li>
-<li>Kuidas töötab SSH võtmepõhine autentimine? Kumba võtit tohib jagada?</li>
-<li>Millised peavad olema kataloogi <code>~/.ssh</code> ja faili <code>authorized_keys</code> õigused?</li>
-<li>Mida tähendab hoiatus <code>REMOTE HOST IDENTIFICATION HAS CHANGED</code>? Mida teha?</li>
-<li>Mis vahe on käskudel <code>rsync -av kataloog/ siht/</code> ja <code>rsync -av kataloog siht/</code>?</li>
-<li>Milliseid SSH-serveri seadeid soovitatakse karastamiseks muuta?</li>
-<li>Miks tuleb enne <code>ufw enable</code> käivitamist lubada SSH?</li>
-<li>Mis vahe on <code>firewall-cmd</code> käskudel võtmega <code>--permanent</code> ja ilma selleta?</li>
-<li>Too kolm probleemi, mis tekivad, kui serverite kellad on valed. Mis vahe on systemd-timesyncd-l ja chronyl?</li>
-<li>Mis on lokaat ja milleks kasutatakse skriptides <code>LC_ALL=C</code>?</li>
-<li>Mis on WireGuardis <code>AllowedIPs</code> kahekordne roll?</li>
-<li>Mis on hüppeserver ja kuidas ühenduda sisevõrgu masinaga ühe SSH käsuga?</li>
-<li>Mis on IPv6 link-local aadress ja miks on IPv6 puhul tulemüür eriti oluline?</li>
-<li>Mis vahe on sillal, VLAN-il ja bond-liidesel?</li>
-<li>Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?</li>
-<li>Kuidas lubad kasutajal ainult SFTP kaudu faile laadida, nii et ta ei näe ülejäänud failisüsteemi? Millised nõuded on chroot-kataloogi omanikule ja õigustele?</li>
-<li>Mis on TOTP ja miks peab serveri kell selle kasutamisel täpne olema? Mida tähendab <code>AuthenticationMethods publickey,keyboard-interactive</code>?</li>
-</ol>
+<p><strong>1.</strong> Millise käsuga näed liideste IP-aadresse ja millisega marsruute?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Aadressid: <code>ip address</code> (või <code>ip -br a</code>). Marsruudid: <code>ip route</code>.</p>
+</details>
+<p><strong>2.</strong> Mis on vaikelüüs?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ruuter, kuhu saadetakse kõik paketid, mille sihtkoht ei ole kohalikus võrgus.</p>
+</details>
+<p><strong>3.</strong> Miks kaovad käsuga <code>ip address add</code> tehtud muudatused pärast taaskäivitust?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>ip</code> muudab ainult kerneli praegust olekut. Püsiv seadistus loetakse alglaadimisel seadistusfailidest (Netplan, <code>interfaces</code>, NetworkManager).</p>
+</details>
+<p><strong>4.</strong> Kus seadistatakse püsiv IP-aadress Debianis, Ubuntus ja AlmaLinuxis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Debian: <code>/etc/network/interfaces</code>; Ubuntu: Netplan, <code>/etc/netplan/*.yaml</code>; AlmaLinux: NetworkManager (<code>nmcli</code>, <code>nmtui</code>).</p>
+</details>
+<p><strong>5.</strong> Mis järjekorras otsitakse nimele IP-aadressi? Millises failis see järjekord on määratud?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Tavaliselt kõigepealt fail <code>/etc/hosts</code>, seejärel DNS. Järjekord on määratud failis <code>/etc/nsswitch.conf</code> (rida <code>hosts:</code>).</p>
+</details>
+<p><strong>6.</strong> Miks ei tohi Ubuntus faili <code>/etc/resolv.conf</code> käsitsi muuta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ubuntus haldab nimelahendust systemd-resolved ja fail genereeritakse automaatselt - käsitsi tehtud muudatused kirjutatakse üle. DNS-serverid määratakse Netplanis.</p>
+</details>
+<p><strong>7.</strong> Mis vahe on teenusel, mis kuulab aadressil <code>0.0.0.0:3306</code>, ja teenusel, mis kuulab aadressil <code>127.0.0.1:3306</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>0.0.0.0</code> - teenus on kättesaadav kõigist võrkudest. <code>127.0.0.1</code> - teenusega saab ühenduda ainult samast masinast.</p>
+</details>
+<p><strong>8.</strong> Kirjelda samm-sammult, kuidas diagnoosida olukorda „veebileht ei avane“.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kontrolli järjest: liides ja aadress (<code>ip -br a</code>), vaikelüüs (<code>ip r</code>), lüüsi ping, interneti ping IP-aadressiga (<code>ping 1.1.1.1</code>), nimelahendus (<code>getent hosts</code>, <code>dig</code>), teenus ja port (<code>curl -I</code>, <code>nc -zv</code>), serveris teenuse olek (<code>systemctl status</code>), kuulav port (<code>ss -tlpn</code>) ja tulemüür.</p>
+</details>
+<p><strong>9.</strong> Kuidas töötab SSH võtmepõhine autentimine? Kumba võtit tohib jagada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kasutajal on võtmepaar: privaatvõti jääb tema arvutisse, avalik võti kopeeritakse serveri faili <code>~/.ssh/authorized_keys</code>. Ühendumisel tõestab klient krüptograafiliselt, et tal on avalikule võtmele vastav privaatvõti, ilma seda saatmata. Jagada tohib ainult <strong>avalikku</strong> võtit.</p>
+</details>
+<p><strong>10.</strong> Millised peavad olema kataloogi <code>~/.ssh</code> ja faili <code>authorized_keys</code> õigused?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>~/.ssh</code> - <code>700</code>, <code>authorized_keys</code> - <code>600</code> (ka privaatvõti - <code>600</code>).</p>
+</details>
+<p><strong>11.</strong> Mida tähendab hoiatus <code>REMOTE HOST IDENTIFICATION HAS CHANGED</code>? Mida teha?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Serveri võti erineb failis <code>~/.ssh/known_hosts</code> salvestatust. See võib tähendada vahendajarünnakut või seda, et server paigaldati uuesti. Kui oled kindel, et muudatus on oodatud, eemalda vana kirje käsuga <code>ssh-keygen -R host</code>.</p>
+</details>
+<p><strong>12.</strong> Mis vahe on käskudel <code>rsync -av kataloog/ siht/</code> ja <code>rsync -av kataloog siht/</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kaldkriipsuga kopeeritakse kataloogi <strong>sisu</strong> sihtkohta, ilma kaldkriipsuta kopeeritakse kataloog <strong>ise</strong> (tulemuseks <code>siht/kataloog/</code>).</p>
+</details>
+<p><strong>13.</strong> Milliseid SSH-serveri seadeid soovitatakse karastamiseks muuta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Näiteks <code>PermitRootLogin no</code>, <code>PasswordAuthentication no</code>, <code>KbdInteractiveAuthentication no</code>, <code>MaxAuthTries</code>, <code>AllowUsers</code> või <code>AllowGroups</code>.</p>
+</details>
+<p><strong>14.</strong> Miks tuleb enne <code>ufw enable</code> käivitamist lubada SSH?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Muidu blokeerib tulemüür SSH-ühenduse ja kaotad ligipääsu masinale.</p>
+</details>
+<p><strong>15.</strong> Mis vahe on <code>firewall-cmd</code> käskudel võtmega <code>--permanent</code> ja ilma selleta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ilma <code>--permanent</code>-ita kehtib muudatus kohe, kuid kaob <code>firewalld</code> taaskäivitusel. <code>--permanent</code> salvestab muudatuse püsivalt, kuid see rakendub alles pärast <code>firewall-cmd --reload</code>.</p>
+</details>
+<p><strong>16.</strong> Too kolm probleemi, mis tekivad, kui serverite kellad on valed. Mis vahe on systemd-timesyncd-l ja chronyl?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Logisid ei saa võrrelda, TLS-sertifikaadid tunduvad kehtetud, Kerberos/AD keeldub autentimast, ajastatud tööd käivituvad valel ajal. systemd-timesyncd on lihtne klient; chrony on täielik NTP-teenus, mis korrigeerib täpsemalt ja võib olla ka sisevõrgu ajaserver.</p>
+</details>
+<p><strong>17.</strong> Mis on lokaat ja milleks kasutatakse skriptides <code>LC_ALL=C</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Lokaat määrab keele, kuupäevade ja arvude vormingu ning järjestuse (nt <code>et_EE.UTF-8</code>). <code>LC_ALL=C</code> annab ühtse, lokaadist sõltumatu käitumise (järjestus, vead inglise keeles), mistõttu skripti tulemus on igas masinas sama.</p>
+</details>
+<p><strong>18.</strong> Mis on WireGuardis <code>AllowedIPs</code> kahekordne roll?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>See on marsruutimistabel (millised aadressid saadetakse sellele partnerile tunnelisse) ja juurdepääsukontroll (millise lähteaadressiga pakette sellelt partnerilt vastu võetakse).</p>
+</details>
+<p><strong>19.</strong> Mis on hüppeserver ja kuidas ühenduda sisevõrgu masinaga ühe SSH käsuga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Server, mille kaudu pääseb sisevõrku (bastion). <code>ssh -J kasutaja@hupe kasutaja@sisemasin</code> või <code>~/.ssh/config</code>-is <code>ProxyJump</code>.</p>
+</details>
+<p><strong>20.</strong> Mis on IPv6 link-local aadress ja miks on IPv6 puhul tulemüür eriti oluline?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>fe80::</code>-ga algav aadress, mis on igal liidesel automaatselt ja töötab ainult samas võrgulõigus. IPv6-s NAT-i tavaliselt pole, masinad on otse adresseeritavad - ainult tulemüür kaitseb neid.</p>
+</details>
+<p><strong>21.</strong> Mis vahe on sillal, VLAN-il ja bond-liidesel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator); VLAN jagab ühe füüsilise võrgu mitmeks loogiliseks (märgistusega); bond koondab mitu füüsilist liidest üheks töökindluse või läbilaskevõime jaoks.</p>
+</details>
+<p><strong>22.</strong> Miks ei tohi kahel masinal samas alamvõrgus olla sama IP-aadress? Kuidas kontrollid enne staatilise aadressi seadistamist, et aadress on vaba?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): ühendused katkevad juhuslikult ja SSH võib ühenduda valesse masinasse. Kontrolli aadressiplaani ja teisest masinast <code>ping</code>, <code>ip neigh show &lt;aadress&gt;</code> või <code>arping -D</code>; kooli laboris kasuta ainult õpetaja antud aadressi.</p>
+</details>
+<p><strong>23.</strong> Kuidas lubad kasutajal ainult SFTP kaudu faile laadida, nii et ta ei näe ülejäänud failisüsteemi? Millised nõuded on chroot-kataloogi omanikule ja õigustele?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>sshd</code> seadistuses <code>Match Group …</code> plokk koos <code>ChrootDirectory /srv/sftp/%u</code> ja <code>ForceCommand internal-sftp</code>. Chroot-kataloog ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ega tohi olla teistele kirjutatavad; kasutaja kirjutab alamkataloogi, mis kuulub talle.</p>
+</details>
+<p><strong>24.</strong> Mis on TOTP ja miks peab serveri kell selle kasutamisel täpne olema? Mida tähendab <code>AuthenticationMethods publickey,keyboard-interactive</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ajapõhine ühekordne kood, mille telefonirakendus ja server arvutavad ühisest saladusest ja kellaajast; kood vahetub iga 30 sekundi järel, seega vale kellaga server ei aktsepteeri õiget koodi. <code>AuthenticationMethods publickey,keyboard-interactive</code> nõuab mõlemat: kõigepealt võti, seejärel PAM-i kaudu küsitav kood.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Leia oma masina vaikelüüsi IP-aadress ühe käsuga, mis väljastab ainult aadressi.</li>
-<li>Leia, millised programmid kuulavad TCP-porte, ja kuva ainult portide numbrid.</li>
-<li>Leia domeeni <code>debian.org</code> nimeserverid (NS-kirjed).</li>
-<li>Kirjuta <code>~/.ssh/config</code> kirje, mis võimaldab käsuga <code>ssh varu</code> ühenduda masinaga <code>10.0.5.20</code> pordil <code>2222</code> kasutajana <code>backup</code>.</li>
-<li>Sünkroniseeri kataloog <code>/var/www/</code> masinasse <code>varu</code> kataloogi <code>/srv/www-varu/</code> nii, et sihtkohas kustutatakse ka allikast kustutatud failid. Kirjuta kõigepealt proovikäsk.</li>
-<li>AlmaLinuxis: luba püsivalt HTTPS-teenus ja port <code>8443/tcp</code> ning kontrolli tulemust.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Aadressid: <code>ip address</code> (või <code>ip -br a</code>). Marsruudid: <code>ip route</code>.</li>
-<li>Ruuter, kuhu saadetakse kõik paketid, mille sihtkoht ei ole kohalikus võrgus.</li>
-<li><code>ip</code> muudab ainult kerneli praegust olekut. Püsiv seadistus loetakse alglaadimisel seadistusfailidest (Netplan, <code>interfaces</code>, NetworkManager).</li>
-<li>Debian: <code>/etc/network/interfaces</code>; Ubuntu: Netplan, <code>/etc/netplan/*.yaml</code>; AlmaLinux: NetworkManager (<code>nmcli</code>, <code>nmtui</code>).</li>
-<li>Tavaliselt kõigepealt fail <code>/etc/hosts</code>, seejärel DNS. Järjekord on määratud failis <code>/etc/nsswitch.conf</code> (rida <code>hosts:</code>).</li>
-<li>Ubuntus haldab nimelahendust systemd-resolved ja fail genereeritakse automaatselt - käsitsi tehtud muudatused kirjutatakse üle. DNS-serverid määratakse Netplanis.</li>
-<li><code>0.0.0.0</code> - teenus on kättesaadav kõigist võrkudest. <code>127.0.0.1</code> - teenusega saab ühenduda ainult samast masinast.</li>
-<li>Kontrolli järjest: liides ja aadress (<code>ip -br a</code>), vaikelüüs (<code>ip r</code>), lüüsi ping, interneti ping IP-aadressiga (<code>ping 1.1.1.1</code>), nimelahendus (<code>getent hosts</code>, <code>dig</code>), teenus ja port (<code>curl -I</code>, <code>nc -zv</code>), serveris teenuse olek (<code>systemctl status</code>), kuulav port (<code>ss -tlpn</code>) ja tulemüür.</li>
-<li>Kasutajal on võtmepaar: privaatvõti jääb tema arvutisse, avalik võti kopeeritakse serveri faili <code>~/.ssh/authorized_keys</code>. Ühendumisel tõestab klient krüptograafiliselt, et tal on avalikule võtmele vastav privaatvõti, ilma seda saatmata. Jagada tohib ainult <strong>avalikku</strong> võtit.</li>
-<li><code>~/.ssh</code> - <code>700</code>, <code>authorized_keys</code> - <code>600</code> (ka privaatvõti - <code>600</code>).</li>
-<li>Serveri võti erineb failis <code>~/.ssh/known_hosts</code> salvestatust. See võib tähendada vahendajarünnakut või seda, et server paigaldati uuesti. Kui oled kindel, et muudatus on oodatud, eemalda vana kirje käsuga <code>ssh-keygen -R host</code>.</li>
-<li>Kaldkriipsuga kopeeritakse kataloogi <strong>sisu</strong> sihtkohta, ilma kaldkriipsuta kopeeritakse kataloog <strong>ise</strong> (tulemuseks <code>siht/kataloog/</code>).</li>
-<li>Näiteks <code>PermitRootLogin no</code>, <code>PasswordAuthentication no</code>, <code>KbdInteractiveAuthentication no</code>, <code>MaxAuthTries</code>, <code>AllowUsers</code> või <code>AllowGroups</code>.</li>
-<li>Muidu blokeerib tulemüür SSH-ühenduse ja kaotad ligipääsu masinale.</li>
-<li>Ilma <code>--permanent</code>-ita kehtib muudatus kohe, kuid kaob <code>firewalld</code> taaskäivitusel. <code>--permanent</code> salvestab muudatuse püsivalt, kuid see rakendub alles pärast <code>firewall-cmd --reload</code>.</li>
-<li>Logisid ei saa võrrelda, TLS-sertifikaadid tunduvad kehtetud, Kerberos/AD keeldub autentimast, ajastatud tööd käivituvad valel ajal. systemd-timesyncd on lihtne klient; chrony on täielik NTP-teenus, mis korrigeerib täpsemalt ja võib olla ka sisevõrgu ajaserver.</li>
-<li>Lokaat määrab keele, kuupäevade ja arvude vormingu ning järjestuse (nt <code>et_EE.UTF-8</code>). <code>LC_ALL=C</code> annab ühtse, lokaadist sõltumatu käitumise (järjestus, vead inglise keeles), mistõttu skripti tulemus on igas masinas sama.</li>
-<li>See on marsruutimistabel (millised aadressid saadetakse sellele partnerile tunnelisse) ja juurdepääsukontroll (millise lähteaadressiga pakette sellelt partnerilt vastu võetakse).</li>
-<li>Server, mille kaudu pääseb sisevõrku (bastion). <code>ssh -J kasutaja@hupe kasutaja@sisemasin</code> või <code>~/.ssh/config</code>-is <code>ProxyJump</code>.</li>
-<li><code>fe80::</code>-ga algav aadress, mis on igal liidesel automaatselt ja töötab ainult samas võrgulõigus. IPv6-s NAT-i tavaliselt pole, masinad on otse adresseeritavad - ainult tulemüür kaitseb neid.</li>
-<li>Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator); VLAN jagab ühe füüsilise võrgu mitmeks loogiliseks (märgistusega); bond koondab mitu füüsilist liidest üheks töökindluse või läbilaskevõime jaoks.</li>
-<li>Võrk ei tea, kummale masinale pakette saata (ARP-tabelis vahetub MAC-aadress): ühendused katkevad juhuslikult ja SSH võib ühenduda valesse masinasse. Kontrolli aadressiplaani ja teisest masinast <code>ping</code>, <code>ip neigh show &lt;aadress&gt;</code> või <code>arping -D</code>; kooli laboris kasuta ainult õpetaja antud aadressi.</li>
-<li><code>sshd</code> seadistuses <code>Match Group …</code> plokk koos <code>ChrootDirectory /srv/sftp/%u</code> ja <code>ForceCommand internal-sftp</code>. Chroot-kataloog ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ega tohi olla teistele kirjutatavad; kasutaja kirjutab alamkataloogi, mis kuulub talle.</li>
-<li>Ajapõhine ühekordne kood, mille telefonirakendus ja server arvutavad ühisest saladusest ja kellaajast; kood vahetub iga 30 sekundi järel, seega vale kellaga server ei aktsepteeri õiget koodi. <code>AuthenticationMethods publickey,keyboard-interactive</code> nõuab mõlemat: kõigepealt võti, seejärel PAM-i kaudu küsitav kood.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Leia oma masina vaikelüüsi IP-aadress ühe käsuga, mis väljastab ainult aadressi.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/^default/ {print $3}'</span>
-sudo<span class="w"> </span>ss<span class="w"> </span>-tlpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'NR&gt;1 {print $4}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">'{print $NF}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nu
-dig<span class="w"> </span>NS<span class="w"> </span>debian.org<span class="w"> </span>+short
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Leia, millised programmid kuulavad TCP-porte, ja kuva ainult portide numbrid.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ss<span class="w"> </span>-tlpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'NR&gt;1 {print $4}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">'{print $NF}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nu
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Leia domeeni <code>debian.org</code> nimeserverid (NS-kirjed).</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>NS<span class="w"> </span>debian.org<span class="w"> </span>+short
+</code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta <code>~/.ssh/config</code> kirje, mis võimaldab käsuga <code>ssh varu</code> ühenduda masinaga <code>10.0.5.20</code> pordil <code>2222</code> kasutajana <code>backup</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <p><code>~/.ssh/config</code>:</p>
 <div class="highlight"><pre><span></span><code>Host varu
     HostName 10.0.5.20
     Port 2222
     User backup
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Sünkroniseeri kataloog <code>/var/www/</code> masinasse <code>varu</code> kataloogi <code>/srv/www-varu/</code> nii, et sihtkohas kustutatakse ka allikast kustutatud failid. Kirjuta kõigepealt proovikäsk.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-avn<span class="w"> </span>--delete<span class="w"> </span>/var/www/<span class="w"> </span>varu:/srv/www-varu/
 rsync<span class="w"> </span>-av<span class="w"> </span>--delete<span class="w"> </span>/var/www/<span class="w"> </span>varu:/srv/www-varu/
 </code></pre></div>
+</details>
+<p><strong>6.</strong> AlmaLinuxis: luba püsivalt HTTPS-teenus ja port <code>8443/tcp</code> ning kontrolli tulemust.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-service<span class="o">=</span>https<span class="w"> </span>--permanent
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-port<span class="o">=</span><span class="m">8443</span>/tcp<span class="w"> </span>--permanent
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--list-all
 </code></pre></div>
+</details>
 
 
 

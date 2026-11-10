@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3297,6 +3299,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4497,6 +4510,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4541,7 +4565,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K16</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K16</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Tee kõiki selle labori osi ainult isoleeritud laborivõrgus!</strong> Kontrolli enne alustamist, et <code>debian1</code> võrguliides on Proxmoxis ühendatud sinu isoleeritud silda/VNet-i, mitte kooli võrku.</p>
@@ -4559,25 +4586,37 @@ cat<span class="w"> </span>/etc/resolv.conf
 sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kea/kea-dhcp4.conf<span class="w"> </span>/etc/kea/kea-dhcp4.conf.orig
 wc<span class="w"> </span>-l<span class="w"> </span>/etc/kea/kea-dhcp4.conf.orig
 </code></pre></div>
-<p><strong>K1.</strong> Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?</p>
+</div>
 <p><strong>1.3</strong> Kirjuta fail <code>/etc/kea/kea-dhcp4.conf</code> teooria punkti 19.2 põhjal oma võrguplaani järgi. Reserveeringut veel ära lisa.</p>
 <p><strong>1.4</strong> Kontrolli süntaksit. Tee meelega viga (kustuta mõni koma) ja kontrolli uuesti. Paranda.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>kea-dhcp4<span class="w"> </span>-t<span class="w"> </span>/etc/kea/kea-dhcp4.conf
 </code></pre></div>
-<p><strong>K2.</strong> Mida näitas kontroll vea korral? Miks on JSON-i puhul nii lihtne viga teha?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mida näitas kontroll vea korral? Miks on JSON-i puhul nii lihtne viga teha?</p>
+</div>
 <p><strong>1.5</strong> <strong>Lülita OPNsense'is LAN-i DHCP-server välja</strong> (<em>Services</em> → DHCP-teenus → <em>LAN</em> → keela, salvesta). Seejärel käivita Kea:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kea-dhcp4-server
 systemctl<span class="w"> </span>status<span class="w"> </span>kea-dhcp4-server
 sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">67</span>/udp<span class="w">          </span><span class="c1"># kui ufw on sees</span>
 journalctl<span class="w"> </span>-u<span class="w"> </span>kea-dhcp4-server<span class="w"> </span>-f
 </code></pre></div>
-<p><strong>K3.</strong> Miks tuli OPNsense'i DHCP välja lülitada? Mis juhtuks, kui võrgus oleks kaks DHCP-serverit?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Miks tuli OPNsense'i DHCP välja lülitada? Mis juhtuks, kui võrgus oleks kaks DHCP-serverit?</p>
+</div>
 <h2 id="2-osa-klient-ja-reserveering">2. osa. Klient ja reserveering<a class="headerlink" href="#2-osa-klient-ja-reserveering" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Uuenda Ubuntu kliendi renti ja jälgi samal ajal <code>debian1</code> logi (<code>journalctl -f</code>):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>networkctl<span class="w"> </span>renew<span class="w"> </span>&lt;liides&gt;
 ip<span class="w"> </span>-br<span class="w"> </span>a
 </code></pre></div>
-<p><strong>K4.</strong> Leia logist DHCP-sõnumite vahetus (DISCOVER, OFFER, REQUEST, ACK - Kea logis <code>DHCP4_PACKET_RECEIVED</code>, <code>DHCP4_LEASE_ALLOC</code> vms). Millise aadressi klient sai?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Leia logist DHCP-sõnumite vahetus (DISCOVER, OFFER, REQUEST, ACK - Kea logis <code>DHCP4_PACKET_RECEIVED</code>, <code>DHCP4_LEASE_ALLOC</code> vms). Millise aadressi klient sai?</p>
+</div>
 <p><strong>2.2</strong> Vaata rente serveris:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cat<span class="w"> </span>/var/lib/kea/kea-leases4.csv
 </code></pre></div>
@@ -4585,11 +4624,20 @@ ip<span class="w"> </span>-br<span class="w"> </span>a
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tcpdump
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>ens18<span class="w"> </span>-v<span class="w"> </span>port<span class="w"> </span><span class="m">67</span><span class="w"> </span>or<span class="w"> </span>port<span class="w"> </span><span class="m">68</span>
 </code></pre></div>
-<p><strong>K5.</strong> Kas nägid leviedastusi (<code>255.255.255.255</code>)? Millised DHCP-valikud olid serveri vastuses (ruuter, DNS, domeen, rendiaeg)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kas nägid leviedastusi (<code>255.255.255.255</code>)? Millised DHCP-valikud olid serveri vastuses (ruuter, DNS, domeen, rendiaeg)?</p>
+</div>
 <p><strong>2.4</strong> Lisa Ubuntu kliendile reserveering võrguplaanis olevale aadressile (<code>10.0.83.98</code>). Kontrolli süntaksit, taaskäivita Kea ja uuenda kliendi renti.</p>
-<p><strong>K6.</strong> Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?</p>
+</div>
 <p><strong>2.5</strong> Peata Kea ja oota, mis juhtub kliendiga, kui see renti uuendada üritab (<code>networkctl renew</code>). Käivita Kea uuesti.</p>
-<p><strong>K7.</strong> Mis juhtus kliendi aadressiga, kui DHCP-server ei vastanud? Miks ei kaota klient aadressi kohe?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mis juhtus kliendi aadressiga, kui DHCP-server ei vastanud? Miks ei kaota klient aadressi kohe?</p>
+</div>
 <h2 id="3-osa-pxe-alglaadimine-netbootxyz">3. osa. PXE alglaadimine (netboot.xyz)<a class="headerlink" href="#3-osa-pxe-alglaadimine-netbootxyz" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Paigalda <code>debian1</code>-sse TFTP-server ja laadi alla netboot.xyz alglaadimisfail (BIOS-klientidele):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tftpd-hpa
@@ -4603,9 +4651,15 @@ tftp<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </
 </code></pre></div>
 <p><strong>3.3</strong> Lisa Kea alamvõrgu seadistusse PXE valikud (teooria punkt 19.4) - <code>next-server</code> = <code>debian1</code> aadress, <code>boot-file-name</code> = <code>netboot.xyz.kpxe</code>. Kontrolli ja taaskäivita Kea.</p>
 <p><strong>3.4</strong> Loo Proxmoxis tühi virtuaalmasin ilma kettata (või väikese kettaga), võrk isoleeritud silda, BIOS <strong>SeaBIOS</strong>, <em>Options</em> → <em>Boot Order</em>: <code>net0</code> esimeseks. Käivita see ja jälgi konsooli.</p>
-<p><strong>K8.</strong> Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?</p>
+</div>
 <p><strong>3.5</strong> Muuda masina BIOS UEFI-ks (OVMF) ja proovi uuesti.</p>
-<p><strong>K9.</strong> Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?</p>
+</div>
 <h2 id="4-osa-iscsi-sihtmärk">4. osa. iSCSI sihtmärk<a class="headerlink" href="#4-osa-iscsi-sihtmärk" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> <code>debian2</code>-s: kasuta lisaketast (<code>/dev/sdb</code>) LVM-iga või failipõhist tausta. Lihtsam variant (fail):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>targetcli-fb
@@ -4624,7 +4678,10 @@ sudo<span class="w"> </span>targetcli
 sudo<span class="w"> </span>ss<span class="w"> </span>-tlpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">3260</span>
 sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">3260</span>/tcp
 </code></pre></div>
-<p><strong>K10.</strong> Kirjuta aruandesse <code>targetcli ls</code> väljund. Selgita, mis on sihtmärk, LUN, ACL ja portaal.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kirjuta aruandesse <code>targetcli ls</code> väljund. Selgita, mis on sihtmärk, LUN, ACL ja portaal.</p>
+</div>
 <p><strong>4.2</strong> Taaskäivita <code>debian2</code> ja kontrolli, kas sihtmärk taastus (<code>sudo targetcli ls</code>).</p>
 <h2 id="5-osa-iscsi-initsiaator-almalinux">5. osa. iSCSI initsiaator (AlmaLinux)<a class="headerlink" href="#5-osa-iscsi-initsiaator-almalinux" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Paigalda initsiaator ja määra IQN, mis vastab ACL-ile:</p>
@@ -4640,9 +4697,15 @@ sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> <
 lsblk
 sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>session<span class="w"> </span>-P<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"Target|Attached scsi disk"</span>
 </code></pre></div>
-<p><strong>K11.</strong> Mis nime sai iSCSI ketas AlmaLinuxis? Kuidas see <code>lsblk</code> väljundis kohalikust kettast erineb (vihje: <code>lsblk -S</code> veerg <code>TRAN</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mis nime sai iSCSI ketas AlmaLinuxis? Kuidas see <code>lsblk</code> väljundis kohalikust kettast erineb (vihje: <code>lsblk -S</code> veerg <code>TRAN</code>)?</p>
+</div>
 <p><strong>5.3</strong> Proovi esmalt <strong>vale</strong> IQN-iga: muuda faili <code>initiatorname.iscsi</code> IQN-i, logi välja (<code>iscsiadm -m node --logout</code>), taaskäivita <code>iscsid</code> ja logi uuesti sisse.</p>
-<p><strong>K12.</strong> Mis veateate said? Miks? Taasta õige IQN.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Mis veateate said? Miks? Taasta õige IQN.</p>
+</div>
 <p><strong>5.4</strong> Loo kettale failisüsteem ja haagi see püsivalt:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>/dev/sdX
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/iscsi
@@ -4657,12 +4720,24 @@ df<span class="w"> </span>-h<span class="w"> </span>/mnt/iscsi
 sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
 </code></pre></div>
 <p>Pärast taaskäivitust: <code>df -h /mnt/iscsi &amp;&amp; cat /mnt/iscsi/test.txt</code>.</p>
-<p><strong>K13.</strong> Mis on valiku <code>_netdev</code> ülesanne? Mis juhtuks alglaadimisel ilma selleta?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mis on valiku <code>_netdev</code> ülesanne? Mis juhtuks alglaadimisel ilma selleta?</p>
+</div>
 <p><strong>5.5</strong> (Valikuline) Ühenda sama sihtmärgi <strong>teine LUN</strong> (loo <code>debian2</code>-s eraldi taust ja ACL Windowsi initsiaatori IQN-ile) Windowsi kliendist <code>iscsicpl</code> abil ja vorminda NTFS-iks.</p>
-<p><strong>K14.</strong> Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?</p>
+</div>
 <h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K15.</strong> Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.</p>
-<p><strong>K16.</strong> Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4672,6 +4747,30 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
 <li><strong>ISC DHCP võrdlus:</strong> seadista samale võrgule (Kea peatatuna) ISC DHCP teooria punkti 19.3 järgi ja võrdle seadistusfaile ning logisid.</li>
 <li><strong>Automaatne paigaldus kickstartiga:</strong> pane <code>debian2</code> veebiserverisse <code>ks.cfg</code> ja <code>boot.ipxe</code> (teooria punkt 19.4), lisa Kea seadistusse iPXE kliendiklass ning käivita uus tühi VM (vähemalt 2 GiB RAM, 20 GiB ketas) võrgust. Mõõda, kui kaua võttis paigaldus nupuvajutusest sisselogimiseni. Kontrolli, et SSH-võtmega saab kohe sisse.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.2)</em> Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?</li>
+<li><strong>K2.</strong> <em>(punkt 1.4)</em> Mida näitas kontroll vea korral? Miks on JSON-i puhul nii lihtne viga teha?</li>
+<li><strong>K3.</strong> <em>(punkt 1.5)</em> Miks tuli OPNsense'i DHCP välja lülitada? Mis juhtuks, kui võrgus oleks kaks DHCP-serverit?</li>
+<li><strong>K4.</strong> <em>(punkt 2.1)</em> Leia logist DHCP-sõnumite vahetus (DISCOVER, OFFER, REQUEST, ACK - Kea logis <code>DHCP4_PACKET_RECEIVED</code>, <code>DHCP4_LEASE_ALLOC</code> vms). Millise aadressi klient sai?</li>
+<li><strong>K5.</strong> <em>(punkt 2.3)</em> Kas nägid leviedastusi (<code>255.255.255.255</code>)? Millised DHCP-valikud olid serveri vastuses (ruuter, DNS, domeen, rendiaeg)?</li>
+<li><strong>K6.</strong> <em>(punkt 2.4)</em> Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?</li>
+<li><strong>K7.</strong> <em>(punkt 2.5)</em> Mis juhtus kliendi aadressiga, kui DHCP-server ei vastanud? Miks ei kaota klient aadressi kohe?</li>
+<li><strong>K8.</strong> <em>(punkt 3.4)</em> Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?</li>
+<li><strong>K9.</strong> <em>(punkt 3.5)</em> Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?</li>
+<li><strong>K10.</strong> <em>(punkt 4.1)</em> Kirjuta aruandesse <code>targetcli ls</code> väljund. Selgita, mis on sihtmärk, LUN, ACL ja portaal.</li>
+<li><strong>K11.</strong> <em>(punkt 5.2)</em> Mis nime sai iSCSI ketas AlmaLinuxis? Kuidas see <code>lsblk</code> väljundis kohalikust kettast erineb (vihje: <code>lsblk -S</code> veerg <code>TRAN</code>)?</li>
+<li><strong>K12.</strong> <em>(punkt 5.3)</em> Mis veateate said? Miks? Taasta õige IQN.</li>
+<li><strong>K13.</strong> <em>(punkt 5.4)</em> Mis on valiku <code>_netdev</code> ülesanne? Mis juhtuks alglaadimisel ilma selleta?</li>
+<li><strong>K14.</strong> <em>(punkt 5.5)</em> Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?</li>
+<li><strong>K15.</strong> <em>(6. osa)</em> Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.</li>
+<li><strong>K16.</strong> <em>(6. osa)</em> Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -809,34 +811,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,72 +4407,139 @@
 
 
 <h1 id="moodul-3-enesekontroll">Moodul 3. Enesekontroll<a class="headerlink" href="#moodul-3-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on vähima õiguse põhimõte? Too näide.</li>
-<li>Milline on juurkasutaja UID? Mis vahe on süsteemikasutajal ja tavakasutajal?</li>
-<li>Miks on paroolid failis <code>/etc/shadow</code>, mitte <code>/etc/passwd</code>?</li>
-<li>Mis vahe on kasutaja põhigrupil ja lisagruppidel?</li>
-<li>Mis vahe on käskudel <code>sudo</code> ja <code>su</code>? Kelle parooli kumbki küsib?</li>
-<li>Miks ei tohi faili <code>/etc/sudoers</code> muuta tavalise redaktoriga?</li>
-<li>Mis juhtub, kui käivitad <code>sudo usermod -G tarkvara mari</code> ilma võtmeta <code>-a</code>?</li>
-<li>Mida tähendavad õigused <code>r</code>, <code>w</code> ja <code>x</code> kataloogi puhul?</li>
-<li>Mis on vaja, et kasutaja saaks faili kustutada?</li>
-<li>Teisenda numbriliseks: <code>rwxr-x---</code>, <code>rw-r--r--</code>, <code>rw-------</code>.</li>
-<li>Teisenda sümboliliseks: <code>755</code>, <code>640</code>, <code>2770</code>.</li>
-<li>Kui umask on <code>0027</code>, millised õigused saavad uus fail ja uus kataloog?</li>
-<li>Mida teeb SGID-õigus kataloogil? Miks on see kasulik jagatud kataloogi puhul?</li>
-<li>Miks on kataloogil <code>/tmp</code> sticky bit?</li>
-<li>Miks on <code>chmod 777</code> halb lahendus?</li>
-<li>Milleks on kataloog <code>/etc/skel</code> ja fail <code>/etc/login.defs</code>?</li>
-<li>Mis on PAM ja millised on selle nelja moodulitüübi ülesanded?</li>
-<li>Kuidas nõuda vähemalt 12-märgilisi paroole ja lukustada konto 5 vale katse järel?</li>
-</ol>
+<p><strong>1.</strong> Mis on vähima õiguse põhimõte? Too näide.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Iga kasutaja ja programm saab ainult need õigused, mida ta oma tööks vajab. Näiteks veebiserver töötab kasutajana <code>www-data</code>, mitte juurkasutajana, et ülevõetud veebiserver ei pääseks ligi kogu süsteemile.</p>
+</details>
+<p><strong>2.</strong> Milline on juurkasutaja UID? Mis vahe on süsteemikasutajal ja tavakasutajal?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Juurkasutaja UID on <code>0</code>. Süsteemikasutajad (UID 1–999) on teenuste jaoks ega saa tavaliselt sisse logida. Tavakasutajad (UID 1000+) on inimesed.</p>
+</details>
+<p><strong>3.</strong> Miks on paroolid failis <code>/etc/shadow</code>, mitte <code>/etc/passwd</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Faili <code>/etc/passwd</code> peavad saama lugeda kõik programmid (nt et näidata failide omanike nimesid). Paroolide räsid on eraldi failis <code>/etc/shadow</code>, mida saab lugeda ainult juurkasutaja, et neid ei saaks varastada ja maha murda.</p>
+</details>
+<p><strong>4.</strong> Mis vahe on kasutaja põhigrupil ja lisagruppidel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Põhigrupp on määratud failis <code>/etc/passwd</code> ja sellele kuuluvad kasutaja loodud failid. Lisagrupid annavad kasutajale nende gruppide õigused.</p>
+</details>
+<p><strong>5.</strong> Mis vahe on käskudel <code>sudo</code> ja <code>su</code>? Kelle parooli kumbki küsib?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>sudo</code> käivitab käsu teise kasutaja (tavaliselt root) õigustes ja küsib <strong>sinu</strong> parooli, eeldusel et sul on vastav reegel. <code>su</code> vahetab kasutajat ja küsib <strong>sihtkasutaja</strong> parooli.</p>
+</details>
+<p><strong>6.</strong> Miks ei tohi faili <code>/etc/sudoers</code> muuta tavalise redaktoriga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Süntaksiviga sudoers-failis võib takistada <code>sudo</code> kasutamist ja võtta kõigilt halduriõigused. <code>visudo</code> kontrollib süntaksit enne salvestamist.</p>
+</details>
+<p><strong>7.</strong> Mis juhtub, kui käivitad <code>sudo usermod -G tarkvara mari</code> ilma võtmeta <code>-a</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kasutaja kõik senised lisagrupid asendatakse grupiga <code>tarkvara</code>. Kui ta kuulus näiteks gruppi <code>sudo</code>, kaotab ta halduriõigused.</p>
+</details>
+<p><strong>8.</strong> Mida tähendavad õigused <code>r</code>, <code>w</code> ja <code>x</code> kataloogi puhul?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>r</code> - sisu loetlemine, <code>w</code> - failide loomine, kustutamine ja ümbernimetamine, <code>x</code> - kataloogi sisenemine ja sealsetele failidele ligipääs.</p>
+</details>
+<p><strong>9.</strong> Mis on vaja, et kasutaja saaks faili kustutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kirjutus- ja sisenemisõigust (<code>w</code> ja <code>x</code>) <strong>kataloogile</strong>, kus fail asub. Õigus failile endale ei ole oluline (v.a kui kataloogil on sticky bit - siis peab olema faili omanik).</p>
+</details>
+<p><strong>10.</strong> Teisenda numbriliseks: <code>rwxr-x---</code>, <code>rw-r--r--</code>, <code>rw-------</code>.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>rwxr-x---</code> = <code>750</code>, <code>rw-r--r--</code> = <code>644</code>, <code>rw-------</code> = <code>600</code>.</p>
+</details>
+<p><strong>11.</strong> Teisenda sümboliliseks: <code>755</code>, <code>640</code>, <code>2770</code>.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>755</code> = <code>rwxr-xr-x</code>, <code>640</code> = <code>rw-r-----</code>, <code>2770</code> = <code>rwxrws---</code>.</p>
+</details>
+<p><strong>12.</strong> Kui umask on <code>0027</code>, millised õigused saavad uus fail ja uus kataloog?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Fail: <code>666 − 027</code> → <code>640</code> (<code>rw-r-----</code>). Kataloog: <code>777 − 027</code> → <code>750</code> (<code>rwxr-x---</code>).</p>
+</details>
+<p><strong>13.</strong> Mida teeb SGID-õigus kataloogil? Miks on see kasulik jagatud kataloogi puhul?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Uued failid ja alamkataloogid saavad kataloogi grupi, mitte looja põhigrupi. Nii kuuluvad kõik jagatud kataloogi failid automaatselt meeskonna grupile ja kõik liikmed saavad neile ligi.</p>
+</details>
+<p><strong>14.</strong> Miks on kataloogil <code>/tmp</code> sticky bit?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kõik kasutajad saavad kataloogi <code>/tmp</code> kirjutada, kuid sticky bit tagab, et igaüks saab kustutada ainult oma faile, mitte teiste omi.</p>
+</details>
+<p><strong>15.</strong> Miks on <code>chmod 777</code> halb lahendus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>See annab kõigile süsteemi kasutajatele (ka teenustele ja võimalikele ründajatele) õiguse faili muuta või kustutada. Õige lahendus on määrata sobiv omanik või grupp.</p>
+</details>
+<p><strong>16.</strong> Milleks on kataloog <code>/etc/skel</code> ja fail <code>/etc/login.defs</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>/etc/skel</code> sisu kopeeritakse uue kasutaja kodukataloogi; <code>login.defs</code> määrab uute kasutajate UID vahemikud, parooli aegumise vaikeväärtused ja <code>UMASK</code>-i.</p>
+</details>
+<p><strong>17.</strong> Mis on PAM ja millised on selle nelja moodulitüübi ülesanded?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Autentimise raamistik, mille kaudu programmid kasutajaid kontrollivad. <code>auth</code> - kes sa oled; <code>account</code> - kas tohid sisse logida; <code>password</code> - parooli muutmine ja nõuded; <code>session</code> - sisselogimisel tehtavad toimingud.</p>
+</details>
+<p><strong>18.</strong> Kuidas nõuda vähemalt 12-märgilisi paroole ja lukustada konto 5 vale katse järel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>/etc/security/pwquality.conf</code>: <code>minlen = 12</code> (<code>pam_pwquality</code>); <code>/etc/security/faillock.conf</code>: <code>deny = 5</code> ja <code>pam_faillock</code> sisse (AlmaLinuxis <code>authselect enable-feature with-faillock</code>).</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p>Tee need ülesanded laborimasinas, kus sul on <code>sudo</code> õigus.</p>
-<ol>
-<li>Loo grupp <code>opetajad</code> ja kasutaja <code>ain</code>, kes kuulub sellesse gruppi ja kelle kest on <code>/bin/bash</code>.</li>
-<li>Loo fail <code>~/hinded.txt</code> ja määra sellele õigused nii, et sina saad lugeda ja kirjutada, grupp ainult lugeda ja muud mitte midagi.</li>
-<li>Loo kataloog <code>/srv/opetajad</code>, kuhu ainult grupi <code>opetajad</code> liikmed pääsevad ja kus uued failid kuuluvad automaatselt sellele grupile.</li>
-<li>Leia kõik failid kataloogis <code>/etc</code>, mille omanik ei ole <code>root</code>.</li>
-<li>Kontrolli, millised <code>sudo</code> õigused on sinu kasutajal.</li>
-<li>Kustuta kasutaja <code>ain</code> koos kodukataloogiga ja grupp <code>opetajad</code>.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Iga kasutaja ja programm saab ainult need õigused, mida ta oma tööks vajab. Näiteks veebiserver töötab kasutajana <code>www-data</code>, mitte juurkasutajana, et ülevõetud veebiserver ei pääseks ligi kogu süsteemile.</li>
-<li>Juurkasutaja UID on <code>0</code>. Süsteemikasutajad (UID 1–999) on teenuste jaoks ega saa tavaliselt sisse logida. Tavakasutajad (UID 1000+) on inimesed.</li>
-<li>Faili <code>/etc/passwd</code> peavad saama lugeda kõik programmid (nt et näidata failide omanike nimesid). Paroolide räsid on eraldi failis <code>/etc/shadow</code>, mida saab lugeda ainult juurkasutaja, et neid ei saaks varastada ja maha murda.</li>
-<li>Põhigrupp on määratud failis <code>/etc/passwd</code> ja sellele kuuluvad kasutaja loodud failid. Lisagrupid annavad kasutajale nende gruppide õigused.</li>
-<li><code>sudo</code> käivitab käsu teise kasutaja (tavaliselt root) õigustes ja küsib <strong>sinu</strong> parooli, eeldusel et sul on vastav reegel. <code>su</code> vahetab kasutajat ja küsib <strong>sihtkasutaja</strong> parooli.</li>
-<li>Süntaksiviga sudoers-failis võib takistada <code>sudo</code> kasutamist ja võtta kõigilt halduriõigused. <code>visudo</code> kontrollib süntaksit enne salvestamist.</li>
-<li>Kasutaja kõik senised lisagrupid asendatakse grupiga <code>tarkvara</code>. Kui ta kuulus näiteks gruppi <code>sudo</code>, kaotab ta halduriõigused.</li>
-<li><code>r</code> - sisu loetlemine, <code>w</code> - failide loomine, kustutamine ja ümbernimetamine, <code>x</code> - kataloogi sisenemine ja sealsetele failidele ligipääs.</li>
-<li>Kirjutus- ja sisenemisõigust (<code>w</code> ja <code>x</code>) <strong>kataloogile</strong>, kus fail asub. Õigus failile endale ei ole oluline (v.a kui kataloogil on sticky bit - siis peab olema faili omanik).</li>
-<li><code>rwxr-x---</code> = <code>750</code>, <code>rw-r--r--</code> = <code>644</code>, <code>rw-------</code> = <code>600</code>.</li>
-<li><code>755</code> = <code>rwxr-xr-x</code>, <code>640</code> = <code>rw-r-----</code>, <code>2770</code> = <code>rwxrws---</code>.</li>
-<li>Fail: <code>666 − 027</code> → <code>640</code> (<code>rw-r-----</code>). Kataloog: <code>777 − 027</code> → <code>750</code> (<code>rwxr-x---</code>).</li>
-<li>Uued failid ja alamkataloogid saavad kataloogi grupi, mitte looja põhigrupi. Nii kuuluvad kõik jagatud kataloogi failid automaatselt meeskonna grupile ja kõik liikmed saavad neile ligi.</li>
-<li>Kõik kasutajad saavad kataloogi <code>/tmp</code> kirjutada, kuid sticky bit tagab, et igaüks saab kustutada ainult oma faile, mitte teiste omi.</li>
-<li>See annab kõigile süsteemi kasutajatele (ka teenustele ja võimalikele ründajatele) õiguse faili muuta või kustutada. Õige lahendus on määrata sobiv omanik või grupp.</li>
-<li><code>/etc/skel</code> sisu kopeeritakse uue kasutaja kodukataloogi; <code>login.defs</code> määrab uute kasutajate UID vahemikud, parooli aegumise vaikeväärtused ja <code>UMASK</code>-i.</li>
-<li>Autentimise raamistik, mille kaudu programmid kasutajaid kontrollivad. <code>auth</code> - kes sa oled; <code>account</code> - kas tohid sisse logida; <code>password</code> - parooli muutmine ja nõuded; <code>session</code> - sisselogimisel tehtavad toimingud.</li>
-<li><code>/etc/security/pwquality.conf</code>: <code>minlen = 12</code> (<code>pam_pwquality</code>); <code>/etc/security/faillock.conf</code>: <code>deny = 5</code> ja <code>pam_faillock</code> sisse (AlmaLinuxis <code>authselect enable-feature with-faillock</code>).</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Loo grupp <code>opetajad</code> ja kasutaja <code>ain</code>, kes kuulub sellesse gruppi ja kelle kest on <code>/bin/bash</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>groupadd<span class="w"> </span>opetajad
 sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>-G<span class="w"> </span>opetajad<span class="w"> </span>ain
-touch<span class="w"> </span>~/hinded.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span><span class="m">640</span><span class="w"> </span>~/hinded.txt
-sudo<span class="w"> </span>mkdir<span class="w"> </span>/srv/opetajad
+</code></pre></div>
+</details>
+<p><strong>2.</strong> Loo fail <code>~/hinded.txt</code> ja määra sellele õigused nii, et sina saad lugeda ja kirjutada, grupp ainult lugeda ja muud mitte midagi.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>touch<span class="w"> </span>~/hinded.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span><span class="m">640</span><span class="w"> </span>~/hinded.txt
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Loo kataloog <code>/srv/opetajad</code>, kuhu ainult grupi <code>opetajad</code> liikmed pääsevad ja kus uued failid kuuluvad automaatselt sellele grupile.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>/srv/opetajad
 sudo<span class="w"> </span>chown<span class="w"> </span>root:opetajad<span class="w"> </span>/srv/opetajad
 sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">2770</span><span class="w"> </span>/srv/opetajad
-find<span class="w"> </span>/etc<span class="w"> </span>!<span class="w"> </span>-user<span class="w"> </span>root<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-sudo<span class="w"> </span>-l
-sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>ain<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>groupdel<span class="w"> </span>opetajad
+</code></pre></div>
+</details>
+<p><strong>4.</strong> Leia kõik failid kataloogis <code>/etc</code>, mille omanik ei ole <code>root</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/etc<span class="w"> </span>!<span class="w"> </span>-user<span class="w"> </span>root<span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </code></pre></div>
 <p><code>!</code> käsus <code>find</code> pöörab tingimuse ümber (omanik <strong>ei ole</strong> root).</p>
+</details>
+<p><strong>5.</strong> Kontrolli, millised <code>sudo</code> õigused on sinu kasutajal.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-l
+</code></pre></div>
+</details>
+<p><strong>6.</strong> Kustuta kasutaja <code>ain</code> koos kodukataloogiga ja grupp <code>opetajad</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>ain<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>groupdel<span class="w"> </span>opetajad
+</code></pre></div>
+</details>
 
 
 

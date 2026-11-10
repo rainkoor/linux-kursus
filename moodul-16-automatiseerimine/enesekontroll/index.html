@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2732,34 +2734,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,46 +4407,72 @@
 
 
 <h1 id="moodul-16-enesekontroll">Moodul 16. Enesekontroll<a class="headerlink" href="#moodul-16-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on infrastruktuur koodina (IaC)?</li>
-<li>Mis on Ansible'i inventuur, moodul, ülesanne, mänguraamat ja käsitleja?</li>
-<li>Mida tähendab idempotentsus? Miks on see oluline?</li>
-<li>Mis on Vagrant, box ja Vagrantfile? Millal kasutada Vagranti ja millal Terraformi/OpenTofut?</li>
-<li>Mis on Ansible'i roll ja millistest kataloogidest see koosneb? Mis vahe on rolli <code>defaults/main.yml</code> ja <code>group_vars/</code> muutujatel?</li>
-<li>Nimeta Ansible'i koodi testimise tasemed alates süntaksikontrollist kuni Molecule'ini. Mida kontrollib Molecule'i samm <code>idempotence</code>?</li>
-<li>Mis on cloud-init ja OpenTofu roll virtuaalmasinate loomisel? Miks ei panda olekufaili <code>terraform.tfstate</code> Giti?</li>
-<li>Millal on Bashi skript koos systemd taimeriga parem valik kui Ansible ja millal vastupidi?</li>
-<li>Miks on Ansible'is parem kasutada moodulit (nt <code>ansible.builtin.lineinfile</code>, <code>template</code>) kui <code>shell</code>- või <code>command</code>-moodulit?</li>
-<li>Kuidas teeb üks mänguraamat sama tööd Debianis ja AlmaLinuxis, kuigi paketi nimi ja pakihaldur erinevad?</li>
-<li>Mis on Ansible Vault ja kuidas hoiad paroole Gitis turvaliselt?</li>
-<li>Mida näitab <code>ansible-playbook --check --diff</code> ja miks tasub seda enne päris käivitust kasutada?</li>
-</ol>
+<p><strong>1.</strong> Mis on infrastruktuur koodina (IaC)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Serverite ja infrastruktuuri seadistus kirjeldatakse tekstifailides (kood), mida hoitakse versioonihalduses, vaadatakse üle ja rakendatakse automaatselt.</p>
+</details>
+<p><strong>2.</strong> Mis on Ansible'i inventuur, moodul, ülesanne, mänguraamat ja käsitleja?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>Inventuur</strong> - hallatavate serverite loend; <strong>moodul</strong> - üks tegevus (nt <code>package</code>); <strong>ülesanne</strong> - mooduli kasutamine parameetritega; <strong>mänguraamat</strong> - ülesannete kogum serverigruppidele; <strong>käsitleja</strong> - ülesanne, mis käivitub ainult muudatuse korral.</p>
+</details>
+<p><strong>3.</strong> Mida tähendab idempotentsus? Miks on see oluline?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Sama tegevuse korduv rakendamine annab alati sama tulemuse - kui olek on juba õige, ei muudeta midagi. Mänguraamatut võib turvaliselt korduvalt käivitada ja see parandab seadistuse triivi.</p>
+</details>
+<p><strong>4.</strong> Mis on Vagrant, box ja Vagrantfile? Millal kasutada Vagranti ja millal Terraformi/OpenTofut?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Vagrant loob virtuaalmasinaid tekstifaili (Vagrantfile) järgi; box on valmis põhitõmmis. Vagrant sobib arendus- ja laborikeskkonnaks oma arvutis (VirtualBox); Terraform/OpenTofu sobib püsiva infrastruktuuri (nt Proxmoxi, pilve) loomiseks ja haldamiseks.</p>
+</details>
+<p><strong>5.</strong> Mis on Ansible'i roll ja millistest kataloogidest see koosneb? Mis vahe on rolli <code>defaults/main.yml</code> ja <code>group_vars/</code> muutujatel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Korduvkasutatav ülesannete komplekt kindlas kataloogistruktuuris: <code>tasks/</code>, <code>handlers/</code>, <code>templates/</code>, <code>files/</code>, <code>defaults/</code>, <code>vars/</code>, <code>meta/</code>. <code>defaults/</code> on madalaima prioriteediga vaikeväärtused; <code>group_vars/</code> (ja <code>host_vars/</code>) kirjutavad need keskkonna järgi üle.</p>
+</details>
+<p><strong>6.</strong> Nimeta Ansible'i koodi testimise tasemed alates süntaksikontrollist kuni Molecule'ini. Mida kontrollib Molecule'i samm <code>idempotence</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>--syntax-check</code> → <code>ansible-lint</code> → <code>--check --diff</code> → kaks järjestikust käivitust (<code>changed=0</code>) → Molecule (ajutine masin, rakendus, korduvrakendus, kontroll, kustutamine). <code>idempotence</code> käivitab rolli teist korda ja ebaõnnestub, kui midagi muudeti.</p>
+</details>
+<p><strong>7.</strong> Mis on cloud-init ja OpenTofu roll virtuaalmasinate loomisel? Miks ei panda olekufaili <code>terraform.tfstate</code> Giti?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>OpenTofu loob masinad deklaratiivse koodi järgi (pakkuja kaudu, nt Proxmoxi API); cloud-init seadistab masina esimesel käivitusel (nimi, IP, kasutaja, SSH-võti), misjärel Ansible seadistab teenused. Olekufailis võivad olla saladused ja see muutub iga käivitusega; seda hoitakse turvalises jagatud salvestuses, mitte Gitis.</p>
+</details>
+<p><strong>8.</strong> Millal on Bashi skript koos systemd taimeriga parem valik kui Ansible ja millal vastupidi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Skript ja taimer sobivad ühe masina lihtsaks korduvaks tööks (varundus, koristamine), kus pole vaja mitut masinat ühesuguseks hoida. Ansible on parem, kui servereid on mitu, seadistus peab olema kõigis sama, korduval käivitamisel ei tohi midagi katki minna (idempotentsus) ja kogu serveri olek peab olema koodina kirjeldatud.</p>
+</details>
+<p><strong>9.</strong> Miks on Ansible'is parem kasutada moodulit (nt <code>ansible.builtin.lineinfile</code>, <code>template</code>) kui <code>shell</code>- või <code>command</code>-moodulit?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Moodul on idempotentne ja teab olekut: muudab ainult siis, kui vaja, ja annab õige <code>changed</code>/<code>ok</code> tulemuse, mis käivitab käsitlejaid õigesti. <code>shell</code> käivitab käsu iga kord ja Ansible ei tea, kas midagi muutus; korduvkäivitus võib anda erineva tulemuse.</p>
+</details>
+<p><strong>10.</strong> Kuidas teeb üks mänguraamat sama tööd Debianis ja AlmaLinuxis, kuigi paketi nimi ja pakihaldur erinevad?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Tingimustega (<code>when: ansible_os_family == "Debian"</code> / <code>"RedHat"</code>) või muutujatega, mille väärtus sõltub distrost (nt <code>group_vars/</code> või <code>vars/Debian.yml</code>); osa mooduleid (<code>package</code>, <code>service</code>) töötab mõlemas ühtemoodi.</p>
+</details>
+<p><strong>11.</strong> Mis on Ansible Vault ja kuidas hoiad paroole Gitis turvaliselt?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ansible Vault krüpteerib muutujafailid (<code>ansible-vault create</code>/<code>encrypt</code>); Gitis on krüpteeritud fail ja parool antakse käivitamisel (<code>--ask-vault-pass</code>) või parooli failist, mis ei ole Gitis.</p>
+</details>
+<p><strong>12.</strong> Mida näitab <code>ansible-playbook --check --diff</code> ja miks tasub seda enne päris käivitust kasutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kuivkäivitus: näitab, mida muudetaks (<code>changed</code>) ja failide muudatuste erinevust, ilma midagi muutmata. Nii näed enne päris käivitust, kas mänguraamat teeb seda, mida ootad.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjuta Ansible'i ülesanne, mis loob kasutaja <code>abi</code> (kest <code>/bin/bash</code>, lisagrupp <code>sudo</code>).</li>
-<li>Kirjuta Ansible'i ad-hoc käsk, mis näitab kõigi serverite vaba kettaruumi juurfailisüsteemis.</li>
-<li>Kirjuta ülesanne, mis loob mallist <code>motd.j2</code> faili <code>/etc/motd</code>, ja käsitleja, mis taaskäivitab <code>nginx</code>-i ainult siis, kui mallist loodud fail <code>/etc/nginx/conf.d/kool.conf</code> muutus.</li>
-<li>Kirjuta kaks ülesannet, mis paigaldavad veebiserveri nii Debiani (<code>apache2</code>) kui ka AlmaLinuxi (<code>httpd</code>) masinatesse.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Serverite ja infrastruktuuri seadistus kirjeldatakse tekstifailides (kood), mida hoitakse versioonihalduses, vaadatakse üle ja rakendatakse automaatselt.</li>
-<li><strong>Inventuur</strong> - hallatavate serverite loend; <strong>moodul</strong> - üks tegevus (nt <code>package</code>); <strong>ülesanne</strong> - mooduli kasutamine parameetritega; <strong>mänguraamat</strong> - ülesannete kogum serverigruppidele; <strong>käsitleja</strong> - ülesanne, mis käivitub ainult muudatuse korral.</li>
-<li>Sama tegevuse korduv rakendamine annab alati sama tulemuse - kui olek on juba õige, ei muudeta midagi. Mänguraamatut võib turvaliselt korduvalt käivitada ja see parandab seadistuse triivi.</li>
-<li>Vagrant loob virtuaalmasinaid tekstifaili (Vagrantfile) järgi; box on valmis põhitõmmis. Vagrant sobib arendus- ja laborikeskkonnaks oma arvutis (VirtualBox); Terraform/OpenTofu sobib püsiva infrastruktuuri (nt Proxmoxi, pilve) loomiseks ja haldamiseks.</li>
-<li>Korduvkasutatav ülesannete komplekt kindlas kataloogistruktuuris: <code>tasks/</code>, <code>handlers/</code>, <code>templates/</code>, <code>files/</code>, <code>defaults/</code>, <code>vars/</code>, <code>meta/</code>. <code>defaults/</code> on madalaima prioriteediga vaikeväärtused; <code>group_vars/</code> (ja <code>host_vars/</code>) kirjutavad need keskkonna järgi üle.</li>
-<li><code>--syntax-check</code> → <code>ansible-lint</code> → <code>--check --diff</code> → kaks järjestikust käivitust (<code>changed=0</code>) → Molecule (ajutine masin, rakendus, korduvrakendus, kontroll, kustutamine). <code>idempotence</code> käivitab rolli teist korda ja ebaõnnestub, kui midagi muudeti.</li>
-<li>OpenTofu loob masinad deklaratiivse koodi järgi (pakkuja kaudu, nt Proxmoxi API); cloud-init seadistab masina esimesel käivitusel (nimi, IP, kasutaja, SSH-võti), misjärel Ansible seadistab teenused. Olekufailis võivad olla saladused ja see muutub iga käivitusega; seda hoitakse turvalises jagatud salvestuses, mitte Gitis.</li>
-<li>Skript ja taimer sobivad ühe masina lihtsaks korduvaks tööks (varundus, koristamine), kus pole vaja mitut masinat ühesuguseks hoida. Ansible on parem, kui servereid on mitu, seadistus peab olema kõigis sama, korduval käivitamisel ei tohi midagi katki minna (idempotentsus) ja kogu serveri olek peab olema koodina kirjeldatud.</li>
-<li>Moodul on idempotentne ja teab olekut: muudab ainult siis, kui vaja, ja annab õige <code>changed</code>/<code>ok</code> tulemuse, mis käivitab käsitlejaid õigesti. <code>shell</code> käivitab käsu iga kord ja Ansible ei tea, kas midagi muutus; korduvkäivitus võib anda erineva tulemuse.</li>
-<li>Tingimustega (<code>when: ansible_os_family == "Debian"</code> / <code>"RedHat"</code>) või muutujatega, mille väärtus sõltub distrost (nt <code>group_vars/</code> või <code>vars/Debian.yml</code>); osa mooduleid (<code>package</code>, <code>service</code>) töötab mõlemas ühtemoodi.</li>
-<li>Ansible Vault krüpteerib muutujafailid (<code>ansible-vault create</code>/<code>encrypt</code>); Gitis on krüpteeritud fail ja parool antakse käivitamisel (<code>--ask-vault-pass</code>) või parooli failist, mis ei ole Gitis.</li>
-<li>Kuivkäivitus: näitab, mida muudetaks (<code>changed</code>) ja failide muudatuste erinevust, ilma midagi muutmata. Nii näed enne päris käivitust, kas mänguraamat teeb seda, mida ootad.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kirjuta Ansible'i ülesanne, mis loob kasutaja <code>abi</code> (kest <code>/bin/bash</code>, lisagrupp <code>sudo</code>).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Loo kasutaja abi</span>
 <span class="w">  </span><span class="nt">ansible.builtin.user</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abi</span>
@@ -4508,8 +4480,16 @@
 <span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sudo</span>
 <span class="w">    </span><span class="nt">append</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta Ansible'i ad-hoc käsk, mis näitab kõigi serverite vaba kettaruumi juurfailisüsteemis.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>all<span class="w"> </span>-a<span class="w"> </span><span class="s2">"df -h /"</span>
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta ülesanne, mis loob mallist <code>motd.j2</code> faili <code>/etc/motd</code>, ja käsitleja, mis taaskäivitab <code>nginx</code>-i ainult siis, kui mallist loodud fail <code>/etc/nginx/conf.d/kool.conf</code> muutus.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="c1"># tasks</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Teadaanne sisselogimisel</span>
 <span class="w">  </span><span class="nt">ansible.builtin.template</span><span class="p">:</span>
@@ -4529,6 +4509,10 @@
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta kaks ülesannet, mis paigaldavad veebiserveri nii Debiani (<code>apache2</code>) kui ka AlmaLinuxi (<code>httpd</code>) masinatesse.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Paigalda Apache (Debian)</span>
 <span class="w">  </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
@@ -4540,6 +4524,7 @@
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">httpd</span>
 <span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_os_family == "RedHat"</span>
 </code></pre></div>
+</details>
 
 
 

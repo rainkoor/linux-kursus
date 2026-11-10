@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -562,6 +564,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4519,6 +4532,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4563,7 +4587,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K18</strong> aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Iga käsu järel vaata hoolega, mida see väljastas.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K18</strong> aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>). Iga käsu järel vaata hoolega, mida see väljastas.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Iseõppijale</p>
 <p>Sobib iga Debiani virtuaalmasin, nt VirtualBoxis. Paigalda Debian ilma graafilise töölauata ja vali paigaldamisel tarkvara hulka „SSH server“. Täpsed paigaldussammud on lisas <a href="../../lisad/paigaldus/">Laborikeskkond ja paigaldus</a>.</p>
@@ -4574,9 +4601,15 @@
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>kasutaja@aadress
 </code></pre></div>
 <p>Kinnita serveri võti (<code>yes</code>) ja sisesta parool.</p>
-<p><strong>K1.</strong> Mis on sinu viip? Mida tähendab selle iga osa?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mis on sinu viip? Mida tähendab selle iga osa?</p>
+</div>
 <p><strong>1.2</strong> Logi välja käsuga <code>exit</code> ja seejärel uuesti sisse.</p>
-<p><strong>K2.</strong> Kas serveri võtit küsiti ka teisel korral? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Kas SSH küsis serveri võtme kinnitust ka teisel ühendumisel? Miks?</p>
+</div>
 <hr />
 <h2 id="2-osa-süsteemiga-tutvumine">2. osa. Süsteemiga tutvumine<a class="headerlink" href="#2-osa-süsteemiga-tutvumine" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Käivita järgmised käsud:</p>
@@ -4586,23 +4619,41 @@ cat<span class="w"> </span>/etc/os-release
 uname<span class="w"> </span>-r
 uptime
 </code></pre></div>
-<p><strong>K3.</strong> Milline Debiani versioon ja koodnimi on masinal? Milline on kerneli versioon?</p>
-<p><strong>K4.</strong> Kui kaua on masin töötanud?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Milline Debiani versioon ja koodnimi on masinal? Milline on kerneli versioon?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Kui kaua on masin töötanud?</p>
+</div>
 <p><strong>2.2</strong> Käivita <code>hostnamectl</code>.</p>
-<p><strong>K5.</strong> Millist infot näitab <code>hostnamectl</code>, mida eelmised käsud ei näidanud? Kas masin teab, et ta on virtuaalmasin?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Millist infot näitab <code>hostnamectl</code>, mida eelmised käsud ei näidanud? Kas masin teab, et ta on virtuaalmasin?</p>
+</div>
 <hr />
 <h2 id="3-osa-abi-leidmine">3. osa. Abi leidmine<a class="headerlink" href="#3-osa-abi-leidmine" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Ava käsu <code>ls</code> kasutusjuhend:</p>
 <div class="highlight"><pre><span></span><code>man<span class="w"> </span>ls
 </code></pre></div>
 <p>Otsi kasutusjuhendist (klahv <code>/</code>) võtme <code>-t</code> kirjeldus. Välju klahviga <code>q</code>.</p>
-<p><strong>K6.</strong> Mida teeb võti <code>-t</code>? Mida teeb võti <code>-r</code>? Mida teeb käsk <code>ls -ltr</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mida teeb võti <code>-t</code>? Mida teeb võti <code>-r</code>? Mida teeb käsk <code>ls -ltr</code>?</p>
+</div>
 <p><strong>3.2</strong> Uuri, millised kasutusjuhendid käsitlevad sõna <code>passwd</code>:</p>
 <div class="highlight"><pre><span></span><code>man<span class="w"> </span>-k<span class="w"> </span>passwd
 </code></pre></div>
-<p><strong>K7.</strong> Mille poolest erinevad <code>man 1 passwd</code> ja <code>man 5 passwd</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mille poolest erinevad <code>man 1 passwd</code> ja <code>man 5 passwd</code>?</p>
+</div>
 <p><strong>3.3</strong> Käivita <code>cp --help</code>.</p>
-<p><strong>K8.</strong> Millise võtmega küsib <code>cp</code> enne olemasoleva faili ülekirjutamist kinnitust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Millise võtmega küsib <code>cp</code> enne olemasoleva faili ülekirjutamist kinnitust?</p>
+</div>
 <hr />
 <h2 id="4-osa-failisüsteemis-liikumine">4. osa. Failisüsteemis liikumine<a class="headerlink" href="#4-osa-failisüsteemis-liikumine" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Liigu järjest järgmistesse kataloogidesse ja vaata iga kataloogi sisu käsuga <code>ls</code>:</p>
@@ -4615,7 +4666,10 @@ ls<span class="w"> </span>-lh
 <span class="nb">cd</span>
 <span class="nb">pwd</span>
 </code></pre></div>
-<p><strong>K9.</strong> Milline kataloog avanes käsuga <code>cd</code> ilma argumendita? Mis on selle absoluutne tee?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Milline kataloog avanes käsuga <code>cd</code> ilma argumendita? Mis on selle absoluutne tee?</p>
+</div>
 <p><strong>4.2</strong> Ilma <code>cd</code> käsku kasutamata vaata, kas kataloogis <code>/etc</code> on fail nimega <code>hostname</code>, ja kuva selle sisu:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/hostname
 cat<span class="w"> </span>/etc/hostname
@@ -4625,14 +4679,23 @@ cat<span class="w"> </span>/etc/hostname
 <span class="nb">cd</span><span class="w"> </span>../../bin
 <span class="nb">pwd</span>
 </code></pre></div>
-<p><strong>K10.</strong> Selgita, miks tee <code>../../bin</code> viis kataloogi <code>/usr/bin</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Selgita, miks tee <code>../../bin</code> viis kataloogi <code>/usr/bin</code>.</p>
+</div>
 <p><strong>4.4</strong> Käivita <code>ls -l /bin</code>.</p>
-<p><strong>K11.</strong> Mida näitab väljundis olev nool (<code>-&gt;</code>)? Kuhu <code>/bin</code> tegelikult viitab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mida näitab väljundis olev nool (<code>-&gt;</code>)? Kuhu <code>/bin</code> tegelikult viitab?</p>
+</div>
 <p><strong>4.5</strong> Vaata oma kodukataloogi peidetud faile:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span>
 ls<span class="w"> </span>-la
 </code></pre></div>
-<p><strong>K12.</strong> Nimeta kaks peidetud faili. Mille järgi need ära tunned?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Nimeta kaks peidetud faili. Mille järgi need ära tunned?</p>
+</div>
 <hr />
 <h2 id="5-osa-failid-ja-kataloogid">5. osa. Failid ja kataloogid<a class="headerlink" href="#5-osa-failid-ja-kataloogid" title="Permanent link">&para;</a></h2>
 <p>Selles osas ehitad väljamõeldud veebiprojekti kataloogistruktuuri.</p>
@@ -4647,7 +4710,10 @@ ls<span class="w"> </span>-la
 <p>Vihje: <code>mkdir -p</code> ja loogelised sulud. Kontrolli tulemust:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-R<span class="w"> </span>~/labor01
 </code></pre></div>
-<p><strong>K13.</strong> Millise käsuga struktuuri lõid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Millise käsuga lõid kataloogistruktuuri <code>~/labor01/veebileht</code> (punkt 5.1)?</p>
+</div>
 <p><strong>5.2</strong> Loo failid ja kontrolli tulemust:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/labor01/veebileht
 touch<span class="w"> </span>html/index.html<span class="w"> </span>html/kontakt.html<span class="w"> </span>html/meist.html
@@ -4661,7 +4727,10 @@ ls<span class="w"> </span>-R
 <li>loetle kataloogis <code>pildid</code> ainult need failid, mille nimi algab sõnaga <code>foto</code>;</li>
 <li>kopeeri kõik <code>.html</code> failid kataloogi <code>~/labor01/varukoopiad</code>.</li>
 </ol>
-<p><strong>K14.</strong> Kirjuta üles kõik kolm käsku.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Kirjuta üles punkti 5.3 kolm metamärkidega käsku (<code>.jpg</code> failide kopeerimine, <code>foto*</code> failide loetlemine, <code>.html</code> failide kopeerimine).</p>
+</div>
 <p><strong>5.4</strong> Nimeta fail <code>html/meist.html</code> ümber failiks <code>html/tutvustus.html</code>. Teisalda kataloog <code>logid</code> kataloogi <code>~/labor01</code> (st ühe taseme võrra kõrgemale).</p>
 <p><strong>5.5</strong> Kopeeri kogu kataloog <code>veebileht</code> koos sisuga nimega <code>~/labor01/varukoopiad/veebileht-varu</code>.</p>
 <p><strong>5.6</strong> Kirjuta faili sisu ja kuva see:</p>
@@ -4670,13 +4739,19 @@ cat<span class="w"> </span>~/labor01/veebileht/html/index.html
 file<span class="w"> </span>~/labor01/veebileht/html/index.html
 file<span class="w"> </span>~/labor01/veebileht/pildid/logo.png
 </code></pre></div>
-<p><strong>K15.</strong> Mida väitis käsk <code>file</code> faili <code>logo.png</code> kohta? Miks ei pidanud ta seda pildiks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Mida väitis käsk <code>file</code> faili <code>logo.png</code> kohta? Miks ei pidanud ta seda pildiks?</p>
+</div>
 <p><strong>5.7</strong> Kontrolli kogu struktuuri käsuga <code>ls -R ~/labor01</code>.</p>
 <hr />
 <h2 id="6-osa-kustutamine-ja-ajalugu">6. osa. Kustutamine ja ajalugu<a class="headerlink" href="#6-osa-kustutamine-ja-ajalugu" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Kustuta kataloogist <code>varukoopiad</code> kõik <code>.jpg</code> failid nii, et iga faili puhul küsitakse kinnitust.</p>
 <p><strong>6.2</strong> Proovi kustutada kataloogi <code>~/labor01/logid</code> käsuga <code>rmdir</code>.</p>
-<p><strong>K16.</strong> Mis juhtus ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Mis juhtus, kui proovisid kataloogi <code>~/labor01/logid</code> kustutada käsuga <code>rmdir</code>, ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?</p>
+</div>
 <p><strong>6.3</strong> Vaata oma käsuajalugu:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">history</span>
 </code></pre></div>
@@ -4689,11 +4764,43 @@ file<span class="w"> </span>~/labor01/veebileht/pildid/logo.png
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>bandit0@bandit.labs.overthewire.org<span class="w"> </span>-p<span class="w"> </span><span class="m">2220</span>
 </code></pre></div>
 <p>Parool on <code>bandit0</code>. Juhised: overthewire.org/wargames/bandit. Läbi vähemalt tasemed <strong>0 → 5</strong>.</p>
-<p><strong>K17.</strong> Mitu taset läbisid? Kirjuta iga taseme kohta üks rida: mis oli ülesanne ja millise käsuga selle lahendasid (<strong>ära kirjuta paroole aruandesse</strong>).</p>
-<p><strong>K18.</strong> Tase 2 ja 3 (failinimed kriipsu või tühikuga, peidetud failid) - miks olid need keerulised ja kuidas neid failinimesid käsureal käsitleda (vt teooria punkt 1.9)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Mitu taset läbisid? Kirjuta iga taseme kohta üks rida: mis oli ülesanne ja millise käsuga selle lahendasid (<strong>ära kirjuta paroole aruandesse</strong>).</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Tase 2 ja 3 (failinimed kriipsu või tühikuga, peidetud failid) - miks olid need keerulised ja kuidas neid failinimesid käsureal käsitleda (vt teooria punkt 1.9)?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <p>Jätka Banditiga tasemetel 6–15 - need kasutavad mooduli 2 teemasid (<code>find</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, torud).</p>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Mis on sinu viip? Mida tähendab selle iga osa?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Kas SSH küsis serveri võtme kinnitust ka teisel ühendumisel? Miks?</li>
+<li><strong>K3.</strong> <em>(punkt 2.1)</em> Milline Debiani versioon ja koodnimi on masinal? Milline on kerneli versioon?</li>
+<li><strong>K4.</strong> <em>(punkt 2.1)</em> Kui kaua on masin töötanud?</li>
+<li><strong>K5.</strong> <em>(punkt 2.2)</em> Millist infot näitab <code>hostnamectl</code>, mida eelmised käsud ei näidanud? Kas masin teab, et ta on virtuaalmasin?</li>
+<li><strong>K6.</strong> <em>(punkt 3.1)</em> Mida teeb võti <code>-t</code>? Mida teeb võti <code>-r</code>? Mida teeb käsk <code>ls -ltr</code>?</li>
+<li><strong>K7.</strong> <em>(punkt 3.2)</em> Mille poolest erinevad <code>man 1 passwd</code> ja <code>man 5 passwd</code>?</li>
+<li><strong>K8.</strong> <em>(punkt 3.3)</em> Millise võtmega küsib <code>cp</code> enne olemasoleva faili ülekirjutamist kinnitust?</li>
+<li><strong>K9.</strong> <em>(punkt 4.1)</em> Milline kataloog avanes käsuga <code>cd</code> ilma argumendita? Mis on selle absoluutne tee?</li>
+<li><strong>K10.</strong> <em>(punkt 4.3)</em> Selgita, miks tee <code>../../bin</code> viis kataloogi <code>/usr/bin</code>.</li>
+<li><strong>K11.</strong> <em>(punkt 4.4)</em> Mida näitab väljundis olev nool (<code>-&gt;</code>)? Kuhu <code>/bin</code> tegelikult viitab?</li>
+<li><strong>K12.</strong> <em>(punkt 4.5)</em> Nimeta kaks peidetud faili. Mille järgi need ära tunned?</li>
+<li><strong>K13.</strong> <em>(punkt 5.1)</em> Millise käsuga lõid kataloogistruktuuri <code>~/labor01/veebileht</code> (punkt 5.1)?</li>
+<li><strong>K14.</strong> <em>(punkt 5.3)</em> Kirjuta üles punkti 5.3 kolm metamärkidega käsku (<code>.jpg</code> failide kopeerimine, <code>foto*</code> failide loetlemine, <code>.html</code> failide kopeerimine).</li>
+<li><strong>K15.</strong> <em>(punkt 5.6)</em> Mida väitis käsk <code>file</code> faili <code>logo.png</code> kohta? Miks ei pidanud ta seda pildiks?</li>
+<li><strong>K16.</strong> <em>(punkt 6.2)</em> Mis juhtus, kui proovisid kataloogi <code>~/labor01/logid</code> kustutada käsuga <code>rmdir</code>, ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?</li>
+<li><strong>K17.</strong> <em>(punkt 7.1)</em> Mitu taset läbisid? Kirjuta iga taseme kohta üks rida: mis oli ülesanne ja millise käsuga selle lahendasid (<strong>ära kirjuta paroole aruandesse</strong>).</li>
+<li><strong>K18.</strong> <em>(punkt 7.1)</em> Tase 2 ja 3 (failinimed kriipsu või tühikuga, peidetud failid) - miks olid need keerulised ja kuidas neid failinimesid käsureal käsitleda (vt teooria punkt 1.9)?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

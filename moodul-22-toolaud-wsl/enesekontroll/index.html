@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3693,34 +3695,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,73 +4407,124 @@
 
 
 <h1 id="moodul-22-enesekontroll">Moodul 22. Enesekontroll<a class="headerlink" href="#moodul-22-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Too kolm põhjust, miks töölaua Linux on viimastel aastatel populaarsust kogunud.</li>
-<li>Mis on digitaalne suveräänsus ja kuidas see seostub avatud tarkvaraga? Too üks näide Euroopa avalikust sektorist.</li>
-<li>Mis vahe on distrol ja töölauakeskkonnal? Too kummastki kolm näidet.</li>
-<li>Mis on Wayland ja mille poolest see erineb X11-st? Mis on XWayland?</li>
-<li>Mis on sisselogimishaldur ja millise systemd eesmärgiga see käivitub?</li>
-<li>Mis vahe on distro hoidla paketil, Flatpakil ja Snapil?</li>
-<li>Mis on muutumatu (<em>immutable</em>) distro? Too kaks näidet.</li>
-<li>Kuidas töötab Proton? Mis on mängimise peamine piirang Linuxis?</li>
-<li>Milleks on <code>fwupd</code>?</li>
-<li>Millised on töölaua Linuxi kaugtöölaua võimalused ja millega Proxmoxi VM-is töölaua kasutamine kõige mugavam on?</li>
-<li>Mida on vaja Eesti ID-kaardi kasutamiseks Linuxis?</li>
-<li>Mis on Kali Linux ja millised on selle kasutamise reeglid?</li>
-<li>Mis vahe on WSL 1-l ja WSL 2-l? Mis on WSLg?</li>
-<li>Kus asuvad WSL-is Windowsi failid ja kuidas pääseda Windowsist Linuxi failidele? Kuhu peaks projekte hoidma?</li>
-<li>Miks ei sobi WSL kõigi selle kursuse laboritööde tegemiseks?</li>
-</ol>
+<p><strong>1.</strong> Too kolm põhjust, miks töölaua Linux on viimastel aastatel populaarsust kogunud.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mängud (Steam Deck, Proton, SteamOS); digitaalne suveräänsus ja avaliku sektori üleminekud; Windows 10 toe lõpp ja vanade arvutite taaskasutus; arendajate tööriistad.</p>
+</details>
+<p><strong>2.</strong> Mis on digitaalne suveräänsus ja kuidas see seostub avatud tarkvaraga? Too üks näide Euroopa avalikust sektorist.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Riigi või organisatsiooni võime ise otsustada oma andmete ja IT-süsteemide üle ilma liigse sõltuvuseta ühest (välis)tarnijast. Avatud tarkvara saab ise hallata, auditeerida ja edasi arendada. Näited: Schleswig-Holsteini üleminek LibreOffice'ile ja Linuxile, Prantsuse Gendarmerie Linuxi töölauad, Saksamaa openDesk.</p>
+</details>
+<p><strong>3.</strong> Mis vahe on distrol ja töölauakeskkonnal? Too kummastki kolm näidet.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Distro on terviklik operatsioonisüsteem (Ubuntu, Fedora, Linux Mint); töölauakeskkond on graafiline kasutajaliides (GNOME, KDE Plasma, Xfce). Sama distro võib pakkuda mitut töölauda.</p>
+</details>
+<p><strong>4.</strong> Mis on Wayland ja mille poolest see erineb X11-st? Mis on XWayland?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Wayland on uus kuvaprotokoll, kus komposiitor joonistab ekraani ja rakendused ei näe üksteise aknaid ega sisendit - turvalisem ja sobib paremini uute ekraanidega. X11 on vana võrgupõhine protokoll. XWayland käivitab X11 rakendusi Waylandi seansis.</p>
+</details>
+<p><strong>5.</strong> Mis on sisselogimishaldur ja millise systemd eesmärgiga see käivitub?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Graafiline sisselogimisekraan (GDM, SDDM, LightDM), mis käivitab valitud töölauaseansi; <code>graphical.target</code>.</p>
+</details>
+<p><strong>6.</strong> Mis vahe on distro hoidla paketil, Flatpakil ja Snapil?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Hoidla pakett tuleb distrolt ja uueneb koos süsteemiga; Flatpak ja Snap on distrost sõltumatud, uuemad ja liivakastis, kuid suuremad; Flatpaki peamine pood on Flathub, Snapi oma Canonicali Snap Store.</p>
+</details>
+<p><strong>7.</strong> Mis on muutumatu (<em>immutable</em>) distro? Too kaks näidet.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Süsteemi juurosa on ainult lugemiseks ja uuendatakse tervikuna, eelmisele versioonile saab tagasi minna. Näited: SteamOS, Fedora Silverblue, Bazzite.</p>
+</details>
+<p><strong>8.</strong> Kuidas töötab Proton? Mis on mängimise peamine piirang Linuxis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Proton (Wine + DXVK/VKD3D) tõlgib Windowsi API ja DirectX-i kutsed Linuxi ja Vulkani kutseteks. Piirang: osa võistlusmängude petmisvastased süsteemid ei luba Linuxit.</p>
+</details>
+<p><strong>9.</strong> Milleks on <code>fwupd</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Riistvara püsivara (UEFI, SSD, dokid, hiired jm) uuendamiseks Linuxist (LVFS teenus).</p>
+</details>
+<p><strong>10.</strong> Millised on töölaua Linuxi kaugtöölaua võimalused ja millega Proxmoxi VM-is töölaua kasutamine kõige mugavam on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>SPICE (Proxmoxi konsool koos <code>spice-vdagent</code>-iga), RDP (GNOME Remote Desktop, xrdp), VNC, RustDesk. Proxmoxis on mugavaim SPICE koos <code>virt-viewer</code>-iga või RDP.</p>
+</details>
+<p><strong>11.</strong> Mida on vaja Eesti ID-kaardi kasutamiseks Linuxis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>ID-tarkvara (DigiDoc4, Web eID laiend) id.ee juhendi järgi, kaardilugeja ja teenus <code>pcscd</code>; VM-is USB-lugeja suunamine.</p>
+</details>
+<p><strong>12.</strong> Mis on Kali Linux ja millised on selle kasutamise reeglid?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Debianil põhinev turvatestimise distro sadade tööriistadega. Kasutada ainult isoleeritud laboris või süsteemidega, mille testimiseks on luba; mitte igapäevase töölauana.</p>
+</details>
+<p><strong>13.</strong> Mis vahe on WSL 1-l ja WSL 2-l? Mis on WSLg?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>WSL 1 tõlkis Linuxi süsteemikutsed Windowsi omadeks; WSL 2 käitab päris Linuxi kernelit kerges VM-is (parem ühilduvus, Docker, systemd). WSLg võimaldab Linuxi graafilisi rakendusi Windowsi akendena.</p>
+</details>
+<p><strong>14.</strong> Kus asuvad WSL-is Windowsi failid ja kuidas pääseda Windowsist Linuxi failidele? Kuhu peaks projekte hoidma?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Windowsi failid: <code>/mnt/c/...</code>; Linuxi failid Windowsist: <code>\\wsl.localhost\&lt;distro&gt;\...</code> või <code>explorer.exe .</code>. Projektid hoia Linuxi failisüsteemis (<code>~/</code>), sest üle piiri on failioperatsioonid aeglased.</p>
+</details>
+<p><strong>15.</strong> Miks ei sobi WSL kõigi selle kursuse laboritööde tegemiseks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>WSL-il on Microsofti kernel ja virtuaalne riistvara: puuduvad GRUB, päris kettad ja partitsioonid, tavapärane võrguseadistus, tulemüür ja SELinux/AppArmor; teenused ei ole teistele masinatele lihtsalt kättesaadavad.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjuta käsk, mis näitab, kas sinu seanss kasutab Waylandi või X11-t.</li>
-<li>Lisa Ubuntus Flathubi hoidla ja paigalda sealt LibreOffice (<code>org.libreoffice.LibreOffice</code>).</li>
-<li>Lisa AlmaLinuxi serverile graafiline keskkond ja tee see vaikimisi käivituvaks.</li>
-<li>Kirjuta PowerShelli käsud, mis paigaldavad WSL-i Ubuntu, näitavad paigaldatud distrosid ja peatavad kõik.</li>
-<li>Kirjuta <code>/etc/wsl.conf</code> sisu, mis lülitab sisse systemd ja määrab vaikekasutajaks <code>mari</code>.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mängud (Steam Deck, Proton, SteamOS); digitaalne suveräänsus ja avaliku sektori üleminekud; Windows 10 toe lõpp ja vanade arvutite taaskasutus; arendajate tööriistad.</li>
-<li>Riigi või organisatsiooni võime ise otsustada oma andmete ja IT-süsteemide üle ilma liigse sõltuvuseta ühest (välis)tarnijast. Avatud tarkvara saab ise hallata, auditeerida ja edasi arendada. Näited: Schleswig-Holsteini üleminek LibreOffice'ile ja Linuxile, Prantsuse Gendarmerie Linuxi töölauad, Saksamaa openDesk.</li>
-<li>Distro on terviklik operatsioonisüsteem (Ubuntu, Fedora, Linux Mint); töölauakeskkond on graafiline kasutajaliides (GNOME, KDE Plasma, Xfce). Sama distro võib pakkuda mitut töölauda.</li>
-<li>Wayland on uus kuvaprotokoll, kus komposiitor joonistab ekraani ja rakendused ei näe üksteise aknaid ega sisendit - turvalisem ja sobib paremini uute ekraanidega. X11 on vana võrgupõhine protokoll. XWayland käivitab X11 rakendusi Waylandi seansis.</li>
-<li>Graafiline sisselogimisekraan (GDM, SDDM, LightDM), mis käivitab valitud töölauaseansi; <code>graphical.target</code>.</li>
-<li>Hoidla pakett tuleb distrolt ja uueneb koos süsteemiga; Flatpak ja Snap on distrost sõltumatud, uuemad ja liivakastis, kuid suuremad; Flatpaki peamine pood on Flathub, Snapi oma Canonicali Snap Store.</li>
-<li>Süsteemi juurosa on ainult lugemiseks ja uuendatakse tervikuna, eelmisele versioonile saab tagasi minna. Näited: SteamOS, Fedora Silverblue, Bazzite.</li>
-<li>Proton (Wine + DXVK/VKD3D) tõlgib Windowsi API ja DirectX-i kutsed Linuxi ja Vulkani kutseteks. Piirang: osa võistlusmängude petmisvastased süsteemid ei luba Linuxit.</li>
-<li>Riistvara püsivara (UEFI, SSD, dokid, hiired jm) uuendamiseks Linuxist (LVFS teenus).</li>
-<li>SPICE (Proxmoxi konsool koos <code>spice-vdagent</code>-iga), RDP (GNOME Remote Desktop, xrdp), VNC, RustDesk. Proxmoxis on mugavaim SPICE koos <code>virt-viewer</code>-iga või RDP.</li>
-<li>ID-tarkvara (DigiDoc4, Web eID laiend) id.ee juhendi järgi, kaardilugeja ja teenus <code>pcscd</code>; VM-is USB-lugeja suunamine.</li>
-<li>Debianil põhinev turvatestimise distro sadade tööriistadega. Kasutada ainult isoleeritud laboris või süsteemidega, mille testimiseks on luba; mitte igapäevase töölauana.</li>
-<li>WSL 1 tõlkis Linuxi süsteemikutsed Windowsi omadeks; WSL 2 käitab päris Linuxi kernelit kerges VM-is (parem ühilduvus, Docker, systemd). WSLg võimaldab Linuxi graafilisi rakendusi Windowsi akendena.</li>
-<li>Windowsi failid: <code>/mnt/c/...</code>; Linuxi failid Windowsist: <code>\\wsl.localhost\&lt;distro&gt;\...</code> või <code>explorer.exe .</code>. Projektid hoia Linuxi failisüsteemis (<code>~/</code>), sest üle piiri on failioperatsioonid aeglased.</li>
-<li>WSL-il on Microsofti kernel ja virtuaalne riistvara: puuduvad GRUB, päris kettad ja partitsioonid, tavapärane võrguseadistus, tulemüür ja SELinux/AppArmor; teenused ei ole teistele masinatele lihtsalt kättesaadavad.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kirjuta käsk, mis näitab, kas sinu seanss kasutab Waylandi või X11-t.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$XDG_SESSION_TYPE</span>
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Lisa Ubuntus Flathubi hoidla ja paigalda sealt LibreOffice (<code>org.libreoffice.LibreOffice</code>).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>flatpak
 flatpak<span class="w"> </span>remote-add<span class="w"> </span>--if-not-exists<span class="w"> </span>flathub<span class="w"> </span>https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak<span class="w"> </span>install<span class="w"> </span>flathub<span class="w"> </span>org.libreoffice.LibreOffice
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Lisa AlmaLinuxi serverile graafiline keskkond ja tee see vaikimisi käivituvaks.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>groupinstall<span class="w"> </span><span class="s2">"Server with GUI"</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span>set-default<span class="w"> </span>graphical.target
 sudo<span class="w"> </span>reboot
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta PowerShelli käsud, mis paigaldavad WSL-i Ubuntu, näitavad paigaldatud distrosid ja peatavad kõik.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span> <span class="n">-d</span> <span class="n">Ubuntu</span>
 <span class="n">wsl</span> <span class="p">-</span><span class="n">-list</span> <span class="p">-</span><span class="n">-verbose</span>
 <span class="n">wsl</span> <span class="p">-</span><span class="n">-shutdown</span>
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Kirjuta <code>/etc/wsl.conf</code> sisu, mis lülitab sisse systemd ja määrab vaikekasutajaks <code>mari</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="k">[boot]</span>
 <span class="na">systemd</span><span class="o">=</span><span class="s">true</span>
 
 <span class="k">[user]</span>
 <span class="na">default</span><span class="o">=</span><span class="s">mari</span>
 </code></pre></div>
+</details>
 
 
 

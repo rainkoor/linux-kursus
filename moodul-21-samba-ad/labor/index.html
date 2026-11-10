@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -4342,7 +4344,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K18</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K18</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p>Tähised võrguplaani näite järgi: võrk <code>10.0.83.0/24</code>, OPNsense <code>10.0.83.1</code>, <code>dc1</code> <code>10.0.83.56</code>, <code>alma</code> <code>10.0.83.55</code>, <code>ubuntuklient</code> <code>10.0.83.98</code>, <code>winklient</code> <code>10.0.83.99</code>. Domeen <code>ad.lab.example</code>, NetBIOS-nimi <code>AD</code>. Asenda oma võrguplaani väärtustega.</p>
 <div class="admonition warning">
 <p class="admonition-title">Enne alustamist</p>
@@ -4357,11 +4362,17 @@ hostname<span class="w"> </span>-f
 hostname<span class="w"> </span>-i
 ip<span class="w"> </span>-br<span class="w"> </span>a
 </code></pre></div>
-<p><strong>K1.</strong> Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.56</code>), mitte <code>127.0.1.1</code>-ks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.56</code>), mitte <code>127.0.1.1</code>-ks?</p>
+</div>
 <p><strong>1.2</strong> Kontrolli kellaaega:</p>
 <div class="highlight"><pre><span></span><code>timedatectl
 </code></pre></div>
-<p><strong>K2.</strong> Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?</p>
+</div>
 <h2 id="2-osa-domeeni-loomine">2. osa. Domeeni loomine<a class="headerlink" href="#2-osa-domeeni-loomine" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Paigalda paketid, peata <code>smbd</code>, <code>nmbd</code> ja <code>winbind</code>, tõsta vaikimisi <code>smb.conf</code> kõrvale.</p>
 <p><strong>2.2</strong> Loo domeen (teooria punkt 21.4) - DNS-i edastajaks OPNsense. Pane administraatori parool kirja turvalisse kohta (mitte aruandesse!).</p>
@@ -4370,7 +4381,10 @@ ip<span class="w"> </span>-br<span class="w"> </span>a
 sudo<span class="w"> </span>ss<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">':(53|88|389|445|464|636) '</span>
 cat<span class="w"> </span>/etc/samba/smb.conf
 </code></pre></div>
-<p><strong>K3.</strong> Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on <code>smb.conf</code> failis jaotises <code>[global]</code> peale provisioning'ut?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on <code>smb.conf</code> failis jaotises <code>[global]</code> peale provisioning'ut?</p>
+</div>
 <h2 id="3-osa-dns-ja-kerberos">3. osa. DNS ja Kerberos<a class="headerlink" href="#3-osa-dns-ja-kerberos" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Testi DNS-i:</p>
 <div class="highlight"><pre><span></span><code>host<span class="w"> </span>-t<span class="w"> </span>SRV<span class="w"> </span>_ldap._tcp.ad.lab.example
@@ -4379,14 +4393,20 @@ host<span class="w"> </span>-t<span class="w"> </span>SRV<span class="w"> </span
 host<span class="w"> </span>-t<span class="w"> </span>A<span class="w"> </span>dc1.ad.lab.example
 host<span class="w"> </span>www.debian.org
 </code></pre></div>
-<p><strong>K4.</strong> Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule <code>www.debian.org</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule <code>www.debian.org</code>?</p>
+</div>
 <p><strong>3.2</strong> Testi Kerberost:</p>
 <div class="highlight"><pre><span></span><code>kinit<span class="w"> </span>administrator
 klist
 kdestroy
 kinit<span class="w"> </span>vale-kasutaja
 </code></pre></div>
-<p><strong>K5.</strong> Milline pilet tekkis <code>klist</code> väljundis ja kui kaua see kehtib? Mis veateate andis vale kasutaja?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Milline pilet tekkis <code>klist</code> väljundis ja kui kaua see kehtib? Mis veateate andis vale kasutaja?</p>
+</div>
 <p><strong>3.3</strong> Testi SMB-d:</p>
 <div class="highlight"><pre><span></span><code>smbclient<span class="w"> </span>-L<span class="w"> </span>localhost<span class="w"> </span>-N
 smbclient<span class="w"> </span>//localhost/netlogon<span class="w"> </span>-U<span class="w"> </span>Administrator<span class="w"> </span>-c<span class="w"> </span><span class="s1">'ls'</span>
@@ -4394,7 +4414,10 @@ smbclient<span class="w"> </span>//localhost/netlogon<span class="w"> </span>-U<
 <p><strong>3.4</strong> Seadista OPNsense'is Unbound Query Forwarding domeenile <code>ad.lab.example</code> → <code>10.0.83.56</code> (teooria punkt 21.3). Testi teisest masinast (nt <code>debian1</code>), mille DNS on OPNsense:</p>
 <div class="highlight"><pre><span></span><code>host<span class="w"> </span>-t<span class="w"> </span>SRV<span class="w"> </span>_ldap._tcp.ad.lab.example
 </code></pre></div>
-<p><strong>K6.</strong> Miks on parem suunata ainult domeeni <code>ad.lab.example</code> päringud DC-le, mitte panna DC kogu laborivõrgu DNS-iks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks on parem suunata ainult domeeni <code>ad.lab.example</code> päringud DC-le, mitte panna DC kogu laborivõrgu DNS-iks?</p>
+</div>
 <h2 id="4-osa-kasutajad-grupid-ja-ou-d">4. osa. Kasutajad, grupid ja OU-d<a class="headerlink" href="#4-osa-kasutajad-grupid-ja-ou-d" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Loo <code>samba-tool</code> abil:</p>
 <table>
@@ -4438,9 +4461,15 @@ sudo<span class="w"> </span>samba-tool<span class="w"> </span>user<span class="w
 sudo<span class="w"> </span>samba-tool<span class="w"> </span>group<span class="w"> </span>listmembers<span class="w"> </span>opilased
 sudo<span class="w"> </span>samba-tool<span class="w"> </span>user<span class="w"> </span>show<span class="w"> </span>mari
 </code></pre></div>
-<p><strong>K7.</strong> Kirjuta aruandesse käsud, millega lõid kasutaja <code>mari</code> ja paigutasid ta OU-sse <code>Opilased</code>. Mis on Mari täielik DN?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kirjuta aruandesse käsud, millega lõid kasutaja <code>mari</code> ja paigutasid ta OU-sse <code>Opilased</code>. Mis on Mari täielik DN?</p>
+</div>
 <p><strong>4.2</strong> Vaata ja muuda paroolipoliitikat (min pikkus 10). Proovi seada Jaanile parool <code>Lyhike1</code>.</p>
-<p><strong>K8.</strong> Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?</p>
+</div>
 <p><strong>4.3</strong> Lisa DNS-kirjed: <code>www.ad.lab.example → 10.0.83.55</code> ning pöördtsoon <code>83.0.10.in-addr.arpa</code> koos <code>dc1</code> PTR-kirjega.</p>
 <div class="highlight"><pre><span></span><code>host<span class="w"> </span>www.ad.lab.example
 host<span class="w"> </span><span class="m">10</span>.0.83.56
@@ -4457,23 +4486,35 @@ host<span class="w"> </span><span class="m">10</span>.0.83.56
 <span class="nb">echo </span><span class="nv">$env:LOGONSERVER</span>
 <span class="n">klist</span>
 </code></pre></div>
-<p><strong>K9.</strong> Mida näitasid <code>whoami</code> ja <code>$env:LOGONSERVER</code>? Milliseid Kerberose pileteid on Windowsi kliendil?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Mida näitasid <code>whoami</code> ja <code>$env:LOGONSERVER</code>? Milliseid Kerberose pileteid on Windowsi kliendil?</p>
+</div>
 <p><strong>5.3</strong> Vaata DC-s, et arvutikonto tekkis:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>computer<span class="w"> </span>list
 host<span class="w"> </span>winklient.ad.lab.example
 </code></pre></div>
-<p><strong>K10.</strong> Kas Windowsi klient registreeris ennast DNS-is automaatselt?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kas Windowsi klient registreeris ennast DNS-is automaatselt?</p>
+</div>
 <h2 id="6-osa-rsat-ja-rühmapoliitika">6. osa. RSAT ja rühmapoliitika<a class="headerlink" href="#6-osa-rsat-ja-rühmapoliitika" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Logi <code>winklient</code>-i sisse kui <code>AD\Administrator</code> ja paigalda RSAT-tööriistad (teooria punkt 21.6). Ava <code>dsa.msc</code> ja leia 4. osas loodud OU-d ja kasutajad. Loo <code>dsa.msc</code>-ga uus kasutaja <code>ain</code> OU-sse <code>Opetajad</code> ja kontrolli DC-s <code>samba-tool user list</code>.</p>
 <p><strong>6.2</strong> Loo <code>gpmc.msc</code>-ga GPO, mis keelab OU <code>Opilased</code> kasutajatel juhtpaneeli, ja seo see OU-ga. Logi sisse kui <code>AD\jaan</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gpupdate</span> <span class="p">/</span><span class="n">force</span>
 <span class="n">gpresult</span> <span class="p">/</span><span class="nb">r</span>
 </code></pre></div>
-<p><strong>K11.</strong> Kas juhtpaneel oli Jaanile keelatud? Kas see kehtis ka Katile? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Kas juhtpaneel oli Jaanile keelatud? Kas see kehtis ka Katile? Miks?</p>
+</div>
 <p><strong>6.3</strong> Leia GPO failid DC-s:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ls<span class="w"> </span>-R<span class="w"> </span>/var/lib/samba/sysvol/ad.lab.example/Policies/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
 </code></pre></div>
-<p><strong>K12.</strong> Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?</p>
+</div>
 <hr />
 <h1 id="laboritöö-21b-linuxi-kliendid-ubuntu-almalinux">Laboritöö 21B. Linuxi kliendid (Ubuntu, AlmaLinux)<a class="headerlink" href="#laboritöö-21b-linuxi-kliendid-ubuntu-almalinux" title="Permanent link">&para;</a></h1>
 <h2 id="7-osa-ubuntu-liitmine-domeeniga">7. osa. Ubuntu liitmine domeeniga<a class="headerlink" href="#7-osa-ubuntu-liitmine-domeeniga" title="Permanent link">&para;</a></h2>
@@ -4484,7 +4525,10 @@ sudo<span class="w"> </span>realm<span class="w"> </span>join<span class="w"> </
 realm<span class="w"> </span>list
 sudo<span class="w"> </span>klist<span class="w"> </span>-k
 </code></pre></div>
-<p><strong>K13.</strong> Mida näitas <code>realm discover</code>? Millised kirjed on failis <code>/etc/krb5.keytab</code> (<code>klist -k</code>) ja milleks neid vaja on?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mida näitas <code>realm discover</code>? Millised kirjed on failis <code>/etc/krb5.keytab</code> (<code>klist -k</code>) ja milleks neid vaja on?</p>
+</div>
 <p><strong>7.3</strong> Testi:</p>
 <div class="highlight"><pre><span></span><code>id<span class="w"> </span>mari@ad.lab.example
 getent<span class="w"> </span>passwd<span class="w"> </span>mari@ad.lab.example
@@ -4496,21 +4540,30 @@ ssh<span class="w"> </span>mari@ubuntuklient.ad.lab.example
 <span class="nb">pwd</span>
 klist
 </code></pre></div>
-<p><strong>K14.</strong> Mis on Mari UID? Kuidas see arvutati (<code>ldap_id_mapping</code>)? Kas Maril on pärast sisselogimist Kerberose pilet?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Mis on Mari UID? Kuidas see arvutati (<code>ldap_id_mapping</code>)? Kas Maril on pärast sisselogimist Kerberose pilet?</p>
+</div>
 <h2 id="8-osa-almalinuxi-liitmine-domeeniga">8. osa. AlmaLinuxi liitmine domeeniga<a class="headerlink" href="#8-osa-almalinuxi-liitmine-domeeniga" title="Permanent link">&para;</a></h2>
 <p><strong>8.1</strong> Tee <code>alma</code>-s sama: hostinimi, DNS, paketid, <code>realm join</code>. Kontrolli, milline <code>authselect</code> profiil valiti:</p>
 <div class="highlight"><pre><span></span><code>authselect<span class="w"> </span>current
 id<span class="w"> </span>mari@ad.lab.example
 </code></pre></div>
 <p><strong>8.2</strong> Muuda ka siin <code>use_fully_qualified_names = False</code> ja <code>fallback_homedir = /home/%u</code>.</p>
-<p><strong>K15.</strong> Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?</p>
+</div>
 <h2 id="9-osa-ligipääsu-piiramine-ja-sudo">9. osa. Ligipääsu piiramine ja <code>sudo</code><a class="headerlink" href="#9-osa-ligipääsu-piiramine-ja-sudo" title="Permanent link">&para;</a></h2>
 <p><strong>9.1</strong> Mõlemas Linuxi kliendis luba sisse logida ainult gruppidel <code>opilased</code> ja <code>linuxadminid</code>. Proovi sisse logida kasutajana <code>administrator</code> ja <code>ain</code>.</p>
 <p><strong>9.2</strong> Anna grupile <code>linuxadminid</code> <code>sudo</code> õigus (fail <code>/etc/sudoers.d/ad-adminid</code>). Kontrolli kasutajana <code>kati</code>:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-l
 sudo<span class="w"> </span>whoami
 </code></pre></div>
-<p><strong>K16.</strong> Kirjuta <code>realm permit</code> käsud ja sudoers-rida. Mis juhtus <code>administrator</code>-i ja <code>ain</code>-i sisselogimisel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Kirjuta <code>realm permit</code> käsud ja sudoers-rida. Mis juhtus <code>administrator</code>-i ja <code>ain</code>-i sisselogimisel?</p>
+</div>
 <p><strong>9.3</strong> Keela DC-s Mari konto (<code>samba-tool user disable mari</code>), tühjenda kliendis vahemälu ja proovi Marina sisse logida. Seejärel luba konto uuesti.</p>
 <h2 id="10-osa-veaotsing">10. osa. Veaotsing<a class="headerlink" href="#10-osa-veaotsing" title="Permanent link">&para;</a></h2>
 <p><strong>10.1</strong> Muuda <code>ubuntuklient</code>-is kella 10 minutit valeks (peata enne ajasünkroonimine):</p>
@@ -4519,9 +4572,15 @@ sudo<span class="w"> </span>date<span class="w"> </span>-s<span class="w"> </spa
 kinit<span class="w"> </span>mari
 </code></pre></div>
 <p>Seejärel taasta: <code>sudo timedatectl set-ntp true</code>.</p>
-<p><strong>K17.</strong> Mis veateate said? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Mis veateate said? Miks?</p>
+</div>
 <p><strong>10.2</strong> Muuda <code>ubuntuklient</code>-is ajutiselt DNS-iks <code>1.1.1.1</code> ja proovi <code>realm discover ad.lab.example</code>. Taasta DNS.</p>
-<p><strong>K18.</strong> Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4530,6 +4589,32 @@ kinit<span class="w"> </span>mari
 <li><strong>Windows Server AD:</strong> kui laboris on Windows Serveri domeen (nt IT25 plaanis <code>AD1</code>/<code>AD2</code>), liida <code>alma</code> sellega ja võrdle samme.</li>
 <li><strong>Varundus:</strong> tee <code>samba-tool domain backup online</code> ja taasta domeen uude VM-i.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.56</code>), mitte <code>127.0.1.1</code>-ks?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?</li>
+<li><strong>K3.</strong> <em>(punkt 2.3)</em> Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on <code>smb.conf</code> failis jaotises <code>[global]</code> peale provisioning'ut?</li>
+<li><strong>K4.</strong> <em>(punkt 3.1)</em> Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule <code>www.debian.org</code>?</li>
+<li><strong>K5.</strong> <em>(punkt 3.2)</em> Milline pilet tekkis <code>klist</code> väljundis ja kui kaua see kehtib? Mis veateate andis vale kasutaja?</li>
+<li><strong>K6.</strong> <em>(punkt 3.4)</em> Miks on parem suunata ainult domeeni <code>ad.lab.example</code> päringud DC-le, mitte panna DC kogu laborivõrgu DNS-iks?</li>
+<li><strong>K7.</strong> <em>(punkt 4.1)</em> Kirjuta aruandesse käsud, millega lõid kasutaja <code>mari</code> ja paigutasid ta OU-sse <code>Opilased</code>. Mis on Mari täielik DN?</li>
+<li><strong>K8.</strong> <em>(punkt 4.2)</em> Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?</li>
+<li><strong>K9.</strong> <em>(punkt 5.2)</em> Mida näitasid <code>whoami</code> ja <code>$env:LOGONSERVER</code>? Milliseid Kerberose pileteid on Windowsi kliendil?</li>
+<li><strong>K10.</strong> <em>(punkt 5.3)</em> Kas Windowsi klient registreeris ennast DNS-is automaatselt?</li>
+<li><strong>K11.</strong> <em>(punkt 6.2)</em> Kas juhtpaneel oli Jaanile keelatud? Kas see kehtis ka Katile? Miks?</li>
+<li><strong>K12.</strong> <em>(punkt 6.3)</em> Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?</li>
+<li><strong>K13.</strong> <em>(punkt 7.2)</em> Mida näitas <code>realm discover</code>? Millised kirjed on failis <code>/etc/krb5.keytab</code> (<code>klist -k</code>) ja milleks neid vaja on?</li>
+<li><strong>K14.</strong> <em>(punkt 7.4)</em> Mis on Mari UID? Kuidas see arvutati (<code>ldap_id_mapping</code>)? Kas Maril on pärast sisselogimist Kerberose pilet?</li>
+<li><strong>K15.</strong> <em>(punkt 8.2)</em> Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?</li>
+<li><strong>K16.</strong> <em>(punkt 9.2)</em> Kirjuta <code>realm permit</code> käsud ja sudoers-rida. Mis juhtus <code>administrator</code>-i ja <code>ain</code>-i sisselogimisel?</li>
+<li><strong>K17.</strong> <em>(punkt 10.1)</em> Mis veateate said? Miks?</li>
+<li><strong>K18.</strong> <em>(punkt 10.2)</em> Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

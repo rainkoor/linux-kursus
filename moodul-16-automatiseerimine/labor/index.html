@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2737,6 +2739,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4453,6 +4466,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4497,7 +4521,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K11</strong>. Esita ka oma Git-hoidla (<code>git log --oneline --graph</code> väljund).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K11</strong>. Esita ka oma Git-hoidla (<code>git log --oneline --graph</code> väljund). Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p>Tähised: <code>DEBIAN_IP</code>, <code>UBUNTU_IP</code>, <code>ALMA_IP</code>, <code>kasutaja</code> - asenda oma väärtustega.</p>
 <hr />
 <h2 id="1-osa-ansible">1. osa. Ansible<a class="headerlink" href="#1-osa-ansible" title="Permanent link">&para;</a></h2>
@@ -4530,7 +4557,10 @@ ansible<span class="w"> </span>all<span class="w"> </span>-a<span class="w"> </s
 ansible<span class="w"> </span>all<span class="w"> </span>-m<span class="w"> </span>ansible.builtin.setup<span class="w"> </span>-a<span class="w"> </span><span class="s2">"filter=ansible_distribution*"</span>
 ansible<span class="w"> </span>all<span class="w"> </span>-b<span class="w"> </span>-K<span class="w"> </span>-a<span class="w"> </span><span class="s2">"whoami"</span>
 </code></pre></div>
-<p><strong>K1.</strong> Mida vastas <code>ping</code>? Milliseid distro fakte Ansible kogus? Mida tegi <code>-b -K</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mida vastas <code>ping</code>? Milliseid distro fakte Ansible kogus? Mida tegi <code>-b -K</code>?</p>
+</div>
 <p><strong>1.4</strong> Loo mall <code>templates/motd.j2</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="x">====================================================</span>
 <span class="x">  </span><span class="cp">{{</span> <span class="nv">ansible_hostname</span> <span class="cp">}}</span><span class="x"> - </span><span class="cp">{{</span> <span class="nv">ansible_distribution</span> <span class="cp">}}</span><span class="x"> </span><span class="cp">{{</span> <span class="nv">ansible_distribution_version</span> <span class="cp">}}</span>
@@ -4631,16 +4661,28 @@ ansible-playbook<span class="w"> </span>veebiserverid.yml<span class="w"> </span
 <div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>veebiserverid.yml<span class="w"> </span>-K
 ansible-playbook<span class="w"> </span>veebiserverid.yml<span class="w"> </span>-K
 </code></pre></div>
-<p><strong>K2.</strong> Kopeeri mõlema käivituse lõpukokkuvõte (<code>PLAY RECAP</code>) aruandesse. Mille poolest need erinevad? Mida tähendab idempotentsus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Kopeeri mõlema käivituse lõpukokkuvõte (<code>PLAY RECAP</code>) aruandesse. Mille poolest need erinevad? Mida tähendab idempotentsus?</p>
+</div>
 <p><strong>1.8</strong> Kontrolli tulemust:</p>
 <div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>veebiserverid<span class="w"> </span>-a<span class="w"> </span><span class="s2">"curl -s http://localhost:8090"</span>
 ssh<span class="w"> </span>kasutaja@DEBIAN_IP
 </code></pre></div>
-<p><strong>K3.</strong> Mida näitas veebileht kummaski serveris? Kas sisselogimisel ilmus teade? Kuidas sai sama mall eri serverites eri sisu?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Mida näitas veebileht kummaski serveris? Kas sisselogimisel ilmus teade? Kuidas sai sama mall eri serverites eri sisu?</p>
+</div>
 <p><strong>1.9</strong> <strong>Seadistuse triiv:</strong> logi Ubuntu masinasse ja muuda faili <code>/var/www/ansible/index.html</code> käsitsi. Kustuta Debianis pakett <code>tree</code>. Käivita mänguraamat uuesti.</p>
-<p><strong>K4.</strong> Mida Ansible tegi? Mis on „seadistuse triiv“ (<em>configuration drift</em>) ja kuidas Ansible seda lahendab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mida Ansible tegi? Mis on „seadistuse triiv“ (<em>configuration drift</em>) ja kuidas Ansible seda lahendab?</p>
+</div>
 <p><strong>1.10</strong> Lisa kolmas server: lisa inventuuri AlmaLinuxi masin ise (<code>alma ansible_host=localhost ansible_connection=local</code>) gruppi <code>veebiserverid</code> ja käivita mänguraamat.</p>
-<p><strong>K5.</strong> Mis juhtus AlmaLinuxis? Milline ülesanne ebaõnnestus ja miks? (Vihje: kas AlmaLinuxi nginx kasutab kataloogi <code>sites-available</code>?) Kuidas peaks mänguraamatut muutma, et see töötaks ka AlmaLinuxis? (Vihje: <code>when: ansible_os_family == "Debian"</code> ja <code>/etc/nginx/conf.d/</code>.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Mis juhtus AlmaLinuxis? Milline ülesanne ebaõnnestus ja miks? (Vihje: kas AlmaLinuxi nginx kasutab kataloogi <code>sites-available</code>?) Kuidas peaks mänguraamatut muutma, et see töötaks ka AlmaLinuxis? (Vihje: <code>when: ansible_os_family == "Debian"</code> ja <code>/etc/nginx/conf.d/</code>.)</p>
+</div>
 <p>Paranda mänguraamat või eemalda AlmaLinux inventuurist.</p>
 <p><strong>1.11</strong> Lisa Ansible'i projekt Giti ja saada kaughoidlasse:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/infra
@@ -4692,26 +4734,44 @@ ansible-playbook<span class="w"> </span>site.yml<span class="w"> </span>-K
 ansible-playbook<span class="w"> </span>site.yml<span class="w"> </span>-K<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/tmp/teine.txt
 grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'changed=[1-9]'</span><span class="w"> </span>/tmp/teine.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"EI OLE IDEMPOTENTNE"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"OK"</span>
 </code></pre></div>
-<p><strong>K6.</strong> Mida näitab veebileht nüüd kooli nimena - rolli vaikeväärtust või <code>group_vars</code> väärtust? Miks? Mis juhtub, kui käivitad <code>ansible-playbook site.yml -K -e kooli_nimi=Test</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mida näitab veebileht nüüd kooli nimena - rolli vaikeväärtust või <code>group_vars</code> väärtust? Miks? Mis juhtub, kui käivitad <code>ansible-playbook site.yml -K -e kooli_nimi=Test</code>?</p>
+</div>
 <p><strong>3.5</strong> Paigalda <code>ansible-lint</code> ja kontrolli projekti:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-pip
 python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>ansible-lint
 ansible-lint
 </code></pre></div>
 <p>Paranda leiud (või põhjenda, miks mõnda ei paranda) ja käivita uuesti, kuni leide pole.</p>
-<p><strong>K7.</strong> Milliseid leide <code>ansible-lint</code> andis (reegli nimed)? Kas mõni neist oleks võinud põhjustada päris vea?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Milliseid leide <code>ansible-lint</code> andis (reegli nimed)? Kas mõni neist oleks võinud põhjustada päris vea?</p>
+</div>
 <p><strong>3.6</strong> Tee lõpuks muudatus, mis rikub idempotentsuse: lisa rolli ülesanne</p>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kirjuta paigaldusaeg</span>
 <span class="w">  </span><span class="nt">ansible.builtin.shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date &gt; /var/www/ansible/aeg.txt</span>
 </code></pre></div>
 <p>ja käivita idempotentsuse kontroll uuesti. Seejärel paranda ülesanne nii, et see muudaks faili ainult esimesel korral (vihje: <code>creates: /var/www/ansible/aeg.txt</code>).</p>
-<p><strong>K8.</strong> Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible <code>shell</code>-ülesande alati muutunuks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible <code>shell</code>-ülesande alati muutunuks?</p>
+</div>
 <p><strong>3.7</strong> Kanna muudatused Giti: <code>git add -A &amp;&amp; git commit -m "Veebiserveri roll, group_vars ja ansible-lint"</code> ja <code>git push</code>.</p>
 <hr />
 <h2 id="4-osa-kokkuvõte">4. osa. Kokkuvõte<a class="headerlink" href="#4-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K9.</strong> Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?</p>
-<p><strong>K10.</strong> Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.</p>
-<p><strong>K11.</strong> Koosta <code>git log --oneline --graph</code> väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Koosta <code>git log --oneline --graph</code> väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4720,6 +4780,25 @@ ansible-lint
 <li><strong>Ansible + konteinerid:</strong> kirjuta mänguraamat, mis paigaldab hallatavatele masinatele Podmani ja käivitab seal laboritöö 12 kooli saidi konteineri Quadleti abil.</li>
 <li><strong>Laboritöö 13 automaatselt:</strong> kirjuta mänguraamat, mis ehitab tühjast Debiani masinast laboritöö 13 veebiserveri (nginx, saidid, sertifikaat, MariaDB).</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.3)</em> Mida vastas <code>ping</code>? Milliseid distro fakte Ansible kogus? Mida tegi <code>-b -K</code>?</li>
+<li><strong>K2.</strong> <em>(punkt 1.7)</em> Kopeeri mõlema käivituse lõpukokkuvõte (<code>PLAY RECAP</code>) aruandesse. Mille poolest need erinevad? Mida tähendab idempotentsus?</li>
+<li><strong>K3.</strong> <em>(punkt 1.8)</em> Mida näitas veebileht kummaski serveris? Kas sisselogimisel ilmus teade? Kuidas sai sama mall eri serverites eri sisu?</li>
+<li><strong>K4.</strong> <em>(punkt 1.9)</em> Mida Ansible tegi? Mis on „seadistuse triiv“ (<em>configuration drift</em>) ja kuidas Ansible seda lahendab?</li>
+<li><strong>K5.</strong> <em>(punkt 1.10)</em> Mis juhtus AlmaLinuxis? Milline ülesanne ebaõnnestus ja miks? (Vihje: kas AlmaLinuxi nginx kasutab kataloogi <code>sites-available</code>?) Kuidas peaks mänguraamatut muutma, et see töötaks ka AlmaLinuxis? (Vihje: <code>when: ansible_os_family == "Debian"</code> ja <code>/etc/nginx/conf.d/</code>.)</li>
+<li><strong>K6.</strong> <em>(punkt 3.4)</em> Mida näitab veebileht nüüd kooli nimena - rolli vaikeväärtust või <code>group_vars</code> väärtust? Miks? Mis juhtub, kui käivitad <code>ansible-playbook site.yml -K -e kooli_nimi=Test</code>?</li>
+<li><strong>K7.</strong> <em>(punkt 3.5)</em> Milliseid leide <code>ansible-lint</code> andis (reegli nimed)? Kas mõni neist oleks võinud põhjustada päris vea?</li>
+<li><strong>K8.</strong> <em>(punkt 3.6)</em> Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible <code>shell</code>-ülesande alati muutunuks?</li>
+<li><strong>K9.</strong> <em>(4. osa)</em> Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?</li>
+<li><strong>K10.</strong> <em>(4. osa)</em> Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.</li>
+<li><strong>K11.</strong> <em>(4. osa)</em> Koosta <code>git log --oneline --graph</code> väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

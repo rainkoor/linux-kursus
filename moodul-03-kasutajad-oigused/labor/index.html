@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -844,6 +846,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4519,6 +4532,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4563,7 +4587,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K20</strong>. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K20</strong>. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Stsenaarium:</strong> väike IT-ettevõte Näidis OÜ võtab kasutusele uue failiserveri. Sinu ülesanne on luua töötajatele kontod ja seadistada osakondadele kataloogid nii, et igaüks pääseb ligi ainult sellele, mida tal on vaja.</p>
 <table>
 <thead>
@@ -4612,21 +4639,33 @@
 id
 groups
 </code></pre></div>
-<p><strong>K1.</strong> Mis on sinu UID ja millistesse gruppidesse kuulud? Milline grupp annab sulle <code>sudo</code> õiguse?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mis on sinu UID ja millistesse gruppidesse kuulud? Milline grupp annab sulle <code>sudo</code> õiguse?</p>
+</div>
 <p><strong>1.2</strong> Uuri süsteemi kasutajaid:</p>
 <div class="highlight"><pre><span></span><code>cut<span class="w"> </span>-d:<span class="w"> </span>-f1,3,7<span class="w"> </span>/etc/passwd
 </code></pre></div>
-<p><strong>K2.</strong> Nimeta kaks süsteemikasutajat (UID alla 1000). Milline on nende sisselogimiskest ja mida see tähendab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Nimeta kaks süsteemikasutajat (UID alla 1000). Milline on nende sisselogimiskest ja mida see tähendab?</p>
+</div>
 <p><strong>1.3</strong> Proovi lugeda faili <code>/etc/shadow</code> tavakasutajana ja seejärel <code>sudo</code>-ga:</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/shadow
 sudo<span class="w"> </span>head<span class="w"> </span>-3<span class="w"> </span>/etc/shadow
 ls<span class="w"> </span>-l<span class="w"> </span>/etc/passwd<span class="w"> </span>/etc/shadow
 </code></pre></div>
-<p><strong>K3.</strong> Miks tavakasutaja faili <code>/etc/shadow</code> lugeda ei saa? Võrdle mõlema faili õigusi.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Miks tavakasutaja faili <code>/etc/shadow</code> lugeda ei saa? Võrdle mõlema faili õigusi.</p>
+</div>
 <p><strong>1.4</strong> Kontrolli, kas juurkasutajal on parool:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>passwd<span class="w"> </span>-S<span class="w"> </span>root
 </code></pre></div>
-<p><strong>K4.</strong> Mida tähendab väljundis täht <code>L</code>? Kuidas Ubuntus halduriõigusi kasutatakse, kui juurkasutaja konto on lukus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mida tähendab väljundis täht <code>L</code>? Kuidas Ubuntus halduriõigusi kasutatakse, kui juurkasutaja konto on lukus?</p>
+</div>
 <hr />
 <h2 id="2-osa-gruppide-ja-kasutajate-loomine">2. osa. Gruppide ja kasutajate loomine<a class="headerlink" href="#2-osa-gruppide-ja-kasutajate-loomine" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Loo grupid <code>tarkvara</code> ja <code>turundus</code>.</p>
@@ -4640,7 +4679,10 @@ ls<span class="w"> </span>-l<span class="w"> </span>/etc/passwd<span class="w"> 
 <p>Näide esimese kasutaja kohta:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"Mari Maasikas"</span><span class="w"> </span>-G<span class="w"> </span>tarkvara<span class="w"> </span>mari
 </code></pre></div>
-<p><strong>K5.</strong> Kirjuta käsud kasutajate <code>jaan</code> ja <code>kati</code> loomiseks.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kirjuta käsud kasutajate <code>jaan</code> ja <code>kati</code> loomiseks.</p>
+</div>
 <p><strong>2.3</strong> Määra kõigile kolmele parool:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>passwd<span class="w"> </span>mari
 </code></pre></div>
@@ -4649,7 +4691,10 @@ ls<span class="w"> </span>-l<span class="w"> </span>/etc/passwd<span class="w"> 
 sudo<span class="w"> </span>chage<span class="w"> </span>-l<span class="w"> </span>mari
 </code></pre></div>
 <p><strong>2.5</strong> Loo kasutaja <code>toomas</code> interaktiivse käsuga <code>adduser</code>.</p>
-<p><strong>K6.</strong> Mis vahe on käskudel <code>useradd</code> ja <code>adduser</code>? Millist neist kasutaksid skriptis ja miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mis vahe on käskudel <code>useradd</code> ja <code>adduser</code>? Millist neist kasutaksid skriptis ja miks?</p>
+</div>
 <p><strong>2.6</strong> Kontrolli tulemust:</p>
 <div class="highlight"><pre><span></span><code>id<span class="w"> </span>mari
 id<span class="w"> </span>kati
@@ -4657,19 +4702,31 @@ getent<span class="w"> </span>group<span class="w"> </span>tarkvara
 tail<span class="w"> </span>-4<span class="w"> </span>/etc/passwd
 ls<span class="w"> </span>-l<span class="w"> </span>/home
 </code></pre></div>
-<p><strong>K7.</strong> Mis on kasutaja <code>mari</code> põhigrupp ja millised on tema lisagrupid? Millised on kodukataloogide õigused?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mis on kasutaja <code>mari</code> põhigrupp ja millised on tema lisagrupid? Millised on kodukataloogide õigused?</p>
+</div>
 <hr />
 <h2 id="3-osa-õigused-kodukataloogis">3. osa. Õigused kodukataloogis<a class="headerlink" href="#3-osa-õigused-kodukataloogis" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Proovi, kas <code>kati</code> näeb kasutaja <code>mari</code> kodukataloogi sisu:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-iu<span class="w"> </span>kati<span class="w"> </span>ls<span class="w"> </span>/home/mari
 </code></pre></div>
-<p><strong>K8.</strong> Kas see õnnestus? Selgita tulemust kataloogi <code>/home/mari</code> õiguste põhjal.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas see õnnestus? Selgita tulemust kataloogi <code>/home/mari</code> õiguste põhjal.</p>
+</div>
 <p><strong>3.2</strong> Kasutajana <code>mari</code> loo fail ja uuri selle õigusi ning oma umaski:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-iu<span class="w"> </span>mari<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "Salajane plaan" &gt; plaan.txt; ls -l plaan.txt; umask'</span>
 </code></pre></div>
-<p><strong>K9.</strong> Millised õigused said uus fail ja mis on umask? Arvuta, kuidas umaskist need õigused tulid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Millised õigused said uus fail ja mis on umask? Arvuta, kuidas umaskist need õigused tulid.</p>
+</div>
 <p><strong>3.3</strong> Muuda kasutajana <code>mari</code> faili <code>plaan.txt</code> õigusi nii, et ainult tema saab seda lugeda ja muuta. Tee seda kõigepealt sümbolilisel ja seejärel numbrilisel kujul.</p>
-<p><strong>K10.</strong> Kirjuta mõlemad käsud.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kirjuta mõlemad käsud.</p>
+</div>
 <hr />
 <h2 id="4-osa-osakondade-kataloogid">4. osa. Osakondade kataloogid<a class="headerlink" href="#4-osa-osakondade-kataloogid" title="Permanent link">&para;</a></h2>
 <p>Loo järgmine struktuur:</p>
@@ -4686,16 +4743,28 @@ ls<span class="w"> </span>-l<span class="w"> </span>/home
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>root:tarkvara<span class="w"> </span>/srv/firma/tarkvara
 sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">2770</span><span class="w"> </span>/srv/firma/tarkvara
 </code></pre></div>
-<p><strong>K11.</strong> Selgita kõiki nelja numbrit väärtuses <code>2770</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Selgita kõiki nelja numbrit väärtuses <code>2770</code>.</p>
+</div>
 <p><strong>4.3</strong> Seadista samamoodi kataloog <code>turundus</code>.</p>
 <p><strong>4.4</strong> Seadista kataloog <code>ühine</code> nii, et kõik saavad sinna kirjutada, kuid teiste faile kustutada ei saa.</p>
-<p><strong>K12.</strong> Kirjuta käsk. Millise süsteemikataloogiga on see seadistus sama?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kirjuta käsk. Millise süsteemikataloogiga on see seadistus sama?</p>
+</div>
 <p><strong>4.5</strong> Seadista kataloog <code>teated</code>: omanik <code>toomas</code>, kõik saavad lugeda ja kataloogi siseneda, kuid ainult <code>toomas</code> saab sinna faile luua.</p>
-<p><strong>K13.</strong> Kirjuta käsud. Millised õigused numbrilisel kujul kataloogile andsid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Kirjuta käsud. Millised õigused numbrilisel kujul kataloogile andsid?</p>
+</div>
 <p><strong>4.6</strong> Kontrolli kõike korraga:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>/srv/firma
 </code></pre></div>
-<p><strong>K14.</strong> Kopeeri väljund aruandesse ja selgita, miks on kataloogi <code>tarkvara</code> grupi õigustes <code>s</code> ja kataloogi <code>ühine</code> muude õigustes <code>t</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Kopeeri väljund aruandesse ja selgita, miks on kataloogi <code>tarkvara</code> grupi õigustes <code>s</code> ja kataloogi <code>ühine</code> muude õigustes <code>t</code>.</p>
+</div>
 <hr />
 <h2 id="5-osa-õiguste-testimine">5. osa. Õiguste testimine<a class="headerlink" href="#5-osa-õiguste-testimine" title="Permanent link">&para;</a></h2>
 <p>Iga testi puhul <strong>ennusta enne käivitamist</strong>, kas see õnnestub, ja kirjuta ennustus ning tegelik tulemus aruandesse.</p>
@@ -4753,7 +4822,10 @@ sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">2770</s
 <p><strong>5.1</strong> Vaata faili <code>kood.py</code> omanikku ja gruppi:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>/srv/firma/tarkvara/
 </code></pre></div>
-<p><strong>K15.</strong> Esita tabel testide T1–T8 ennustuste ja tulemustega. Miks kuulub fail <code>kood.py</code> grupile <code>tarkvara</code>, mitte grupile <code>mari</code>? Miks sai <code>jaan</code> seda muuta?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Esita tabel testide T1–T8 ennustuste ja tulemustega. Miks kuulub fail <code>kood.py</code> grupile <code>tarkvara</code>, mitte grupile <code>mari</code>? Miks sai <code>jaan</code> seda muuta?</p>
+</div>
 <hr />
 <h2 id="6-osa-piiratud-sudo-õigus">6. osa. Piiratud sudo õigus<a class="headerlink" href="#6-osa-piiratud-sudo-õigus" title="Permanent link">&para;</a></h2>
 <p>Toomas peab saama süsteemi uuendada, kuid mitte midagi muud halduriõigustes teha.</p>
@@ -4772,20 +4844,35 @@ sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">2770</s
 sudo<span class="w"> </span>cat<span class="w"> </span>/etc/shadow
 <span class="nb">exit</span>
 </code></pre></div>
-<p><strong>K16.</strong> Mis juhtus kummagi käsuga? Miks?</p>
-<p><strong>K17.</strong> Miks tuleb sudoers-faile muuta käsuga <code>visudo</code>, mitte otse redaktoriga?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Mis juhtus kummagi käsuga? Miks?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Miks tuleb sudoers-faile muuta käsuga <code>visudo</code>, mitte otse redaktoriga?</p>
+</div>
 <p><strong>6.3</strong> Uuri, kus logitakse <code>sudo</code> kasutamine:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span><span class="nv">_COMM</span><span class="o">=</span>sudo<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-5
 </code></pre></div>
-<p><strong>K18.</strong> Kas logis on näha Toomase katse lugeda faili <code>/etc/shadow</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Kas logis on näha Toomase katse lugeda faili <code>/etc/shadow</code>?</p>
+</div>
 <hr />
 <h2 id="7-osa-muudatused-ja-koristamine">7. osa. Muudatused ja koristamine<a class="headerlink" href="#7-osa-muudatused-ja-koristamine" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Jaan läheb üle turundusse. Lisa ta gruppi <code>turundus</code> ja eemalda grupist <code>tarkvara</code>. Kontrolli käsuga <code>id jaan</code>.</p>
-<p><strong>K19.</strong> Kirjuta käsud. Miks peab grupi lisamisel kasutama käsus <code>usermod</code> võtit <code>-a</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K19</p>
+<p>Kirjuta käsud. Miks peab grupi lisamisel kasutama käsus <code>usermod</code> võtit <code>-a</code>?</p>
+</div>
 <p><strong>7.2</strong> Leia kõik süsteemi SUID-failid:</p>
 <div class="highlight"><pre><span></span><code>find<span class="w"> </span>/<span class="w"> </span>-perm<span class="w"> </span>-4000<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </code></pre></div>
-<p><strong>K20.</strong> Nimeta kolm leitud faili. Miks vajab näiteks <code>passwd</code> SUID-õigust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K20</p>
+<p>Nimeta kolm leitud faili. Miks vajab näiteks <code>passwd</code> SUID-õigust?</p>
+</div>
 <p><strong>7.3</strong> Kui õpetaja ei ole teisiti öelnud, jäta kasutajad ja kataloogid alles - neid kontrollitakse. Kui teed laborit iseseisvalt ja tahad koristada:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>mari<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>jaan<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>kati<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>toomas
 sudo<span class="w"> </span>groupdel<span class="w"> </span>tarkvara<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>groupdel<span class="w"> </span>turundus
@@ -4799,6 +4886,34 @@ sudo<span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>
 <li>Kirjuta üles, mis juhtub, kui jätad punktis 4.2 SGID-õiguse ära (<code>chmod 770</code>) ja korrata teste T1–T2.</li>
 <li><strong>Paroolipoliitika:</strong> paigalda <code>libpam-pwquality</code>, sea <code>/etc/security/pwquality.conf</code>-is <code>minlen = 12</code> ja <code>minclass = 3</code> ning proovi testkasutajana <code>passwd</code>-iga seada nõrka parooli. Lisa <code>/etc/skel</code>-i fail <code>LOEMIND.txt</code> ja loo uus kasutaja - kas fail kopeeriti?</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Mis on sinu UID ja millistesse gruppidesse kuulud? Milline grupp annab sulle <code>sudo</code> õiguse?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Nimeta kaks süsteemikasutajat (UID alla 1000). Milline on nende sisselogimiskest ja mida see tähendab?</li>
+<li><strong>K3.</strong> <em>(punkt 1.3)</em> Miks tavakasutaja faili <code>/etc/shadow</code> lugeda ei saa? Võrdle mõlema faili õigusi.</li>
+<li><strong>K4.</strong> <em>(punkt 1.4)</em> Mida tähendab väljundis täht <code>L</code>? Kuidas Ubuntus halduriõigusi kasutatakse, kui juurkasutaja konto on lukus?</li>
+<li><strong>K5.</strong> <em>(punkt 2.2)</em> Kirjuta käsud kasutajate <code>jaan</code> ja <code>kati</code> loomiseks.</li>
+<li><strong>K6.</strong> <em>(punkt 2.5)</em> Mis vahe on käskudel <code>useradd</code> ja <code>adduser</code>? Millist neist kasutaksid skriptis ja miks?</li>
+<li><strong>K7.</strong> <em>(punkt 2.6)</em> Mis on kasutaja <code>mari</code> põhigrupp ja millised on tema lisagrupid? Millised on kodukataloogide õigused?</li>
+<li><strong>K8.</strong> <em>(punkt 3.1)</em> Kas see õnnestus? Selgita tulemust kataloogi <code>/home/mari</code> õiguste põhjal.</li>
+<li><strong>K9.</strong> <em>(punkt 3.2)</em> Millised õigused said uus fail ja mis on umask? Arvuta, kuidas umaskist need õigused tulid.</li>
+<li><strong>K10.</strong> <em>(punkt 3.3)</em> Kirjuta mõlemad käsud.</li>
+<li><strong>K11.</strong> <em>(punkt 4.2)</em> Selgita kõiki nelja numbrit väärtuses <code>2770</code>.</li>
+<li><strong>K12.</strong> <em>(punkt 4.4)</em> Kirjuta käsk. Millise süsteemikataloogiga on see seadistus sama?</li>
+<li><strong>K13.</strong> <em>(punkt 4.5)</em> Kirjuta käsud. Millised õigused numbrilisel kujul kataloogile andsid?</li>
+<li><strong>K14.</strong> <em>(punkt 4.6)</em> Kopeeri väljund aruandesse ja selgita, miks on kataloogi <code>tarkvara</code> grupi õigustes <code>s</code> ja kataloogi <code>ühine</code> muude õigustes <code>t</code>.</li>
+<li><strong>K15.</strong> <em>(punkt 5.1)</em> Esita tabel testide T1–T8 ennustuste ja tulemustega. Miks kuulub fail <code>kood.py</code> grupile <code>tarkvara</code>, mitte grupile <code>mari</code>? Miks sai <code>jaan</code> seda muuta?</li>
+<li><strong>K16.</strong> <em>(punkt 6.2)</em> Mis juhtus kummagi käsuga? Miks?</li>
+<li><strong>K17.</strong> <em>(punkt 6.2)</em> Miks tuleb sudoers-faile muuta käsuga <code>visudo</code>, mitte otse redaktoriga?</li>
+<li><strong>K18.</strong> <em>(punkt 6.3)</em> Kas logis on näha Toomase katse lugeda faili <code>/etc/shadow</code>?</li>
+<li><strong>K19.</strong> <em>(punkt 7.1)</em> Kirjuta käsud. Miks peab grupi lisamisel kasutama käsus <code>usermod</code> võtit <code>-a</code>?</li>
+<li><strong>K20.</strong> <em>(punkt 7.2)</em> Nimeta kolm leitud faili. Miks vajab näiteks <code>passwd</code> SUID-õigust?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

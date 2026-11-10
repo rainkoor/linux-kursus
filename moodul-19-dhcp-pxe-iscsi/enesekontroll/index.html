@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3270,34 +3272,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,57 +4407,97 @@
 
 
 <h1 id="moodul-19-enesekontroll">Moodul 19. Enesekontroll<a class="headerlink" href="#moodul-19-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mida tähendab DORA? Miks on DHCPDISCOVER leviedastus?</li>
-<li>Miks töötab DHCP vaikimisi ainult ühes võrgusegmendis? Mis on DHCP relee?</li>
-<li>Mis juhtub kliendiga, kui DHCP-server rendiaja keskel kaob?</li>
-<li>Miks soovitatakse uutel süsteemidel ISC DHCP asemel Kea-d?</li>
-<li>Millise käsuga kontrollid Kea seadistuse õigsust?</li>
-<li>Mis on DHCP reserveering ja kuidas see erineb staatilisest aadressist?</li>
-<li>Milliseid DHCP-valikuid vajab PXE?</li>
-<li>Mis on TFTP ja iPXE roll PXE alglaadimisel?</li>
-<li>Miks vajavad BIOS- ja UEFI-kliendid eri alglaadimisfaile?</li>
-<li>Mida teeb FOG ja kuidas see klassiruumis kasulik on?</li>
-<li>Mis vahe on iSCSI-l ja NFS-il?</li>
-<li>Selgita mõisteid sihtmärk, initsiaator, LUN ja IQN.</li>
-<li>Kuidas tagab iSCSI sihtmärk, et ainult õige klient saab LUN-i kasutada?</li>
-<li>Miks ei tohi ühte LUN-i korraga kasutada kaks initsiaatorit?</li>
-<li>Miks kasutatakse iSCSI ketta haakimisel fstab-is valikut <code>_netdev</code>?</li>
-<li>Mis on vastustefail? Nimeta AlmaLinuxi, Debiani ja Ubuntu vastustefaili vormingud ning kuidas paigaldaja faili leiab.</li>
-<li>Miks ei panda domeeni administraatori parooli kickstarti faili ja kuidas masin siis domeeniga liidetakse?</li>
-</ol>
+<p><strong>1.</strong> Mida tähendab DORA? Miks on DHCPDISCOVER leviedastus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Discover, Offer, Request, Acknowledge - nelja sõnumiga vahetus. DISCOVER on leviedastus, sest kliendil pole veel aadressi ja ta ei tea DHCP-serveri aadressi.</p>
+</details>
+<p><strong>2.</strong> Miks töötab DHCP vaikimisi ainult ühes võrgusegmendis? Mis on DHCP relee?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Leviedastused ei läbi ruutereid. DHCP relee (nt ruuteris) võtab leviedastuse vastu ja edastab selle teises võrgus asuvale DHCP-serverile.</p>
+</details>
+<p><strong>3.</strong> Mis juhtub kliendiga, kui DHCP-server rendiaja keskel kaob?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Klient kasutab aadressi edasi kuni rendi aegumiseni ja proovib vahepeal korduvalt renti uuendada. Kui rent aegub, kaotab klient aadressi.</p>
+</details>
+<p><strong>4.</strong> Miks soovitatakse uutel süsteemidel ISC DHCP asemel Kea-d?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>ISC DHCP arendus on lõpetatud ja turvaparandusi ei tule; Kea on aktiivselt arendatav, toetab REST API-d ja on näiteks RHEL 10 ja OPNsense'i soovitatud lahendus.</p>
+</details>
+<p><strong>5.</strong> Millise käsuga kontrollid Kea seadistuse õigsust?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>kea-dhcp4 -t /etc/kea/kea-dhcp4.conf</code>.</p>
+</details>
+<p><strong>6.</strong> Mis on DHCP reserveering ja kuidas see erineb staatilisest aadressist?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>DHCP-server annab kindla MAC-aadressiga kliendile alati sama aadressi; seadistus on serveris. Staatiline aadress on seadistatud masinas endas ega sõltu DHCP-serverist.</p>
+</details>
+<p><strong>7.</strong> Milliseid DHCP-valikuid vajab PXE?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Valik 66 / <code>next-server</code> (TFTP-serveri aadress) ja valik 67 / <code>boot-file-name</code> (alglaadimisfail).</p>
+</details>
+<p><strong>8.</strong> Mis on TFTP ja iPXE roll PXE alglaadimisel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>TFTP on lihtne protokoll, millega PXE-püsivara laadib alglaadimisfaili. iPXE on täiustatud alglaadimisprogramm, mis oskab HTTP-d, skripte ja menüüsid ning laadib edasi kerneli või paigaldaja.</p>
+</details>
+<p><strong>9.</strong> Miks vajavad BIOS- ja UEFI-kliendid eri alglaadimisfaile?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>BIOS ja UEFI käivitavad eri vormingus programme: BIOS-il on PXE-ROM-i jaoks <code>.kpxe</code>/<code>.pxe</code>, UEFI-l EFI-rakendus <code>.efi</code>.</p>
+</details>
+<p><strong>10.</strong> Mida teeb FOG ja kuidas see klassiruumis kasulik on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>FOG salvestab etalonarvuti kettatõmmise ja paigaldab selle PXE kaudu teistele arvutitele (ka grupile korraga). Klassiruumis saab kõik arvutid kiiresti ühesuguseks või algolekusse taastada.</p>
+</details>
+<p><strong>11.</strong> Mis vahe on iSCSI-l ja NFS-il?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>NFS jagab faile (failitasemel, mitu klienti korraga); iSCSI jagab plokkseadmeid - klient näeb seda nagu oma ketast ja haldab failisüsteemi ise.</p>
+</details>
+<p><strong>12.</strong> Selgita mõisteid sihtmärk, initsiaator, LUN ja IQN.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Sihtmärk - server, mis jagab kettaid; initsiaator - klient; LUN - üks jagatav ketas; IQN - unikaalne nimi kujul <code>iqn.AAAA-KK.pööratud.domeen:nimi</code>.</p>
+</details>
+<p><strong>13.</strong> Kuidas tagab iSCSI sihtmärk, et ainult õige klient saab LUN-i kasutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>ACL-iga (lubatud initsiaatorite IQN-id) ja soovi korral CHAP-autentimisega.</p>
+</details>
+<p><strong>14.</strong> Miks ei tohi ühte LUN-i korraga kasutada kaks initsiaatorit?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Tavaline failisüsteem eeldab, et ainult üks süsteem kirjutab - kaks samaaegset kirjutajat rikuvad failisüsteemi ja andmed hävivad.</p>
+</details>
+<p><strong>15.</strong> Miks kasutatakse iSCSI ketta haakimisel fstab-is valikut <code>_netdev</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Et haakimist proovitaks alles pärast võrgu ja iSCSI seansi tekkimist; muidu ebaõnnestub haakimine alglaadimisel.</p>
+</details>
+<p><strong>16.</strong> Mis on vastustefail? Nimeta AlmaLinuxi, Debiani ja Ubuntu vastustefaili vormingud ning kuidas paigaldaja faili leiab.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Fail, mis vastab paigaldaja küsimustele ette, et paigaldus toimuks ilma inimeseta. AlmaLinux: kickstart (<code>inst.ks=URL</code>), Debian: preseed (<code>url=URL</code> koos <code>auto=true priority=critical</code>), Ubuntu: autoinstall (<code>autoinstall ds=nocloud;s=URL</code>). Fail jagatakse tavaliselt HTTP kaudu ja aadress antakse kerneli parameetrina (nt iPXE skriptis).</p>
+</details>
+<p><strong>17.</strong> Miks ei panda domeeni administraatori parooli kickstarti faili ja kuidas masin siis domeeniga liidetakse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Fail on loetav kõigile, kes pääsevad veebiserverisse (ja jääb sageli paigaldatud masinasse alles). Vastustefail paigaldab vajalikud paketid ja SSH-võtme; liitmise teeb pärast käivitust Ansible, mille parool on Vaultis (või kasutatakse ühekordset liitumisparooli).</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Lisa Kea seadistusse teine alamvõrk <code>10.0.84.0/24</code> vahemikuga <code>.100–.150</code> ja vaikelüüsiga <code>.1</code>.</li>
-<li>Lisa Kea seadistusse globaalne NTP-serveri valik <code>10.0.83.1</code>.</li>
-<li>Kirjuta ISC DHCP reserveering masinale <code>printer</code> (MAC <code>00:11:22:33:44:55</code>, IP <code>10.0.83.20</code>).</li>
-<li>Loo <code>targetcli</code>-s LVM-köitel <code>/dev/vg_san/lv_db</code> põhinev taust nimega <code>db</code>.</li>
-<li>Kuva AlmaLinuxis kõik aktiivsed iSCSI seansid ja logi kõigist välja.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Discover, Offer, Request, Acknowledge - nelja sõnumiga vahetus. DISCOVER on leviedastus, sest kliendil pole veel aadressi ja ta ei tea DHCP-serveri aadressi.</li>
-<li>Leviedastused ei läbi ruutereid. DHCP relee (nt ruuteris) võtab leviedastuse vastu ja edastab selle teises võrgus asuvale DHCP-serverile.</li>
-<li>Klient kasutab aadressi edasi kuni rendi aegumiseni ja proovib vahepeal korduvalt renti uuendada. Kui rent aegub, kaotab klient aadressi.</li>
-<li>ISC DHCP arendus on lõpetatud ja turvaparandusi ei tule; Kea on aktiivselt arendatav, toetab REST API-d ja on näiteks RHEL 10 ja OPNsense'i soovitatud lahendus.</li>
-<li><code>kea-dhcp4 -t /etc/kea/kea-dhcp4.conf</code>.</li>
-<li>DHCP-server annab kindla MAC-aadressiga kliendile alati sama aadressi; seadistus on serveris. Staatiline aadress on seadistatud masinas endas ega sõltu DHCP-serverist.</li>
-<li>Valik 66 / <code>next-server</code> (TFTP-serveri aadress) ja valik 67 / <code>boot-file-name</code> (alglaadimisfail).</li>
-<li>TFTP on lihtne protokoll, millega PXE-püsivara laadib alglaadimisfaili. iPXE on täiustatud alglaadimisprogramm, mis oskab HTTP-d, skripte ja menüüsid ning laadib edasi kerneli või paigaldaja.</li>
-<li>BIOS ja UEFI käivitavad eri vormingus programme: BIOS-il on PXE-ROM-i jaoks <code>.kpxe</code>/<code>.pxe</code>, UEFI-l EFI-rakendus <code>.efi</code>.</li>
-<li>FOG salvestab etalonarvuti kettatõmmise ja paigaldab selle PXE kaudu teistele arvutitele (ka grupile korraga). Klassiruumis saab kõik arvutid kiiresti ühesuguseks või algolekusse taastada.</li>
-<li>NFS jagab faile (failitasemel, mitu klienti korraga); iSCSI jagab plokkseadmeid - klient näeb seda nagu oma ketast ja haldab failisüsteemi ise.</li>
-<li>Sihtmärk - server, mis jagab kettaid; initsiaator - klient; LUN - üks jagatav ketas; IQN - unikaalne nimi kujul <code>iqn.AAAA-KK.pööratud.domeen:nimi</code>.</li>
-<li>ACL-iga (lubatud initsiaatorite IQN-id) ja soovi korral CHAP-autentimisega.</li>
-<li>Tavaline failisüsteem eeldab, et ainult üks süsteem kirjutab - kaks samaaegset kirjutajat rikuvad failisüsteemi ja andmed hävivad.</li>
-<li>Et haakimist proovitaks alles pärast võrgu ja iSCSI seansi tekkimist; muidu ebaõnnestub haakimine alglaadimisel.</li>
-<li>Fail, mis vastab paigaldaja küsimustele ette, et paigaldus toimuks ilma inimeseta. AlmaLinux: kickstart (<code>inst.ks=URL</code>), Debian: preseed (<code>url=URL</code> koos <code>auto=true priority=critical</code>), Ubuntu: autoinstall (<code>autoinstall ds=nocloud;s=URL</code>). Fail jagatakse tavaliselt HTTP kaudu ja aadress antakse kerneli parameetrina (nt iPXE skriptis).</li>
-<li>Fail on loetav kõigile, kes pääsevad veebiserverisse (ja jääb sageli paigaldatud masinasse alles). Vastustefail paigaldab vajalikud paketid ja SSH-võtme; liitmise teeb pärast käivitust Ansible, mille parool on Vaultis (või kasutatakse ühekordset liitumisparooli).</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Lisa Kea seadistusse teine alamvõrk <code>10.0.84.0/24</code> vahemikuga <code>.100–.150</code> ja vaikelüüsiga <code>.1</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">"subnet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.84.0/24"</span><span class="p">,</span>
@@ -4520,19 +4506,36 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>(lisa massiivi <code>subnet4</code>)</p>
+</details>
+<p><strong>2.</strong> Lisa Kea seadistusse globaalne NTP-serveri valik <code>10.0.83.1</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ntp-servers"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.1"</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <p>(lisa globaalsesse massiivi <code>option-data</code>)</p>
+</details>
+<p><strong>3.</strong> Kirjuta ISC DHCP reserveering masinale <code>printer</code> (MAC <code>00:11:22:33:44:55</code>, IP <code>10.0.83.20</code>).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>host printer {
     hardware ethernet 00:11:22:33:44:55;
     fixed-address 10.0.83.20;
 }
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Loo <code>targetcli</code>-s LVM-köitel <code>/dev/vg_san/lv_db</code> põhinev taust nimega <code>db</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>/&gt; backstores/block create db /dev/vg_san/lv_db
 </code></pre></div>
+</details>
+<p><strong>5.</strong> Kuva AlmaLinuxis kõik aktiivsed iSCSI seansid ja logi kõigist välja.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>session
 sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>--logoutall<span class="o">=</span>all
 </code></pre></div>
+</details>
 
 
 

@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1323,6 +1325,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4631,6 +4644,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4675,7 +4699,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Esitamine:</strong> kõik skriptid kataloogis <code>~/bin</code> ning aruanne küsimuste <strong>K1–K16</strong> vastustega. Skriptid peavad olema ka 7. osas loodud Git-hoidlas. Iga skript peab läbima ShellCheck'i kontrolli ilma vigade ja hoiatusteta. Infotaseme märkused (<em>info</em>, nt SC2012) on lubatud, kui oskad selgitada, miks sa need teadlikult alles jätsid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Esitamine</p>
+<p>Kõik skriptid kataloogis <code>~/bin</code> ning aruanne küsimuste <strong>K1–K16</strong> vastustega. Skriptid peavad olema ka 7. osas loodud Git-hoidlas. Iga skript peab läbima ShellCheck'i kontrolli ilma vigade ja hoiatusteta. Infotaseme märkused (<em>info</em>, nt SC2012) on lubatud, kui oskad selgitada, miks sa need teadlikult alles jätsid. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Töövõte:</strong> kirjuta skript osade kaupa ja testi pärast iga muudatust. Ära kirjuta kogu skripti korraga valmis - vigu on siis raske leida.</p>
 <hr />
 <h2 id="1-osa-ettevalmistus">1. osa. Ettevalmistus<a class="headerlink" href="#1-osa-ettevalmistus" title="Permanent link">&para;</a></h2>
@@ -4686,7 +4713,10 @@ mkdir<span class="w"> </span>-p<span class="w"> </span>~/bin
 <p><strong>1.2</strong> Logi välja ja uuesti sisse. Kontrolli, kas <code>~/bin</code> on muutujas <code>PATH</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">':'</span><span class="w"> </span><span class="s1">'\n'</span>
 </code></pre></div>
-<p><strong>K1.</strong> Millised kataloogid on muutujas <code>PATH</code>? Miks oli vaja uuesti sisse logida? (Vihje: vaata faili <code>~/.profile</code>.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Millised kataloogid on muutujas <code>PATH</code>? Miks oli vaja uuesti sisse logida? (Vihje: vaata faili <code>~/.profile</code>.)</p>
+</div>
 <p><strong>1.3</strong> Loo esimene skript <code>~/bin/minuinfo</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># Näitab infot kasutaja ja süsteemi kohta</span>
@@ -4709,7 +4739,10 @@ ls<span class="w"> </span>-l<span class="w"> </span><span class="s2">"</span><sp
 <span class="nb">echo</span><span class="w"> </span><span class="s1">'Kasutaja on $USER'</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"Kasutaja on </span><span class="nv">$USER</span><span class="s2">"</span>
 </code></pre></div>
-<p><strong>K2.</strong> Selgita kummagi <code>ls</code> käsu tulemust. Mis vahe on ülakomadel ja jutumärkidel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Selgita kummagi <code>ls</code> käsu tulemust. Mis vahe on ülakomadel ja jutumärkidel?</p>
+</div>
 <hr />
 <h2 id="2-osa-argumendid-ja-tingimused">2. osa. Argumendid ja tingimused<a class="headerlink" href="#2-osa-argumendid-ja-tingimused" title="Permanent link">&para;</a></h2>
 <h3 id="skript-tervita">Skript <code>tervita</code><a class="headerlink" href="#skript-tervita" title="Permanent link">&para;</a></h3>
@@ -4728,7 +4761,10 @@ $ echo $?
 1
 </code></pre></div>
 <p>Vihje: <code>date +%H</code> annab tunni, <code>date +%d.%m.%Y</code> kuupäeva.</p>
-<p><strong>K3.</strong> Kuidas kontrollisid, kas argument on olemas? Miks on oluline, et veateade läheb standardveaväljundisse ja väljumiskood on 1?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Kuidas kontrollisid, kas argument on olemas? Miks on oluline, et veateade läheb standardveaväljundisse ja väljumiskood on 1?</p>
+</div>
 <h3 id="skript-failiinfo">Skript <code>failiinfo</code><a class="headerlink" href="#skript-failiinfo" title="Permanent link">&para;</a></h3>
 <p>Kirjuta skript <code>~/bin/failiinfo</code>, mis saab <strong>ükskõik kui palju</strong> teid argumentidena ja ütleb iga kohta:</p>
 <ul>
@@ -4745,7 +4781,10 @@ $ echo $?
 /olematu: ei ole olemas
 </code></pre></div>
 <p>Vihjed: <code>for tee in "$@"</code>, <code>[ -f ]</code>, <code>[ -d ]</code>, <code>[ -e ]</code>, <code>[ -r ]</code>, <code>stat -c %s</code>, <code>ls -A | wc -l</code>.</p>
-<p><strong>K4.</strong> Käivita <code>failiinfo /etc/shadow /usr/bin/passwd /dev/null</code>. Selgita tulemust.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Käivita <code>failiinfo /etc/shadow /usr/bin/passwd /dev/null</code>. Selgita tulemust.</p>
+</div>
 <hr />
 <h2 id="3-osa-tsüklid-ja-failist-lugemine-kasutajate-loomine">3. osa. Tsüklid ja failist lugemine: kasutajate loomine<a class="headerlink" href="#3-osa-tsüklid-ja-failist-lugemine-kasutajate-loomine" title="Permanent link">&para;</a></h2>
 <p>Kooli IT-tugi saab igal sügisel uute õppijate nimekirja. Kirjuta skript, mis loob kasutajad automaatselt.</p>
@@ -4792,8 +4831,14 @@ id<span class="w"> </span>jtamm
 sudo<span class="w"> </span>loo_kasutajad<span class="w"> </span>~/kasutajad.csv
 </code></pre></div>
 <p>Kui <code>sudo</code> ei leia sinu skripti, kasuta täielikku teed: <code>sudo ~/bin/loo_kasutajad</code>.</p>
-<p><strong>K5.</strong> Miks on proovirežiim sellise skripti puhul oluline? Mis juhtus kolmandal käivitusel?</p>
-<p><strong>K6.</strong> Miks ei leia <code>sudo</code> skripti <code>~/bin</code> kataloogist ilma täieliku teeta? (Vihje: <code>sudo</code> kasutab oma turvalist <code>PATH</code>-i - vaata <code>sudo grep secure_path /etc/sudoers</code>.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Miks on proovirežiim sellise skripti puhul oluline? Mis juhtus kolmandal käivitusel?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks ei leia <code>sudo</code> skripti <code>~/bin</code> kataloogist ilma täieliku teeta? (Vihje: <code>sudo</code> kasutab oma turvalist <code>PATH</code>-i - vaata <code>sudo grep secure_path /etc/sudoers</code>.)</p>
+</div>
 <p><strong>3.4</strong> Kustuta testkasutajad ja grupid (<code>userdel -r</code>, <code>groupdel</code>).</p>
 <hr />
 <h2 id="4-osa-funktsioonid-varundus-koos-rotatsiooniga">4. osa. Funktsioonid: varundus koos rotatsiooniga<a class="headerlink" href="#4-osa-funktsioonid-varundus-koos-rotatsiooniga" title="Permanent link">&para;</a></h2>
@@ -4827,8 +4872,14 @@ varunda<span class="w"> </span>/olematu<span class="p">;</span><span class="w"> 
 varunda<span class="w"> </span>~/labor02<span class="w"> </span>kaks<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Väljumiskood: </span><span class="nv">$?</span><span class="s2">"</span>
 <span class="nv">VARUNDUS_SIHT</span><span class="o">=</span>/tmp/proov<span class="w"> </span>varunda<span class="w"> </span>~/labor02
 </code></pre></div>
-<p><strong>K7.</strong> Mitu arhiivi jäi alles ja miks? Mida tegi viimane käsk?</p>
-<p><strong>K8.</strong> Miks on arhiivi loomisel kasulik võti <code>-C</code>? Mis oleks ilma selleta teisiti (vaata <code>tar -tzf</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mitu arhiivi jäi alles ja miks? Mida tegi viimane käsk?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Miks on arhiivi loomisel kasulik võti <code>-C</code>? Mis oleks ilma selleta teisiti (vaata <code>tar -tzf</code>)?</p>
+</div>
 <p><strong>4.2</strong> Ajasta varundus systemd taimeriga iga päev kell 01:00 (vt moodul 5). Kasuta teenuse failis keskkonnamuutujat:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[Service]</span>
 <span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
@@ -4836,7 +4887,10 @@ varunda<span class="w"> </span>~/labor02<span class="w"> </span>kaks<span class=
 <span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/varunda /etc 7</span>
 </code></pre></div>
 <p>Kopeeri selleks skript kataloogi <code>/usr/local/bin</code> ja loo kataloog <code>/srv/varundus</code>. Testi teenust käsitsi (<code>sudo systemctl start varunda.service</code>) ja vaata logi.</p>
-<p><strong>K9.</strong> Kirjuta mõlema faili (<code>varunda.service</code>, <code>varunda.timer</code>) sisu aruandesse.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kirjuta mõlema faili (<code>varunda.service</code>, <code>varunda.timer</code>) sisu aruandesse.</p>
+</div>
 <hr />
 <h2 id="5-osa-case-logianalüüsi-tööriist">5. osa. case: logianalüüsi tööriist<a class="headerlink" href="#5-osa-case-logianalüüsi-tööriist" title="Permanent link">&para;</a></h2>
 <p>Kirjuta skript <code>~/bin/logianalyys</code>, mis teeb laboritöö 2 analüüsid ühe tööriistaga:</p>
@@ -4863,7 +4917,10 @@ Vigu (4xx/5xx):     7
 Andmemaht (baiti):  191548
 </code></pre></div>
 <p>Vihje: <code>awk '$9 &gt;= 400' fail</code> valib read, kus 9. väli on vähemalt 400. Mitmerealise teksti väljastamiseks sobib <em>here document</em> (<code>cat &lt;&lt;EOF ... EOF</code>).</p>
-<p><strong>K10.</strong> Miks on <code>case</code> siin parem kui <code>if</code>-<code>elif</code>-ahel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Miks on <code>case</code> siin parem kui <code>if</code>-<code>elif</code>-ahel?</p>
+</div>
 <hr />
 <h2 id="6-osa-vigade-leidmine-ja-parandamine">6. osa. Vigade leidmine ja parandamine<a class="headerlink" href="#6-osa-vigade-leidmine-ja-parandamine" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Loo fail <code>~/vigane.sh</code>:</p>
@@ -4887,9 +4944,15 @@ bash<span class="w"> </span>~/vigane.sh<span class="w"> </span><span class="s2">
 <div class="highlight"><pre><span></span><code>shellcheck<span class="w"> </span>~/vigane.sh
 bash<span class="w"> </span>-x<span class="w"> </span>~/vigane.sh<span class="w"> </span><span class="s2">"/tmp/minu varu"</span>
 </code></pre></div>
-<p><strong>K11.</strong> Loetle kõik ShellCheck'i hoiatused (koodid ja lühike selgitus eesti keeles). Mis läks testi käigus valesti ja miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Loetle kõik ShellCheck'i hoiatused (koodid ja lühike selgitus eesti keeles). Mis läks testi käigus valesti ja miks?</p>
+</div>
 <p><strong>6.4</strong> Paranda skript nii, et ShellCheck ei anna hoiatusi ja skript töötab tühikutega failinimede ja kataloogidega. Lisa <code>set -euo pipefail</code>, argumendi kontroll ja kasutusjuhend. Eemalda mõttetu <code>read</code>.</p>
-<p><strong>K12.</strong> Lisa parandatud skript aruandesse.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Lisa parandatud skript aruandesse.</p>
+</div>
 <hr />
 <h2 id="7-osa-skriptid-git-hoidlasse">7. osa. Skriptid Git-hoidlasse<a class="headerlink" href="#7-osa-skriptid-git-hoidlasse" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Paigalda Git ja seadista see:</p>
@@ -4924,12 +4987,18 @@ git<span class="w"> </span>add<span class="w"> </span>-p<span class="w">        
 git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Täienda varundusskripti kommentaare"</span>
 git<span class="w"> </span>log<span class="w"> </span>--oneline
 </code></pre></div>
-<p><strong>K13.</strong> Mis vahe on käskudel <code>git diff</code> ja <code>git diff --staged</code>? Miks on kasulik muudatused enne sissekannet üle vaadata?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mis vahe on käskudel <code>git diff</code> ja <code>git diff --staged</code>? Miks on kasulik muudatused enne sissekannet üle vaadata?</p>
+</div>
 <p><strong>7.5</strong> Proovi saladuse kaitset:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"parool=Salajane123"</span><span class="w"> </span>&gt;<span class="w"> </span>saladused.txt
 git<span class="w"> </span>status
 </code></pre></div>
-<p><strong>K14.</strong> Kas Git näitas faili <code>saladused.txt</code>? Miks? Mis juhtuks, kui oleksid parooli kogemata sisse kandnud ja hoidla avalikuks teinud?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Kas Git näitas faili <code>saladused.txt</code>? Miks? Mis juhtuks, kui oleksid parooli kogemata sisse kandnud ja hoidla avalikuks teinud?</p>
+</div>
 <h3 id="harud-ja-konflikt">Harud ja konflikt<a class="headerlink" href="#harud-ja-konflikt" title="Permanent link">&para;</a></h3>
 <p><strong>7.6</strong> Loo seadistusfail ja kaks haru, mis muudavad sama rida:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"PIIR=80"</span><span class="w"> </span>&gt;<span class="w"> </span>seire.conf
@@ -4954,7 +5023,10 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph
 git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>tundlikum
 </code></pre></div>
-<p><strong>K15.</strong> Kuidas nägi fail <code>seire.conf</code> konflikti ajal välja? Mida tähendavad märgid <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> ja <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>? Kopeeri <code>git log --oneline --graph</code> väljund aruandesse.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Kuidas nägi fail <code>seire.conf</code> konflikti ajal välja? Mida tähendavad märgid <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> ja <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>? Kopeeri <code>git log --oneline --graph</code> väljund aruandesse.</p>
+</div>
 <h3 id="kaughoidla">Kaughoidla<a class="headerlink" href="#kaughoidla" title="Permanent link">&para;</a></h3>
 <p><strong>7.8</strong> Kaughoidla võib olla teises masinas (SSH kaudu, moodul 7), GitHubis või harjutamiseks samas masinas teises kataloogis:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w"> </span>--bare<span class="w"> </span>-b<span class="w"> </span>main<span class="w"> </span>~/hoidlad/infra.git
@@ -4971,7 +5043,10 @@ git<span class="w"> </span>push
 git<span class="w"> </span>pull
 cat<span class="w"> </span>README.md
 </code></pre></div>
-<p><strong>K16.</strong> Mida tegid <code>git push</code> ja <code>git pull</code>? Miks on kasulik, et seadistus on kaughoidlas (teises masinas või GitHubis)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Mida tegid <code>git push</code> ja <code>git pull</code>? Miks on kasulik, et seadistus on kaughoidlas (teises masinas või GitHubis)?</p>
+</div>
 <p><strong>7.10</strong> (Valikuline, pärast moodulit 7) Loo GitHubis privaatne hoidla, lisa oma SSH avalik võti GitHubi seadistustes ja lisa teine kaughoidla:</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-T<span class="w"> </span>git@github.com
 git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>github<span class="w"> </span>git@github.com:&lt;kasutaja&gt;/infra.git
@@ -4984,6 +5059,30 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 <li>Kirjuta skript <code>seire</code>, mis kontrollib ketta täituvust, mälu ja koormust ning kirjutab hoiatuse, kui mõni ületab skripti alguses määratud piiri. Kasuta väljumiskoode: 0 - kõik korras, 1 - hoiatus, 2 - kriitiline.</li>
 <li>Muuda <code>logianalyys</code> nii, et logifaili võib anda ka torust: <code>cat juurdepaas.log | logianalyys kokku -</code>.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.2)</em> Millised kataloogid on muutujas <code>PATH</code>? Miks oli vaja uuesti sisse logida? (Vihje: vaata faili <code>~/.profile</code>.)</li>
+<li><strong>K2.</strong> <em>(punkt 1.4)</em> Selgita kummagi <code>ls</code> käsu tulemust. Mis vahe on ülakomadel ja jutumärkidel?</li>
+<li><strong>K3.</strong> <em>(2. osa)</em> Kuidas kontrollisid, kas argument on olemas? Miks on oluline, et veateade läheb standardveaväljundisse ja väljumiskood on 1?</li>
+<li><strong>K4.</strong> <em>(2. osa)</em> Käivita <code>failiinfo /etc/shadow /usr/bin/passwd /dev/null</code>. Selgita tulemust.</li>
+<li><strong>K5.</strong> <em>(punkt 3.3)</em> Miks on proovirežiim sellise skripti puhul oluline? Mis juhtus kolmandal käivitusel?</li>
+<li><strong>K6.</strong> <em>(punkt 3.3)</em> Miks ei leia <code>sudo</code> skripti <code>~/bin</code> kataloogist ilma täieliku teeta? (Vihje: <code>sudo</code> kasutab oma turvalist <code>PATH</code>-i - vaata <code>sudo grep secure_path /etc/sudoers</code>.)</li>
+<li><strong>K7.</strong> <em>(punkt 4.1)</em> Mitu arhiivi jäi alles ja miks? Mida tegi viimane käsk?</li>
+<li><strong>K8.</strong> <em>(punkt 4.1)</em> Miks on arhiivi loomisel kasulik võti <code>-C</code>? Mis oleks ilma selleta teisiti (vaata <code>tar -tzf</code>)?</li>
+<li><strong>K9.</strong> <em>(punkt 4.2)</em> Kirjuta mõlema faili (<code>varunda.service</code>, <code>varunda.timer</code>) sisu aruandesse.</li>
+<li><strong>K10.</strong> <em>(5. osa)</em> Miks on <code>case</code> siin parem kui <code>if</code>-<code>elif</code>-ahel?</li>
+<li><strong>K11.</strong> <em>(punkt 6.3)</em> Loetle kõik ShellCheck'i hoiatused (koodid ja lühike selgitus eesti keeles). Mis läks testi käigus valesti ja miks?</li>
+<li><strong>K12.</strong> <em>(punkt 6.4)</em> Lisa parandatud skript aruandesse.</li>
+<li><strong>K13.</strong> <em>(punkt 7.4)</em> Mis vahe on käskudel <code>git diff</code> ja <code>git diff --staged</code>? Miks on kasulik muudatused enne sissekannet üle vaadata?</li>
+<li><strong>K14.</strong> <em>(punkt 7.5)</em> Kas Git näitas faili <code>saladused.txt</code>? Miks? Mis juhtuks, kui oleksid parooli kogemata sisse kandnud ja hoidla avalikuks teinud?</li>
+<li><strong>K15.</strong> <em>(punkt 7.7)</em> Kuidas nägi fail <code>seire.conf</code> konflikti ajal välja? Mida tähendavad märgid <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> ja <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>? Kopeeri <code>git log --oneline --graph</code> väljund aruandesse.</li>
+<li><strong>K16.</strong> <em>(punkt 7.9)</em> Mida tegid <code>git push</code> ja <code>git pull</code>? Miks on kasulik, et seadistus on kaughoidlas (teises masinas või GitHubis)?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

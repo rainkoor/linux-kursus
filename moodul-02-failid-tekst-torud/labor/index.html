@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -692,6 +694,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4497,6 +4510,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4541,7 +4565,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K20</strong>. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K20</strong>. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Stsenaarium:</strong> oled kooli veebiserveri administraator. Õpetaja kahtlustab, et serverit on rünnatud, ja palub sul logi analüüsida, kokkuvõte teha ning logid varundada.</p>
 <hr />
 <h2 id="1-osa-ettevalmistus-ja-redaktorid">1. osa. Ettevalmistus ja redaktorid<a class="headerlink" href="#1-osa-ettevalmistus-ja-redaktorid" title="Permanent link">&para;</a></h2>
@@ -4587,7 +4614,10 @@
 <li>vajuta <strong>Esc</strong>, kirjuta <code>:wq</code> ja vajuta Enter.</li>
 </ol>
 <p>Kontrolli käsuga <code>cat markmed.txt</code>.</p>
-<p><strong>K1.</strong> Milles seisneb vi tava- ja sisestusrežiimi erinevus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Milles seisneb vi tava- ja sisestusrežiimi erinevus?</p>
+</div>
 <hr />
 <h2 id="2-osa-ümbersuunamine">2. osa. Ümbersuunamine<a class="headerlink" href="#2-osa-ümbersuunamine" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Lisa märkmetesse praegune kuupäev ja kellaaeg:</p>
@@ -4599,7 +4629,10 @@ cat<span class="w"> </span>markmed.txt
 date<span class="w"> </span>&gt;<span class="w"> </span>proov.txt
 cat<span class="w"> </span>proov.txt
 </code></pre></div>
-<p><strong>K2.</strong> Mitu rida on failis <code>proov.txt</code>? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mitu rida on failis <code>proov.txt</code>? Miks?</p>
+</div>
 <p><strong>2.3</strong> Käivita käsk, mis annab nii väljundi kui ka veateate:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/hostname<span class="w"> </span>/olematu
 ls<span class="w"> </span>/etc/hostname<span class="w"> </span>/olematu<span class="w"> </span>&gt;<span class="w"> </span>valjund.txt
@@ -4607,36 +4640,72 @@ ls<span class="w"> </span>/etc/hostname<span class="w"> </span>/olematu<span cla
 cat<span class="w"> </span>valjund.txt
 cat<span class="w"> </span>vead.txt
 </code></pre></div>
-<p><strong>K3.</strong> Miks kuvati teise käsu järel ekraanil ikkagi midagi? Mis jõudis faili <code>valjund.txt</code> ja mis faili <code>vead.txt</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Miks kuvati teise käsu järel ekraanil ikkagi midagi? Mis jõudis faili <code>valjund.txt</code> ja mis faili <code>vead.txt</code>?</p>
+</div>
 <p><strong>2.4</strong> Otsi kogu süsteemist faile nimega <code>passwd</code> nii, et veateateid ekraanil ei kuvata.</p>
-<p><strong>K4.</strong> Kirjuta käsk ja loetle leitud failid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Kirjuta käsk ja loetle leitud failid.</p>
+</div>
 <hr />
 <h2 id="3-osa-logi-analüüs">3. osa. Logi analüüs<a class="headerlink" href="#3-osa-logi-analüüs" title="Permanent link">&para;</a></h2>
 <p>Kasuta selles osas faili <code>juurdepaas.log</code>. Ehita ahelaid järk-järgult: lisa üks käsk korraga ja vaata tulemust.</p>
 <p><strong>3.1</strong> Mitu rida on logis?</p>
-<p><strong>K5.</strong> Kirjuta käsk ja tulemus.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kirjuta käsk ja tulemus.</p>
+</div>
 <p><strong>3.2</strong> Kuva ainult IP-aadressid (1. väli):</p>
 <div class="highlight"><pre><span></span><code>cut<span class="w"> </span>-d<span class="s1">' '</span><span class="w"> </span>-f1<span class="w"> </span>juurdepaas.log
 </code></pre></div>
 <p><strong>3.3</strong> Leia, mitu päringut tegi iga IP-aadress, ja järjesta tulemus suurimast väikseimani.</p>
-<p><strong>K6.</strong> Kirjuta käsk. Milline IP-aadress tegi kõige rohkem päringuid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Kirjuta käsk. Milline IP-aadress tegi kõige rohkem päringuid?</p>
+</div>
 <p><strong>3.4</strong> Kuva kõik read, kus olekukood on <code>404</code> (lehte ei leitud). Vihje: otsi mustrit <code>" 404</code>.</p>
-<p><strong>K7.</strong> Mitu sellist rida on? Millise IP-aadressi päringud need on ja milliseid lehti küsiti?</p>
-<p><strong>K8.</strong> Miks on need päringud kahtlased? (Vihje: vaata küsitud lehtede nimesid. Kas koolilehel on WordPress või phpMyAdmin?)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mitu sellist rida on? Millise IP-aadressi päringud need on ja milliseid lehti küsiti?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Miks on need päringud kahtlased? (Vihje: vaata küsitud lehtede nimesid. Kas koolilehel on WordPress või phpMyAdmin?)</p>
+</div>
 <p><strong>3.5</strong> Loenda kõik olekukoodid (9. väli). Kasuta <code>awk</code>:</p>
 <div class="highlight"><pre><span></span><code>awk<span class="w"> </span><span class="s1">'{print $9}'</span><span class="w"> </span>juurdepaas.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
 </code></pre></div>
-<p><strong>K9.</strong> Milline olekukood esineb kõige sagedamini? Mitu serveri viga (koodid 5xx) logis on?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Milline olekukood esineb kõige sagedamini? Mitu serveri viga (koodid 5xx) logis on?</p>
+</div>
 <p><strong>3.6</strong> Leia, millised leheküljed tagastasid serveri vea <code>500</code>. Kuva iga lehekülg ainult ühe korra.</p>
-<p><strong>K10.</strong> Kirjuta käsk ja tulemus.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kirjuta käsk ja tulemus.</p>
+</div>
 <p><strong>3.7</strong> Leia kolm kõige populaarsemat lehekülge (7. väli).</p>
-<p><strong>K11.</strong> Kirjuta käsk ja tulemus.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Kirjuta käsk ja tulemus.</p>
+</div>
 <p><strong>3.8</strong> Kuva päringud, mis tehti vahemikus kell 10:00–10:59. Kasuta <code>grep</code> ja regulaaravaldist, mis otsib mustrit <code>:10:</code> kellaaja algusest.</p>
-<p><strong>K12.</strong> Kirjuta käsk. Mitu päringut tehti selles vahemikus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kirjuta käsk. Mitu päringut tehti selles vahemikus?</p>
+</div>
 <p><strong>3.9</strong> Kuva kõik read, mis <strong>ei</strong> pärine sisevõrgust <code>10.0.83.</code>. Vihje: <code>grep -v</code>, ja pea meeles, et punkt tähendab regulaaravaldises suvalist märki.</p>
-<p><strong>K13.</strong> Kirjuta käsk. Miks on oluline punkt varjestada (<code>\.</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Kirjuta käsk. Miks on oluline punkt varjestada (<code>\.</code>)?</p>
+</div>
 <p><strong>3.10</strong> Kasutades laiendatud regulaaravaldist, kuva read, kus olekukood on <code>403</code> või <code>404</code>.</p>
-<p><strong>K14.</strong> Kirjuta käsk.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Kirjuta käsk.</p>
+</div>
 <p><strong>3.11</strong> Arvuta, mitu baiti server kokku välja saatis:</p>
 <div class="highlight"><pre><span></span><code>awk<span class="w"> </span><span class="s1">'{summa += $10} END {print summa}'</span><span class="w"> </span>juurdepaas.log
 </code></pre></div>
@@ -4648,26 +4717,41 @@ cat<span class="w"> </span>vead.txt
 <li>kõik <code>404</code> read.</li>
 </ol>
 <p>Kasuta <code>echo</code> ja ümbersuunamisi <code>&gt;</code> ning <code>&gt;&gt;</code>.</p>
-<p><strong>K15.</strong> Kirjuta käsud, millega faili koostasid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Kirjuta käsud, millega faili koostasid.</p>
+</div>
 <hr />
 <h2 id="4-osa-süsteemifailide-uurimine">4. osa. Süsteemifailide uurimine<a class="headerlink" href="#4-osa-süsteemifailide-uurimine" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Kuva failist <code>/etc/passwd</code> ainult kasutajanimed ja nende kestad (väljad 1 ja 7).</p>
 <p><strong>4.2</strong> Leia, millised kasutajad saavad sisse logida, st nende kest lõpeb sõnaga <code>bash</code>.</p>
-<p><strong>K16.</strong> Kirjuta käsk ja loetle kasutajad.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Kirjuta käsk ja loetle kasutajad.</p>
+</div>
 <p><strong>4.3</strong> Kuva SSH-serveri seadistusfaili <code>/etc/ssh/sshd_config</code> sisu ilma kommentaaride ja tühjade ridadeta.</p>
-<p><strong>K17.</strong> Kirjuta käsk. Mitu rida jäi alles?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Kirjuta käsk. Mitu rida jäi alles?</p>
+</div>
 <hr />
 <h2 id="5-osa-failide-otsimine-ja-viidad">5. osa. Failide otsimine ja viidad<a class="headerlink" href="#5-osa-failide-otsimine-ja-viidad" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Leia kataloogist <code>/etc</code> kõik failid, mille nimi lõpeb laiendiga <code>.conf</code>, ja loenda need.</p>
 <p><strong>5.2</strong> Leia kataloogist <code>/usr</code> kõik failid, mis on suuremad kui 20 MB. Peida veateated.</p>
 <p><strong>5.3</strong> Leia oma kodukataloogist kõik failid, mida on muudetud viimase 60 minuti jooksul (vihje: <code>-mmin</code>).</p>
-<p><strong>K18.</strong> Kirjuta kõigi kolme ülesande käsud ja leitud failide arv või nimed.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Kirjuta kõigi kolme ülesande käsud ja leitud failide arv või nimed.</p>
+</div>
 <p><strong>5.4</strong> Loo kodukataloogi sümbolviit <code>logi</code>, mis viitab failile <code>~/labor02/juurdepaas.log</code>. Kontrolli seda käskudega <code>ls -l ~/logi</code> ja <code>head -3 ~/logi</code>.</p>
 <p><strong>5.5</strong> Loo failist <code>markmed.txt</code> kõvaviit <code>markmed-koopia.txt</code>. Võrdle i-sõlmede numbreid:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-li<span class="w"> </span>markmed.txt<span class="w"> </span>markmed-koopia.txt
 </code></pre></div>
 <p>Kirjuta faili <code>markmed-koopia.txt</code> lõppu uus rida ja vaata seejärel faili <code>markmed.txt</code> sisu.</p>
-<p><strong>K19.</strong> Mis juhtus faili <code>markmed.txt</code> sisuga? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K19</p>
+<p>Mis juhtus faili <code>markmed.txt</code> sisuga? Miks?</p>
+</div>
 <hr />
 <h2 id="6-osa-varundamine">6. osa. Varundamine<a class="headerlink" href="#6-osa-varundamine" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Loo kataloogist <code>~/labor02</code> pakitud arhiiv <code>~/labor02-varu.tar.gz</code>.</p>
@@ -4679,7 +4763,10 @@ gzip<span class="w"> </span>/tmp/vana.log
 ls<span class="w"> </span>-l<span class="w"> </span>/tmp/vana.log*
 zgrep<span class="w"> </span><span class="s1">'" 500 '</span><span class="w"> </span>/tmp/vana.log.gz
 </code></pre></div>
-<p><strong>K20.</strong> Mis juhtus pärast <code>gzip</code> käsku algse failiga <code>vana.log</code>? Milleks on vaja käske <code>zcat</code> ja <code>zgrep</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K20</p>
+<p>Mis juhtus pärast <code>gzip</code> käsku algse failiga <code>vana.log</code>? Milleks on vaja käske <code>zcat</code> ja <code>zgrep</code>?</p>
+</div>
 <p><strong>6.5</strong> Koristamine: kustuta <code>/tmp/taastamine</code> ja <code>/tmp/vana.log.gz</code>. Jäta <code>~/labor02</code> ja arhiiv alles.</p>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
@@ -4688,6 +4775,34 @@ zgrep<span class="w"> </span><span class="s1">'" 500 '</span><span class="w"> </
 <li>Jätka <strong>OverTheWire Banditiga</strong>, tasemed 6–15. Need tasemed nõuavad just selles moodulis õpitud käske (<code>find</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, <code>tr</code>, <code>tar</code>, <code>gzip</code>).</li>
 <li><strong>diff ja xargs:</strong> tee kataloogist <code>/etc</code> koopia (<code>sudo cp -a /etc ~/etc-varu</code>), muuda ühte faili ja leia muudatus käsuga <code>sudo diff -r /etc ~/etc-varu</code>. Leia <code>find</code>-i ja <code>xargs</code>-iga kõik <code>.conf</code> failid kataloogis <code>/etc</code>, mis sisaldavad sõna <code>Listen</code>, ja loenda need (<code>xargs grep -l … | wc -l</code>).</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.4)</em> Milles seisneb vi tava- ja sisestusrežiimi erinevus?</li>
+<li><strong>K2.</strong> <em>(punkt 2.2)</em> Mitu rida on failis <code>proov.txt</code>? Miks?</li>
+<li><strong>K3.</strong> <em>(punkt 2.3)</em> Miks kuvati teise käsu järel ekraanil ikkagi midagi? Mis jõudis faili <code>valjund.txt</code> ja mis faili <code>vead.txt</code>?</li>
+<li><strong>K4.</strong> <em>(punkt 2.4)</em> Kirjuta käsk ja loetle leitud failid.</li>
+<li><strong>K5.</strong> <em>(punkt 3.1)</em> Kirjuta käsk ja tulemus.</li>
+<li><strong>K6.</strong> <em>(punkt 3.3)</em> Kirjuta käsk. Milline IP-aadress tegi kõige rohkem päringuid?</li>
+<li><strong>K7.</strong> <em>(punkt 3.4)</em> Mitu sellist rida on? Millise IP-aadressi päringud need on ja milliseid lehti küsiti?</li>
+<li><strong>K8.</strong> <em>(punkt 3.4)</em> Miks on need päringud kahtlased? (Vihje: vaata küsitud lehtede nimesid. Kas koolilehel on WordPress või phpMyAdmin?)</li>
+<li><strong>K9.</strong> <em>(punkt 3.5)</em> Milline olekukood esineb kõige sagedamini? Mitu serveri viga (koodid 5xx) logis on?</li>
+<li><strong>K10.</strong> <em>(punkt 3.6)</em> Kirjuta käsk ja tulemus.</li>
+<li><strong>K11.</strong> <em>(punkt 3.7)</em> Kirjuta käsk ja tulemus.</li>
+<li><strong>K12.</strong> <em>(punkt 3.8)</em> Kirjuta käsk. Mitu päringut tehti selles vahemikus?</li>
+<li><strong>K13.</strong> <em>(punkt 3.9)</em> Kirjuta käsk. Miks on oluline punkt varjestada (<code>\.</code>)?</li>
+<li><strong>K14.</strong> <em>(punkt 3.10)</em> Kirjuta käsk.</li>
+<li><strong>K15.</strong> <em>(punkt 3.12)</em> Kirjuta käsud, millega faili koostasid.</li>
+<li><strong>K16.</strong> <em>(punkt 4.2)</em> Kirjuta käsk ja loetle kasutajad.</li>
+<li><strong>K17.</strong> <em>(punkt 4.3)</em> Kirjuta käsk. Mitu rida jäi alles?</li>
+<li><strong>K18.</strong> <em>(punkt 5.3)</em> Kirjuta kõigi kolme ülesande käsud ja leitud failide arv või nimed.</li>
+<li><strong>K19.</strong> <em>(punkt 5.5)</em> Mis juhtus faili <code>markmed.txt</code> sisuga? Miks?</li>
+<li><strong>K20.</strong> <em>(punkt 6.4)</em> Mis juhtus pärast <code>gzip</code> käsku algse failiga <code>vana.log</code>? Milleks on vaja käske <code>zcat</code> ja <code>zgrep</code>?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

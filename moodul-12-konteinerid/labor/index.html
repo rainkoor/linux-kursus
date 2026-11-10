@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2200,6 +2202,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4519,6 +4532,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4563,7 +4587,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K10</strong>. Esita ka oma Git-hoidla (<code>git log --oneline --graph</code> väljund).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K10</strong>. Esita ka oma Git-hoidla (<code>git log --oneline --graph</code> väljund). Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <hr />
 <h2 id="1-osa-ettevalmistus">1. osa. Ettevalmistus<a class="headerlink" href="#1-osa-ettevalmistus" title="Permanent link">&para;</a></h2>
 <p>Too laboritöö 6 Git-hoidla AlmaLinuxi masinasse (klooni see Debianist SSH kaudu või GitHubist) või loo uus:</p>
@@ -4580,7 +4607,10 @@ cat<span class="w"> </span>/etc/os-release<span class="w"> </span><span class="p
 uname<span class="w"> </span>-r
 podman<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>docker.io/library/alpine:latest<span class="w"> </span>uname<span class="w"> </span>-r
 </code></pre></div>
-<p><strong>K1.</strong> Milline distro oli konteineri sees ja milline hostis? Mis oli kerneli versioon konteineris ja hostis? Mida see konteinerite kohta näitab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Milline distro oli konteineri sees ja milline hostis? Mis oli kerneli versioon konteineris ja hostis? Mida see konteinerite kohta näitab?</p>
+</div>
 <p><strong>2.2</strong> Uuri konteineri isolatsiooni:</p>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>docker.io/library/alpine:latest<span class="w"> </span>sh
 </code></pre></div>
@@ -4592,7 +4622,10 @@ id
 ls<span class="w"> </span>/
 <span class="nb">exit</span>
 </code></pre></div>
-<p><strong>K2.</strong> Mitu protsessi nägid konteineris? Kes oli konteineri sees kasutaja? Võrdle hostis: <code>podman unshare id</code> ja <code>id</code>. Mis on juurkasutajata konteineri eelis?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mitu protsessi nägid konteineris? Kes oli konteineri sees kasutaja? Võrdle hostis: <code>podman unshare id</code> ja <code>id</code>. Mis on juurkasutajata konteineri eelis?</p>
+</div>
 <p><strong>2.3</strong> Käivita veebiserver taustal:</p>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>veeb<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>docker.io/library/nginx:alpine
 podman<span class="w"> </span>ps
@@ -4610,7 +4643,10 @@ podman<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </spa
 podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>veeb<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>docker.io/library/nginx:alpine
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8080<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
 </code></pre></div>
-<p><strong>K3.</strong> Mis juhtus muudatusega pärast konteineri uuesti loomist? Miks? Kuidas hoida konteineri andmeid püsivalt?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Mis juhtus muudatusega pärast konteineri uuesti loomist? Miks? Kuidas hoida konteineri andmeid püsivalt?</p>
+</div>
 <p><strong>2.6</strong> Haagi veebisisu hosti kataloogist:</p>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>veeb
 mkdir<span class="w"> </span>-p<span class="w"> </span>~/sait
@@ -4621,7 +4657,10 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8080
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8080
 ls<span class="w"> </span>-Z<span class="w"> </span>~/sait
 </code></pre></div>
-<p><strong>K4.</strong> Kas hostis tehtud muudatus oli kohe konteineris nähtav? Mida tegid valikud <code>ro</code> ja <code>Z</code>? Mis juhtub ilma <code>Z</code>-ta (proovi)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Kas hostis tehtud muudatus oli kohe konteineris nähtav? Mida tegid valikud <code>ro</code> ja <code>Z</code>? Mis juhtub ilma <code>Z</code>-ta (proovi)?</p>
+</div>
 <hr />
 <h2 id="3-osa-oma-pilt">3. osa. Oma pilt<a class="headerlink" href="#3-osa-oma-pilt" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Loo pildi jaoks kataloog, sait ja <code>Containerfile</code>:</p>
@@ -4651,7 +4690,10 @@ podman<span class="w"> </span><span class="nb">history</span><span class="w"> </
 git<span class="w"> </span>add<span class="w"> </span>konteinerid
 git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Lisa kooli saidi konteinerpilt"</span>
 </code></pre></div>
-<p><strong>K5.</strong> Mis on pildi suurus (<code>podman images</code>)? Mida näitab <code>podman history</code>? Miks on kasulik hoida <code>Containerfile</code> Gitis, aga mitte pilti ennast?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Mis on pildi suurus (<code>podman images</code>)? Mida näitab <code>podman history</code>? Miks on kasulik hoida <code>Containerfile</code> Gitis, aga mitte pilti ennast?</p>
+</div>
 <hr />
 <h2 id="4-osa-compose-andmebaas-ja-haldusliides">4. osa. Compose: andmebaas ja haldusliides<a class="headerlink" href="#4-osa-compose-andmebaas-ja-haldusliides" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Paigalda <code>podman-compose</code> (EPEL) ja loo rakendus:</p>
@@ -4669,7 +4711,10 @@ podman<span class="w"> </span>volume<span class="w"> </span>ls
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-port<span class="o">=</span><span class="m">8082</span>/tcp
 </code></pre></div>
 <p>Ava brauseris <code>http://ALMA_IP:8082</code>. Logi Adminerisse sisse: süsteem <em>MySQL/MariaDB</em>, server <code>db</code>, kasutaja <code>kool</code>, parool <code>Kool-Parool-123</code>, andmebaas <code>kool</code>. Loo Adminerist tabel <code>opilased</code> ja lisa paar rida.</p>
-<p><strong>K6.</strong> Miks on Adminerisse sisselogimisel serveri nimi <code>db</code>, mitte <code>localhost</code>? Kas MariaDB port 3306 on hostis avatud (<code>ss -tlpn | grep 3306</code>)? Miks see hea on?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks on Adminerisse sisselogimisel serveri nimi <code>db</code>, mitte <code>localhost</code>? Kas MariaDB port 3306 on hostis avatud (<code>ss -tlpn | grep 3306</code>)? Miks see hea on?</p>
+</div>
 <p><strong>4.3</strong> Testi andmete püsivust:</p>
 <div class="highlight"><pre><span></span><code>podman-compose<span class="w"> </span>down
 podman<span class="w"> </span>ps<span class="w"> </span>-a
@@ -4677,7 +4722,10 @@ podman<span class="w"> </span>volume<span class="w"> </span>ls
 podman-compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>Kontrolli Adminerist, kas tabel ja andmed on alles.</p>
-<p><strong>K7.</strong> Kas andmed jäid alles? Miks? Mis juhtuks käsuga <code>podman-compose down -v</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kas andmed jäid alles? Miks? Mis juhtuks käsuga <code>podman-compose down -v</code>?</p>
+</div>
 <p><strong>4.4</strong> Ära lisa paroole avalikku Giti! Lisa Giti ainult näidisfail ilma päris paroolideta (nt <code>compose.example.yaml</code>) ja lisa <code>compose.yaml</code> faili <code>.gitignore</code>. Arutle aruandes, kuidas paroole paremini hallata (nt <code>.env</code> fail, Podmani saladused <code>podman secret</code>).</p>
 <hr />
 <h2 id="5-osa-konteiner-teenusena-quadlet">5. osa. Konteiner teenusena (Quadlet)<a class="headerlink" href="#5-osa-konteiner-teenusena-quadlet" title="Permanent link">&para;</a></h2>
@@ -4702,12 +4750,21 @@ systemctl<span class="w"> </span>status<span class="w"> </span>veeb<span class="
 sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
 </code></pre></div>
 <p>Pärast taaskäivitust: <code>curl -s http://localhost:8083</code>.</p>
-<p><strong>K8.</strong> Mille poolest erineb teenuse <code>veeb</code> haldamine tavalisest systemd teenusest? Kas konteiner käivitus pärast taaskäivitust? Miks ei näe <code>podman ps</code> (ilma <code>sudo</code>-ta) seda konteinerit?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mille poolest erineb teenuse <code>veeb</code> haldamine tavalisest systemd teenusest? Kas konteiner käivitus pärast taaskäivitust? Miks ei näe <code>podman ps</code> (ilma <code>sudo</code>-ta) seda konteinerit?</p>
+</div>
 <p>Lisa Quadlet-fail oma Giti hoidlasse (<code>~/infra/konteinerid/quadlet/veeb.container</code>).</p>
 <hr />
 <h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K9.</strong> Võrdle konteinerit ja virtuaalmasinat: millal kasutaksid kumba? Too näide kooli Proxmoxi laborist.</p>
-<p><strong>K10.</strong> Mida peaks hoidma Gitis (Containerfile, <code>compose.yaml</code>, Quadlet-failid, andmed, pildid, paroolid) ja mida mitte? Põhjenda.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Võrdle konteinerit ja virtuaalmasinat: millal kasutaksid kumba? Too näide kooli Proxmoxi laborist.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mida peaks hoidma Gitis (Containerfile, <code>compose.yaml</code>, Quadlet-failid, andmed, pildid, paroolid) ja mida mitte? Põhjenda.</p>
+</div>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>kooli-sait
@@ -4723,6 +4780,24 @@ podman<span class="w"> </span>system<span class="w"> </span>prune<span class="w"
 <li><strong>Mailpit:</strong> käivita konteinerina kirjapüüdja Mailpit (<code>axllent/mailpit</code>, veebiliides pordil 8025). Hiljem laboritöös 15 saad sinna suunata Postfixi kirjad (<code>relayhost = [127.0.0.1]:1025</code>).</li>
 <li><strong>Automaatne uuendus:</strong> lisa oma Quadleti konteinerile <code>AutoUpdate=registry</code>, käivita <code>podman auto-update --dry-run</code> ja luba <code>podman-auto-update.timer</code>. Millal taimer järgmisena käivitub (<code>systemctl list-timers</code>)? Miks on täpne pildisilt turvalisem kui <code>latest</code>?</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 2.1)</em> Milline distro oli konteineri sees ja milline hostis? Mis oli kerneli versioon konteineris ja hostis? Mida see konteinerite kohta näitab?</li>
+<li><strong>K2.</strong> <em>(punkt 2.2)</em> Mitu protsessi nägid konteineris? Kes oli konteineri sees kasutaja? Võrdle hostis: <code>podman unshare id</code> ja <code>id</code>. Mis on juurkasutajata konteineri eelis?</li>
+<li><strong>K3.</strong> <em>(punkt 2.5)</em> Mis juhtus muudatusega pärast konteineri uuesti loomist? Miks? Kuidas hoida konteineri andmeid püsivalt?</li>
+<li><strong>K4.</strong> <em>(punkt 2.6)</em> Kas hostis tehtud muudatus oli kohe konteineris nähtav? Mida tegid valikud <code>ro</code> ja <code>Z</code>? Mis juhtub ilma <code>Z</code>-ta (proovi)?</li>
+<li><strong>K5.</strong> <em>(punkt 3.3)</em> Mis on pildi suurus (<code>podman images</code>)? Mida näitab <code>podman history</code>? Miks on kasulik hoida <code>Containerfile</code> Gitis, aga mitte pilti ennast?</li>
+<li><strong>K6.</strong> <em>(punkt 4.2)</em> Miks on Adminerisse sisselogimisel serveri nimi <code>db</code>, mitte <code>localhost</code>? Kas MariaDB port 3306 on hostis avatud (<code>ss -tlpn | grep 3306</code>)? Miks see hea on?</li>
+<li><strong>K7.</strong> <em>(punkt 4.3)</em> Kas andmed jäid alles? Miks? Mis juhtuks käsuga <code>podman-compose down -v</code>?</li>
+<li><strong>K8.</strong> <em>(punkt 5.3)</em> Mille poolest erineb teenuse <code>veeb</code> haldamine tavalisest systemd teenusest? Kas konteiner käivitus pärast taaskäivitust? Miks ei näe <code>podman ps</code> (ilma <code>sudo</code>-ta) seda konteinerit?</li>
+<li><strong>K9.</strong> <em>(6. osa)</em> Võrdle konteinerit ja virtuaalmasinat: millal kasutaksid kumba? Too näide kooli Proxmoxi laborist.</li>
+<li><strong>K10.</strong> <em>(6. osa)</em> Mida peaks hoidma Gitis (Containerfile, <code>compose.yaml</code>, Quadlet-failid, andmed, pildid, paroolid) ja mida mitte? Põhjenda.</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

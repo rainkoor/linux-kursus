@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3731,6 +3733,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4519,6 +4532,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4563,7 +4587,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K20</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K20</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Hoiatus</p>
 <p>Tee enne alustamist Ubuntu VM-ist <strong>hetktõmmis</strong>.</p>
@@ -4580,12 +4607,18 @@ systemctl<span class="w"> </span>status<span class="w"> </span>gdm<span class="w
 ps<span class="w"> </span>-e<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"gnome-shell|Xwayland"</span>
 free<span class="w"> </span>-h
 </code></pre></div>
-<p><strong>K1.</strong> Kas seanss on Wayland või X11? Milline programm on sisselogimishaldur? Kas töötab ka XWayland ja miks? Kui palju mälu töölaud kasutab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Kas seanss on Wayland või X11? Milline programm on sisselogimishaldur? Kas töötab ka XWayland ja miks? Kui palju mälu töölaud kasutab?</p>
+</div>
 <p><strong>1.2</strong> Paigalda VM-i külalisagendid ja vaata, mis muutub (SPICE-konsoolis: lõikelaud, akna suurus):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>qemu-guest-agent<span class="w"> </span>spice-vdagent
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>qemu-guest-agent
 </code></pre></div>
-<p><strong>K2.</strong> Mida võimaldab <code>spice-vdagent</code>? Mida näed nüüd Proxmoxi VM-i <em>Summary</em> lehel (IP-aadressid)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mida võimaldab <code>spice-vdagent</code>? Mida näed nüüd Proxmoxi VM-i <em>Summary</em> lehel (IP-aadressid)?</p>
+</div>
 <h2 id="2-osa-tarkvara-apt-snap-ja-flatpak">2. osa. Tarkvara: apt, Snap ja Flatpak<a class="headerlink" href="#2-osa-tarkvara-apt-snap-ja-flatpak" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Vaata, mis on juba paigaldatud:</p>
 <div class="highlight"><pre><span></span><code>snap<span class="w"> </span>list
@@ -4601,7 +4634,10 @@ flatpak<span class="w"> </span>info<span class="w"> </span>org.gimp.GIMP<span cl
 flatpak<span class="w"> </span>info<span class="w"> </span>--show-permissions<span class="w"> </span>org.gimp.GIMP
 du<span class="w"> </span>-sh<span class="w"> </span>/var/lib/flatpak
 </code></pre></div>
-<p><strong>K3.</strong> Võrdle versioone ja ruumikasutust. Milliseid õigusi Flatpaki GIMP saab? Kumb paigaldusviis on sinu arvates parem koolis kasutamiseks ja miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Võrdle versioone ja ruumikasutust. Milliseid õigusi Flatpaki GIMP saab? Kumb paigaldusviis on sinu arvates parem koolis kasutamiseks ja miks?</p>
+</div>
 <p><strong>2.3</strong> Eemalda apt-i GIMP (<code>sudo apt remove gimp</code>) ja leia rakenduste menüüst, kas GIMP käivitub endiselt.</p>
 <h2 id="3-osa-teine-töölauakeskkond">3. osa. Teine töölauakeskkond<a class="headerlink" href="#3-osa-teine-töölauakeskkond" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Paigalda kerge töölaud Xfce:</p>
@@ -4611,7 +4647,10 @@ du<span class="w"> </span>-sh<span class="w"> </span>/var/lib/flatpak
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$XDG_SESSION_TYPE</span><span class="w"> </span><span class="nv">$XDG_CURRENT_DESKTOP</span>
 free<span class="w"> </span>-h
 </code></pre></div>
-<p><strong>K4.</strong> Kas Xfce töötab Waylandis või X11-s? Võrdle mälukasutust GNOME-iga. Millal eelistaksid kergemat töölauda?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Kas Xfce töötab Waylandis või X11-s? Võrdle mälukasutust GNOME-iga. Millal eelistaksid kergemat töölauda?</p>
+</div>
 <p>Logi tagasi GNOME-sse.</p>
 <h2 id="4-osa-kaugtöölaud-ja-haldus">4. osa. Kaugtöölaud ja haldus<a class="headerlink" href="#4-osa-kaugtöölaud-ja-haldus" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Luba Ubuntus RDP: <em>Settings</em> → <em>System</em> → <em>Remote Desktop</em> → <em>Remote Login</em> (määra kasutajanimi ja parool). Ava tulemüür, kui see on sees:</p>
@@ -4619,7 +4658,10 @@ free<span class="w"> </span>-h
 sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span>VORK<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">3389</span><span class="w"> </span>proto<span class="w"> </span>tcp
 </code></pre></div>
 <p>Ühendu Windowsist (<code>mstsc</code>) või Linuxist (Remmina) aadressile <code>UBUNTU_IP</code>.</p>
-<p><strong>K5.</strong> Kas ühendus õnnestus? Mis on RDP eelis Proxmoxi konsooli ees ja mis on riskid, kui RDP port on internetist kättesaadav?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kas ühendus õnnestus? Mis on RDP eelis Proxmoxi konsooli ees ja mis on riskid, kui RDP port on internetist kättesaadav?</p>
+</div>
 <p><strong>4.2</strong> Lisa virtuaalne PDF-printer ja prindi testleht:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>printer-driver-cups-pdf
 lpstat<span class="w"> </span>-p<span class="w"> </span>-d
@@ -4638,12 +4680,18 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 sudo<span class="w"> </span>timeshift<span class="w"> </span>--list
 </code></pre></div>
 <p>Taasta graafilisest liidesest (või <code>sudo timeshift --restore</code>) ja kontrolli, kas <code>cowsay</code> on pärast taaskäivitust alles.</p>
-<p><strong>K6.</strong> Mida Timeshift vaikimisi varundab ja mida mitte (vaata seadeid <em>Users</em>)? Mis vahe on Timeshiftil ja Proxmoxi hetktõmmisel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Mida Timeshift vaikimisi varundab ja mida mitte (vaata seadeid <em>Users</em>)? Mis vahe on Timeshiftil ja Proxmoxi hetktõmmisel?</p>
+</div>
 <p><strong>4.5</strong> (Valikuline, vajab kaardilugejat ja ID-kaarti) Paigalda Eesti ID-tarkvara id.ee juhendi järgi, suuna USB-kaardilugeja VM-ile ja kontrolli:</p>
 <div class="highlight"><pre><span></span><code>pcsc_scan
 </code></pre></div>
 <p>Ava DigiDoc4 ja Firefoxis lehe id.ee kontrolliteenus.</p>
-<p><strong>K7.</strong> Kas kaart tuvastati? Milliseid pakette ja teenuseid paigaldusjuhend lisas?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kas kaart tuvastati? Milliseid pakette ja teenuseid paigaldusjuhend lisas?</p>
+</div>
 <h2 id="5-osa-kali-linux">5. osa. Kali Linux<a class="headerlink" href="#5-osa-kali-linux" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Hoiatus</p>
@@ -4656,15 +4704,24 @@ cat<span class="w"> </span>/etc/os-release
 dpkg<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">"^ii"</span>
 apt-cache<span class="w"> </span>search<span class="w"> </span>kali-tools<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
 </code></pre></div>
-<p><strong>K8.</strong> Millisel Debiani harul Kali põhineb? Mitu paketti on paigaldatud? Milliseid tööriistade rühmi (<code>kali-tools-*</code>) leidsid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Millisel Debiani harul Kali põhineb? Mitu paketti on paigaldatud? Milliseid tööriistade rühmi (<code>kali-tools-*</code>) leidsid?</p>
+</div>
 <p><strong>5.2</strong> Uuri laborivõrku (ainult oma masinad või õpetaja määratud sihtmärk):</p>
 <div class="highlight"><pre><span></span><code>ip<span class="w"> </span>-br<span class="w"> </span>a
 sudo<span class="w"> </span>netdiscover<span class="w"> </span>-r<span class="w"> </span>VORK<span class="w"> </span>-P
 sudo<span class="w"> </span>nmap<span class="w"> </span>-sV<span class="w"> </span>-O<span class="w"> </span>SIHT_IP
 </code></pre></div>
-<p><strong>K9.</strong> Milliseid masinaid ja teenuseid leidsid? Kuidas tuvastas <code>nmap</code> operatsioonisüsteemi ja teenuste versioonid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Milliseid masinaid ja teenuseid leidsid? Kuidas tuvastas <code>nmap</code> operatsioonisüsteemi ja teenuste versioonid?</p>
+</div>
 <p><strong>5.3</strong> Ava Ubuntu serveris (nt laboritöö 11 masinas) <code>sudo tail -f /var/log/auth.log</code> või <code>journalctl -f</code> ja käivita Kalist sama masina vastu <code>nmap -sS</code>. Vaata, kas skaneerimine jättis jälje logidesse (või fail2ban / ufw logidesse).</p>
-<p><strong>K10.</strong> Kas skaneerimist oli serveri poolelt näha? Miks peab testimiseks alati olema luba?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kas skaneerimist oli serveri poolelt näha? Miks peab testimiseks alati olema luba?</p>
+</div>
 <h2 id="6-osa-wsl">6. osa. WSL<a class="headerlink" href="#6-osa-wsl" title="Permanent link">&para;</a></h2>
 <p>Tee see osa oma Windows 11 arvutis või laboris Windowsi VM-is (vajab pesastatud virtualiseerimist, vt teooria punkt 22.9).</p>
 <p><strong>6.1</strong> Paigalda Debian (PowerShell administraatorina):</p>
@@ -4680,7 +4737,10 @@ ps<span class="w"> </span>-p<span class="w"> </span><span class="m">1</span><spa
 ip<span class="w"> </span>-br<span class="w"> </span>a
 df<span class="w"> </span>-h<span class="w"> </span>/
 </code></pre></div>
-<p><strong>K11.</strong> Mis kernel töötab (<code>uname -r</code>)? Kas PID 1 on <code>systemd</code> või <code>init</code>? Mis on WSL-i masina IP-aadress ja kuidas see erineb Windowsi omast?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mis kernel töötab (<code>uname -r</code>)? Kas PID 1 on <code>systemd</code> või <code>init</code>? Mis on WSL-i masina IP-aadress ja kuidas see erineb Windowsi omast?</p>
+</div>
 <p><strong>6.2</strong> Kui PID 1 ei ole <code>systemd</code>, lülita see sisse (<code>/etc/wsl.conf</code>, punkt 22.9), käivita PowerShellis <code>wsl --shutdown</code> ja kontrolli uuesti <code>systemctl status</code>.</p>
 <p><strong>6.3</strong> Failid kahe süsteemi vahel:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/mnt/c/Users/
@@ -4696,7 +4756,10 @@ notepad.exe<span class="w"> </span>~/test.txt
 <div class="highlight"><pre><span></span><code><span class="nb">time</span><span class="w"> </span><span class="o">(</span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1000</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$i</span><span class="w"> </span>&gt;<span class="w"> </span>~/kiirus_<span class="nv">$i</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="o">)</span><span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>~/kiirus_*
 mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/c/Temp/wsl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="o">(</span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1000</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$i</span><span class="w"> </span>&gt;<span class="w"> </span>/mnt/c/Temp/wsl/kiirus_<span class="nv">$i</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="o">)</span><span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/mnt/c/Temp/wsl
 </code></pre></div>
-<p><strong>K12.</strong> Kui suur oli erinevus? Kuhu peaksid seega hoidma oma Giti projekte, kui töötad WSL-is?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kui suur oli erinevus? Kuhu peaksid seega hoidma oma Giti projekte, kui töötad WSL-is?</p>
+</div>
 <p><strong>6.5</strong> Käivita Linuxi graafiline programm (WSLg):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>x11-apps<span class="w"> </span>gedit
 xeyes<span class="w"> </span><span class="p">&amp;</span>
@@ -4710,20 +4773,44 @@ gedit<span class="w"> </span><span class="p">&amp;</span>
 <span class="n">wsl</span> <span class="n">-d</span> <span class="n">DebianTest</span> <span class="p">--</span> <span class="nb">cat </span><span class="p">~/</span><span class="n">test</span><span class="p">.</span><span class="n">txt</span>
 <span class="n">wsl</span> <span class="p">-</span><span class="n">-unregister</span> <span class="n">DebianTest</span>
 </code></pre></div>
-<p><strong>K13.</strong> Mis on <code>wsl --export</code> faili suurus? Millise kasutajana DebianTest käivitus ja miks (vihje: <code>[user]</code> jaotis <code>wsl.conf</code>-is)? Mida teeb <code>--unregister</code> ja miks peab sellega ettevaatlik olema?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mis on <code>wsl --export</code> faili suurus? Millise kasutajana DebianTest käivitus ja miks (vihje: <code>[user]</code> jaotis <code>wsl.conf</code>-is)? Mida teeb <code>--unregister</code> ja miks peab sellega ettevaatlik olema?</p>
+</div>
 <p><strong>6.7</strong> Kasuta WSL-i kursuse tööriistana: paigalda Debianis <code>git</code>, <code>ansible</code>, <code>shellcheck</code> ja ühendu SSH-ga oma laborimasinasse.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>ansible<span class="w"> </span>shellcheck<span class="w"> </span>openssh-client
 ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
 ssh<span class="w"> </span>kasutaja@SERVER_IP
 </code></pre></div>
-<p><strong>K14.</strong> Milliseid kursuse mooduleid saaks WSL-is täielikult läbi teha ja milliseid mitte? Too kummastki vähemalt kaks näidet ja põhjenda.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Milliseid kursuse mooduleid saaks WSL-is täielikult läbi teha ja milliseid mitte? Too kummastki vähemalt kaks näidet ja põhjenda.</p>
+</div>
 <h2 id="7-osa-kokkuvõte">7. osa. Kokkuvõte<a class="headerlink" href="#7-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K15.</strong> Joonista Ubuntu töölaua kihid riistvarast rakendusteni ja märgi, millised programmid sinu masinas igal kihil töötavad.</p>
-<p><strong>K16.</strong> Kirjelda, kuidas Proton võimaldab Windowsi mänge Linuxis mängida. Mis on SteamOS-i kui muutumatu distro eelised tavakasutajale?</p>
-<p><strong>K17.</strong> Kool kaalub ühe arvutiklassi viimist Windowsilt Linuxile. Too kolm argumenti poolt ja kolm vastu (nt tarkvara, koolitus, haldus, kulud, sõltumatus, eksamid ja ID-kaart).</p>
-<p><strong>K18.</strong> Milliseid kooli tunnis kasutatavaid programme saab Linuxis kasutada otse, milliseid alternatiiviga ja milliseid ainult brauseris või virtuaalmasinas?</p>
-<p><strong>K19.</strong> Millal kasutaksid Linuxit WSL-is, millal virtuaalmasinas ja millal otse riistvaral? Too igaühe kohta näide.</p>
-<p><strong>K20.</strong> Miks ei soovitata Kalit igapäevaseks töölauaks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Joonista Ubuntu töölaua kihid riistvarast rakendusteni ja märgi, millised programmid sinu masinas igal kihil töötavad.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Kirjelda, kuidas Proton võimaldab Windowsi mänge Linuxis mängida. Mis on SteamOS-i kui muutumatu distro eelised tavakasutajale?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Kool kaalub ühe arvutiklassi viimist Windowsilt Linuxile. Too kolm argumenti poolt ja kolm vastu (nt tarkvara, koolitus, haldus, kulud, sõltumatus, eksamid ja ID-kaart).</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Milliseid kooli tunnis kasutatavaid programme saab Linuxis kasutada otse, milliseid alternatiiviga ja milliseid ainult brauseris või virtuaalmasinas?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K19</p>
+<p>Millal kasutaksid Linuxit WSL-is, millal virtuaalmasinas ja millal otse riistvaral? Too igaühe kohta näide.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K20</p>
+<p>Miks ei soovitata Kalit igapäevaseks töölauaks?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4732,6 +4819,34 @@ ssh<span class="w"> </span>kasutaja@SERVER_IP
 <li><strong>Steam:</strong> kui sul on Linuxi arvuti graafikakaardiga, paigalda Steam, luba Proton ja proovi mõnda mängu. Vaata selle hinnangut ProtonDB-s.</li>
 <li><strong>Mitu distrot WSL-is:</strong> paigalda WSL-i ka AlmaLinux, tee mõlemas sama ülesanne (nt paigalda <code>nginx</code> ja ava see Windowsi brauseris <code>http://localhost</code>) ja võrdle käske.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Kas seanss on Wayland või X11? Milline programm on sisselogimishaldur? Kas töötab ka XWayland ja miks? Kui palju mälu töölaud kasutab?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Mida võimaldab <code>spice-vdagent</code>? Mida näed nüüd Proxmoxi VM-i <em>Summary</em> lehel (IP-aadressid)?</li>
+<li><strong>K3.</strong> <em>(punkt 2.2)</em> Võrdle versioone ja ruumikasutust. Milliseid õigusi Flatpaki GIMP saab? Kumb paigaldusviis on sinu arvates parem koolis kasutamiseks ja miks?</li>
+<li><strong>K4.</strong> <em>(punkt 3.1)</em> Kas Xfce töötab Waylandis või X11-s? Võrdle mälukasutust GNOME-iga. Millal eelistaksid kergemat töölauda?</li>
+<li><strong>K5.</strong> <em>(punkt 4.1)</em> Kas ühendus õnnestus? Mis on RDP eelis Proxmoxi konsooli ees ja mis on riskid, kui RDP port on internetist kättesaadav?</li>
+<li><strong>K6.</strong> <em>(punkt 4.4)</em> Mida Timeshift vaikimisi varundab ja mida mitte (vaata seadeid <em>Users</em>)? Mis vahe on Timeshiftil ja Proxmoxi hetktõmmisel?</li>
+<li><strong>K7.</strong> <em>(punkt 4.5)</em> Kas kaart tuvastati? Milliseid pakette ja teenuseid paigaldusjuhend lisas?</li>
+<li><strong>K8.</strong> <em>(punkt 5.1)</em> Millisel Debiani harul Kali põhineb? Mitu paketti on paigaldatud? Milliseid tööriistade rühmi (<code>kali-tools-*</code>) leidsid?</li>
+<li><strong>K9.</strong> <em>(punkt 5.2)</em> Milliseid masinaid ja teenuseid leidsid? Kuidas tuvastas <code>nmap</code> operatsioonisüsteemi ja teenuste versioonid?</li>
+<li><strong>K10.</strong> <em>(punkt 5.3)</em> Kas skaneerimist oli serveri poolelt näha? Miks peab testimiseks alati olema luba?</li>
+<li><strong>K11.</strong> <em>(punkt 6.1)</em> Mis kernel töötab (<code>uname -r</code>)? Kas PID 1 on <code>systemd</code> või <code>init</code>? Mis on WSL-i masina IP-aadress ja kuidas see erineb Windowsi omast?</li>
+<li><strong>K12.</strong> <em>(punkt 6.4)</em> Kui suur oli erinevus? Kuhu peaksid seega hoidma oma Giti projekte, kui töötad WSL-is?</li>
+<li><strong>K13.</strong> <em>(punkt 6.6)</em> Mis on <code>wsl --export</code> faili suurus? Millise kasutajana DebianTest käivitus ja miks (vihje: <code>[user]</code> jaotis <code>wsl.conf</code>-is)? Mida teeb <code>--unregister</code> ja miks peab sellega ettevaatlik olema?</li>
+<li><strong>K14.</strong> <em>(punkt 6.7)</em> Milliseid kursuse mooduleid saaks WSL-is täielikult läbi teha ja milliseid mitte? Too kummastki vähemalt kaks näidet ja põhjenda.</li>
+<li><strong>K15.</strong> <em>(7. osa)</em> Joonista Ubuntu töölaua kihid riistvarast rakendusteni ja märgi, millised programmid sinu masinas igal kihil töötavad.</li>
+<li><strong>K16.</strong> <em>(7. osa)</em> Kirjelda, kuidas Proton võimaldab Windowsi mänge Linuxis mängida. Mis on SteamOS-i kui muutumatu distro eelised tavakasutajale?</li>
+<li><strong>K17.</strong> <em>(7. osa)</em> Kool kaalub ühe arvutiklassi viimist Windowsilt Linuxile. Too kolm argumenti poolt ja kolm vastu (nt tarkvara, koolitus, haldus, kulud, sõltumatus, eksamid ja ID-kaart).</li>
+<li><strong>K18.</strong> <em>(7. osa)</em> Milliseid kooli tunnis kasutatavaid programme saab Linuxis kasutada otse, milliseid alternatiiviga ja milliseid ainult brauseris või virtuaalmasinas?</li>
+<li><strong>K19.</strong> <em>(7. osa)</em> Millal kasutaksid Linuxit WSL-is, millal virtuaalmasinas ja millal otse riistvaral? Too igaühe kohta näide.</li>
+<li><strong>K20.</strong> <em>(7. osa)</em> Miks ei soovitata Kalit igapäevaseks töölauaks?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

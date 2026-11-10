@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1883,34 +1885,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,86 +4407,170 @@
 
 
 <h1 id="moodul-10-enesekontroll">Moodul 10. Enesekontroll<a class="headerlink" href="#moodul-10-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Nimeta Linuxi alglaadimise etapid õiges järjekorras.</li>
-<li>Mis vahe on BIOS-il ja UEFI-l? Kuidas teada saada, kumba süsteem kasutas?</li>
-<li>Milline fail tuleb GRUB-i seadistamiseks muuta ja millise käsuga muudatus Debianis rakendada?</li>
-<li>Kuidas muuta kerneli parameetreid ainult üheks alglaadimiseks?</li>
-<li>Mis on initramfs ja miks seda vaja on?</li>
-<li>Miks jätab pakihaldur kerneli uuendamisel alles ka eelmise kerneli?</li>
-<li>Mis vahe on eesmärkidel <code>rescue.target</code> ja <code>emergency.target</code>?</li>
-<li>Kuidas teada saada, milline teenus alglaadimist kõige rohkem aeglustab?</li>
-<li>Mis on <code>/proc</code> ja <code>/sys</code>? Kas need asuvad kettal?</li>
-<li>Mis on kerneli moodul? Kuidas laadida ja eemaldada moodulit?</li>
-<li>Mida takistab rida <code>blacklist moodul</code> failis <code>/etc/modprobe.d/</code>?</li>
-<li>Kuidas muuta kerneli parameetrit nii, et muudatus jääb püsima ka pärast taaskäivitust?</li>
-<li>Süsteem käivitub hädaolukorra režiimis. Mis on levinuim põhjus ja kuidas seda parandada?</li>
-<li>Kirjelda juurkasutaja parooli lähtestamist Debianis.</li>
-<li>Miks tuleb AlmaLinuxis pärast parooli lähtestamist käivitada <code>touch /.autorelabel</code>?</li>
-<li>Kuidas käivitada Debianis vanem kernel ainult üheks korraks? Mis seadistus on selleks vajalik?</li>
-<li>Mida teevad käsud <code>make olddefconfig</code>, <code>make localmodconfig</code> ja <code>make bindeb-pkg</code>?</li>
-<li>Miks on parem paigaldada isekompileeritud kernel <code>.deb</code> paketina kui käsuga <code>make install</code>?</li>
-<li>Masin näitab <code>grub rescue&gt;</code>. Kirjelda kahte viisi GRUB-i parandamiseks.</li>
-<li>Miks seotakse enne <code>chroot</code>-i kataloogid <code>/dev</code>, <code>/proc</code> ja <code>/sys</code>? Mida tuleb lisaks teha LVM-iga süsteemis?</li>
-<li>Mis vahe on <code>Requires=</code> ja <code>After=</code> seadetel? Miks on vaja <code>Wants=network-online.target</code> ja <code>After=network-online.target</code>, mitte ainult <code>network.target</code>?</li>
-<li>Millal kasutad <code>Type=oneshot</code> ja millal <code>Type=notify</code>? Mida teeb <code>RemainAfterExit=yes</code>?</li>
-<li>Mis on systemd mall (<code>nimi@.service</code>) ja pesa aktiveerimine? Too kummagi kohta üks näide.</li>
-<li>Mida teevad <code>DynamicUser=yes</code>, <code>ProtectSystem=strict</code> ja <code>NoNewPrivileges=yes</code>? Kuidas hinnata teenuse turvalisust?</li>
-<li>Teenus näitab <code>status=203/EXEC</code> ja teine teatab „Start request repeated too quickly“. Mida need tähendavad ja kuidas edasi uurid?</li>
-</ol>
-<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Leia ühe käsuga, mitu sekundit masin on töötanud (failist <code>/proc</code>).</li>
-<li>Leia kõik kerneli moodulid, mille nimes on <code>virtio</code>, ja nende suurused.</li>
-<li>Kuva kolm teenust, mille käivitamine võttis kõige kauem aega.</li>
-<li>Kuva eelmise alglaadimise vead.</li>
-<li>Muuda püsivalt <code>vm.swappiness</code> väärtuseks 20 ja kontrolli tulemust.</li>
-<li>Lisa Debianis kõigile kernelikirjetele püsivalt parameeter <code>nomodeset</code>.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Püsivara (UEFI/BIOS) → alglaadija (GRUB) → kernel ja initramfs → systemd (PID 1) → teenused ja sisselogimine.</li>
-<li>BIOS on vanem püsivara, mis kasutab tavaliselt MBR-i ja laadib alglaadija ketta esimestest sektoritest. UEFI on tänapäevane standard, kasutab GPT-d, alglaadija on fail EFI süsteempartitsioonil ja toetab turvalist alglaadimist. Kontroll: kui kataloog <code>/sys/firmware/efi</code> on olemas, käivitus süsteem UEFI-ga.</li>
-<li><code>/etc/default/grub</code>, seejärel <code>sudo update-grub</code>.</li>
-<li>GRUB-i menüüs vajuta <strong>e</strong>, lisa parameeter rea <code>linux</code> lõppu ja käivita <strong>Ctrl+X</strong>-ga.</li>
-<li>Väike ajutine failisüsteem, mis laaditakse koos kerneliga mällu ja sisaldab juurfailisüsteemi haakimiseks vajalikke draivereid ja tööriistu (nt LVM, RAID, krüpteering).</li>
-<li>Et saaks GRUB-i menüüst valida vana kerneli, kui uus ei käivitu.</li>
-<li><code>rescue.target</code> haagib kõik failisüsteemid ja käivitab põhiteenused (ilma võrguta). <code>emergency.target</code> haagib ainult juurfailisüsteemi (sageli ainult lugemiseks) ega käivita peaaegu midagi.</li>
-<li><code>systemd-analyze blame</code> (teenuste käivitusajad) ja <code>systemd-analyze critical-chain</code> (tegelik pudelikael).</li>
-<li>Virtuaalsed failisüsteemid, mille sisu genereerib kernel lugemise hetkel. Kettal need ei asu. <code>/proc</code> sisaldab protsesside ja kerneli infot, <code>/sys</code> seadmete ja draiverite infot.</li>
-<li>Kerneli osa (nt draiver), mida saab laadida ja eemaldada töö ajal. Laadimine <code>modprobe nimi</code>, eemaldamine <code>modprobe -r nimi</code>.</li>
-<li>Mooduli <strong>automaatset</strong> laadimist (nt riistvara tuvastamisel aliase järgi). Käsitsi <code>modprobe nimi</code> laadib selle siiski.</li>
-<li>Loo fail kataloogi <code>/etc/sysctl.d/</code> (nt <code>90-minu.conf</code>) reaga <code>parameeter = väärtus</code> ja käivita <code>sudo sysctl --system</code>.</li>
-<li>Vigane <code>/etc/fstab</code> (olematu seade ilma <code>nofail</code>-ita). Logi sisse juurkasutajana, haagi juurfailisüsteem kirjutatavaks (<code>mount -o remount,rw /</code>), paranda fstab ja käivita <code>systemctl default</code>.</li>
-<li>GRUB-is vajuta <strong>e</strong>, lisa rea <code>linux</code> lõppu <code>init=/bin/bash</code>, käivita <strong>Ctrl+X</strong>. Kestas: <code>mount -o remount,rw /</code>, <code>passwd</code>, <code>sync</code>, <code>exec /sbin/init</code>.</li>
-<li>
+<p><strong>1.</strong> Nimeta Linuxi alglaadimise etapid õiges järjekorras.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Püsivara (UEFI/BIOS) → alglaadija (GRUB) → kernel ja initramfs → systemd (PID 1) → teenused ja sisselogimine.</p>
+</details>
+<p><strong>2.</strong> Mis vahe on BIOS-il ja UEFI-l? Kuidas teada saada, kumba süsteem kasutas?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>BIOS on vanem püsivara, mis kasutab tavaliselt MBR-i ja laadib alglaadija ketta esimestest sektoritest. UEFI on tänapäevane standard, kasutab GPT-d, alglaadija on fail EFI süsteempartitsioonil ja toetab turvalist alglaadimist. Kontroll: kui kataloog <code>/sys/firmware/efi</code> on olemas, käivitus süsteem UEFI-ga.</p>
+</details>
+<p><strong>3.</strong> Milline fail tuleb GRUB-i seadistamiseks muuta ja millise käsuga muudatus Debianis rakendada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>/etc/default/grub</code>, seejärel <code>sudo update-grub</code>.</p>
+</details>
+<p><strong>4.</strong> Kuidas muuta kerneli parameetreid ainult üheks alglaadimiseks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>GRUB-i menüüs vajuta <strong>e</strong>, lisa parameeter rea <code>linux</code> lõppu ja käivita <strong>Ctrl+X</strong>-ga.</p>
+</details>
+<p><strong>5.</strong> Mis on initramfs ja miks seda vaja on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Väike ajutine failisüsteem, mis laaditakse koos kerneliga mällu ja sisaldab juurfailisüsteemi haakimiseks vajalikke draivereid ja tööriistu (nt LVM, RAID, krüpteering).</p>
+</details>
+<p><strong>6.</strong> Miks jätab pakihaldur kerneli uuendamisel alles ka eelmise kerneli?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Et saaks GRUB-i menüüst valida vana kerneli, kui uus ei käivitu.</p>
+</details>
+<p><strong>7.</strong> Mis vahe on eesmärkidel <code>rescue.target</code> ja <code>emergency.target</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>rescue.target</code> haagib kõik failisüsteemid ja käivitab põhiteenused (ilma võrguta). <code>emergency.target</code> haagib ainult juurfailisüsteemi (sageli ainult lugemiseks) ega käivita peaaegu midagi.</p>
+</details>
+<p><strong>8.</strong> Kuidas teada saada, milline teenus alglaadimist kõige rohkem aeglustab?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>systemd-analyze blame</code> (teenuste käivitusajad) ja <code>systemd-analyze critical-chain</code> (tegelik pudelikael).</p>
+</details>
+<p><strong>9.</strong> Mis on <code>/proc</code> ja <code>/sys</code>? Kas need asuvad kettal?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Virtuaalsed failisüsteemid, mille sisu genereerib kernel lugemise hetkel. Kettal need ei asu. <code>/proc</code> sisaldab protsesside ja kerneli infot, <code>/sys</code> seadmete ja draiverite infot.</p>
+</details>
+<p><strong>10.</strong> Mis on kerneli moodul? Kuidas laadida ja eemaldada moodulit?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kerneli osa (nt draiver), mida saab laadida ja eemaldada töö ajal. Laadimine <code>modprobe nimi</code>, eemaldamine <code>modprobe -r nimi</code>.</p>
+</details>
+<p><strong>11.</strong> Mida takistab rida <code>blacklist moodul</code> failis <code>/etc/modprobe.d/</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mooduli <strong>automaatset</strong> laadimist (nt riistvara tuvastamisel aliase järgi). Käsitsi <code>modprobe nimi</code> laadib selle siiski.</p>
+</details>
+<p><strong>12.</strong> Kuidas muuta kerneli parameetrit nii, et muudatus jääb püsima ka pärast taaskäivitust?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Loo fail kataloogi <code>/etc/sysctl.d/</code> (nt <code>90-minu.conf</code>) reaga <code>parameeter = väärtus</code> ja käivita <code>sudo sysctl --system</code>.</p>
+</details>
+<p><strong>13.</strong> Süsteem käivitub hädaolukorra režiimis. Mis on levinuim põhjus ja kuidas seda parandada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Vigane <code>/etc/fstab</code> (olematu seade ilma <code>nofail</code>-ita). Logi sisse juurkasutajana, haagi juurfailisüsteem kirjutatavaks (<code>mount -o remount,rw /</code>), paranda fstab ja käivita <code>systemctl default</code>.</p>
+</details>
+<p><strong>14.</strong> Kirjelda juurkasutaja parooli lähtestamist Debianis.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>GRUB-is vajuta <strong>e</strong>, lisa rea <code>linux</code> lõppu <code>init=/bin/bash</code>, käivita <strong>Ctrl+X</strong>. Kestas: <code>mount -o remount,rw /</code>, <code>passwd</code>, <code>sync</code>, <code>exec /sbin/init</code>.</p>
+</details>
+<p><strong>15.</strong> Miks tuleb AlmaLinuxis pärast parooli lähtestamist käivitada <code>touch /.autorelabel</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
 <p>SELinux märgistab iga faili. <code>passwd</code> loob faili <code>/etc/shadow</code> uuesti ilma õige SELinuxi märgiseta, mistõttu sisselogimine võib ebaõnnestuda. <code>/.autorelabel</code> paneb süsteemi järgmisel alglaadimisel kõik failid uuesti märgistama.</p>
-</li>
-<li>
+</details>
+<p><strong>16.</strong> Kuidas käivitada Debianis vanem kernel ainult üheks korraks? Mis seadistus on selleks vajalik?</p>
+<details class="success">
+<summary>Vastus</summary>
 <p>Failis <code>/etc/default/grub</code> peab olema <code>GRUB_DEFAULT=saved</code> (ja <code>update-grub</code> käivitatud). Seejärel <code>sudo grub-reboot "Advanced options for Debian GNU/Linux&gt;…kirje nimi…"</code> ja taaskäivitus.</p>
-</li>
-<li><code>olddefconfig</code> - võtab aluseks olemasoleva <code>.config</code>-i ja annab uutele valikutele vaikeväärtused; <code>localmodconfig</code> - jätab moodulitest alles ainult praegu laaditud; <code>bindeb-pkg</code> - kompileerib kerneli ja loob sellest <code>.deb</code> paketid.</li>
-<li>Pakihaldur teab kernelist: selle saab puhtalt eemaldada (<code>apt remove</code>), paigaldamisel genereeritakse automaatselt initramfs ja GRUB-i kirje ning paketti saab kopeerida ja paigaldada teistesse masinatesse.</li>
-<li>Debiani paigaldusmeedia taastamisrežiim → <em>Reinstall GRUB boot loader</em>; või live-meedia: haagi juurfailisüsteem kataloogi <code>/mnt</code>, seo <code>/dev</code>, <code>/proc</code>, <code>/sys</code>, <code>/run</code>, <code>chroot /mnt</code>, <code>grub-install /dev/sda</code>, <code>update-grub</code>.</li>
-<li><code>chroot</code>-i sees töötavad programmid vajavad seadmefaile ja kerneli liideseid, mida tühi kataloog ei sisalda. LVM-i puhul tuleb enne haakimist köitegrupid aktiveerida: <code>vgscan</code>, <code>vgchange -ay</code>.</li>
-<li><code>Requires=</code> on sõltuvus (käivita ka see; kui see ebaõnnestub, ebaõnnestu ka ise), <code>After=</code> ainult järjekord. Ilma <code>After</code>-ita käivitatakse mõlemad korraga. <code>network.target</code> tähendab ainult võrguhalduse alustamist; <code>network-online.target</code> ootab, kuni võrk on päriselt kasutatav - see tuleb <code>Wants</code>-iga tõmmata ja <code>After</code>-iga oodata.</li>
-<li><code>oneshot</code> - ühekordne töö, mis lõpetab (varundus, taimeri teenus); systemd ootab lõpetamist. <code>notify</code> - programm teatab ise, et on valmis (nt nginx, PostgreSQL), kõige täpsem. <code>RemainAfterExit=yes</code> jätab oneshot-teenuse pärast lõpetamist olekusse <code>active</code> (nt seadistuse rakendamine).</li>
-<li>Mall on üksuse fail, millest käivitatakse mitu eksemplari, <code>%i</code> asendub eksemplari nimega (<code>getty@tty1</code>, <code>wg-quick@wg0</code>). Pesa aktiveerimisel kuulab systemd porti ja käivitab teenuse alles ühenduse saabumisel (<code>ssh.socket</code> Ubuntus, <code>kell.socket</code> laboris).</li>
-<li><code>DynamicUser</code> - teenus töötab ajutise kasutajana; <code>ProtectSystem=strict</code> - failisüsteem on teenusele ainult lugemiseks; <code>NoNewPrivileges</code> - teenus ei saa õigusi juurde (SUID). Hinnang: <code>systemd-analyze security teenus</code> (0-10, väiksem parem) koos soovitustega.</li>
-<li><code>203/EXEC</code> - <code>ExecStart</code> programmi ei leitud või see pole käivitatav. „Repeated too quickly“ - teenus jooksis korduvalt kokku ja ületas <code>StartLimitBurst</code>-i. Uuri <code>journalctl -xeu teenus</code> (esimene viga), <code>systemctl cat</code>, <code>systemd-analyze verify</code>; pärast parandust <code>systemctl reset-failed</code> ja uuesti käivitamine.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+</details>
+<p><strong>17.</strong> Mida teevad käsud <code>make olddefconfig</code>, <code>make localmodconfig</code> ja <code>make bindeb-pkg</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>olddefconfig</code> - võtab aluseks olemasoleva <code>.config</code>-i ja annab uutele valikutele vaikeväärtused; <code>localmodconfig</code> - jätab moodulitest alles ainult praegu laaditud; <code>bindeb-pkg</code> - kompileerib kerneli ja loob sellest <code>.deb</code> paketid.</p>
+</details>
+<p><strong>18.</strong> Miks on parem paigaldada isekompileeritud kernel <code>.deb</code> paketina kui käsuga <code>make install</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pakihaldur teab kernelist: selle saab puhtalt eemaldada (<code>apt remove</code>), paigaldamisel genereeritakse automaatselt initramfs ja GRUB-i kirje ning paketti saab kopeerida ja paigaldada teistesse masinatesse.</p>
+</details>
+<p><strong>19.</strong> Masin näitab <code>grub rescue&gt;</code>. Kirjelda kahte viisi GRUB-i parandamiseks.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Debiani paigaldusmeedia taastamisrežiim → <em>Reinstall GRUB boot loader</em>; või live-meedia: haagi juurfailisüsteem kataloogi <code>/mnt</code>, seo <code>/dev</code>, <code>/proc</code>, <code>/sys</code>, <code>/run</code>, <code>chroot /mnt</code>, <code>grub-install /dev/sda</code>, <code>update-grub</code>.</p>
+</details>
+<p><strong>20.</strong> Miks seotakse enne <code>chroot</code>-i kataloogid <code>/dev</code>, <code>/proc</code> ja <code>/sys</code>? Mida tuleb lisaks teha LVM-iga süsteemis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>chroot</code>-i sees töötavad programmid vajavad seadmefaile ja kerneli liideseid, mida tühi kataloog ei sisalda. LVM-i puhul tuleb enne haakimist köitegrupid aktiveerida: <code>vgscan</code>, <code>vgchange -ay</code>.</p>
+</details>
+<p><strong>21.</strong> Mis vahe on <code>Requires=</code> ja <code>After=</code> seadetel? Miks on vaja <code>Wants=network-online.target</code> ja <code>After=network-online.target</code>, mitte ainult <code>network.target</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>Requires=</code> on sõltuvus (käivita ka see; kui see ebaõnnestub, ebaõnnestu ka ise), <code>After=</code> ainult järjekord. Ilma <code>After</code>-ita käivitatakse mõlemad korraga. <code>network.target</code> tähendab ainult võrguhalduse alustamist; <code>network-online.target</code> ootab, kuni võrk on päriselt kasutatav - see tuleb <code>Wants</code>-iga tõmmata ja <code>After</code>-iga oodata.</p>
+</details>
+<p><strong>22.</strong> Millal kasutad <code>Type=oneshot</code> ja millal <code>Type=notify</code>? Mida teeb <code>RemainAfterExit=yes</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>oneshot</code> - ühekordne töö, mis lõpetab (varundus, taimeri teenus); systemd ootab lõpetamist. <code>notify</code> - programm teatab ise, et on valmis (nt nginx, PostgreSQL), kõige täpsem. <code>RemainAfterExit=yes</code> jätab oneshot-teenuse pärast lõpetamist olekusse <code>active</code> (nt seadistuse rakendamine).</p>
+</details>
+<p><strong>23.</strong> Mis on systemd mall (<code>nimi@.service</code>) ja pesa aktiveerimine? Too kummagi kohta üks näide.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mall on üksuse fail, millest käivitatakse mitu eksemplari, <code>%i</code> asendub eksemplari nimega (<code>getty@tty1</code>, <code>wg-quick@wg0</code>). Pesa aktiveerimisel kuulab systemd porti ja käivitab teenuse alles ühenduse saabumisel (<code>ssh.socket</code> Ubuntus, <code>kell.socket</code> laboris).</p>
+</details>
+<p><strong>24.</strong> Mida teevad <code>DynamicUser=yes</code>, <code>ProtectSystem=strict</code> ja <code>NoNewPrivileges=yes</code>? Kuidas hinnata teenuse turvalisust?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>DynamicUser</code> - teenus töötab ajutise kasutajana; <code>ProtectSystem=strict</code> - failisüsteem on teenusele ainult lugemiseks; <code>NoNewPrivileges</code> - teenus ei saa õigusi juurde (SUID). Hinnang: <code>systemd-analyze security teenus</code> (0-10, väiksem parem) koos soovitustega.</p>
+</details>
+<p><strong>25.</strong> Teenus näitab <code>status=203/EXEC</code> ja teine teatab „Start request repeated too quickly“. Mida need tähendavad ja kuidas edasi uurid?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>203/EXEC</code> - <code>ExecStart</code> programmi ei leitud või see pole käivitatav. „Repeated too quickly“ - teenus jooksis korduvalt kokku ja ületas <code>StartLimitBurst</code>-i. Uuri <code>journalctl -xeu teenus</code> (esimene viga), <code>systemctl cat</code>, <code>systemd-analyze verify</code>; pärast parandust <code>systemctl reset-failed</code> ja uuesti käivitamine.</p>
+</details>
+<h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
+<p><strong>1.</strong> Leia ühe käsuga, mitu sekundit masin on töötanud (failist <code>/proc</code>).</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>cut<span class="w"> </span>-d<span class="s1">' '</span><span class="w"> </span>-f1<span class="w"> </span>/proc/uptime
-lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>virtio
-systemd-analyze<span class="w"> </span>blame<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
-journalctl<span class="w"> </span>-b<span class="w"> </span>-1<span class="w"> </span>-p<span class="w"> </span>err
-<span class="nb">echo</span><span class="w"> </span><span class="s2">"vm.swappiness = 20"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/90-swappiness.conf
+</code></pre></div>
+</details>
+<p><strong>2.</strong> Leia kõik kerneli moodulid, mille nimes on <code>virtio</code>, ja nende suurused.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>virtio
+</code></pre></div>
+</details>
+<p><strong>3.</strong> Kuva kolm teenust, mille käivitamine võttis kõige kauem aega.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>systemd-analyze<span class="w"> </span>blame<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+</code></pre></div>
+</details>
+<p><strong>4.</strong> Kuva eelmise alglaadimise vead.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>-b<span class="w"> </span>-1<span class="w"> </span>-p<span class="w"> </span>err
+</code></pre></div>
+</details>
+<p><strong>5.</strong> Muuda püsivalt <code>vm.swappiness</code> väärtuseks 20 ja kontrolli tulemust.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"vm.swappiness = 20"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/90-swappiness.conf
 sudo<span class="w"> </span>sysctl<span class="w"> </span>--system<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sysctl<span class="w"> </span>vm.swappiness
 </code></pre></div>
-<p>Ülesanne 6: muuda failis <code>/etc/default/grub</code> rida <code>GRUB_CMDLINE_LINUX="nomodeset"</code> ja käivita <code>sudo update-grub</code>. Kontrolli pärast taaskäivitust käsuga <code>cat /proc/cmdline</code>. (<code>GRUB_CMDLINE_LINUX</code> kehtib kõigile kirjetele, ka taastamisrežiimile, <code>GRUB_CMDLINE_LINUX_DEFAULT</code> ainult tavalisele käivitusele.)</p>
+</details>
+<p><strong>6.</strong> Lisa Debianis kõigile kernelikirjetele püsivalt parameeter <code>nomodeset</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<p>Muuda failis <code>/etc/default/grub</code> rida <code>GRUB_CMDLINE_LINUX="nomodeset"</code> ja käivita <code>sudo update-grub</code>. Kontrolli pärast taaskäivitust käsuga <code>cat /proc/cmdline</code>. (<code>GRUB_CMDLINE_LINUX</code> kehtib kõigile kirjetele, ka taastamisrežiimile, <code>GRUB_CMDLINE_LINUX_DEFAULT</code> ainult tavalisele käivitusele.)</p>
+</details>
 
 
 

@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3975,34 +3977,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,57 +4407,99 @@
 
 
 <h1 id="moodul-24-enesekontroll">Moodul 24. Enesekontroll<a class="headerlink" href="#moodul-24-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Milliseid probleeme lahendab konteinerite orkestreerimine võrreldes Quadleti või Compose'iga ühes masinas? Millal Kubernetest ei tasu kasutada?</li>
-<li>Nimeta Kubernetese juhtkihi komponendid ja sõlme komponendid ning nende ülesanded.</li>
-<li>Mida tähendab deklaratiivne haldus ja „soovitud olek“? Too näide.</li>
-<li>Mis vahe on k3s-il, kubeadm-il ja minikube'il? Miks kasutatakse süsteemihalduse kursusel k3s-i?</li>
-<li>Mis on pod ja miks ei käivitata rakendust tavaliselt otse podina, vaid Deploymentiga?</li>
-<li>Mis on Service ja kuidas see teab, millistele podidele liiklust saata? Nimeta kolm teenuse tüüpi.</li>
-<li>Mis vahe on <code>readinessProbe</code>-il ja <code>livenessProbe</code>-il?</li>
-<li>Mis vahe on ressursside <code>requests</code> ja <code>limits</code> väärtustel? Mis juhtub, kui konteiner ületab mälupiirangu?</li>
-<li>Kuidas toimub järkjärguline uuendus ja kuidas vigane uuendus tagasi võtta?</li>
-<li>Mis vahe on ConfigMap'il ja Secret'il? Kas Secret on krüpteeritud?</li>
-<li>Mis on Ingress ja Ingressi kontroller? Milline kontroller on k3s-is vaikimisi?</li>
-<li>Mis on PVC ja StorageClass? Mis on <code>local-path</code> salvestuse puudus mitmesõlmelises klastris?</li>
-<li>Mis on Helm, tabel (<em>chart</em>) ja väljalase (<em>release</em>)?</li>
-<li>Kuidas viid sõlme hoolduseks klastrist välja ja tagasi? Mis juhtub podidega ootamatu sõlme rikke korral?</li>
-<li>Miks on kõrge kättesaadavusega k3s-is kolm serverit, mitte kaks? Mis on GitOps?</li>
-<li>Milliseid porte peab k3s klastri sõlmede vahel lubama ja milleks?</li>
-</ol>
+<p><strong>1.</strong> Milliseid probleeme lahendab konteinerite orkestreerimine võrreldes Quadleti või Compose'iga ühes masinas? Millal Kubernetest ei tasu kasutada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Mitme masina vahel ajastamine, konteinerite taaskäivitamine <strong>teises masinas</strong> sõlme rikke korral, skaleerimine, katkestuseta uuendused ja tagasivõtt, teenuste leidmine nime järgi, ühtne seadistuse ja saladuste haldus. Ei tasu, kui teenuseid ja servereid on vähe - Compose/Quadlet on lihtsam ja töökindlam ning Kubernetese hooldus nõuab aega ja oskusi.</p>
+</details>
+<p><strong>2.</strong> Nimeta Kubernetese juhtkihi komponendid ja sõlme komponendid ning nende ülesanded.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Juhtkiht: kube-apiserver (ainus sissepääs, API), etcd (klastri olek), kube-scheduler (valib podile sõlme), kube-controller-manager (hoiab soovitud olekut). Sõlm: kubelet (käivitab konteinerid ja annab olekust teada), konteinerikäitur (containerd), kube-proxy (teenuste liikluse suunamine), CNI (podivõrk).</p>
+</details>
+<p><strong>3.</strong> Mida tähendab deklaratiivne haldus ja „soovitud olek“? Too näide.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kirjeldatakse lõpptulemust, mitte samme; kontrollerid võrdlevad pidevalt tegelikku olekut soovituga ja parandavad erinevused. Näide: Deployment <code>replicas: 3</code> - kui üks pod kustub, luuakse automaatselt uus.</p>
+</details>
+<p><strong>4.</strong> Mis vahe on k3s-il, kubeadm-il ja minikube'il? Miks kasutatakse süsteemihalduse kursusel k3s-i?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>kubeadm on ametlik tööriist „puhta“ Kubernetese paigaldamiseks komponent haaval (rohkem tööd); k3s on sertifitseeritud kerge distributsioon ühe binaarfailina koos vajalike lisadega ja paigaldub systemd teenusena tavalisse serverisse; minikube on ühe sõlme klaster arendaja arvutis. k3s-iga saab vähese ressursiga ehitada päris mitmesõlmelise klastri ja harjutada sõlmede lisamist, riket, hooldust ja varundust.</p>
+</details>
+<p><strong>5.</strong> Mis on pod ja miks ei käivitata rakendust tavaliselt otse podina, vaid Deploymentiga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pod on üks või mitu ühise võrgu ja kettaga konteinerit - väikseim käivitatav üksus. Pod on ajutine: kui see kustub või sõlm rikneb, ei looda seda ise uuesti. Deployment hoiab soovitud arvu koopiaid, loob kadunud podid uuesti ja haldab uuendusi.</p>
+</details>
+<p><strong>6.</strong> Mis on Service ja kuidas see teab, millistele podidele liiklust saata? Nimeta kolm teenuse tüüpi.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Püsiv nimi ja IP-aadress podide hulgale; liiklus saadetakse kõigile valmis podidele, mille sildid vastavad teenuse <code>selector</code>-ile. Tüübid: ClusterIP (klastri sees), NodePort (iga sõlme pordil 30000–32767), LoadBalancer (väline aadress; k3s-is ServiceLB).</p>
+</details>
+<p><strong>7.</strong> Mis vahe on <code>readinessProbe</code>-il ja <code>livenessProbe</code>-il?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>readinessProbe</code> otsustab, kas pod saab liiklust (mittevalmis pod eemaldatakse teenusest); <code>livenessProbe</code> otsustab, kas konteiner on elus (ebaõnnestumisel taaskäivitatakse).</p>
+</details>
+<p><strong>8.</strong> Mis vahe on ressursside <code>requests</code> ja <code>limits</code> väärtustel? Mis juhtub, kui konteiner ületab mälupiirangu?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>requests</code> - garanteeritud osa, mille järgi ajastaja valib sõlme; <code>limits</code> - ülempiir (cgroup). Mälupiirangu ületamisel tapab kernel konteineri (<code>OOMKilled</code>) ja kubelet taaskäivitab selle.</p>
+</details>
+<p><strong>9.</strong> Kuidas toimub järkjärguline uuendus ja kuidas vigane uuendus tagasi võtta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Uued podid luuakse ükshaaval ja vanad eemaldatakse alles siis, kui uued on valmis, nii et teenus jätkub. Tagasi: <code>kubectl rollout undo deployment/&lt;nimi&gt;</code> (või eelmine manifest Gitist + <code>kubectl apply</code>).</p>
+</details>
+<p><strong>10.</strong> Mis vahe on ConfigMap'il ja Secret'il? Kas Secret on krüpteeritud?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>ConfigMap - tavaline seadistus; Secret - saladused (paroolid, võtmed, sertifikaadid), mida saab eraldi õigustega kaitsta. Secret on vaikimisi ainult base64-kodeeritud, mitte krüpteeritud; krüpteerimine andmebaasis tuleb eraldi sisse lülitada ja Gitis kasutatakse Sealed Secrets'i, SOPS-i vms.</p>
+</details>
+<p><strong>11.</strong> Mis on Ingress ja Ingressi kontroller? Milline kontroller on k3s-is vaikimisi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ingress on reegel, mis suunab HTTP(S) päringu nime ja tee järgi teenusele; kontroller on pöördpuhver, mis reegleid täidab. k3s-is Traefik.</p>
+</details>
+<p><strong>12.</strong> Mis on PVC ja StorageClass? Mis on <code>local-path</code> salvestuse puudus mitmesõlmelises klastris?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>PVC on podi taotlus püsiketta järele (suurus, ligipääsuviis); StorageClass määrab, kuidas ja kust ketas luuakse. <code>local-path</code> hoiab andmeid ühe sõlme kohalikul kettal - pod on selle sõlmega seotud ja sõlme rikke korral pole andmed teistele kättesaadavad.</p>
+</details>
+<p><strong>13.</strong> Mis on Helm, tabel (<em>chart</em>) ja väljalase (<em>release</em>)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Helm on Kubernetese pakihaldur; tabel on pakett manifestide mallidest ja vaikeväärtustest; väljalase on tabeli konkreetne paigaldus klastris (oma nime, seadete ja revisjonidega).</p>
+</details>
+<p><strong>14.</strong> Kuidas viid sõlme hoolduseks klastrist välja ja tagasi? Mis juhtub podidega ootamatu sõlme rikke korral?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>kubectl cordon &lt;sõlm&gt;</code>, <code>kubectl drain &lt;sõlm&gt; --ignore-daemonsets --delete-emptydir-data</code>, hooldus, <code>kubectl uncordon &lt;sõlm&gt;</code>. Ootamatul rikkel muutub sõlm <code>NotReady</code>-ks ja vaikimisi ~5 minuti pärast käivitatakse selle podid teistes sõlmedes (v.a podid, mis on seotud kohaliku kettaga).</p>
+</details>
+<p><strong>15.</strong> Miks on kõrge kättesaadavusega k3s-is kolm serverit, mitte kaks? Mis on GitOps?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>etcd vajab otsuste tegemiseks häälteenamust: kolmest kaks on enamus, kahest üks ei ole - kahe serveriga klaster ei talu ühtegi riket paremini kui üks server. GitOps: klastri soovitud olek on Gitis ja kontroller (Argo CD, Flux) rakendab muudatused automaatselt.</p>
+</details>
+<p><strong>16.</strong> Milliseid porte peab k3s klastri sõlmede vahel lubama ja milleks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>6443/tcp (API: agendid ja administraator → server), 8472/udp (Flannel VXLAN kõigi sõlmede vahel), 10250/tcp (kubelet), mitme serveri korral 2379–2380/tcp (etcd); klientidele 80/443 (Ingress). Hosti tulemüür peab lubama ka podi- ja teenusevõrgu (<code>10.42.0.0/16</code>, <code>10.43.0.0/16</code>).</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjuta käsud, mis näitavad kõigi nimeruumide podid koos sõlmedega ja viimased sündmused nimeruumis <code>kool</code>.</li>
-<li>Kirjuta Deploymenti manifest <code>whoami</code> (pilt <code>docker.io/traefik/whoami</code>, 2 koopiat, port 80) ja sellele Service.</li>
-<li>Deploymenti <code>kool</code> uus versioon ei käivitu. Kirjuta käsud, millega leiad põhjuse ja võtad uuenduse tagasi.</li>
-<li>Kirjuta käsud, mis tühjendavad sõlme <code>k3s3</code> hoolduseks ja toovad selle pärast tagasi.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mitme masina vahel ajastamine, konteinerite taaskäivitamine <strong>teises masinas</strong> sõlme rikke korral, skaleerimine, katkestuseta uuendused ja tagasivõtt, teenuste leidmine nime järgi, ühtne seadistuse ja saladuste haldus. Ei tasu, kui teenuseid ja servereid on vähe - Compose/Quadlet on lihtsam ja töökindlam ning Kubernetese hooldus nõuab aega ja oskusi.</li>
-<li>Juhtkiht: kube-apiserver (ainus sissepääs, API), etcd (klastri olek), kube-scheduler (valib podile sõlme), kube-controller-manager (hoiab soovitud olekut). Sõlm: kubelet (käivitab konteinerid ja annab olekust teada), konteinerikäitur (containerd), kube-proxy (teenuste liikluse suunamine), CNI (podivõrk).</li>
-<li>Kirjeldatakse lõpptulemust, mitte samme; kontrollerid võrdlevad pidevalt tegelikku olekut soovituga ja parandavad erinevused. Näide: Deployment <code>replicas: 3</code> - kui üks pod kustub, luuakse automaatselt uus.</li>
-<li>kubeadm on ametlik tööriist „puhta“ Kubernetese paigaldamiseks komponent haaval (rohkem tööd); k3s on sertifitseeritud kerge distributsioon ühe binaarfailina koos vajalike lisadega ja paigaldub systemd teenusena tavalisse serverisse; minikube on ühe sõlme klaster arendaja arvutis. k3s-iga saab vähese ressursiga ehitada päris mitmesõlmelise klastri ja harjutada sõlmede lisamist, riket, hooldust ja varundust.</li>
-<li>Pod on üks või mitu ühise võrgu ja kettaga konteinerit - väikseim käivitatav üksus. Pod on ajutine: kui see kustub või sõlm rikneb, ei looda seda ise uuesti. Deployment hoiab soovitud arvu koopiaid, loob kadunud podid uuesti ja haldab uuendusi.</li>
-<li>Püsiv nimi ja IP-aadress podide hulgale; liiklus saadetakse kõigile valmis podidele, mille sildid vastavad teenuse <code>selector</code>-ile. Tüübid: ClusterIP (klastri sees), NodePort (iga sõlme pordil 30000–32767), LoadBalancer (väline aadress; k3s-is ServiceLB).</li>
-<li><code>readinessProbe</code> otsustab, kas pod saab liiklust (mittevalmis pod eemaldatakse teenusest); <code>livenessProbe</code> otsustab, kas konteiner on elus (ebaõnnestumisel taaskäivitatakse).</li>
-<li><code>requests</code> - garanteeritud osa, mille järgi ajastaja valib sõlme; <code>limits</code> - ülempiir (cgroup). Mälupiirangu ületamisel tapab kernel konteineri (<code>OOMKilled</code>) ja kubelet taaskäivitab selle.</li>
-<li>Uued podid luuakse ükshaaval ja vanad eemaldatakse alles siis, kui uued on valmis, nii et teenus jätkub. Tagasi: <code>kubectl rollout undo deployment/&lt;nimi&gt;</code> (või eelmine manifest Gitist + <code>kubectl apply</code>).</li>
-<li>ConfigMap - tavaline seadistus; Secret - saladused (paroolid, võtmed, sertifikaadid), mida saab eraldi õigustega kaitsta. Secret on vaikimisi ainult base64-kodeeritud, mitte krüpteeritud; krüpteerimine andmebaasis tuleb eraldi sisse lülitada ja Gitis kasutatakse Sealed Secrets'i, SOPS-i vms.</li>
-<li>Ingress on reegel, mis suunab HTTP(S) päringu nime ja tee järgi teenusele; kontroller on pöördpuhver, mis reegleid täidab. k3s-is Traefik.</li>
-<li>PVC on podi taotlus püsiketta järele (suurus, ligipääsuviis); StorageClass määrab, kuidas ja kust ketas luuakse. <code>local-path</code> hoiab andmeid ühe sõlme kohalikul kettal - pod on selle sõlmega seotud ja sõlme rikke korral pole andmed teistele kättesaadavad.</li>
-<li>Helm on Kubernetese pakihaldur; tabel on pakett manifestide mallidest ja vaikeväärtustest; väljalase on tabeli konkreetne paigaldus klastris (oma nime, seadete ja revisjonidega).</li>
-<li><code>kubectl cordon &lt;sõlm&gt;</code>, <code>kubectl drain &lt;sõlm&gt; --ignore-daemonsets --delete-emptydir-data</code>, hooldus, <code>kubectl uncordon &lt;sõlm&gt;</code>. Ootamatul rikkel muutub sõlm <code>NotReady</code>-ks ja vaikimisi ~5 minuti pärast käivitatakse selle podid teistes sõlmedes (v.a podid, mis on seotud kohaliku kettaga).</li>
-<li>etcd vajab otsuste tegemiseks häälteenamust: kolmest kaks on enamus, kahest üks ei ole - kahe serveriga klaster ei talu ühtegi riket paremini kui üks server. GitOps: klastri soovitud olek on Gitis ja kontroller (Argo CD, Flux) rakendab muudatused automaatselt.</li>
-<li>6443/tcp (API: agendid ja administraator → server), 8472/udp (Flannel VXLAN kõigi sõlmede vahel), 10250/tcp (kubelet), mitme serveri korral 2379–2380/tcp (etcd); klientidele 80/443 (Ingress). Hosti tulemüür peab lubama ka podi- ja teenusevõrgu (<code>10.42.0.0/16</code>, <code>10.43.0.0/16</code>).</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kirjuta käsud, mis näitavad kõigi nimeruumide podid koos sõlmedega ja viimased sündmused nimeruumis <code>kool</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide
 kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta Deploymenti manifest <code>whoami</code> (pilt <code>docker.io/traefik/whoami</code>, 2 koopiat, port 80) ja sellele Service.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <span class="nt">metadata</span><span class="p">:</span>
@@ -4543,17 +4531,26 @@ kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w">
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 <span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Deploymenti <code>kool</code> uus versioon ei käivitu. Kirjuta käsud, millega leiad põhjuse ja võtad uuenduse tagasi.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deployment/kool<span class="w"> </span>-n<span class="w"> </span>kool
 kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kool
 kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>&lt;uue-podi-nimi&gt;<span class="w">      </span><span class="c1"># sündmused: ImagePullBackOff, CrashLoopBackOff, OOMKilled…</span>
 kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kool<span class="w"> </span>&lt;uue-podi-nimi&gt;<span class="w"> </span>--previous<span class="w">   </span><span class="c1"># kui konteiner käivitus ja kukkus</span>
 kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment/kool<span class="w"> </span>-n<span class="w"> </span>kool
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Kirjuta käsud, mis tühjendavad sõlme <code>k3s3</code> hoolduseks ja toovad selle pärast tagasi.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>cordon<span class="w"> </span>k3s3
 kubectl<span class="w"> </span>drain<span class="w"> </span>k3s3<span class="w"> </span>--ignore-daemonsets<span class="w"> </span>--delete-emptydir-data
 <span class="c1"># … hooldus …</span>
 kubectl<span class="w"> </span>uncordon<span class="w"> </span>k3s3
 </code></pre></div>
+</details>
 
 
 

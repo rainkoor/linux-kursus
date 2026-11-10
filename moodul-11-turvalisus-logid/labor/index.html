@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -4349,7 +4351,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>A1–A14</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>A1–A14</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Stsenaarium:</strong> paigaldad veebiserveri, mille failid peavad asuma kataloogis <code>/srv/veeb</code> ja mis peab kuulama lisaks pordile 80 ka porti 8888. SELinux ei lase seda vaikimisi teha - sinu ülesanne on probleemid lahendada <strong>SELinuxit välja lülitamata</strong>.</p>
 <h2 id="1-osa-selinuxi-olek-ja-kontekstid">1. osa. SELinuxi olek ja kontekstid<a class="headerlink" href="#1-osa-selinuxi-olek-ja-kontekstid" title="Permanent link">&para;</a></h2>
 <p><strong>1.1</strong> Kontrolli SELinuxi olekut:</p>
@@ -4357,14 +4362,20 @@
 sestatus
 cat<span class="w"> </span>/etc/selinux/config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">'^#'</span>
 </code></pre></div>
-<p><strong>A1.</strong> Mis režiimis SELinux töötab? Mis on poliitika nimi (<code>Loaded policy name</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A1</p>
+<p>Mis režiimis SELinux töötab? Mis on poliitika nimi (<code>Loaded policy name</code>)?</p>
+</div>
 <p><strong>1.2</strong> Uuri kontekste:</p>
 <div class="highlight"><pre><span></span><code>id<span class="w"> </span>-Z
 ls<span class="w"> </span>-Z<span class="w"> </span>/etc/passwd<span class="w"> </span>/etc/shadow
 ls<span class="w"> </span>-Zd<span class="w"> </span>/home/<span class="nv">$USER</span><span class="w"> </span>/tmp<span class="w"> </span>/var/www<span class="w"> </span>/srv
 ps<span class="w"> </span>-eZ<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"sshd|systemd "</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
 </code></pre></div>
-<p><strong>A2.</strong> Mis tüüp on failidel <code>/etc/shadow</code> ja <code>/etc/passwd</code>? Mis tüüp on kataloogil <code>/srv</code>? Mis kontekstis töötab <code>sshd</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A2</p>
+<p>Mis tüüp on failidel <code>/etc/shadow</code> ja <code>/etc/passwd</code>? Mis tüüp on kataloogil <code>/srv</code>? Mis kontekstis töötab <code>sshd</code>?</p>
+</div>
 <p><strong>1.3</strong> Paigalda vajalikud tööriistad:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>httpd<span class="w"> </span>policycoreutils-python-utils<span class="w"> </span>setroubleshoot-server
 </code></pre></div>
@@ -4395,13 +4406,19 @@ ls<span class="w"> </span>-lZ<span class="w"> </span>/srv/veeb/
 sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>httpd
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost
 </code></pre></div>
-<p><strong>A3.</strong> Mida server vastas? Failiõigused on <code>644</code> - miks ei saa veebiserver faili lugeda?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A3</p>
+<p>Mida server vastas? Failiõigused on <code>644</code> - miks ei saa veebiserver faili lugeda?</p>
+</div>
 <p><strong>2.4</strong> Diagnoosi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ausearch<span class="w"> </span>-m<span class="w"> </span>AVC<span class="w"> </span>-ts<span class="w"> </span>recent
 sudo<span class="w"> </span>ausearch<span class="w"> </span>-m<span class="w"> </span>AVC<span class="w"> </span>-ts<span class="w"> </span>recent<span class="w"> </span><span class="p">|</span><span class="w"> </span>audit2why
 sudo<span class="w"> </span>journalctl<span class="w"> </span>-t<span class="w"> </span>setroubleshoot<span class="w"> </span>--since<span class="w"> </span><span class="s2">"10 min ago"</span>
 </code></pre></div>
-<p><strong>A4.</strong> Kirjuta AVC teatest välja: protsess (<code>comm</code>), tegevus (<code>{ ... }</code>), allika tüüp (<code>scontext</code>) ja sihi tüüp (<code>tcontext</code>). Mida soovitab <code>setroubleshoot</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A4</p>
+<p>Kirjuta AVC teatest välja: protsess (<code>comm</code>), tegevus (<code>{ ... }</code>), allika tüüp (<code>scontext</code>) ja sihi tüüp (<code>tcontext</code>). Mida soovitab <code>setroubleshoot</code>?</p>
+</div>
 <p><strong>2.5</strong> Kontrolli, et põhjus on tõesti SELinux, ja lülita see kohe tagasi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>setenforce<span class="w"> </span><span class="m">0</span>
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost
@@ -4415,19 +4432,28 @@ sudo<span class="w"> </span>restorecon<span class="w"> </span>-Rv<span class="w"
 ls<span class="w"> </span>-lZ<span class="w"> </span>/srv/veeb/
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost
 </code></pre></div>
-<p><strong>A5.</strong> Mis muutus faili kontekstis? Miks oli <code>index.html</code> kontekst algselt just selline (vihje: kus fail loodi)? Mis vahe on <code>semanage fcontext</code> ja <code>chcon</code> vahel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A5</p>
+<p>Mis muutus faili kontekstis? Miks oli <code>index.html</code> kontekst algselt just selline (vihje: kus fail loodi)? Mis vahe on <code>semanage fcontext</code> ja <code>chcon</code> vahel?</p>
+</div>
 <p><strong>2.7</strong> Loo uus fail otse kataloogis ja võrdle konteksti:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;p&gt;Teine leht&lt;/p&gt;"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/srv/veeb/teine.html
 ls<span class="w"> </span>-Z<span class="w"> </span>/srv/veeb/
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost/teine.html
 </code></pre></div>
-<p><strong>A6.</strong> Millise konteksti sai uus fail ja miks ei olnud seekord <code>restorecon</code>-i vaja?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A6</p>
+<p>Millise konteksti sai uus fail ja miks ei olnud seekord <code>restorecon</code>-i vaja?</p>
+</div>
 <h2 id="3-osa-mittestandardne-port">3. osa. Mittestandardne port<a class="headerlink" href="#3-osa-mittestandardne-port" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Lisa Apache'ile port 8888:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"Listen 8888"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/httpd/conf.d/port8888.conf
 sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>httpd
 </code></pre></div>
-<p><strong>A7.</strong> Mis juhtus? Leia põhjus käskudega <code>systemctl status httpd</code>, <code>journalctl -u httpd -n 20</code> ja <code>ausearch -m AVC -ts recent</code>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A7</p>
+<p>Mis juhtus? Leia põhjus käskudega <code>systemctl status httpd</code>, <code>journalctl -u httpd -n 20</code> ja <code>ausearch -m AVC -ts recent</code>.</p>
+</div>
 <p><strong>3.2</strong> Uuri, millised pordid on veebiserverile lubatud, ja lisa port:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>semanage<span class="w"> </span>port<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>http_port_t
 sudo<span class="w"> </span>semanage<span class="w"> </span>port<span class="w"> </span>-a<span class="w"> </span>-t<span class="w"> </span>http_port_t<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span><span class="m">8888</span>
@@ -4436,7 +4462,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8888
 </code></pre></div>
 <p>Kui <code>semanage port -a</code> teatab, et port on juba mõnele teisele tüübile määratud, kasuta <code>-a</code> asemel <code>-m</code>.</p>
-<p><strong>A8.</strong> Millised pordid olid algselt <code>http_port_t</code> loendis? Miks piirab SELinux ka porte?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A8</p>
+<p>Millised pordid olid algselt <code>http_port_t</code> loendis? Miks piirab SELinux ka porte?</p>
+</div>
 <p><strong>3.3</strong> Ava tulemüüris port 8888 ja testi teisest masinast (või oma arvuti brauserist):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-port<span class="o">=</span><span class="m">8888</span>/tcp<span class="w"> </span>--permanent
 sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-service<span class="o">=</span>http<span class="w"> </span>--permanent
@@ -4456,12 +4485,18 @@ getsebool<span class="w"> </span>httpd_can_network_connect<span class="w"> </spa
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>httpd
 curl<span class="w"> </span>-sI<span class="w"> </span>http://localhost/vana<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
 </code></pre></div>
-<p><strong>A9.</strong> Mis vastuse said? Mida näitab <code>ausearch -m AVC -ts recent</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A9</p>
+<p>Mis vastuse said? Mida näitab <code>ausearch -m AVC -ts recent</code>?</p>
+</div>
 <p><strong>4.3</strong> Luba veebiserveril luua võrguühendusi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>setsebool<span class="w"> </span>-P<span class="w"> </span>httpd_can_network_connect<span class="w"> </span>on
 curl<span class="w"> </span>-sI<span class="w"> </span>http://localhost/vana<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
 </code></pre></div>
-<p><strong>A10.</strong> Mida tähendab võti <code>-P</code>? Miks on see tõeväärtus vaikimisi väljas? (Mõtle, mida saaks ründaja teha ülevõetud veebiserveriga, mis tohib igale poole ühenduda.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A10</p>
+<p>Mida tähendab võti <code>-P</code>? Miks on see tõeväärtus vaikimisi väljas? (Mõtle, mida saaks ründaja teha ülevõetud veebiserveriga, mis tohib igale poole ühenduda.)</p>
+</div>
 <h2 id="5-osa-automaatsed-turvauuendused">5. osa. Automaatsed turvauuendused<a class="headerlink" href="#5-osa-automaatsed-turvauuendused" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Vaata saadaolevaid turvauuendusi:</p>
 <div class="highlight"><pre><span></span><code>dnf<span class="w"> </span>updateinfo<span class="w"> </span>summary
@@ -4473,7 +4508,10 @@ sudo<span class="w"> </span>nano<span class="w"> </span>/etc/dnf/automatic.conf<
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>dnf-automatic.timer
 systemctl<span class="w"> </span>list-timers<span class="w"> </span>dnf-automatic.timer
 </code></pre></div>
-<p><strong>A11.</strong> Millal käivitub <code>dnf-automatic</code> järgmisena? Leia ühe turvauuenduse kohta CVE number (<code>dnf updateinfo info &lt;ID&gt;</code>). Kui uuendusi pole, leia mõni CVE AlmaLinuxi turvateadete lehelt (errata.almalinux.org).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A11</p>
+<p>Millal käivitub <code>dnf-automatic</code> järgmisena? Leia ühe turvauuenduse kohta CVE number (<code>dnf updateinfo info &lt;ID&gt;</code>). Kui uuendusi pole, leia mõni CVE AlmaLinuxi turvateadete lehelt (errata.almalinux.org).</p>
+</div>
 <h2 id="6-osa-audit">6. osa. Audit<a class="headerlink" href="#6-osa-audit" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Lisa auditireeglid oluliste failide jälgimiseks:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>auditctl<span class="w"> </span>-w<span class="w"> </span>/etc/passwd<span class="w"> </span>-p<span class="w"> </span>wa<span class="w"> </span>-k<span class="w"> </span>kasutajad
@@ -4487,7 +4525,10 @@ sudo<span class="w"> </span>userdel<span class="w"> </span>auditikatse
 sudo<span class="w"> </span>ausearch<span class="w"> </span>-k<span class="w"> </span>kasutajad<span class="w"> </span>-i<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-20
 sudo<span class="w"> </span>aureport<span class="w"> </span>--summary
 </code></pre></div>
-<p><strong>A12.</strong> Millised programmid muutsid faili <code>/etc/passwd</code>? Mis on sündmuste juures välja <code>auid</code> väärtus ja miks on see oluline, kuigi käsud käivitati <code>sudo</code>-ga?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A12</p>
+<p>Millised programmid muutsid faili <code>/etc/passwd</code>? Mis on sündmuste juures välja <code>auid</code> väärtus ja miks on see oluline, kuigi käsud käivitati <code>sudo</code>-ga?</p>
+</div>
 <p><strong>6.3</strong> Muuda reeglid püsivaks:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/audit/rules.d/90-labor.rules<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
 <span class="s">-w /etc/passwd -p wa -k kasutajad</span>
@@ -4497,9 +4538,15 @@ sudo<span class="w"> </span>aureport<span class="w"> </span>--summary
 sudo<span class="w"> </span>augenrules<span class="w"> </span>--load
 sudo<span class="w"> </span>auditctl<span class="w"> </span>-l
 </code></pre></div>
-<p><strong>A13.</strong> Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A13</p>
+<p>Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?</p>
+</div>
 <h2 id="7-osa-kokkuvõte">7. osa. Kokkuvõte<a class="headerlink" href="#7-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>A14.</strong> Täida tabel: SELinuxi probleem → tunnus → lahendus.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus A14</p>
+<p>Täida tabel: SELinuxi probleem → tunnus → lahendus.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -4559,7 +4606,10 @@ sudo<span class="w"> </span>auditctl<span class="w"> </span>-l
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>B1–B14</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>B1–B14</strong>.</p>
+</div>
 <h2 id="1-osa-logid">1. osa. Logid<a class="headerlink" href="#1-osa-logid" title="Permanent link">&para;</a></h2>
 <p><strong>1.1</strong> Uuri logikataloogi ja autentimislogi:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>/var/log/
@@ -4567,7 +4617,10 @@ sudo<span class="w"> </span>tail<span class="w"> </span>-20<span class="w"> </sp
 last<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
 sudo<span class="w"> </span>lastb<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
-<p><strong>B1.</strong> Millised on kataloogi <code>/var/log</code> suurimad failid? Kes ja millal viimati sisse logis? Kas on ebaõnnestunud sisselogimisi?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B1</p>
+<p>Millised on kataloogi <code>/var/log</code> suurimad failid? Kes ja millal viimati sisse logis? Kas on ebaõnnestunud sisselogimisi?</p>
+</div>
 <p><strong>1.2</strong> Otsi journal'ist <code>sudo</code> kasutamine ja SSH sündmused:</p>
 <div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span><span class="nv">_COMM</span><span class="o">=</span>sudo<span class="w"> </span>--since<span class="w"> </span>today<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-10
 journalctl<span class="w"> </span>-u<span class="w"> </span>ssh<span class="w"> </span>--since<span class="w"> </span>today<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-10
@@ -4577,7 +4630,10 @@ journalctl<span class="w"> </span>-u<span class="w"> </span>ssh<span class="w"> 
 journalctl<span class="w"> </span>-t<span class="w"> </span>labor10
 grep<span class="w"> </span>labor10<span class="w"> </span>/var/log/syslog
 </code></pre></div>
-<p><strong>B2.</strong> Kas teade jõudis nii journal'isse kui ka faili <code>/var/log/syslog</code>? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B2</p>
+<p>Kas teade jõudis nii journal'isse kui ka faili <code>/var/log/syslog</code>? Miks?</p>
+</div>
 <p><strong>1.4</strong> Piira journal'i mahtu:</p>
 <div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>--disk-usage
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/systemd/journald.conf.d
@@ -4616,7 +4672,10 @@ ls<span class="w"> </span>-lh<span class="w"> </span>/var/log/minurakendus/
 <span class="w">    </span>ls<span class="w"> </span>/var/log/minurakendus/
 <span class="k">done</span>
 </code></pre></div>
-<p><strong>B3.</strong> Mitu faili jäi lõpuks alles ja millised neist on pakitud? Mida tegid valikud <code>rotate 3</code> ja <code>delaycompress</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B3</p>
+<p>Mitu faili jäi lõpuks alles ja millised neist on pakitud? Mida tegid valikud <code>rotate 3</code> ja <code>delaycompress</code>?</p>
+</div>
 <h2 id="2-osa-automaatsed-uuendused">2. osa. Automaatsed uuendused<a class="headerlink" href="#2-osa-automaatsed-uuendused" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Kontrolli <code>unattended-upgrades</code> seadistust:</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/apt/apt.conf.d/20auto-upgrades
@@ -4625,7 +4684,10 @@ systemctl<span class="w"> </span>list-timers<span class="w"> </span><span class=
 sudo<span class="w"> </span>unattended-upgrade<span class="w"> </span>--dry-run<span class="w"> </span>--debug<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-15
 ls<span class="w"> </span>/var/log/unattended-upgrades/
 </code></pre></div>
-<p><strong>B4.</strong> Kas automaatsed uuendused on sisse lülitatud? Milliseid hoidlaid (<code>Allowed-Origins</code>) need hõlmavad? Kas masin taaskäivitatakse automaatselt (<code>Automatic-Reboot</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B4</p>
+<p>Kas automaatsed uuendused on sisse lülitatud? Milliseid hoidlaid (<code>Allowed-Origins</code>) need hõlmavad? Kas masin taaskäivitatakse automaatselt (<code>Automatic-Reboot</code>)?</p>
+</div>
 <h2 id="3-osa-fail2ban">3. osa. fail2ban<a class="headerlink" href="#3-osa-fail2ban" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Paigalda ja seadista fail2ban:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fail2ban
@@ -4652,17 +4714,26 @@ sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status<span c
 sudo<span class="w"> </span>grep<span class="w"> </span><span class="s2">"Invalid user"</span><span class="w"> </span>/var/log/auth.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-5
 sudo<span class="w"> </span>nft<span class="w"> </span>list<span class="w"> </span>ruleset<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A3<span class="w"> </span>f2b
 </code></pre></div>
-<p><strong>B5.</strong> Kas Debiani IP-aadress blokeeriti? Mitu katset kulus? Kuidas oli blokeering tulemüüris näha?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B5</p>
+<p>Kas Debiani IP-aadress blokeeriti? Mitu katset kulus? Kuidas oli blokeering tulemüüris näha?</p>
+</div>
 <p><strong>3.4</strong> Proovi Debiani masinast ühenduda (ka õige kasutajaga): <code>ssh kasutaja@UBUNTU_IP</code>. Seejärel vabasta aadress:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="nb">set</span><span class="w"> </span>sshd<span class="w"> </span>unbanip<span class="w"> </span>DEBIAN_IP
 </code></pre></div>
-<p><strong>B6.</strong> Mis juhtus ühenduskatsega blokeeringu ajal? Miks on oluline seada <code>ignoreip</code> oma administraatorivõrgule?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B6</p>
+<p>Mis juhtus ühenduskatsega blokeeringu ajal? Miks on oluline seada <code>ignoreip</code> oma administraatorivõrgule?</p>
+</div>
 <h2 id="4-osa-apparmor">4. osa. AppArmor<a class="headerlink" href="#4-osa-apparmor" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Uuri AppArmori olekut:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>aa-status
 ls<span class="w"> </span>/etc/apparmor.d/
 </code></pre></div>
-<p><strong>B7.</strong> Mitu profiili on laaditud? Mitu on enforce- ja mitu complain-režiimis? Nimeta kolm programmi, millel on profiil.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B7</p>
+<p>Mitu profiili on laaditud? Mitu on enforce- ja mitu complain-režiimis? Nimeta kolm programmi, millel on profiil.</p>
+</div>
 <p><strong>4.2</strong> Loo skript, mis loeb faili, mille nimi antakse argumendina:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/local/bin/loe-faili<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
 <span class="s">#!/bin/bash</span>
@@ -4696,7 +4767,10 @@ loe-faili<span class="w"> </span>/etc/passwd
 sudo<span class="w"> </span>loe-faili<span class="w"> </span>/etc/shadow
 sudo<span class="w"> </span>journalctl<span class="w"> </span>-k<span class="w"> </span>--since<span class="w"> </span><span class="s2">"5 min ago"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>apparmor
 </code></pre></div>
-<p><strong>B8.</strong> Milliseid faile skript sai lugeda ja milliseid mitte? Kas <code>sudo</code> aitas faili <code>/etc/shadow</code> lugeda? Miks? Kirjuta üks <code>DENIED</code> logirida aruandesse.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B8</p>
+<p>Milliseid faile skript sai lugeda ja milliseid mitte? Kas <code>sudo</code> aitas faili <code>/etc/shadow</code> lugeda? Miks? Kirjuta üks <code>DENIED</code> logirida aruandesse.</p>
+</div>
 <p><strong>4.5</strong> Lülita profiil complain-režiimi ja korda testi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apparmor-utils
 sudo<span class="w"> </span>aa-complain<span class="w"> </span>/usr/local/bin/loe-faili
@@ -4704,24 +4778,42 @@ loe-faili<span class="w"> </span>/etc/passwd<span class="w"> </span><span class=
 sudo<span class="w"> </span>journalctl<span class="w"> </span>-k<span class="w"> </span>--since<span class="w"> </span><span class="s2">"2 min ago"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>apparmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-3
 sudo<span class="w"> </span>aa-enforce<span class="w"> </span>/usr/local/bin/loe-faili
 </code></pre></div>
-<p><strong>B9.</strong> Mis vahe oli complain- ja enforce-režiimil? Milleks on complain-režiim kasulik?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B9</p>
+<p>Mis vahe oli complain- ja enforce-režiimil? Milleks on complain-režiim kasulik?</p>
+</div>
 <h2 id="5-osa-turvaaudit">5. osa. Turvaaudit<a class="headerlink" href="#5-osa-turvaaudit" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Käivita turvaaudit:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>lynis
 sudo<span class="w"> </span>lynis<span class="w"> </span>audit<span class="w"> </span>system<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>~/lynis.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-40
 </code></pre></div>
-<p><strong>B10.</strong> Mis on karastamise indeks (<em>hardening index</em>)? Nimeta kolm hoiatust (<em>warnings</em>) või soovitust (<em>suggestions</em>), mis tunduvad sinu serveri jaoks olulised.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B10</p>
+<p>Mis on karastamise indeks (<em>hardening index</em>)? Nimeta kolm hoiatust (<em>warnings</em>) või soovitust (<em>suggestions</em>), mis tunduvad sinu serveri jaoks olulised.</p>
+</div>
 <p><strong>5.2</strong> Vali kolm Lynise soovitust, rakenda need ja käivita audit uuesti.</p>
-<p><strong>B11.</strong> Milliseid soovitusi rakendasid ja kuidas? Kas indeks muutus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B11</p>
+<p>Milliseid soovitusi rakendasid ja kuidas? Kas indeks muutus?</p>
+</div>
 <p><strong>5.3</strong> Vaata oma serverit „ründaja pilgu läbi“ - <strong>Debiani masinast</strong> (ainult oma laborimasina vastu!):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nmap
 nmap<span class="w"> </span>UBUNTU_IP
 sudo<span class="w"> </span>nmap<span class="w"> </span>-sV<span class="w"> </span>UBUNTU_IP
 </code></pre></div>
-<p><strong>B12.</strong> Millised pordid ja teenused on väljast nähtavad? Kas <code>nmap</code> tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B12</p>
+<p>Millised pordid ja teenused on väljast nähtavad? Kas <code>nmap</code> tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?</p>
+</div>
 <h2 id="6-osa-kokkuvõte">6. osa. Kokkuvõte<a class="headerlink" href="#6-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>B13.</strong> Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.</p>
-<p><strong>B14.</strong> Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B13</p>
+<p>Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus B14</p>
+<p>Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline-wazuh-siem">Lisaülesanne (valikuline): Wazuh SIEM<a class="headerlink" href="#lisaülesanne-valikuline-wazuh-siem" title="Permanent link">&para;</a></h2>
 <p>Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB) mäluga ja vähemalt 2 jälgitavat masinat (nt <code>debian1</code> ja <code>alma</code>).</p>
@@ -4732,10 +4824,62 @@ sudo<span class="w"> </span>nmap<span class="w"> </span>-sV<span class="w"> </sp
 <li>Leia sündmused veebiliidesest (<em>Threat Hunting</em> / <em>Security events</em>).</li>
 <li>Seadista automaatne reageerimine (teooria punkt 11.10, reegel 5763 ja <code>firewall-drop</code>) ning korda SSH jõurünnet mõnest kolmandast masinast. Kontrolli agendis <code>/var/ossec/logs/active-responses.log</code> ja <code>sudo nft list ruleset</code>.</li>
 </ol>
-<p><strong>W1.</strong> Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?</p>
-<p><strong>W2.</strong> Milliseid haavatavusi (<em>Vulnerability Detection</em>) leiti agentidega masinates? Milliseid CIS-i soovitusi (<em>Configuration Assessment</em>) Debiani masin ei täitnud?</p>
-<p><strong>W3.</strong> Võrdle Wazuhi fail2ban-i ja <code>auditd</code>-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?</p>
-<p><strong>W4.</strong> Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus W1</p>
+<p>Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus W2</p>
+<p>Milliseid haavatavusi (<em>Vulnerability Detection</em>) leiti agentidega masinates? Milliseid CIS-i soovitusi (<em>Configuration Assessment</em>) Debiani masin ei täitnud?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus W3</p>
+<p>Võrdle Wazuhi fail2ban-i ja <code>auditd</code>-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus W4</p>
+<p>Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?</p>
+</div>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>A1.</strong> <em>(punkt 1.1)</em> Mis režiimis SELinux töötab? Mis on poliitika nimi (<code>Loaded policy name</code>)?</li>
+<li><strong>A2.</strong> <em>(punkt 1.2)</em> Mis tüüp on failidel <code>/etc/shadow</code> ja <code>/etc/passwd</code>? Mis tüüp on kataloogil <code>/srv</code>? Mis kontekstis töötab <code>sshd</code>?</li>
+<li><strong>A3.</strong> <em>(punkt 2.3)</em> Mida server vastas? Failiõigused on <code>644</code> - miks ei saa veebiserver faili lugeda?</li>
+<li><strong>A4.</strong> <em>(punkt 2.4)</em> Kirjuta AVC teatest välja: protsess (<code>comm</code>), tegevus (<code>{ ... }</code>), allika tüüp (<code>scontext</code>) ja sihi tüüp (<code>tcontext</code>). Mida soovitab <code>setroubleshoot</code>?</li>
+<li><strong>A5.</strong> <em>(punkt 2.6)</em> Mis muutus faili kontekstis? Miks oli <code>index.html</code> kontekst algselt just selline (vihje: kus fail loodi)? Mis vahe on <code>semanage fcontext</code> ja <code>chcon</code> vahel?</li>
+<li><strong>A6.</strong> <em>(punkt 2.7)</em> Millise konteksti sai uus fail ja miks ei olnud seekord <code>restorecon</code>-i vaja?</li>
+<li><strong>A7.</strong> <em>(punkt 3.1)</em> Mis juhtus? Leia põhjus käskudega <code>systemctl status httpd</code>, <code>journalctl -u httpd -n 20</code> ja <code>ausearch -m AVC -ts recent</code>.</li>
+<li><strong>A8.</strong> <em>(punkt 3.2)</em> Millised pordid olid algselt <code>http_port_t</code> loendis? Miks piirab SELinux ka porte?</li>
+<li><strong>A9.</strong> <em>(punkt 4.2)</em> Mis vastuse said? Mida näitab <code>ausearch -m AVC -ts recent</code>?</li>
+<li><strong>A10.</strong> <em>(punkt 4.3)</em> Mida tähendab võti <code>-P</code>? Miks on see tõeväärtus vaikimisi väljas? (Mõtle, mida saaks ründaja teha ülevõetud veebiserveriga, mis tohib igale poole ühenduda.)</li>
+<li><strong>A11.</strong> <em>(punkt 5.2)</em> Millal käivitub <code>dnf-automatic</code> järgmisena? Leia ühe turvauuenduse kohta CVE number (<code>dnf updateinfo info &lt;ID&gt;</code>). Kui uuendusi pole, leia mõni CVE AlmaLinuxi turvateadete lehelt (errata.almalinux.org).</li>
+<li><strong>A12.</strong> <em>(punkt 6.2)</em> Millised programmid muutsid faili <code>/etc/passwd</code>? Mis on sündmuste juures välja <code>auid</code> väärtus ja miks on see oluline, kuigi käsud käivitati <code>sudo</code>-ga?</li>
+<li><strong>A13.</strong> <em>(punkt 6.3)</em> Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?</li>
+<li><strong>A14.</strong> <em>(7. osa)</em> Täida tabel: SELinuxi probleem → tunnus → lahendus.</li>
+<li><strong>B1.</strong> <em>(punkt 1.1)</em> Millised on kataloogi <code>/var/log</code> suurimad failid? Kes ja millal viimati sisse logis? Kas on ebaõnnestunud sisselogimisi?</li>
+<li><strong>B2.</strong> <em>(punkt 1.3)</em> Kas teade jõudis nii journal'isse kui ka faili <code>/var/log/syslog</code>? Miks?</li>
+<li><strong>B3.</strong> <em>(punkt 1.6)</em> Mitu faili jäi lõpuks alles ja millised neist on pakitud? Mida tegid valikud <code>rotate 3</code> ja <code>delaycompress</code>?</li>
+<li><strong>B4.</strong> <em>(punkt 2.1)</em> Kas automaatsed uuendused on sisse lülitatud? Milliseid hoidlaid (<code>Allowed-Origins</code>) need hõlmavad? Kas masin taaskäivitatakse automaatselt (<code>Automatic-Reboot</code>)?</li>
+<li><strong>B5.</strong> <em>(punkt 3.3)</em> Kas Debiani IP-aadress blokeeriti? Mitu katset kulus? Kuidas oli blokeering tulemüüris näha?</li>
+<li><strong>B6.</strong> <em>(punkt 3.4)</em> Mis juhtus ühenduskatsega blokeeringu ajal? Miks on oluline seada <code>ignoreip</code> oma administraatorivõrgule?</li>
+<li><strong>B7.</strong> <em>(punkt 4.1)</em> Mitu profiili on laaditud? Mitu on enforce- ja mitu complain-režiimis? Nimeta kolm programmi, millel on profiil.</li>
+<li><strong>B8.</strong> <em>(punkt 4.4)</em> Milliseid faile skript sai lugeda ja milliseid mitte? Kas <code>sudo</code> aitas faili <code>/etc/shadow</code> lugeda? Miks? Kirjuta üks <code>DENIED</code> logirida aruandesse.</li>
+<li><strong>B9.</strong> <em>(punkt 4.5)</em> Mis vahe oli complain- ja enforce-režiimil? Milleks on complain-režiim kasulik?</li>
+<li><strong>B10.</strong> <em>(punkt 5.1)</em> Mis on karastamise indeks (<em>hardening index</em>)? Nimeta kolm hoiatust (<em>warnings</em>) või soovitust (<em>suggestions</em>), mis tunduvad sinu serveri jaoks olulised.</li>
+<li><strong>B11.</strong> <em>(punkt 5.2)</em> Milliseid soovitusi rakendasid ja kuidas? Kas indeks muutus?</li>
+<li><strong>B12.</strong> <em>(punkt 5.3)</em> Millised pordid ja teenused on väljast nähtavad? Kas <code>nmap</code> tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?</li>
+<li><strong>B13.</strong> <em>(6. osa)</em> Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.</li>
+<li><strong>B14.</strong> <em>(6. osa)</em> Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?</li>
+<li><strong>W1.</strong> <em>(Lisaülesanne (valikuline): Wazuh SIEM)</em> Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?</li>
+<li><strong>W2.</strong> <em>(Lisaülesanne (valikuline): Wazuh SIEM)</em> Milliseid haavatavusi (<em>Vulnerability Detection</em>) leiti agentidega masinates? Milliseid CIS-i soovitusi (<em>Configuration Assessment</em>) Debiani masin ei täitnud?</li>
+<li><strong>W3.</strong> <em>(Lisaülesanne (valikuline): Wazuh SIEM)</em> Võrdle Wazuhi fail2ban-i ja <code>auditd</code>-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?</li>
+<li><strong>W4.</strong> <em>(Lisaülesanne (valikuline): Wazuh SIEM)</em> Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

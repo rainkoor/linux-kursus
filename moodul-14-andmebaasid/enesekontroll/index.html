@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2450,34 +2452,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,57 +4407,96 @@
 
 
 <h1 id="moodul-14-enesekontroll">Moodul 14. Enesekontroll<a class="headerlink" href="#moodul-14-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Miks peab veebirakendusel olema oma andmebaasikasutaja?</li>
-<li>Miks ei ole töötava andmebaasi failide kopeerimine usaldusväärne varukoopia?</li>
-<li>Kuidas taastada MariaDB juurkasutaja unustatud parool? Miks peab sel ajal kasutama valikut <code>--skip-networking</code>?</li>
-<li>Mis vahe on relatsioonilisel andmebaasiserveril, manustatud andmebaasil ja võti-väärtus hoidlal? Too igaühe kohta näide.</li>
-<li>Mis on PostgreSQL-is roll? Kuidas erineb see MariaDB kasutajast <code>'nimi'@'host'</code>?</li>
-<li>Mida määrab fail <code>pg_hba.conf</code>? Mis on <code>peer</code>-autentimine?</li>
-<li>Millal sobib SQLite ja millal mitte? Kuidas varundada SQLite'i andmebaasi?</li>
-<li>Milleks kasutatakse Valkeyt/Redist? Miks tekkis Valkey?</li>
-<li>Miks ei tohi Redise/Valkey porti avada võrku ilma paroolita?</li>
-<li>Mis on replikatsioon ja miks see ei asenda varukoopiat?</li>
-<li>Miks peab PHP-leht kasutama <code>htmlspecialchars()</code>-i andmebaasist tulnud teksti väljastamisel?</li>
-<li>Mis on ülevõtt (<em>failover</em>)? Milliseid samme teed MariaDB-s, et koopiast saaks põhiserver, ja miks ei tohi vana põhiserverit pärast parandamist lihtsalt uuesti käivitada?</li>
-</ol>
+<p><strong>1.</strong> Miks peab veebirakendusel olema oma andmebaasikasutaja?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Vähima õiguse põhimõte: kui rakendus häkitakse, pääseb ründaja ligi ainult selle rakenduse andmebaasile, mitte kõigile andmebaasidele ega serveri haldusele.</p>
+</details>
+<p><strong>2.</strong> Miks ei ole töötava andmebaasi failide kopeerimine usaldusväärne varukoopia?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Failid võivad olla poolelioleva muudatuse keskel ja omavahel ebajärjepidevad. Kasutada tuleb <code>mariadb-dump</code>/<code>pg_dump</code>-i või peatada teenus.</p>
+</details>
+<p><strong>3.</strong> Kuidas taastada MariaDB juurkasutaja unustatud parool? Miks peab sel ajal kasutama valikut <code>--skip-networking</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Peata teenus, käivita see valikutega <code>--skip-grant-tables --skip-networking</code> (nt <code>systemctl set-environment MYSQLD_OPTS=…</code>), logi sisse ilma paroolita, <code>FLUSH PRIVILEGES;</code> ja <code>ALTER USER … IDENTIFIED BY …</code>, seejärel käivita teenus tavapäraselt. Ilma õiguste kontrollita saaks muidu igaüks võrgust andmebaasi ilma paroolita kasutada.</p>
+</details>
+<p><strong>4.</strong> Mis vahe on relatsioonilisel andmebaasiserveril, manustatud andmebaasil ja võti-väärtus hoidlal? Too igaühe kohta näide.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Server: eraldi teenus võrgus, mitu klienti (MariaDB, PostgreSQL); manustatud: andmebaas on fail, mida rakendus otse kasutab (SQLite); võti-väärtus: mälupõhine kiire hoidla (Valkey, Redis).</p>
+</details>
+<p><strong>5.</strong> Mis on PostgreSQL-is roll? Kuidas erineb see MariaDB kasutajast <code>'nimi'@'host'</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Roll on kasutaja või grupp (sama mõiste); õigused antakse rollidele. MariaDB-s on kasutaja seotud aadressiga, kust ta ühendub; PostgreSQL-is määrab ühenduse lubamise eraldi fail <code>pg_hba.conf</code>.</p>
+</details>
+<p><strong>6.</strong> Mida määrab fail <code>pg_hba.conf</code>? Mis on <code>peer</code>-autentimine?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kes (kasutaja), millisesse andmebaasi, kust (aadress) ja millise meetodiga tohib ühenduda. <code>peer</code> - kohalik ühendus, kus operatsioonisüsteemi kasutajanimi peab ühtima andmebaasi kasutajanimega.</p>
+</details>
+<p><strong>7.</strong> Millal sobib SQLite ja millal mitte? Kuidas varundada SQLite'i andmebaasi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Sobib üks rakendus, väike/keskmine andmemaht, seadistus ja olek; ei sobi palju samaaegseid kirjutajaid, mitu serverit, NFS. Varundus: <code>sqlite3 fail.db ".backup varu.db"</code> või <code>.dump</code>, või failikoopia peatatud rakendusega.</p>
+</details>
+<p><strong>8.</strong> Milleks kasutatakse Valkeyt/Redist? Miks tekkis Valkey?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Vahemälu, seansid, järjekorrad, loendurid. Valkey tekkis 2024, kui Redis muutis litsentsi mittevabaks - kogukond jätkas viimase vaba versiooni põhjal.</p>
+</details>
+<p><strong>9.</strong> Miks ei tohi Redise/Valkey porti avada võrku ilma paroolita?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>See on mälupõhine ja vaikimisi ilma autentimiseta; ründaja saab lugeda ja kirjutada kõiki andmeid ning võib serveri üle võtta (nt failide kirjutamise kaudu).</p>
+</details>
+<p><strong>10.</strong> Mis on replikatsioon ja miks see ei asenda varukoopiat?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Teise serverisse pidevalt uuendatav koopia. Vead ja kustutamised (<code>DROP TABLE</code>) replitseeritakse samuti kohe - varukoopia on ajaline koopia, millest saab taastada varasema seisu.</p>
+</details>
+<p><strong>11.</strong> Miks peab PHP-leht kasutama <code>htmlspecialchars()</code>-i andmebaasist tulnud teksti väljastamisel?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Andmebaasis võib olla HTML-i või JavaScripti (nt kasutaja sisestatud nimi); ilma kodeerimiseta käivitaks brauser selle (XSS).</p>
+</details>
+<p><strong>12.</strong> Mis on ülevõtt (<em>failover</em>)? Milliseid samme teed MariaDB-s, et koopiast saaks põhiserver, ja miks ei tohi vana põhiserverit pärast parandamist lihtsalt uuesti käivitada?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Rikkis põhiserveri asendamine koopiaga. Koopias: kontrolli replikatsiooni olekut, <code>STOP REPLICA</code>, <code>RESET REPLICA ALL</code>, <code>read_only = OFF</code> (ka seadistusfailis) ning suuna rakendus uuele serverile (nimi või virtuaalne IP). Vana server võtaks vastu kirjutusi ja andmed läheksid lahku (<em>split brain</em>) - sellest tehakse uue põhiserveri koopia.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Kirjuta SQL-käsud, mis loovad andmebaasi <code>moodle</code> ja kasutaja <code>moodle</code>, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt <code>10.0.83.55</code>.</li>
-<li>Loo PostgreSQL-is roll <code>moodle</code> parooliga ja andmebaas <code>moodle</code>, mille omanik see roll on.</li>
-<li>Kirjuta <code>pg_hba.conf</code> rida, mis lubab rollil <code>moodle</code> ühenduda andmebaasi <code>moodle</code> ainult aadressilt <code>10.0.83.55</code> paroolitõendusega.</li>
-<li>Ekspordi SQLite'i andmebaasist <code>kool.db</code> tabel <code>opilased</code> CSV-failiks.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Vähima õiguse põhimõte: kui rakendus häkitakse, pääseb ründaja ligi ainult selle rakenduse andmebaasile, mitte kõigile andmebaasidele ega serveri haldusele.</li>
-<li>Failid võivad olla poolelioleva muudatuse keskel ja omavahel ebajärjepidevad. Kasutada tuleb <code>mariadb-dump</code>/<code>pg_dump</code>-i või peatada teenus.</li>
-<li>Peata teenus, käivita see valikutega <code>--skip-grant-tables --skip-networking</code> (nt <code>systemctl set-environment MYSQLD_OPTS=…</code>), logi sisse ilma paroolita, <code>FLUSH PRIVILEGES;</code> ja <code>ALTER USER … IDENTIFIED BY …</code>, seejärel käivita teenus tavapäraselt. Ilma õiguste kontrollita saaks muidu igaüks võrgust andmebaasi ilma paroolita kasutada.</li>
-<li>Server: eraldi teenus võrgus, mitu klienti (MariaDB, PostgreSQL); manustatud: andmebaas on fail, mida rakendus otse kasutab (SQLite); võti-väärtus: mälupõhine kiire hoidla (Valkey, Redis).</li>
-<li>Roll on kasutaja või grupp (sama mõiste); õigused antakse rollidele. MariaDB-s on kasutaja seotud aadressiga, kust ta ühendub; PostgreSQL-is määrab ühenduse lubamise eraldi fail <code>pg_hba.conf</code>.</li>
-<li>Kes (kasutaja), millisesse andmebaasi, kust (aadress) ja millise meetodiga tohib ühenduda. <code>peer</code> - kohalik ühendus, kus operatsioonisüsteemi kasutajanimi peab ühtima andmebaasi kasutajanimega.</li>
-<li>Sobib üks rakendus, väike/keskmine andmemaht, seadistus ja olek; ei sobi palju samaaegseid kirjutajaid, mitu serverit, NFS. Varundus: <code>sqlite3 fail.db ".backup varu.db"</code> või <code>.dump</code>, või failikoopia peatatud rakendusega.</li>
-<li>Vahemälu, seansid, järjekorrad, loendurid. Valkey tekkis 2024, kui Redis muutis litsentsi mittevabaks - kogukond jätkas viimase vaba versiooni põhjal.</li>
-<li>See on mälupõhine ja vaikimisi ilma autentimiseta; ründaja saab lugeda ja kirjutada kõiki andmeid ning võib serveri üle võtta (nt failide kirjutamise kaudu).</li>
-<li>Teise serverisse pidevalt uuendatav koopia. Vead ja kustutamised (<code>DROP TABLE</code>) replitseeritakse samuti kohe - varukoopia on ajaline koopia, millest saab taastada varasema seisu.</li>
-<li>Andmebaasis võib olla HTML-i või JavaScripti (nt kasutaja sisestatud nimi); ilma kodeerimiseta käivitaks brauser selle (XSS).</li>
-<li>Rikkis põhiserveri asendamine koopiaga. Koopias: kontrolli replikatsiooni olekut, <code>STOP REPLICA</code>, <code>RESET REPLICA ALL</code>, <code>read_only = OFF</code> (ka seadistusfailis) ning suuna rakendus uuele serverile (nimi või virtuaalne IP). Vana server võtaks vastu kirjutusi ja andmed läheksid lahku (<em>split brain</em>) - sellest tehakse uue põhiserveri koopia.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Kirjuta SQL-käsud, mis loovad andmebaasi <code>moodle</code> ja kasutaja <code>moodle</code>, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt <code>10.0.83.55</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">moodle</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Tugev-Parool-456'</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">moodle</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="p">;</span>
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Loo PostgreSQL-is roll <code>moodle</code> parooliga ja andmebaas <code>moodle</code>, mille omanik see roll on.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">moodle</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">'Tugev-Parool-456'</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">moodle</span><span class="w"> </span><span class="k">OWNER</span><span class="w"> </span><span class="n">moodle</span><span class="p">;</span>
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kirjuta <code>pg_hba.conf</code> rida, mis lubab rollil <code>moodle</code> ühenduda andmebaasi <code>moodle</code> ainult aadressilt <code>10.0.83.55</code> paroolitõendusega.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>host  moodle  moodle  10.0.83.55/32  scram-sha-256
 </code></pre></div>
+</details>
+<p><strong>4.</strong> Ekspordi SQLite'i andmebaasist <code>kool.db</code> tabel <code>opilased</code> CSV-failiks.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>sqlite3<span class="w"> </span>-csv<span class="w"> </span>-header<span class="w"> </span>kool.db<span class="w"> </span><span class="s2">"SELECT * FROM opilased;"</span><span class="w"> </span>&gt;<span class="w"> </span>opilased.csv
 </code></pre></div>
+</details>
 
 
 

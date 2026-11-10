@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -950,34 +952,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,76 +4407,134 @@
 
 
 <h1 id="moodul-4-enesekontroll">Moodul 4. Enesekontroll<a class="headerlink" href="#moodul-4-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis on pakett, hoidla ja sõltuvus?</li>
-<li>Nimeta kolm põhjust, miks paigaldada tarkvara pakihalduriga, mitte tootja kodulehelt alla laaditud failist.</li>
-<li>Mis vahe on käskudel <code>dpkg</code> ja <code>apt</code> (või <code>rpm</code> ja <code>dnf</code>)?</li>
-<li>Mida teeb <code>apt update</code> ja mida <code>apt upgrade</code>?</li>
-<li>Mis vahe on käskudel <code>apt remove</code> ja <code>apt purge</code>?</li>
-<li>Mida teeb <code>apt autoremove</code>?</li>
-<li>Kuidas leida, millisesse paketti kuulub fail <code>/usr/bin/ssh</code>? Kirjuta käsk mõlema perekonna jaoks.</li>
-<li>Mis on EPEL ja miks seda AlmaLinuxis sageli vaja on?</li>
-<li>Millised riskid kaasnevad kolmanda osapoole hoidla lisamisega?</li>
-<li>Kus asuvad hoidlate seadistused Debianis/Ubuntus ja AlmaLinuxis?</li>
-<li>Mis on Ubuntu hoidla osade <code>main</code> ja <code>universe</code> erinevus?</li>
-<li>Millised on kolm klassikalist sammu programmi kompileerimisel lähtekoodist? Kuhu programm vaikimisi paigaldatakse?</li>
-<li>Miks ei uuendata lähtekoodist kompileeritud programmi koos süsteemiga?</li>
-<li>Mis on Snap ja Flatpak? Nimeta üks eelis ja üks puudus.</li>
-<li>Kuidas AlmaLinuxis viimast pakihalduri toimingut tagasi võtta?</li>
-<li>Mida tuleb teha enne väljalaske uuendust (nt Debian 12 → 13)? Nimeta vähemalt neli sammu.</li>
-<li>Milliste tööriistadega uuendatakse väljalaset Ubuntus ja AlmaLinuxis?</li>
-</ol>
+<p><strong>1.</strong> Mis on pakett, hoidla ja sõltuvus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><strong>Pakett</strong> on arhiiv, mis sisaldab programmi faile, metaandmeid ja paigaldusskripte. <strong>Hoidla</strong> on server, kus asuvad paketid ja nende loend. <strong>Sõltuvus</strong> on teine pakett, mida programm töötamiseks vajab.</p>
+</details>
+<p><strong>2.</strong> Nimeta kolm põhjust, miks paigaldada tarkvara pakihalduriga, mitte tootja kodulehelt alla laaditud failist.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Näiteks: paketid on allkirjastatud ja kontrollitud; sõltuvused lahendatakse automaatselt; kogu süsteem uueneb ühe käsuga; eemaldamine on puhas.</p>
+</details>
+<p><strong>3.</strong> Mis vahe on käskudel <code>dpkg</code> ja <code>apt</code> (või <code>rpm</code> ja <code>dnf</code>)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>dpkg</code> / <code>rpm</code> on madala taseme tööriistad, mis paigaldavad üksiku paketifaili, kuid ei lahenda sõltuvusi ega laadi midagi alla. <code>apt</code> / <code>dnf</code> laadivad paketid hoidlast ja lahendavad sõltuvused automaatselt.</p>
+</details>
+<p><strong>4.</strong> Mida teeb <code>apt update</code> ja mida <code>apt upgrade</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>apt update</code> värskendab hoidlatest pakettide loendi. <code>apt upgrade</code> uuendab paigaldatud paketid uuematele versioonidele.</p>
+</details>
+<p><strong>5.</strong> Mis vahe on käskudel <code>apt remove</code> ja <code>apt purge</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>remove</code> eemaldab paketi, kuid jätab seadistusfailid alles. <code>purge</code> eemaldab ka seadistusfailid.</p>
+</details>
+<p><strong>6.</strong> Mida teeb <code>apt autoremove</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Eemaldab paketid, mis paigaldati sõltuvustena, kuid mida ükski paigaldatud pakett enam ei vaja.</p>
+</details>
+<p><strong>7.</strong> Kuidas leida, millisesse paketti kuulub fail <code>/usr/bin/ssh</code>? Kirjuta käsk mõlema perekonna jaoks.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Debian/Ubuntu: <code>dpkg -S /usr/bin/ssh</code>. AlmaLinux: <code>rpm -qf /usr/bin/ssh</code> (või <code>dnf provides /usr/bin/ssh</code>).</p>
+</details>
+<p><strong>8.</strong> Mis on EPEL ja miks seda AlmaLinuxis sageli vaja on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>EPEL (<em>Extra Packages for Enterprise Linux</em>) on Fedora kogukonna lisapakettide hoidla RHEL-i perekonna distrodele. AlmaLinuxi põhihoidlates on teadlikult piiratud valik tarkvara, palju populaarseid tööriistu (nt <code>htop</code>, <code>ncdu</code>) on ainult EPEL-is.</p>
+</details>
+<p><strong>9.</strong> Millised riskid kaasnevad kolmanda osapoole hoidla lisamisega?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Hoidla paigaldusskriptid töötavad juurkasutaja õigustes, seega pahatahtlik või häkitud hoidla võib süsteemi üle võtta. Lisaks võivad tekkida pakettide konfliktid ja uuendusprobleemid ning hoidla võib hooldamata jääda.</p>
+</details>
+<p><strong>10.</strong> Kus asuvad hoidlate seadistused Debianis/Ubuntus ja AlmaLinuxis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Debian/Ubuntu: <code>/etc/apt/sources.list.d/</code> (uuemates <code>.sources</code> failid) või <code>/etc/apt/sources.list</code>. AlmaLinux: <code>/etc/yum.repos.d/*.repo</code>.</p>
+</details>
+<p><strong>11.</strong> Mis on Ubuntu hoidla osade <code>main</code> ja <code>universe</code> erinevus?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>main</code> on Canonicali ametlikult toetatud vaba tarkvara. <code>universe</code> on kogukonna hooldatud vaba tarkvara, mille turvauuendusi Canonical ei taga samal määral.</p>
+</details>
+<p><strong>12.</strong> Millised on kolm klassikalist sammu programmi kompileerimisel lähtekoodist? Kuhu programm vaikimisi paigaldatakse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>./configure</code>, <code>make</code>, <code>sudo make install</code>. Vaikimisi paigaldatakse kataloogi <code>/usr/local</code>.</p>
+</details>
+<p><strong>13.</strong> Miks ei uuendata lähtekoodist kompileeritud programmi koos süsteemiga?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Pakihaldur ei tea sellest programmist midagi, seega ei saa see programmi uuendada ega eemaldada. Uuendused tuleb ise jälgida ja programm uuesti kompileerida.</p>
+</details>
+<p><strong>14.</strong> Mis on Snap ja Flatpak? Nimeta üks eelis ja üks puudus.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Distrost sõltumatud paketivormingud, kus programm on koos oma sõltuvustega ja töötab isoleeritult. Eelis: uusim versioon igas distros. Puudus: suurem maht ja aeglasem käivitus (või sõltuvuste turvauuendused sõltuvad paketi koostajast).</p>
+</details>
+<p><strong>15.</strong> Kuidas AlmaLinuxis viimast pakihalduri toimingut tagasi võtta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>dnf history</code> näitab toimingute numbreid, <code>sudo dnf history undo &lt;nr&gt;</code> võtab valitud toimingu tagasi.</p>
+</details>
+<p><strong>16.</strong> Mida tuleb teha enne väljalaske uuendust (nt Debian 12 → 13)? Nimeta vähemalt neli sammu.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Loe väljalaskemärkmeid, tee hetktõmmis või varukoopia, uuenda praegune väljalase lõpuni ja taaskäivita, kontrolli vaba kettaruumi, keela kolmandate osapoolte hoidlad, tee uuendust konsoolis või <code>tmux</code>-is.</p>
+</details>
+<p><strong>17.</strong> Milliste tööriistadega uuendatakse väljalaset Ubuntus ja AlmaLinuxis?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ubuntu: <code>do-release-upgrade</code>. AlmaLinux: ELevate projekti <code>leapp</code> (<code>leapp preupgrade</code>, <code>leapp upgrade</code>); RHEL-i perekonnas eelistatakse siiski uut paigaldust.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p>Tee ülesanded Debiani või Ubuntu masinas (A) ja AlmaLinuxi masinas (B).</p>
-<ol>
-<li>(A ja B) Uuenda süsteem ühe käsurea abil.</li>
-<li>(A ja B) Leia, mitu faili on paketis <code>bash</code>.</li>
-<li>(A) Leia paketi <code>curl</code> paigaldatud ja hoidlas saadaval olev versioon.</li>
-<li>(B) Leia, milline pakett annab käsu <code>semanage</code>.</li>
-<li>(A ja B) Paigalda ja seejärel eemalda pakett <code>htop</code> (AlmaLinuxis on vaja EPEL-i).</li>
-<li>(A) Leia failist <code>/var/log/apt/history.log</code> kõik read, kus midagi paigaldati (<code>Install:</code>).</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Pakett</strong> on arhiiv, mis sisaldab programmi faile, metaandmeid ja paigaldusskripte. <strong>Hoidla</strong> on server, kus asuvad paketid ja nende loend. <strong>Sõltuvus</strong> on teine pakett, mida programm töötamiseks vajab.</li>
-<li>Näiteks: paketid on allkirjastatud ja kontrollitud; sõltuvused lahendatakse automaatselt; kogu süsteem uueneb ühe käsuga; eemaldamine on puhas.</li>
-<li><code>dpkg</code> / <code>rpm</code> on madala taseme tööriistad, mis paigaldavad üksiku paketifaili, kuid ei lahenda sõltuvusi ega laadi midagi alla. <code>apt</code> / <code>dnf</code> laadivad paketid hoidlast ja lahendavad sõltuvused automaatselt.</li>
-<li><code>apt update</code> värskendab hoidlatest pakettide loendi. <code>apt upgrade</code> uuendab paigaldatud paketid uuematele versioonidele.</li>
-<li><code>remove</code> eemaldab paketi, kuid jätab seadistusfailid alles. <code>purge</code> eemaldab ka seadistusfailid.</li>
-<li>Eemaldab paketid, mis paigaldati sõltuvustena, kuid mida ükski paigaldatud pakett enam ei vaja.</li>
-<li>Debian/Ubuntu: <code>dpkg -S /usr/bin/ssh</code>. AlmaLinux: <code>rpm -qf /usr/bin/ssh</code> (või <code>dnf provides /usr/bin/ssh</code>).</li>
-<li>EPEL (<em>Extra Packages for Enterprise Linux</em>) on Fedora kogukonna lisapakettide hoidla RHEL-i perekonna distrodele. AlmaLinuxi põhihoidlates on teadlikult piiratud valik tarkvara, palju populaarseid tööriistu (nt <code>htop</code>, <code>ncdu</code>) on ainult EPEL-is.</li>
-<li>Hoidla paigaldusskriptid töötavad juurkasutaja õigustes, seega pahatahtlik või häkitud hoidla võib süsteemi üle võtta. Lisaks võivad tekkida pakettide konfliktid ja uuendusprobleemid ning hoidla võib hooldamata jääda.</li>
-<li>Debian/Ubuntu: <code>/etc/apt/sources.list.d/</code> (uuemates <code>.sources</code> failid) või <code>/etc/apt/sources.list</code>. AlmaLinux: <code>/etc/yum.repos.d/*.repo</code>.</li>
-<li><code>main</code> on Canonicali ametlikult toetatud vaba tarkvara. <code>universe</code> on kogukonna hooldatud vaba tarkvara, mille turvauuendusi Canonical ei taga samal määral.</li>
-<li><code>./configure</code>, <code>make</code>, <code>sudo make install</code>. Vaikimisi paigaldatakse kataloogi <code>/usr/local</code>.</li>
-<li>Pakihaldur ei tea sellest programmist midagi, seega ei saa see programmi uuendada ega eemaldada. Uuendused tuleb ise jälgida ja programm uuesti kompileerida.</li>
-<li>Distrost sõltumatud paketivormingud, kus programm on koos oma sõltuvustega ja töötab isoleeritult. Eelis: uusim versioon igas distros. Puudus: suurem maht ja aeglasem käivitus (või sõltuvuste turvauuendused sõltuvad paketi koostajast).</li>
-<li><code>dnf history</code> näitab toimingute numbreid, <code>sudo dnf history undo &lt;nr&gt;</code> võtab valitud toimingu tagasi.</li>
-<li>Loe väljalaskemärkmeid, tee hetktõmmis või varukoopia, uuenda praegune väljalase lõpuni ja taaskäivita, kontrolli vaba kettaruumi, keela kolmandate osapoolte hoidlad, tee uuendust konsoolis või <code>tmux</code>-is.</li>
-<li>Ubuntu: <code>do-release-upgrade</code>. AlmaLinux: ELevate projekti <code>leapp</code> (<code>leapp preupgrade</code>, <code>leapp upgrade</code>); RHEL-i perekonnas eelistatakse siiski uut paigaldust.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1</span>
-sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w">            </span><span class="c1"># A</span>
+<p><strong>1.</strong> (A ja B) Uuenda süsteem ühe käsurea abil.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w">            </span><span class="c1"># A</span>
 sudo<span class="w"> </span>dnf<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w">                               </span><span class="c1"># B</span>
-<span class="c1"># 2</span>
-dpkg<span class="w"> </span>-L<span class="w"> </span>bash<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">                              </span><span class="c1"># A</span>
-rpm<span class="w"> </span>-ql<span class="w"> </span>bash<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">                              </span><span class="c1"># B</span>
-<span class="c1"># 3</span>
-apt<span class="w"> </span>policy<span class="w"> </span>curl<span class="w">                                   </span><span class="c1"># A</span>
-<span class="c1"># 4</span>
-dnf<span class="w"> </span>provides<span class="w"> </span>semanage<span class="w">                             </span><span class="c1"># B (pakett policycoreutils-python-utils)</span>
-<span class="c1"># 5</span>
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>htop<span class="w">     </span><span class="c1"># A</span>
-sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>epel-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>htop<span class="w">   </span><span class="c1"># B</span>
-<span class="c1"># 6</span>
-grep<span class="w"> </span><span class="s1">'^Install:'</span><span class="w"> </span>/var/log/apt/history.log<span class="w">         </span><span class="c1"># A</span>
 </code></pre></div>
 <p>Võti <code>-y</code> vastab kõigile küsimustele automaatselt „jah“. Seda kasutatakse skriptides, kuid käsitsi töötades on parem enne kinnitamist üle vaadata, mida pakihaldur teha kavatseb.</p>
+</details>
+<p><strong>2.</strong> (A ja B) Leia, mitu faili on paketis <code>bash</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>dpkg<span class="w"> </span>-L<span class="w"> </span>bash<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">                              </span><span class="c1"># A</span>
+rpm<span class="w"> </span>-ql<span class="w"> </span>bash<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">                              </span><span class="c1"># B</span>
+</code></pre></div>
+</details>
+<p><strong>3.</strong> (A) Leia paketi <code>curl</code> paigaldatud ja hoidlas saadaval olev versioon.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>policy<span class="w"> </span>curl<span class="w">                                   </span><span class="c1"># A</span>
+</code></pre></div>
+</details>
+<p><strong>4.</strong> (B) Leia, milline pakett annab käsu <code>semanage</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>dnf<span class="w"> </span>provides<span class="w"> </span>semanage<span class="w">                             </span><span class="c1"># B (pakett policycoreutils-python-utils)</span>
+</code></pre></div>
+</details>
+<p><strong>5.</strong> (A ja B) Paigalda ja seejärel eemalda pakett <code>htop</code> (AlmaLinuxis on vaja EPEL-i).</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>htop<span class="w">     </span><span class="c1"># A</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>epel-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>htop<span class="w">   </span><span class="c1"># B</span>
+</code></pre></div>
+</details>
+<p><strong>6.</strong> (A) Leia failist <code>/var/log/apt/history.log</code> kõik read, kus midagi paigaldati (<code>Install:</code>).</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code>grep<span class="w"> </span><span class="s1">'^Install:'</span><span class="w"> </span>/var/log/apt/history.log<span class="w">         </span><span class="c1"># A</span>
+</code></pre></div>
+</details>
 
 
 

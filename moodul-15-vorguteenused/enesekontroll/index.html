@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2591,34 +2593,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4415,34 +4389,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#vastused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vastused
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vastused">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#miniülesannete-lahendused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Miniülesannete lahendused
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4461,58 +4407,97 @@
 
 
 <h1 id="moodul-15-enesekontroll">Moodul 15. Enesekontroll<a class="headerlink" href="#moodul-15-enesekontroll" title="Permanent link">&para;</a></h1>
-<p>Vasta küsimustele kõigepealt ise, ilma materjali vaatamata. Seejärel kontrolli vastuseid lehe lõpust.</p>
+<p>Vasta igale küsimusele kõigepealt ise, ilma materjali vaatamata. Seejärel ava selle all olev <strong>Vastus</strong> ja võrdle.</p>
 <h2 id="küsimused">Küsimused<a class="headerlink" href="#küsimused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Mis vahe on autoriteetsel ja rekursiivsel DNS-serveril?</li>
-<li>Selgita DNS-kirjeid <code>A</code>, <code>CNAME</code>, <code>MX</code> ja <code>NS</code>.</li>
-<li>Miks tuleb tsoonifaili muutmisel suurendada seerianumbrit?</li>
-<li>Mis on NFS-i <code>root_squash</code> ja miks see vaikimisi sees on?</li>
-<li>Miks on Sambal oma paroolid?</li>
-<li>Selgita varunduse 3-2-1 reeglit. Miks on oluline taastamist testida?</li>
-<li>Võrdle BIND9-t, dnsmasq-i, CoreDNS-i ja Pi-hole'i: milleks igaüks sobib?</li>
-<li>Millal valiksid failiserveriks TrueNASi ja millal ise seadistatud Debiani Samba ja NFS-iga? Miks peaks TrueNAS nägema päris kettaid?</li>
-<li>Milleks on serveris vaja MTA-d (nt Postfix), kui see ei ole e-posti server? Mis on relee (<em>smarthost</em>)?</li>
-<li>Miks peab Postfixi <code>inet_interfaces</code> olema laborserveris <code>loopback-only</code>?</li>
-<li>Mis on autofs ja mille poolest on see parem kui NFS-i rida <code>/etc/fstab</code>-is?</li>
-<li>Mis on RPO ja RTO? Kooli e-õppekeskkonda varundatakse igal ööl kell 02.00 ja taastamine võtab 3 tundi. Milline on halvimal juhul andmekadu ja kas see sobib, kui RTO on 2 tundi?</li>
-<li>Mille poolest erineb käsiraamat (<em>runbook</em>) tavalisest serveri dokumentatsioonist? Milleks on otsuste logi?</li>
-</ol>
+<p><strong>1.</strong> Mis vahe on autoriteetsel ja rekursiivsel DNS-serveril?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Autoriteetne server vastab oma tsooni nimede kohta. Rekursiivne server küsib klientide eest vastuseid teistelt serveritelt ja hoiab vahemälu.</p>
+</details>
+<p><strong>2.</strong> Selgita DNS-kirjeid <code>A</code>, <code>CNAME</code>, <code>MX</code> ja <code>NS</code>.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>A</code> - nimi → IPv4-aadress; <code>CNAME</code> - nimi on teise nime alias; <code>MX</code> - domeeni e-posti server; <code>NS</code> - tsooni nimeserver.</p>
+</details>
+<p><strong>3.</strong> Miks tuleb tsoonifaili muutmisel suurendada seerianumbrit?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Seerianumber on tsooni versioon. Sekundaarsed serverid uuendavad tsooni ainult siis, kui seerianumber on suurenenud.</p>
+</details>
+<p><strong>4.</strong> Mis on NFS-i <code>root_squash</code> ja miks see vaikimisi sees on?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kliendi juurkasutaja muudetakse serveris õigusteta kasutajaks <code>nobody</code>. Muidu saaks iga kliendi juurkasutaja serveri jagatud failidega teha kõike.</p>
+</details>
+<p><strong>5.</strong> Miks on Sambal oma paroolid?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>SMB-protokoll kasutab autentimiseks teist meetodit kui Linuxi sisselogimine, mistõttu Samba vajab kasutajate jaoks oma räsisid. (Active Directory domeenis autenditakse kasutajad domeenikontrolleri kaudu.)</p>
+</details>
+<p><strong>6.</strong> Selgita varunduse 3-2-1 reeglit. Miks on oluline taastamist testida?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kolm koopiat, kahel eri andmekandjal, üks mujal. Taastamist tuleb testida, sest alles siis on näha, kas varukoopia on täielik, loetav ja kas taastamise sammud on teada.</p>
+</details>
+<p><strong>7.</strong> Võrdle BIND9-t, dnsmasq-i, CoreDNS-i ja Pi-hole'i: milleks igaüks sobib?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>BIND9 - täisfunktsionaalne autoriteetne ja rekursiivne server suurematele tsoonidele; dnsmasq - kerge edastav DNS + DHCP väikevõrku; CoreDNS - ühe failiga seadistatav, pistikprogrammidega, sobib konteineritesse ja Gitiga hallatavaks (Kubernetese DNS); Pi-hole - filtreeriv DNS, mis blokeerib reklaami- ja jälitusdomeene kogu võrgule.</p>
+</details>
+<p><strong>8.</strong> Millal valiksid failiserveriks TrueNASi ja millal ise seadistatud Debiani Samba ja NFS-iga? Miks peaks TrueNAS nägema päris kettaid?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>TrueNAS: palju kettaid, ZFS-i töökindlus, hetktõmmised ja replikatsioon veebiliidesest, eraldi salvestusseade. Oma Debian: kui samas masinas on ka muud teenused, vaja on täielikku kontrolli või õpitakse seadistamist. ZFS jälgib ketaste tervist ja parandab vigu ainult siis, kui tal on otseligipääs ketastele; virtuaalketaste all olevat riket ta ei näe.</p>
+</details>
+<p><strong>9.</strong> Milleks on serveris vaja MTA-d (nt Postfix), kui see ei ole e-posti server? Mis on relee (<em>smarthost</em>)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Et serveri enda programmid (cron, systemd, <code>smartd</code>, skriptid) saaksid teateid saata. Relee on teine SMTP-server (asutuse või pakkuja oma), mille kaudu server kirjad edastab, selle asemel et neid ise otse adressaatide serveritesse saata.</p>
+</details>
+<p><strong>10.</strong> Miks peab Postfixi <code>inet_interfaces</code> olema laborserveris <code>loopback-only</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Server ei tohi võtta võrgust kirju vastu ega edastada neid - avatud releed kasutatakse rämpsposti saatmiseks ja server satub mustadesse nimekirjadesse.</p>
+</details>
+<p><strong>11.</strong> Mis on autofs ja mille poolest on see parem kui NFS-i rida <code>/etc/fstab</code>-is?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>autofs haagib jagamise alles siis, kui kataloogi poole pöördutakse, ja haagib lahti tegevusetuse järel. Alglaadimine ei sõltu failiserverist ja kodukataloogid saab metamärgiga (<code>*</code>, <code>&amp;</code>) haakida kõigile kasutajatele.</p>
+</details>
+<p><strong>12.</strong> Mis on RPO ja RTO? Kooli e-õppekeskkonda varundatakse igal ööl kell 02.00 ja taastamine võtab 3 tundi. Milline on halvimal juhul andmekadu ja kas see sobib, kui RTO on 2 tundi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>RPO - lubatud andmekadu ajas; RTO - lubatud taastumisaeg. Rike vahetult enne järgmist varundust tähendab kuni ~24 h andmekadu. 3-tunnine taastamine ei mahu 2-tunnise RTO sisse - vaja on kiiremat taastamist (nt valmis VM-i varukoopia, varuserver) või tuleb RTO-s kokku leppida uuesti.</p>
+</details>
+<p><strong>13.</strong> Mille poolest erineb käsiraamat (<em>runbook</em>) tavalisest serveri dokumentatsioonist? Milleks on otsuste logi?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Dokumentatsioon kirjeldab, kuidas süsteem on ehitatud; käsiraamat annab sammhaaval tegevusjuhised kindlateks olukordadeks (rike, hooldus), mida saab järgida ka süsteemi mittetundev inimene. Otsuste logi talletab, miks midagi valiti, et hilisemad muudatused ei kordaks vanu vigu.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Lisa tsooni <code>lab.example</code> e-posti server <code>mail.lab.example</code> (IP <code>10.0.83.58</code>) koos MX-kirjega.</li>
-<li>Kirjuta <code>/etc/exports</code> rida, mis jagab kataloogi <code>/srv/iso</code> kogu võrgule <code>10.0.0.0/8</code> ainult lugemiseks.</li>
-<li>Kuva restic'u hoidlast kõik hetktõmmised ja taasta eelviimasest failid kataloogist <code>/etc/nginx</code>.</li>
-</ol>
-<hr />
-<h2 id="vastused">Vastused<a class="headerlink" href="#vastused" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Autoriteetne server vastab oma tsooni nimede kohta. Rekursiivne server küsib klientide eest vastuseid teistelt serveritelt ja hoiab vahemälu.</li>
-<li><code>A</code> - nimi → IPv4-aadress; <code>CNAME</code> - nimi on teise nime alias; <code>MX</code> - domeeni e-posti server; <code>NS</code> - tsooni nimeserver.</li>
-<li>Seerianumber on tsooni versioon. Sekundaarsed serverid uuendavad tsooni ainult siis, kui seerianumber on suurenenud.</li>
-<li>Kliendi juurkasutaja muudetakse serveris õigusteta kasutajaks <code>nobody</code>. Muidu saaks iga kliendi juurkasutaja serveri jagatud failidega teha kõike.</li>
-<li>SMB-protokoll kasutab autentimiseks teist meetodit kui Linuxi sisselogimine, mistõttu Samba vajab kasutajate jaoks oma räsisid. (Active Directory domeenis autenditakse kasutajad domeenikontrolleri kaudu.)</li>
-<li>Kolm koopiat, kahel eri andmekandjal, üks mujal. Taastamist tuleb testida, sest alles siis on näha, kas varukoopia on täielik, loetav ja kas taastamise sammud on teada.</li>
-<li>BIND9 - täisfunktsionaalne autoriteetne ja rekursiivne server suurematele tsoonidele; dnsmasq - kerge edastav DNS + DHCP väikevõrku; CoreDNS - ühe failiga seadistatav, pistikprogrammidega, sobib konteineritesse ja Gitiga hallatavaks (Kubernetese DNS); Pi-hole - filtreeriv DNS, mis blokeerib reklaami- ja jälitusdomeene kogu võrgule.</li>
-<li>TrueNAS: palju kettaid, ZFS-i töökindlus, hetktõmmised ja replikatsioon veebiliidesest, eraldi salvestusseade. Oma Debian: kui samas masinas on ka muud teenused, vaja on täielikku kontrolli või õpitakse seadistamist. ZFS jälgib ketaste tervist ja parandab vigu ainult siis, kui tal on otseligipääs ketastele; virtuaalketaste all olevat riket ta ei näe.</li>
-<li>Et serveri enda programmid (cron, systemd, <code>smartd</code>, skriptid) saaksid teateid saata. Relee on teine SMTP-server (asutuse või pakkuja oma), mille kaudu server kirjad edastab, selle asemel et neid ise otse adressaatide serveritesse saata.</li>
-<li>Server ei tohi võtta võrgust kirju vastu ega edastada neid - avatud releed kasutatakse rämpsposti saatmiseks ja server satub mustadesse nimekirjadesse.</li>
-<li>autofs haagib jagamise alles siis, kui kataloogi poole pöördutakse, ja haagib lahti tegevusetuse järel. Alglaadimine ei sõltu failiserverist ja kodukataloogid saab metamärgiga (<code>*</code>, <code>&amp;</code>) haakida kõigile kasutajatele.</li>
-<li>RPO - lubatud andmekadu ajas; RTO - lubatud taastumisaeg. Rike vahetult enne järgmist varundust tähendab kuni ~24 h andmekadu. 3-tunnine taastamine ei mahu 2-tunnise RTO sisse - vaja on kiiremat taastamist (nt valmis VM-i varukoopia, varuserver) või tuleb RTO-s kokku leppida uuesti.</li>
-<li>Dokumentatsioon kirjeldab, kuidas süsteem on ehitatud; käsiraamat annab sammhaaval tegevusjuhised kindlateks olukordadeks (rike, hooldus), mida saab järgida ka süsteemi mittetundev inimene. Otsuste logi talletab, miks midagi valiti, et hilisemad muudatused ei kordaks vanu vigu.</li>
-</ol>
-<h3 id="miniülesannete-lahendused">Miniülesannete lahendused<a class="headerlink" href="#miniülesannete-lahendused" title="Permanent link">&para;</a></h3>
+<p><strong>1.</strong> Lisa tsooni <code>lab.example</code> e-posti server <code>mail.lab.example</code> (IP <code>10.0.83.58</code>) koos MX-kirjega.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>; 1 (tsoonifaili, suurenda seerianumbrit)
 @       IN  MX  10 mail.lab.example.
 mail    IN  A   10.0.83.58
 </code></pre></div>
+</details>
+<p><strong>2.</strong> Kirjuta <code>/etc/exports</code> rida, mis jagab kataloogi <code>/srv/iso</code> kogu võrgule <code>10.0.0.0/8</code> ainult lugemiseks.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code># 2
 /srv/iso  10.0.0.0/8(ro,sync,no_subtree_check)
 </code></pre></div>
+</details>
+<p><strong>3.</strong> Kuva restic'u hoidlast kõik hetktõmmised ja taasta eelviimasest failid kataloogist <code>/etc/nginx</code>.</p>
+<details class="success">
+<summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="c1"># 3</span>
 sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>snapshots
 sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </span>restore<span class="w"> </span>&lt;eelviimase<span class="w"> </span>ID&gt;<span class="w"> </span>--target<span class="w"> </span>/tmp/taaste<span class="w"> </span>--include<span class="w"> </span>/etc/nginx
 </code></pre></div>
+</details>
 
 
 

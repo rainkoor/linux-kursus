@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3113,6 +3115,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#4-osa-veebiliides-ja-seadistusviisard" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4487,6 +4500,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#4-osa-veebiliides-ja-seadistusviisard" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4607,19 +4631,28 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K16</strong> ja lisa oma võrguplaan (vt <a href="../../lisad/paigaldus/">paigalduslisa</a>, punkt 2).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K16</strong> ja lisa oma võrguplaan (vt <a href="../../lisad/paigaldus/">paigalduslisa</a>, punkt 2). Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Tulemus:</strong> pärast seda laborit on sinu masinad isoleeritud võrgus OPNsense'i taga. Seda võrku kasutavad ka moodulid 19–21.</p>
 <p>Tähised: <code>WAN_IP</code> - OPNsense'i WAN-aadress (saad kooli DHCP-st), <code>LAN_VORK</code> - sinu laborivõrk võrguplaanist (nt <code>10.0.83.0/24</code>, ruuter <code>10.0.83.1</code>).</p>
 <hr />
 <h2 id="1-osa-võrguplaan-ja-virtuaalmasin">1. osa. Võrguplaan ja virtuaalmasin<a class="headerlink" href="#1-osa-võrguplaan-ja-virtuaalmasin" title="Permanent link">&para;</a></h2>
 <p><strong>1.1</strong> Koosta võrguplaan: sinu laborivõrk, ruuteri aadress (<code>.1</code>), DHCP vahemik ja kõigi masinate aadressid (vt paigalduslisa punkt 1).</p>
 <p><strong>1.2</strong> Loo Proxmoxis OPNsense'i virtuaalmasin (teooria punkt 18.3): kaks VirtIO võrguliidest - <code>net0</code> kooli silda (WAN), <code>net1</code> isoleeritud silda/VNet-i (LAN).</p>
-<p><strong>K1.</strong> Kirjuta aruandesse virtuaalmasina riistvara seaded ja selgita, miks vajab tulemüür kahte võrguliidest.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Kirjuta aruandesse virtuaalmasina riistvara seaded ja selgita, miks vajab tulemüür kahte võrguliidest.</p>
+</div>
 <h2 id="2-osa-paigaldus">2. osa. Paigaldus<a class="headerlink" href="#2-osa-paigaldus" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Paigalda OPNsense (teooria punkt 18.3): liidesed käsitsi (WAN <code>vtnet0</code>, LAN <code>vtnet1</code>), sisselogimine <code>installer</code>/<code>opnsense</code>, UFS või ZFS, uus juurkasutaja parool.</p>
 <p><strong>2.2</strong> Pärast taaskäivitust ja paigaldusmeedia eemaldamist logi konsoolis sisse kasutajaga <code>root</code>.</p>
 <p><strong>2.3</strong> Muuda konsoolimenüü punktis <strong>2</strong> LAN-i aadress oma võrguplaani järgi (<code>LAN_VORK</code>-i esimene aadress, mask 24). Luba LAN-il DHCP ja anna vahemik võrguplaani järgi. Veebiliidese protokolliks jäta HTTPS.</p>
-<p><strong>K2.</strong> Millise WAN-aadressi sai OPNsense? Milline liides on WAN ja milline LAN (konsooli kokkuvõte)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Millise WAN-aadressi sai OPNsense? Milline liides on WAN ja milline LAN (konsooli kokkuvõte)?</p>
+</div>
 <h2 id="3-osa-kliendid-laborivõrku">3. osa. Kliendid laborivõrku<a class="headerlink" href="#3-osa-kliendid-laborivõrku" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Muuda <strong>Ubuntu</strong> masina võrguliides Proxmoxis isoleeritud silda/VNet-i (<em>Hardware</em> → <em>Network Device</em> → <em>Bridge</em>). Masin peab saama aadressi OPNsense'ilt:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>netplan<span class="w"> </span>apply<span class="w">          </span><span class="c1"># või taaskäivita</span>
@@ -4630,13 +4663,41 @@ ping<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>
 ping<span class="w"> </span>-c2<span class="w"> </span><span class="m">1</span>.1.1.1
 ping<span class="w"> </span>-c2<span class="w"> </span>debian.org
 </code></pre></div>
-<p><strong>K3.</strong> Millise aadressi, vaikelüüsi ja DNS-serveri Ubuntu sai? Kas internet töötas? Mille kaudu (vt <code>tracepath -n 1.1.1.1</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Millise aadressi, vaikelüüsi ja DNS-serveri Ubuntu sai? Kas internet töötas? Mille kaudu (vt <code>tracepath -n 1.1.1.1</code>)?</p>
+</div>
 <p><strong>3.2</strong> Tõsta isoleeritud võrku ka Debiani ja AlmaLinuxi masinad ning anna neile võrguplaani järgi <strong>staatilised</strong> aadressid (moodul 7, punkt 7.2). Vaikelüüs ja DNS on OPNsense'i LAN-aadress.</p>
 <p><strong>3.3</strong> OPNsense'i veebiliides on vaikimisi kättesaadav ainult <strong>LAN-ist</strong>, kuid sinu arvuti on kooli võrgus (WAN-i pool). Vali üks viis:</p>
 <ul>
 <li><strong>A (soovitatav):</strong> laborivõrgus on töölauaga klient (nt Ubuntu Desktop või Windows), mida kasutad Proxmoxi konsooli kaudu, ja avad veebiliidese selle brauseris;</li>
 <li><strong>B:</strong> luba veebiliides ajutiselt WAN-ist <strong>ainult oma arvuti aadressilt</strong>. OPNsense'i konsoolis (punkt <strong>8</strong>, kest) lülita tulemüür ajutiselt välja käsuga <code>pfctl -d</code>, ava oma arvutist <code>https://WAN_IP</code>, eemalda kõigepealt <em>Interfaces</em> → <em>WAN</em> valik <em>Block private networks</em> (sinu arvuti aadress on privaatvõrgust), seejärel lisa WAN-i liidesele reegel <em>Pass</em>, TCP, allikas = sinu arvuti IP, sihtkoht = <em>This Firewall</em>, port 443, ja vajuta <em>Apply</em> - see lülitab tulemüüri jälle sisse. Kontrolli konsoolis <code>pfctl -s info | head -1</code> (peab olema <code>Status: Enabled</code>).</li>
 </ul>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.2)</em> Kirjuta aruandesse virtuaalmasina riistvara seaded ja selgita, miks vajab tulemüür kahte võrguliidest.</li>
+<li><strong>K2.</strong> <em>(punkt 2.3)</em> Millise WAN-aadressi sai OPNsense? Milline liides on WAN ja milline LAN (konsooli kokkuvõte)?</li>
+<li><strong>K3.</strong> <em>(punkt 3.1)</em> Millise aadressi, vaikelüüsi ja DNS-serveri Ubuntu sai? Kas internet töötas? Mille kaudu (vt <code>tracepath -n 1.1.1.1</code>)?</li>
+<li><strong>K4.</strong> <em>(punkt 4.2)</em> Miks lülitasime laboris välja „Block private networks from entering via WAN“? Miks ei tohi seda teha päris interneti ühenduse korral?</li>
+<li><strong>K5.</strong> <em>(punkt 5.2)</em> Kas Ubuntu sai reserveeritud aadressi? Miks kasutatakse serveritel siiski pigem staatilist aadressi kui DHCP reserveeringut?</li>
+<li><strong>K6.</strong> <em>(punkt 5.3)</em> Kas DHCP-kliendi nimi (<code>ubuntuklient</code>) lahenes? Kes vastas DNS-päringutele?</li>
+<li><strong>K7.</strong> <em>(punkt 6.3)</em> Kas leht avanes? Millise WAN-i reegli OPNsense automaatselt lõi (<em>Firewall</em> → <em>Rules</em> → <em>WAN</em>)? Mida näitas <em>Live View</em> logi ühendumise ajal?</li>
+<li><strong>K8.</strong> <em>(punkt 6.4)</em> Kas SSH keelati ja veeb töötas? Mis vahe on <em>Block</em> ja <em>Reject</em> vahel (proovi mõlemat ja vaata, kuidas <code>ssh</code> käitub)?</li>
+<li><strong>K9.</strong> <em>(punkt 6.5)</em> Mis juhtus? Selgita, kuidas reeglite järjekord mõjutab tulemust.</li>
+<li><strong>K10.</strong> <em>(punkt 7.1)</em> Täida tabel: milline FreeBSD käsk vastab Linuxi käsule <code>ip a</code>, <code>ip r</code>, <code>ss -tulpn</code>, <code>nft list ruleset</code>, <code>systemctl list-units</code>, <code>lsblk</code>? Mis on FreeBSD versioon?</li>
+<li><strong>K11.</strong> <em>(punkt 7.1)</em> Leia <code>pfctl -sr</code> väljundist oma osa 6.4 reegel. Kuidas see erineb veebiliideses nähtust?</li>
+<li><strong>K12.</strong> <em>(punkt 8.1)</em> Mis vormingus on seadistusfail? Miks peab seda hoidma turvaliselt (vihje: mis seal veel on)?</li>
+<li><strong>K13.</strong> <em>(punkt 8.3)</em> Mis vahe on OPNsense'i seadistuse varukoopial ja virtuaalmasina hetktõmmisel? Millal kumbagi kasutada?</li>
+<li><strong>K14.</strong> <em>(9. osa)</em> Joonista oma laborivõrgu skeem: OPNsense (WAN- ja LAN-aadress), kõik masinad koos aadressidega, pordisuunamine.</li>
+<li><strong>K15.</strong> <em>(9. osa)</em> Too kolm näidet, kus OPNsense'i ja Linuxi serveri (moodul 7 - <code>ufw</code>, <code>firewalld</code>, <code>nftables</code>) tulemüüri ülesanded erinevad.</li>
+<li><strong>K16.</strong> <em>(9. osa)</em> Mida tuleks teha, enne kui sellist OPNsense'i kasutatakse päris ettevõtte internetiühenduse ees?</li>
+</ul>
+<!-- /kysimused -->
+
+<hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>
 <p>Variant A on turvalisem ja lihtsam. Kui kasutad varianti B, veendu, et õppijad ei jätaks tulemüüri välja lülitatuks ega avaks haldusliidest kogu kooli võrgule.</p>
@@ -4644,7 +4705,10 @@ ping<span class="w"> </span>-c2<span class="w"> </span>debian.org
 <h2 id="4-osa-veebiliides-ja-seadistusviisard">4. osa. Veebiliides ja seadistusviisard<a class="headerlink" href="#4-osa-veebiliides-ja-seadistusviisard" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Ava veebiliides <code>https://10.0.83.1</code> (sinu LAN-aadress), aktsepteeri iseallkirjastatud sertifikaat ja logi sisse kasutajaga <code>root</code>.</p>
 <p><strong>4.2</strong> Läbi seadistusviisard (teooria punkt 18.3): hostinimi <code>fw</code>, domeen <code>lab.example</code>, ajavöönd <code>Europe/Tallinn</code>, WAN DHCP, <strong>lülita välja „Block private networks from entering via WAN“</strong>.</p>
-<p><strong>K4.</strong> Miks lülitasime laboris välja „Block private networks from entering via WAN“? Miks ei tohi seda teha päris interneti ühenduse korral?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Miks lülitasime laboris välja „Block private networks from entering via WAN“? Miks ei tohi seda teha päris interneti ühenduse korral?</p>
+</div>
 <p><strong>4.3</strong> Paigalda pistikprogramm <code>os-qemu-guest-agent</code> (<em>System</em> → <em>Firmware</em> → <em>Plugins</em>) ja kontrolli Proxmoxis, et OPNsense'i IP-aadressid on <em>Summary</em> lehel näha.</p>
 <h2 id="5-osa-dhcp-ja-dns">5. osa. DHCP ja DNS<a class="headerlink" href="#5-osa-dhcp-ja-dns" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Ava DHCP-teenuse seaded (vaikimisi <em>Services</em> → <em>Dnsmasq DNS &amp; DHCP</em>) ja kontrolli vahemikku. Leia antud rendid.</p>
@@ -4652,13 +4716,19 @@ ping<span class="w"> </span>-c2<span class="w"> </span>debian.org
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>networkctl<span class="w"> </span>renew<span class="w"> </span>&lt;liides&gt;<span class="w">    </span><span class="c1"># või taaskäivita</span>
 ip<span class="w"> </span>-br<span class="w"> </span>a
 </code></pre></div>
-<p><strong>K5.</strong> Kas Ubuntu sai reserveeritud aadressi? Miks kasutatakse serveritel siiski pigem staatilist aadressi kui DHCP reserveeringut?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kas Ubuntu sai reserveeritud aadressi? Miks kasutatakse serveritel siiski pigem staatilist aadressi kui DHCP reserveeringut?</p>
+</div>
 <p><strong>5.3</strong> Lisa Unboundi käsitsi kirjed (<em>Services</em> → <em>Unbound DNS</em> → <em>Overrides</em>): <code>debian1.lab.example</code>, <code>alma.lab.example</code>, <code>www.lab.example → alma</code>. Testi Ubuntust:</p>
 <div class="highlight"><pre><span></span><code>dig<span class="w"> </span>debian1.lab.example<span class="w"> </span>+short
 dig<span class="w"> </span>www.lab.example<span class="w"> </span>+short
 ping<span class="w"> </span>-c1<span class="w"> </span>ubuntuklient
 </code></pre></div>
-<p><strong>K6.</strong> Kas DHCP-kliendi nimi (<code>ubuntuklient</code>) lahenes? Kes vastas DNS-päringutele?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Kas DHCP-kliendi nimi (<code>ubuntuklient</code>) lahenes? Kes vastas DNS-päringutele?</p>
+</div>
 <h2 id="6-osa-tulemüür-aliased-ja-pordisuunamine">6. osa. Tulemüür, aliased ja pordisuunamine<a class="headerlink" href="#6-osa-tulemüür-aliased-ja-pordisuunamine" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Loo aliased (<em>Firewall</em> → <em>Aliases</em>):</p>
 <table>
@@ -4685,7 +4755,10 @@ ping<span class="w"> </span>-c1<span class="w"> </span>ubuntuklient
 <p><strong>6.2</strong> Paigalda AlmaLinuxi masinasse veebiserver (moodul 5 laboritöö) või kasuta olemasolevat. Kontrolli, et see on laborivõrgust kättesaadav: Ubuntust <code>curl -I http://alma.lab.example</code>.</p>
 <p><strong>6.3</strong> Tee pordisuunamine: WAN, TCP, port <strong>8080</strong> → <code>alma</code> port <strong>80</strong>, logimine sees, kirjeldus. Rakenda.</p>
 <p>Testi <strong>oma arvutist</strong> (kooli võrgust): <code>http://WAN_IP:8080</code>.</p>
-<p><strong>K7.</strong> Kas leht avanes? Millise WAN-i reegli OPNsense automaatselt lõi (<em>Firewall</em> → <em>Rules</em> → <em>WAN</em>)? Mida näitas <em>Live View</em> logi ühendumise ajal?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Kas leht avanes? Millise WAN-i reegli OPNsense automaatselt lõi (<em>Firewall</em> → <em>Rules</em> → <em>WAN</em>)? Mida näitas <em>Live View</em> logi ühendumise ajal?</p>
+</div>
 <p><strong>6.4</strong> Keela Ubuntu kliendil serveritele SSH: lisa LAN-i liidesele <strong>vaikimisi lubava reegli kohale</strong> reegel:</p>
 <table>
 <thead>
@@ -4730,9 +4803,15 @@ ping<span class="w"> </span>-c1<span class="w"> </span>ubuntuklient
 </tbody>
 </table>
 <p>Testi Ubuntust: <code>ssh kasutaja@debian1.lab.example</code> ja <code>curl -I http://alma.lab.example</code>.</p>
-<p><strong>K8.</strong> Kas SSH keelati ja veeb töötas? Mis vahe on <em>Block</em> ja <em>Reject</em> vahel (proovi mõlemat ja vaata, kuidas <code>ssh</code> käitub)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas SSH keelati ja veeb töötas? Mis vahe on <em>Block</em> ja <em>Reject</em> vahel (proovi mõlemat ja vaata, kuidas <code>ssh</code> käitub)?</p>
+</div>
 <p><strong>6.5</strong> Liiguta oma reegel vaikimisi lubava reegli <strong>alla</strong> ja testi uuesti.</p>
-<p><strong>K9.</strong> Mis juhtus? Selgita, kuidas reeglite järjekord mõjutab tulemust.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Mis juhtus? Selgita, kuidas reeglite järjekord mõjutab tulemust.</p>
+</div>
 <p>Taasta õige järjekord.</p>
 <h2 id="7-osa-freebsd-käsurida">7. osa. FreeBSD käsurida<a class="headerlink" href="#7-osa-freebsd-käsurida" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Ava konsoolis kest (punkt <strong>8</strong>) või luba SSH (<em>System</em> → <em>Settings</em> → <em>Administration</em> → <em>Secure Shell</em>, ainult LAN!) ja uuri süsteemi:</p>
@@ -4751,21 +4830,42 @@ gpart<span class="w"> </span>show
 df<span class="w"> </span>-h
 top
 </code></pre></div>
-<p><strong>K10.</strong> Täida tabel: milline FreeBSD käsk vastab Linuxi käsule <code>ip a</code>, <code>ip r</code>, <code>ss -tulpn</code>, <code>nft list ruleset</code>, <code>systemctl list-units</code>, <code>lsblk</code>? Mis on FreeBSD versioon?</p>
-<p><strong>K11.</strong> Leia <code>pfctl -sr</code> väljundist oma osa 6.4 reegel. Kuidas see erineb veebiliideses nähtust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Täida tabel: milline FreeBSD käsk vastab Linuxi käsule <code>ip a</code>, <code>ip r</code>, <code>ss -tulpn</code>, <code>nft list ruleset</code>, <code>systemctl list-units</code>, <code>lsblk</code>? Mis on FreeBSD versioon?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Leia <code>pfctl -sr</code> väljundist oma osa 6.4 reegel. Kuidas see erineb veebiliideses nähtust?</p>
+</div>
 <p><strong>7.2</strong> Püüa pakette LAN-i liideselt, kui Ubuntu teeb <code>ping</code>-i:</p>
 <div class="highlight"><pre><span></span><code>tcpdump<span class="w"> </span>-ni<span class="w"> </span>vtnet1<span class="w"> </span>icmp
 </code></pre></div>
 <h2 id="8-osa-varundus-ja-taastamine">8. osa. Varundus ja taastamine<a class="headerlink" href="#8-osa-varundus-ja-taastamine" title="Permanent link">&para;</a></h2>
 <p><strong>8.1</strong> Laadi alla seadistuse varukoopia (<em>System</em> → <em>Configuration</em> → <em>Backups</em>). Ava fail tekstiredaktoriga ja leia sealt oma alias <code>serverid</code>.</p>
-<p><strong>K12.</strong> Mis vormingus on seadistusfail? Miks peab seda hoidma turvaliselt (vihje: mis seal veel on)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Mis vormingus on seadistusfail? Miks peab seda hoidma turvaliselt (vihje: mis seal veel on)?</p>
+</div>
 <p><strong>8.2</strong> Muuda midagi (nt kustuta alias <code>veebipordid</code>) ja taasta eelmine versioon lehelt <em>System</em> → <em>Configuration</em> → <em>History</em>.</p>
 <p><strong>8.3</strong> Tee OPNsense'i virtuaalmasinast Proxmoxis hetktõmmis.</p>
-<p><strong>K13.</strong> Mis vahe on OPNsense'i seadistuse varukoopial ja virtuaalmasina hetktõmmisel? Millal kumbagi kasutada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mis vahe on OPNsense'i seadistuse varukoopial ja virtuaalmasina hetktõmmisel? Millal kumbagi kasutada?</p>
+</div>
 <h2 id="9-osa-kokkuvõte">9. osa. Kokkuvõte<a class="headerlink" href="#9-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K14.</strong> Joonista oma laborivõrgu skeem: OPNsense (WAN- ja LAN-aadress), kõik masinad koos aadressidega, pordisuunamine.</p>
-<p><strong>K15.</strong> Too kolm näidet, kus OPNsense'i ja Linuxi serveri (moodul 7 - <code>ufw</code>, <code>firewalld</code>, <code>nftables</code>) tulemüüri ülesanded erinevad.</p>
-<p><strong>K16.</strong> Mida tuleks teha, enne kui sellist OPNsense'i kasutatakse päris ettevõtte internetiühenduse ees?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Joonista oma laborivõrgu skeem: OPNsense (WAN- ja LAN-aadress), kõik masinad koos aadressidega, pordisuunamine.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Too kolm näidet, kus OPNsense'i ja Linuxi serveri (moodul 7 - <code>ufw</code>, <code>firewalld</code>, <code>nftables</code>) tulemüüri ülesanded erinevad.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Mida tuleks teha, enne kui sellist OPNsense'i kasutatakse päris ettevõtte internetiühenduse ees?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>

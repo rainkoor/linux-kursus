@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1452,6 +1454,17 @@
     <span class="md-ellipsis">
       
         Lisaülesanne (valikuline)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
       
     </span>
   </a>
@@ -4607,6 +4620,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4651,7 +4675,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K20</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K20</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Turvavõrk</p>
 <p>Selles laboris muudad võrgu- ja SSH-seadistust, mis võib katkestada sinu ühenduse. Hoia Ubuntu masina konsool brauseris avatuna. Kui midagi läheb valesti, saad konsooli kaudu parandada.</p>
@@ -4691,18 +4718,27 @@ ip<span class="w"> </span>address<span class="w"> </span>show
 ip<span class="w"> </span>route
 ip<span class="w"> </span>neigh
 </code></pre></div>
-<p><strong>K1.</strong> Mis on Ubuntu masina võrguliidese nimi, IP-aadress ja võrgumask? Mis on vaikelüüs? Mitu masinat on võrgus <code>/24</code> maski korral võimalik aadresseerida?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mis on Ubuntu masina võrguliidese nimi, IP-aadress ja võrgumask? Mis on vaikelüüs? Mitu masinat on võrgus <code>/24</code> maski korral võimalik aadresseerida?</p>
+</div>
 <p><strong>1.2</strong> Uuri DNS-i seadistust:</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/resolv.conf
 resolvectl<span class="w"> </span>status
 cat<span class="w"> </span>/etc/nsswitch.conf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>hosts
 </code></pre></div>
-<p><strong>K2.</strong> Miks on failis <code>/etc/resolv.conf</code> aadress <code>127.0.0.53</code>? Milline on tegelik DNS-server?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Miks on failis <code>/etc/resolv.conf</code> aadress <code>127.0.0.53</code>? Milline on tegelik DNS-server?</p>
+</div>
 <p><strong>1.3</strong> Vaata, kuidas võrk on seadistatud:</p>
 <div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>/etc/netplan/
 sudo<span class="w"> </span>cat<span class="w"> </span>/etc/netplan/*.yaml
 </code></pre></div>
-<p><strong>K3.</strong> Kas masin saab aadressi DHCP-st või on see staatiline? Mille järgi see selgus?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Kas masin saab aadressi DHCP-st või on see staatiline? Mille järgi see selgus?</p>
+</div>
 <hr />
 <h2 id="2-osa-ühenduvuse-kontroll-ja-dns">2. osa. Ühenduvuse kontroll ja DNS<a class="headerlink" href="#2-osa-ühenduvuse-kontroll-ja-dns" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Kontrolli ühenduvust kihthaaval (teooria punkt 7.5). Kirjuta iga käsu tulemus aruandesse:</p>
@@ -4712,7 +4748,10 @@ ping<span class="w"> </span>-c3<span class="w"> </span>www.debian.org
 ping<span class="w"> </span>-c3<span class="w"> </span>DEBIAN_IP
 tracepath<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>.1.1.1
 </code></pre></div>
-<p><strong>K4.</strong> Mitu ruuterit (hüpet) on sinu masina ja aadressi <code>1.1.1.1</code> vahel? Milline on keskmine ping-aeg vaikelüüsini ja <code>1.1.1.1</code>-ni?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mitu ruuterit (hüpet) on sinu masina ja aadressi <code>1.1.1.1</code> vahel? Milline on keskmine ping-aeg vaikelüüsini ja <code>1.1.1.1</code>-ni?</p>
+</div>
 <p><strong>2.2</strong> Tee DNS-päringuid:</p>
 <div class="highlight"><pre><span></span><code>dig<span class="w"> </span>www.hkhk.edu.ee
 dig<span class="w"> </span>+short<span class="w"> </span>www.hkhk.edu.ee
@@ -4720,7 +4759,10 @@ dig<span class="w"> </span>@1.1.1.1<span class="w"> </span>+short<span class="w"
 dig<span class="w"> </span>MX<span class="w"> </span>hkhk.edu.ee<span class="w"> </span>+short
 dig<span class="w"> </span>-x<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w"> </span>+short
 </code></pre></div>
-<p><strong>K5.</strong> Mis on <code>www.hkhk.edu.ee</code> IP-aadress? Milline server vastas esimesele päringule (rida <code>SERVER</code>)? Millised on domeeni <code>hkhk.edu.ee</code> e-posti serverid?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Mis on <code>www.hkhk.edu.ee</code> IP-aadress? Milline server vastas esimesele päringule (rida <code>SERVER</code>)? Millised on domeeni <code>hkhk.edu.ee</code> e-posti serverid?</p>
+</div>
 <p><strong>2.3</strong> Lisa Debiani masin faili <code>/etc/hosts</code>:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/hosts
 </code></pre></div>
@@ -4732,13 +4774,19 @@ dig<span class="w"> </span>-x<span class="w"> </span><span class="m">1</span>.1.
 ping<span class="w"> </span>-c2<span class="w"> </span>debian1
 dig<span class="w"> </span>debian1
 </code></pre></div>
-<p><strong>K6.</strong> Miks <code>ping debian1</code> ja <code>getent hosts</code> töötavad, kuid <code>dig debian1</code> vastust ei leia?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks <code>ping debian1</code> ja <code>getent hosts</code> töötavad, kuid <code>dig debian1</code> vastust ei leia?</p>
+</div>
 <hr />
 <h2 id="3-osa-pordid-ja-teenused">3. osa. Pordid ja teenused<a class="headerlink" href="#3-osa-pordid-ja-teenused" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Vaata, millised pordid kuulavad:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ss<span class="w"> </span>-tulpn
 </code></pre></div>
-<p><strong>K7.</strong> Millised teenused kuulavad? Millised kuulavad kõigil aadressidel ja millised ainult <code>127.0.0.x</code> aadressil?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Millised teenused kuulavad? Millised kuulavad kõigil aadressidel ja millised ainult <code>127.0.0.x</code> aadressil?</p>
+</div>
 <p><strong>3.2</strong> Paigalda veebiserver nginx ja kontrolli seda:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nginx
 sudo<span class="w"> </span>ss<span class="w"> </span>-tlpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:80
@@ -4749,7 +4797,10 @@ curl<span class="w"> </span>-I<span class="w"> </span>http://localhost
 nc<span class="w"> </span>-zv<span class="w"> </span>UBUNTU_IP<span class="w"> </span><span class="m">80</span>
 nc<span class="w"> </span>-zv<span class="w"> </span>UBUNTU_IP<span class="w"> </span><span class="m">3306</span>
 </code></pre></div>
-<p><strong>K8.</strong> Mida näitasid <code>nc</code> käsud kummagi pordi kohta? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Mida näitasid <code>nc</code> käsud kummagi pordi kohta? Miks?</p>
+</div>
 <hr />
 <h2 id="4-osa-püsiv-võrguseadistus-netplaniga">4. osa. Püsiv võrguseadistus Netplaniga<a class="headerlink" href="#4-osa-püsiv-võrguseadistus-netplaniga" title="Permanent link">&para;</a></h2>
 <p>Lisad Ubuntu masinale teise IP-aadressi, säilitades olemasoleva DHCP-seadistuse.</p>
@@ -4763,7 +4814,10 @@ ip<span class="w"> </span>-br<span class="w"> </span>address
 </code></pre></div>
 <p>Debiani masinast: <code>ping -c2 LISA_IP</code>.</p>
 <p><strong>4.2</strong> Taaskäivita Ubuntu masin ja kontrolli, kas lisa-aadress on alles.</p>
-<p><strong>K9.</strong> Kas aadress oli pärast taaskäivitust alles? Miks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Kas aadress oli pärast taaskäivitust alles? Miks?</p>
+</div>
 <p><strong>4.3</strong> Lisa aadress püsivalt. Loo uus Netplani fail (asenda liidese nimi ja aadress):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/netplan/60-lisa-aadress.yaml
 </code></pre></div>
@@ -4778,9 +4832,15 @@ ip<span class="w"> </span>-br<span class="w"> </span>address
 sudo<span class="w"> </span>netplan<span class="w"> </span>try
 </code></pre></div>
 <p>Kui ühendus säilis, vajuta Enter, et muudatus kinnitada. Kontrolli tulemust ja taaskäivita masin veel kord.</p>
-<p><strong>K10.</strong> Mida teeb <code>netplan try</code>? Miks on see SSH kaudu töötades oluline? Kas aadress püsis pärast taaskäivitust?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mida teeb <code>netplan try</code>? Miks on see SSH kaudu töötades oluline? Kas aadress püsis pärast taaskäivitust?</p>
+</div>
 <p><strong>4.4</strong> Tee meelega viga: muuda faili <code>60-lisa-aadress.yaml</code> taandeid (nihuta rida <code>addresses:</code> paar tühikut vasakule) ja käivita <code>sudo netplan try</code>.</p>
-<p><strong>K11.</strong> Mis veateate said? Paranda viga.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mis veateate said? Paranda viga.</p>
+</div>
 <hr />
 <h2 id="5-osa-ssh-võtmed">5. osa. SSH-võtmed<a class="headerlink" href="#5-osa-ssh-võtmed" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Loo <strong>oma arvutis</strong> võtmepaar (kui sul seda veel pole):</p>
@@ -4798,7 +4858,10 @@ sudo<span class="w"> </span>netplan<span class="w"> </span>try
 ls<span class="w"> </span>-la<span class="w"> </span>~/.ssh
 cat<span class="w"> </span>~/.ssh/authorized_keys
 </code></pre></div>
-<p><strong>K12.</strong> Mida küsiti sisselogimisel - serveri kasutaja parooli või võtme parooli? Millised on kataloogi <code>~/.ssh</code> ja faili <code>authorized_keys</code> õigused?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Mida küsiti sisselogimisel - serveri kasutaja parooli või võtme parooli? Millised on kataloogi <code>~/.ssh</code> ja faili <code>authorized_keys</code> õigused?</p>
+</div>
 <p><strong>5.4</strong> Loo oma arvutis fail <code>~/.ssh/config</code> (Windowsis <code>%USERPROFILE%\.ssh\config</code>):</p>
 <div class="highlight"><pre><span></span><code>Host ubuntusrv
     HostName UBUNTU_IP
@@ -4830,13 +4893,19 @@ rm<span class="w"> </span>~/sync/dokumendid/dok2.txt
 rsync<span class="w"> </span>-av<span class="w"> </span>--delete<span class="w"> </span>~/sync/<span class="w"> </span>debian1:~/sync/
 ssh<span class="w"> </span>debian1<span class="w"> </span>ls<span class="w"> </span>~/sync/dokumendid
 </code></pre></div>
-<p><strong>K13.</strong> Milliseid faile <code>rsync</code> üle kandis? Mis juhtus failiga <code>dok2.txt</code> Debiani masinas ja miks? Miks on oluline käivitada <code>--delete</code> kõigepealt koos võtmega <code>-n</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Milliseid faile <code>rsync</code> üle kandis? Mis juhtus failiga <code>dok2.txt</code> Debiani masinas ja miks? Miks on oluline käivitada <code>--delete</code> kõigepealt koos võtmega <code>-n</code>?</p>
+</div>
 <p><strong>6.4</strong> Proovi kaldkriipsu erinevust:</p>
 <div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-av<span class="w"> </span>~/sync<span class="w"> </span>debian1:~/proov1/
 rsync<span class="w"> </span>-av<span class="w"> </span>~/sync/<span class="w"> </span>debian1:~/proov2/
 ssh<span class="w"> </span>debian1<span class="w"> </span><span class="s2">"ls ~/proov1 ~/proov2"</span>
 </code></pre></div>
-<p><strong>K14.</strong> Selgita tulemust.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Selgita tulemust.</p>
+</div>
 <hr />
 <h2 id="7-osa-ssh-serveri-karastamine">7. osa. SSH-serveri karastamine<a class="headerlink" href="#7-osa-ssh-serveri-karastamine" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
@@ -4864,7 +4933,10 @@ sudo<span class="w"> </span>sshd<span class="w"> </span>-T<span class="w"> </spa
 <p><strong>7.5</strong> Testi paroolipõhist sisselogimist Debiani masinast mõnele teisele Ubuntu kasutajale (nt laboritöö 3 kasutaja, kellel võtit pole) või sundides paroolipõhist autentimist:</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">PubkeyAuthentication</span><span class="o">=</span>no<span class="w"> </span>kasutaja@UBUNTU_IP
 </code></pre></div>
-<p><strong>K15.</strong> Mis veateate said? Miks? Miks on oluline, et karastamise fail algaks väikese numbriga (<code>10-</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Mis veateate said? Miks? Miks on oluline, et karastamise fail algaks väikese numbriga (<code>10-</code>)?</p>
+</div>
 <hr />
 <h2 id="8-osa-tulemüür-ufw">8. osa. Tulemüür ufw<a class="headerlink" href="#8-osa-tulemüür-ufw" title="Permanent link">&para;</a></h2>
 <p><strong>8.1</strong> Kontrolli olekut ja rakenduste profiile:</p>
@@ -4885,7 +4957,10 @@ sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </
 <li>oma arvuti brauserist: <code>http://UBUNTU_IP</code> (ei tohi töötada);</li>
 <li>oma arvutist: <code>ssh ubuntusrv</code> (peab töötama).</li>
 </ul>
-<p><strong>K16.</strong> Kirjuta testide tulemused. Miks ei saanud sinu arvuti veebiserveriga ühendust, kuid SSH töötas?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Kirjuta testide tulemused. Miks ei saanud sinu arvuti veebiserveriga ühendust, kuid SSH töötas?</p>
+</div>
 <p><strong>8.4</strong> Vaata, milliseid madala taseme reegleid ufw lõi:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nft<span class="w"> </span>list<span class="w"> </span>ruleset<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-40
 </code></pre></div>
@@ -4894,7 +4969,10 @@ sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </
 sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>numbered
 sudo<span class="w"> </span>ufw<span class="w"> </span>delete<span class="w"> </span>&lt;Debiani<span class="w"> </span>reegli<span class="w"> </span>number&gt;
 </code></pre></div>
-<p><strong>K17.</strong> Kirjuta lõplik <code>ufw status numbered</code> väljund aruandesse.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Kirjuta lõplik <code>ufw status numbered</code> väljund aruandesse.</p>
+</div>
 <hr />
 <h2 id="9-osa-tõrkeotsing">9. osa. Tõrkeotsing<a class="headerlink" href="#9-osa-tõrkeotsing" title="Permanent link">&para;</a></h2>
 <p>Õpetaja tekitab sinu masinas (või paarilise masinas) ühe võrguvea. Iseõppija: palu kellelgi teisel valida üks vigadest allolevast loendist või vali ise juhuslikult ja unusta, kumma valisid.</p>
@@ -4906,7 +4984,10 @@ sudo<span class="w"> </span>ufw<span class="w"> </span>delete<span class="w"> </
 <li>Netplani failis on vale DNS-server ja <code>netplan apply</code> on tehtud;</li>
 <li>SSH karastamise failis on <code>AllowUsers</code> kellegi teise nimega.</li>
 </ol>
-<p><strong>K18.</strong> Kirjelda, millised diagnostikakäsud sa järjest käivitasid, mida iga käsk näitas, mis oli viga ja kuidas selle parandasid.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Kirjelda, millised diagnostikakäsud sa järjest käivitasid, mida iga käsk näitas, mis oli viga ja kuidas selle parandasid.</p>
+</div>
 <hr />
 <h2 id="10-osa-kellaaeg-ja-ntp">10. osa. Kellaaeg ja NTP<a class="headerlink" href="#10-osa-kellaaeg-ja-ntp" title="Permanent link">&para;</a></h2>
 <p><strong>10.1</strong> Uuri Ubuntu masina kellaaega ja ajasünkroonimist (teooria punkt 7.9):</p>
@@ -4914,7 +4995,10 @@ sudo<span class="w"> </span>ufw<span class="w"> </span>delete<span class="w"> </
 timedatectl<span class="w"> </span>timesync-status
 systemctl<span class="w"> </span>status<span class="w"> </span>systemd-timesyncd
 </code></pre></div>
-<p><strong>K19.</strong> Milline ajavöönd on seadistatud? Millise serveriga kell sünkroniseeritakse ja kui suur on nihe (<em>Offset</em>)? Kas riistvara kell on UTC-s?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K19</p>
+<p>Milline ajavöönd on seadistatud? Millise serveriga kell sünkroniseeritakse ja kui suur on nihe (<em>Offset</em>)? Kas riistvara kell on UTC-s?</p>
+</div>
 <p><strong>10.2</strong> Kui ajavöönd ei ole <code>Europe/Tallinn</code>, muuda see. Seadista Ubuntu küsima aega Eesti kogumist (<code>NTP=ee.pool.ntp.org</code> failis <code>/etc/systemd/timesyncd.conf</code>) ja taaskäivita <code>systemd-timesyncd</code>.</p>
 <p><strong>10.3</strong> Tee Debiani masinast laborivõrgu ajaserver: paigalda <code>chrony</code>, lisa seadistusse <code>allow</code> oma laborivõrgu jaoks ja ava tulemüüris port 123/udp. Seadista Ubuntu küsima aega Debianilt (<code>NTP=debian1</code>) ja kontrolli:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Ubuntus</span>
@@ -4931,7 +5015,10 @@ curl<span class="w"> </span>-sI<span class="w"> </span>https://www.debian.org<sp
 sudo<span class="w"> </span>timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span>
 sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span>date
 </code></pre></div>
-<p><strong>K20.</strong> Mis juhtus <code>curl</code>-i HTTPS-päringuga vale kellaajaga ja miks? Kas Debian näitas <code>chronyc clients</code> väljundis Ubuntut?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K20</p>
+<p>Mis juhtus <code>curl</code>-i HTTPS-päringuga vale kellaajaga ja miks? Kas Debian näitas <code>chronyc clients</code> väljundis Ubuntut?</p>
+</div>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <p>Kui õpetaja ei ole teisiti öelnud, jäta seadistus alles. Iseõppija võib soovi korral eemaldada lisa-aadressi faili (<code>/etc/netplan/60-lisa-aadress.yaml</code>, seejärel <code>sudo netplan apply</code>) ja lülitada tulemüüri välja (<code>sudo ufw disable</code>). SSH karastamise jäta alles - see on hea tava.</p>
@@ -4949,6 +5036,34 @@ sleep<span class="w"> </span><span class="m">10</span><span class="p">;</span><s
 <li><strong>TOTP:</strong> seadista Ubuntu masinas oma kasutajale kaheastmeline autentimine (võti + kood telefonist, teooria punkt 7.7). Kontrolli uues aknas, et küsitakse koodi. Mis juhtub, kui Ubuntu kell on 2 minutit vale (<code>sudo timedatectl set-ntp false; sudo date -s '+2 min'</code>)? Taasta lõpuks <code>sudo timedatectl set-ntp true</code>.</li>
 <li><strong>IPv6:</strong> leia oma masinate link-local aadressid (<code>ip -6 a</code>) ja pingi naabrit: <code>ping -6 fe80::…%ens18</code>. Miks on vaja liidese nime (<code>%ens18</code>)?</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Mis on Ubuntu masina võrguliidese nimi, IP-aadress ja võrgumask? Mis on vaikelüüs? Mitu masinat on võrgus <code>/24</code> maski korral võimalik aadresseerida?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Miks on failis <code>/etc/resolv.conf</code> aadress <code>127.0.0.53</code>? Milline on tegelik DNS-server?</li>
+<li><strong>K3.</strong> <em>(punkt 1.3)</em> Kas masin saab aadressi DHCP-st või on see staatiline? Mille järgi see selgus?</li>
+<li><strong>K4.</strong> <em>(punkt 2.1)</em> Mitu ruuterit (hüpet) on sinu masina ja aadressi <code>1.1.1.1</code> vahel? Milline on keskmine ping-aeg vaikelüüsini ja <code>1.1.1.1</code>-ni?</li>
+<li><strong>K5.</strong> <em>(punkt 2.2)</em> Mis on <code>www.hkhk.edu.ee</code> IP-aadress? Milline server vastas esimesele päringule (rida <code>SERVER</code>)? Millised on domeeni <code>hkhk.edu.ee</code> e-posti serverid?</li>
+<li><strong>K6.</strong> <em>(punkt 2.3)</em> Miks <code>ping debian1</code> ja <code>getent hosts</code> töötavad, kuid <code>dig debian1</code> vastust ei leia?</li>
+<li><strong>K7.</strong> <em>(punkt 3.1)</em> Millised teenused kuulavad? Millised kuulavad kõigil aadressidel ja millised ainult <code>127.0.0.x</code> aadressil?</li>
+<li><strong>K8.</strong> <em>(punkt 3.3)</em> Mida näitasid <code>nc</code> käsud kummagi pordi kohta? Miks?</li>
+<li><strong>K9.</strong> <em>(punkt 4.2)</em> Kas aadress oli pärast taaskäivitust alles? Miks?</li>
+<li><strong>K10.</strong> <em>(punkt 4.3)</em> Mida teeb <code>netplan try</code>? Miks on see SSH kaudu töötades oluline? Kas aadress püsis pärast taaskäivitust?</li>
+<li><strong>K11.</strong> <em>(punkt 4.4)</em> Mis veateate said? Paranda viga.</li>
+<li><strong>K12.</strong> <em>(punkt 5.3)</em> Mida küsiti sisselogimisel - serveri kasutaja parooli või võtme parooli? Millised on kataloogi <code>~/.ssh</code> ja faili <code>authorized_keys</code> õigused?</li>
+<li><strong>K13.</strong> <em>(punkt 6.3)</em> Milliseid faile <code>rsync</code> üle kandis? Mis juhtus failiga <code>dok2.txt</code> Debiani masinas ja miks? Miks on oluline käivitada <code>--delete</code> kõigepealt koos võtmega <code>-n</code>?</li>
+<li><strong>K14.</strong> <em>(punkt 6.4)</em> Selgita tulemust.</li>
+<li><strong>K15.</strong> <em>(punkt 7.5)</em> Mis veateate said? Miks? Miks on oluline, et karastamise fail algaks väikese numbriga (<code>10-</code>)?</li>
+<li><strong>K16.</strong> <em>(punkt 8.3)</em> Kirjuta testide tulemused. Miks ei saanud sinu arvuti veebiserveriga ühendust, kuid SSH töötas?</li>
+<li><strong>K17.</strong> <em>(punkt 8.5)</em> Kirjuta lõplik <code>ufw status numbered</code> väljund aruandesse.</li>
+<li><strong>K18.</strong> <em>(9. osa)</em> Kirjelda, millised diagnostikakäsud sa järjest käivitasid, mida iga käsk näitas, mis oli viga ja kuidas selle parandasid.</li>
+<li><strong>K19.</strong> <em>(punkt 10.1)</em> Milline ajavöönd on seadistatud? Millise serveriga kell sünkroniseeritakse ja kui suur on nihe (<em>Offset</em>)? Kas riistvara kell on UTC-s?</li>
+<li><strong>K20.</strong> <em>(punkt 10.4)</em> Mis juhtus <code>curl</code>-i HTTPS-päringuga vale kellaajaga ja miks? Kas Debian näitas <code>chronyc clients</code> väljundis Ubuntut?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

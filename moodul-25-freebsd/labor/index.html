@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -4198,6 +4200,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4607,6 +4620,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4651,7 +4675,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K12</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K12</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
 <p><strong>HKHK laboris</strong> võib õpetaja anda valmis FreeBSD malli - siis alusta 2. osast. Iseõppijale sobib ka VirtualBox (võrguliides on siis <code>em0</code>, mitte <code>vtnet0</code>).</p>
@@ -4663,7 +4690,10 @@
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>kasutaja@&lt;fbsd-aadress&gt;
 su<span class="w"> </span>-
 </code></pre></div>
-<p><strong>K1.</strong> Mitu sammu oli paigaldajas võrreldes Debiani paigaldajaga? Mis juhtub, kui proovid <code>su -</code> kasutajaga, kes ei ole grupis <code>wheel</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Mitu sammu oli paigaldajas võrreldes Debiani paigaldajaga? Mis juhtub, kui proovid <code>su -</code> kasutajaga, kes ei ole grupis <code>wheel</code>?</p>
+</div>
 <hr />
 <h2 id="2-osa-süsteemiga-tutvumine">2. osa. Süsteemiga tutvumine<a class="headerlink" href="#2-osa-süsteemiga-tutvumine" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong></p>
@@ -4685,7 +4715,10 @@ sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">''</span><
 cat<span class="w"> </span>/tmp/proov.txt
 man<span class="w"> </span>sed<span class="w">             </span><span class="c1"># otsi -i kirjeldus</span>
 </code></pre></div>
-<p><strong>K2.</strong> Milline on FreeBSD ja kerneli versioon? Millised ZFS-i andmekogumid paigaldaja lõi? Miks ebaõnnestus <code>sed -i</code> ilma tühja argumendita ja mida see sulle skriptide kirjutamise kohta ütleb?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Milline on FreeBSD ja kerneli versioon? Millised ZFS-i andmekogumid paigaldaja lõi? Miks ebaõnnestus <code>sed -i</code> ilma tühja argumendita ja mida see sulle skriptide kirjutamise kohta ütleb?</p>
+</div>
 <hr />
 <h2 id="3-osa-paketid-ja-uuendused">3. osa. Paketid ja uuendused<a class="headerlink" href="#3-osa-paketid-ja-uuendused" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Uuenda baassüsteem ja paigalda paketid:</p>
@@ -4700,7 +4733,10 @@ pkg<span class="w"> </span>which<span class="w"> </span>/usr/local/sbin/nginx
 pkg<span class="w"> </span>audit<span class="w"> </span>-F
 which<span class="w"> </span>bash
 </code></pre></div>
-<p><strong>K3.</strong> Kas <code>freebsd-update</code> leidis uuendusi? Kus asuvad <code>bash</code> ja nginx-i seadistusfail? Miks just seal, mitte <code>/bin</code> ja <code>/etc</code> all? Kas <code>pkg audit</code> leidis haavatavusi?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Kas <code>freebsd-update</code> leidis uuendusi? Kus asuvad <code>bash</code> ja nginx-i seadistusfail? Miks just seal, mitte <code>/bin</code> ja <code>/etc</code> all? Kas <code>pkg audit</code> leidis haavatavusi?</p>
+</div>
 <hr />
 <h2 id="4-osa-kasutajad-ja-halduriõigused">4. osa. Kasutajad ja halduriõigused<a class="headerlink" href="#4-osa-kasutajad-ja-halduriõigused" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Loo grupp ja kasutajad:</p>
@@ -4717,7 +4753,10 @@ id<span class="w"> </span>anna<span class="p">;</span><span class="w"> </span>id
 pw<span class="w"> </span>groupmod<span class="w"> </span>wheel<span class="w"> </span>-m<span class="w"> </span>anna
 </code></pre></div>
 <p>Logi teises terminalis sisse kasutajana <code>anna</code> ja proovi <code>doas pkg info nginx</code> ning <code>su -</code>.</p>
-<p><strong>K4.</strong> Mis vahe on <code>pw usermod anna -G grupp</code> ja <code>pw groupmod grupp -m anna</code> vahel? Kus on FreeBSD-s parooliräsid (võrdle Linuxi <code>/etc/shadow</code>-ga)? Miks on <code>peeter</code>-i kest <code>/usr/local/bin/bash</code>, mitte <code>/bin/bash</code>?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mis vahe on <code>pw usermod anna -G grupp</code> ja <code>pw groupmod grupp -m anna</code> vahel? Kus on FreeBSD-s parooliräsid (võrdle Linuxi <code>/etc/shadow</code>-ga)? Miks on <code>peeter</code>-i kest <code>/usr/local/bin/bash</code>, mitte <code>/bin/bash</code>?</p>
+</div>
 <hr />
 <h2 id="5-osa-teenused-ja-logid">5. osa. Teenused ja logid<a class="headerlink" href="#5-osa-teenused-ja-logid" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Käivita nginx ja muuda avaleht:</p>
@@ -4736,7 +4775,10 @@ ls<span class="w"> </span>/etc/periodic/daily<span class="w"> </span><span class
 periodic<span class="w"> </span>daily
 less<span class="w"> </span>/var/mail/root
 </code></pre></div>
-<p><strong>K5.</strong> Millises failis on nginx-i lubamise seade ja mis rida <code>sysrc</code> sinna kirjutas? Mida sisaldas igapäevane <code>periodic</code> aruanne? Kuidas teeksid sama Linuxis (systemd)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Millises failis on nginx-i lubamise seade ja mis rida <code>sysrc</code> sinna kirjutas? Mida sisaldas igapäevane <code>periodic</code> aruanne? Kuidas teeksid sama Linuxis (systemd)?</p>
+</div>
 <hr />
 <h2 id="6-osa-staatiline-aadress">6. osa. Staatiline aadress<a class="headerlink" href="#6-osa-staatiline-aadress" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> <strong>Proxmoxi konsoolis</strong> (mitte SSH-s):</p>
@@ -4749,7 +4791,10 @@ netstat<span class="w"> </span>-rn
 host<span class="w"> </span>www.freebsd.org
 </code></pre></div>
 <p>Ühendu uue aadressiga SSH-ga.</p>
-<p><strong>K6.</strong> Võrdle FreeBSD võrguseadistust Debiani (<code>/etc/network/interfaces</code>), Ubuntu (Netplan) ja AlmaLinuxi (<code>nmcli</code>) omaga (moodul 7). Mis on lihtsam, mis on keerulisem?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Võrdle FreeBSD võrguseadistust Debiani (<code>/etc/network/interfaces</code>), Ubuntu (Netplan) ja AlmaLinuxi (<code>nmcli</code>) omaga (moodul 7). Mis on lihtsam, mis on keerulisem?</p>
+</div>
 <hr />
 <h2 id="7-osa-zfs-ja-alglaadimiskeskkonnad">7. osa. ZFS ja alglaadimiskeskkonnad<a class="headerlink" href="#7-osa-zfs-ja-alglaadimiskeskkonnad" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Hetktõmmis ja taastamine:</p>
@@ -4775,7 +4820,10 @@ which<span class="w"> </span>tmux
 ls<span class="w"> </span>/home/anna
 </code></pre></div>
 <p>Vaata Proxmoxi konsoolis ka alglaadija menüüd (<em>Boot Environments</em>). Lõpuks aktiveeri soovi korral jälle <code>default</code> ja kustuta katsekeskkond (<code>bectl destroy</code>).</p>
-<p><strong>K7.</strong> Mis juhtus failiga <code>/etc/katse-fail</code> ja paketiga <code>tmux</code> pärast vana keskkonna aktiveerimist? Miks ei mõjutanud see kodukataloogi? Kuidas aitab see põhiversiooni uuendamisel?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mis juhtus failiga <code>/etc/katse-fail</code> ja paketiga <code>tmux</code> pärast vana keskkonna aktiveerimist? Miks ei mõjutanud see kodukataloogi? Kuidas aitab see põhiversiooni uuendamisel?</p>
+</div>
 <hr />
 <h2 id="8-osa-tulemüür-pf">8. osa. Tulemüür pf<a class="headerlink" href="#8-osa-tulemüür-pf" title="Permanent link">&para;</a></h2>
 <p><strong>8.1</strong> Kirjuta <code>/etc/pf.conf</code> teooria punkti 25.10 näite järgi (haldusvõrk <code>10.0.83.0/24</code>). <strong>Proxmoxi konsoolis:</strong></p>
@@ -4797,7 +4845,10 @@ ssh<span class="w"> </span>kasutaja@10.0.83.66<span class="w">                  
 tcpdump<span class="w"> </span>-n<span class="w"> </span>-e<span class="w"> </span>-ttt<span class="w"> </span>-i<span class="w"> </span>pflog0<span class="w"> </span><span class="p">&amp;</span><span class="w">             </span><span class="c1"># blokeeritud paketid (Ctrl+C / kill %1)</span>
 pfctl<span class="w"> </span>-t<span class="w"> </span>ryndajad<span class="w"> </span>-T<span class="w"> </span>delete<span class="w"> </span>&lt;kliendi-IP&gt;
 </code></pre></div>
-<p><strong>K8.</strong> Kas klient sattus tabelisse <code>&lt;ryndajad&gt;</code>? Pärast mitut ühendust? Mida tähendab pf-i reeglite juures „viimane sobiv reegel kehtib“ ja milleks on <code>quick</code>? Võrdle seda lahendust fail2ban-iga (moodul 11).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas klient sattus tabelisse <code>&lt;ryndajad&gt;</code>? Pärast mitut ühendust? Mida tähendab pf-i reeglite juures „viimane sobiv reegel kehtib“ ja milleks on <code>quick</code>? Võrdle seda lahendust fail2ban-iga (moodul 11).</p>
+</div>
 <hr />
 <h2 id="9-osa-jail">9. osa. Jail<a class="headerlink" href="#9-osa-jail" title="Permanent link">&para;</a></h2>
 <p><strong>9.1</strong> Hosti nginx kuulab praegu kõigil aadressidel, ka jailile antaval. Lase sel kuulata ainult hosti aadressil:</p>
@@ -4827,12 +4878,24 @@ sockstat<span class="w"> </span>-4l<span class="w"> </span><span class="p">|</sp
 zfs<span class="w"> </span>snapshot<span class="w"> </span>zroot/jails/www@puhas
 </code></pre></div>
 <p>Linuxi kliendist: <code>curl http://10.0.83.67</code> ja <code>curl http://10.0.83.66</code>. Lisa vajadusel pf-i reeglisse jaili aadress (reegel <code>to port { http, https }</code> kehtib kõigile hosti aadressidele).</p>
-<p><strong>K9.</strong> Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 12) sarnasused ja erinevused?</p>
-<p><strong>K10.</strong> Mitu megabaiti võttis jail (<code>zfs list zroot/jails/www</code>)? Kuidas saaksid hetktõmmisest kiiresti luua teise samasuguse jaili (vihje: <code>zfs clone</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 12) sarnasused ja erinevused?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Mitu megabaiti võttis jail (<code>zfs list zroot/jails/www</code>)? Kuidas saaksid hetktõmmisest kiiresti luua teise samasuguse jaili (vihje: <code>zfs clone</code>)?</p>
+</div>
 <hr />
 <h2 id="10-osa-kokkuvõte">10. osa. Kokkuvõte<a class="headerlink" href="#10-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K11.</strong> Täida tabel kümne toimingu kohta: kuidas seda tehakse Debianis ja kuidas FreeBSD-s (paketid, uuendus, teenus, kasutaja gruppi, staatiline IP, kuulavad pordid, tulemüür, logid, isoleeritud teenus, tagasivõtt pärast uuendust).</p>
-<p><strong>K12.</strong> Millises olukorras valiksid serverile FreeBSD ja millises Linuxi? Too vähemalt kaks argumenti mõlema kohta.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Täida tabel kümne toimingu kohta: kuidas seda tehakse Debianis ja kuidas FreeBSD-s (paketid, uuendus, teenus, kasutaja gruppi, staatiline IP, kuulavad pordid, tulemüür, logid, isoleeritud teenus, tagasivõtt pärast uuendust).</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Millises olukorras valiksid serverile FreeBSD ja millises Linuxi? Too vähemalt kaks argumenti mõlema kohta.</p>
+</div>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <p><code>service jail stop www</code>, vajadusel <code>zfs destroy -r zroot/jails</code>. Kui VM-i enam ei vaja, kustuta see või tee hetktõmmis ja lülita välja.</p>
@@ -4845,6 +4908,26 @@ zfs<span class="w"> </span>snapshot<span class="w"> </span>zroot/jails/www@puhas
 <li><strong>pkgbase:</strong> paigalda teine FreeBSD VM, vali paigaldajas baassüsteem pakettidena ja võrdle uuendamist (<code>pkg upgrade</code>) traditsioonilisega.</li>
 <li><strong>Ansible ja FreeBSD:</strong> halda FreeBSD-d mooduli 16 Ansible'iga (<code>ansible_python_interpreter=/usr/local/bin/python3</code>, moodulid <code>community.general.pkgng</code> ja <code>community.general.sysrc</code>).</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.2)</em> Mitu sammu oli paigaldajas võrreldes Debiani paigaldajaga? Mis juhtub, kui proovid <code>su -</code> kasutajaga, kes ei ole grupis <code>wheel</code>?</li>
+<li><strong>K2.</strong> <em>(punkt 2.2)</em> Milline on FreeBSD ja kerneli versioon? Millised ZFS-i andmekogumid paigaldaja lõi? Miks ebaõnnestus <code>sed -i</code> ilma tühja argumendita ja mida see sulle skriptide kirjutamise kohta ütleb?</li>
+<li><strong>K3.</strong> <em>(punkt 3.1)</em> Kas <code>freebsd-update</code> leidis uuendusi? Kus asuvad <code>bash</code> ja nginx-i seadistusfail? Miks just seal, mitte <code>/bin</code> ja <code>/etc</code> all? Kas <code>pkg audit</code> leidis haavatavusi?</li>
+<li><strong>K4.</strong> <em>(punkt 4.2)</em> Mis vahe on <code>pw usermod anna -G grupp</code> ja <code>pw groupmod grupp -m anna</code> vahel? Kus on FreeBSD-s parooliräsid (võrdle Linuxi <code>/etc/shadow</code>-ga)? Miks on <code>peeter</code>-i kest <code>/usr/local/bin/bash</code>, mitte <code>/bin/bash</code>?</li>
+<li><strong>K5.</strong> <em>(punkt 5.2)</em> Millises failis on nginx-i lubamise seade ja mis rida <code>sysrc</code> sinna kirjutas? Mida sisaldas igapäevane <code>periodic</code> aruanne? Kuidas teeksid sama Linuxis (systemd)?</li>
+<li><strong>K6.</strong> <em>(punkt 6.1)</em> Võrdle FreeBSD võrguseadistust Debiani (<code>/etc/network/interfaces</code>), Ubuntu (Netplan) ja AlmaLinuxi (<code>nmcli</code>) omaga (moodul 7). Mis on lihtsam, mis on keerulisem?</li>
+<li><strong>K7.</strong> <em>(punkt 7.2)</em> Mis juhtus failiga <code>/etc/katse-fail</code> ja paketiga <code>tmux</code> pärast vana keskkonna aktiveerimist? Miks ei mõjutanud see kodukataloogi? Kuidas aitab see põhiversiooni uuendamisel?</li>
+<li><strong>K8.</strong> <em>(punkt 8.2)</em> Kas klient sattus tabelisse <code>&lt;ryndajad&gt;</code>? Pärast mitut ühendust? Mida tähendab pf-i reeglite juures „viimane sobiv reegel kehtib“ ja milleks on <code>quick</code>? Võrdle seda lahendust fail2ban-iga (moodul 11).</li>
+<li><strong>K9.</strong> <em>(punkt 9.3)</em> Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 12) sarnasused ja erinevused?</li>
+<li><strong>K10.</strong> <em>(punkt 9.3)</em> Mitu megabaiti võttis jail (<code>zfs list zroot/jails/www</code>)? Kuidas saaksid hetktõmmisest kiiresti luua teise samasuguse jaili (vihje: <code>zfs clone</code>)?</li>
+<li><strong>K11.</strong> <em>(10. osa)</em> Täida tabel kümne toimingu kohta: kuidas seda tehakse Debianis ja kuidas FreeBSD-s (paketid, uuendus, teenus, kasutaja gruppi, staatiline IP, kuulavad pordid, tulemüür, logid, isoleeritud teenus, tagasivõtt pärast uuendust).</li>
+<li><strong>K12.</strong> <em>(10. osa)</em> Millises olukorras valiksid serverile FreeBSD ja millises Linuxi? Too vähemalt kaks argumenti mõlema kohta.</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3894,6 +3896,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4563,6 +4576,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4607,7 +4631,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K18</strong>.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K18</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
 <p>Pesastatud hüperviisor on aeglasem kui päris riistvaral. Kasuta väikeseid testmasinaid (Alpine, Debiani pilvetõmmis) ja lülita masinad pärast tundi välja.</p>
@@ -4620,7 +4647,10 @@ lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 ls<span class="w"> </span>-l<span class="w"> </span>/dev/kvm
 lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>kvm
 </code></pre></div>
-<p><strong>K1.</strong> Kas virtualiseerimise tugi oli VM-is olemas? Mis juhtuks, kui Proxmoxis oleks VM-i protsessori tüüp <code>x86-64-v2-AES</code> (mitte <code>host</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Kas virtualiseerimise tugi oli VM-is olemas? Mis juhtuks, kui Proxmoxis oleks VM-i protsessori tüüp <code>x86-64-v2-AES</code> (mitte <code>host</code>)?</p>
+</div>
 <p><strong>1.2</strong> Paigalda KVM ja libvirt ning loo masin Debiani pilvetõmmisest (teooria punkt 23.2):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>qemu-system-x86<span class="w"> </span>qemu-utils<span class="w"> </span>libvirt-daemon-system<span class="w"> </span>virtinst
 sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>libvirt,kvm<span class="w"> </span><span class="nv">$USER</span><span class="w">      </span><span class="c1"># logi välja ja uuesti sisse</span>
@@ -4632,14 +4662,20 @@ virsh<span class="w"> </span>-c<span class="w"> </span>qemu:///system<span class
 virsh<span class="w"> </span>-c<span class="w"> </span>qemu:///system<span class="w"> </span>console<span class="w"> </span>test1
 ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>q<span class="o">]</span>emu-system
 </code></pre></div>
-<p><strong>K2.</strong> Mis on <code>test1</code> IP-aadress ja millises võrgus see asub (<code>virbr0</code>)? Kuidas paistab virtuaalmasin hostis (<code>ps</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Mis on <code>test1</code> IP-aadress ja millises võrgus see asub (<code>virbr0</code>)? Kuidas paistab virtuaalmasin hostis (<code>ps</code>)?</p>
+</div>
 <p><strong>1.3</strong> Tee hetktõmmis, muuda masinas midagi ja taasta:</p>
 <div class="highlight"><pre><span></span><code>virsh<span class="w"> </span>-c<span class="w"> </span>qemu:///system<span class="w"> </span>snapshot-create-as<span class="w"> </span>test1<span class="w"> </span>puhas
 virsh<span class="w"> </span>-c<span class="w"> </span>qemu:///system<span class="w"> </span>snapshot-list<span class="w"> </span>test1
 virsh<span class="w"> </span>-c<span class="w"> </span>qemu:///system<span class="w"> </span>snapshot-revert<span class="w"> </span>test1<span class="w"> </span>puhas
 qemu-img<span class="w"> </span>info<span class="w"> </span>/var/lib/libvirt/images/test1.qcow2
 </code></pre></div>
-<p><strong>K3.</strong> Mida näitas <code>qemu-img info</code> ketta tegeliku suuruse ja tagatõmmise (<em>backing file</em>) kohta? Miks oli uue masina loomine nii kiire?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Mida näitas <code>qemu-img info</code> ketta tegeliku suuruse ja tagatõmmise (<em>backing file</em>) kohta? Miks oli uue masina loomine nii kiire?</p>
+</div>
 <h2 id="2-osa-proxmox-ve-paigaldus-ja-uuendused">2. osa. Proxmox VE paigaldus ja uuendused<a class="headerlink" href="#2-osa-proxmox-ve-paigaldus-ja-uuendused" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Paigalda Proxmox VE VM-i (teooria punkt 23.3): ZFS RAID0 või ext4, <strong>staatiline IP</strong> oma võrguplaanist, FQDN hostinimi (nt <code>pve1.lab.example</code>), e-posti aadress, mis ei lõpe <code>.invalid</code>-iga.</p>
 <p><strong>2.2</strong> Logi veebiliidesesse (<code>https://&lt;IP&gt;:8006</code>, <em>Linux PAM</em>) ja SSH-ga sisse. Seadista no-subscription hoidla, keela enterprise-hoidlad ja uuenda:</p>
@@ -4647,7 +4683,10 @@ qemu-img<span class="w"> </span>info<span class="w"> </span>/var/lib/libvirt/ima
 apt<span class="w"> </span>update
 apt<span class="w"> </span>full-upgrade
 </code></pre></div>
-<p><strong>K4.</strong> Mis viga andis <code>apt update</code> enne hoidlate muutmist ja miks? Millal oleks õige kasutada enterprise-hoidlat?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Mis viga andis <code>apt update</code> enne hoidlate muutmist ja miks? Millal oleks õige kasutada enterprise-hoidlat?</p>
+</div>
 <p><strong>2.3</strong> Uuri Proxmoxi „kapoti all“:</p>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"pve|corosync"</span>
 ls<span class="w"> </span>/etc/pve
@@ -4655,7 +4694,10 @@ cat<span class="w"> </span>/etc/network/interfaces
 pvesm<span class="w"> </span>status
 zpool<span class="w"> </span>status<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span>lvs
 </code></pre></div>
-<p><strong>K5.</strong> Millised on Proxmoxi põhiteenused? Mis on kataloog <code>/etc/pve</code> ja miks on see eriline? Milline sild (<code>vmbr0</code>) ühendab VM-e füüsilise võrguga?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Millised on Proxmoxi põhiteenused? Mis on kataloog <code>/etc/pve</code> ja miks on see eriline? Milline sild (<code>vmbr0</code>) ühendab VM-e füüsilise võrguga?</p>
+</div>
 <h2 id="3-osa-virtuaalmasinad-ja-konteinerid-proxmoxis">3. osa. Virtuaalmasinad ja konteinerid Proxmoxis<a class="headerlink" href="#3-osa-virtuaalmasinad-ja-konteinerid-proxmoxis" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Laadi ISO-fail (nt Alpine Linux või Debian netinst) salvestusse <em>Download from URL</em> abil. Loo veebiliideses VM 100 (512 MiB RAM, 4 GiB ketas, QEMU agent sees) ja paigalda OS.</p>
 <p><strong>3.2</strong> Halda masinat käsurealt:</p>
@@ -4676,8 +4718,14 @@ pct<span class="w"> </span>start<span class="w"> </span><span class="m">200</spa
 pct<span class="w"> </span>enter<span class="w"> </span><span class="m">200</span>
 </code></pre></div>
 <p>Konteineris: <code>cat /etc/os-release; uname -r; ps aux</code>. Proxmoxis: <code>uname -r</code>.</p>
-<p><strong>K6.</strong> Võrdle VM-i ja LXC konteineri käivitusaega, mälukasutust ja kernelit (<code>uname -r</code>). Millal kasutaksid kumba?</p>
-<p><strong>K7.</strong> Mida tähendab <code>--unprivileged 1</code>? Mis on konteineri <code>root</code>-i UID hostis (vihje: <code>ps -o user,pid,cmd -C bash</code> hostis, kui konteineris töötab kest)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Võrdle VM-i ja LXC konteineri käivitusaega, mälukasutust ja kernelit (<code>uname -r</code>). Millal kasutaksid kumba?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mida tähendab <code>--unprivileged 1</code>? Mis on konteineri <code>root</code>-i UID hostis (vihje: <code>ps -o user,pid,cmd -C bash</code> hostis, kui konteineris töötab kest)?</p>
+</div>
 <h2 id="4-osa-varundus-mall-kloonid-ja-proxmox-backup-server">4. osa. Varundus, mall, kloonid ja Proxmox Backup Server<a class="headerlink" href="#4-osa-varundus-mall-kloonid-ja-proxmox-backup-server" title="Permanent link">&para;</a></h2>
 <p><strong>4.1</strong> Tee masinast 100 varukoopia ja taasta see uue masinana:</p>
 <div class="highlight"><pre><span></span><code>vzdump<span class="w"> </span><span class="m">100</span><span class="w"> </span>--mode<span class="w"> </span>stop<span class="w"> </span>--compress<span class="w"> </span>zstd<span class="w"> </span>--storage<span class="w"> </span><span class="nb">local</span>
@@ -4686,14 +4734,20 @@ qmrestore<span class="w"> </span>/var/lib/vz/dump/vzdump-qemu-100-*.vma.zst<span
 qm<span class="w"> </span>config<span class="w"> </span><span class="m">110</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>net0
 qm<span class="w"> </span>config<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>net0
 </code></pre></div>
-<p><strong>K8.</strong> Kas masinate 100 ja 110 MAC-aadressid erinesid? Mis juhtuks samas võrgus kahe sama MAC-aadressiga masinaga?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Kas masinate 100 ja 110 MAC-aadressid erinesid? Mis juhtuks samas võrgus kahe sama MAC-aadressiga masinaga?</p>
+</div>
 <p><strong>4.2</strong> Muuda masin 110 malliks ja tee sellest üks täielik ja üks lingitud kloon:</p>
 <div class="highlight"><pre><span></span><code>qm<span class="w"> </span>template<span class="w"> </span><span class="m">110</span>
 qm<span class="w"> </span>clone<span class="w"> </span><span class="m">110</span><span class="w"> </span><span class="m">121</span><span class="w"> </span>--name<span class="w"> </span>kloon-full<span class="w"> </span>--full
 qm<span class="w"> </span>clone<span class="w"> </span><span class="m">110</span><span class="w"> </span><span class="m">122</span><span class="w"> </span>--name<span class="w"> </span>kloon-linked
 pvesm<span class="w"> </span>list<span class="w"> </span>local-lvm
 </code></pre></div>
-<p><strong>K9.</strong> Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?</p>
+</div>
 <p><strong>4.3 Proxmox Backup Server.</strong> Paigalda PBS ISO-st eraldi VM-i (teooria punkt 23.3, <em>Proxmox Backup Server</em>): staatiline IP (nt <code>10.0.83.65</code>), seejärel ava <code>https://10.0.83.65:8007</code>. Lülita hoidlad <em>no-subscription</em> peale ja uuenda (<code>apt update &amp;&amp; apt full-upgrade</code>). Loo andmekettale andmehoidla <code>andmed</code> (<em>Administration</em> → <em>Storage / Disks</em> → <em>Directory</em>, <em>Add as Datastore</em>).</p>
 <p><strong>4.4</strong> PBS-i konsoolis loo Proxmoxi jaoks kasutaja ja vaata sõrmejälge:</p>
 <div class="highlight"><pre><span></span><code>proxmox-backup-manager<span class="w"> </span>user<span class="w"> </span>create<span class="w"> </span>pve@pbs<span class="w"> </span>--password<span class="w"> </span><span class="s1">'Pikk-parool-2026'</span>
@@ -4707,14 +4761,20 @@ proxmox-backup-manager<span class="w"> </span>cert<span class="w"> </span>info<s
 pvesm<span class="w"> </span>list<span class="w"> </span>pbs
 </code></pre></div>
 <p>Vaata PBS-i veebiliideses andmehoidla <em>Summary</em> (deduplitseerimistegur) ja <em>Content</em>. Seadista andmehoidlale <em>Prune &amp; GC</em> (nt <em>keep-last 3, keep-daily 7</em>) ja käivita <em>Verify</em> käsitsi.</p>
-<p><strong>K10.</strong> Kui kaua võttis esimene ja teine varukoopia ning kui palju andmeid kumbki kord saadeti (vt <code>vzdump</code> väljundit)? Mis on deduplitseerimistegur? Miks oli teine varukoopia kiirem?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kui kaua võttis esimene ja teine varukoopia ning kui palju andmeid kumbki kord saadeti (vt <code>vzdump</code> väljundit)? Mis on deduplitseerimistegur? Miks oli teine varukoopia kiirem?</p>
+</div>
 <p><strong>4.6</strong> Taasta failid ja masin:</p>
 <ol>
 <li>Kustuta masinas 100 mõni fail (nt <code>/etc/motd</code>).</li>
 <li>Proxmoxis vali salvestus <code>pbs</code> → viimane varukoopia → <em>File Restore</em>, leia fail ja laadi see alla.</li>
 <li>Taasta kogu masin uue ID-ga: varukoopia → <em>Restore</em>, VM ID <code>130</code>, märgi <em>Unique</em>. Käivita masin 130 ja kontrolli, et see töötab.</li>
 </ol>
-<p><strong>K11.</strong> Mis on PBS-i õiguse <code>DatastoreBackup</code> eelis võrreldes <code>root</code>-iga, kui ründaja saab Proxmoxi enda üle kontrolli? Miks ei ole hea mõte paigaldada PBS samasse Proxmoxi, mida see varundab? Kui kaua võttis kogu masina taastamine?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Mis on PBS-i õiguse <code>DatastoreBackup</code> eelis võrreldes <code>root</code>-iga, kui ründaja saab Proxmoxi enda üle kontrolli? Miks ei ole hea mõte paigaldada PBS samasse Proxmoxi, mida see varundab? Kui kaua võttis kogu masina taastamine?</p>
+</div>
 <h2 id="5-osa-proxmoxi-võrk-sild-ja-nat">5. osa. Proxmoxi võrk: sild ja NAT<a class="headerlink" href="#5-osa-proxmoxi-võrk-sild-ja-nat" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Loo sild <code>vmbr10</code> võrguga <code>10.0.222.0/24</code> (Proxmox <code>10.0.222.1</code>) ja NAT (teooria punkt 23.3). Rakenda <code>ifreload -a</code>.</p>
 <p><strong>5.2</strong> Ühenda konteiner 200 sillaga <code>vmbr10</code>, anna talle staatiline aadress <code>10.0.222.10/24</code>, vaikelüüs <code>10.0.222.1</code>, ja kontrolli internetiühendust:</p>
@@ -4727,7 +4787,10 @@ ping<span class="w"> </span>-c2<span class="w"> </span><span class="m">1</span>.
 <div class="highlight"><pre><span></span><code>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v
 sysctl<span class="w"> </span>net.ipv4.ip_forward
 </code></pre></div>
-<p><strong>K12.</strong> Kas konteiner pääses internetti? Mida teeb reegel <code>MASQUERADE</code> ja miks oli vaja <code>ip_forward</code>-i? Võrdle seda OPNsense'iga (moodul 18).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kas konteiner pääses internetti? Mida teeb reegel <code>MASQUERADE</code> ja miks oli vaja <code>ip_forward</code>-i? Võrdle seda OPNsense'iga (moodul 18).</p>
+</div>
 <h2 id="6-osa-klaster-valikuline-kaks-proxmoxi-vm-i">6. osa. Klaster (valikuline, kaks Proxmoxi VM-i)<a class="headerlink" href="#6-osa-klaster-valikuline-kaks-proxmoxi-vm-i" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> Paigalda teine Proxmox (<code>pve2</code>). Loo <code>pve1</code>-s klaster ja liida <code>pve2</code>:</p>
 <div class="highlight"><pre><span></span><code>pvecm<span class="w"> </span>create<span class="w"> </span>labor<span class="w">          </span><span class="c1"># pve1</span>
@@ -4736,7 +4799,10 @@ pvecm<span class="w"> </span>status
 pvecm<span class="w"> </span>nodes
 </code></pre></div>
 <p><strong>6.2</strong> Migreeri konteiner või väljalülitatud VM <code>pve2</code>-le (<em>Migrate</em>). Lülita <code>pve2</code> välja ja vaata <code>pve1</code>-s <code>pvecm status</code>.</p>
-<p><strong>K13.</strong> Mitu häält (<em>votes</em>) klastris on ja kas pärast <code>pve2</code> väljalülitamist on kvoorum? Miks on HA jaoks vaja vähemalt kolme sõlme?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mitu häält (<em>votes</em>) klastris on ja kas pärast <code>pve2</code> väljalülitamist on kvoorum? Miks on HA jaoks vaja vähemalt kolme sõlme?</p>
+</div>
 <h2 id="7-osa-xcp-ng-ja-xen-orchestra">7. osa. XCP-ng ja Xen Orchestra<a class="headerlink" href="#7-osa-xcp-ng-ja-xen-orchestra" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Paigalda XCP-ng VM-i (teooria punkt 23.4): staatiline IP, hostinimi, NTP <code>pool.ntp.org</code>. Uuri konsoolis <code>xsconsole</code>-i menüüd ning SSH-ga:</p>
 <div class="highlight"><pre><span></span><code>xe<span class="w"> </span>host-list
@@ -4744,15 +4810,30 @@ xe<span class="w"> </span>sr-list
 xe<span class="w"> </span>network-list
 xl<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">        </span><span class="c1"># Xeni enda tööriist</span>
 </code></pre></div>
-<p><strong>K14.</strong> Mis on dom0 ja mille poolest erineb Xeni ülesehitus KVM-ist?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Mis on dom0 ja mille poolest erineb Xeni ülesehitus KVM-ist?</p>
+</div>
 <p><strong>7.2</strong> Loo kohalik ISO-repositoorium (teooria punkt 23.4) ja kopeeri sinna väike ISO (<code>scp</code>).</p>
 <p><strong>7.3</strong> Paigalda Debiani VM-i Xen Orchestra lähtekoodist (teooria punkt 23.4), logi sisse, <strong>muuda vaikeparool</strong> ja lisa XCP-ng server.</p>
 <p><strong>7.4</strong> Loo Xen Orchestras VM, paigalda OS ja külalistööriistad (<code>guest-tools.iso</code>). Kontrolli, et XO näitab VM-i IP-aadressi.</p>
-<p><strong>K15.</strong> Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?</p>
+</div>
 <h2 id="8-osa-kokkuvõte">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K16.</strong> Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.</p>
-<p><strong>K17.</strong> Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.</p>
-<p><strong>K18.</strong> Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja <code>apt</code>, ZFS, Linuxi sillad, LXC, <code>vzdump</code>, systemd, iSCSI).</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K17</p>
+<p>Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K18</p>
+<p>Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja <code>apt</code>, ZFS, Linuxi sillad, LXC, <code>vzdump</code>, systemd, iSCSI).</p>
+</div>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
 <p>Kustuta testmasinad (<code>virsh undefine test1 --remove-all-storage</code>, <code>qm destroy</code>, <code>pct destroy</code>) ja lülita pesastatud hüperviisorid välja, et need ei kulutaks kooli Proxmoxi ressursse.</p>
@@ -4764,6 +4845,32 @@ xl<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><s
 <li><strong>Proxmoxi API:</strong> loo API-võti ja küsi <code>curl</code>-iga masinate loetelu (teooria punkt 23.3, <em>API ja skriptid</em>). Kirjuta Bashi skript (moodul 6), mis käivitab kõik ühe kogumi (<em>pool</em>) masinad.</li>
 <li><strong>Ansible ja Proxmox:</strong> kasuta Ansible'i kogumit <code>community.general</code> (moodulid <code>proxmox_kvm</code> ja <code>proxmox</code>), et luua masinaid koodina (moodul 16).</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Kas virtualiseerimise tugi oli VM-is olemas? Mis juhtuks, kui Proxmoxis oleks VM-i protsessori tüüp <code>x86-64-v2-AES</code> (mitte <code>host</code>)?</li>
+<li><strong>K2.</strong> <em>(punkt 1.2)</em> Mis on <code>test1</code> IP-aadress ja millises võrgus see asub (<code>virbr0</code>)? Kuidas paistab virtuaalmasin hostis (<code>ps</code>)?</li>
+<li><strong>K3.</strong> <em>(punkt 1.3)</em> Mida näitas <code>qemu-img info</code> ketta tegeliku suuruse ja tagatõmmise (<em>backing file</em>) kohta? Miks oli uue masina loomine nii kiire?</li>
+<li><strong>K4.</strong> <em>(punkt 2.2)</em> Mis viga andis <code>apt update</code> enne hoidlate muutmist ja miks? Millal oleks õige kasutada enterprise-hoidlat?</li>
+<li><strong>K5.</strong> <em>(punkt 2.3)</em> Millised on Proxmoxi põhiteenused? Mis on kataloog <code>/etc/pve</code> ja miks on see eriline? Milline sild (<code>vmbr0</code>) ühendab VM-e füüsilise võrguga?</li>
+<li><strong>K6.</strong> <em>(punkt 3.3)</em> Võrdle VM-i ja LXC konteineri käivitusaega, mälukasutust ja kernelit (<code>uname -r</code>). Millal kasutaksid kumba?</li>
+<li><strong>K7.</strong> <em>(punkt 3.3)</em> Mida tähendab <code>--unprivileged 1</code>? Mis on konteineri <code>root</code>-i UID hostis (vihje: <code>ps -o user,pid,cmd -C bash</code> hostis, kui konteineris töötab kest)?</li>
+<li><strong>K8.</strong> <em>(punkt 4.1)</em> Kas masinate 100 ja 110 MAC-aadressid erinesid? Mis juhtuks samas võrgus kahe sama MAC-aadressiga masinaga?</li>
+<li><strong>K9.</strong> <em>(punkt 4.2)</em> Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?</li>
+<li><strong>K10.</strong> <em>(punkt 4.5)</em> Kui kaua võttis esimene ja teine varukoopia ning kui palju andmeid kumbki kord saadeti (vt <code>vzdump</code> väljundit)? Mis on deduplitseerimistegur? Miks oli teine varukoopia kiirem?</li>
+<li><strong>K11.</strong> <em>(punkt 4.6)</em> Mis on PBS-i õiguse <code>DatastoreBackup</code> eelis võrreldes <code>root</code>-iga, kui ründaja saab Proxmoxi enda üle kontrolli? Miks ei ole hea mõte paigaldada PBS samasse Proxmoxi, mida see varundab? Kui kaua võttis kogu masina taastamine?</li>
+<li><strong>K12.</strong> <em>(punkt 5.2)</em> Kas konteiner pääses internetti? Mida teeb reegel <code>MASQUERADE</code> ja miks oli vaja <code>ip_forward</code>-i? Võrdle seda OPNsense'iga (moodul 18).</li>
+<li><strong>K13.</strong> <em>(punkt 6.2)</em> Mitu häält (<em>votes</em>) klastris on ja kas pärast <code>pve2</code> väljalülitamist on kvoorum? Miks on HA jaoks vaja vähemalt kolme sõlme?</li>
+<li><strong>K14.</strong> <em>(punkt 7.1)</em> Mis on dom0 ja mille poolest erineb Xeni ülesehitus KVM-ist?</li>
+<li><strong>K15.</strong> <em>(punkt 7.4)</em> Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?</li>
+<li><strong>K16.</strong> <em>(8. osa)</em> Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.</li>
+<li><strong>K17.</strong> <em>(8. osa)</em> Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.</li>
+<li><strong>K18.</strong> <em>(8. osa)</em> Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja <code>apt</code>, ZFS, Linuxi sillad, LXC, <code>vzdump</code>, systemd, iSCSI).</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>

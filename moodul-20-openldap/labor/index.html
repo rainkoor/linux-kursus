@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/kursus.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -3460,6 +3462,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4541,6 +4554,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aruande-küsimused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aruande küsimused
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4585,7 +4609,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Aruanne:</strong> vasta küsimustele <strong>K1–K16</strong>. Hoia kõik LDIF-failid kataloogis <code>~/ldap</code> ja lisa need oma Giti hoidlasse (moodul 6) - ilma paroolideta!</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Aruanne</p>
+<p>Vasta küsimustele <strong>K1–K16</strong>. Hoia kõik LDIF-failid kataloogis <code>~/ldap</code> ja lisa need oma Giti hoidlasse (moodul 6) - ilma paroolideta! Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
+</div>
 <p><strong>Stsenaarium:</strong> kool soovib, et õppijad ja õpetajad saaksid kõigisse laborimasinatesse sisse logida ühe kasutajanime ja parooliga.</p>
 <hr />
 <h2 id="1-osa-paigaldus">1. osa. Paigaldus<a class="headerlink" href="#1-osa-paigaldus" title="Permanent link">&para;</a></h2>
@@ -4605,7 +4632,10 @@ ldapsearch<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> <
 ldapwhoami<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W
 sudo<span class="w"> </span>ldapsearch<span class="w"> </span>-Y<span class="w"> </span>EXTERNAL<span class="w"> </span>-H<span class="w"> </span>ldapi:///<span class="w"> </span>-b<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>config<span class="w"> </span>-LLL<span class="w"> </span>dn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
 </code></pre></div>
-<p><strong>K1.</strong> Millised kirjed on kataloogis kohe pärast paigaldust? Millised skeemid on laaditud (<code>cn=schema,cn=config</code> alt)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K1</p>
+<p>Millised kirjed on kataloogis kohe pärast paigaldust? Millised skeemid on laaditud (<code>cn=schema,cn=config</code> alt)?</p>
+</div>
 <h2 id="2-osa-struktuur-grupid-ja-kasutajad">2. osa. Struktuur, grupid ja kasutajad<a class="headerlink" href="#2-osa-struktuur-grupid-ja-kasutajad" title="Permanent link">&para;</a></h2>
 <p><strong>2.1</strong> Loo LDIF-failiga konteinerid <code>ou=People</code> ja <code>ou=Groups</code> (teooria punkt 20.4) ja lisa need.</p>
 <p><strong>2.2</strong> Loo grupid ja kasutajad:</p>
@@ -4642,9 +4672,15 @@ sudo<span class="w"> </span>ldapsearch<span class="w"> </span>-Y<span class="w">
 <p>Genereeri igale parool käsuga <code>slappasswd</code>. Lisa gruppidesse liikmed (<code>memberUid</code>).</p>
 <div class="highlight"><pre><span></span><code>ldapadd<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W<span class="w"> </span>-f<span class="w"> </span>kasutajad.ldif
 </code></pre></div>
-<p><strong>K2.</strong> Kirjuta aruandesse ühe kasutaja LDIF (räsi võid lühendada). Miks on igal kasutajal kolm objektiklassi?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K2</p>
+<p>Kirjuta aruandesse ühe kasutaja LDIF (räsi võid lühendada). Miks on igal kasutajal kolm objektiklassi?</p>
+</div>
 <p><strong>2.3</strong> Proovi lisada kasutaja, kellel puudub kohustuslik atribuut (nt <code>sn</code> või <code>homeDirectory</code>).</p>
-<p><strong>K3.</strong> Mis veateate said? Kust tuleb nõue, et atribuut on kohustuslik?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K3</p>
+<p>Mis veateate said? Kust tuleb nõue, et atribuut on kohustuslik?</p>
+</div>
 <h2 id="3-osa-otsimine-ja-muutmine">3. osa. Otsimine ja muutmine<a class="headerlink" href="#3-osa-otsimine-ja-muutmine" title="Permanent link">&para;</a></h2>
 <p><strong>3.1</strong> Kirjuta ja käivita otsingud, mis leiavad:</p>
 <ol>
@@ -4653,13 +4689,19 @@ sudo<span class="w"> </span>ldapsearch<span class="w"> </span>-Y<span class="w">
 <li>kasutaja, kelle eesnimi algab tähega „K“;</li>
 <li>kõik kirjed, mis ei ole kasutajad ega grupid.</li>
 </ol>
-<p><strong>K4.</strong> Kirjuta kõik neli käsku.</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K4</p>
+<p>Kirjuta kõik neli käsku.</p>
+</div>
 <p><strong>3.2</strong> Muuda <code>ldapmodify</code>-ga: Mari kest <code>/bin/zsh</code>-iks, lisa Jaanile e-posti aadress, eemalda Kati telefoninumber (lisa see enne).</p>
 <p><strong>3.3</strong> Proovi anonüümselt (ilma <code>-D</code>-ta) lugeda Mari parooli räsi ja seejärel Mari enda nimel:</p>
 <div class="highlight"><pre><span></span><code>ldapsearch<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-b<span class="w"> </span><span class="nv">uid</span><span class="o">=</span>mari,ou<span class="o">=</span>People,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>userPassword
 ldapsearch<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">uid</span><span class="o">=</span>mari,ou<span class="o">=</span>People,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W<span class="w"> </span>-b<span class="w"> </span><span class="nv">uid</span><span class="o">=</span>mari,ou<span class="o">=</span>People,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>userPassword
 </code></pre></div>
-<p><strong>K5.</strong> Kas anonüümne kasutaja nägi räsi? Kas Mari nägi oma räsi? Milline <code>olcAccess</code> reegel seda määrab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K5</p>
+<p>Kas anonüümne kasutaja nägi räsi? Kas Mari nägi oma räsi? Milline <code>olcAccess</code> reegel seda määrab?</p>
+</div>
 <p><strong>3.4</strong> Lase Maril oma parool ise muuta ja kontrolli uue parooliga <code>ldapwhoami</code>.</p>
 <div class="highlight"><pre><span></span><code>ldappasswd<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">uid</span><span class="o">=</span>mari,ou<span class="o">=</span>People,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W<span class="w"> </span>-S
 </code></pre></div>
@@ -4669,18 +4711,27 @@ ldapsearch<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> <
 <div class="highlight"><pre><span></span><code>ldapwhoami<span class="w"> </span>-x<span class="w"> </span>-ZZ<span class="w"> </span>-H<span class="w"> </span>ldap://debian1.lab.example<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W
 ldapwhoami<span class="w"> </span>-x<span class="w"> </span>-ZZ<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-W
 </code></pre></div>
-<p><strong>K6.</strong> Miks esimene käsk õnnestus, aga teine ebaõnnestus? (Vihje: sertifikaadi SAN.)</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K6</p>
+<p>Miks esimene käsk õnnestus, aga teine ebaõnnestus? (Vihje: sertifikaadi SAN.)</p>
+</div>
 <p><strong>4.3</strong> Püüa liiklust ja võrdle krüpteerimata ning StartTLS-iga bind'i:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>lo<span class="w"> </span>-A<span class="w"> </span>port<span class="w"> </span><span class="m">389</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-a<span class="w"> </span>-i<span class="w"> </span>-E<span class="w"> </span><span class="s2">"admin|parool"</span><span class="w"> </span><span class="p">&amp;</span>
 ldapwhoami<span class="w"> </span>-x<span class="w"> </span>-H<span class="w"> </span>ldap://localhost<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-w<span class="w"> </span>&lt;parool&gt;
 ldapwhoami<span class="w"> </span>-x<span class="w"> </span>-ZZ<span class="w"> </span>-H<span class="w"> </span>ldap://debian1.lab.example<span class="w"> </span>-D<span class="w"> </span><span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>lab,dc<span class="o">=</span>example<span class="w"> </span>-w<span class="w"> </span>&lt;parool&gt;
 sudo<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>%1
 </code></pre></div>
-<p><strong>K7.</strong> Mida nägid krüpteerimata ühenduse puhul? Miks on TLS LDAP-i puhul kohustuslik?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K7</p>
+<p>Mida nägid krüpteerimata ühenduse puhul? Miks on TLS LDAP-i puhul kohustuslik?</p>
+</div>
 <h2 id="5-osa-ldap-account-manager">5. osa. LDAP Account Manager<a class="headerlink" href="#5-osa-ldap-account-manager" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Paigalda LAM ja seadista serveri profiil (teooria punkt 20.6). <strong>Muuda LAM-i seadistuse peaparool.</strong></p>
 <p><strong>5.2</strong> Loo LAM-iga uus kasutaja <code>ain</code> (õpetaja) ja lisa ta gruppi <code>opetajad</code>. Vaata <code>ldapsearch</code>-iga, milline kirje tekkis.</p>
-<p><strong>K8.</strong> Millise UID-numbri LAM andis? Milliseid atribuute lisas LAM, mida sina käsitsi ei lisanud?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K8</p>
+<p>Millise UID-numbri LAM andis? Milliseid atribuute lisas LAM, mida sina käsitsi ei lisanud?</p>
+</div>
 <p><strong>5.3</strong> (Valikuline) Impordi LAM-iga CSV-failist veel 5 õppijat (<em>Tools</em> → <em>File upload</em>).</p>
 <h2 id="6-osa-linuxi-kliendid-sssd">6. osa. Linuxi kliendid (SSSD)<a class="headerlink" href="#6-osa-linuxi-kliendid-sssd" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> <strong>Ubuntu</strong> kliendis: paigalda paketid, kopeeri CA sertifikaat kataloogi <code>/etc/sssd/</code>, loo <code>/etc/sssd/sssd.conf</code> (teooria punkt 20.7) ja käivita SSSD. Luba kodukataloogi loomine.</p>
@@ -4688,32 +4739,56 @@ sudo<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>
 id<span class="w"> </span>mari
 getent<span class="w"> </span>group<span class="w"> </span>opilased
 </code></pre></div>
-<p><strong>K9.</strong> Mida näitas <code>id mari</code>? Kust see info tuli (vaata <code>/etc/nsswitch.conf</code> rida <code>passwd:</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K9</p>
+<p>Mida näitas <code>id mari</code>? Kust see info tuli (vaata <code>/etc/nsswitch.conf</code> rida <code>passwd:</code>)?</p>
+</div>
 <p><strong>6.2</strong> Logi Ubuntu kliendisse sisse LDAP-i kasutajana (SSH-ga peab olema parooliga sisselogimine lubatud või kasuta Proxmoxi konsooli või <code>su - mari</code>):</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>mari@ubuntuklient.lab.example
 <span class="nb">pwd</span>
 id
 touch<span class="w"> </span>test.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ls<span class="w"> </span>-ln<span class="w"> </span>test.txt
 </code></pre></div>
-<p><strong>K10.</strong> Kas kodukataloog loodi automaatselt? Mis on faili <code>test.txt</code> numbriline omanik? Miks on see oluline NFS-i puhul (moodul 15)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K10</p>
+<p>Kas kodukataloog loodi automaatselt? Mis on faili <code>test.txt</code> numbriline omanik? Miks on see oluline NFS-i puhul (moodul 15)?</p>
+</div>
 <p><strong>6.3</strong> <strong>AlmaLinuxi</strong> kliendis tee sama (AlmaLinuxi paketid ja <code>authselect</code>, teooria punkt 20.7). Logi sisse kasutajana <code>kati</code>.</p>
 <p><strong>6.4</strong> Peata <code>debian1</code>-s <code>slapd</code> ja proovi Ubuntu kliendis uuesti sisse logida kasutajana <code>mari</code>. Seejärel käivita <code>slapd</code>.</p>
-<p><strong>K11.</strong> Kas sisselogimine õnnestus, kui server oli maas? Miks? Milline <code>sssd.conf</code> valik seda mõjutab?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K11</p>
+<p>Kas sisselogimine õnnestus, kui server oli maas? Miks? Milline <code>sssd.conf</code> valik seda mõjutab?</p>
+</div>
 <p><strong>6.5</strong> Anna grupile <code>opetajad</code> klientides <code>sudo</code> õigus. Loo kliendis fail <code>/etc/sudoers.d/opetajad</code> (<code>visudo -f</code>):</p>
 <div class="highlight"><pre><span></span><code>%opetajad ALL=(ALL:ALL) ALL
 </code></pre></div>
-<p><strong>K12.</strong> Kas <code>kati</code> sai <code>sudo</code> kasutada? Kas <code>mari</code> sai? Miks on parem anda õigused grupi kaudu?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K12</p>
+<p>Kas <code>kati</code> sai <code>sudo</code> kasutada? Kas <code>mari</code> sai? Miks on parem anda õigused grupi kaudu?</p>
+</div>
 <p><strong>6.6</strong> Lukusta LDAP-is Jaani konto: muuda tema <code>loginShell</code> väärtuseks <code>/usr/sbin/nologin</code>. Tühjenda kliendis vahemälu ja proovi Jaanina sisse logida.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sss_cache<span class="w"> </span>-E
 </code></pre></div>
-<p><strong>K13.</strong> Mis juhtus? Mis on teised võimalused konto keelamiseks?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K13</p>
+<p>Mis juhtus? Mis on teised võimalused konto keelamiseks?</p>
+</div>
 <h2 id="7-osa-varundus-ja-taastamine">7. osa. Varundus ja taastamine<a class="headerlink" href="#7-osa-varundus-ja-taastamine" title="Permanent link">&para;</a></h2>
 <p><strong>7.1</strong> Varunda seadistus ja andmed (teooria punkt 20.8). Kontrolli failide sisu.</p>
 <p><strong>7.2</strong> Kustuta kasutaja <code>kati</code> ja taasta kogu andmebaas varukoopiast.</p>
-<p><strong>K14.</strong> Kas <code>kati</code> taastus? Miks on vaja eraldi varundada <code>cn=config</code> (<code>-n 0</code>) ja andmed (<code>-n 1</code>)?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K14</p>
+<p>Kas <code>kati</code> taastus? Miks on vaja eraldi varundada <code>cn=config</code> (<code>-n 0</code>) ja andmed (<code>-n 1</code>)?</p>
+</div>
 <h2 id="8-osa-kokkuvõte">8. osa. Kokkuvõte<a class="headerlink" href="#8-osa-kokkuvõte" title="Permanent link">&para;</a></h2>
-<p><strong>K15.</strong> Joonista skeem: kuidas jõuab <code>ssh mari@ubuntuklient</code> sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?</p>
-<p><strong>K16.</strong> Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?</p>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K15</p>
+<p>Joonista skeem: kuidas jõuab <code>ssh mari@ubuntuklient</code> sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?</p>
+</div>
+<div class="admonition kysimus">
+<p class="admonition-title">Küsimus K16</p>
+<p>Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?</p>
+</div>
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4722,6 +4797,30 @@ touch<span class="w"> </span>test.txt<span class="w"> </span><span class="o">&am
 <li><strong>SSH võtmed LDAP-is:</strong> salvesta kasutajate avalikud SSH-võtmed LDAP-i (skeem <code>openssh-lpk</code>) ja seadista SSSD (<code>sss_ssh_authorizedkeys</code>) neid kasutama.</li>
 <li><strong>LAM konteineris:</strong> käivita LAM Podmani konteinerina (pilt <code>ghcr.io/ldapaccountmanager/lam</code>) ja pane selle ette nginx koos TLS-iga.</li>
 </ol>
+<hr />
+<!-- kysimused -->
+<h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
+<p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
+<ul>
+<li><strong>K1.</strong> <em>(punkt 1.3)</em> Millised kirjed on kataloogis kohe pärast paigaldust? Millised skeemid on laaditud (<code>cn=schema,cn=config</code> alt)?</li>
+<li><strong>K2.</strong> <em>(punkt 2.2)</em> Kirjuta aruandesse ühe kasutaja LDIF (räsi võid lühendada). Miks on igal kasutajal kolm objektiklassi?</li>
+<li><strong>K3.</strong> <em>(punkt 2.3)</em> Mis veateate said? Kust tuleb nõue, et atribuut on kohustuslik?</li>
+<li><strong>K4.</strong> <em>(punkt 3.1)</em> Kirjuta kõik neli käsku.</li>
+<li><strong>K5.</strong> <em>(punkt 3.3)</em> Kas anonüümne kasutaja nägi räsi? Kas Mari nägi oma räsi? Milline <code>olcAccess</code> reegel seda määrab?</li>
+<li><strong>K6.</strong> <em>(punkt 4.2)</em> Miks esimene käsk õnnestus, aga teine ebaõnnestus? (Vihje: sertifikaadi SAN.)</li>
+<li><strong>K7.</strong> <em>(punkt 4.3)</em> Mida nägid krüpteerimata ühenduse puhul? Miks on TLS LDAP-i puhul kohustuslik?</li>
+<li><strong>K8.</strong> <em>(punkt 5.2)</em> Millise UID-numbri LAM andis? Milliseid atribuute lisas LAM, mida sina käsitsi ei lisanud?</li>
+<li><strong>K9.</strong> <em>(punkt 6.1)</em> Mida näitas <code>id mari</code>? Kust see info tuli (vaata <code>/etc/nsswitch.conf</code> rida <code>passwd:</code>)?</li>
+<li><strong>K10.</strong> <em>(punkt 6.2)</em> Kas kodukataloog loodi automaatselt? Mis on faili <code>test.txt</code> numbriline omanik? Miks on see oluline NFS-i puhul (moodul 15)?</li>
+<li><strong>K11.</strong> <em>(punkt 6.4)</em> Kas sisselogimine õnnestus, kui server oli maas? Miks? Milline <code>sssd.conf</code> valik seda mõjutab?</li>
+<li><strong>K12.</strong> <em>(punkt 6.5)</em> Kas <code>kati</code> sai <code>sudo</code> kasutada? Kas <code>mari</code> sai? Miks on parem anda õigused grupi kaudu?</li>
+<li><strong>K13.</strong> <em>(punkt 6.6)</em> Mis juhtus? Mis on teised võimalused konto keelamiseks?</li>
+<li><strong>K14.</strong> <em>(punkt 7.2)</em> Kas <code>kati</code> taastus? Miks on vaja eraldi varundada <code>cn=config</code> (<code>-n 0</code>) ja andmed (<code>-n 1</code>)?</li>
+<li><strong>K15.</strong> <em>(8. osa)</em> Joonista skeem: kuidas jõuab <code>ssh mari@ubuntuklient</code> sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?</li>
+<li><strong>K16.</strong> <em>(8. osa)</em> Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?</li>
+</ul>
+<!-- /kysimused -->
+
 <hr />
 <div class="admonition note">
 <p class="admonition-title">Õpetajale</p>
