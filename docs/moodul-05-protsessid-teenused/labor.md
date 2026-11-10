@@ -11,7 +11,7 @@
 | **Vajalik** | AlmaLinuxi virtuaalmasin, `sudo` õigusega kasutaja, internetiühendus. Soovitatavalt **kaks SSH-seanssi** korraga |
 | **Eesmärk** | Harjutada protsesside jälgimist, signaale, teenuste haldust, oma teenuse loomist, logide lugemist ja ajastamist |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ---
 
@@ -26,7 +26,7 @@ pstree -p | head -20
 
 Kui `pstree` puudub, paigalda pakett `psmisc`.
 
-**K1.** Mis on protsessi PID 1 nimi? Kes on sinu praeguse kesta (`bash`) vanemprotsess? (Vihje: `ps -ef | grep $$` - muutuja `$$` on praeguse kesta PID.)
+> **K1.** Mis on protsessi PID 1 nimi? Kes on sinu praeguse kesta (`bash`) vanemprotsess? (Vihje: `ps -ef | grep $$` - muutuja `$$` on praeguse kesta PID.)
 
 **1.2** Leia viis kõige rohkem mälu kasutavat protsessi:
 
@@ -36,7 +36,7 @@ ps -eo pid,user,%mem,rss,cmd --sort=-%mem | head -6
 
 **1.3** Ava `top`. Vajuta **M** (sorteeri mälu järgi), seejärel **P** (protsessori järgi) ja **1** (iga tuum eraldi). Välju klahviga **q**.
 
-**K2.** Mis on süsteemi koormus (*load average*) ja mitu protsessorituuma on masinal (`nproc`)? Kui palju mälu on tegelikult saadaval (`avail Mem`)?
+> **K2.** Mis on süsteemi koormus (*load average*) ja mitu protsessorituuma on masinal (`nproc`)? Kui palju mälu on tegelikult saadaval (`avail Mem`)?
 
 ---
 
@@ -61,11 +61,11 @@ bg %2
 jobs
 ```
 
-**K3.** Mis olekus oli töö pärast Ctrl+Z vajutamist? Mis muutus pärast `bg` käsku?
+> **K3.** Mis olekus oli töö pärast Ctrl+Z vajutamist? Mis muutus pärast `bg` käsku?
 
 **2.3** Lõpeta töö nr 1 käsuga `kill %1`. Lõpeta ülejäänud `sleep` protsessid **ühe käsuga**.
 
-**K4.** Kirjuta käsk, millega lõpetasid kõik `sleep` protsessid.
+> **K4.** Kirjuta käsk, millega lõpetasid kõik `sleep` protsessid.
 
 **2.4** Koorma protsessorit. Käivita ühes SSH-seansis:
 
@@ -83,11 +83,11 @@ renice 19 -p <PID>
 top
 ```
 
-**K5.** Kas protsessori kasutus muutus? Miks ei pruugi see tühjas virtuaalmasinas eriti muutuda? (Vihje: mille suhtes prioriteet kehtib?)
+> **K5.** Kas protsessori kasutus muutus? Miks ei pruugi see tühjas virtuaalmasinas eriti muutuda? (Vihje: mille suhtes prioriteet kehtib?)
 
 **2.6** Proovi prioriteeti tagasi tõsta tavakasutajana: `renice 0 -p <PID>`.
 
-**K6.** Mis juhtus? Miks?
+> **K6.** Mis juhtus? Miks?
 
 **2.7** Saada protsessile signaal `SIGTERM`. Kui see ei lõpe, kasuta `SIGKILL`.
 
@@ -101,7 +101,7 @@ top
 systemctl status sshd
 ```
 
-**K7.** Kas teenus on lubatud (`enabled`)? Mis on selle põhiprotsessi PID? Millises failis on teenuse kirjeldus?
+> **K7.** Kas teenus on lubatud (`enabled`)? Mis on selle põhiprotsessi PID? Millises failis on teenuse kirjeldus?
 
 **3.2** Paigalda veebiserver Apache:
 
@@ -110,7 +110,7 @@ sudo dnf install httpd
 systemctl status httpd
 ```
 
-**K8.** Kas teenus töötab kohe pärast paigaldamist? Kas see on lubatud? Kuidas erineb see Debianist ja Ubuntust?
+> **K8.** Kas teenus töötab kohe pärast paigaldamist? Kas see on lubatud? Kuidas erineb see Debianist ja Ubuntust?
 
 **3.3** Käivita teenus ja kontrolli, kas see vastab:
 
@@ -123,7 +123,7 @@ curl -s http://localhost | head -5
 
 **3.4** Taaskäivita virtuaalmasin (`sudo systemctl reboot`), logi uuesti sisse ja kontrolli, kas `httpd` töötab.
 
-**K9.** Kas `httpd` töötas pärast taaskäivitust? Miks? Millise **ühe** käsuga oleksid saanud teenuse korraga käivitada ja lubada?
+> **K9.** Kas `httpd` töötas pärast taaskäivitust? Miks? Millise **ühe** käsuga oleksid saanud teenuse korraga käivitada ja lubada?
 
 **3.5** Luba teenus ja kontrolli tulemust. Uuri, mida `enable` tegelikult tegi:
 
@@ -132,7 +132,7 @@ sudo systemctl enable --now httpd
 ls -l /etc/systemd/system/multi-user.target.wants/ | grep httpd
 ```
 
-**K10.** Mis on `enable` tegelikult loonud?
+> **K10.** Mis on `enable` tegelikult loonud?
 
 **3.6** Uuri teenuse faili ja selle asukohta:
 
@@ -166,7 +166,7 @@ sudo journalctl -u sshd -f
 
 Teises seansis (või oma arvutist) proovi ühenduda **vale parooliga** ja seejärel õigega.
 
-**K11.** Kuidas on logis näha ebaõnnestunud ja õnnestunud sisselogimine? Kirjuta mõlema kohta üks logirida (IP-aadressi võid varjata).
+> **K11.** Kuidas on logis näha ebaõnnestunud ja õnnestunud sisselogimine? Kirjuta mõlema kohta üks logirida (IP-aadressi võid varjata).
 
 **4.3** Leia käesoleva alglaadimise vead ja kontrolli, kas journal on püsiv:
 
@@ -176,7 +176,7 @@ journalctl --list-boots
 ls -d /var/log/journal /run/log/journal 2>/dev/null
 ```
 
-**K12.** Mitu alglaadimist on journal'is (punktis 3.4 tegid ühe taaskäivituse)? Kas journal on püsiv või ajutine? Kui ajutine, tee see püsivaks (vt teooria punkt 5.7).
+> **K12.** Mitu alglaadimist on journal'is (punktis 3.4 tegid ühe taaskäivituse)? Kas journal on püsiv või ajutine? Kui ajutine, tee see püsivaks (vt teooria punkt 5.7).
 
 ---
 
@@ -242,7 +242,7 @@ sudo systemctl enable --now kettakontroll
 systemctl status kettakontroll
 ```
 
-**K13.** Mille poolest erineb teenuse `kettakontroll` olek teenuse `httpd` omast? Millise kasutajana teenus töötab (`ps -fu nobody`)?
+> **K13.** Mille poolest erineb teenuse `kettakontroll` olek teenuse `httpd` omast? Millise kasutajana teenus töötab (`ps -fu nobody`)?
 
 **5.4** Vaata teenuse väljundit:
 
@@ -251,7 +251,7 @@ journalctl -u kettakontroll -n 10
 journalctl -u kettakontroll -f
 ```
 
-**K14.** Kuhu jõuab skripti `echo` väljund? Miks ei olnud vaja eraldi logifaili?
+> **K14.** Kuhu jõuab skripti `echo` väljund? Miks ei olnud vaja eraldi logifaili?
 
 **5.5** Testi automaatset taaskäivitust. Leia teenuse põhiprotsessi PID (`systemctl status`) ja lõpeta see kõigepealt viisakalt, seejärel jõuga. Iga kord oota 10 sekundit ja vaata olekut:
 
@@ -263,7 +263,7 @@ sudo kill -9 <uus PID>
 sleep 10; systemctl status kettakontroll
 ```
 
-**K15.** Kummal juhul teenus taaskäivitati ja kummal mitte? Selgita seda seadistusega `Restart=on-failure`.
+> **K15.** Kummal juhul teenus taaskäivitati ja kummal mitte? Selgita seda seadistusega `Restart=on-failure`.
 
 **5.6** Muuda teenuse seadistust nii, et see taaskäivitub **alati**, kasutades käsku `systemctl edit` (mitte põhifaili muutmist):
 
@@ -278,7 +278,7 @@ Lisa avanevasse faili märgitud kohta:
 Restart=always
 ```
 
-**K16.** Millise faili `systemctl edit` lõi? Miks on see parem kui põhifaili muutmine? Kontrolli tulemust käsuga `systemctl cat kettakontroll`.
+> **K16.** Millise faili `systemctl edit` lõi? Miks on see parem kui põhifaili muutmine? Kontrolli tulemust käsuga `systemctl cat kettakontroll`.
 
 ---
 
@@ -298,7 +298,7 @@ crontab -e
 
 Asenda `SINU_KASUTAJA` oma kasutajanimega. Oota 2–3 minutit ja kontrolli: `cat ~/koormus.log`.
 
-**K17.** Kirjuta crontab'i read, mis käivitaksid skripti `/usr/local/bin/aruanne.sh`: a) iga päev kell 06:45; b) tööpäeviti iga 30 minuti järel vahemikus 8–17; c) iga pühapäeva keskööl.
+> **K17.** Kirjuta crontab'i read, mis käivitaksid skripti `/usr/local/bin/aruanne.sh`: a) iga päev kell 06:45; b) tööpäeviti iga 30 minuti järel vahemikus 8–17; c) iga pühapäeva keskööl.
 
 **6.2** Eemalda rida crontab'ist (`crontab -e`).
 
@@ -361,7 +361,7 @@ ls -l /srv/varundus
 journalctl -u varundus.service
 ```
 
-**K18.** Millal käivitub taimer järgmisena? Mitu arhiivi tekkis? Mida näitab teenuse logi?
+> **K18.** Millal käivitub taimer järgmisena? Mitu arhiivi tekkis? Mida näitab teenuse logi?
 
 **6.6** Muuda taimer igapäevaseks kell 02:30 ja kontrolli ajaavaldist:
 
@@ -369,11 +369,11 @@ journalctl -u varundus.service
 systemd-analyze calendar "*-*-* 02:30:00"
 ```
 
-**K19.** Mida tähendab `Persistent=true`? Miks on see varunduse puhul oluline?
+> **K19.** Mida tähendab `Persistent=true`? Miks on see varunduse puhul oluline?
 
 **6.7** Koristamine: peata ja keela teenus `kettakontroll` ning taimer `varundus.timer`. Kustuta varundusarhiivid.
 
-**K20.** Kirjuta koristamise käsud.
+> **K20.** Kirjuta koristamise käsud.
 
 ---
 

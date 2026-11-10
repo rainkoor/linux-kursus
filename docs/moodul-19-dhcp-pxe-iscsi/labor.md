@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 18 isoleeritud laborivõrk OPNsense'i taga, võrguplaan, `debian2`-le lisaketas 10 GiB (valikuline), üks tühi virtuaalmasin PXE testimiseks |
 | **Eesmärk** | Seadistada laborivõrgule Linuxi DHCP-server, PXE alglaadimine ja iSCSI salvestus |
 
-**Aruanne:** vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > **Tee kõiki selle labori osi ainult isoleeritud laborivõrgus!** Kontrolli enne alustamist, et `debian1` võrguliides on Proxmoxis ühendatud sinu isoleeritud silda/VNet-i, mitte kooli võrku.
@@ -38,7 +38,7 @@ sudo cp /etc/kea/kea-dhcp4.conf /etc/kea/kea-dhcp4.conf.orig
 wc -l /etc/kea/kea-dhcp4.conf.orig
 ```
 
-**K1.** Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?
+> **K1.** Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?
 
 **1.3** Kirjuta fail `/etc/kea/kea-dhcp4.conf` teooria punkti 19.2 põhjal oma võrguplaani järgi. Reserveeringut veel ära lisa.
 
@@ -48,7 +48,7 @@ wc -l /etc/kea/kea-dhcp4.conf.orig
 sudo kea-dhcp4 -t /etc/kea/kea-dhcp4.conf
 ```
 
-**K2.** Mida näitas kontroll vea korral? Miks on JSON-i puhul nii lihtne viga teha?
+> **K2.** Mida näitas kontroll vea korral? Miks on JSON-i puhul nii lihtne viga teha?
 
 **1.5** **Lülita OPNsense'is LAN-i DHCP-server välja** (*Services* → DHCP-teenus → *LAN* → keela, salvesta). Seejärel käivita Kea:
 
@@ -59,7 +59,7 @@ sudo ufw allow 67/udp          # kui ufw on sees
 journalctl -u kea-dhcp4-server -f
 ```
 
-**K3.** Miks tuli OPNsense'i DHCP välja lülitada? Mis juhtuks, kui võrgus oleks kaks DHCP-serverit?
+> **K3.** Miks tuli OPNsense'i DHCP välja lülitada? Mis juhtuks, kui võrgus oleks kaks DHCP-serverit?
 
 ## 2. osa. Klient ja reserveering
 
@@ -70,7 +70,7 @@ sudo networkctl renew <liides>
 ip -br a
 ```
 
-**K4.** Leia logist DHCP-sõnumite vahetus (DISCOVER, OFFER, REQUEST, ACK - Kea logis `DHCP4_PACKET_RECEIVED`, `DHCP4_LEASE_ALLOC` vms). Millise aadressi klient sai?
+> **K4.** Leia logist DHCP-sõnumite vahetus (DISCOVER, OFFER, REQUEST, ACK - Kea logis `DHCP4_PACKET_RECEIVED`, `DHCP4_LEASE_ALLOC` vms). Millise aadressi klient sai?
 
 **2.2** Vaata rente serveris:
 
@@ -85,15 +85,15 @@ sudo apt install tcpdump
 sudo tcpdump -ni ens18 -v port 67 or port 68
 ```
 
-**K5.** Kas nägid leviedastusi (`255.255.255.255`)? Millised DHCP-valikud olid serveri vastuses (ruuter, DNS, domeen, rendiaeg)?
+> **K5.** Kas nägid leviedastusi (`255.255.255.255`)? Millised DHCP-valikud olid serveri vastuses (ruuter, DNS, domeen, rendiaeg)?
 
 **2.4** Lisa Ubuntu kliendile reserveering võrguplaanis olevale aadressile (`10.0.83.98`). Kontrolli süntaksit, taaskäivita Kea ja uuenda kliendi renti.
 
-**K6.** Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?
+> **K6.** Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?
 
 **2.5** Peata Kea ja oota, mis juhtub kliendiga, kui see renti uuendada üritab (`networkctl renew`). Käivita Kea uuesti.
 
-**K7.** Mis juhtus kliendi aadressiga, kui DHCP-server ei vastanud? Miks ei kaota klient aadressi kohe?
+> **K7.** Mis juhtus kliendi aadressiga, kui DHCP-server ei vastanud? Miks ei kaota klient aadressi kohe?
 
 ## 3. osa. PXE alglaadimine (netboot.xyz)
 
@@ -117,11 +117,11 @@ tftp 10.0.83.52 -c get netboot.xyz.kpxe && ls -l netboot.xyz.kpxe
 
 **3.4** Loo Proxmoxis tühi virtuaalmasin ilma kettata (või väikese kettaga), võrk isoleeritud silda, BIOS **SeaBIOS**, *Options* → *Boot Order*: `net0` esimeseks. Käivita see ja jälgi konsooli.
 
-**K8.** Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?
+> **K8.** Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?
 
 **3.5** Muuda masina BIOS UEFI-ks (OVMF) ja proovi uuesti.
 
-**K9.** Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?
+> **K9.** Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?
 
 ## 4. osa. iSCSI sihtmärk
 
@@ -147,7 +147,7 @@ sudo ss -tlpn | grep 3260
 sudo ufw allow 3260/tcp
 ```
 
-**K10.** Kirjuta aruandesse `targetcli ls` väljund. Selgita, mis on sihtmärk, LUN, ACL ja portaal.
+> **K10.** Kirjuta aruandesse `targetcli ls` väljund. Selgita, mis on sihtmärk, LUN, ACL ja portaal.
 
 **4.2** Taaskäivita `debian2` ja kontrolli, kas sihtmärk taastus (`sudo targetcli ls`).
 
@@ -172,11 +172,11 @@ lsblk
 sudo iscsiadm -m session -P 3 | grep -E "Target|Attached scsi disk"
 ```
 
-**K11.** Mis nime sai iSCSI ketas AlmaLinuxis? Kuidas see `lsblk` väljundis kohalikust kettast erineb (vihje: `lsblk -S` veerg `TRAN`)?
+> **K11.** Mis nime sai iSCSI ketas AlmaLinuxis? Kuidas see `lsblk` väljundis kohalikust kettast erineb (vihje: `lsblk -S` veerg `TRAN`)?
 
 **5.3** Proovi esmalt **vale** IQN-iga: muuda faili `initiatorname.iscsi` IQN-i, logi välja (`iscsiadm -m node --logout`), taaskäivita `iscsid` ja logi uuesti sisse.
 
-**K12.** Mis veateate said? Miks? Taasta õige IQN.
+> **K12.** Mis veateate said? Miks? Taasta õige IQN.
 
 **5.4** Loo kettale failisüsteem ja haagi see püsivalt:
 
@@ -199,17 +199,17 @@ sudo systemctl reboot
 
 Pärast taaskäivitust: `df -h /mnt/iscsi && cat /mnt/iscsi/test.txt`.
 
-**K13.** Mis on valiku `_netdev` ülesanne? Mis juhtuks alglaadimisel ilma selleta?
+> **K13.** Mis on valiku `_netdev` ülesanne? Mis juhtuks alglaadimisel ilma selleta?
 
 **5.5** (Valikuline) Ühenda sama sihtmärgi **teine LUN** (loo `debian2`-s eraldi taust ja ACL Windowsi initsiaatori IQN-ile) Windowsi kliendist `iscsicpl` abil ja vorminda NTFS-iks.
 
-**K14.** Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?
+> **K14.** Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?
 
 ## 6. osa. Kokkuvõte
 
-**K15.** Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.
+> **K15.** Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.
 
-**K16.** Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?
+> **K16.** Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?
 
 ---
 

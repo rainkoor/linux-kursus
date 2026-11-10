@@ -11,7 +11,7 @@
 | **Vajalik** | AlmaLinuxi virtuaalmasin `sudo` õigusega kasutajaga, **kaks lisaketast** (soovitatavalt 5 GiB ja 3 GiB), ligipääs masina konsoolile |
 | **Eesmärk** | Harjutada partitsioneerimist, failisüsteeme, püsivat haakimist, saaleala ja LVM-i |
 
-**Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ### Lisaketaste lisamine
 
@@ -33,7 +33,7 @@ df -hT
 findmnt -t xfs,ext4,vfat
 ```
 
-**K1.** Joonista (või kirjelda) süsteemiketta struktuur: millised partitsioonid on, millised failisüsteemid neil on ja kuhu need on haagitud. Kas süsteem kasutab LVM-i?
+> **K1.** Joonista (või kirjelda) süsteemiketta struktuur: millised partitsioonid on, millised failisüsteemid neil on ja kuhu need on haagitud. Kas süsteem kasutab LVM-i?
 
 **1.2** Uuri LVM-i ja saaleala:
 
@@ -46,7 +46,7 @@ free -h
 cat /etc/fstab
 ```
 
-**K2.** Kuidas on juurfailisüsteem ja saaleala failis `/etc/fstab` kirjeldatud - UUID või LVM-i köite tee järgi? Kui palju on köitegrupis vaba ruumi?
+> **K2.** Kuidas on juurfailisüsteem ja saaleala failis `/etc/fstab` kirjeldatud - UUID või LVM-i köite tee järgi? Kui palju on köitegrupis vaba ruumi?
 
 **1.3** Kontrolli, et lisakettad on olemas ja tühjad:
 
@@ -72,7 +72,7 @@ lsblk /dev/sdb
 
 või interaktiivset `fdisk`-i (`g`, `n`, `n`, `p`, `w`).
 
-**K3.** Millised on partitsioonide suurused? Miks algab esimene partitsioon 1 MiB juurest, mitte ketta päris algusest?
+> **K3.** Millised on partitsioonide suurused? Miks algab esimene partitsioon 1 MiB juurest, mitte ketta päris algusest?
 
 **2.2** Loo failisüsteemid:
 
@@ -104,7 +104,7 @@ sudo umount /mnt/andmed
 ls /mnt/andmed
 ```
 
-**K4.** Mis juhtus failiga `peidus.txt`, kui ketas oli haagitud? Kas fail kadus?
+> **K4.** Mis juhtus failiga `peidus.txt`, kui ketas oli haagitud? Kas fail kadus?
 
 **2.5** Proovi lahti haakida kataloogi, kus oled:
 
@@ -116,7 +116,7 @@ cd
 sudo umount /srv/arhiiv
 ```
 
-**K5.** Mis veateate said ja miks? Mida näitas `fuser`?
+> **K5.** Mis veateate said ja miks? Mida näitas `fuser`?
 
 ---
 ## 3. osa. Püsiv haakimine
@@ -153,7 +153,7 @@ df -hT /mnt/andmed /srv/arhiiv
 
 **3.4** Taaskäivita masin ja kontrolli, kas failisüsteemid haagiti.
 
-**K6.** Miks kasutatakse failis `fstab` UUID-d, mitte seadme nime `/dev/sdb1`? Miks on XFS-i real viimane väli `0`?
+> **K6.** Miks kasutatakse failis `fstab` UUID-d, mitte seadme nime `/dev/sdb1`? Miks on XFS-i real viimane väli `0`?
 
 **3.5** Tee fstab-i meelega viga: muuda esimese rea UUID-s üks märk. Kontrolli:
 
@@ -163,7 +163,7 @@ sudo umount /mnt/andmed
 sudo mount -a
 ```
 
-**K7.** Mida näitasid `findmnt --verify` ja `mount -a`? Mis juhtuks taaskäivitusel, kui real **ei oleks** valikut `nofail`?
+> **K7.** Mida näitasid `findmnt --verify` ja `mount -a`? Mis juhtuks taaskäivitusel, kui real **ei oleks** valikut `nofail`?
 
 Paranda viga ja kontrolli uuesti käsuga `findmnt --verify`.
 
@@ -181,7 +181,7 @@ swapon --show
 free -h
 ```
 
-**K8.** Kui palju on nüüd saaleala kokku? Miks peavad saalefaili õigused olema `600`?
+> **K8.** Kui palju on nüüd saaleala kokku? Miks peavad saalefaili õigused olema `600`?
 
 **4.2** Lisa saalefail faili `/etc/fstab` ja kontrolli:
 
@@ -218,7 +218,7 @@ sudo lvs
 sudo vgs
 ```
 
-**K9.** Kui palju ruumi jäi köitegruppi vabaks?
+> **K9.** Kui palju ruumi jäi köitegruppi vabaks?
 
 **5.3** Loo köidetele failisüsteemid ja haagi need püsivalt:
 
@@ -251,7 +251,7 @@ sudo lvextend -r -L +500M /dev/vg_andmed/lv_veeb
 df -h /srv/veeb
 ```
 
-**K10.** Mis oli köite suurus ja täituvus enne ja pärast laiendamist? Kas fail `suur.fail` jäi alles? Mida tegi võti `-r`?
+> **K10.** Mis oli köite suurus ja täituvus enne ja pärast laiendamist? Kas fail `suur.fail` jäi alles? Mida tegi võti `-r`?
 
 **5.5** Proovi XFS-köidet vähendada:
 
@@ -259,7 +259,7 @@ df -h /srv/veeb
 sudo lvreduce -r -L -200M /dev/vg_andmed/lv_veeb
 ```
 
-**K11.** Mis juhtus? Miks? (Vasta küsimusele „Do you want to…“ `n`, kui küsitakse.)
+> **K11.** Mis juhtus? Miks? (Vasta küsimusele „Do you want to…“ `n`, kui küsitakse.)
 
 ### Uue ketta lisamine köitegruppi
 
@@ -276,7 +276,7 @@ sudo wipefs -a /dev/sdb
 lsblk /dev/sdb
 ```
 
-**K12.** Mida teeb `wipefs`? Miks oli vaja enne kustutada fstab-i read?
+> **K12.** Mida teeb `wipefs`? Miks oli vaja enne kustutada fstab-i read?
 
 **5.7** Lisa ketas köitegruppi ja kasuta kogu vaba ruum andmebaasi köite jaoks:
 
@@ -290,7 +290,7 @@ df -h /srv/db
 lsblk
 ```
 
-**K13.** Kui suur on nüüd köitegrupp ja köide `lv_db`? Millistel füüsilistel ketastel köide `lv_db` asub (`sudo lvs -o +devices`)?
+> **K13.** Kui suur on nüüd köitegrupp ja köide `lv_db`? Millistel füüsilistel ketastel köide `lv_db` asub (`sudo lvs -o +devices`)?
 
 ### Hetktõmmis
 
@@ -315,7 +315,7 @@ sudo umount /mnt/snap
 sudo lvremove -y /dev/vg_andmed/lv_db_snap
 ```
 
-**K14.** Mis oli hetktõmmise failis? Miks ei ole hetktõmmis varukoopia asendus?
+> **K14.** Mis oli hetktõmmise failis? Miks ei ole hetktõmmis varukoopia asendus?
 
 ---
 ## 6. osa. Kettakasutuse analüüs
@@ -330,7 +330,7 @@ journalctl --disk-usage
 dnf clean all
 ```
 
-**K15.** Milline kataloog kataloogis `/var` on suurim? Leia kolm suurimat faili juurfailisüsteemis.
+> **K15.** Milline kataloog kataloogis `/var` on suurim? Leia kolm suurimat faili juurfailisüsteemis.
 
 **6.2** Kustutatud, kuid avatud fail:
 
@@ -345,7 +345,7 @@ sudo pkill -f "tail -f /srv/veeb/logi.log"
 df -h /srv/veeb
 ```
 
-**K16.** Millal ruum vabanes - pärast `rm`-i või pärast protsessi lõpetamist? Miks?
+> **K16.** Millal ruum vabanes - pärast `rm`-i või pärast protsessi lõpetamist? Miks?
 
 ---
 ## 7. osa. Krüpteeritud köide LUKS-iga
@@ -376,7 +376,7 @@ sudo strings /dev/loop0 | grep -i konfidentsiaalne
 sudo cryptsetup luksDump /dev/loop0 | head -30
 ```
 
-**K17.** Kas teksti leidus krüpteeritud seadmest? Milline krüpteerimisalgoritm ja mitu võtmepesa on kasutusel?
+> **K17.** Kas teksti leidus krüpteeritud seadmest? Milline krüpteerimisalgoritm ja mitu võtmepesa on kasutusel?
 
 **7.3** Lisa teine parool, kontrolli, et mõlemaga saab avada, ja tee päisest varukoopia:
 
@@ -386,7 +386,7 @@ sudo cryptsetup open --test-passphrase /dev/loop0 && echo OK
 sudo cryptsetup luksHeaderBackup /dev/loop0 --header-backup-file /root/salajane-header.img
 ```
 
-**K18.** Miks on päise varukoopia oluline? Kus tohib seda hoida ja kus mitte?
+> **K18.** Miks on päise varukoopia oluline? Kus tohib seda hoida ja kus mitte?
 
 **7.4** Koristamine:
 

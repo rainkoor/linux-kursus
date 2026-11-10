@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani virtuaalmasin, `sudo` õigusega kasutaja. Laboritöö 2 logifail `~/labor02/juurdepaas.log` (kui seda pole, loo see uuesti laboritöö 2 punkti 1.2 järgi) |
 | **Eesmärk** | Kirjutada töökindlaid Bashi skripte tüüpiliste haldusülesannete jaoks |
 
-**Esitamine:** kõik skriptid kataloogis `~/bin` ning aruanne küsimuste **K1–K16** vastustega. Skriptid peavad olema ka 7. osas loodud Git-hoidlas. Iga skript peab läbima ShellCheck'i kontrolli ilma vigade ja hoiatusteta. Infotaseme märkused (*info*, nt SC2012) on lubatud, kui oskad selgitada, miks sa need teadlikult alles jätsid. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Esitamine:** kõik skriptid kataloogis `~/bin` ning aruanne küsimuste **K1–K16** vastustega. Skriptid peavad olema ka 7. osas loodud Git-hoidlas. Iga skript peab läbima ShellCheck'i kontrolli ilma vigade ja hoiatusteta. Infotaseme märkused (*info*, nt SC2012) on lubatud, kui oskad selgitada, miks sa need teadlikult alles jätsid. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Töövõte:** kirjuta skript osade kaupa ja testi pärast iga muudatust. Ära kirjuta kogu skripti korraga valmis - vigu on siis raske leida.
 
@@ -32,7 +32,7 @@ mkdir -p ~/bin
 echo "$PATH" | tr ':' '\n'
 ```
 
-**K1.** Millised kataloogid on muutujas `PATH`? Miks oli vaja uuesti sisse logida? (Vihje: vaata faili `~/.profile`.)
+> **K1.** Millised kataloogid on muutujas `PATH`? Miks oli vaja uuesti sisse logida? (Vihje: vaata faili `~/.profile`.)
 
 **1.3** Loo esimene skript `~/bin/minuinfo`:
 
@@ -65,7 +65,7 @@ echo 'Kasutaja on $USER'
 echo "Kasutaja on $USER"
 ```
 
-**K2.** Selgita kummagi `ls` käsu tulemust. Mis vahe on ülakomadel ja jutumärkidel?
+> **K2.** Selgita kummagi `ls` käsu tulemust. Mis vahe on ülakomadel ja jutumärkidel?
 
 ---
 
@@ -91,7 +91,7 @@ $ echo $?
 
 Vihje: `date +%H` annab tunni, `date +%d.%m.%Y` kuupäeva.
 
-**K3.** Kuidas kontrollisid, kas argument on olemas? Miks on oluline, et veateade läheb standardveaväljundisse ja väljumiskood on 1?
+> **K3.** Kuidas kontrollisid, kas argument on olemas? Miks on oluline, et veateade läheb standardveaväljundisse ja väljumiskood on 1?
 
 ### Skript `failiinfo`
 
@@ -113,7 +113,7 @@ $ failiinfo /etc/hostname /tmp /olematu
 
 Vihjed: `for tee in "$@"`, `[ -f ]`, `[ -d ]`, `[ -e ]`, `[ -r ]`, `stat -c %s`, `ls -A | wc -l`.
 
-**K4.** Käivita `failiinfo /etc/shadow /usr/bin/passwd /dev/null`. Selgita tulemust.
+> **K4.** Käivita `failiinfo /etc/shadow /usr/bin/passwd /dev/null`. Selgita tulemust.
 
 ---
 
@@ -179,9 +179,9 @@ sudo loo_kasutajad ~/kasutajad.csv
 
 Kui `sudo` ei leia sinu skripti, kasuta täielikku teed: `sudo ~/bin/loo_kasutajad`.
 
-**K5.** Miks on proovirežiim sellise skripti puhul oluline? Mis juhtus kolmandal käivitusel?
+> **K5.** Miks on proovirežiim sellise skripti puhul oluline? Mis juhtus kolmandal käivitusel?
 
-**K6.** Miks ei leia `sudo` skripti `~/bin` kataloogist ilma täieliku teeta? (Vihje: `sudo` kasutab oma turvalist `PATH`-i - vaata `sudo grep secure_path /etc/sudoers`.)
+> **K6.** Miks ei leia `sudo` skripti `~/bin` kataloogist ilma täieliku teeta? (Vihje: `sudo` kasutab oma turvalist `PATH`-i - vaata `sudo grep secure_path /etc/sudoers`.)
 
 **3.4** Kustuta testkasutajad ja grupid (`userdel -r`, `groupdel`).
 
@@ -225,9 +225,9 @@ varunda ~/labor02 kaks; echo "Väljumiskood: $?"
 VARUNDUS_SIHT=/tmp/proov varunda ~/labor02
 ```
 
-**K7.** Mitu arhiivi jäi alles ja miks? Mida tegi viimane käsk?
+> **K7.** Mitu arhiivi jäi alles ja miks? Mida tegi viimane käsk?
 
-**K8.** Miks on arhiivi loomisel kasulik võti `-C`? Mis oleks ilma selleta teisiti (vaata `tar -tzf`)?
+> **K8.** Miks on arhiivi loomisel kasulik võti `-C`? Mis oleks ilma selleta teisiti (vaata `tar -tzf`)?
 
 **4.2** Ajasta varundus systemd taimeriga iga päev kell 01:00 (vt moodul 5). Kasuta teenuse failis keskkonnamuutujat:
 
@@ -240,7 +240,7 @@ ExecStart=/usr/local/bin/varunda /etc 7
 
 Kopeeri selleks skript kataloogi `/usr/local/bin` ja loo kataloog `/srv/varundus`. Testi teenust käsitsi (`sudo systemctl start varunda.service`) ja vaata logi.
 
-**K9.** Kirjuta mõlema faili (`varunda.service`, `varunda.timer`) sisu aruandesse.
+> **K9.** Kirjuta mõlema faili (`varunda.service`, `varunda.timer`) sisu aruandesse.
 
 ---
 
@@ -276,7 +276,7 @@ Andmemaht (baiti):  191548
 
 Vihje: `awk '$9 >= 400' fail` valib read, kus 9. väli on vähemalt 400. Mitmerealise teksti väljastamiseks sobib *here document* (`cat <<EOF ... EOF`).
 
-**K10.** Miks on `case` siin parem kui `if`-`elif`-ahel?
+> **K10.** Miks on `case` siin parem kui `if`-`elif`-ahel?
 
 ---
 
@@ -312,11 +312,11 @@ shellcheck ~/vigane.sh
 bash -x ~/vigane.sh "/tmp/minu varu"
 ```
 
-**K11.** Loetle kõik ShellCheck'i hoiatused (koodid ja lühike selgitus eesti keeles). Mis läks testi käigus valesti ja miks?
+> **K11.** Loetle kõik ShellCheck'i hoiatused (koodid ja lühike selgitus eesti keeles). Mis läks testi käigus valesti ja miks?
 
 **6.4** Paranda skript nii, et ShellCheck ei anna hoiatusi ja skript töötab tühikutega failinimede ja kataloogidega. Lisa `set -euo pipefail`, argumendi kontroll ja kasutusjuhend. Eemalda mõttetu `read`.
 
-**K12.** Lisa parandatud skript aruandesse.
+> **K12.** Lisa parandatud skript aruandesse.
 
 ---
 
@@ -366,7 +366,7 @@ git commit -m "Täienda varundusskripti kommentaare"
 git log --oneline
 ```
 
-**K13.** Mis vahe on käskudel `git diff` ja `git diff --staged`? Miks on kasulik muudatused enne sissekannet üle vaadata?
+> **K13.** Mis vahe on käskudel `git diff` ja `git diff --staged`? Miks on kasulik muudatused enne sissekannet üle vaadata?
 
 **7.5** Proovi saladuse kaitset:
 
@@ -375,7 +375,7 @@ echo "parool=Salajane123" > saladused.txt
 git status
 ```
 
-**K14.** Kas Git näitas faili `saladused.txt`? Miks? Mis juhtuks, kui oleksid parooli kogemata sisse kandnud ja hoidla avalikuks teinud?
+> **K14.** Kas Git näitas faili `saladused.txt`? Miks? Mis juhtuks, kui oleksid parooli kogemata sisse kandnud ja hoidla avalikuks teinud?
 
 ### Harud ja konflikt
 
@@ -408,7 +408,7 @@ git log --oneline --graph
 git branch -d tundlikum
 ```
 
-**K15.** Kuidas nägi fail `seire.conf` konflikti ajal välja? Mida tähendavad märgid `<<<<<<<`, `=======` ja `>>>>>>>`? Kopeeri `git log --oneline --graph` väljund aruandesse.
+> **K15.** Kuidas nägi fail `seire.conf` konflikti ajal välja? Mida tähendavad märgid `<<<<<<<`, `=======` ja `>>>>>>>`? Kopeeri `git log --oneline --graph` väljund aruandesse.
 
 ### Kaughoidla
 
@@ -433,7 +433,7 @@ git pull
 cat README.md
 ```
 
-**K16.** Mida tegid `git push` ja `git pull`? Miks on kasulik, et seadistus on kaughoidlas (teises masinas või GitHubis)?
+> **K16.** Mida tegid `git push` ja `git pull`? Miks on kasulik, et seadistus on kaughoidlas (teises masinas või GitHubis)?
 
 **7.10** (Valikuline, pärast moodulit 7) Loo GitHubis privaatne hoidla, lisa oma SSH avalik võti GitHubi seadistustes ja lisa teine kaughoidla:
 

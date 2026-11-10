@@ -11,7 +11,7 @@
 | **Vajalik** | Kolm Debiani VM-i (igaüks 2 vCPU, 2 GiB RAM, 20 GiB ketas; `k3s1`-le soovitatavalt 3 GiB). Kõige kiiremini saab need cloud-init mallist (moodul 23) või OpenTofuga (moodul 16). Laboritöö 13 labori CA (`debian1`, `/root/ca`). Ubuntu klient (`ubuntuklient`) |
 | **Eesmärk** | Ehitada mitmesõlmeline Kubernetese klaster, käivitada sellel rakendus koos TLS-i ja püsiandmetega ning harjutada uuendamist ja hooldust |
 
-**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised: `kasutaja` - sinu kasutajanimi. IP-aadressid on paigalduslisa plaanist (`10.0.83.61`–`63`); asenda `83` oma võrgu numbriga.
 
@@ -79,7 +79,7 @@ kubectl get nodes -o wide
 kubectl get pods -A
 ```
 
-**K1.** Milline Kubernetese versioon paigaldati? Milliseid pode on nimeruumis `kube-system` ja mis on igaühe ülesanne (teooria punkt 24.4)? Milline protsess kuulab pordil 6443?
+> **K1.** Milline Kubernetese versioon paigaldati? Milliseid pode on nimeruumis `kube-system` ja mis on igaühe ülesanne (teooria punkt 24.4)? Milline protsess kuulab pordil 6443?
 
 ---
 
@@ -108,7 +108,7 @@ kubectl get nodes -o wide
 kubectl describe node k3s2 | grep -A6 -E "Capacity|Allocatable"
 ```
 
-**K2.** Milline on iga sõlme roll (`ROLES`), sisemine IP ja konteinerikäitur (`CONTAINER-RUNTIME`)? Kui palju mälu ja protsessorit on sõlmel `k3s2` podide jaoks saadaval (`Allocatable`)? Miks on agendi liitumisluba saladus?
+> **K2.** Milline on iga sõlme roll (`ROLES`), sisemine IP ja konteinerikäitur (`CONTAINER-RUNTIME`)? Kui palju mälu ja protsessorit on sõlmel `k3s2` podide jaoks saadaval (`Allocatable`)? Miks on agendi liitumisluba saladus?
 
 ---
 
@@ -123,7 +123,7 @@ kubectl get all -n kool
 kubectl get pods -n kool -o wide
 ```
 
-**K3.** Millistes sõlmedes podid töötavad? Milline IP-aadress on igal podil ja milline teenusel `kool`? Millisest võrgust need aadressid on (teooria punkt 24.4)?
+> **K3.** Millistes sõlmedes podid töötavad? Milline IP-aadress on igal podil ja milline teenusel `kool`? Millisest võrgust need aadressid on (teooria punkt 24.4)?
 
 **3.2** Testi teenust klastri seest ajutise podiga:
 
@@ -140,7 +140,7 @@ kubectl delete pod -n kool <ühe-podi-nimi>
 kubectl get events -n kool --sort-by=.lastTimestamp | tail -10
 ```
 
-**K4.** Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?
+> **K4.** Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?
 
 ---
 
@@ -173,11 +173,11 @@ kubectl rollout undo deployment/kool -n kool
 kubectl rollout status deployment/kool -n kool
 ```
 
-**K5.** Mitu podi töötas vigase uuenduse ajal ja milline oli uue podi olek (`STATUS`) ning sündmus `describe` väljundis? Kas teenus katkes? Miks?
+> **K5.** Mitu podi töötas vigase uuenduse ajal ja milline oli uue podi olek (`STATUS`) ning sündmus `describe` väljundis? Kas teenus katkes? Miks?
 
 **4.3** Muuda failis `kool.yaml` koopiate arvuks 3 ja pildiks `nginx:1.28-alpine` ning tee `kubectl apply -f kool.yaml`.
 
-**K6.** Miks tuleb muudatus lõpuks teha manifesti, kui sama tulemuse saab ka käsuga `kubectl scale` või `set image`?
+> **K6.** Miks tuleb muudatus lõpuks teha manifesti, kui sama tulemuse saab ka käsuga `kubectl scale` või `set image`?
 
 ---
 
@@ -199,7 +199,7 @@ kubectl get secret db-parool -n kool -o yaml
 kubectl get secret db-parool -n kool -o jsonpath='{.data.parool}' | base64 -d; echo
 ```
 
-**K7.** Kas lehe muudatus jõudis podidesse ilma taaskäivituseta (vihje: kulub kuni minut)? Milleks on `rollout restart`? Mida näitas Secret'i YAML ja miks ei tohi Secret'i manifesti Giti panna?
+> **K7.** Kas lehe muudatus jõudis podidesse ilma taaskäivituseta (vihje: kulub kuni minut)? Milleks on `rollout restart`? Mida näitas Secret'i YAML ja miks ei tohi Secret'i manifesti Giti panna?
 
 ---
 
@@ -236,7 +236,7 @@ curl https://kool.k8s.lab.example
 curl --resolve kool.k8s.lab.example:443:10.0.83.63 https://kool.k8s.lab.example
 ```
 
-**K8.** Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele `k3s3` - kas vastus tuli, isegi kui sellel sõlmel ei pruugi `kool` podi olla? Miks? Milline komponent päringu vastu võttis?
+> **K8.** Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele `k3s3` - kas vastus tuli, isegi kui sellel sõlmel ei pruugi `kool` podi olla? Miks? Milline komponent päringu vastu võttis?
 
 **6.4** Sõlme rike: vaata, millistes sõlmedes `kool` podid on, ja **lülita `k3s3` VM välja** (Proxmoxis *Shutdown*). Jälgi `k3s1`-s:
 
@@ -247,7 +247,7 @@ kubectl get pods -n kool -o wide -w
 
 Oota vähemalt 6 minutit, seejärel käivita `k3s3` uuesti.
 
-**K9.** Kui kiiresti muutus `k3s3` olekuks `NotReady`? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil `kool.k8s.lab.example` (kliendi `hosts` failis on `k3s1`)? Mis oleks juhtunud, kui välja oleks lülitatud `k3s1`?
+> **K9.** Kui kiiresti muutus `k3s3` olekuks `NotReady`? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil `kool.k8s.lab.example` (kliendi `hosts` failis on `k3s1`)? Mis oleks juhtunud, kui välja oleks lülitatud `k3s1`?
 
 ---
 
@@ -302,7 +302,7 @@ kubectl exec -n kool deploy/kirjutaja -- head -3 /andmed/aeg.txt
 
 Leia andmed sõlmest, kus pod töötab: `sudo ls -R /var/lib/rancher/k3s/storage/`.
 
-**K10.** Mis olekus oli PVC enne Deploymenti loomist ja pärast (vihje: `WaitForFirstConsumer`)? Kas andmed säilisid podi kustutamisel? Millises sõlmes ja kataloogis andmed asuvad ning mis juhtub selle sõlme rikke korral?
+> **K10.** Mis olekus oli PVC enne Deploymenti loomist ja pärast (vihje: `WaitForFirstConsumer`)? Kas andmed säilisid podi kustutamisel? Millises sõlmes ja kataloogis andmed asuvad ning mis juhtub selle sõlme rikke korral?
 
 ---
 
@@ -332,7 +332,7 @@ kubectl get pods -n demo
 helm list -A
 ```
 
-**K11.** Mitu Kubernetese objekti lõi üks `helm install` (`kubectl get all -n demo`)? Mis muutus pärast `upgrade` ja `rollback` käske? Kuidas hoiaksid Helmi paigalduse seadeid korratavana?
+> **K11.** Mitu Kubernetese objekti lõi üks `helm install` (`kubectl get all -n demo`)? Mis muutus pärast `upgrade` ja `rollback` käske? Kuidas hoiaksid Helmi paigalduse seadeid korratavana?
 
 ---
 
@@ -368,7 +368,7 @@ sudo systemctl start k3s
 ls -lh /root/k3s-varu-*.tar.gz
 ```
 
-**K12.** Millised podid jäid `k3s2`-sse pärast `drain`-i ja miks (vihje: DaemonSet)? Kas veebileht vastas `k3s1` teenuse peatamise ajal? Mis on sinu varukoopias ja mida see **ei** sisalda?
+> **K12.** Millised podid jäid `k3s2`-sse pärast `drain`-i ja miks (vihje: DaemonSet)? Kas veebileht vastas `k3s1` teenuse peatamise ajal? Mis on sinu varukoopias ja mida see **ei** sisalda?
 
 **9.4** Kanna kõik manifestid (`~/k8s`) Git-hoidlasse (moodul 6). **Ära lisa** `k8s.key`, `kubeconfig`-faile ega Secret'ide väärtusi.
 
@@ -376,9 +376,9 @@ ls -lh /root/k3s-varu-*.tar.gz
 
 ## 10. osa. Kokkuvõte
 
-**K13.** Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?
+> **K13.** Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?
 
-**K14.** Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus `kool`, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.
+> **K14.** Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus `kool`, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.
 
 ---
 

@@ -11,7 +11,7 @@
 | **Vajalik** | Laborivõrk (moodul 18) koos DNS-nimedega (`debian1.lab.example` jt), moodulis 13 loodud oma CA (või loo uus) |
 | **Eesmärk** | Ehitada kooli kasutajate kataloog ja panna Linuxi masinad sellest autentima |
 
-**Aruanne:** vasta küsimustele **K1–K16**. Hoia kõik LDIF-failid kataloogis `~/ldap` ja lisa need oma Giti hoidlasse (moodul 6) - ilma paroolideta! Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K16**. Hoia kõik LDIF-failid kataloogis `~/ldap` ja lisa need oma Giti hoidlasse (moodul 6) - ilma paroolideta! Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** kool soovib, et õppijad ja õpetajad saaksid kõigisse laborimasinatesse sisse logida ühe kasutajanime ja parooliga.
 
@@ -44,7 +44,7 @@ ldapwhoami -x -H ldap://localhost -D cn=admin,dc=lab,dc=example -W
 sudo ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config -LLL dn | head -20
 ```
 
-**K1.** Millised kirjed on kataloogis kohe pärast paigaldust? Millised skeemid on laaditud (`cn=schema,cn=config` alt)?
+> **K1.** Millised kirjed on kataloogis kohe pärast paigaldust? Millised skeemid on laaditud (`cn=schema,cn=config` alt)?
 
 ## 2. osa. Struktuur, grupid ja kasutajad
 
@@ -64,11 +64,11 @@ Genereeri igale parool käsuga `slappasswd`. Lisa gruppidesse liikmed (`memberUi
 ldapadd -x -H ldap://localhost -D cn=admin,dc=lab,dc=example -W -f kasutajad.ldif
 ```
 
-**K2.** Kirjuta aruandesse ühe kasutaja LDIF (räsi võid lühendada). Miks on igal kasutajal kolm objektiklassi?
+> **K2.** Kirjuta aruandesse ühe kasutaja LDIF (räsi võid lühendada). Miks on igal kasutajal kolm objektiklassi?
 
 **2.3** Proovi lisada kasutaja, kellel puudub kohustuslik atribuut (nt `sn` või `homeDirectory`).
 
-**K3.** Mis veateate said? Kust tuleb nõue, et atribuut on kohustuslik?
+> **K3.** Mis veateate said? Kust tuleb nõue, et atribuut on kohustuslik?
 
 ## 3. osa. Otsimine ja muutmine
 
@@ -79,7 +79,7 @@ ldapadd -x -H ldap://localhost -D cn=admin,dc=lab,dc=example -W -f kasutajad.ldi
 3. kasutaja, kelle eesnimi algab tähega „K“;
 4. kõik kirjed, mis ei ole kasutajad ega grupid.
 
-**K4.** Kirjuta kõik neli käsku.
+> **K4.** Kirjuta kõik neli käsku.
 
 **3.2** Muuda `ldapmodify`-ga: Mari kest `/bin/zsh`-iks, lisa Jaanile e-posti aadress, eemalda Kati telefoninumber (lisa see enne).
 
@@ -90,7 +90,7 @@ ldapsearch -x -H ldap://localhost -b uid=mari,ou=People,dc=lab,dc=example userPa
 ldapsearch -x -H ldap://localhost -D uid=mari,ou=People,dc=lab,dc=example -W -b uid=mari,ou=People,dc=lab,dc=example userPassword
 ```
 
-**K5.** Kas anonüümne kasutaja nägi räsi? Kas Mari nägi oma räsi? Milline `olcAccess` reegel seda määrab?
+> **K5.** Kas anonüümne kasutaja nägi räsi? Kas Mari nägi oma räsi? Milline `olcAccess` reegel seda määrab?
 
 **3.4** Lase Maril oma parool ise muuta ja kontrolli uue parooliga `ldapwhoami`.
 
@@ -109,7 +109,7 @@ ldapwhoami -x -ZZ -H ldap://debian1.lab.example -D cn=admin,dc=lab,dc=example -W
 ldapwhoami -x -ZZ -H ldap://localhost -D cn=admin,dc=lab,dc=example -W
 ```
 
-**K6.** Miks esimene käsk õnnestus, aga teine ebaõnnestus? (Vihje: sertifikaadi SAN.)
+> **K6.** Miks esimene käsk õnnestus, aga teine ebaõnnestus? (Vihje: sertifikaadi SAN.)
 
 **4.3** Püüa liiklust ja võrdle krüpteerimata ning StartTLS-iga bind'i:
 
@@ -120,7 +120,7 @@ ldapwhoami -x -ZZ -H ldap://debian1.lab.example -D cn=admin,dc=lab,dc=example -w
 sudo kill %1
 ```
 
-**K7.** Mida nägid krüpteerimata ühenduse puhul? Miks on TLS LDAP-i puhul kohustuslik?
+> **K7.** Mida nägid krüpteerimata ühenduse puhul? Miks on TLS LDAP-i puhul kohustuslik?
 
 ## 5. osa. LDAP Account Manager
 
@@ -128,7 +128,7 @@ sudo kill %1
 
 **5.2** Loo LAM-iga uus kasutaja `ain` (õpetaja) ja lisa ta gruppi `opetajad`. Vaata `ldapsearch`-iga, milline kirje tekkis.
 
-**K8.** Millise UID-numbri LAM andis? Milliseid atribuute lisas LAM, mida sina käsitsi ei lisanud?
+> **K8.** Millise UID-numbri LAM andis? Milliseid atribuute lisas LAM, mida sina käsitsi ei lisanud?
 
 **5.3** (Valikuline) Impordi LAM-iga CSV-failist veel 5 õppijat (*Tools* → *File upload*).
 
@@ -142,7 +142,7 @@ id mari
 getent group opilased
 ```
 
-**K9.** Mida näitas `id mari`? Kust see info tuli (vaata `/etc/nsswitch.conf` rida `passwd:`)?
+> **K9.** Mida näitas `id mari`? Kust see info tuli (vaata `/etc/nsswitch.conf` rida `passwd:`)?
 
 **6.2** Logi Ubuntu kliendisse sisse LDAP-i kasutajana (SSH-ga peab olema parooliga sisselogimine lubatud või kasuta Proxmoxi konsooli või `su - mari`):
 
@@ -153,13 +153,13 @@ id
 touch test.txt && ls -ln test.txt
 ```
 
-**K10.** Kas kodukataloog loodi automaatselt? Mis on faili `test.txt` numbriline omanik? Miks on see oluline NFS-i puhul (moodul 15)?
+> **K10.** Kas kodukataloog loodi automaatselt? Mis on faili `test.txt` numbriline omanik? Miks on see oluline NFS-i puhul (moodul 15)?
 
 **6.3** **AlmaLinuxi** kliendis tee sama (AlmaLinuxi paketid ja `authselect`, teooria punkt 20.7). Logi sisse kasutajana `kati`.
 
 **6.4** Peata `debian1`-s `slapd` ja proovi Ubuntu kliendis uuesti sisse logida kasutajana `mari`. Seejärel käivita `slapd`.
 
-**K11.** Kas sisselogimine õnnestus, kui server oli maas? Miks? Milline `sssd.conf` valik seda mõjutab?
+> **K11.** Kas sisselogimine õnnestus, kui server oli maas? Miks? Milline `sssd.conf` valik seda mõjutab?
 
 **6.5** Anna grupile `opetajad` klientides `sudo` õigus. Loo kliendis fail `/etc/sudoers.d/opetajad` (`visudo -f`):
 
@@ -167,7 +167,7 @@ touch test.txt && ls -ln test.txt
 %opetajad ALL=(ALL:ALL) ALL
 ```
 
-**K12.** Kas `kati` sai `sudo` kasutada? Kas `mari` sai? Miks on parem anda õigused grupi kaudu?
+> **K12.** Kas `kati` sai `sudo` kasutada? Kas `mari` sai? Miks on parem anda õigused grupi kaudu?
 
 **6.6** Lukusta LDAP-is Jaani konto: muuda tema `loginShell` väärtuseks `/usr/sbin/nologin`. Tühjenda kliendis vahemälu ja proovi Jaanina sisse logida.
 
@@ -175,7 +175,7 @@ touch test.txt && ls -ln test.txt
 sudo sss_cache -E
 ```
 
-**K13.** Mis juhtus? Mis on teised võimalused konto keelamiseks?
+> **K13.** Mis juhtus? Mis on teised võimalused konto keelamiseks?
 
 ## 7. osa. Varundus ja taastamine
 
@@ -183,13 +183,13 @@ sudo sss_cache -E
 
 **7.2** Kustuta kasutaja `kati` ja taasta kogu andmebaas varukoopiast.
 
-**K14.** Kas `kati` taastus? Miks on vaja eraldi varundada `cn=config` (`-n 0`) ja andmed (`-n 1`)?
+> **K14.** Kas `kati` taastus? Miks on vaja eraldi varundada `cn=config` (`-n 0`) ja andmed (`-n 1`)?
 
 ## 8. osa. Kokkuvõte
 
-**K15.** Joonista skeem: kuidas jõuab `ssh mari@ubuntuklient` sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?
+> **K15.** Joonista skeem: kuidas jõuab `ssh mari@ubuntuklient` sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?
 
-**K16.** Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?
+> **K16.** Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?
 
 ---
 

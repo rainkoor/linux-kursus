@@ -11,7 +11,7 @@
 | **Vajalik** | Ubuntu virtuaalmasin (põhimasin), teise masinana **Debiani virtuaalmasin** varasematest laboritest (samas võrgus), oma arvuti SSH kliendiga. Ligipääs Ubuntu masina **konsoolile** (nt Proxmoxi veebiliides) |
 | **Eesmärk** | Harjutada võrgu diagnostikat ja seadistamist, SSH-võtmeid, SSH karastamist, failide sünkroniseerimist ja tulemüüri |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > **Turvavõrk:** selles laboris muudad võrgu- ja SSH-seadistust, mis võib katkestada sinu ühenduse. Hoia Ubuntu masina konsool brauseris avatuna. Kui midagi läheb valesti, saad konsooli kaudu parandada.
@@ -38,7 +38,7 @@ ip route
 ip neigh
 ```
 
-**K1.** Mis on Ubuntu masina võrguliidese nimi, IP-aadress ja võrgumask? Mis on vaikelüüs? Mitu masinat on võrgus `/24` maski korral võimalik aadresseerida?
+> **K1.** Mis on Ubuntu masina võrguliidese nimi, IP-aadress ja võrgumask? Mis on vaikelüüs? Mitu masinat on võrgus `/24` maski korral võimalik aadresseerida?
 
 **1.2** Uuri DNS-i seadistust:
 
@@ -48,7 +48,7 @@ resolvectl status
 cat /etc/nsswitch.conf | grep hosts
 ```
 
-**K2.** Miks on failis `/etc/resolv.conf` aadress `127.0.0.53`? Milline on tegelik DNS-server?
+> **K2.** Miks on failis `/etc/resolv.conf` aadress `127.0.0.53`? Milline on tegelik DNS-server?
 
 **1.3** Vaata, kuidas võrk on seadistatud:
 
@@ -57,7 +57,7 @@ ls -l /etc/netplan/
 sudo cat /etc/netplan/*.yaml
 ```
 
-**K3.** Kas masin saab aadressi DHCP-st või on see staatiline? Mille järgi see selgus?
+> **K3.** Kas masin saab aadressi DHCP-st või on see staatiline? Mille järgi see selgus?
 
 ---
 
@@ -73,7 +73,7 @@ ping -c3 DEBIAN_IP
 tracepath -n 1.1.1.1
 ```
 
-**K4.** Mitu ruuterit (hüpet) on sinu masina ja aadressi `1.1.1.1` vahel? Milline on keskmine ping-aeg vaikelüüsini ja `1.1.1.1`-ni?
+> **K4.** Mitu ruuterit (hüpet) on sinu masina ja aadressi `1.1.1.1` vahel? Milline on keskmine ping-aeg vaikelüüsini ja `1.1.1.1`-ni?
 
 **2.2** Tee DNS-päringuid:
 
@@ -85,7 +85,7 @@ dig MX hkhk.edu.ee +short
 dig -x 1.1.1.1 +short
 ```
 
-**K5.** Mis on `www.hkhk.edu.ee` IP-aadress? Milline server vastas esimesele päringule (rida `SERVER`)? Millised on domeeni `hkhk.edu.ee` e-posti serverid?
+> **K5.** Mis on `www.hkhk.edu.ee` IP-aadress? Milline server vastas esimesele päringule (rida `SERVER`)? Millised on domeeni `hkhk.edu.ee` e-posti serverid?
 
 **2.3** Lisa Debiani masin faili `/etc/hosts`:
 
@@ -107,7 +107,7 @@ ping -c2 debian1
 dig debian1
 ```
 
-**K6.** Miks `ping debian1` ja `getent hosts` töötavad, kuid `dig debian1` vastust ei leia?
+> **K6.** Miks `ping debian1` ja `getent hosts` töötavad, kuid `dig debian1` vastust ei leia?
 
 ---
 
@@ -119,7 +119,7 @@ dig debian1
 sudo ss -tulpn
 ```
 
-**K7.** Millised teenused kuulavad? Millised kuulavad kõigil aadressidel ja millised ainult `127.0.0.x` aadressil?
+> **K7.** Millised teenused kuulavad? Millised kuulavad kõigil aadressidel ja millised ainult `127.0.0.x` aadressil?
 
 **3.2** Paigalda veebiserver nginx ja kontrolli seda:
 
@@ -137,7 +137,7 @@ nc -zv UBUNTU_IP 80
 nc -zv UBUNTU_IP 3306
 ```
 
-**K8.** Mida näitasid `nc` käsud kummagi pordi kohta? Miks?
+> **K8.** Mida näitasid `nc` käsud kummagi pordi kohta? Miks?
 
 ---
 
@@ -159,7 +159,7 @@ Debiani masinast: `ping -c2 LISA_IP`.
 
 **4.2** Taaskäivita Ubuntu masin ja kontrolli, kas lisa-aadress on alles.
 
-**K9.** Kas aadress oli pärast taaskäivitust alles? Miks?
+> **K9.** Kas aadress oli pärast taaskäivitust alles? Miks?
 
 **4.3** Lisa aadress püsivalt. Loo uus Netplani fail (asenda liidese nimi ja aadress):
 
@@ -183,11 +183,11 @@ sudo netplan try
 
 Kui ühendus säilis, vajuta Enter, et muudatus kinnitada. Kontrolli tulemust ja taaskäivita masin veel kord.
 
-**K10.** Mida teeb `netplan try`? Miks on see SSH kaudu töötades oluline? Kas aadress püsis pärast taaskäivitust?
+> **K10.** Mida teeb `netplan try`? Miks on see SSH kaudu töötades oluline? Kas aadress püsis pärast taaskäivitust?
 
 **4.4** Tee meelega viga: muuda faili `60-lisa-aadress.yaml` taandeid (nihuta rida `addresses:` paar tühikut vasakule) ja käivita `sudo netplan try`.
 
-**K11.** Mis veateate said? Paranda viga.
+> **K11.** Mis veateate said? Paranda viga.
 
 ---
 
@@ -221,7 +221,7 @@ ls -la ~/.ssh
 cat ~/.ssh/authorized_keys
 ```
 
-**K12.** Mida küsiti sisselogimisel - serveri kasutaja parooli või võtme parooli? Millised on kataloogi `~/.ssh` ja faili `authorized_keys` õigused?
+> **K12.** Mida küsiti sisselogimisel - serveri kasutaja parooli või võtme parooli? Millised on kataloogi `~/.ssh` ja faili `authorized_keys` õigused?
 
 **5.4** Loo oma arvutis fail `~/.ssh/config` (Windowsis `%USERPROFILE%\.ssh\config`):
 
@@ -273,7 +273,7 @@ rsync -av --delete ~/sync/ debian1:~/sync/
 ssh debian1 ls ~/sync/dokumendid
 ```
 
-**K13.** Milliseid faile `rsync` üle kandis? Mis juhtus failiga `dok2.txt` Debiani masinas ja miks? Miks on oluline käivitada `--delete` kõigepealt koos võtmega `-n`?
+> **K13.** Milliseid faile `rsync` üle kandis? Mis juhtus failiga `dok2.txt` Debiani masinas ja miks? Miks on oluline käivitada `--delete` kõigepealt koos võtmega `-n`?
 
 **6.4** Proovi kaldkriipsu erinevust:
 
@@ -283,7 +283,7 @@ rsync -av ~/sync/ debian1:~/proov2/
 ssh debian1 "ls ~/proov1 ~/proov2"
 ```
 
-**K14.** Selgita tulemust.
+> **K14.** Selgita tulemust.
 
 ---
 
@@ -328,7 +328,7 @@ sudo sshd -T | grep -Ei '^(permitrootlogin|passwordauthentication|maxauthtries)'
 ssh -o PubkeyAuthentication=no kasutaja@UBUNTU_IP
 ```
 
-**K15.** Mis veateate said? Miks? Miks on oluline, et karastamise fail algaks väikese numbriga (`10-`)?
+> **K15.** Mis veateate said? Miks? Miks on oluline, et karastamise fail algaks väikese numbriga (`10-`)?
 
 ---
 
@@ -358,7 +358,7 @@ sudo ufw status numbered
 - oma arvuti brauserist: `http://UBUNTU_IP` (ei tohi töötada);
 - oma arvutist: `ssh ubuntusrv` (peab töötama).
 
-**K16.** Kirjuta testide tulemused. Miks ei saanud sinu arvuti veebiserveriga ühendust, kuid SSH töötas?
+> **K16.** Kirjuta testide tulemused. Miks ei saanud sinu arvuti veebiserveriga ühendust, kuid SSH töötas?
 
 **8.4** Vaata, milliseid madala taseme reegleid ufw lõi:
 
@@ -374,7 +374,7 @@ sudo ufw status numbered
 sudo ufw delete <Debiani reegli number>
 ```
 
-**K17.** Kirjuta lõplik `ufw status numbered` väljund aruandesse.
+> **K17.** Kirjuta lõplik `ufw status numbered` väljund aruandesse.
 
 ---
 
@@ -390,7 +390,7 @@ Võimalikud vead:
 4. Netplani failis on vale DNS-server ja `netplan apply` on tehtud;
 5. SSH karastamise failis on `AllowUsers` kellegi teise nimega.
 
-**K18.** Kirjelda, millised diagnostikakäsud sa järjest käivitasid, mida iga käsk näitas, mis oli viga ja kuidas selle parandasid.
+> **K18.** Kirjelda, millised diagnostikakäsud sa järjest käivitasid, mida iga käsk näitas, mis oli viga ja kuidas selle parandasid.
 
 ---
 
@@ -404,7 +404,7 @@ timedatectl timesync-status
 systemctl status systemd-timesyncd
 ```
 
-**K19.** Milline ajavöönd on seadistatud? Millise serveriga kell sünkroniseeritakse ja kui suur on nihe (*Offset*)? Kas riistvara kell on UTC-s?
+> **K19.** Milline ajavöönd on seadistatud? Millise serveriga kell sünkroniseeritakse ja kui suur on nihe (*Offset*)? Kas riistvara kell on UTC-s?
 
 **10.2** Kui ajavöönd ei ole `Europe/Tallinn`, muuda see. Seadista Ubuntu küsima aega Eesti kogumist (`NTP=ee.pool.ntp.org` failis `/etc/systemd/timesyncd.conf`) ja taaskäivita `systemd-timesyncd`.
 
@@ -429,7 +429,7 @@ sudo timedatectl set-ntp true
 sleep 10; date
 ```
 
-**K20.** Mis juhtus `curl`-i HTTPS-päringuga vale kellaajaga ja miks? Kas Debian näitas `chronyc clients` väljundis Ubuntut?
+> **K20.** Mis juhtus `curl`-i HTTPS-päringuga vale kellaajaga ja miks? Kas Debian näitas `chronyc clients` väljundis Ubuntut?
 
 ---
 

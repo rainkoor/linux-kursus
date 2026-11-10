@@ -11,7 +11,7 @@
 | **Vajalik** | Ubuntu virtuaalmasin, ligipääs SSH kaudu kasutajana, kellel on `sudo` õigus |
 | **Eesmärk** | Harjutada kasutajate ja gruppide haldust, õigusi, jagatud katalooge ja `sudo` reegleid |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** väike IT-ettevõte Näidis OÜ võtab kasutusele uue failiserveri. Sinu ülesanne on luua töötajatele kontod ja seadistada osakondadele kataloogid nii, et igaüks pääseb ligi ainult sellele, mida tal on vaja.
 
@@ -37,7 +37,7 @@ id
 groups
 ```
 
-**K1.** Mis on sinu UID ja millistesse gruppidesse kuulud? Milline grupp annab sulle `sudo` õiguse?
+> **K1.** Mis on sinu UID ja millistesse gruppidesse kuulud? Milline grupp annab sulle `sudo` õiguse?
 
 **1.2** Uuri süsteemi kasutajaid:
 
@@ -45,7 +45,7 @@ groups
 cut -d: -f1,3,7 /etc/passwd
 ```
 
-**K2.** Nimeta kaks süsteemikasutajat (UID alla 1000). Milline on nende sisselogimiskest ja mida see tähendab?
+> **K2.** Nimeta kaks süsteemikasutajat (UID alla 1000). Milline on nende sisselogimiskest ja mida see tähendab?
 
 **1.3** Proovi lugeda faili `/etc/shadow` tavakasutajana ja seejärel `sudo`-ga:
 
@@ -55,7 +55,7 @@ sudo head -3 /etc/shadow
 ls -l /etc/passwd /etc/shadow
 ```
 
-**K3.** Miks tavakasutaja faili `/etc/shadow` lugeda ei saa? Võrdle mõlema faili õigusi.
+> **K3.** Miks tavakasutaja faili `/etc/shadow` lugeda ei saa? Võrdle mõlema faili õigusi.
 
 **1.4** Kontrolli, kas juurkasutajal on parool:
 
@@ -63,7 +63,7 @@ ls -l /etc/passwd /etc/shadow
 sudo passwd -S root
 ```
 
-**K4.** Mida tähendab väljundis täht `L`? Kuidas Ubuntus halduriõigusi kasutatakse, kui juurkasutaja konto on lukus?
+> **K4.** Mida tähendab väljundis täht `L`? Kuidas Ubuntus halduriõigusi kasutatakse, kui juurkasutaja konto on lukus?
 
 ---
 
@@ -84,7 +84,7 @@ Näide esimese kasutaja kohta:
 sudo useradd -m -s /bin/bash -c "Mari Maasikas" -G tarkvara mari
 ```
 
-**K5.** Kirjuta käsud kasutajate `jaan` ja `kati` loomiseks.
+> **K5.** Kirjuta käsud kasutajate `jaan` ja `kati` loomiseks.
 
 **2.3** Määra kõigile kolmele parool:
 
@@ -101,7 +101,7 @@ sudo chage -l mari
 
 **2.5** Loo kasutaja `toomas` interaktiivse käsuga `adduser`.
 
-**K6.** Mis vahe on käskudel `useradd` ja `adduser`? Millist neist kasutaksid skriptis ja miks?
+> **K6.** Mis vahe on käskudel `useradd` ja `adduser`? Millist neist kasutaksid skriptis ja miks?
 
 **2.6** Kontrolli tulemust:
 
@@ -113,7 +113,7 @@ tail -4 /etc/passwd
 ls -l /home
 ```
 
-**K7.** Mis on kasutaja `mari` põhigrupp ja millised on tema lisagrupid? Millised on kodukataloogide õigused?
+> **K7.** Mis on kasutaja `mari` põhigrupp ja millised on tema lisagrupid? Millised on kodukataloogide õigused?
 
 ---
 
@@ -125,7 +125,7 @@ ls -l /home
 sudo -iu kati ls /home/mari
 ```
 
-**K8.** Kas see õnnestus? Selgita tulemust kataloogi `/home/mari` õiguste põhjal.
+> **K8.** Kas see õnnestus? Selgita tulemust kataloogi `/home/mari` õiguste põhjal.
 
 **3.2** Kasutajana `mari` loo fail ja uuri selle õigusi ning oma umaski:
 
@@ -133,11 +133,11 @@ sudo -iu kati ls /home/mari
 sudo -iu mari bash -c 'echo "Salajane plaan" > plaan.txt; ls -l plaan.txt; umask'
 ```
 
-**K9.** Millised õigused said uus fail ja mis on umask? Arvuta, kuidas umaskist need õigused tulid.
+> **K9.** Millised õigused said uus fail ja mis on umask? Arvuta, kuidas umaskist need õigused tulid.
 
 **3.3** Muuda kasutajana `mari` faili `plaan.txt` õigusi nii, et ainult tema saab seda lugeda ja muuta. Tee seda kõigepealt sümbolilisel ja seejärel numbrilisel kujul.
 
-**K10.** Kirjuta mõlemad käsud.
+> **K10.** Kirjuta mõlemad käsud.
 
 ---
 
@@ -166,17 +166,17 @@ sudo chown root:tarkvara /srv/firma/tarkvara
 sudo chmod 2770 /srv/firma/tarkvara
 ```
 
-**K11.** Selgita kõiki nelja numbrit väärtuses `2770`.
+> **K11.** Selgita kõiki nelja numbrit väärtuses `2770`.
 
 **4.3** Seadista samamoodi kataloog `turundus`.
 
 **4.4** Seadista kataloog `ühine` nii, et kõik saavad sinna kirjutada, kuid teiste faile kustutada ei saa.
 
-**K12.** Kirjuta käsk. Millise süsteemikataloogiga on see seadistus sama?
+> **K12.** Kirjuta käsk. Millise süsteemikataloogiga on see seadistus sama?
 
 **4.5** Seadista kataloog `teated`: omanik `toomas`, kõik saavad lugeda ja kataloogi siseneda, kuid ainult `toomas` saab sinna faile luua.
 
-**K13.** Kirjuta käsud. Millised õigused numbrilisel kujul kataloogile andsid?
+> **K13.** Kirjuta käsud. Millised õigused numbrilisel kujul kataloogile andsid?
 
 **4.6** Kontrolli kõike korraga:
 
@@ -184,7 +184,7 @@ sudo chmod 2770 /srv/firma/tarkvara
 ls -l /srv/firma
 ```
 
-**K14.** Kopeeri väljund aruandesse ja selgita, miks on kataloogi `tarkvara` grupi õigustes `s` ja kataloogi `ühine` muude õigustes `t`.
+> **K14.** Kopeeri väljund aruandesse ja selgita, miks on kataloogi `tarkvara` grupi õigustes `s` ja kataloogi `ühine` muude õigustes `t`.
 
 ---
 
@@ -209,7 +209,7 @@ Iga testi puhul **ennusta enne käivitamist**, kas see õnnestub, ja kirjuta enn
 ls -l /srv/firma/tarkvara/
 ```
 
-**K15.** Esita tabel testide T1–T8 ennustuste ja tulemustega. Miks kuulub fail `kood.py` grupile `tarkvara`, mitte grupile `mari`? Miks sai `jaan` seda muuta?
+> **K15.** Esita tabel testide T1–T8 ennustuste ja tulemustega. Miks kuulub fail `kood.py` grupile `tarkvara`, mitte grupile `mari`? Miks sai `jaan` seda muuta?
 
 ---
 
@@ -245,9 +245,9 @@ sudo cat /etc/shadow
 exit
 ```
 
-**K16.** Mis juhtus kummagi käsuga? Miks?
+> **K16.** Mis juhtus kummagi käsuga? Miks?
 
-**K17.** Miks tuleb sudoers-faile muuta käsuga `visudo`, mitte otse redaktoriga?
+> **K17.** Miks tuleb sudoers-faile muuta käsuga `visudo`, mitte otse redaktoriga?
 
 **6.3** Uuri, kus logitakse `sudo` kasutamine:
 
@@ -255,7 +255,7 @@ exit
 sudo journalctl _COMM=sudo | tail -5
 ```
 
-**K18.** Kas logis on näha Toomase katse lugeda faili `/etc/shadow`?
+> **K18.** Kas logis on näha Toomase katse lugeda faili `/etc/shadow`?
 
 ---
 
@@ -263,7 +263,7 @@ sudo journalctl _COMM=sudo | tail -5
 
 **7.1** Jaan läheb üle turundusse. Lisa ta gruppi `turundus` ja eemalda grupist `tarkvara`. Kontrolli käsuga `id jaan`.
 
-**K19.** Kirjuta käsud. Miks peab grupi lisamisel kasutama käsus `usermod` võtit `-a`?
+> **K19.** Kirjuta käsud. Miks peab grupi lisamisel kasutama käsus `usermod` võtit `-a`?
 
 **7.2** Leia kõik süsteemi SUID-failid:
 
@@ -271,7 +271,7 @@ sudo journalctl _COMM=sudo | tail -5
 find / -perm -4000 -type f 2>/dev/null
 ```
 
-**K20.** Nimeta kolm leitud faili. Miks vajab näiteks `passwd` SUID-õigust?
+> **K20.** Nimeta kolm leitud faili. Miks vajab näiteks `passwd` SUID-õigust?
 
 **7.3** Kui õpetaja ei ole teisiti öelnud, jäta kasutajad ja kataloogid alles - neid kontrollitakse. Kui teed laborit iseseisvalt ja tahad koristada:
 

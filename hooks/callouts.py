@@ -5,7 +5,7 @@ Lisaks:
 - plokk <details><summary>…</summary> … </details> saab Materiali avatavaks kastiks
   (enesekontrolli "Vastus" ja "Lahendus" rohelise kastina);
 - laboritöödes, kus on aruande küsimuste loend (<!-- kysimused -->, tools/kysimused.py),
-  saavad lõigud **Aruanne:** ja **K1.** jt eraldi värvi kasti "kysimus" (docs/stylesheets/kursus.css).
+  saavad lõigud > **Aruanne:** ja > **K1.** jt (GitHubis tsitaadiplokid) eraldi värvi kasti "kysimus" (docs/stylesheets/kursus.css).
 
 Lähtetekstis kasutatakse GitHubi süntaksit, mis näeb värviliste kastidena välja ka
 GitHubis. Veebilehe ehitamisel teeb see hook neist Materiali admonition-kastid
@@ -81,8 +81,8 @@ def avatavad(markdown):
     return DETAILS.sub(asenda, markdown)
 
 
-KYSIMUS = re.compile(r"^\*\*([A-Z]\d+)\.\*\*\s*(.*)$")
-ARUANNE = re.compile(r"^\*\*(Aruanne|Esitamine):\*\*\s*(.*)$")
+KYSIMUS = re.compile(r"^(?:> )?\*\*([A-Z]\d+)\.\*\*\s*(.*)$")
+ARUANNE = re.compile(r"^(?:> )?\*\*(Aruanne|Esitamine):\*\*\s*(.*)$")
 
 
 def kysimused(markdown):
@@ -106,7 +106,7 @@ def kysimused(markdown):
             pealkiri, sisu = m.group(1), [m.group(2)]
         i += 1
         while i < len(read) and read[i].strip():
-            sisu.append(read[i])
+            sisu.append(read[i][2:] if read[i].startswith("> ") else read[i])
             i += 1
         sisu[0] = sisu[0][:1].upper() + sisu[0][1:]
         valja.append(f'!!! kysimus "{pealkiri}"')

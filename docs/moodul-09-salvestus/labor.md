@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 8 AlmaLinuxi masin ja **kaks uut 2 GiB lisaketast** (pluss kolmas 2 GiB ketas 1. osa lõpus), Ubuntu masin |
 | **Eesmärk** | Ehitada tarkvaraline RAID ja vahetada ketas, mõõta ja jälgida ketaste jõudlust ning tervist, taastada partitsioonitabel ja tutvuda ZFS-iga |
 
-**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > Tee enne alustamist mõlemast masinast hetktõmmis. **Kontrolli enne iga ohtlikku käsku `lsblk`-iga, millise kettaga töötad.**
@@ -35,7 +35,7 @@ cat /proc/mdstat
 sudo mdadm --detail /dev/md0
 ```
 
-**K1.** Kui suur on massiiv? Mida näitab `/proc/mdstat` sünkroniseerimise ajal ja pärast seda (`[UU]`)?
+> **K1.** Kui suur on massiiv? Mida näitab `/proc/mdstat` sünkroniseerimise ajal ja pärast seda (`[UU]`)?
 
 **1.3** Loo failisüsteem, haagi see ja salvesta massiivi seadistus:
 
@@ -57,7 +57,7 @@ ls /srv/raid/etc | head
 sudo mdadm /dev/md0 --remove /dev/sde
 ```
 
-**K2.** Mis on massiivi olek pärast riket? Kas andmed olid loetavad?
+> **K2.** Mis on massiivi olek pärast riket? Kas andmed olid loetavad?
 
 **1.5** Lisa masinale kolmas 2 GiB ketas (`/dev/sdf`) ja lisa see massiivi:
 
@@ -66,11 +66,11 @@ sudo mdadm /dev/md0 --add /dev/sdf
 watch -n1 cat /proc/mdstat          # välju Ctrl+C
 ```
 
-**K3.** Kui kaua taastamine (*recovery*) kestis? Miks võtab suurte (nt 20 TB) ketaste taastamine päevi ja miks on see risk?
+> **K3.** Kui kaua taastamine (*recovery*) kestis? Miks võtab suurte (nt 20 TB) ketaste taastamine päevi ja miks on see risk?
 
 **1.6** Taaskäivita masin ja kontrolli, kas massiiv pandi automaatselt kokku (`cat /proc/mdstat`). Lisa see vajadusel UUID-ga `/etc/fstab`-i (valikuga `nofail`).
 
-**K4.** Mis on riistvaralise ja tarkvaralise RAID-i peamine erinevus, kui server ise (emaplaat või RAID-kontroller) rikneb?
+> **K4.** Mis on riistvaralise ja tarkvaralise RAID-i peamine erinevus, kui server ise (emaplaat või RAID-kontroller) rikneb?
 
 ## 2. osa. Ketta kiirus (AlmaLinux)
 
@@ -85,11 +85,11 @@ sudo dd if=/srv/veeb/test of=/dev/null bs=1M
 sudo rm /srv/veeb/test
 ```
 
-**K5.** Pane tulemused tabelisse. Miks oli `oflag=dsync` kiirus väiksem? Miks erinesid kaks lugemise tulemust?
+> **K5.** Pane tulemused tabelisse. Miks oli `oflag=dsync` kiirus väiksem? Miks erinesid kaks lugemise tulemust?
 
 **2.2** Paigalda `fio` ja mõõda 4 KiB juhuslikku lugemist-kirjutamist ning 1 MiB järjestikust kirjutamist (failiga `/srv/veeb/fio.test`, suurus 512M, kestus 30 s). Ava teises terminalis samal ajal `iostat -xz 2` (pakett `sysstat`).
 
-**K6.** Mitu IOPS-i ja MB/s said kummagi testiga? Miks on 4 KiB juhusliku testi MB/s palju väiksem? Mida näitas `iostat` veerg `%util`?
+> **K6.** Mitu IOPS-i ja MB/s said kummagi testiga? Miks on 4 KiB juhusliku testi MB/s palju väiksem? Mida näitas `iostat` veerg `%util`?
 
 Kustuta testfail: `sudo rm /srv/veeb/fio.test`.
 
@@ -103,7 +103,7 @@ sudo smartctl -i /dev/sda
 sudo smartctl -H /dev/sda
 ```
 
-**K7.** Mida `smartctl` virtuaalse ketta kohta näitas? Kus tuleks virtuaalmasinate puhul ketaste tervist jälgida? Kui sul on ligipääs mõnele füüsilisele Linuxi arvutile, vaata seal `smartctl -a` väljundist atribuute `Reallocated_Sector_Ct` ja `Power_On_Hours`.
+> **K7.** Mida `smartctl` virtuaalse ketta kohta näitas? Kus tuleks virtuaalmasinate puhul ketaste tervist jälgida? Kui sul on ligipääs mõnele füüsilisele Linuxi arvutile, vaata seal `smartctl -a` väljundist atribuute `Reallocated_Sector_Ct` ja `Power_On_Hours`.
 
 ## 4. osa. Partitsioonitabeli taastamine TestDiskiga (AlmaLinux)
 
@@ -133,7 +133,7 @@ sudo losetup -fP --show /var/tmp/taaste.img
 lsblk /dev/loop0
 ```
 
-**K8.** Kas `loop0p1` on alles? Kas andmed on kustutatud?
+> **K8.** Kas `loop0p1` on alles? Kas andmed on kustutatud?
 
 **4.3** Taasta partitsioonitabel:
 
@@ -150,7 +150,7 @@ sudo mount /dev/loop0p1 /mnt/taaste
 cat /mnt/taaste/oluline.txt
 ```
 
-**K9.** Kas andmed taastusid? Milline oli taastatud partitsiooni algus ja nimi? Miks ei tohi kahjustatud kettale enne taastamist midagi kirjutada?
+> **K9.** Kas andmed taastusid? Milline oli taastatud partitsiooni algus ja nimi? Miks ei tohi kahjustatud kettale enne taastamist midagi kirjutada?
 
 **4.4** Koristamine:
 
@@ -180,18 +180,18 @@ zfs list -o name,used,compressratio labor/andmed
 **5.3** Riku ühte peegli faili (`sudo dd if=/dev/urandom of=/var/tmp/zd1.img bs=1M count=50 seek=10 conv=notrunc`), käivita `sudo zpool scrub labor` ja vaata `zpool status -v` - mida ZFS leidis ja kas andmed jäid terveks?
 **5.4** Koristamine: `sudo zpool destroy labor && rm /var/tmp/zd*.img`.
 
-**K10.** Mis oli pakkimise suhe (`compressratio`)? Miks võib pakkimine kettatööd isegi kiirendada?
+> **K10.** Mis oli pakkimise suhe (`compressratio`)? Miks võib pakkimine kettatööd isegi kiirendada?
 
-**K11.** Mitu viga `scrub` leidis ja parandas (veerg `CKSUM`)? Miks ei saaks tavaline RAID 1 (`mdadm`) seda viga ise parandada?
+> **K11.** Mitu viga `scrub` leidis ja parandas (veerg `CKSUM`)? Miks ei saaks tavaline RAID 1 (`mdadm`) seda viga ise parandada?
 
-**K12.** Mis vahe on LVM-i ja ZFS-i hetktõmmisel? Miks ei asenda kumbki varukoopiat?
+> **K12.** Mis vahe on LVM-i ja ZFS-i hetktõmmisel? Miks ei asenda kumbki varukoopiat?
 
 
 ## 6. osa. Kokkuvõte
 
-**K13.** Täida tabel: RAID 1 (`mdadm`), LVM, ZFS mirror - töökindlus, hetktõmmised, andmete kontrollsummad, suurendamine, kus kasutada?
+> **K13.** Täida tabel: RAID 1 (`mdadm`), LVM, ZFS mirror - töökindlus, hetktõmmised, andmete kontrollsummad, suurendamine, kus kasutada?
 
-**K14.** Koostasid salvestuse kooli failiserverile, kus on 4 ketast. Milline lahendus (riistvaraline RAID, `mdadm` + LVM, ZFS raidz2 või kaks peeglit) valiksid ja miks? Mis on varunduse plaan?
+> **K14.** Koostasid salvestuse kooli failiserverile, kus on 4 ketast. Milline lahendus (riistvaraline RAID, `mdadm` + LVM, ZFS raidz2 või kaks peeglit) valiksid ja miks? Mis on varunduse plaan?
 
 ---
 

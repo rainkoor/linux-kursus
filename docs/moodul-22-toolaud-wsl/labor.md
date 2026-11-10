@@ -11,7 +11,7 @@
 | **Vajalik** | Graafiline Ubuntu VM (2 vCPU, 4 GiB RAM, *Display*: SPICE või VirtIO-GPU), Kali VM isoleeritud laborivõrgus, Windows 11 arvuti või VM pesastatud virtualiseerimisega (6. osa). Oma arvutisse SPICE-i jaoks `virt-viewer` (valikuline) |
 | **Eesmärk** | Tutvuda töölaua Linuxi ülesehituse ja haldusega, kasutada Kalit vastutustundlikult ja töötada Linuxiga Windowsi sees |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > Tee enne alustamist Ubuntu VM-ist **hetktõmmis**.
@@ -33,7 +33,7 @@ ps -e | grep -E "gnome-shell|Xwayland"
 free -h
 ```
 
-**K1.** Kas seanss on Wayland või X11? Milline programm on sisselogimishaldur? Kas töötab ka XWayland ja miks? Kui palju mälu töölaud kasutab?
+> **K1.** Kas seanss on Wayland või X11? Milline programm on sisselogimishaldur? Kas töötab ka XWayland ja miks? Kui palju mälu töölaud kasutab?
 
 **1.2** Paigalda VM-i külalisagendid ja vaata, mis muutub (SPICE-konsoolis: lõikelaud, akna suurus):
 
@@ -42,7 +42,7 @@ sudo apt install qemu-guest-agent spice-vdagent
 sudo systemctl enable --now qemu-guest-agent
 ```
 
-**K2.** Mida võimaldab `spice-vdagent`? Mida näed nüüd Proxmoxi VM-i *Summary* lehel (IP-aadressid)?
+> **K2.** Mida võimaldab `spice-vdagent`? Mida näed nüüd Proxmoxi VM-i *Summary* lehel (IP-aadressid)?
 
 ## 2. osa. Tarkvara: apt, Snap ja Flatpak
 
@@ -66,7 +66,7 @@ flatpak info --show-permissions org.gimp.GIMP
 du -sh /var/lib/flatpak
 ```
 
-**K3.** Võrdle versioone ja ruumikasutust. Milliseid õigusi Flatpaki GIMP saab? Kumb paigaldusviis on sinu arvates parem koolis kasutamiseks ja miks?
+> **K3.** Võrdle versioone ja ruumikasutust. Milliseid õigusi Flatpaki GIMP saab? Kumb paigaldusviis on sinu arvates parem koolis kasutamiseks ja miks?
 
 **2.3** Eemalda apt-i GIMP (`sudo apt remove gimp`) ja leia rakenduste menüüst, kas GIMP käivitub endiselt.
 
@@ -85,7 +85,7 @@ echo $XDG_SESSION_TYPE $XDG_CURRENT_DESKTOP
 free -h
 ```
 
-**K4.** Kas Xfce töötab Waylandis või X11-s? Võrdle mälukasutust GNOME-iga. Millal eelistaksid kergemat töölauda?
+> **K4.** Kas Xfce töötab Waylandis või X11-s? Võrdle mälukasutust GNOME-iga. Millal eelistaksid kergemat töölauda?
 
 Logi tagasi GNOME-sse.
 
@@ -100,7 +100,7 @@ sudo ufw allow from VORK to any port 3389 proto tcp
 
 Ühendu Windowsist (`mstsc`) või Linuxist (Remmina) aadressile `UBUNTU_IP`.
 
-**K5.** Kas ühendus õnnestus? Mis on RDP eelis Proxmoxi konsooli ees ja mis on riskid, kui RDP port on internetist kättesaadav?
+> **K5.** Kas ühendus õnnestus? Mis on RDP eelis Proxmoxi konsooli ees ja mis on riskid, kui RDP port on internetist kättesaadav?
 
 **4.2** Lisa virtuaalne PDF-printer ja prindi testleht:
 
@@ -131,7 +131,7 @@ sudo timeshift --list
 
 Taasta graafilisest liidesest (või `sudo timeshift --restore`) ja kontrolli, kas `cowsay` on pärast taaskäivitust alles.
 
-**K6.** Mida Timeshift vaikimisi varundab ja mida mitte (vaata seadeid *Users*)? Mis vahe on Timeshiftil ja Proxmoxi hetktõmmisel?
+> **K6.** Mida Timeshift vaikimisi varundab ja mida mitte (vaata seadeid *Users*)? Mis vahe on Timeshiftil ja Proxmoxi hetktõmmisel?
 
 **4.5** (Valikuline, vajab kaardilugejat ja ID-kaarti) Paigalda Eesti ID-tarkvara id.ee juhendi järgi, suuna USB-kaardilugeja VM-ile ja kontrolli:
 
@@ -141,7 +141,7 @@ pcsc_scan
 
 Ava DigiDoc4 ja Firefoxis lehe id.ee kontrolliteenus.
 
-**K7.** Kas kaart tuvastati? Milliseid pakette ja teenuseid paigaldusjuhend lisas?
+> **K7.** Kas kaart tuvastati? Milliseid pakette ja teenuseid paigaldusjuhend lisas?
 
 ## 5. osa. Kali Linux
 
@@ -158,7 +158,7 @@ dpkg -l | grep -c "^ii"
 apt-cache search kali-tools | head -20
 ```
 
-**K8.** Millisel Debiani harul Kali põhineb? Mitu paketti on paigaldatud? Milliseid tööriistade rühmi (`kali-tools-*`) leidsid?
+> **K8.** Millisel Debiani harul Kali põhineb? Mitu paketti on paigaldatud? Milliseid tööriistade rühmi (`kali-tools-*`) leidsid?
 
 **5.2** Uuri laborivõrku (ainult oma masinad või õpetaja määratud sihtmärk):
 
@@ -168,11 +168,11 @@ sudo netdiscover -r VORK -P
 sudo nmap -sV -O SIHT_IP
 ```
 
-**K9.** Milliseid masinaid ja teenuseid leidsid? Kuidas tuvastas `nmap` operatsioonisüsteemi ja teenuste versioonid?
+> **K9.** Milliseid masinaid ja teenuseid leidsid? Kuidas tuvastas `nmap` operatsioonisüsteemi ja teenuste versioonid?
 
 **5.3** Ava Ubuntu serveris (nt laboritöö 11 masinas) `sudo tail -f /var/log/auth.log` või `journalctl -f` ja käivita Kalist sama masina vastu `nmap -sS`. Vaata, kas skaneerimine jättis jälje logidesse (või fail2ban / ufw logidesse).
 
-**K10.** Kas skaneerimist oli serveri poolelt näha? Miks peab testimiseks alati olema luba?
+> **K10.** Kas skaneerimist oli serveri poolelt näha? Miks peab testimiseks alati olema luba?
 
 ## 6. osa. WSL
 
@@ -197,7 +197,7 @@ ip -br a
 df -h /
 ```
 
-**K11.** Mis kernel töötab (`uname -r`)? Kas PID 1 on `systemd` või `init`? Mis on WSL-i masina IP-aadress ja kuidas see erineb Windowsi omast?
+> **K11.** Mis kernel töötab (`uname -r`)? Kas PID 1 on `systemd` või `init`? Mis on WSL-i masina IP-aadress ja kuidas see erineb Windowsi omast?
 
 **6.2** Kui PID 1 ei ole `systemd`, lülita see sisse (`/etc/wsl.conf`, punkt 22.9), käivita PowerShellis `wsl --shutdown` ja kontrolli uuesti `systemctl status`.
 
@@ -224,7 +224,7 @@ time (for i in $(seq 1000); do echo $i > ~/kiirus_$i; done); rm ~/kiirus_*
 mkdir -p /mnt/c/Temp/wsl && time (for i in $(seq 1000); do echo $i > /mnt/c/Temp/wsl/kiirus_$i; done); rm -r /mnt/c/Temp/wsl
 ```
 
-**K12.** Kui suur oli erinevus? Kuhu peaksid seega hoidma oma Giti projekte, kui töötad WSL-is?
+> **K12.** Kui suur oli erinevus? Kuhu peaksid seega hoidma oma Giti projekte, kui töötad WSL-is?
 
 **6.5** Käivita Linuxi graafiline programm (WSLg):
 
@@ -245,7 +245,7 @@ wsl -d DebianTest -- cat ~/test.txt
 wsl --unregister DebianTest
 ```
 
-**K13.** Mis on `wsl --export` faili suurus? Millise kasutajana DebianTest käivitus ja miks (vihje: `[user]` jaotis `wsl.conf`-is)? Mida teeb `--unregister` ja miks peab sellega ettevaatlik olema?
+> **K13.** Mis on `wsl --export` faili suurus? Millise kasutajana DebianTest käivitus ja miks (vihje: `[user]` jaotis `wsl.conf`-is)? Mida teeb `--unregister` ja miks peab sellega ettevaatlik olema?
 
 **6.7** Kasuta WSL-i kursuse tööriistana: paigalda Debianis `git`, `ansible`, `shellcheck` ja ühendu SSH-ga oma laborimasinasse.
 
@@ -255,21 +255,21 @@ ssh-keygen -t ed25519
 ssh kasutaja@SERVER_IP
 ```
 
-**K14.** Milliseid kursuse mooduleid saaks WSL-is täielikult läbi teha ja milliseid mitte? Too kummastki vähemalt kaks näidet ja põhjenda.
+> **K14.** Milliseid kursuse mooduleid saaks WSL-is täielikult läbi teha ja milliseid mitte? Too kummastki vähemalt kaks näidet ja põhjenda.
 
 ## 7. osa. Kokkuvõte
 
-**K15.** Joonista Ubuntu töölaua kihid riistvarast rakendusteni ja märgi, millised programmid sinu masinas igal kihil töötavad.
+> **K15.** Joonista Ubuntu töölaua kihid riistvarast rakendusteni ja märgi, millised programmid sinu masinas igal kihil töötavad.
 
-**K16.** Kirjelda, kuidas Proton võimaldab Windowsi mänge Linuxis mängida. Mis on SteamOS-i kui muutumatu distro eelised tavakasutajale?
+> **K16.** Kirjelda, kuidas Proton võimaldab Windowsi mänge Linuxis mängida. Mis on SteamOS-i kui muutumatu distro eelised tavakasutajale?
 
-**K17.** Kool kaalub ühe arvutiklassi viimist Windowsilt Linuxile. Too kolm argumenti poolt ja kolm vastu (nt tarkvara, koolitus, haldus, kulud, sõltumatus, eksamid ja ID-kaart).
+> **K17.** Kool kaalub ühe arvutiklassi viimist Windowsilt Linuxile. Too kolm argumenti poolt ja kolm vastu (nt tarkvara, koolitus, haldus, kulud, sõltumatus, eksamid ja ID-kaart).
 
-**K18.** Milliseid kooli tunnis kasutatavaid programme saab Linuxis kasutada otse, milliseid alternatiiviga ja milliseid ainult brauseris või virtuaalmasinas?
+> **K18.** Milliseid kooli tunnis kasutatavaid programme saab Linuxis kasutada otse, milliseid alternatiiviga ja milliseid ainult brauseris või virtuaalmasinas?
 
-**K19.** Millal kasutaksid Linuxit WSL-is, millal virtuaalmasinas ja millal otse riistvaral? Too igaühe kohta näide.
+> **K19.** Millal kasutaksid Linuxit WSL-is, millal virtuaalmasinas ja millal otse riistvaral? Too igaühe kohta näide.
 
-**K20.** Miks ei soovitata Kalit igapäevaseks töölauaks?
+> **K20.** Miks ei soovitata Kalit igapäevaseks töölauaks?
 
 ---
 

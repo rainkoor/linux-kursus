@@ -20,7 +20,7 @@ Selles moodulis on kaks laboritööd, kumbki oma distrol:
 | **Vajalik** | AlmaLinuxi virtuaalmasin `sudo` õigusega kasutajaga, internetiühendus |
 | **Eesmärk** | Mõista SELinuxi toimimist ja lahendada tüüpilised SELinuxi probleemid; seadistada automaatsed turvauuendused ja audit |
 
-**Aruanne:** vasta küsimustele **A1–A14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **A1–A14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** paigaldad veebiserveri, mille failid peavad asuma kataloogis `/srv/veeb` ja mis peab kuulama lisaks pordile 80 ka porti 8888. SELinux ei lase seda vaikimisi teha - sinu ülesanne on probleemid lahendada **SELinuxit välja lülitamata**.
 
@@ -34,7 +34,7 @@ sestatus
 cat /etc/selinux/config | grep -v '^#'
 ```
 
-**A1.** Mis režiimis SELinux töötab? Mis on poliitika nimi (`Loaded policy name`)?
+> **A1.** Mis režiimis SELinux töötab? Mis on poliitika nimi (`Loaded policy name`)?
 
 **1.2** Uuri kontekste:
 
@@ -45,7 +45,7 @@ ls -Zd /home/$USER /tmp /var/www /srv
 ps -eZ | grep -E "sshd|systemd " | head -5
 ```
 
-**A2.** Mis tüüp on failidel `/etc/shadow` ja `/etc/passwd`? Mis tüüp on kataloogil `/srv`? Mis kontekstis töötab `sshd`?
+> **A2.** Mis tüüp on failidel `/etc/shadow` ja `/etc/passwd`? Mis tüüp on kataloogil `/srv`? Mis kontekstis töötab `sshd`?
 
 **1.3** Paigalda vajalikud tööriistad:
 
@@ -94,7 +94,7 @@ sudo systemctl restart httpd
 curl -s http://localhost
 ```
 
-**A3.** Mida server vastas? Failiõigused on `644` - miks ei saa veebiserver faili lugeda?
+> **A3.** Mida server vastas? Failiõigused on `644` - miks ei saa veebiserver faili lugeda?
 
 **2.4** Diagnoosi:
 
@@ -104,7 +104,7 @@ sudo ausearch -m AVC -ts recent | audit2why
 sudo journalctl -t setroubleshoot --since "10 min ago"
 ```
 
-**A4.** Kirjuta AVC teatest välja: protsess (`comm`), tegevus (`{ ... }`), allika tüüp (`scontext`) ja sihi tüüp (`tcontext`). Mida soovitab `setroubleshoot`?
+> **A4.** Kirjuta AVC teatest välja: protsess (`comm`), tegevus (`{ ... }`), allika tüüp (`scontext`) ja sihi tüüp (`tcontext`). Mida soovitab `setroubleshoot`?
 
 **2.5** Kontrolli, et põhjus on tõesti SELinux, ja lülita see kohe tagasi:
 
@@ -125,7 +125,7 @@ ls -lZ /srv/veeb/
 curl -s http://localhost
 ```
 
-**A5.** Mis muutus faili kontekstis? Miks oli `index.html` kontekst algselt just selline (vihje: kus fail loodi)? Mis vahe on `semanage fcontext` ja `chcon` vahel?
+> **A5.** Mis muutus faili kontekstis? Miks oli `index.html` kontekst algselt just selline (vihje: kus fail loodi)? Mis vahe on `semanage fcontext` ja `chcon` vahel?
 
 **2.7** Loo uus fail otse kataloogis ja võrdle konteksti:
 
@@ -135,7 +135,7 @@ ls -Z /srv/veeb/
 curl -s http://localhost/teine.html
 ```
 
-**A6.** Millise konteksti sai uus fail ja miks ei olnud seekord `restorecon`-i vaja?
+> **A6.** Millise konteksti sai uus fail ja miks ei olnud seekord `restorecon`-i vaja?
 
 ## 3. osa. Mittestandardne port
 
@@ -146,7 +146,7 @@ echo "Listen 8888" | sudo tee /etc/httpd/conf.d/port8888.conf
 sudo systemctl restart httpd
 ```
 
-**A7.** Mis juhtus? Leia põhjus käskudega `systemctl status httpd`, `journalctl -u httpd -n 20` ja `ausearch -m AVC -ts recent`.
+> **A7.** Mis juhtus? Leia põhjus käskudega `systemctl status httpd`, `journalctl -u httpd -n 20` ja `ausearch -m AVC -ts recent`.
 
 **3.2** Uuri, millised pordid on veebiserverile lubatud, ja lisa port:
 
@@ -160,7 +160,7 @@ curl -s http://localhost:8888
 
 Kui `semanage port -a` teatab, et port on juba mõnele teisele tüübile määratud, kasuta `-a` asemel `-m`.
 
-**A8.** Millised pordid olid algselt `http_port_t` loendis? Miks piirab SELinux ka porte?
+> **A8.** Millised pordid olid algselt `http_port_t` loendis? Miks piirab SELinux ka porte?
 
 **3.3** Ava tulemüüris port 8888 ja testi teisest masinast (või oma arvuti brauserist):
 
@@ -195,7 +195,7 @@ sudo systemctl restart httpd
 curl -sI http://localhost/vana | head -1
 ```
 
-**A9.** Mis vastuse said? Mida näitab `ausearch -m AVC -ts recent`?
+> **A9.** Mis vastuse said? Mida näitab `ausearch -m AVC -ts recent`?
 
 **4.3** Luba veebiserveril luua võrguühendusi:
 
@@ -204,7 +204,7 @@ sudo setsebool -P httpd_can_network_connect on
 curl -sI http://localhost/vana | head -1
 ```
 
-**A10.** Mida tähendab võti `-P`? Miks on see tõeväärtus vaikimisi väljas? (Mõtle, mida saaks ründaja teha ülevõetud veebiserveriga, mis tohib igale poole ühenduda.)
+> **A10.** Mida tähendab võti `-P`? Miks on see tõeväärtus vaikimisi väljas? (Mõtle, mida saaks ründaja teha ülevõetud veebiserveriga, mis tohib igale poole ühenduda.)
 
 ## 5. osa. Automaatsed turvauuendused
 
@@ -224,7 +224,7 @@ sudo systemctl enable --now dnf-automatic.timer
 systemctl list-timers dnf-automatic.timer
 ```
 
-**A11.** Millal käivitub `dnf-automatic` järgmisena? Leia ühe turvauuenduse kohta CVE number (`dnf updateinfo info <ID>`). Kui uuendusi pole, leia mõni CVE AlmaLinuxi turvateadete lehelt (errata.almalinux.org).
+> **A11.** Millal käivitub `dnf-automatic` järgmisena? Leia ühe turvauuenduse kohta CVE number (`dnf updateinfo info <ID>`). Kui uuendusi pole, leia mõni CVE AlmaLinuxi turvateadete lehelt (errata.almalinux.org).
 
 ## 6. osa. Audit
 
@@ -246,7 +246,7 @@ sudo ausearch -k kasutajad -i | tail -20
 sudo aureport --summary
 ```
 
-**A12.** Millised programmid muutsid faili `/etc/passwd`? Mis on sündmuste juures välja `auid` väärtus ja miks on see oluline, kuigi käsud käivitati `sudo`-ga?
+> **A12.** Millised programmid muutsid faili `/etc/passwd`? Mis on sündmuste juures välja `auid` väärtus ja miks on see oluline, kuigi käsud käivitati `sudo`-ga?
 
 **6.3** Muuda reeglid püsivaks:
 
@@ -260,11 +260,11 @@ sudo augenrules --load
 sudo auditctl -l
 ```
 
-**A13.** Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?
+> **A13.** Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?
 
 ## 7. osa. Kokkuvõte
 
-**A14.** Täida tabel: SELinuxi probleem → tunnus → lahendus.
+> **A14.** Täida tabel: SELinuxi probleem → tunnus → lahendus.
 
 | Probleem | Tunnus | Lahendus (käsk) |
 |---|---|---|
@@ -284,7 +284,7 @@ sudo auditctl -l
 | **Vajalik** | Laboritöö 7 Ubuntu masin (SSH karastatud, ufw sees) ja teise masinana Debiani virtuaalmasin |
 | **Eesmärk** | Hallata logisid, kaitsta SSH-d fail2ban-iga, mõista AppArmori toimimist ja auditeerida serveri turvalisust |
 
-**Aruanne:** vasta küsimustele **B1–B14**.
+> **Aruanne:** vasta küsimustele **B1–B14**.
 
 ## 1. osa. Logid
 
@@ -297,7 +297,7 @@ last -n 10
 sudo lastb -n 10
 ```
 
-**B1.** Millised on kataloogi `/var/log` suurimad failid? Kes ja millal viimati sisse logis? Kas on ebaõnnestunud sisselogimisi?
+> **B1.** Millised on kataloogi `/var/log` suurimad failid? Kes ja millal viimati sisse logis? Kas on ebaõnnestunud sisselogimisi?
 
 **1.2** Otsi journal'ist `sudo` kasutamine ja SSH sündmused:
 
@@ -314,7 +314,7 @@ journalctl -t labor10
 grep labor10 /var/log/syslog
 ```
 
-**B2.** Kas teade jõudis nii journal'isse kui ka faili `/var/log/syslog`? Miks?
+> **B2.** Kas teade jõudis nii journal'isse kui ka faili `/var/log/syslog`? Miks?
 
 **1.4** Piira journal'i mahtu:
 
@@ -366,7 +366,7 @@ for i in 1 2 3 4 5; do
 done
 ```
 
-**B3.** Mitu faili jäi lõpuks alles ja millised neist on pakitud? Mida tegid valikud `rotate 3` ja `delaycompress`?
+> **B3.** Mitu faili jäi lõpuks alles ja millised neist on pakitud? Mida tegid valikud `rotate 3` ja `delaycompress`?
 
 ## 2. osa. Automaatsed uuendused
 
@@ -380,7 +380,7 @@ sudo unattended-upgrade --dry-run --debug 2>&1 | tail -15
 ls /var/log/unattended-upgrades/
 ```
 
-**B4.** Kas automaatsed uuendused on sisse lülitatud? Milliseid hoidlaid (`Allowed-Origins`) need hõlmavad? Kas masin taaskäivitatakse automaatselt (`Automatic-Reboot`)?
+> **B4.** Kas automaatsed uuendused on sisse lülitatud? Milliseid hoidlaid (`Allowed-Origins`) need hõlmavad? Kas masin taaskäivitatakse automaatselt (`Automatic-Reboot`)?
 
 ## 3. osa. fail2ban
 
@@ -419,7 +419,7 @@ sudo grep "Invalid user" /var/log/auth.log | tail -5
 sudo nft list ruleset | grep -A3 f2b
 ```
 
-**B5.** Kas Debiani IP-aadress blokeeriti? Mitu katset kulus? Kuidas oli blokeering tulemüüris näha?
+> **B5.** Kas Debiani IP-aadress blokeeriti? Mitu katset kulus? Kuidas oli blokeering tulemüüris näha?
 
 **3.4** Proovi Debiani masinast ühenduda (ka õige kasutajaga): `ssh kasutaja@UBUNTU_IP`. Seejärel vabasta aadress:
 
@@ -427,7 +427,7 @@ sudo nft list ruleset | grep -A3 f2b
 sudo fail2ban-client set sshd unbanip DEBIAN_IP
 ```
 
-**B6.** Mis juhtus ühenduskatsega blokeeringu ajal? Miks on oluline seada `ignoreip` oma administraatorivõrgule?
+> **B6.** Mis juhtus ühenduskatsega blokeeringu ajal? Miks on oluline seada `ignoreip` oma administraatorivõrgule?
 
 ## 4. osa. AppArmor
 
@@ -438,7 +438,7 @@ sudo aa-status
 ls /etc/apparmor.d/
 ```
 
-**B7.** Mitu profiili on laaditud? Mitu on enforce- ja mitu complain-režiimis? Nimeta kolm programmi, millel on profiil.
+> **B7.** Mitu profiili on laaditud? Mitu on enforce- ja mitu complain-režiimis? Nimeta kolm programmi, millel on profiil.
 
 **4.2** Loo skript, mis loeb faili, mille nimi antakse argumendina:
 
@@ -482,7 +482,7 @@ sudo loe-faili /etc/shadow
 sudo journalctl -k --since "5 min ago" | grep -i apparmor
 ```
 
-**B8.** Milliseid faile skript sai lugeda ja milliseid mitte? Kas `sudo` aitas faili `/etc/shadow` lugeda? Miks? Kirjuta üks `DENIED` logirida aruandesse.
+> **B8.** Milliseid faile skript sai lugeda ja milliseid mitte? Kas `sudo` aitas faili `/etc/shadow` lugeda? Miks? Kirjuta üks `DENIED` logirida aruandesse.
 
 **4.5** Lülita profiil complain-režiimi ja korda testi:
 
@@ -494,7 +494,7 @@ sudo journalctl -k --since "2 min ago" | grep -i apparmor | tail -3
 sudo aa-enforce /usr/local/bin/loe-faili
 ```
 
-**B9.** Mis vahe oli complain- ja enforce-režiimil? Milleks on complain-režiim kasulik?
+> **B9.** Mis vahe oli complain- ja enforce-režiimil? Milleks on complain-režiim kasulik?
 
 ## 5. osa. Turvaaudit
 
@@ -505,11 +505,11 @@ sudo apt install lynis
 sudo lynis audit system 2>&1 | tee ~/lynis.txt | tail -40
 ```
 
-**B10.** Mis on karastamise indeks (*hardening index*)? Nimeta kolm hoiatust (*warnings*) või soovitust (*suggestions*), mis tunduvad sinu serveri jaoks olulised.
+> **B10.** Mis on karastamise indeks (*hardening index*)? Nimeta kolm hoiatust (*warnings*) või soovitust (*suggestions*), mis tunduvad sinu serveri jaoks olulised.
 
 **5.2** Vali kolm Lynise soovitust, rakenda need ja käivita audit uuesti.
 
-**B11.** Milliseid soovitusi rakendasid ja kuidas? Kas indeks muutus?
+> **B11.** Milliseid soovitusi rakendasid ja kuidas? Kas indeks muutus?
 
 **5.3** Vaata oma serverit „ründaja pilgu läbi“ - **Debiani masinast** (ainult oma laborimasina vastu!):
 
@@ -519,13 +519,13 @@ nmap UBUNTU_IP
 sudo nmap -sV UBUNTU_IP
 ```
 
-**B12.** Millised pordid ja teenused on väljast nähtavad? Kas `nmap` tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?
+> **B12.** Millised pordid ja teenused on väljast nähtavad? Kas `nmap` tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?
 
 ## 6. osa. Kokkuvõte
 
-**B13.** Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.
+> **B13.** Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.
 
-**B14.** Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?
+> **B14.** Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?
 
 ---
 
@@ -539,13 +539,13 @@ Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB
 4. Leia sündmused veebiliidesest (*Threat Hunting* / *Security events*).
 5. Seadista automaatne reageerimine (teooria punkt 11.10, reegel 5763 ja `firewall-drop`) ning korda SSH jõurünnet mõnest kolmandast masinast. Kontrolli agendis `/var/ossec/logs/active-responses.log` ja `sudo nft list ruleset`.
 
-**W1.** Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?
+> **W1.** Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?
 
-**W2.** Milliseid haavatavusi (*Vulnerability Detection*) leiti agentidega masinates? Milliseid CIS-i soovitusi (*Configuration Assessment*) Debiani masin ei täitnud?
+> **W2.** Milliseid haavatavusi (*Vulnerability Detection*) leiti agentidega masinates? Milliseid CIS-i soovitusi (*Configuration Assessment*) Debiani masin ei täitnud?
 
-**W3.** Võrdle Wazuhi fail2ban-i ja `auditd`-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?
+> **W3.** Võrdle Wazuhi fail2ban-i ja `auditd`-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?
 
-**W4.** Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?
+> **W4.** Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?
 
 ---
 

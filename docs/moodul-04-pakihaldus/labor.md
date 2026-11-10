@@ -11,7 +11,7 @@
 | **Vajalik** | Kolm virtuaalmasinat (Debian, Ubuntu, AlmaLinux), igaühes `sudo` õigusega kasutaja ja internetiühendus |
 | **Eesmärk** | Harjutada pakihaldust kahe perekonna distrodel ja võrrelda nende erinevusi |
 
-**Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!NOTE]
 > **Erandina kasutad selles laboris kõiki kolme distrot.** Hoia kolm SSH-seanssi korraga lahti (nt Windows Terminali eri vahekaartidel), et saaksid tulemusi kohe võrrelda. Jälgi viipa, et teaksid, millises masinas oled.
@@ -34,7 +34,7 @@ uname -r
 
 **1.2 Uuenda süsteem.** Debianis ja Ubuntus värskenda kõigepealt pakettide loend ja vaata uuendatavaid pakette. AlmaLinuxis kontrolli uuendusi. Seejärel uuenda kõik süsteemid.
 
-**K1.** Mitu paketti oli igas masinas uuendatav? Miks on Debianis ja Ubuntus vaja kahte käsku, AlmaLinuxis aga ühte?
+> **K1.** Mitu paketti oli igas masinas uuendatav? Miks on Debianis ja Ubuntus vaja kahte käsku, AlmaLinuxis aga ühte?
 
 **1.3 Loe hoidlate seadistust.** Leia ja kuva iga distro hoidlate seadistusfail(id).
 
@@ -43,7 +43,7 @@ ls /etc/apt/sources.list.d/ /etc/apt/sources.list 2>/dev/null   # Debian, Ubuntu
 ls /etc/yum.repos.d/                                             # AlmaLinux
 ```
 
-**K2.** Millised hoidla osad (*components*) on Debianis ja Ubuntus lubatud? Millised hoidlad on AlmaLinuxis lubatud (`dnf repolist`)?
+> **K2.** Millised hoidla osad (*components*) on Debianis ja Ubuntus lubatud? Millised hoidlad on AlmaLinuxis lubatud (`dnf repolist`)?
 
 **1.4 Otsi ja uuri.** Otsi paketti `tree` ja kuva selle info (versioon, suurus, kirjeldus).
 
@@ -54,7 +54,7 @@ ls /etc/yum.repos.d/                                             # AlmaLinux
 > [!NOTE]
 > Kui Debiani vanemas versioonis `dpkg -S /usr/bin/ls` vastust ei anna, proovi `dpkg -S /bin/ls`. Põhjus: vanemates versioonides registreeris pakihaldur faili vana tee all, kuigi `/bin` on viit kataloogile `/usr/bin`.
 
-**K3.** Kas paketid on kolmes distros samanimelised?
+> **K3.** Kas paketid on kolmes distros samanimelised?
 
 **1.7 Paketi sisu.** Kuva kõik paketi `openssh-server` failid ja loenda need.
 
@@ -65,7 +65,7 @@ dpkg -l | grep '^ii' | wc -l     # Debian, Ubuntu
 rpm -qa | wc -l                  # AlmaLinux
 ```
 
-**K4.** Milline masin sisaldab kõige rohkem pakette? Mis võib olla põhjus?
+> **K4.** Milline masin sisaldab kõige rohkem pakette? Mis võib olla põhjus?
 
 **1.9 Eemalda.** Eemalda pakett `tree`. Debianis ja Ubuntus kasuta `purge`. Seejärel eemalda mittevajalikud sõltuvused.
 
@@ -106,7 +106,7 @@ Täida tabel aruandes.
 dnf search ncdu
 ```
 
-**K5.** Kas pakett leiti? Miks?
+> **K5.** Kas pakett leiti? Miks?
 
 **2.2** Luba EPEL-i hoidla ja otsi uuesti:
 
@@ -117,7 +117,7 @@ dnf search ncdu
 dnf info ncdu
 ```
 
-**K6.** Millised uued hoidlad lisandusid? Millisest hoidlast `ncdu` pärineb (rida `Repository` või `From repo`)?
+> **K6.** Millised uued hoidlad lisandusid? Millisest hoidlast `ncdu` pärineb (rida `Repository` või `From repo`)?
 
 **2.3** Paigalda `ncdu` ja proovi seda kataloogil `/usr` (välju klahviga `q`):
 
@@ -135,7 +135,7 @@ sudo dnf history undo <ID>
 
 Asenda `<ID>` paketi `ncdu` paigaldamise toimingu numbriga.
 
-**K7.** Kas `ncdu` eemaldati? Mis juhtus EPEL-iga (`dnf repolist`)? Miks?
+> **K7.** Kas `ncdu` eemaldati? Mis juhtus EPEL-iga (`dnf repolist`)? Miks?
 
 **2.5** Leia, milline pakett sisaldab käsku `dig`, ja paigalda see:
 
@@ -143,7 +143,7 @@ Asenda `<ID>` paketi `ncdu` paigaldamise toimingu numbriga.
 dnf provides '*/bin/dig'
 ```
 
-**K8.** Mis on paketi nimi AlmaLinuxis? Leia Debiani või Ubuntu masinas, mis on sama tööriista paketi nimi (`apt search dnsutils`).
+> **K8.** Mis on paketi nimi AlmaLinuxis? Leia Debiani või Ubuntu masinas, mis on sama tööriista paketi nimi (`apt search dnsutils`).
 
 ---
 
@@ -156,7 +156,7 @@ apt policy ncdu
 apt show ncdu
 ```
 
-**K9.** Kas `ncdu` on hoidla osas `main` või `universe`? Mis vahe neil on?
+> **K9.** Kas `ncdu` on hoidla osas `main` või `universe`? Mis vahe neil on?
 
 **3.2** Uuri Snapi:
 
@@ -174,7 +174,7 @@ which hello-world
 sudo snap remove hello-world
 ```
 
-**K10.** Millised snapid olid süsteemis enne sinu paigaldust? Kuhu paigaldati `hello-world` käivitusfail? Kuidas erineb see apt-i paketist?
+> **K10.** Millised snapid olid süsteemis enne sinu paigaldust? Kuhu paigaldati `hello-world` käivitusfail? Kuidas erineb see apt-i paketist?
 
 ---
 
@@ -188,7 +188,7 @@ Selles osas kompileerid GNU projekti näidisprogrammi `hello` ja võrdled seda s
 sudo apt install build-essential wget
 ```
 
-**K11.** Mitu paketti paigaldati koos `build-essential`-iga? Miks nii palju?
+> **K11.** Mitu paketti paigaldati koos `build-essential`-iga? Miks nii palju?
 
 **4.2** Laadi lähtekood alla ja paki lahti:
 
@@ -217,7 +217,7 @@ which hello
 dpkg -S "$(which hello)"
 ```
 
-**K12.** Kuhu programm paigaldati? Miks ütleb `dpkg -S`, et fail ei kuulu ühtegi paketti?
+> **K12.** Kuhu programm paigaldati? Miks ütleb `dpkg -S`, et fail ei kuulu ühtegi paketti?
 
 **4.5** Paigalda nüüd sama programm Debiani hoidlast ja võrdle:
 
@@ -230,7 +230,7 @@ hello --version | head -1
 echo $PATH
 ```
 
-**K13.** Mitu `hello` programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt `hello`, ja miks? (Vihje: vaata muutujat `PATH`.)
+> **K13.** Mitu `hello` programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt `hello`, ja miks? (Vihje: vaata muutujat `PATH`.)
 
 **4.6** Eemalda mõlemad:
 
@@ -241,15 +241,15 @@ sudo apt purge hello
 which -a hello
 ```
 
-**K14.** Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.
+> **K14.** Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.
 
 ---
 
 ## 5. osa. Kokkuvõte
 
-**K15.** Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
+> **K15.** Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
 
-**K16.** Mida tuleks teha enne olulise serveri suurt uuendust?
+> **K16.** Mida tuleks teha enne olulise serveri suurt uuendust?
 
 ---
 

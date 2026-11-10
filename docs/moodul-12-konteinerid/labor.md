@@ -11,7 +11,7 @@
 | **Vajalik** | AlmaLinuxi virtuaalmasin (soovitatavalt 2 GiB mälu), internetiühendus, laboritöö 6 Git-hoidla |
 | **Eesmärk** | Käivitada ja hallata teenuseid konteinerites ning hoida nende kirjeldus Gitis |
 
-**Aruanne:** vasta küsimustele **K1–K10**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K10**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ---
 
@@ -39,7 +39,7 @@ uname -r
 podman run --rm docker.io/library/alpine:latest uname -r
 ```
 
-**K1.** Milline distro oli konteineri sees ja milline hostis? Mis oli kerneli versioon konteineris ja hostis? Mida see konteinerite kohta näitab?
+> **K1.** Milline distro oli konteineri sees ja milline hostis? Mis oli kerneli versioon konteineris ja hostis? Mida see konteinerite kohta näitab?
 
 **2.2** Uuri konteineri isolatsiooni:
 
@@ -58,7 +58,7 @@ ls /
 exit
 ```
 
-**K2.** Mitu protsessi nägid konteineris? Kes oli konteineri sees kasutaja? Võrdle hostis: `podman unshare id` ja `id`. Mis on juurkasutajata konteineri eelis?
+> **K2.** Mitu protsessi nägid konteineris? Kes oli konteineri sees kasutaja? Võrdle hostis: `podman unshare id` ja `id`. Mis on juurkasutajata konteineri eelis?
 
 **2.3** Käivita veebiserver taustal:
 
@@ -86,7 +86,7 @@ podman run -d --name veeb -p 8080:80 docker.io/library/nginx:alpine
 curl -s http://localhost:8080 | head -3
 ```
 
-**K3.** Mis juhtus muudatusega pärast konteineri uuesti loomist? Miks? Kuidas hoida konteineri andmeid püsivalt?
+> **K3.** Mis juhtus muudatusega pärast konteineri uuesti loomist? Miks? Kuidas hoida konteineri andmeid püsivalt?
 
 **2.6** Haagi veebisisu hosti kataloogist:
 
@@ -101,7 +101,7 @@ curl -s http://localhost:8080
 ls -Z ~/sait
 ```
 
-**K4.** Kas hostis tehtud muudatus oli kohe konteineris nähtav? Mida tegid valikud `ro` ja `Z`? Mis juhtub ilma `Z`-ta (proovi)?
+> **K4.** Kas hostis tehtud muudatus oli kohe konteineris nähtav? Mida tegid valikud `ro` ja `Z`? Mis juhtub ilma `Z`-ta (proovi)?
 
 
 ---
@@ -144,7 +144,7 @@ git add konteinerid
 git commit -m "Lisa kooli saidi konteinerpilt"
 ```
 
-**K5.** Mis on pildi suurus (`podman images`)? Mida näitab `podman history`? Miks on kasulik hoida `Containerfile` Gitis, aga mitte pilti ennast?
+> **K5.** Mis on pildi suurus (`podman images`)? Mida näitab `podman history`? Miks on kasulik hoida `Containerfile` Gitis, aga mitte pilti ennast?
 
 
 ---
@@ -174,7 +174,7 @@ sudo firewall-cmd --add-port=8082/tcp
 
 Ava brauseris `http://ALMA_IP:8082`. Logi Adminerisse sisse: süsteem *MySQL/MariaDB*, server `db`, kasutaja `kool`, parool `Kool-Parool-123`, andmebaas `kool`. Loo Adminerist tabel `opilased` ja lisa paar rida.
 
-**K6.** Miks on Adminerisse sisselogimisel serveri nimi `db`, mitte `localhost`? Kas MariaDB port 3306 on hostis avatud (`ss -tlpn | grep 3306`)? Miks see hea on?
+> **K6.** Miks on Adminerisse sisselogimisel serveri nimi `db`, mitte `localhost`? Kas MariaDB port 3306 on hostis avatud (`ss -tlpn | grep 3306`)? Miks see hea on?
 
 **4.3** Testi andmete püsivust:
 
@@ -187,7 +187,7 @@ podman-compose up -d
 
 Kontrolli Adminerist, kas tabel ja andmed on alles.
 
-**K7.** Kas andmed jäid alles? Miks? Mis juhtuks käsuga `podman-compose down -v`?
+> **K7.** Kas andmed jäid alles? Miks? Mis juhtuks käsuga `podman-compose down -v`?
 
 **4.4** Ära lisa paroole avalikku Giti! Lisa Giti ainult näidisfail ilma päris paroolideta (nt `compose.example.yaml`) ja lisa `compose.yaml` faili `.gitignore`. Arutle aruandes, kuidas paroole paremini hallata (nt `.env` fail, Podmani saladused `podman secret`).
 
@@ -228,7 +228,7 @@ sudo systemctl reboot
 
 Pärast taaskäivitust: `curl -s http://localhost:8083`.
 
-**K8.** Mille poolest erineb teenuse `veeb` haldamine tavalisest systemd teenusest? Kas konteiner käivitus pärast taaskäivitust? Miks ei näe `podman ps` (ilma `sudo`-ta) seda konteinerit?
+> **K8.** Mille poolest erineb teenuse `veeb` haldamine tavalisest systemd teenusest? Kas konteiner käivitus pärast taaskäivitust? Miks ei näe `podman ps` (ilma `sudo`-ta) seda konteinerit?
 
 Lisa Quadlet-fail oma Giti hoidlasse (`~/infra/konteinerid/quadlet/veeb.container`).
 
@@ -237,9 +237,9 @@ Lisa Quadlet-fail oma Giti hoidlasse (`~/infra/konteinerid/quadlet/veeb.containe
 
 ## 6. osa. Kokkuvõte
 
-**K9.** Võrdle konteinerit ja virtuaalmasinat: millal kasutaksid kumba? Too näide kooli Proxmoxi laborist.
+> **K9.** Võrdle konteinerit ja virtuaalmasinat: millal kasutaksid kumba? Too näide kooli Proxmoxi laborist.
 
-**K10.** Mida peaks hoidma Gitis (Containerfile, `compose.yaml`, Quadlet-failid, andmed, pildid, paroolid) ja mida mitte? Põhjenda.
+> **K10.** Mida peaks hoidma Gitis (Containerfile, `compose.yaml`, Quadlet-failid, andmed, pildid, paroolid) ja mida mitte? Põhjenda.
 
 ---
 

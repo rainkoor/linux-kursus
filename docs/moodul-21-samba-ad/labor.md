@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 18 laborivõrk OPNsense'i taga, uus Debiani VM `dc1` (2 vCPU, 2 GiB RAM, 20 GiB ketas), Windowsi kliendi VM |
 | **Eesmärk** | Ehitada vaba tarkvaraga Active Directory domeen ja liita sellega Windowsi ning Linuxi masinad |
 
-**Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `dc1` `10.0.83.56`, `alma` `10.0.83.55`, `ubuntuklient` `10.0.83.98`, `winklient` `10.0.83.99`. Domeen `ad.lab.example`, NetBIOS-nimi `AD`. Asenda oma võrguplaani väärtustega.
 
@@ -33,7 +33,7 @@ hostname -i
 ip -br a
 ```
 
-**K1.** Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.56`), mitte `127.0.1.1`-ks?
+> **K1.** Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.56`), mitte `127.0.1.1`-ks?
 
 **1.2** Kontrolli kellaaega:
 
@@ -41,7 +41,7 @@ ip -br a
 timedatectl
 ```
 
-**K2.** Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?
+> **K2.** Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?
 
 ## 2. osa. Domeeni loomine
 
@@ -57,7 +57,7 @@ sudo ss -tulpn | grep -E ':(53|88|389|445|464|636) '
 cat /etc/samba/smb.conf
 ```
 
-**K3.** Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on `smb.conf` failis jaotises `[global]` peale provisioning'ut?
+> **K3.** Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on `smb.conf` failis jaotises `[global]` peale provisioning'ut?
 
 ## 3. osa. DNS ja Kerberos
 
@@ -71,7 +71,7 @@ host -t A dc1.ad.lab.example
 host www.debian.org
 ```
 
-**K4.** Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule `www.debian.org`?
+> **K4.** Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule `www.debian.org`?
 
 **3.2** Testi Kerberost:
 
@@ -82,7 +82,7 @@ kdestroy
 kinit vale-kasutaja
 ```
 
-**K5.** Milline pilet tekkis `klist` väljundis ja kui kaua see kehtib? Mis veateate andis vale kasutaja?
+> **K5.** Milline pilet tekkis `klist` väljundis ja kui kaua see kehtib? Mis veateate andis vale kasutaja?
 
 **3.3** Testi SMB-d:
 
@@ -97,7 +97,7 @@ smbclient //localhost/netlogon -U Administrator -c 'ls'
 host -t SRV _ldap._tcp.ad.lab.example
 ```
 
-**K6.** Miks on parem suunata ainult domeeni `ad.lab.example` päringud DC-le, mitte panna DC kogu laborivõrgu DNS-iks?
+> **K6.** Miks on parem suunata ainult domeeni `ad.lab.example` päringud DC-le, mitte panna DC kogu laborivõrgu DNS-iks?
 
 ## 4. osa. Kasutajad, grupid ja OU-d
 
@@ -118,11 +118,11 @@ sudo samba-tool group listmembers opilased
 sudo samba-tool user show mari
 ```
 
-**K7.** Kirjuta aruandesse käsud, millega lõid kasutaja `mari` ja paigutasid ta OU-sse `Opilased`. Mis on Mari täielik DN?
+> **K7.** Kirjuta aruandesse käsud, millega lõid kasutaja `mari` ja paigutasid ta OU-sse `Opilased`. Mis on Mari täielik DN?
 
 **4.2** Vaata ja muuda paroolipoliitikat (min pikkus 10). Proovi seada Jaanile parool `Lyhike1`.
 
-**K8.** Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?
+> **K8.** Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?
 
 **4.3** Lisa DNS-kirjed: `www.ad.lab.example → 10.0.83.55` ning pöördtsoon `83.0.10.in-addr.arpa` koos `dc1` PTR-kirjega.
 
@@ -150,7 +150,7 @@ echo $env:LOGONSERVER
 klist
 ```
 
-**K9.** Mida näitasid `whoami` ja `$env:LOGONSERVER`? Milliseid Kerberose pileteid on Windowsi kliendil?
+> **K9.** Mida näitasid `whoami` ja `$env:LOGONSERVER`? Milliseid Kerberose pileteid on Windowsi kliendil?
 
 **5.3** Vaata DC-s, et arvutikonto tekkis:
 
@@ -159,7 +159,7 @@ sudo samba-tool computer list
 host winklient.ad.lab.example
 ```
 
-**K10.** Kas Windowsi klient registreeris ennast DNS-is automaatselt?
+> **K10.** Kas Windowsi klient registreeris ennast DNS-is automaatselt?
 
 ## 6. osa. RSAT ja rühmapoliitika
 
@@ -172,7 +172,7 @@ gpupdate /force
 gpresult /r
 ```
 
-**K11.** Kas juhtpaneel oli Jaanile keelatud? Kas see kehtis ka Katile? Miks?
+> **K11.** Kas juhtpaneel oli Jaanile keelatud? Kas see kehtis ka Katile? Miks?
 
 **6.3** Leia GPO failid DC-s:
 
@@ -180,7 +180,7 @@ gpresult /r
 sudo ls -R /var/lib/samba/sysvol/ad.lab.example/Policies/ | head -30
 ```
 
-**K12.** Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?
+> **K12.** Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?
 
 ---
 
@@ -199,7 +199,7 @@ realm list
 sudo klist -k
 ```
 
-**K13.** Mida näitas `realm discover`? Millised kirjed on failis `/etc/krb5.keytab` (`klist -k`) ja milleks neid vaja on?
+> **K13.** Mida näitas `realm discover`? Millised kirjed on failis `/etc/krb5.keytab` (`klist -k`) ja milleks neid vaja on?
 
 **7.3** Testi:
 
@@ -218,7 +218,7 @@ pwd
 klist
 ```
 
-**K14.** Mis on Mari UID? Kuidas see arvutati (`ldap_id_mapping`)? Kas Maril on pärast sisselogimist Kerberose pilet?
+> **K14.** Mis on Mari UID? Kuidas see arvutati (`ldap_id_mapping`)? Kas Maril on pärast sisselogimist Kerberose pilet?
 
 ## 8. osa. AlmaLinuxi liitmine domeeniga
 
@@ -231,7 +231,7 @@ id mari@ad.lab.example
 
 **8.2** Muuda ka siin `use_fully_qualified_names = False` ja `fallback_homedir = /home/%u`.
 
-**K15.** Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?
+> **K15.** Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?
 
 ## 9. osa. Ligipääsu piiramine ja `sudo`
 
@@ -244,7 +244,7 @@ sudo -l
 sudo whoami
 ```
 
-**K16.** Kirjuta `realm permit` käsud ja sudoers-rida. Mis juhtus `administrator`-i ja `ain`-i sisselogimisel?
+> **K16.** Kirjuta `realm permit` käsud ja sudoers-rida. Mis juhtus `administrator`-i ja `ain`-i sisselogimisel?
 
 **9.3** Keela DC-s Mari konto (`samba-tool user disable mari`), tühjenda kliendis vahemälu ja proovi Marina sisse logida. Seejärel luba konto uuesti.
 
@@ -260,11 +260,11 @@ kinit mari
 
 Seejärel taasta: `sudo timedatectl set-ntp true`.
 
-**K17.** Mis veateate said? Miks?
+> **K17.** Mis veateate said? Miks?
 
 **10.2** Muuda `ubuntuklient`-is ajutiselt DNS-iks `1.1.1.1` ja proovi `realm discover ad.lab.example`. Taasta DNS.
 
-**K18.** Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.
+> **K18.** Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.
 
 ---
 

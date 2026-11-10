@@ -11,7 +11,7 @@
 | **Vajalik** | Varasemate laboritööde masinad, `ubuntusrv`-s Docker (või Podman) ja vähemalt 2 GiB mälu |
 | **Eesmärk** | Õppida leidma jõudlusprobleeme käsurealt ja ehitada laborivõrgule seiresüsteem |
 
-**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ---
 
@@ -28,7 +28,7 @@ vmstat 1 5
 iostat -xz 1 3
 ```
 
-**K1.** Mitu tuuma masinal on ja mis on koormus? Kui palju mälu on tegelikult vaba (`available`) ja kui palju on failide vahemälus? Kas `top` päises on `st` väärtus suurem kui 0 - mida see Proxmoxi VM-is tähendab?
+> **K1.** Mitu tuuma masinal on ja mis on koormus? Kui palju mälu on tegelikult vaba (`available`) ja kui palju on failide vahemälus? Kas `top` päises on `st` väärtus suurem kui 0 - mida see Proxmoxi VM-is tähendab?
 
 ## 2. osa. Koormuse tekitamine ja tuvastamine
 
@@ -71,9 +71,9 @@ iostat -xz 2
 pidstat -d 2 3
 ```
 
-**K2.** Täida tabel: iga koormuse jaoks - milline tööriist ja milline veerg näitas probleemi kõige selgemini (nt `vmstat` `r`, `wa`, `si/so`, `iostat` `%util`, `await`)?
+> **K2.** Täida tabel: iga koormuse jaoks - milline tööriist ja milline veerg näitas probleemi kõige selgemini (nt `vmstat` `r`, `wa`, `si/so`, `iostat` `%util`, `await`)?
 
-**K3.** Kas mälukoormusel hakkas süsteem kasutama saaleala (`si`/`so`)? Mis juhtub, kui mälu ja saaleala saavad otsa (vaata `journalctl -k | grep -i oom`)?
+> **K3.** Kas mälukoormusel hakkas süsteem kasutama saaleala (`si`/`so`)? Mis juhtub, kui mälu ja saaleala saavad otsa (vaata `journalctl -k | grep -i oom`)?
 
 ## 3. osa. Ajalugu sar-iga
 
@@ -92,7 +92,7 @@ sar -q
 sar -r
 ```
 
-**K4.** Kas sar-i ajaloost on näha, millal koormust tekitasid? Mitme minuti järel sysstat andmeid kogub?
+> **K4.** Kas sar-i ajaloost on näha, millal koormust tekitasid? Mitme minuti järel sysstat andmeid kogub?
 
 ## 4. osa. Tõrkeotsing strace'i ja lsof-iga
 
@@ -115,7 +115,7 @@ Oletame, et sa ei näe skripti sisu. Leia `strace`-iga, mida programm otsib:
 strace -f -e trace=file ~/katkine.sh 2>&1 | tail -15
 ```
 
-**K5.** Millist faili programm otsis ja mis oli tulemus (`ENOENT`, `EACCES`)? Kuidas probleemi parandaksid?
+> **K5.** Millist faili programm otsis ja mis oli tulemus (`ENOENT`, `EACCES`)? Kuidas probleemi parandaksid?
 
 **4.2** Kes hoiab faili avatuna:
 
@@ -126,7 +126,7 @@ sudo lsof -i -P -n | grep LISTEN
 kill %1
 ```
 
-**K6.** Milline protsess hoidis logifaili avatuna? Millised protsessid kuulavad võrgus (võrdle `ss -tlpn` väljundiga)?
+> **K6.** Milline protsess hoidis logifaili avatuna? Millised protsessid kuulavad võrgus (võrdle `ss -tlpn` väljundiga)?
 
 ## 5. osa. Prometheus ja Grafana
 
@@ -146,19 +146,19 @@ docker compose ps
 
 Ava `http://10.0.83.54:9090/targets`.
 
-**K7.** Kas kõik sihtmärgid olid **UP**? Kui mõni oli **DOWN**, mis oli põhjus (tulemüür, vale IP, eksportija ei tööta)?
+> **K7.** Kas kõik sihtmärgid olid **UP**? Kui mõni oli **DOWN**, mis oli põhjus (tulemüür, vale IP, eksportija ei tööta)?
 
 **5.3** Proovi Prometheuse veebiliideses (*Graph*/*Query*) päringuid teooria tabelist. Käivita `debian1`-s uuesti `stress-ng --cpu $(nproc) --timeout 120s` ja vaata protsessori kasutuse graafikut.
 
-**K8.** Kirjuta PromQL-päring, mis näitab iga masina vaba mälu protsentides. Mis oli tulemus?
+> **K8.** Kirjuta PromQL-päring, mis näitab iga masina vaba mälu protsentides. Mis oli tulemus?
 
 **5.4** Ava Grafana (`http://10.0.83.54:3000`), muuda administraatori parool, lisa andmeallikas Prometheus (`http://prometheus:9090`) ja impordi armatuurlaud ID **1860**.
 
-**K9.** Miks on Grafanas andmeallika aadress `http://prometheus:9090`, mitte `http://localhost:9090`? (Vihje: moodul 12, Compose'i võrk.)
+> **K9.** Miks on Grafanas andmeallika aadress `http://prometheus:9090`, mitte `http://localhost:9090`? (Vihje: moodul 12, Compose'i võrk.)
 
 **5.5** Loo Grafanas häire (*Alerting* → *Alert rules*), mis käivitub, kui mõne masina juurfailisüsteemis on vaba ruumi alla 20%. Testi seda: täida `alma`-s ketast (`fallocate -l <suurus> /var/tmp/suur.fail`) ja kustuta fail pärast testi.
 
-**K10.** Kas häire käivitus? Mida tähendab häire olek *Pending* ja *Firing*? Miks on reeglis `for: 10m` (või *Pending period*)?
+> **K10.** Kas häire käivitus? Mida tähendab häire olek *Pending* ja *Firing*? Miks on reeglis `for: 10m` (või *Pending period*)?
 
 ## 6. osa. Kättesaadavus: Uptime Kuma
 
@@ -170,15 +170,15 @@ Ava `http://10.0.83.54:9090/targets`.
 
 **6.2** Peata `debian1`-s nginx (`sudo systemctl stop nginx`), oota ja vaata, millal Uptime Kuma probleemi märkas. Käivita nginx uuesti.
 
-**K11.** Kui kaua kulus probleemi märkamiseks? Millest see sõltub? Kas Uptime Kuma näitab ka sertifikaadi aegumist?
+> **K11.** Kui kaua kulus probleemi märkamiseks? Millest see sõltub? Kas Uptime Kuma näitab ka sertifikaadi aegumist?
 
 ## 7. osa. Kokkuvõte
 
-**K12.** Kasutaja kaebab, et veebileht on kell 9–10 aeglane. Kirjelda samm-sammult, kuidas põhjust otsiksid (USE meetod, käsud, sar, Grafana).
+> **K12.** Kasutaja kaebab, et veebileht on kell 9–10 aeglane. Kirjelda samm-sammult, kuidas põhjust otsiksid (USE meetod, käsud, sar, Grafana).
 
-**K13.** Millised häired seadistaksid kooli laborivõrgule? Too 5 häiret ja põhjenda, miks just need (ja mitte rohkem).
+> **K13.** Millised häired seadistaksid kooli laborivõrgule? Too 5 häiret ja põhjenda, miks just need (ja mitte rohkem).
 
-**K14.** Võrdle Prometheust ja Zabbixit: millal valiksid kumma?
+> **K14.** Võrdle Prometheust ja Zabbixit: millal valiksid kumma?
 
 ---
 

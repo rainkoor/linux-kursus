@@ -11,7 +11,7 @@
 | **Vajalik** | FreeBSD VM `fbsd` (2 vCPU, 2 GiB RAM, 20 GiB ketas, VirtIO võrk), aadressid `10.0.83.66` (host) ja `10.0.83.67` (jail). Linuxi klient testimiseks (nt `ubuntuklient`) |
 | **Eesmärk** | Paigaldada ja hallata FreeBSD serverit: paketid ja uuendused, teenused, kasutajad, võrk, ZFS-i alglaadimiskeskkonnad, pf ja jail |
 
-**Aruanne:** vasta küsimustele **K1–K12**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K12**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!NOTE]
 > **HKHK laboris** võib õpetaja anda valmis FreeBSD malli - siis alusta 2. osast. Iseõppijale sobib ka VirtualBox (võrguliides on siis `em0`, mitte `vtnet0`).
@@ -29,7 +29,7 @@ ssh kasutaja@<fbsd-aadress>
 su -
 ```
 
-**K1.** Mitu sammu oli paigaldajas võrreldes Debiani paigaldajaga? Mis juhtub, kui proovid `su -` kasutajaga, kes ei ole grupis `wheel`?
+> **K1.** Mitu sammu oli paigaldajas võrreldes Debiani paigaldajaga? Mis juhtub, kui proovid `su -` kasutajaga, kes ei ole grupis `wheel`?
 
 ---
 
@@ -60,7 +60,7 @@ cat /tmp/proov.txt
 man sed             # otsi -i kirjeldus
 ```
 
-**K2.** Milline on FreeBSD ja kerneli versioon? Millised ZFS-i andmekogumid paigaldaja lõi? Miks ebaõnnestus `sed -i` ilma tühja argumendita ja mida see sulle skriptide kirjutamise kohta ütleb?
+> **K2.** Milline on FreeBSD ja kerneli versioon? Millised ZFS-i andmekogumid paigaldaja lõi? Miks ebaõnnestus `sed -i` ilma tühja argumendita ja mida see sulle skriptide kirjutamise kohta ütleb?
 
 ---
 
@@ -81,7 +81,7 @@ pkg audit -F
 which bash
 ```
 
-**K3.** Kas `freebsd-update` leidis uuendusi? Kus asuvad `bash` ja nginx-i seadistusfail? Miks just seal, mitte `/bin` ja `/etc` all? Kas `pkg audit` leidis haavatavusi?
+> **K3.** Kas `freebsd-update` leidis uuendusi? Kus asuvad `bash` ja nginx-i seadistusfail? Miks just seal, mitte `/bin` ja `/etc` all? Kas `pkg audit` leidis haavatavusi?
 
 ---
 
@@ -108,7 +108,7 @@ pw groupmod wheel -m anna
 
 Logi teises terminalis sisse kasutajana `anna` ja proovi `doas pkg info nginx` ning `su -`.
 
-**K4.** Mis vahe on `pw usermod anna -G grupp` ja `pw groupmod grupp -m anna` vahel? Kus on FreeBSD-s parooliräsid (võrdle Linuxi `/etc/shadow`-ga)? Miks on `peeter`-i kest `/usr/local/bin/bash`, mitte `/bin/bash`?
+> **K4.** Mis vahe on `pw usermod anna -G grupp` ja `pw groupmod grupp -m anna` vahel? Kus on FreeBSD-s parooliräsid (võrdle Linuxi `/etc/shadow`-ga)? Miks on `peeter`-i kest `/usr/local/bin/bash`, mitte `/bin/bash`?
 
 ---
 
@@ -136,7 +136,7 @@ periodic daily
 less /var/mail/root
 ```
 
-**K5.** Millises failis on nginx-i lubamise seade ja mis rida `sysrc` sinna kirjutas? Mida sisaldas igapäevane `periodic` aruanne? Kuidas teeksid sama Linuxis (systemd)?
+> **K5.** Millises failis on nginx-i lubamise seade ja mis rida `sysrc` sinna kirjutas? Mida sisaldas igapäevane `periodic` aruanne? Kuidas teeksid sama Linuxis (systemd)?
 
 ---
 
@@ -156,7 +156,7 @@ host www.freebsd.org
 
 Ühendu uue aadressiga SSH-ga.
 
-**K6.** Võrdle FreeBSD võrguseadistust Debiani (`/etc/network/interfaces`), Ubuntu (Netplan) ja AlmaLinuxi (`nmcli`) omaga (moodul 7). Mis on lihtsam, mis on keerulisem?
+> **K6.** Võrdle FreeBSD võrguseadistust Debiani (`/etc/network/interfaces`), Ubuntu (Netplan) ja AlmaLinuxi (`nmcli`) omaga (moodul 7). Mis on lihtsam, mis on keerulisem?
 
 ---
 
@@ -195,7 +195,7 @@ ls /home/anna
 
 Vaata Proxmoxi konsoolis ka alglaadija menüüd (*Boot Environments*). Lõpuks aktiveeri soovi korral jälle `default` ja kustuta katsekeskkond (`bectl destroy`).
 
-**K7.** Mis juhtus failiga `/etc/katse-fail` ja paketiga `tmux` pärast vana keskkonna aktiveerimist? Miks ei mõjutanud see kodukataloogi? Kuidas aitab see põhiversiooni uuendamisel?
+> **K7.** Mis juhtus failiga `/etc/katse-fail` ja paketiga `tmux` pärast vana keskkonna aktiveerimist? Miks ei mõjutanud see kodukataloogi? Kuidas aitab see põhiversiooni uuendamisel?
 
 ---
 
@@ -229,7 +229,7 @@ tcpdump -n -e -ttt -i pflog0 &             # blokeeritud paketid (Ctrl+C / kill 
 pfctl -t ryndajad -T delete <kliendi-IP>
 ```
 
-**K8.** Kas klient sattus tabelisse `<ryndajad>`? Pärast mitut ühendust? Mida tähendab pf-i reeglite juures „viimane sobiv reegel kehtib“ ja milleks on `quick`? Võrdle seda lahendust fail2ban-iga (moodul 11).
+> **K8.** Kas klient sattus tabelisse `<ryndajad>`? Pärast mitut ühendust? Mida tähendab pf-i reeglite juures „viimane sobiv reegel kehtib“ ja milleks on `quick`? Võrdle seda lahendust fail2ban-iga (moodul 11).
 
 ---
 
@@ -272,17 +272,17 @@ zfs snapshot zroot/jails/www@puhas
 
 Linuxi kliendist: `curl http://10.0.83.67` ja `curl http://10.0.83.66`. Lisa vajadusel pf-i reeglisse jaili aadress (reegel `to port { http, https }` kehtib kõigile hosti aadressidele).
 
-**K9.** Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 12) sarnasused ja erinevused?
+> **K9.** Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 12) sarnasused ja erinevused?
 
-**K10.** Mitu megabaiti võttis jail (`zfs list zroot/jails/www`)? Kuidas saaksid hetktõmmisest kiiresti luua teise samasuguse jaili (vihje: `zfs clone`)?
+> **K10.** Mitu megabaiti võttis jail (`zfs list zroot/jails/www`)? Kuidas saaksid hetktõmmisest kiiresti luua teise samasuguse jaili (vihje: `zfs clone`)?
 
 ---
 
 ## 10. osa. Kokkuvõte
 
-**K11.** Täida tabel kümne toimingu kohta: kuidas seda tehakse Debianis ja kuidas FreeBSD-s (paketid, uuendus, teenus, kasutaja gruppi, staatiline IP, kuulavad pordid, tulemüür, logid, isoleeritud teenus, tagasivõtt pärast uuendust).
+> **K11.** Täida tabel kümne toimingu kohta: kuidas seda tehakse Debianis ja kuidas FreeBSD-s (paketid, uuendus, teenus, kasutaja gruppi, staatiline IP, kuulavad pordid, tulemüür, logid, isoleeritud teenus, tagasivõtt pärast uuendust).
 
-**K12.** Millises olukorras valiksid serverile FreeBSD ja millises Linuxi? Too vähemalt kaks argumenti mõlema kohta.
+> **K12.** Millises olukorras valiksid serverile FreeBSD ja millises Linuxi? Too vähemalt kaks argumenti mõlema kohta.
 
 ---
 

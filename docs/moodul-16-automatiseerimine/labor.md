@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 12 AlmaLinuxi masin koos Git-hoidlaga `~/infra`, varasemate laboritööde Debiani ja Ubuntu masinad. 2. osa jaoks oma arvuti VirtualBoxi ja Vagrantiga |
 | **Eesmärk** | Seadistada mitu serverit korraga Ansible'iga, jagada kood rollideks, testida seda ja luua korratav laborikeskkond |
 
-**Aruanne:** vasta küsimustele **K1–K11**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K11**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised: `DEBIAN_IP`, `UBUNTU_IP`, `ALMA_IP`, `kasutaja` - asenda oma väärtustega.
 
@@ -64,7 +64,7 @@ ansible all -m ansible.builtin.setup -a "filter=ansible_distribution*"
 ansible all -b -K -a "whoami"
 ```
 
-**K1.** Mida vastas `ping`? Milliseid distro fakte Ansible kogus? Mida tegi `-b -K`?
+> **K1.** Mida vastas `ping`? Milliseid distro fakte Ansible kogus? Mida tegi `-b -K`?
 
 **1.4** Loo mall `templates/motd.j2`:
 
@@ -184,7 +184,7 @@ ansible-playbook veebiserverid.yml -K
 ansible-playbook veebiserverid.yml -K
 ```
 
-**K2.** Kopeeri mõlema käivituse lõpukokkuvõte (`PLAY RECAP`) aruandesse. Mille poolest need erinevad? Mida tähendab idempotentsus?
+> **K2.** Kopeeri mõlema käivituse lõpukokkuvõte (`PLAY RECAP`) aruandesse. Mille poolest need erinevad? Mida tähendab idempotentsus?
 
 **1.8** Kontrolli tulemust:
 
@@ -193,15 +193,15 @@ ansible veebiserverid -a "curl -s http://localhost:8090"
 ssh kasutaja@DEBIAN_IP
 ```
 
-**K3.** Mida näitas veebileht kummaski serveris? Kas sisselogimisel ilmus teade? Kuidas sai sama mall eri serverites eri sisu?
+> **K3.** Mida näitas veebileht kummaski serveris? Kas sisselogimisel ilmus teade? Kuidas sai sama mall eri serverites eri sisu?
 
 **1.9** **Seadistuse triiv:** logi Ubuntu masinasse ja muuda faili `/var/www/ansible/index.html` käsitsi. Kustuta Debianis pakett `tree`. Käivita mänguraamat uuesti.
 
-**K4.** Mida Ansible tegi? Mis on „seadistuse triiv“ (*configuration drift*) ja kuidas Ansible seda lahendab?
+> **K4.** Mida Ansible tegi? Mis on „seadistuse triiv“ (*configuration drift*) ja kuidas Ansible seda lahendab?
 
 **1.10** Lisa kolmas server: lisa inventuuri AlmaLinuxi masin ise (`alma ansible_host=localhost ansible_connection=local`) gruppi `veebiserverid` ja käivita mänguraamat.
 
-**K5.** Mis juhtus AlmaLinuxis? Milline ülesanne ebaõnnestus ja miks? (Vihje: kas AlmaLinuxi nginx kasutab kataloogi `sites-available`?) Kuidas peaks mänguraamatut muutma, et see töötaks ka AlmaLinuxis? (Vihje: `when: ansible_os_family == "Debian"` ja `/etc/nginx/conf.d/`.)
+> **K5.** Mis juhtus AlmaLinuxis? Milline ülesanne ebaõnnestus ja miks? (Vihje: kas AlmaLinuxi nginx kasutab kataloogi `sites-available`?) Kuidas peaks mänguraamatut muutma, et see töötaks ka AlmaLinuxis? (Vihje: `when: ansible_os_family == "Debian"` ja `/etc/nginx/conf.d/`.)
 
 Paranda mänguraamat või eemalda AlmaLinux inventuurist.
 
@@ -284,7 +284,7 @@ ansible-playbook site.yml -K | tee /tmp/teine.txt
 grep -E 'changed=[1-9]' /tmp/teine.txt && echo "EI OLE IDEMPOTENTNE" || echo "OK"
 ```
 
-**K6.** Mida näitab veebileht nüüd kooli nimena - rolli vaikeväärtust või `group_vars` väärtust? Miks? Mis juhtub, kui käivitad `ansible-playbook site.yml -K -e kooli_nimi=Test`?
+> **K6.** Mida näitab veebileht nüüd kooli nimena - rolli vaikeväärtust või `group_vars` väärtust? Miks? Mis juhtub, kui käivitad `ansible-playbook site.yml -K -e kooli_nimi=Test`?
 
 **3.5** Paigalda `ansible-lint` ja kontrolli projekti:
 
@@ -296,7 +296,7 @@ ansible-lint
 
 Paranda leiud (või põhjenda, miks mõnda ei paranda) ja käivita uuesti, kuni leide pole.
 
-**K7.** Milliseid leide `ansible-lint` andis (reegli nimed)? Kas mõni neist oleks võinud põhjustada päris vea?
+> **K7.** Milliseid leide `ansible-lint` andis (reegli nimed)? Kas mõni neist oleks võinud põhjustada päris vea?
 
 **3.6** Tee lõpuks muudatus, mis rikub idempotentsuse: lisa rolli ülesanne
 
@@ -307,7 +307,7 @@ Paranda leiud (või põhjenda, miks mõnda ei paranda) ja käivita uuesti, kuni 
 
 ja käivita idempotentsuse kontroll uuesti. Seejärel paranda ülesanne nii, et see muudaks faili ainult esimesel korral (vihje: `creates: /var/www/ansible/aeg.txt`).
 
-**K8.** Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible `shell`-ülesande alati muutunuks?
+> **K8.** Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible `shell`-ülesande alati muutunuks?
 
 **3.7** Kanna muudatused Giti: `git add -A && git commit -m "Veebiserveri roll, group_vars ja ansible-lint"` ja `git push`.
 
@@ -315,11 +315,11 @@ ja käivita idempotentsuse kontroll uuesti. Seejärel paranda ülesanne nii, et 
 
 ## 4. osa. Kokkuvõte
 
-**K9.** Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?
+> **K9.** Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?
 
-**K10.** Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.
+> **K10.** Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.
 
-**K11.** Koosta `git log --oneline --graph` väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?
+> **K11.** Koosta `git log --oneline --graph` väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?
 
 
 ---

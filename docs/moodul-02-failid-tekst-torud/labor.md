@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani virtuaalmasin (sama, mis laboritöös 1), ligipääs SSH kaudu |
 | **Eesmärk** | Harjutada redaktoreid, ümbersuunamist, torusid, tekstitöötlust, failide otsimist ja arhiveerimist |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** oled kooli veebiserveri administraator. Õpetaja kahtlustab, et serverit on rünnatud, ja palub sul logi analüüsida, kokkuvõte teha ning logid varundada.
 
@@ -75,7 +75,7 @@ Väli 1 on kliendi IP-aadress, 7 küsitud lehekülg, 9 HTTP olekukood ja 10 vast
 
 Kontrolli käsuga `cat markmed.txt`.
 
-**K1.** Milles seisneb vi tava- ja sisestusrežiimi erinevus?
+> **K1.** Milles seisneb vi tava- ja sisestusrežiimi erinevus?
 
 ---
 
@@ -96,7 +96,7 @@ date > proov.txt
 cat proov.txt
 ```
 
-**K2.** Mitu rida on failis `proov.txt`? Miks?
+> **K2.** Mitu rida on failis `proov.txt`? Miks?
 
 **2.3** Käivita käsk, mis annab nii väljundi kui ka veateate:
 
@@ -108,11 +108,11 @@ cat valjund.txt
 cat vead.txt
 ```
 
-**K3.** Miks kuvati teise käsu järel ekraanil ikkagi midagi? Mis jõudis faili `valjund.txt` ja mis faili `vead.txt`?
+> **K3.** Miks kuvati teise käsu järel ekraanil ikkagi midagi? Mis jõudis faili `valjund.txt` ja mis faili `vead.txt`?
 
 **2.4** Otsi kogu süsteemist faile nimega `passwd` nii, et veateateid ekraanil ei kuvata.
 
-**K4.** Kirjuta käsk ja loetle leitud failid.
+> **K4.** Kirjuta käsk ja loetle leitud failid.
 
 ---
 
@@ -122,7 +122,7 @@ Kasuta selles osas faili `juurdepaas.log`. Ehita ahelaid järk-järgult: lisa ü
 
 **3.1** Mitu rida on logis?
 
-**K5.** Kirjuta käsk ja tulemus.
+> **K5.** Kirjuta käsk ja tulemus.
 
 **3.2** Kuva ainult IP-aadressid (1. väli):
 
@@ -132,13 +132,13 @@ cut -d' ' -f1 juurdepaas.log
 
 **3.3** Leia, mitu päringut tegi iga IP-aadress, ja järjesta tulemus suurimast väikseimani.
 
-**K6.** Kirjuta käsk. Milline IP-aadress tegi kõige rohkem päringuid?
+> **K6.** Kirjuta käsk. Milline IP-aadress tegi kõige rohkem päringuid?
 
 **3.4** Kuva kõik read, kus olekukood on `404` (lehte ei leitud). Vihje: otsi mustrit `" 404 `.
 
-**K7.** Mitu sellist rida on? Millise IP-aadressi päringud need on ja milliseid lehti küsiti?
+> **K7.** Mitu sellist rida on? Millise IP-aadressi päringud need on ja milliseid lehti küsiti?
 
-**K8.** Miks on need päringud kahtlased? (Vihje: vaata küsitud lehtede nimesid. Kas koolilehel on WordPress või phpMyAdmin?)
+> **K8.** Miks on need päringud kahtlased? (Vihje: vaata küsitud lehtede nimesid. Kas koolilehel on WordPress või phpMyAdmin?)
 
 **3.5** Loenda kõik olekukoodid (9. väli). Kasuta `awk`:
 
@@ -146,27 +146,27 @@ cut -d' ' -f1 juurdepaas.log
 awk '{print $9}' juurdepaas.log | sort | uniq -c | sort -rn
 ```
 
-**K9.** Milline olekukood esineb kõige sagedamini? Mitu serveri viga (koodid 5xx) logis on?
+> **K9.** Milline olekukood esineb kõige sagedamini? Mitu serveri viga (koodid 5xx) logis on?
 
 **3.6** Leia, millised leheküljed tagastasid serveri vea `500`. Kuva iga lehekülg ainult ühe korra.
 
-**K10.** Kirjuta käsk ja tulemus.
+> **K10.** Kirjuta käsk ja tulemus.
 
 **3.7** Leia kolm kõige populaarsemat lehekülge (7. väli).
 
-**K11.** Kirjuta käsk ja tulemus.
+> **K11.** Kirjuta käsk ja tulemus.
 
 **3.8** Kuva päringud, mis tehti vahemikus kell 10:00–10:59. Kasuta `grep` ja regulaaravaldist, mis otsib mustrit `:10:` kellaaja algusest.
 
-**K12.** Kirjuta käsk. Mitu päringut tehti selles vahemikus?
+> **K12.** Kirjuta käsk. Mitu päringut tehti selles vahemikus?
 
 **3.9** Kuva kõik read, mis **ei** pärine sisevõrgust `10.0.83.`. Vihje: `grep -v`, ja pea meeles, et punkt tähendab regulaaravaldises suvalist märki.
 
-**K13.** Kirjuta käsk. Miks on oluline punkt varjestada (`\.`)?
+> **K13.** Kirjuta käsk. Miks on oluline punkt varjestada (`\.`)?
 
 **3.10** Kasutades laiendatud regulaaravaldist, kuva read, kus olekukood on `403` või `404`.
 
-**K14.** Kirjuta käsk.
+> **K14.** Kirjuta käsk.
 
 **3.11** Arvuta, mitu baiti server kokku välja saatis:
 
@@ -183,7 +183,7 @@ awk '{summa += $10} END {print summa}' juurdepaas.log
 
 Kasuta `echo` ja ümbersuunamisi `>` ning `>>`.
 
-**K15.** Kirjuta käsud, millega faili koostasid.
+> **K15.** Kirjuta käsud, millega faili koostasid.
 
 ---
 
@@ -193,11 +193,11 @@ Kasuta `echo` ja ümbersuunamisi `>` ning `>>`.
 
 **4.2** Leia, millised kasutajad saavad sisse logida, st nende kest lõpeb sõnaga `bash`.
 
-**K16.** Kirjuta käsk ja loetle kasutajad.
+> **K16.** Kirjuta käsk ja loetle kasutajad.
 
 **4.3** Kuva SSH-serveri seadistusfaili `/etc/ssh/sshd_config` sisu ilma kommentaaride ja tühjade ridadeta.
 
-**K17.** Kirjuta käsk. Mitu rida jäi alles?
+> **K17.** Kirjuta käsk. Mitu rida jäi alles?
 
 ---
 
@@ -209,7 +209,7 @@ Kasuta `echo` ja ümbersuunamisi `>` ning `>>`.
 
 **5.3** Leia oma kodukataloogist kõik failid, mida on muudetud viimase 60 minuti jooksul (vihje: `-mmin`).
 
-**K18.** Kirjuta kõigi kolme ülesande käsud ja leitud failide arv või nimed.
+> **K18.** Kirjuta kõigi kolme ülesande käsud ja leitud failide arv või nimed.
 
 **5.4** Loo kodukataloogi sümbolviit `logi`, mis viitab failile `~/labor02/juurdepaas.log`. Kontrolli seda käskudega `ls -l ~/logi` ja `head -3 ~/logi`.
 
@@ -221,7 +221,7 @@ ls -li markmed.txt markmed-koopia.txt
 
 Kirjuta faili `markmed-koopia.txt` lõppu uus rida ja vaata seejärel faili `markmed.txt` sisu.
 
-**K19.** Mis juhtus faili `markmed.txt` sisuga? Miks?
+> **K19.** Mis juhtus faili `markmed.txt` sisuga? Miks?
 
 ---
 
@@ -242,7 +242,7 @@ ls -l /tmp/vana.log*
 zgrep '" 500 ' /tmp/vana.log.gz
 ```
 
-**K20.** Mis juhtus pärast `gzip` käsku algse failiga `vana.log`? Milleks on vaja käske `zcat` ja `zgrep`?
+> **K20.** Mis juhtus pärast `gzip` käsku algse failiga `vana.log`? Milleks on vaja käske `zcat` ja `zgrep`?
 
 **6.5** Koristamine: kustuta `/tmp/taastamine` ja `/tmp/vana.log.gz`. Jäta `~/labor02` ja arhiiv alles.
 

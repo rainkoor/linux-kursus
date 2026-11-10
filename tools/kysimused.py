@@ -13,7 +13,7 @@ import re
 import sys
 
 JUUR = pathlib.Path(__file__).resolve().parent.parent
-KYSIMUS = re.compile(r"^\*\*([A-Z]\d+)\.\*\*\s*(.*)$")
+KYSIMUS = re.compile(r"^(?:> )?\*\*([A-Z]\d+)\.\*\*\s*(.*)$")
 PLOKK = re.compile(r"\n*<!-- kysimused -->.*?<!-- /kysimused -->\n*", re.S)
 OPETAJALE = "> [!NOTE]\n> **Õpetajale:**"
 

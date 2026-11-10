@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritööde 13 ja 14 server ja Ubuntu klient, oma arvuti Windowsi failihalduriga |
 | **Eesmärk** | Lisada serverile sisevõrgu DNS, failijagamine Linuxile ja Windowsile, e-posti teavitused ja varundus ning dokumenteerida server |
 
-**Aruanne:** vasta küsimustele **K1–K13** ja esita 6. osas koostatud serveri dokumentatsioon. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K13** ja esita 6. osas koostatud serveri dokumentatsioon. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised on samad mis laboritöös 13 (`SERVER_IP`, `KLIENT_IP`, `VORK`, `lab.example`).
 
@@ -51,7 +51,7 @@ dig @localhost info.lab.example
 dig @localhost www.debian.org +short
 ```
 
-**K1.** Mida näitab `dig` väljundis `info.lab.example` kohta (sektsioon `ANSWER`)? Kas server lahendab ka internetinimesid? Miks?
+> **K1.** Mida näitab `dig` väljundis `info.lab.example` kohta (sektsioon `ANSWER`)? Kas server lahendab ka internetinimesid? Miks?
 
 **1.3** Seadista **Ubuntu klient** kasutama sinu DNS-serverit (ajutiselt, kuni taaskäivituseni):
 
@@ -66,7 +66,7 @@ curl http://info.lab.example
 
 **1.4** Lisa tsooni uus kirje `test IN A 192.0.2.10`, **suurenda seerianumbrit**, kontrolli ja laadi uuesti. Kontrolli Ubuntust: `dig test.lab.example +short`.
 
-**K2.** Mis juhtub, kui muudad tsoonifaili, kuid seerianumbrit ei suurenda? (Ühe serveriga laboris töötab see sageli ikkagi - miks on seerianumber siiski oluline?)
+> **K2.** Mis juhtub, kui muudad tsoonifaili, kuid seerianumbrit ei suurenda? (Ühe serveriga laboris töötab see sageli ikkagi - miks on seerianumber siiski oluline?)
 
 
 ---
@@ -95,11 +95,11 @@ touch /mnt/nfs/klient.txt
 sudo touch /mnt/nfs/root.txt
 ```
 
-**K3.** Kas tavakasutaja sai faili luua? Mis juhtus juurkasutajana (`sudo touch`)? Miks? (Vihje: `root_squash`.)
+> **K3.** Kas tavakasutaja sai faili luua? Mis juhtus juurkasutajana (`sudo touch`)? Miks? (Vihje: `root_squash`.)
 
 **2.3** Muuda serveris jagatud kataloogi õigusi nii, et kõik saavad sinna kirjutada (`sudo chmod 1777 /srv/nfs/jagatud`), ja korda kliendis faili loomist. Vaata serveris failide omanikke (`ls -ln /srv/nfs/jagatud`).
 
-**K4.** Mis numbriline omanik (UID) on kliendis loodud failidel serveris? Kas see vastab serveris samale kasutajale? Miks võib see olla probleem?
+> **K4.** Mis numbriline omanik (UID) on kliendis loodud failidel serveris? Kas see vastab serveris samale kasutajale? Miks võib see olla probleem?
 
 **2.4** Lisa haakimine kliendi faili `/etc/fstab` (vt teooria punkt 15.2) ja kontrolli `sudo mount -a`.
 
@@ -125,7 +125,7 @@ smbclient //debian1.lab.example/jagatud -U <kasutaja> -c "put /etc/hostname klie
 
 **3.3** Ühenda jagamine oma **Windowsi arvutist**: Exploreri aadressiribale `\\SERVER_IP\jagatud`. Loo seal fail ja vaata serveris: `ls -l /srv/samba/jagatud`.
 
-**K5.** Millised olid Windowsist loodud faili õigused ja grupp serveris? Millised `smb.conf` valikud seda mõjutasid?
+> **K5.** Millised olid Windowsist loodud faili õigused ja grupp serveris? Millised `smb.conf` valikud seda mõjutasid?
 
 
 ---
@@ -150,9 +150,9 @@ sudo journalctl -u postfix -n 20 --no-pager
 
 **4.3** Suuna juurkasutaja kirjad oma kasutajale (`/etc/aliases`: `root: <kasutaja>`, siis `sudo newaliases`) ja testi: `echo test | sudo mail -s "root-ile" root`.
 
-**K6.** Millisel aadressil Postfix kuulab (`inet_interfaces`) ja miks ei tohi server võtta kirju vastu kogu võrgust?
+> **K6.** Millisel aadressil Postfix kuulab (`inet_interfaces`) ja miks ei tohi server võtta kirju vastu kogu võrgust?
 
-**K7.** Milliseid serveri teateid tasuks e-postiga saada? Kuidas saaksid 5. osa varundusskripti vea korral teavituse (vihje: systemd `OnFailure=` või skriptis `|| mail ...`)?
+> **K7.** Milliseid serveri teateid tasuks e-postiga saada? Kuidas saaksid 5. osa varundusskripti vea korral teavituse (vihje: systemd `OnFailure=` või skriptis `|| mail ...`)?
 
 ---
 
@@ -190,7 +190,7 @@ sudo /usr/local/sbin/varunda-debian1
 
 **5.3** Ajasta varundus systemd taimeriga iga päev kell 02:00 (vt moodul 5). Kontrolli `systemctl list-timers`.
 
-**K8.** Miks varundatakse andmebaas `mariadb-dump`-iga, mitte kataloogi `/var/lib/mysql` kopeerides? Miks varundatakse ka `/root/ca`?
+> **K8.** Miks varundatakse andmebaas `mariadb-dump`-iga, mitte kataloogi `/var/lib/mysql` kopeerides? Miks varundatakse ka `/root/ca`?
 
 **5.4** **Katastroof!** Simuleeri õnnetust:
 
@@ -213,9 +213,9 @@ sudo mariadb < /tmp/taaste/var/backups/mariadb/koik.sql
 curl https://kool.lab.example/opilased.php
 ```
 
-**K9.** Kas kõik taastus? Kui kaua taastamine aega võttis? Mis oleks juhtunud, kui varundus oleks tehtud samale kettale ja ketas oleks riknenud?
+> **K9.** Kas kõik taastus? Kui kaua taastamine aega võttis? Mis oleks juhtunud, kui varundus oleks tehtud samale kettale ja ketas oleks riknenud?
 
-**K10.** Kuidas vastab sinu varundus 3-2-1 reeglile? Mis on puudu ja kuidas seda parandada? (Vihje: restic toetab SFTP-hoidlat - Ubuntu masin võiks olla varuserver.)
+> **K10.** Kuidas vastab sinu varundus 3-2-1 reeglile? Mis on puudu ja kuidas seda parandada? (Vihje: restic toetab SFTP-hoidlat - Ubuntu masin võiks olla varuserver.)
 
 
 ---
@@ -254,11 +254,11 @@ curl https://kool.lab.example/opilased.php
 |---|---|---|
 ```
 
-**K11.** Millal aeguvad sinu serveri ja CA sertifikaadid? Kuidas tagaksid, et keegi märkab enne aegumist?
+> **K11.** Millal aeguvad sinu serveri ja CA sertifikaadid? Kuidas tagaksid, et keegi märkab enne aegumist?
 
-**K12.** Kirjuta loetelu kõigist portidest, mis sinu serveris on avatud, ja millise teenuse jaoks. Millised neist peaksid olema kättesaadavad kogu sisevõrgule ja millised ainult kindlatele masinatele?
+> **K12.** Kirjuta loetelu kõigist portidest, mis sinu serveris on avatud, ja millise teenuse jaoks. Millised neist peaksid olema kättesaadavad kogu sisevõrgule ja millised ainult kindlatele masinatele?
 
-**K13.** Kui server tuleks homme nullist uuesti üles ehitada, millised sammud oleksid kõige aeganõudvamad? Kuidas saaks seda kiirendada? (See on hea sissejuhatus moodulisse 16.)
+> **K13.** Kui server tuleks homme nullist uuesti üles ehitada, millised sammud oleksid kõige aeganõudvamad? Kuidas saaks seda kiirendada? (See on hea sissejuhatus moodulisse 16.)
 
 
 ---
@@ -290,7 +290,7 @@ curl https://kool.lab.example/opilased.php
 | **Vajalik** | Laboritöö 15 Debiani server BIND9-ga, laboritöö 7 Ubuntu masin (või eraldi Ubuntu VM, nt `ubuntusrv` Dockeriga), 2. osa jaoks Docker või Podman |
 | **Eesmärk** | Paigaldada filtreeriv DNS-server ja kasutada sama tsooni CoreDNS-iga |
 
-**Aruanne:** vasta küsimustele **D1–D10**.
+> **Aruanne:** vasta küsimustele **D1–D10**.
 
 ## 1. osa. Pi-hole
 
@@ -301,7 +301,7 @@ sudo ss -tulpn | grep ':53 '
 resolvectl status | head -20
 ```
 
-**D1.** Milline protsess kuulab pordil 53 ja millisel aadressil? Miks see võib Pi-hole'iga konflikti minna?
+> **D1.** Milline protsess kuulab pordil 53 ja millisel aadressil? Miks see võib Pi-hole'iga konflikti minna?
 
 **1.2** Lülita `systemd-resolved` kohalik kuulaja välja (teooria punkt 15.1, dnsmasq-i märkus) ja seadista masin ise kasutama ajutiselt välist DNS-i:
 
@@ -324,7 +324,7 @@ sudo ufw allow from VORK to any port 53
 sudo ufw allow from VORK to any port 80 proto tcp
 ```
 
-**D2.** Mida skript tegi (paketid, teenused, failid)? Miks on parem skript enne käivitamist läbi lugeda kui kasutada `curl ... | sudo bash`?
+> **D2.** Mida skript tegi (paketid, teenused, failid)? Miks on parem skript enne käivitamist läbi lugeda kui kasutada `curl ... | sudo bash`?
 
 **1.4** Testi teisest masinast (nt Debianist):
 
@@ -334,7 +334,7 @@ dig @PIHOLE_IP doubleclick.net +short
 dig @PIHOLE_IP ads.google.com +short
 ```
 
-**D3.** Mida vastas Pi-hole blokeeritud domeenidele? Mitu domeeni on blokeerimisloendis (veebiliides → *Dashboard* või `pihole status`)?
+> **D3.** Mida vastas Pi-hole blokeeritud domeenidele? Mitu domeeni on blokeerimisloendis (veebiliides → *Dashboard* või `pihole status`)?
 
 **1.5** Ava veebiliides `http://PIHOLE_IP/admin`. Lisa:
 
@@ -348,11 +348,11 @@ dig @PIHOLE_IP kool.lab.example +short
 pihole -q example.org
 ```
 
-**D4.** Kas `kool.lab.example` lahenes Pi-hole'i kaudu? Kirjelda päringu teekonda: klient → ? → ?
+> **D4.** Kas `kool.lab.example` lahenes Pi-hole'i kaudu? Kirjelda päringu teekonda: klient → ? → ?
 
 **1.6** Seadista Debiani server kasutama DNS-ina Pi-hole'i ja ava Debianis mõni veebileht `curl`-iga. Vaata veebiliidese *Query Log*-i.
 
-**D5.** Milliseid päringuid Debian tegi? Mis on Pi-hole'i eelised ja puudused võrreldes brauseri reklaamiblokeerijaga? Milline privaatsusküsimus kaasneb päringute logiga?
+> **D5.** Milliseid päringuid Debian tegi? Mis on Pi-hole'i eelised ja puudused võrreldes brauseri reklaamiblokeerijaga? Milline privaatsusküsimus kaasneb päringute logiga?
 
 ## 2. osa. CoreDNS konteineris
 
@@ -374,7 +374,7 @@ dig @localhost kool.lab.example +short
 dig @localhost www.debian.org +short
 ```
 
-**D6.** Kas CoreDNS vastas mõlemale päringule? Millised read tekkisid logis (`log` pistikprogramm)?
+> **D6.** Kas CoreDNS vastas mõlemale päringule? Millised read tekkisid logis (`log` pistikprogramm)?
 
 **2.3** Lisa tsoonifaili uus kirje `test IN A 10.0.83.60`, **suurenda seerianumbrit** ja oota ~1 minut ilma konteinerit taaskäivitamata:
 
@@ -382,17 +382,17 @@ dig @localhost www.debian.org +short
 dig @localhost test.lab.example +short
 ```
 
-**D7.** Kas uus kirje ilmus ilma taaskäivituseta? Mis juhtub, kui seerianumbrit ei suurenda?
+> **D7.** Kas uus kirje ilmus ilma taaskäivituseta? Mis juhtub, kui seerianumbrit ei suurenda?
 
 **2.4** Pane `Corefile`, `compose.yaml` ja `zones/` Giti hoidlasse. Kirjuta skript `uuenda.sh`, mis teeb `git pull` ja mille käivitab systemd taimer (moodul 5) iga 5 minuti järel. Muuda kirjet teises masinas, `push`-i ja kontrolli, et CoreDNS-i vastus muutus.
 
-**D8.** Kuidas tagab selline lahendus, et kaks DNS-serverit annavad sama vastuse? Mis on selle eelis ja puudus võrreldes BIND9 primaar-sekundaar tsooniülekandega (AXFR)?
+> **D8.** Kuidas tagab selline lahendus, et kaks DNS-serverit annavad sama vastuse? Mis on selle eelis ja puudus võrreldes BIND9 primaar-sekundaar tsooniülekandega (AXFR)?
 
 ## 3. osa. Kokkuvõte
 
-**D9.** Täida tabel: BIND9, dnsmasq, CoreDNS, Pi-hole - kas autoriteetne, kas rekursiivne/edastav, seadistuse vorm, kus sa seda kasutaksid?
+> **D9.** Täida tabel: BIND9, dnsmasq, CoreDNS, Pi-hole - kas autoriteetne, kas rekursiivne/edastav, seadistuse vorm, kus sa seda kasutaksid?
 
-**D10.** Kool tahab laborivõrgule sisevõrgu nimesid ja reklaamide blokeerimist. Kirjelda arhitektuur, kasutades selle laboritöö teenuseid.
+> **D10.** Kool tahab laborivõrgule sisevõrgu nimesid ja reklaamide blokeerimist. Kirjelda arhitektuur, kasutades selle laboritöö teenuseid.
 
 ---
 

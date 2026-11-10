@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 13 server (nginx ja HTTPS töötavad), `alma` kaugühenduse testiks |
 | **Eesmärk** | Paigaldada ja võrrelda MariaDB-d, PostgreSQL-i, SQLite'i ja Valkeyt, ühendada andmebaas veebirakendusega ning varundada ja taastada andmeid |
 
-**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Kõigis osades kasutame sama andmestikku: tabel `opilased` (nimi, eriala).
 
@@ -57,7 +57,7 @@ mariadb -u kool -p -e "SHOW DATABASES; SELECT COUNT(*) FROM kool.opilased;"
 sudo ss -tlpn | grep 3306
 ```
 
-**K1.** Milliseid andmebaase nägi kasutaja `kool`? Millisel aadressil MariaDB kuulab ja miks on see turvaline?
+> **K1.** Milliseid andmebaase nägi kasutaja `kool`? Millisel aadressil MariaDB kuulab ja miks on see turvaline?
 
 **1.3** Leia PHP-FPM pesa nimi ja lisa saidi `kool.lab.example` HTTPS-serveriplokki PHP tugi (vt teooria punkt 14.6). Muuda ka rida `index index.php index.html;`.
 
@@ -104,13 +104,13 @@ curl https://kool.lab.example/opilased.php       # Ubuntu kliendist
 
 Lisa andmebaasi veel üks õpilane ja laadi leht uuesti.
 
-**K2.** Miks kasutab PHP-kood funktsiooni `htmlspecialchars()`? Mis võiks juhtuda, kui andmebaasis oleks õpilase nimi `<script>alert(1)</script>`?
+> **K2.** Miks kasutab PHP-kood funktsiooni `htmlspecialchars()`? Mis võiks juhtuda, kui andmebaasis oleks õpilase nimi `<script>alert(1)</script>`?
 
-**K3.** Parool on PHP-faili sisse kirjutatud. Millised on selle riskid ja kuidas saaks seda paremini teha?
+> **K3.** Parool on PHP-faili sisse kirjutatud. Millised on selle riskid ja kuidas saaks seda paremini teha?
 
 **1.6** Peata MariaDB (`sudo systemctl stop mariadb`), laadi leht uuesti, vaata nginx-i ja PHP logisid ning käivita MariaDB uuesti.
 
-**K4.** Mida näitas leht? Millises logis oli viga näha (`/var/log/nginx/kool.error.log`, `journalctl -u php*-fpm`)?
+> **K4.** Mida näitas leht? Millises logis oli viga näha (`/var/log/nginx/kool.error.log`, `journalctl -u php*-fpm`)?
 
 
 
@@ -148,11 +148,11 @@ mariadb -h 10.0.83.52 -u aruanne -p -e "SELECT * FROM kool.opilased;"
 mariadb -h 10.0.83.52 -u aruanne -p -e "DELETE FROM kool.opilased;"
 ```
 
-**K5.** Kas lugemine õnnestus? Mis juhtus `DELETE`-iga? Miks on tulemüüri reegel lisaks kasutaja aadressipiirangule ikkagi vajalik?
+> **K5.** Kas lugemine õnnestus? Mis juhtus `DELETE`-iga? Miks on tulemüüri reegel lisaks kasutaja aadressipiirangule ikkagi vajalik?
 
 **2.3** Sea MariaDB juurkasutajale parool (`ALTER USER 'root'@'localhost' IDENTIFIED BY '…';`), „unusta“ see ja taasta ligipääs meetodiga `--skip-grant-tables --skip-networking` (teooria punkt 14.2). Kontrolli taastamise ajal `sudo ss -tlpn | grep 3306`. Lõpuks taasta `unix_socket` autentimine.
 
-**K6.** Kas MariaDB kuulas taastamise ajal võrgus? Miks on see oluline?
+> **K6.** Kas MariaDB kuulas taastamise ajal võrgus? Miks on see oluline?
 
 ---
 
@@ -180,7 +180,7 @@ SELECT * FROM opilased;
 
 Kui `\c kool kool` annab vea `Peer authentication failed`, ühendu `psql -h localhost -U kool -d kool` (parooliga, TCP kaudu).
 
-**K7.** Miks ei lubanud `peer`-autentimine süsteemikasutajal `postgres` ühenduda andmebaasi kasutajana `kool`? Mis vahe on `peer` ja `scram-sha-256` meetodil?
+> **K7.** Miks ei lubanud `peer`-autentimine süsteemikasutajal `postgres` ühenduda andmebaasi kasutajana `kool`? Mis vahe on `peer` ja `scram-sha-256` meetodil?
 
 **3.2** Luba `alma`-st ühendus: `listen_addresses = 'localhost,10.0.83.52'` failis `postgresql.conf` ja `pg_hba.conf`-i rida `host kool kool 10.0.83.55/32 scram-sha-256`. Taaskäivita ja ava tulemüür pordile 5432 ainult `alma`-le. `alma`-s:
 
@@ -198,7 +198,7 @@ sudo -u postgres pg_restore -d kool --clean ~/kool.dump
 sudo -u postgres psql -d kool -c "SELECT COUNT(*) FROM opilased;"
 ```
 
-**K8.** Võrdle MariaDB ja PostgreSQL-i: kuidas luuakse kasutaja, kus määratakse, kust võib ühenduda, ja kuidas varundatakse?
+> **K8.** Võrdle MariaDB ja PostgreSQL-i: kuidas luuakse kasutaja, kus määratakse, kust võib ühenduda, ja kuidas varundatakse?
 
 **3.4** (Valikuline) Muuda PHP-leht kasutama PostgreSQL-i: `sudo apt install php-pgsql`, DSN `pgsql:host=localhost;dbname=kool`, taaskäivita PHP-FPM.
 
@@ -233,9 +233,9 @@ head kool.sql
 sudo find / -xdev \( -name "*.db" -o -name "*.sqlite" \) -size +1k 2>/dev/null | head
 ```
 
-**K9.** Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 15B Pi-hole või laboritöö 17 Uptime Kuma, uuri ka nende andmebaase.)
+> **K9.** Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 15B Pi-hole või laboritöö 17 Uptime Kuma, uuri ka nende andmebaase.)
 
-**K10.** Miks ei ole SQLite'il kasutajaid ega porti? Mis on sellest tulenevad eelised ja puudused? Kuidas kaitsta SQLite'i andmeid?
+> **K10.** Miks ei ole SQLite'il kasutajaid ega porti? Mis on sellest tulenevad eelised ja puudused? Kuidas kaitsta SQLite'i andmeid?
 
 ---
 
@@ -266,17 +266,17 @@ sudo ss -tlpn | grep 6379
 valkey-benchmark -q -n 20000 -t set,get
 ```
 
-**K11.** Mis juhtus võtmega `seanss:mari` 31 sekundi pärast? Mitu operatsiooni sekundis Valkey tegi? Miks sobib see vahemäluks ja seansside hoidmiseks?
+> **K11.** Mis juhtus võtmega `seanss:mari` 31 sekundi pärast? Mitu operatsiooni sekundis Valkey tegi? Miks sobib see vahemäluks ja seansside hoidmiseks?
 
-**K12.** Millisel aadressil Valkey kuulab? Mis juhtuks, kui port 6379 oleks internetist ilma paroolita kättesaadav?
+> **K12.** Millisel aadressil Valkey kuulab? Mis juhtuks, kui port 6379 oleks internetist ilma paroolita kättesaadav?
 
 ---
 
 ## 6. osa. Kokkuvõte
 
-**K13.** Täida tabel MariaDB, PostgreSQL, SQLite ja Valkey kohta: tüüp, port, klient, kasutajad ja õigused, varundus, sobiv kasutus.
+> **K13.** Täida tabel MariaDB, PostgreSQL, SQLite ja Valkey kohta: tüüp, port, klient, kasutajad ja õigused, varundus, sobiv kasutus.
 
-**K14.** Kooli uus rakendus vajab: kasutajate ja hinnete andmebaasi, kiiret seansside hoidlat kahe veebiserveri taga (laboritöö 13 HAProxy) ja väikest seadistuse hoidlat. Milliseid andmebaase kasutaksid ja miks?
+> **K14.** Kooli uus rakendus vajab: kasutajate ja hinnete andmebaasi, kiiret seansside hoidlat kahe veebiserveri taga (laboritöö 13 HAProxy) ja väikest seadistuse hoidlat. Milliseid andmebaase kasutaksid ja miks?
 
 ---
 

@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani server `debian1`, AlmaLinux `alma` ja Ubuntu `ubuntusrv` (või laboritöö 7 Ubuntu masin kliendina), oma arvuti brauseriga |
 | **Eesmärk** | Paigaldada ja seadistada terviklik serveriteenuste komplekt, varundada see ja testida taastamist |
 
-**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** kool vajab väikest serverit, mis pakub veebisaiti koos õpilaste andmebaasiga, sisevõrgu DNS-i, failide jagamist Linuxi ja Windowsi arvutitele ning igaöist varundust. Selles laboritöös paigaldad veebiserverid, **laboritöös 14 lisad andmebaasid ja laboritöös 15** DNS-i, failijagamise, e-posti, varunduse ja dokumentatsiooni.
 
@@ -44,7 +44,7 @@ sudo apt update && sudo apt upgrade
 sudo apt install nginx curl
 ```
 
-**K1.** Millised teenused käivitusid pärast paigaldamist automaatselt? Millistel portidel need kuulavad (`sudo ss -tulpn`)?
+> **K1.** Millised teenused käivitusid pärast paigaldamist automaatselt? Millistel portidel need kuulavad (`sudo ss -tulpn`)?
 
 
 
@@ -82,11 +82,11 @@ curl -H "Host: info.lab.example" http://localhost
 curl -H "Host: midagi.muud" http://localhost
 ```
 
-**K2.** Mida näitas kolmas päring ja miks? (Vihje: kui ükski `server_name` ei sobi, kasutab nginx pordi **vaikeserverit** - kumb plokk see on?)
+> **K2.** Mida näitas kolmas päring ja miks? (Vihje: kui ükski `server_name` ei sobi, kasutab nginx pordi **vaikeserverit** - kumb plokk see on?)
 
 **1.5** Tee meelega süntaksiviga (kustuta mõne rea lõpust semikoolon) ja käivita `sudo nginx -t`. Paranda.
 
-**K3.** Mida näitas `nginx -t`? Miks on oluline kontrollida süntaksit enne `reload`-i?
+> **K3.** Mida näitas `nginx -t`? Miks on oluline kontrollida süntaksit enne `reload`-i?
 
 
 
@@ -147,7 +147,7 @@ curl -I http://kool.lab.example
 curl https://kool.lab.example
 ```
 
-**K4.** Mida vastas esimene päring (olekukood ja päis `Location`)? Mis veateate andis teine päring ja miks?
+> **K4.** Mida vastas esimene päring (olekukood ja päis `Location`)? Mis veateate andis teine päring ja miks?
 
 **3.6** Kopeeri CA sertifikaat (mitte võti!) Ubuntu kliendile ja usalda seda. Serveris:
 
@@ -165,7 +165,7 @@ curl https://kool.lab.example
 openssl s_client -connect kool.lab.example:443 -servername kool.lab.example </dev/null 2>/dev/null | grep -E "subject=|issuer=|Verify return"
 ```
 
-**K5.** Mida näitas `openssl s_client` väljundis `Verify return code`? Miks ei tohi CA privaatvõtit (`labori-ca.key`) kunagi serverist välja anda?
+> **K5.** Mida näitas `openssl s_client` väljundis `Verify return code`? Miks ei tohi CA privaatvõtit (`labori-ca.key`) kunagi serverist välja anda?
 
 **3.7** (Valikuline) Impordi CA sertifikaat oma arvuti brauserisse ja ava `https://kool.lab.example` (oma arvuti `hosts` failis peab olema nimi).
 
@@ -193,7 +193,7 @@ sudo apachectl configtest && sudo systemctl reload httpd
 curl -H "Host: kool.lab.example" http://localhost
 ```
 
-**K6.** Mis vastuse said ja miks? Leia põhjus `sudo ausearch -m AVC -ts recent` abil ja paranda see püsivalt (`semanage fcontext` + `restorecon`, moodul 11).
+> **K6.** Mis vastuse said ja miks? Leia põhjus `sudo ausearch -m AVC -ts recent` abil ja paranda see püsivalt (`semanage fcontext` + `restorecon`, moodul 11).
 
 **4.3** Loo kataloogi `.htaccess` fail, mis keelab ligipääsu failile `salajane.txt`, ja luba virtuaalhostis `AllowOverride All`:
 
@@ -204,7 +204,7 @@ sudo systemctl reload httpd
 curl -I -H "Host: kool.lab.example" http://localhost/salajane.txt
 ```
 
-**K7.** Mis olekukoodi said? Miks ei saa nginx `.htaccess`-faile kasutada ja miks peetakse neid jõudluse mõttes halvemaks?
+> **K7.** Mis olekukoodi said? Miks ei saa nginx `.htaccess`-faile kasutada ja miks peetakse neid jõudluse mõttes halvemaks?
 
 **4.4** Lisa Apache'ile HTTPS **sama labori CA** sertifikaadiga, mille lõid 3. osas (sertifikaat kehtib nimele `kool.lab.example`, seega sobib ka `alma`-le). Kopeeri `debian1`-st failid `kool.crt` ja `kool.key` `alma`-sse:
 
@@ -257,7 +257,7 @@ curl -vk https://caddy.lab.example 2>&1 | grep -E "issuer|HTTP/"
 
 **5.3** Usalda Caddy CA-d kliendis: kopeeri `ubuntusrv`-st fail `/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt` Ubuntu kliendi kataloogi `/usr/local/share/ca-certificates/caddy-labor.crt` ja käivita `sudo update-ca-certificates`. Proovi uuesti ilma `-k`-ta.
 
-**K8.** Mitu rida oli Caddyfile'is ja mitu rida vajaks sama nginx-is (koos sertifikaadi loomisega)? Kes oli sertifikaadi väljaandja? Mis juhtuks, kui nimi oleks avalik (nt `www.example.ee`) ja server internetis?
+> **K8.** Mitu rida oli Caddyfile'is ja mitu rida vajaks sama nginx-is (koos sertifikaadi loomisega)? Kes oli sertifikaadi väljaandja? Mis juhtuks, kui nimi oleks avalik (nt `www.example.ee`) ja server internetis?
 
 **5.4** (Valikuline) Kasuta Caddys Caddy enda CA asemel **3. osa labori CA-d**, et kõik laborimasinad usaldaksid ühte CA-d. Loo `debian1`-s (`/root/ca`) punkti 3.2 eeskujul sertifikaat nimele `caddy.lab.example`, kopeeri `caddy.crt` ja `caddy.key` `ubuntusrv` kataloogi `/etc/caddy/certs/` (omanik `caddy`, võtme õigused `600`) ja muuda Caddyfile'is `tls internal` → `tls /etc/caddy/certs/caddy.crt /etc/caddy/certs/caddy.key`. Kontrolli `curl -v`-ga, et väljaandja on nüüd sinu labori CA.
 
@@ -276,15 +276,15 @@ sudo systemctl reload haproxy
 for i in $(seq 6); do curl -s -H "Host: kool.lab.example" http://localhost:8080/ | grep -o "Server [a-z0-9]*"; done
 ```
 
-**K9.** Kuidas päringud serverite vahel jagunesid? Miks oli vaja saata päis `Host:`?
+> **K9.** Kuidas päringud serverite vahel jagunesid? Miks oli vaja saata päis `Host:`?
 
 **6.3** Ava statistikaleht `http://ubuntusrv:8404`. Peata `alma`-s Apache (`sudo systemctl stop httpd`) ja korda `curl`-tsüklit. Käivita Apache uuesti.
 
-**K10.** Mida näitas statistikaleht? Mitu päringut ebaõnnestus pärast Apache'i peatamist ja kui kiiresti HAProxy rikke avastas (`option httpchk`, `check`)?
+> **K10.** Mida näitas statistikaleht? Mitu päringut ebaõnnestus pärast Apache'i peatamist ja kui kiiresti HAProxy rikke avastas (`option httpchk`, `check`)?
 
 **6.4** Vaata `debian1` nginx-i juurdepääsulogi: mis IP-aadressilt päringud tulid?
 
-**K11.** Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: `X-Forwarded-For`, HAProxy `option forwardfor`)?
+> **K11.** Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: `X-Forwarded-For`, HAProxy `option forwardfor`)?
 
 ---
 
@@ -310,15 +310,15 @@ dig +short CAA google.com
 
 Ava brauseris `https://crt.sh/?q=debian.org` (või oma kooli domeen).
 
-**K12.** Kes väljastas `www.debian.org` sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?
+> **K12.** Kes väljastas `www.debian.org` sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?
 
-**K13.** Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (`proxmox1.lab.kool.ee`) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?
+> **K13.** Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (`proxmox1.lab.kool.ee`) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?
 
 ---
 
 ## 8. osa. Kokkuvõte
 
-**K14.** Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?
+> **K14.** Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?
 
 ---
 
