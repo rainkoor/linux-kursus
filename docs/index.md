@@ -18,6 +18,16 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 
 **Eeldused:** arvuti tavakasutaja oskused. Varasemat Linuxi kogemust ei ole vaja.
 
+### Millise osa kellele?
+
+| Osa | Kellele | Mida õppija pärast oskab |
+|---|---|---|
+| **Põhiosa**<br>moodulid 1–8, ~76 h | Kõigile IT-õppijatele, kes alustavad Linuxiga nullist: kutseõppe esimese kursuse õppijad, iseõppijad, aga ka tugispetsialistid, võrguhaldurid ja arendajad, kes vajavad töös käsurida. Eeldab ainult arvuti tavakasutaja oskusi. | Kasutab käsurida enesekindlalt ja haldab iseseisvalt üht Linuxi serverit: kasutajad ja õigused, paketid, teenused, lihtsad skriptid, võrk, SSH ja kettad. |
+| **Süvendusosa**<br>moodulid 9–17, ~84 h + lõpuprojekt | Süsteemihalduse eriala õppijatele (nt IT-süsteemide nooremspetsialist) ja iseõppijatele, kes tahavad töötada Linuxi administraatorina. Eeldab põhiosa läbimist või samaväärset kogemust. | Paigaldab, turvab ja hooldab tüüpilisi serveriteenuseid (veeb, andmebaasid, DNS, failijagamine, e-post, varundus), lahendab alglaadimise ja jõudluse probleeme ning tunneb automatiseerimise ja seire põhimõtteid. Tase on lähedane RHCSA eksami nõuetele. |
+| **Valikmoodulid**<br>moodulid 18–25 | Edasijõudnutele ja huvilistele, kes on süvendusosa (või selle vajalikud moodulid) läbinud ja tahavad mõnda valdkonda lähemalt tundma õppida. Õpetaja saab valida moodulid rühma vajaduste järgi; kiiremad õppijad saavad neid teha iseseisvalt. | Sõltub moodulist: tulemüür, võrgust paigaldus, kataloogiteenused ja domeen, töölaua Linux, virtualiseerimine, Kubernetes või FreeBSD. Osa mooduleid (nt Kubernetes) on sissejuhatavad: teema põhjalikum käsitlus on HKHK õppijal teistes erialaainetes. |
+
+Iga mooduli alguses on kirjas tema **eeldused**, nii et valikmooduleid ei pea tegema järjest.
+
 ## Ülesehitus
 
 Kursus koosneb **17 moodulist** (põhiosa 1–8 ja süvendusosa 9–17), kahest proovieksamist ([põhiosa](proovieksam-pohiosa.md) ja [süvendusosa](proovieksam.md)), [lõpuprojektist](lopuprojekt.md) ning **8 valikmoodulist** (18–25: OPNsense, DHCP/PXE/iSCSI, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes, FreeBSD server). Iga moodul sisaldab kolme osa:
