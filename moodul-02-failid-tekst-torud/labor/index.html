@@ -4774,6 +4774,7 @@ zgrep<span class="w"> </span><span class="s1">'" 500 '</span><span class="w"> </
 <li>Kirjuta üks käsuahel, mis näitab iga IP-aadressi kohta, mitu <strong>404</strong> vastust see sai.</li>
 <li>Jätka <strong>OverTheWire Banditiga</strong>, tasemed 6–15. Need tasemed nõuavad just selles moodulis õpitud käske (<code>find</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, <code>tr</code>, <code>tar</code>, <code>gzip</code>).</li>
 <li><strong>diff ja xargs:</strong> tee kataloogist <code>/etc</code> koopia (<code>sudo cp -a /etc ~/etc-varu</code>), muuda ühte faili ja leia muudatus käsuga <code>sudo diff -r /etc ~/etc-varu</code>. Leia <code>find</code>-i ja <code>xargs</code>-iga kõik <code>.conf</code> failid kataloogis <code>/etc</code>, mis sisaldavad sõna <code>Listen</code>, ja loenda need (<code>xargs grep -l … | wc -l</code>).</li>
+<li><strong>Kust käsud pärinevad:</strong> leia paketid, millest pärinevad <code>ls</code>, <code>grep</code>, <code>find</code>, <code>ps</code>, <code>ip</code> ja <code>mount</code> (teooria punkt 2.1). Mitu käsku on paketis <code>coreutils</code> (<code>dpkg -L coreutils | grep -c /bin/</code>)? Käivita BusyBoxi kest (<code>sudo apt install busybox</code>, seejärel <code>busybox sh</code>) ja proovi <code>ls --human-readable -l</code> ning <code>grep -P '\d+' /etc/hosts</code> - mis töötab ja mis mitte?</li>
 </ol>
 <hr />
 <!-- kysimused -->

@@ -5058,6 +5058,7 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 <li>Täienda <code>loo_kasutajad</code> nii, et see genereerib igale kasutajale juhusliku parooli (<code>openssl rand -base64 12</code>), määrab selle (<code>chpasswd</code>), sunnib esimesel sisselogimisel parooli vahetama (<code>chage -d 0</code>) ja kirjutab kasutajanimed ja paroolid faili, millel on õigused <code>600</code>.</li>
 <li>Kirjuta skript <code>seire</code>, mis kontrollib ketta täituvust, mälu ja koormust ning kirjutab hoiatuse, kui mõni ületab skripti alguses määratud piiri. Kasuta väljumiskoode: 0 - kõik korras, 1 - hoiatus, 2 - kriitiline.</li>
 <li>Muuda <code>logianalyys</code> nii, et logifaili võib anda ka torust: <code>cat juurdepaas.log | logianalyys kokku -</code>.</li>
+<li><strong>Teised kestad:</strong> paigalda <code>zsh</code> ja <code>fish</code> ning proovi neid käsuga <code>zsh</code> ja <code>fish</code> (ilma sisselogimiskesta muutmata). Kas <code>for i in {1..3}; do echo $i; done</code> ja <code>x=5; echo $x</code> töötavad mõlemas? Mis on <code>fish</code>-i vaste? Käivita mõlemast oma skript <code>~/bin/varunda</code> - miks see töötab? Kui tahad, muuda oma sisselogimiskest <code>chsh</code>-ga ja kontrolli uues SSH-seansis <code>echo $SHELL</code> ning <code>ps -p $$</code>.</li>
 </ol>
 <hr />
 <!-- kysimused -->

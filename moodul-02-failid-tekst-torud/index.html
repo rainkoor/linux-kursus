@@ -615,6 +615,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2.1 Miks tekst?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kust-käsud-pärinevad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kust käsud pärinevad?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4770,6 +4787,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2.1 Miks tekst?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kust-käsud-pärinevad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kust käsud pärinevad?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5196,6 +5230,127 @@
 <li>programmid kasutavad universaalse liidesena tekstivoogu.</li>
 </ol>
 <p>Seetõttu ei ole Linuxis üht hiiglaslikku programmi logide analüüsimiseks. Selle asemel ühendatakse mitu väikest tööriista, millest igaüks teeb ühe sammu. Selle mooduli eesmärk on õppida neid tööriistu kombineerima.</p>
+<p>Näide: <strong>mitu kasutajat kasutab millist kesta?</strong> Ühtki käsku, mis just seda teeks, ei ole - aga neli väikest käsku koos annavad vastuse:</p>
+<div class="highlight"><pre><span></span><code>cut<span class="w"> </span>-d:<span class="w"> </span>-f7<span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>     19 /usr/sbin/nologin
+      3 /bin/bash
+      1 /bin/sync
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Samm</th>
+<th>Mida teeb</th>
+<th>Tulemus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cut -d: -f7 /etc/passwd</code></td>
+<td>võtab igalt realt 7. välja (kest)</td>
+<td>üks kest rea kohta</td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>sorteerib</td>
+<td>samad kestad kõrvuti</td>
+</tr>
+<tr>
+<td><code>uniq -c</code></td>
+<td>loendab järjestikused korduvad read</td>
+<td>arv + kest</td>
+</tr>
+<tr>
+<td><code>sort -rn</code></td>
+<td>sorteerib arvu järgi kahanevalt</td>
+<td>enim kasutatud ees</td>
+</tr>
+</tbody>
+</table>
+<p>Ükski neist käskudest ei tea midagi kasutajatest ega kestadest - nad töötlevad lihtsalt teksti. Sama ahelat saab kasutada logides IP-aadresside, veakoodide või muu loendamiseks (punkt 2.4). Käske <code>cut</code>, <code>sort</code> ja <code>uniq</code> õpid selles moodulis lähemalt.</p>
+<p>Neljas põhimõte, <strong>kõik on fail</strong> (moodul 1), tähendab, et samade tööriistadega saab lugeda ka süsteemi infot: <code>cat /proc/cpuinfo</code>, <code>grep MemTotal /proc/meminfo</code>, <code>cat /sys/class/net/ens18/address</code>.</p>
+<h3 id="kust-käsud-pärinevad">Kust käsud pärinevad?<a class="headerlink" href="#kust-käsud-pärinevad" title="Permanent link">&para;</a></h3>
+<p>Käsud nagu <code>ls</code>, <code>grep</code> või <code>ps</code> ei ole kerneli ega kesta osa, vaid eraldi programmid failidena kataloogis <code>/usr/bin</code>. Need pärinevad mõnest <strong>paketist</strong> (moodul 4) ja enamik neist on <strong>GNU projekti</strong> tööriistad:</p>
+<table>
+<thead>
+<tr>
+<th>Pakett</th>
+<th>Käsud (näited)</th>
+<th>Päritolu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>coreutils</code></td>
+<td><code>ls</code>, <code>cp</code>, <code>mv</code>, <code>rm</code>, <code>cat</code>, <code>cut</code>, <code>sort</code>, <code>uniq</code>, <code>wc</code>, <code>chmod</code>, <code>df</code>, <code>date</code></td>
+<td>GNU</td>
+</tr>
+<tr>
+<td><code>findutils</code></td>
+<td><code>find</code>, <code>xargs</code></td>
+<td>GNU</td>
+</tr>
+<tr>
+<td><code>grep</code>, <code>sed</code>, <code>gawk</code>, <code>tar</code>, <code>gzip</code>, <code>diffutils</code></td>
+<td>samanimelised käsud, <code>diff</code></td>
+<td>GNU</td>
+</tr>
+<tr>
+<td><code>bash</code></td>
+<td>kest ise</td>
+<td>GNU</td>
+</tr>
+<tr>
+<td><code>util-linux</code></td>
+<td><code>mount</code>, <code>lsblk</code>, <code>fdisk</code>, <code>su</code>, <code>more</code>, <code>logger</code></td>
+<td>Linuxi projekt</td>
+</tr>
+<tr>
+<td><code>procps</code> (AlmaLinuxis <code>procps-ng</code>)</td>
+<td><code>ps</code>, <code>top</code>, <code>free</code>, <code>kill</code>, <code>sysctl</code></td>
+<td>Linuxi projekt</td>
+</tr>
+<tr>
+<td><code>iproute2</code></td>
+<td><code>ip</code>, <code>ss</code></td>
+<td>Linuxi projekt</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nb">type</span><span class="w"> </span>ls<span class="w">                     </span><span class="c1"># kas käsk on programm, kesta sisekäsk või alias</span>
+dpkg<span class="w"> </span>-S<span class="w"> </span>/usr/bin/ls<span class="w">         </span><span class="c1"># Debian, Ubuntu: coreutils: /usr/bin/ls</span>
+rpm<span class="w"> </span>-qf<span class="w"> </span>/usr/bin/ls<span class="w">         </span><span class="c1"># AlmaLinux: coreutils-9...</span>
+ls<span class="w"> </span>--version<span class="w">                </span><span class="c1"># versioon ja projekt (GNU coreutils)</span>
+</code></pre></div>
+<p><strong>GNU, POSIX, BSD ja BusyBox.</strong> Standard <strong>POSIX</strong> kirjeldab, millised käsud ja võtmed peavad Unixi-laadses süsteemis olemas olema. GNU tööriistad teevad rohkem: neil on pikad võtmed (<code>--help</code>, <code>--human-readable</code>) ja lisavõimalused (<code>grep -P</code>, <code>sed -i</code>, <code>date -d</code>), mida mujal ei pruugi olla.</p>
+<table>
+<thead>
+<tr>
+<th>Kus</th>
+<th>Tööriistad</th>
+<th>Mida arvestada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Debian, Ubuntu, AlmaLinux</td>
+<td>GNU</td>
+<td>Kõik selle kursuse näited</td>
+</tr>
+<tr>
+<td>FreeBSD, macOS</td>
+<td>BSD</td>
+<td>Võtmed osaliselt erinevad (<code>sed -i ''</code>, <code>ls -G</code>), vt moodul 25</td>
+</tr>
+<tr>
+<td>Alpine, konteinerid, ruuterid</td>
+<td><strong>BusyBox</strong>: üks väike programm, mis asendab sadu käske</td>
+<td>Ainult põhivõtmed; pikki GNU võtmeid sageli pole</td>
+</tr>
+</tbody>
+</table>
+<p>Kui kirjutad skripti, mis peab töötama igal pool, kasuta ainult POSIX-võtmeid. Kui skript töötab ainult sinu Linuxi serverites, võid GNU lisavõimalusi julgelt kasutada.</p>
 <h2 id="22-tekstiredaktorid">2.2 Tekstiredaktorid<a class="headerlink" href="#22-tekstiredaktorid" title="Permanent link">&para;</a></h2>
 <p>Serveris ei ole graafilist redaktorit, seega tuleb konfiguratsioonifaile muuta terminalis.</p>
 <h3 id="nano">nano<a class="headerlink" href="#nano" title="Permanent link">&para;</a></h3>

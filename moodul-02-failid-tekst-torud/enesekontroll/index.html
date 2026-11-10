@@ -4494,6 +4494,21 @@
 <summary>Vastus</summary>
 <p><code>xargs</code> loeb sisendist sõnu/ridu ja annab need käsule argumentideks. <code>-print0</code>/<code>-0</code> eraldavad failinimed nullmärgiga, nii et tühikute ja erimärkidega failinimed ei lähe katki.</p>
 </details>
+<p><strong>18.</strong> Selgita UNIX-i filosoofia põhimõtteid käsuahela <code>cut -d: -f7 /etc/passwd | sort | uniq -c | sort -rn</code> näitel.</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Iga käsk teeb üht asja (<code>cut</code> võtab välja, <code>sort</code> sorteerib, <code>uniq -c</code> loendab, <code>sort -rn</code> järjestab arvu järgi), käsud töötavad koos torude kaudu ja nende vaheline liides on tekst. Ükski käsk ei tea, et tegu on kestadega - sama ahelaga saab loendada ka logide IP-aadresse.</p>
+</details>
+<p><strong>19.</strong> Kust pärinevad käsud <code>ls</code>, <code>find</code> ja <code>mount</code>? Kuidas leiad, millisest paketist mõni käsk pärineb?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>ls</code> on GNU paketis <code>coreutils</code>, <code>find</code> GNU paketis <code>findutils</code> ja <code>mount</code> Linuxi projekti paketis <code>util-linux</code>. Paketi leiab Debianis/Ubuntus käsuga <code>dpkg -S /usr/bin/ls</code>, AlmaLinuxis <code>rpm -qf /usr/bin/ls</code>; <code>type käsk</code> näitab enne, kas tegu on üldse programmiga.</p>
+</details>
+<p><strong>20.</strong> Miks võib Linuxis töötav skript FreeBSD-s, macOS-is või Alpine'i konteineris vea anda?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Linuxi distrodes on GNU tööriistad, millel on lisavõtmeid (<code>sed -i</code>, <code>grep -P</code>, <code>date -d</code>, pikad võtmed), mida POSIX ei nõua. FreeBSD-s ja macOS-is on BSD tööriistad, Alpine'is BusyBox, kus neid võtmeid pole või need töötavad teisiti. Kõikjal töötav skript peab kasutama ainult POSIX-võtmeid.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> Loenda, mitu kasutajat on failis <code>/etc/passwd</code>.</p>
 <details class="success">

@@ -4509,6 +4509,26 @@
 <summary>Vastus</summary>
 <p>Haru on eraldi arendusliin, mida kasutatakse uue funktsiooni või muudatuse katsetamiseks põhiharu segamata. Konflikt tekib, kui kahes harus on muudetud sama faili sama kohta.</p>
 </details>
+<p><strong>21.</strong> Mida tähendab, et kest on POSIX-ühilduv? Miks ei sobi <code>fish</code> skriptide kirjutamiseks ega juurkasutaja kestaks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>POSIX-ühilduv kest mõistab standardiga kirjeldatud süntaksit (muutujad, <code>if</code>, <code>for</code>, <code>$( )</code>, torud), nii et POSIX-skript töötab igas sellises kestas (<code>dash</code>, <code>bash</code>, <code>zsh</code>, FreeBSD <code>sh</code>, BusyBox). <code>fish</code> kasutab oma süntaksit (<code>set nimi väärtus</code>, <code>end</code>), mistõttu Bashi/POSIX-i käsud ja skriptid ei pruugi seal töötada; süsteemi hooldusskriptid ja <code>su -c</code> eeldavad POSIX-kesta.</p>
+</details>
+<p><strong>22.</strong> Kuidas näed oma sisselogimiskesta ja praegu töötavat kesta? Kuidas muudad oma sisselogimiskesta ja millised kestad on lubatud?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>echo $SHELL</code> (sisselogimiskest), <code>echo $0</code> või <code>ps -p $$</code> (töötav kest). Muutmine: <code>chsh -s /usr/bin/zsh</code> (enda oma) või <code>sudo usermod -s … kasutaja</code>; lubatud on failis <code>/etc/shells</code> loetletud kestad. Muudatus kehtib järgmisest sisselogimisest.</p>
+</details>
+<p><strong>23.</strong> Kasutaja sisselogimiskest on <code>zsh</code>. Millise kestaga käivitatakse tema skript, mille esimene rida on <code>#!/bin/bash</code>? Miks?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Bashiga: skripti käivitab esimesel real (<em>shebang</em>) nimetatud programm, mitte kasutaja sisselogimiskest. Seepärast saab interaktiivseks tööks valida mis tahes kesta ja skriptid töötavad ikka ühtemoodi.</p>
+</details>
+<p><strong>24.</strong> Mis vahe on sisselogimiskestal ja tavalisel interaktiivsel kestal? Kuhu kirjutad Bashi aliased, et need kehtiksid alati?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Sisselogimiskest (SSH, konsool, <code>su -</code>) loeb <code>/etc/profile</code> ja <code>~/.profile</code> (või <code>~/.bash_profile</code>); iga interaktiivne Bash loeb <code>~/.bashrc</code>. Aliased kirjutatakse faili <code>~/.bashrc</code>, sest Debiani ja Ubuntu <code>~/.profile</code> loeb selle ka sisselogimisel.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> <code>paaris</code> - saab argumendina arvu ja ütleb, kas see on paaris või paaritu. Kui argument pole täisarv, kirjutab veateate ja lõpetab koodiga 1.</p>
 <details class="success">

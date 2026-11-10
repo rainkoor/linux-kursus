@@ -1183,6 +1183,39 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#kestad-bash-sh-zsh-fish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kestad: bash, sh, zsh, fish
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesta-vahetamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesta vahetamine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesta-seadistusfailid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesta seadistusfailid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#esimene-skript" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4890,6 +4923,39 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#kestad-bash-sh-zsh-fish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kestad: bash, sh, zsh, fish
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesta-vahetamine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesta vahetamine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesta-seadistusfailid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesta seadistusfailid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#esimene-skript" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5414,6 +5480,7 @@
 <h2 id="õpiväljundid">Õpiväljundid<a class="headerlink" href="#õpiväljundid" title="Permanent link">&para;</a></h2>
 <p>Mooduli läbinud õppija:</p>
 <ul>
+<li>selgitab kestade erinevusi ja POSIX-ühilduvust ning vahetab sisselogimiskesta;</li>
 <li>loob ja käivitab Bashi skripte;</li>
 <li>kasutab muutujaid, keskkonnamuutujaid ja käskude asendust;</li>
 <li>kasutab jutumärke õigesti;</li>
@@ -5431,6 +5498,101 @@
 <p class="admonition-title">Näpunäide</p>
 <p><strong>Millal skript, millal midagi muud?</strong> Bash sobib hästi käskude ühendamiseks ja failidega töötamiseks. Kui skript kasvab üle paarisaja rea või vajab keerulisi andmestruktuure, on parem kasutada Pythonit. Mitme serveri seadistamiseks sobib Ansible (moodul 16).</p>
 </div>
+<h3 id="kestad-bash-sh-zsh-fish">Kestad: bash, sh, zsh, fish<a class="headerlink" href="#kestad-bash-sh-zsh-fish" title="Permanent link">&para;</a></h3>
+<p>Kest on tavaline programm ja neid on mitu. Igal kasutajal on oma <strong>sisselogimiskest</strong> (failis <code>/etc/passwd</code> viimane väli), mille ta saab ise valida.</p>
+<table>
+<thead>
+<tr>
+<th>Kest</th>
+<th>POSIX-ühilduv</th>
+<th>Kus vaikimisi</th>
+<th>Iseloomustus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>bash</code></strong></td>
+<td>jah (+ laiendused)</td>
+<td>Debian, Ubuntu, AlmaLinux kasutajatel</td>
+<td>Linuxi standard; selle mooduli skriptid</td>
+</tr>
+<tr>
+<td><strong><code>sh</code></strong> / <strong><code>dash</code></strong></td>
+<td>jah (ainult POSIX)</td>
+<td>Debiani ja Ubuntu <code>/bin/sh</code></td>
+<td>Väike ja kiire; süsteemiskriptid</td>
+</tr>
+<tr>
+<td><strong><code>zsh</code></strong></td>
+<td>peaaegu (+ omad laiendused)</td>
+<td>macOS, Kali</td>
+<td>Väga hea automaatne lõpetamine, pluginad (nt Oh My Zsh)</td>
+</tr>
+<tr>
+<td><strong><code>fish</code></strong></td>
+<td><strong>ei</strong></td>
+<td>-</td>
+<td>Kõige kasutajasõbralikum: soovitused, värvid ja lõpetamine ilma seadistamata, kuid oma süntaks</td>
+</tr>
+<tr>
+<td><strong><code>ksh</code></strong>, <strong><code>tcsh</code></strong></td>
+<td><code>ksh</code> jah, <code>tcsh</code> ei</td>
+<td>vanemad Unixid, FreeBSD juurkasutaja (<code>tcsh</code> kuni 13. versioonini)</td>
+<td>Ajaloolised, kohtab vanades süsteemides</td>
+</tr>
+</tbody>
+</table>
+<p><strong>POSIX-ühilduvus</strong> tähendab, et kest mõistab standardiga (punkt 2.1 moodulis 2) kirjeldatud süntaksit: muutujad <code>nimi=väärtus</code>, <code>if … then … fi</code>, <code>for … do … done</code>, <code>$(käsk)</code>, <code>&amp;&amp;</code>, <code>||</code>, torud ja ümbersuunamised. POSIX-süntaksis kirjutatud skript töötab igas POSIX-kestas - <code>dash</code>-is, <code>bash</code>-is, <code>zsh</code>-is, FreeBSD <code>sh</code>-s ja BusyBoxis. Bashi laiendused (<code>[[ ]]</code>, massiivid, <code>{1..5}</code>, <code>(( ))</code>) töötavad ainult <code>bash</code>-is ja osaliselt <code>zsh</code>-is.</p>
+<p><code>fish</code> ei ole POSIX-ühilduv: muutuja omistatakse käsuga <code>set nimi väärtus</code>, tingimus lõpeb sõnaga <code>end</code>, <code>&amp;&amp;</code> asemel on vanemates versioonides <code>; and</code>. Internetist kopeeritud Bashi käsurida ei pruugi <code>fish</code>-is töötada.</p>
+<div class="admonition tip">
+<p class="admonition-title">Näpunäide</p>
+<p><strong>Interaktiivne kest ja skriptikest on eri asjad.</strong> Igapäevatööks võid valida endale meeldiva kesta (<code>zsh</code>, <code>fish</code>), kuid <strong>skriptid kirjuta Bashis või POSIX <code>sh</code>-s</strong> ja määra kest skripti esimesel real (<code>#!/bin/bash</code>). Skripti käivitab see kest, mis on esimesel real, mitte sinu sisselogimiskest. Süsteemikasutajatele ja juurkasutajale jäta vaikekest.</p>
+</div>
+<h3 id="kesta-vahetamine">Kesta vahetamine<a class="headerlink" href="#kesta-vahetamine" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$SHELL</span><span class="w">                 </span><span class="c1"># sisselogimiskest (failist /etc/passwd)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$0</span><span class="w">                     </span><span class="c1"># praegu töötav kest</span>
+ps<span class="w"> </span>-p<span class="w"> </span><span class="nv">$$</span><span class="w">                    </span><span class="c1"># sama protsessi järgi ($$ = kesta PID)</span>
+cat<span class="w"> </span>/etc/shells<span class="w">             </span><span class="c1"># lubatud sisselogimiskestad</span>
+
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zsh<span class="w"> </span>fish<span class="w">   </span><span class="c1"># paigalda (AlmaLinuxis zsh hoidlast, fish EPEL-ist)</span>
+zsh<span class="w">                         </span><span class="c1"># proovi: käivita uus kest olemasoleva sees, välju käsuga exit</span>
+chsh<span class="w"> </span>-s<span class="w"> </span>/usr/bin/zsh<span class="w">        </span><span class="c1"># muuda oma sisselogimiskest (küsib parooli), kehtib järgmisest sisselogimisest</span>
+sudo<span class="w"> </span>usermod<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>mari<span class="w">   </span><span class="c1"># administraator muudab teise kasutaja kesta (moodul 3)</span>
+</code></pre></div>
+<p><code>chsh</code> lubab ainult faili <code>/etc/shells</code> loetletud kestasid. Paigaldamisel lisab pakett oma kesta sinna ise.</p>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Ära muuda juurkasutaja ega süsteemikasutajate kesta mitte-POSIX-kestaks</strong> (nt <code>fish</code>). Mõned hooldusskriptid ja <code>su -c</code> eeldavad POSIX-kesta ning kui kest on vigane või eemaldatakse, ei pääse sa kasutajana enam sisse. Proovi uut kesta kõigepealt käsuga <code>zsh</code> või <code>fish</code>, enne kui teed selle sisselogimiskestaks.</p>
+</div>
+<h3 id="kesta-seadistusfailid">Kesta seadistusfailid<a class="headerlink" href="#kesta-seadistusfailid" title="Permanent link">&para;</a></h3>
+<p>Kest loeb käivitumisel seadistusfaile. Millised, sõltub sellest, kas tegu on <strong>sisselogimiskestaga</strong> (SSH, konsool, <code>su -</code>) või tavalise <strong>interaktiivse kestaga</strong> (uus terminaliaken, käsk <code>bash</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Kest</th>
+<th>Sisselogimisel</th>
+<th>Iga interaktiivne kest</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bash</code></td>
+<td><code>/etc/profile</code>, seejärel <code>~/.bash_profile</code> või <code>~/.profile</code></td>
+<td><code>/etc/bash.bashrc</code> (Debian, Ubuntu) või <code>/etc/bashrc</code> (AlmaLinux), <code>~/.bashrc</code></td>
+</tr>
+<tr>
+<td><code>zsh</code></td>
+<td><code>~/.zprofile</code></td>
+<td><code>~/.zshrc</code></td>
+</tr>
+<tr>
+<td><code>fish</code></td>
+<td>-</td>
+<td><code>~/.config/fish/config.fish</code></td>
+</tr>
+</tbody>
+</table>
+<p>Debiani ja Ubuntu <code>~/.profile</code> loeb omakorda <code>~/.bashrc</code>-i, seega piisab tavaliselt sellest, kui kirjutad aliased ja muutujad faili <code>~/.bashrc</code> (punkt 6.2). Uute kasutajate algfailid tulevad kataloogist <code>/etc/skel</code> (moodul 3). Muudatuse rakendamiseks avatud kestas: <code>source ~/.bashrc</code>.</p>
 <h3 id="esimene-skript">Esimene skript<a class="headerlink" href="#esimene-skript" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>nano<span class="w"> </span>tere.sh
 </code></pre></div>
