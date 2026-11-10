@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani virtuaalmasin (sama, mis laboritöös 1), ligipääs SSH kaudu |
 | **Eesmärk** | Harjutada redaktoreid, ümbersuunamist, torusid, tekstitöötlust, failide otsimist ja arhiveerimist |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk.
+**Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** oled kooli veebiserveri administraator. Õpetaja kahtlustab, et serverit on rünnatud, ja palub sul logi analüüsida, kokkuvõte teha ning logid varundada.
 
@@ -253,6 +253,35 @@ zgrep '" 500 ' /tmp/vana.log.gz
 1. Kirjuta üks käsuahel, mis näitab iga IP-aadressi kohta, mitu **404** vastust see sai.
 2. Jätka **OverTheWire Banditiga**, tasemed 6–15. Need tasemed nõuavad just selles moodulis õpitud käske (`find`, `grep`, `sort`, `uniq`, `tr`, `tar`, `gzip`).
 3. **diff ja xargs:** tee kataloogist `/etc` koopia (`sudo cp -a /etc ~/etc-varu`), muuda ühte faili ja leia muudatus käsuga `sudo diff -r /etc ~/etc-varu`. Leia `find`-i ja `xargs`-iga kõik `.conf` failid kataloogis `/etc`, mis sisaldavad sõna `Listen`, ja loenda need (`xargs grep -l … | wc -l`).
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.4)* Milles seisneb vi tava- ja sisestusrežiimi erinevus?
+- **K2.** *(punkt 2.2)* Mitu rida on failis `proov.txt`? Miks?
+- **K3.** *(punkt 2.3)* Miks kuvati teise käsu järel ekraanil ikkagi midagi? Mis jõudis faili `valjund.txt` ja mis faili `vead.txt`?
+- **K4.** *(punkt 2.4)* Kirjuta käsk ja loetle leitud failid.
+- **K5.** *(punkt 3.1)* Kirjuta käsk ja tulemus.
+- **K6.** *(punkt 3.3)* Kirjuta käsk. Milline IP-aadress tegi kõige rohkem päringuid?
+- **K7.** *(punkt 3.4)* Mitu sellist rida on? Millise IP-aadressi päringud need on ja milliseid lehti küsiti?
+- **K8.** *(punkt 3.4)* Miks on need päringud kahtlased? (Vihje: vaata küsitud lehtede nimesid. Kas koolilehel on WordPress või phpMyAdmin?)
+- **K9.** *(punkt 3.5)* Milline olekukood esineb kõige sagedamini? Mitu serveri viga (koodid 5xx) logis on?
+- **K10.** *(punkt 3.6)* Kirjuta käsk ja tulemus.
+- **K11.** *(punkt 3.7)* Kirjuta käsk ja tulemus.
+- **K12.** *(punkt 3.8)* Kirjuta käsk. Mitu päringut tehti selles vahemikus?
+- **K13.** *(punkt 3.9)* Kirjuta käsk. Miks on oluline punkt varjestada (`\.`)?
+- **K14.** *(punkt 3.10)* Kirjuta käsk.
+- **K15.** *(punkt 3.12)* Kirjuta käsud, millega faili koostasid.
+- **K16.** *(punkt 4.2)* Kirjuta käsk ja loetle kasutajad.
+- **K17.** *(punkt 4.3)* Kirjuta käsk. Mitu rida jäi alles?
+- **K18.** *(punkt 5.3)* Kirjuta kõigi kolme ülesande käsud ja leitud failide arv või nimed.
+- **K19.** *(punkt 5.5)* Mis juhtus faili `markmed.txt` sisuga? Miks?
+- **K20.** *(punkt 6.4)* Mis juhtus pärast `gzip` käsku algse failiga `vana.log`? Milleks on vaja käske `zcat` ja `zgrep`?
+<!-- /kysimused -->
 
 ---
 

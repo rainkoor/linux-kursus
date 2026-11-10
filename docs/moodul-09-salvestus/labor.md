@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 8 AlmaLinuxi masin ja **kaks uut 2 GiB lisaketast** (pluss kolmas 2 GiB ketas 1. osa lõpus), Ubuntu masin |
 | **Eesmärk** | Ehitada tarkvaraline RAID ja vahetada ketas, mõõta ja jälgida ketaste jõudlust ning tervist, taastada partitsioonitabel ja tutvuda ZFS-iga |
 
-**Aruanne:** vasta küsimustele **K1–K14**.
+**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > Tee enne alustamist mõlemast masinast hetktõmmis. **Kontrolli enne iga ohtlikku käsku `lsblk`-iga, millise kettaga töötad.**
@@ -204,6 +204,29 @@ sudo mdadm --zero-superblock /dev/sdd /dev/sdf
 ```
 
 Eemalda `/etc/mdadm.conf` ja `/etc/fstab`-ist lisatud read ning seejärel kettad Proxmoxis.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Kui suur on massiiv? Mida näitab `/proc/mdstat` sünkroniseerimise ajal ja pärast seda (`[UU]`)?
+- **K2.** *(punkt 1.4)* Mis on massiivi olek pärast riket? Kas andmed olid loetavad?
+- **K3.** *(punkt 1.5)* Kui kaua taastamine (*recovery*) kestis? Miks võtab suurte (nt 20 TB) ketaste taastamine päevi ja miks on see risk?
+- **K4.** *(punkt 1.6)* Mis on riistvaralise ja tarkvaralise RAID-i peamine erinevus, kui server ise (emaplaat või RAID-kontroller) rikneb?
+- **K5.** *(punkt 2.1)* Pane tulemused tabelisse. Miks oli `oflag=dsync` kiirus väiksem? Miks erinesid kaks lugemise tulemust?
+- **K6.** *(punkt 2.2)* Mitu IOPS-i ja MB/s said kummagi testiga? Miks on 4 KiB juhusliku testi MB/s palju väiksem? Mida näitas `iostat` veerg `%util`?
+- **K7.** *(punkt 3.1)* Mida `smartctl` virtuaalse ketta kohta näitas? Kus tuleks virtuaalmasinate puhul ketaste tervist jälgida? Kui sul on ligipääs mõnele füüsilisele Linuxi arvutile, vaata seal `smartctl -a` väljundist atribuute `Reallocated_Sector_Ct` ja `Power_On_Hours`.
+- **K8.** *(punkt 4.2)* Kas `loop0p1` on alles? Kas andmed on kustutatud?
+- **K9.** *(punkt 4.3)* Kas andmed taastusid? Milline oli taastatud partitsiooni algus ja nimi? Miks ei tohi kahjustatud kettale enne taastamist midagi kirjutada?
+- **K10.** *(punkt 5.4)* Mis oli pakkimise suhe (`compressratio`)? Miks võib pakkimine kettatööd isegi kiirendada?
+- **K11.** *(punkt 5.4)* Mitu viga `scrub` leidis ja parandas (veerg `CKSUM`)? Miks ei saaks tavaline RAID 1 (`mdadm`) seda viga ise parandada?
+- **K12.** *(punkt 5.4)* Mis vahe on LVM-i ja ZFS-i hetktõmmisel? Miks ei asenda kumbki varukoopiat?
+- **K13.** *(6. osa)* Täida tabel: RAID 1 (`mdadm`), LVM, ZFS mirror - töökindlus, hetktõmmised, andmete kontrollsummad, suurendamine, kus kasutada?
+- **K14.** *(6. osa)* Koostasid salvestuse kooli failiserverile, kus on 4 ketast. Milline lahendus (riistvaraline RAID, `mdadm` + LVM, ZFS raidz2 või kaks peeglit) valiksid ja miks? Mis on varunduse plaan?
+<!-- /kysimused -->
 
 ---
 

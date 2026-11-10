@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 12 AlmaLinuxi masin koos Git-hoidlaga `~/infra`, varasemate laboritööde Debiani ja Ubuntu masinad. 2. osa jaoks oma arvuti VirtualBoxi ja Vagrantiga |
 | **Eesmärk** | Seadistada mitu serverit korraga Ansible'iga, jagada kood rollideks, testida seda ja luua korratav laborikeskkond |
 
-**Aruanne:** vasta küsimustele **K1–K11**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund).
+**Aruanne:** vasta küsimustele **K1–K11**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised: `DEBIAN_IP`, `UBUNTU_IP`, `ALMA_IP`, `kasutaja` - asenda oma väärtustega.
 
@@ -330,6 +330,26 @@ ja käivita idempotentsuse kontroll uuesti. Seejärel paranda ülesanne nii, et 
 2. **Kasutajad:** lisa mänguraamatusse ülesanne, mis loob kõigisse serveritesse laboritöö 6 CSV-faili põhjal kasutajad (`ansible.builtin.read_csv` ja `ansible.builtin.user` koos `loop`-iga).
 3. **Ansible + konteinerid:** kirjuta mänguraamat, mis paigaldab hallatavatele masinatele Podmani ja käivitab seal laboritöö 12 kooli saidi konteineri Quadleti abil.
 4. **Laboritöö 13 automaatselt:** kirjuta mänguraamat, mis ehitab tühjast Debiani masinast laboritöö 13 veebiserveri (nginx, saidid, sertifikaat, MariaDB).
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.3)* Mida vastas `ping`? Milliseid distro fakte Ansible kogus? Mida tegi `-b -K`?
+- **K2.** *(punkt 1.7)* Kopeeri mõlema käivituse lõpukokkuvõte (`PLAY RECAP`) aruandesse. Mille poolest need erinevad? Mida tähendab idempotentsus?
+- **K3.** *(punkt 1.8)* Mida näitas veebileht kummaski serveris? Kas sisselogimisel ilmus teade? Kuidas sai sama mall eri serverites eri sisu?
+- **K4.** *(punkt 1.9)* Mida Ansible tegi? Mis on „seadistuse triiv“ (*configuration drift*) ja kuidas Ansible seda lahendab?
+- **K5.** *(punkt 1.10)* Mis juhtus AlmaLinuxis? Milline ülesanne ebaõnnestus ja miks? (Vihje: kas AlmaLinuxi nginx kasutab kataloogi `sites-available`?) Kuidas peaks mänguraamatut muutma, et see töötaks ka AlmaLinuxis? (Vihje: `when: ansible_os_family == "Debian"` ja `/etc/nginx/conf.d/`.)
+- **K6.** *(punkt 3.4)* Mida näitab veebileht nüüd kooli nimena - rolli vaikeväärtust või `group_vars` väärtust? Miks? Mis juhtub, kui käivitad `ansible-playbook site.yml -K -e kooli_nimi=Test`?
+- **K7.** *(punkt 3.5)* Milliseid leide `ansible-lint` andis (reegli nimed)? Kas mõni neist oleks võinud põhjustada päris vea?
+- **K8.** *(punkt 3.6)* Mida näitas idempotentsuse kontroll enne ja pärast parandust? Miks loeb Ansible `shell`-ülesande alati muutunuks?
+- **K9.** *(4. osa)* Võrdle laboritöid 13–15 (käsitsi seadistatud server) ja selle laboritöö 1. osa (Ansible). Kui kaua kuluks kummalgi viisil 20 ühesuguse serveri seadistamiseks? Millised on automatiseerimise eelised ja puudused?
+- **K10.** *(4. osa)* Kirjelda, kuidas kasutaksid Giti, konteinereid ja Ansible'it koos, et laboritööde 13–15 server oleks võimalik ühe tunniga nullist uuesti üles ehitada.
+- **K11.** *(4. osa)* Koosta `git log --oneline --graph` väljund oma hoidlast. Mitu sissekannet tegid? Kas sissekannete kirjeldused on arusaadavad ka kellelegi teisele?
+<!-- /kysimused -->
 
 ---
 

@@ -11,7 +11,7 @@
 | **Vajalik** | Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp `host`): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) Debian Xen Orchestra jaoks (2 vCPU, 3 GiB) ja Proxmox Backup Server (2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB + andmeketas 32 GiB, nt `10.0.83.65`). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini |
 | **Eesmärk** | Mõista, kuidas Linux virtualiseerib, ning paigaldada ja hallata kahte avatud hüperviisorit |
 
-**Aruanne:** vasta küsimustele **K1–K18**.
+**Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!NOTE]
 > Pesastatud hüperviisor on aeglasem kui päris riistvaral. Kasuta väikeseid testmasinaid (Alpine, Debiani pilvetõmmis) ja lülita masinad pärast tundi välja.
@@ -257,6 +257,33 @@ Kustuta testmasinad (`virsh undefine test1 --remove-all-storage`, `qm destroy`, 
 2. **Cloud-init mall:** tee Debiani pilvetõmmisest Proxmoxi mall koos cloud-initiga (teooria punkt 23.3, *Cloud-init mall*) ja klooni sellest kolm masinat, mis saavad kohe õige nime, IP ja SSH-võtme.
 3. **Proxmoxi API:** loo API-võti ja küsi `curl`-iga masinate loetelu (teooria punkt 23.3, *API ja skriptid*). Kirjuta Bashi skript (moodul 6), mis käivitab kõik ühe kogumi (*pool*) masinad.
 4. **Ansible ja Proxmox:** kasuta Ansible'i kogumit `community.general` (moodulid `proxmox_kvm` ja `proxmox`), et luua masinaid koodina (moodul 16).
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Kas virtualiseerimise tugi oli VM-is olemas? Mis juhtuks, kui Proxmoxis oleks VM-i protsessori tüüp `x86-64-v2-AES` (mitte `host`)?
+- **K2.** *(punkt 1.2)* Mis on `test1` IP-aadress ja millises võrgus see asub (`virbr0`)? Kuidas paistab virtuaalmasin hostis (`ps`)?
+- **K3.** *(punkt 1.3)* Mida näitas `qemu-img info` ketta tegeliku suuruse ja tagatõmmise (*backing file*) kohta? Miks oli uue masina loomine nii kiire?
+- **K4.** *(punkt 2.2)* Mis viga andis `apt update` enne hoidlate muutmist ja miks? Millal oleks õige kasutada enterprise-hoidlat?
+- **K5.** *(punkt 2.3)* Millised on Proxmoxi põhiteenused? Mis on kataloog `/etc/pve` ja miks on see eriline? Milline sild (`vmbr0`) ühendab VM-e füüsilise võrguga?
+- **K6.** *(punkt 3.3)* Võrdle VM-i ja LXC konteineri käivitusaega, mälukasutust ja kernelit (`uname -r`). Millal kasutaksid kumba?
+- **K7.** *(punkt 3.3)* Mida tähendab `--unprivileged 1`? Mis on konteineri `root`-i UID hostis (vihje: `ps -o user,pid,cmd -C bash` hostis, kui konteineris töötab kest)?
+- **K8.** *(punkt 4.1)* Kas masinate 100 ja 110 MAC-aadressid erinesid? Mis juhtuks samas võrgus kahe sama MAC-aadressiga masinaga?
+- **K9.** *(punkt 4.2)* Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?
+- **K10.** *(punkt 4.5)* Kui kaua võttis esimene ja teine varukoopia ning kui palju andmeid kumbki kord saadeti (vt `vzdump` väljundit)? Mis on deduplitseerimistegur? Miks oli teine varukoopia kiirem?
+- **K11.** *(punkt 4.6)* Mis on PBS-i õiguse `DatastoreBackup` eelis võrreldes `root`-iga, kui ründaja saab Proxmoxi enda üle kontrolli? Miks ei ole hea mõte paigaldada PBS samasse Proxmoxi, mida see varundab? Kui kaua võttis kogu masina taastamine?
+- **K12.** *(punkt 5.2)* Kas konteiner pääses internetti? Mida teeb reegel `MASQUERADE` ja miks oli vaja `ip_forward`-i? Võrdle seda OPNsense'iga (moodul 18).
+- **K13.** *(punkt 6.2)* Mitu häält (*votes*) klastris on ja kas pärast `pve2` väljalülitamist on kvoorum? Miks on HA jaoks vaja vähemalt kolme sõlme?
+- **K14.** *(punkt 7.1)* Mis on dom0 ja mille poolest erineb Xeni ülesehitus KVM-ist?
+- **K15.** *(punkt 7.4)* Mida näitas XO enne ja pärast külalistööriistade paigaldust? Milline on Proxmoxis samaväärne komponent?
+- **K16.** *(8. osa)* Täida tabel Proxmox VE ja XCP-ng kohta: paigaldus, haldusliides, käsurida, konteinerid, varundus, mis meeldis, mis oli keeruline.
+- **K17.** *(8. osa)* Kool kaalub laborikeskkonna kolimist VMware'ilt avatud hüperviisorile. Too kolm küsimust, millele peaks enne otsustamist vastama.
+- **K18.** *(8. osa)* Selgita, kuidas selle kursuse teemad seostuvad hüperviisoriga: too vähemalt neli näidet (nt Debian ja `apt`, ZFS, Linuxi sillad, LXC, `vzdump`, systemd, iSCSI).
+<!-- /kysimused -->
 
 ---
 

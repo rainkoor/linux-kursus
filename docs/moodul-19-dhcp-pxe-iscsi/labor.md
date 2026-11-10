@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 18 isoleeritud laborivõrk OPNsense'i taga, võrguplaan, `debian2`-le lisaketas 10 GiB (valikuline), üks tühi virtuaalmasin PXE testimiseks |
 | **Eesmärk** | Seadistada laborivõrgule Linuxi DHCP-server, PXE alglaadimine ja iSCSI salvestus |
 
-**Aruanne:** vasta küsimustele **K1–K16**.
+**Aruanne:** vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > **Tee kõiki selle labori osi ainult isoleeritud laborivõrgus!** Kontrolli enne alustamist, et `debian1` võrguliides on Proxmoxis ühendatud sinu isoleeritud silda/VNet-i, mitte kooli võrku.
@@ -220,6 +220,31 @@ Pärast taaskäivitust: `df -h /mnt/iscsi && cat /mnt/iscsi/test.txt`.
 3. **Proxmox ja iSCSI:** lisa õpetaja loal `debian2` iSCSI sihtmärk Proxmoxi salvestuseks (*Datacenter* → *Storage* → *Add* → *iSCSI*) ja vaata, kuidas Proxmox seda kasutab.
 4. **ISC DHCP võrdlus:** seadista samale võrgule (Kea peatatuna) ISC DHCP teooria punkti 19.3 järgi ja võrdle seadistusfaile ning logisid.
 5. **Automaatne paigaldus kickstartiga:** pane `debian2` veebiserverisse `ks.cfg` ja `boot.ipxe` (teooria punkt 19.4), lisa Kea seadistusse iPXE kliendiklass ning käivita uus tühi VM (vähemalt 2 GiB RAM, 20 GiB ketas) võrgust. Mõõda, kui kaua võttis paigaldus nupuvajutusest sisselogimiseni. Kontrolli, et SSH-võtmega saab kohe sisse.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?
+- **K2.** *(punkt 1.4)* Mida näitas kontroll vea korral? Miks on JSON-i puhul nii lihtne viga teha?
+- **K3.** *(punkt 1.5)* Miks tuli OPNsense'i DHCP välja lülitada? Mis juhtuks, kui võrgus oleks kaks DHCP-serverit?
+- **K4.** *(punkt 2.1)* Leia logist DHCP-sõnumite vahetus (DISCOVER, OFFER, REQUEST, ACK - Kea logis `DHCP4_PACKET_RECEIVED`, `DHCP4_LEASE_ALLOC` vms). Millise aadressi klient sai?
+- **K5.** *(punkt 2.3)* Kas nägid leviedastusi (`255.255.255.255`)? Millised DHCP-valikud olid serveri vastuses (ruuter, DNS, domeen, rendiaeg)?
+- **K6.** *(punkt 2.4)* Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?
+- **K7.** *(punkt 2.5)* Mis juhtus kliendi aadressiga, kui DHCP-server ei vastanud? Miks ei kaota klient aadressi kohe?
+- **K8.** *(punkt 3.4)* Mida konsoolis nägid? Kirjelda alglaadimise etappe (PXE → DHCP → TFTP → iPXE → menüü). Millise distro paigaldaja või tööriista netboot.xyz menüüst proovisid käivitada?
+- **K9.** *(punkt 3.5)* Kas alglaadimine õnnestus? Miks mitte? Millist faili oleks UEFI klient vajanud ja kuidas saaks Kea jagada BIOS- ja UEFI-klientidele eri faile?
+- **K10.** *(punkt 4.1)* Kirjuta aruandesse `targetcli ls` väljund. Selgita, mis on sihtmärk, LUN, ACL ja portaal.
+- **K11.** *(punkt 5.2)* Mis nime sai iSCSI ketas AlmaLinuxis? Kuidas see `lsblk` väljundis kohalikust kettast erineb (vihje: `lsblk -S` veerg `TRAN`)?
+- **K12.** *(punkt 5.3)* Mis veateate said? Miks? Taasta õige IQN.
+- **K13.** *(punkt 5.4)* Mis on valiku `_netdev` ülesanne? Mis juhtuks alglaadimisel ilma selleta?
+- **K14.** *(punkt 5.5)* Miks ei tohi sama LUN-i ühendada korraga AlmaLinuxi ja Windowsiga?
+- **K15.** *(6. osa)* Täienda oma võrguplaani: millises masinas töötab DHCP, TFTP ja iSCSI sihtmärk, millised pordid on avatud.
+- **K16.** *(6. osa)* Võrdle NFS-i, Sambat (moodul 15) ja iSCSI-t: millisel tasemel need jagavad, kas mitu klienti saab korraga kasutada, millal millist kasutada?
+<!-- /kysimused -->
 
 ---
 

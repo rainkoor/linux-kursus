@@ -11,7 +11,7 @@
 | **Vajalik** | AlmaLinuxi virtuaalmasin (soovitatavalt 2 GiB mälu), internetiühendus, laboritöö 6 Git-hoidla |
 | **Eesmärk** | Käivitada ja hallata teenuseid konteinerites ning hoida nende kirjeldus Gitis |
 
-**Aruanne:** vasta küsimustele **K1–K10**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund).
+**Aruanne:** vasta küsimustele **K1–K10**. Esita ka oma Git-hoidla (`git log --oneline --graph` väljund). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ---
 
@@ -260,6 +260,25 @@ podman system prune -a
 2. **Docker:** paigalda Ubuntu masinasse Docker (Dockeri ametlikust hoidlast) ja käivita sama `compose.yaml` käsuga `docker compose up -d`. Mis on erinev?
 3. **Mailpit:** käivita konteinerina kirjapüüdja Mailpit (`axllent/mailpit`, veebiliides pordil 8025). Hiljem laboritöös 15 saad sinna suunata Postfixi kirjad (`relayhost = [127.0.0.1]:1025`).
 4. **Automaatne uuendus:** lisa oma Quadleti konteinerile `AutoUpdate=registry`, käivita `podman auto-update --dry-run` ja luba `podman-auto-update.timer`. Millal taimer järgmisena käivitub (`systemctl list-timers`)? Miks on täpne pildisilt turvalisem kui `latest`?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 2.1)* Milline distro oli konteineri sees ja milline hostis? Mis oli kerneli versioon konteineris ja hostis? Mida see konteinerite kohta näitab?
+- **K2.** *(punkt 2.2)* Mitu protsessi nägid konteineris? Kes oli konteineri sees kasutaja? Võrdle hostis: `podman unshare id` ja `id`. Mis on juurkasutajata konteineri eelis?
+- **K3.** *(punkt 2.5)* Mis juhtus muudatusega pärast konteineri uuesti loomist? Miks? Kuidas hoida konteineri andmeid püsivalt?
+- **K4.** *(punkt 2.6)* Kas hostis tehtud muudatus oli kohe konteineris nähtav? Mida tegid valikud `ro` ja `Z`? Mis juhtub ilma `Z`-ta (proovi)?
+- **K5.** *(punkt 3.3)* Mis on pildi suurus (`podman images`)? Mida näitab `podman history`? Miks on kasulik hoida `Containerfile` Gitis, aga mitte pilti ennast?
+- **K6.** *(punkt 4.2)* Miks on Adminerisse sisselogimisel serveri nimi `db`, mitte `localhost`? Kas MariaDB port 3306 on hostis avatud (`ss -tlpn | grep 3306`)? Miks see hea on?
+- **K7.** *(punkt 4.3)* Kas andmed jäid alles? Miks? Mis juhtuks käsuga `podman-compose down -v`?
+- **K8.** *(punkt 5.3)* Mille poolest erineb teenuse `veeb` haldamine tavalisest systemd teenusest? Kas konteiner käivitus pärast taaskäivitust? Miks ei näe `podman ps` (ilma `sudo`-ta) seda konteinerit?
+- **K9.** *(6. osa)* Võrdle konteinerit ja virtuaalmasinat: millal kasutaksid kumba? Too näide kooli Proxmoxi laborist.
+- **K10.** *(6. osa)* Mida peaks hoidma Gitis (Containerfile, `compose.yaml`, Quadlet-failid, andmed, pildid, paroolid) ja mida mitte? Põhjenda.
+<!-- /kysimused -->
 
 ---
 

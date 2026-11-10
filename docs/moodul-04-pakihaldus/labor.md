@@ -11,7 +11,7 @@
 | **Vajalik** | Kolm virtuaalmasinat (Debian, Ubuntu, AlmaLinux), igaühes `sudo` õigusega kasutaja ja internetiühendus |
 | **Eesmärk** | Harjutada pakihaldust kahe perekonna distrodel ja võrrelda nende erinevusi |
 
-**Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K16**.
+**Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!NOTE]
 > **Erandina kasutad selles laboris kõiki kolme distrot.** Hoia kolm SSH-seanssi korraga lahti (nt Windows Terminali eri vahekaartidel), et saaksid tulemusi kohe võrrelda. Jälgi viipa, et teaksid, millises masinas oled.
@@ -259,6 +259,31 @@ which -a hello
 2. AlmaLinuxis: paigalda tarkvaragrupp `"Development Tools"` ja kompileeri `hello` ka seal. Mis on erinev?
 3. **Väljalaske uuendus:** paigalda Proxmoxi uus Debian 12 VM (või klooni olemasolev), **tee hetktõmmis** ja uuenda see Debian 13-ks (teooria punkt 4.10). Pane kirja: mitu paketti uuendati, milliste seadistusfailide kohta küsiti ja mis on `cat /etc/debian_version` väljund enne ja pärast. Lõpuks teisenda hoidlad käsuga `apt modernize-sources` ja vaata faili `/etc/apt/sources.list.d/debian.sources`.
 4. **AlmaLinux 9 → 10 (ainult analüüs):** AlmaLinux 9 hetktõmmisega VM-is paigalda ELevate ja käivita `sudo leapp preupgrade`. Uuri aruannet `/var/log/leapp/leapp-report.txt`: millised takistused (*inhibitor*) leiti?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(1. osa)* Mitu paketti oli igas masinas uuendatav? Miks on Debianis ja Ubuntus vaja kahte käsku, AlmaLinuxis aga ühte?
+- **K2.** *(1. osa)* Millised hoidla osad (*components*) on Debianis ja Ubuntus lubatud? Millised hoidlad on AlmaLinuxis lubatud (`dnf repolist`)?
+- **K3.** *(1. osa)* Kas paketid on kolmes distros samanimelised?
+- **K4.** *(1. osa)* Milline masin sisaldab kõige rohkem pakette? Mis võib olla põhjus?
+- **K5.** *(punkt 2.1)* Kas pakett leiti? Miks?
+- **K6.** *(punkt 2.2)* Millised uued hoidlad lisandusid? Millisest hoidlast `ncdu` pärineb (rida `Repository` või `From repo`)?
+- **K7.** *(punkt 2.4)* Kas `ncdu` eemaldati? Mis juhtus EPEL-iga (`dnf repolist`)? Miks?
+- **K8.** *(punkt 2.5)* Mis on paketi nimi AlmaLinuxis? Leia Debiani või Ubuntu masinas, mis on sama tööriista paketi nimi (`apt search dnsutils`).
+- **K9.** *(punkt 3.1)* Kas `ncdu` on hoidla osas `main` või `universe`? Mis vahe neil on?
+- **K10.** *(punkt 3.3)* Millised snapid olid süsteemis enne sinu paigaldust? Kuhu paigaldati `hello-world` käivitusfail? Kuidas erineb see apt-i paketist?
+- **K11.** *(punkt 4.1)* Mitu paketti paigaldati koos `build-essential`-iga? Miks nii palju?
+- **K12.** *(punkt 4.4)* Kuhu programm paigaldati? Miks ütleb `dpkg -S`, et fail ei kuulu ühtegi paketti?
+- **K13.** *(punkt 4.5)* Mitu `hello` programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt `hello`, ja miks? (Vihje: vaata muutujat `PATH`.)
+- **K14.** *(punkt 4.6)* Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.
+- **K15.** *(5. osa)* Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
+- **K16.** *(5. osa)* Mida tuleks teha enne olulise serveri suurt uuendust?
+<!-- /kysimused -->
 
 ---
 

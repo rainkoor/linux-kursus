@@ -26,9 +26,13 @@ theme:
 hooks:
   - hooks/callouts.py
 
+extra_css:
+  - stylesheets/kursus.css
+
 markdown_extensions:
   - tables
   - admonition
+  - pymdownx.details
   - attr_list
   - md_in_html
   - pymdownx.emoji:

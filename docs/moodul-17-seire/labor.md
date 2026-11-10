@@ -11,7 +11,7 @@
 | **Vajalik** | Varasemate laboritööde masinad, `ubuntusrv`-s Docker (või Podman) ja vähemalt 2 GiB mälu |
 | **Eesmärk** | Õppida leidma jõudlusprobleeme käsurealt ja ehitada laborivõrgule seiresüsteem |
 
-**Aruanne:** vasta küsimustele **K1–K14**.
+**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ---
 
@@ -200,6 +200,29 @@ rm ~/katkine.sh
 4. **Netdata:** paigalda Netdata ühte masinasse ja võrdle selle reaalajagraafikuid Grafanaga.
 5. **Võrgu läbilaskevõime:** paigalda `iperf3` masinatesse `debian1` ja `ubuntusrv` (ava tulemüüris ajutiselt port 5201/tcp) ning mõõda kiirus mõlemas suunas. Käivita mõõtmise ajal teises masinas `stress-ng --cpu 0` ja vaata, kas tulemus muutub. Mida näitab `ethtool ens18`?
 6. **tuned:** vaata AlmaLinuxis `tuned-adm active` ja `tuned-adm recommend`. Vaheta profiil `throughput-performance`-ks ja tagasi ning võrdle `sysctl vm.dirty_ratio` väärtusi.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Mitu tuuma masinal on ja mis on koormus? Kui palju mälu on tegelikult vaba (`available`) ja kui palju on failide vahemälus? Kas `top` päises on `st` väärtus suurem kui 0 - mida see Proxmoxi VM-is tähendab?
+- **K2.** *(punkt 2.3)* Täida tabel: iga koormuse jaoks - milline tööriist ja milline veerg näitas probleemi kõige selgemini (nt `vmstat` `r`, `wa`, `si/so`, `iostat` `%util`, `await`)?
+- **K3.** *(punkt 2.3)* Kas mälukoormusel hakkas süsteem kasutama saaleala (`si`/`so`)? Mis juhtub, kui mälu ja saaleala saavad otsa (vaata `journalctl -k | grep -i oom`)?
+- **K4.** *(punkt 3.1)* Kas sar-i ajaloost on näha, millal koormust tekitasid? Mitme minuti järel sysstat andmeid kogub?
+- **K5.** *(punkt 4.1)* Millist faili programm otsis ja mis oli tulemus (`ENOENT`, `EACCES`)? Kuidas probleemi parandaksid?
+- **K6.** *(punkt 4.2)* Milline protsess hoidis logifaili avatuna? Millised protsessid kuulavad võrgus (võrdle `ss -tlpn` väljundiga)?
+- **K7.** *(punkt 5.2)* Kas kõik sihtmärgid olid **UP**? Kui mõni oli **DOWN**, mis oli põhjus (tulemüür, vale IP, eksportija ei tööta)?
+- **K8.** *(punkt 5.3)* Kirjuta PromQL-päring, mis näitab iga masina vaba mälu protsentides. Mis oli tulemus?
+- **K9.** *(punkt 5.4)* Miks on Grafanas andmeallika aadress `http://prometheus:9090`, mitte `http://localhost:9090`? (Vihje: moodul 12, Compose'i võrk.)
+- **K10.** *(punkt 5.5)* Kas häire käivitus? Mida tähendab häire olek *Pending* ja *Firing*? Miks on reeglis `for: 10m` (või *Pending period*)?
+- **K11.** *(punkt 6.2)* Kui kaua kulus probleemi märkamiseks? Millest see sõltub? Kas Uptime Kuma näitab ka sertifikaadi aegumist?
+- **K12.** *(7. osa)* Kasutaja kaebab, et veebileht on kell 9–10 aeglane. Kirjelda samm-sammult, kuidas põhjust otsiksid (USE meetod, käsud, sar, Grafana).
+- **K13.** *(7. osa)* Millised häired seadistaksid kooli laborivõrgule? Too 5 häiret ja põhjenda, miks just need (ja mitte rohkem).
+- **K14.** *(7. osa)* Võrdle Prometheust ja Zabbixit: millal valiksid kumma?
+<!-- /kysimused -->
 
 ---
 

@@ -11,7 +11,7 @@
 | **Vajalik** | AlmaLinuxi virtuaalmasin, `sudo` õigusega kasutaja, internetiühendus. Soovitatavalt **kaks SSH-seanssi** korraga |
 | **Eesmärk** | Harjutada protsesside jälgimist, signaale, teenuste haldust, oma teenuse loomist, logide lugemist ja ajastamist |
 
-**Aruanne:** vasta küsimustele **K1–K20**.
+**Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ---
 
@@ -383,6 +383,35 @@ systemd-analyze calendar "*-*-* 02:30:00"
 2. Paigalda `tmux`, käivita selles `top`, ühenda seansist lahti (**Ctrl+B**, seejärel **d**), logi välja, logi uuesti sisse ja ühenda tagasi (`tmux attach`). Kas `top` töötas edasi?
 3. **at:** ajasta `at`-iga 2 minuti pärast käsk, mis kirjutab kuupäeva faili `/tmp/at-test.txt`. Vaata `atq`-d ja kontrolli tulemust.
 4. **Ressursipiirangud:** piira mõne teenuse mälu (`sudo systemctl set-property <teenus> MemoryMax=100M`), vaata `systemctl status <teenus>` rida `Memory:` ja `systemd-cgtop`-i. Käivita `systemd-run --scope -p CPUQuota=20%` abil protsessorit koormav käsk (`sha256sum /dev/zero`) ja vaata `top`-is, mitu protsenti see saab.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Mis on protsessi PID 1 nimi? Kes on sinu praeguse kesta (`bash`) vanemprotsess? (Vihje: `ps -ef | grep $$` - muutuja `$$` on praeguse kesta PID.)
+- **K2.** *(punkt 1.3)* Mis on süsteemi koormus (*load average*) ja mitu protsessorituuma on masinal (`nproc`)? Kui palju mälu on tegelikult saadaval (`avail Mem`)?
+- **K3.** *(punkt 2.2)* Mis olekus oli töö pärast Ctrl+Z vajutamist? Mis muutus pärast `bg` käsku?
+- **K4.** *(punkt 2.3)* Kirjuta käsk, millega lõpetasid kõik `sleep` protsessid.
+- **K5.** *(punkt 2.5)* Kas protsessori kasutus muutus? Miks ei pruugi see tühjas virtuaalmasinas eriti muutuda? (Vihje: mille suhtes prioriteet kehtib?)
+- **K6.** *(punkt 2.6)* Mis juhtus? Miks?
+- **K7.** *(punkt 3.1)* Kas teenus on lubatud (`enabled`)? Mis on selle põhiprotsessi PID? Millises failis on teenuse kirjeldus?
+- **K8.** *(punkt 3.2)* Kas teenus töötab kohe pärast paigaldamist? Kas see on lubatud? Kuidas erineb see Debianist ja Ubuntust?
+- **K9.** *(punkt 3.4)* Kas `httpd` töötas pärast taaskäivitust? Miks? Millise **ühe** käsuga oleksid saanud teenuse korraga käivitada ja lubada?
+- **K10.** *(punkt 3.5)* Mis on `enable` tegelikult loonud?
+- **K11.** *(punkt 4.2)* Kuidas on logis näha ebaõnnestunud ja õnnestunud sisselogimine? Kirjuta mõlema kohta üks logirida (IP-aadressi võid varjata).
+- **K12.** *(punkt 4.3)* Mitu alglaadimist on journal'is (punktis 3.4 tegid ühe taaskäivituse)? Kas journal on püsiv või ajutine? Kui ajutine, tee see püsivaks (vt teooria punkt 5.7).
+- **K13.** *(punkt 5.3)* Mille poolest erineb teenuse `kettakontroll` olek teenuse `httpd` omast? Millise kasutajana teenus töötab (`ps -fu nobody`)?
+- **K14.** *(punkt 5.4)* Kuhu jõuab skripti `echo` väljund? Miks ei olnud vaja eraldi logifaili?
+- **K15.** *(punkt 5.5)* Kummal juhul teenus taaskäivitati ja kummal mitte? Selgita seda seadistusega `Restart=on-failure`.
+- **K16.** *(punkt 5.6)* Millise faili `systemctl edit` lõi? Miks on see parem kui põhifaili muutmine? Kontrolli tulemust käsuga `systemctl cat kettakontroll`.
+- **K17.** *(punkt 6.1)* Kirjuta crontab'i read, mis käivitaksid skripti `/usr/local/bin/aruanne.sh`: a) iga päev kell 06:45; b) tööpäeviti iga 30 minuti järel vahemikus 8–17; c) iga pühapäeva keskööl.
+- **K18.** *(punkt 6.5)* Millal käivitub taimer järgmisena? Mitu arhiivi tekkis? Mida näitab teenuse logi?
+- **K19.** *(punkt 6.6)* Mida tähendab `Persistent=true`? Miks on see varunduse puhul oluline?
+- **K20.** *(punkt 6.7)* Kirjuta koristamise käsud.
+<!-- /kysimused -->
 
 ---
 

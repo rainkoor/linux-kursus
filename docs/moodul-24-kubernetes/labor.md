@@ -11,7 +11,7 @@
 | **Vajalik** | Kolm Debiani VM-i (igaüks 2 vCPU, 2 GiB RAM, 20 GiB ketas; `k3s1`-le soovitatavalt 3 GiB). Kõige kiiremini saab need cloud-init mallist (moodul 23) või OpenTofuga (moodul 16). Laboritöö 13 labori CA (`debian1`, `/root/ca`). Ubuntu klient (`ubuntuklient`) |
 | **Eesmärk** | Ehitada mitmesõlmeline Kubernetese klaster, käivitada sellel rakendus koos TLS-i ja püsiandmetega ning harjutada uuendamist ja hooldust |
 
-**Aruanne:** vasta küsimustele **K1–K14**.
+**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised: `kasutaja` - sinu kasutajanimi. IP-aadressid on paigalduslisa plaanist (`10.0.83.61`–`63`); asenda `83` oma võrgu numbriga.
 
@@ -396,6 +396,29 @@ Kui klastrit enam ei vaja: `sudo /usr/local/bin/k3s-agent-uninstall.sh` agentide
 4. **AlmaLinuxi sõlm:** lisa klastrisse agendiks AlmaLinuxi masin (SELinux `enforcing`, firewalld). Mida paigaldusskript lisaks paigaldas (`rpm -qa | grep -i selinux`)? Milliseid tulemüürireegleid oli vaja?
 5. **minikube või kind oma arvutis:** paigalda oma arvutisse (või WSL-i) minikube ja käivita seal sama `kool.yaml`. Mis on teisiti (sõlmede arv, Ingress, salvestus)?
 6. **Võrgupoliitika:** k3s sisaldab võrgupoliitikate kontrollerit. Kirjuta `NetworkPolicy`, mis lubab nimeruumi `kool` podidele liiklust ainult Traefikilt (nimeruum `kube-system`), ja kontrolli punkti 3.2 testiga teisest nimeruumist.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Milline Kubernetese versioon paigaldati? Milliseid pode on nimeruumis `kube-system` ja mis on igaühe ülesanne (teooria punkt 24.4)? Milline protsess kuulab pordil 6443?
+- **K2.** *(punkt 2.3)* Milline on iga sõlme roll (`ROLES`), sisemine IP ja konteinerikäitur (`CONTAINER-RUNTIME`)? Kui palju mälu ja protsessorit on sõlmel `k3s2` podide jaoks saadaval (`Allocatable`)? Miks on agendi liitumisluba saladus?
+- **K3.** *(punkt 3.1)* Millistes sõlmedes podid töötavad? Milline IP-aadress on igal podil ja milline teenusel `kool`? Millisest võrgust need aadressid on (teooria punkt 24.4)?
+- **K4.** *(punkt 3.3)* Mis juhtus pärast podi kustutamist ja kui kiiresti? Milline Kubernetese komponent selle tegi ja miks (soovitud ja tegelik olek)?
+- **K5.** *(punkt 4.2)* Mitu podi töötas vigase uuenduse ajal ja milline oli uue podi olek (`STATUS`) ning sündmus `describe` väljundis? Kas teenus katkes? Miks?
+- **K6.** *(punkt 4.3)* Miks tuleb muudatus lõpuks teha manifesti, kui sama tulemuse saab ka käsuga `kubectl scale` või `set image`?
+- **K7.** *(punkt 5.3)* Kas lehe muudatus jõudis podidesse ilma taaskäivituseta (vihje: kulub kuni minut)? Milleks on `rollout restart`? Mida näitas Secret'i YAML ja miks ei tohi Secret'i manifesti Giti panna?
+- **K8.** *(punkt 6.3)* Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele `k3s3` - kas vastus tuli, isegi kui sellel sõlmel ei pruugi `kool` podi olla? Miks? Milline komponent päringu vastu võttis?
+- **K9.** *(punkt 6.4)* Kui kiiresti muutus `k3s3` olekuks `NotReady`? Millal käivitati selle podid teistes sõlmedes ja miks just siis? Kas veebileht vastas kogu aja jooksul aadressil `kool.k8s.lab.example` (kliendi `hosts` failis on `k3s1`)? Mis oleks juhtunud, kui välja oleks lülitatud `k3s1`?
+- **K10.** *(punkt 7.2)* Mis olekus oli PVC enne Deploymenti loomist ja pärast (vihje: `WaitForFirstConsumer`)? Kas andmed säilisid podi kustutamisel? Millises sõlmes ja kataloogis andmed asuvad ning mis juhtub selle sõlme rikke korral?
+- **K11.** *(punkt 8.2)* Mitu Kubernetese objekti lõi üks `helm install` (`kubectl get all -n demo`)? Mis muutus pärast `upgrade` ja `rollback` käske? Kuidas hoiaksid Helmi paigalduse seadeid korratavana?
+- **K12.** *(punkt 9.3)* Millised podid jäid `k3s2`-sse pärast `drain`-i ja miks (vihje: DaemonSet)? Kas veebileht vastas `k3s1` teenuse peatamise ajal? Mis on sinu varukoopias ja mida see **ei** sisalda?
+- **K13.** *(10. osa)* Võrdle laboritöö 12 (Podman, Compose, Quadlet) ja selle laboritöö lahendust: mida Kubernetes juurde andis ja mis läks keerulisemaks? Millises olukorras soovitaksid kooli serverile Quadletti ja millises Kubernetest?
+- **K14.** *(10. osa)* Joonista (ASCII või Mermaid) oma klastri skeem: sõlmed ja IP-d, Traefik, teenus `kool`, podid, PVC ja klient. Märgi joonisele kõik üksikud rikkepunktid ja kirjuta iga juurde, kuidas selle kõrvaldaksid.
+<!-- /kysimused -->
 
 ---
 

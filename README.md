@@ -149,3 +149,5 @@ Logod ja maskotid **ei kuulu** CC BY-SA litsentsi alla - need kuuluvad oma omani
 Leidsid vea või on ettepanek? Ava *issue* või tee *pull request*.
 
 Kui lisad, kustutad või nimetad ümber lehti, muuda menüüd failis `mkdocs.yml` ja käivita seejärel `python3 tools/navigatsioon.py`. See uuendab selle README sisukorra ning iga lehe alguses ja lõpus olevad lingid eelmisele ja järgmisele lehele.
+
+Kui muudad laboritöö küsimusi (**K1.** jne), käivita `python3 tools/kysimused.py` - see uuendab laboritöö lõpus olevat aruande küsimuste loendit.

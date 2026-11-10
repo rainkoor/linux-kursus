@@ -19,13 +19,15 @@ Mooduli läbinud õppija:
 - liigub failisüsteemis absoluutsete ja suhteliste teede abil;
 - loob, kopeerib, teisaldab ja kustutab faile ning katalooge.
 
+> [!NOTE]
+> **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+
 ---
 
 ## 1.1 Mis on Linux?
 
-Rangelt võttes on **Linux** operatsioonisüsteemi **kernel** ehk tuum: programm, mis haldab riistvara (protsessor, mälu, kettad, võrk) ja jagab ressursse teiste programmide vahel. Kerneli kirjutas 1991. aastal Soome tudeng **Linus Torvalds** ja seda arendavad tänapäeval tuhanded inimesed üle maailma.
-
-Kernel üksi ei ole veel kasutatav süsteem. Selleks on vaja ka käsurea tööriistu, teeke, pakihaldurit, teenuseid ja muud tarkvara. Suur osa sellest pärineb **GNU projektist**, mistõttu räägitakse vahel ka nimest **GNU/Linux**.
+> [!TIP]
+> **Lühidalt:** **Linux** on operatsioonisüsteemi tuum (kernel). **Distro** on kernel koos tööriistade ja programmidega, mida saab kasutada. Linux on tasuta ja avatud lähtekoodiga ning töötab suuremas osas maailma serverites.
 
 Linuxi süsteem koosneb kihtidest. Kasutaja ei räägi riistvaraga otse, vaid programmide ja kerneli kaudu:
 
@@ -36,6 +38,13 @@ flowchart TB
     S --> L["Linuxi kernel<br>protsessid, mälu, failisüsteemid, võrk, draiverid"]
     L --> H["Riistvara<br>protsessor, mälu, kettad, võrgukaart"]
 ```
+
+<details>
+<summary>Loe lähemalt: kernel, GNU, UNIX, BSD ja kus Linuxit kasutatakse</summary>
+
+Rangelt võttes on **Linux** operatsioonisüsteemi **kernel** ehk tuum: programm, mis haldab riistvara (protsessor, mälu, kettad, võrk) ja jagab ressursse teiste programmide vahel. Kerneli kirjutas 1991. aastal Soome tudeng **Linus Torvalds** ja seda arendavad tänapäeval tuhanded inimesed üle maailma.
+
+Kernel üksi ei ole veel kasutatav süsteem. Selleks on vaja ka käsurea tööriistu, teeke, pakihaldurit, teenuseid ja muud tarkvara. Suur osa sellest pärineb **GNU projektist**, mistõttu räägitakse vahel ka nimest **GNU/Linux**.
 
 Linux on **vaba ja avatud lähtekoodiga tarkvara**: lähtekood on kõigile kättesaadav ning seda võib uurida, muuta ja levitada.
 
@@ -55,13 +64,21 @@ Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud
 > [!NOTE]
 > **Miks see IT-spetsialistile oluline on?** Kui haldad servereid, võrguseadmeid või pilveteenuseid, puutud Linuxiga kokku peaaegu kindlasti, isegi kui sinu töölaual on Windows.
 
+</details>
+
 ## 1.2 Distributsioonid
+
+> [!TIP]
+> **Lühidalt:** Kursusel kasutame kolme distrot: **Debian**, **Ubuntu** ja **AlmaLinux**. Debian ja Ubuntu kasutavad pakihaldurit `apt`, AlmaLinux `dnf`. Käsurea põhitõed on kõigis samad.
 
 **Distributsioon** ehk **distro** on terviklik operatsioonisüsteem, mis koosneb Linuxi kernelist ja selle ümber valitud tarkvarast, pakihaldurist, paigaldusprogrammist ja seadistustest. Distrosid on sadu, kuid enamik neist kuulub mõnda suuremasse **perekonda**. Suuremate distrode ülevaate leiad lisast [Linuxi distributsioonide ülevaade](../lisad/distrod.md).
 
 ### Kursusel kasutatavad distrod
 
 **Debian, Ubuntu ja AlmaLinux on Haapsalu Kutsehariduskeskuse Proxmoxi labori põhilised distrod ning kogu selle kursuse materjal on üles ehitatud nende kolme põhjal.** Iga laboritöö on kirjutatud ühe kindla distro jaoks ja teoorias on nende erinevused välja toodud lõikudes „Distrode erinevused“.
+
+<details>
+<summary>Loe lähemalt: distrode võrdlus</summary>
 
 Need kolm on valitud, sest koos katavad need kaks levinuimat serveridistrode perekonda ja suurema osa reaalsetest Linuxi serveritest.
 
@@ -81,16 +98,28 @@ Sama perekonna distrod on väga sarnased: kui oskad Debianit, saad hakkama ka Ub
 > [!NOTE]
 > **Märkus:** distrode versioonid muutuvad. Kehtiv versioon ja toe kestus on alati kirjas distro kodulehel.
 
+</details>
+
 ### Kus Linuxit harjutada?
+
+HKHK õppijal on laborimasinad Proxmoxis olemas. Iseõppija saab kasutada oma arvuti virtuaalmasinat või WSL-i.
+
+<details>
+<summary>Loe lähemalt: harjutamise võimalused</summary>
 
 - **HKHK Proxmoxi labor** - õppija saab oma virtuaalmasinad (Debian, Ubuntu, AlmaLinux) ja need on kursuse laboritööde põhikeskkond. Masinate loomine, paigaldus ja võrguplaan on kirjeldatud lisas [Laborikeskkond ja paigaldus](../lisad/paigaldus.md).
 - **Oma arvuti virtuaalmasin** - VirtualBox, VMware Workstation, Hyper-V või macOS-is UTM. Sobib iseõppijale ja koduseks tööks.
 - **WSL** (*Windows Subsystem for Linux*) - Linux otse Windowsi sees, ilma eraldi virtuaalmasinata. Paigaldus PowerShellis (administraatorina): `wsl --install -d Debian` (või `Ubuntu`, `AlmaLinux-10`; valikud näitab `wsl --list --online`). WSL sobib hästi käsurea, Bashi ja Giti harjutamiseks (moodulid 1–6, 12–16), kuid mitte kõigi laboritööde jaoks: alglaadimine, kettad, võrguseadistus ja tulemüür töötavad seal teisiti kui päris serveris.
 - **Pilveserver** - väike virtuaalserver mõne teenusepakkuja juures. Arvesta, et see on kohe internetis ja vajab algusest peale turvalist seadistust (moodulid 7 ja 11).
 
+</details>
+
 ## 1.3 Terminal, kest ja käsurida
 
-Linuxit saab kasutada graafilise töölauaga, kuid servereid hallatakse peaaegu alati **käsurealt**. Serveril ei olegi tavaliselt graafilist liidest, sest see kulutaks ressursse ja suurendaks ründepinda.
+> [!TIP]
+> **Lühidalt:** Servereid hallatakse **käsurealt**. Sinu arvutis on **terminal**, millega ühendud serverisse. Serveris loeb ja täidab sinu käske **kest** (Bash).
+
+Serveril ei ole tavaliselt graafilist liidest, sest see kulutaks ressursse ja suurendaks ründepinda.
 
 Mõisted, mida tihti segi aetakse:
 
@@ -114,6 +143,9 @@ flowchart LR
 ```
 
 ## 1.4 Ühendumine serveriga SSH kaudu
+
+> [!TIP]
+> **Lühidalt:** Serverisse ühendud käsuga `ssh kasutaja@aadress`. Parooli sisestamisel ekraanil midagi ei kuvata - see on normaalne. Välja saad käsuga `exit`.
 
 **SSH** (*Secure Shell*) on krüpteeritud protokoll, millega saab üle võrgu teise arvuti käsureale ligi. SSH klient on olemas Windowsis, macOS-is ja Linuxis.
 
@@ -161,6 +193,9 @@ mari@debian:~$
 
 ## 1.5 Käsu ülesehitus
 
+> [!TIP]
+> **Lühidalt:** Käsk on kujul `käsk võtmed argumendid`, nt `ls -l /etc`. Suur- ja väiketähed on erinevad. Kasuta **Tab**-klahvi: see lõpetab käsu ja failinime sinu eest.
+
 Käsk koosneb üldjuhul kolmest osast:
 
 ```text
@@ -204,6 +239,9 @@ Käsuajalugu saad vaadata käsuga `history`.
 
 ## 1.6 Abi leidmine
 
+> [!TIP]
+> **Lühidalt:** `man käsk` näitab käsu kasutusjuhendit (välju klahviga **q**), `käsk --help` annab lühiabi. Tehisintellekti vastust kontrolli enne käivitamist.
+
 Ükski süsteemiadministraator ei mäleta kõiki käske ja võtmeid. Oluline on osata abi leida.
 
 ### `man` - kasutusjuhend
@@ -220,7 +258,12 @@ Avaneb käsu kasutusjuhend (*manual page*). Selles liikumiseks:
 | **/sõna** | Otsi sõna, **n** järgmine vaste |
 | **q** | Välju |
 
+<details>
+<summary>Loe lähemalt: kasutusjuhendi osad</summary>
+
 Kasutusjuhendid on jaotatud osadesse. Olulisemad on **1** (tavakäsud), **5** (failivormingud ja konfiguratsioonifailid) ja **8** (halduskäsud). Näiteks `man 5 passwd` näitab faili `/etc/passwd` kirjeldust, mitte käsku `passwd`.
+
+</details>
 
 Kui sa ei tea käsu nime, otsi märksõna järgi:
 
@@ -258,6 +301,9 @@ Tehisintellekti vestlusrobotid (ChatGPT, Claude, Copilot jt) oskavad selgitada k
 
 ## 1.7 Failisüsteemi hierarhia
 
+> [!TIP]
+> **Lühidalt:** Linuxis on üks kataloogipuu, mis algab juurest `/`. Tähtsamad kohad: `/home` - kasutajate failid, `/etc` - seadistus, `/var/log` - logid.
+
 Windowsis on igal kettal oma täht (`C:`, `D:`). Linuxis on **üks puu**, mis algab **juurkataloogist** `/`. Kõik kettad, USB-mälud ja võrgukettad haagitakse selle puu mõnda kataloogi.
 
 Kataloogide paigutust kirjeldab standard **FHS** (*Filesystem Hierarchy Standard*):
@@ -277,6 +323,9 @@ flowchart TB
     usr --> bin["/usr/bin"]
 ```
 
+<details>
+<summary>Loe lähemalt: kõik põhikataloogid</summary>
+
 | Kataloog | Sisu |
 |---|---|
 | `/` | Juurkataloog, kogu puu algus |
@@ -294,10 +343,15 @@ flowchart TB
 | `/opt` | Kolmandate osapoolte lisatarkvara |
 | `/srv` | Serveriteenuste andmed (nt veebilehe failid) |
 
+</details>
+
 > [!NOTE]
 > **Linuxis on kõik fail.** Ka seadmed, protsessid ja kerneli seaded on esitatud failidena. Sellepärast saab neid uurida samade tööriistadega, millega tavalisi faile.
 
 ## 1.8 Liikumine failisüsteemis
+
+> [!TIP]
+> **Lühidalt:** `pwd` - kus ma olen, `ls` - mis siin on, `cd` - mine mujale. **Absoluutne tee** algab märgiga `/`, **suhteline tee** algab sealt, kus parajasti oled. `..` on ülemkataloog, `~` kodukataloog.
 
 ### Kus ma olen? - `pwd`
 
@@ -363,6 +417,9 @@ Näide: kui oled kataloogis `/home/mari/dokumendid`, viitavad kõik järgmised s
 
 ## 1.9 Failid ja kataloogid
 
+> [!TIP]
+> **Lühidalt:** `mkdir` loob kataloogi, `touch` faili, `cp` kopeerib, `mv` teisaldab või nimetab ümber, `rm` kustutab. **Prügikasti ei ole** - kontrolli enne kustutamist, mida kustutad.
+
 ### Loomine
 
 ```bash
@@ -371,12 +428,17 @@ mkdir -p projekt/a/b/c         # loo ka puuduvad vahekataloogid
 touch märkmed.txt              # loo tühi fail (või uuenda olemasoleva faili aega)
 ```
 
+<details>
+<summary>Loe lähemalt: mitu kataloogi korraga</summary>
+
 Kest oskab laiendada **loogelisi sulge**, mis aitab luua mitu kataloogi korraga:
 
 ```bash
 mkdir -p projekt/{dokumendid,pildid,skriptid}
 # sama mis: mkdir -p projekt/dokumendid projekt/pildid projekt/skriptid
 ```
+
+</details>
 
 ### Kopeerimine ja teisaldamine
 
@@ -447,6 +509,9 @@ Serverites on parem tühikuid failinimedes vältida ja kasutada sidekriipsu või
 
 ## 1.10 Süsteemi info
 
+> [!TIP]
+> **Lühidalt:** Distro ja versiooni näitab kõige kindlamalt `cat /etc/os-release`, masina üldinfot `hostnamectl`.
+
 ```bash
 whoami                 # kes ma olen
 hostname               # masina nimi
@@ -465,12 +530,17 @@ Fail `/etc/os-release` on olemas kõigis tänapäevastes distrodes ning on kõig
 
 Selles moodulis käsitletud käsud töötavad Debianis, Ubuntus ja AlmaLinuxis ühtemoodi. Märgatavad erinevused:
 
+<details>
+<summary>Loe lähemalt: erinevuste tabel</summary>
+
 | | **Debian** | **Ubuntu** | **AlmaLinux** |
 |---|---|---|---|
 | Viip | `mari@debian:~$` | `mari@ubuntu:~$` | `[mari@alma ~]$` |
 | Sisselogimisel | Lühike teade | Pikem teade süsteemi seisu ja uuenduste kohta | Võib soovitada veebikonsooli Cockpit aktiveerimist |
 | Halduri grupp | `sudo` | `sudo` | `wheel` |
 | Esimene kasutaja saab `sudo` õiguse | Ainult siis, kui paigaldusel jäeti juurkasutaja parool määramata | Alati | Kui paigaldusel märgiti kasutaja administraatoriks |
+
+</details>
 
 Halduriõigusi ja `sudo` käsku käsitleme lähemalt moodulis 3.
 

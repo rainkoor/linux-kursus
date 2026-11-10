@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritööde 13 ja 14 server ja Ubuntu klient, oma arvuti Windowsi failihalduriga |
 | **Eesmärk** | Lisada serverile sisevõrgu DNS, failijagamine Linuxile ja Windowsile, e-posti teavitused ja varundus ning dokumenteerida server |
 
-**Aruanne:** vasta küsimustele **K1–K13** ja esita 6. osas koostatud serveri dokumentatsioon.
+**Aruanne:** vasta küsimustele **K1–K13** ja esita 6. osas koostatud serveri dokumentatsioon. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised on samad mis laboritöös 13 (`SERVER_IP`, `KLIENT_IP`, `VORK`, `lab.example`).
 
@@ -393,6 +393,38 @@ dig @localhost test.lab.example +short
 **D9.** Täida tabel: BIND9, dnsmasq, CoreDNS, Pi-hole - kas autoriteetne, kas rekursiivne/edastav, seadistuse vorm, kus sa seda kasutaksid?
 
 **D10.** Kool tahab laborivõrgule sisevõrgu nimesid ja reklaamide blokeerimist. Kirjelda arhitektuur, kasutades selle laboritöö teenuseid.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Mida näitab `dig` väljundis `info.lab.example` kohta (sektsioon `ANSWER`)? Kas server lahendab ka internetinimesid? Miks?
+- **K2.** *(punkt 1.4)* Mis juhtub, kui muudad tsoonifaili, kuid seerianumbrit ei suurenda? (Ühe serveriga laboris töötab see sageli ikkagi - miks on seerianumber siiski oluline?)
+- **K3.** *(punkt 2.2)* Kas tavakasutaja sai faili luua? Mis juhtus juurkasutajana (`sudo touch`)? Miks? (Vihje: `root_squash`.)
+- **K4.** *(punkt 2.3)* Mis numbriline omanik (UID) on kliendis loodud failidel serveris? Kas see vastab serveris samale kasutajale? Miks võib see olla probleem?
+- **K5.** *(punkt 3.3)* Millised olid Windowsist loodud faili õigused ja grupp serveris? Millised `smb.conf` valikud seda mõjutasid?
+- **K6.** *(punkt 4.3)* Millisel aadressil Postfix kuulab (`inet_interfaces`) ja miks ei tohi server võtta kirju vastu kogu võrgust?
+- **K7.** *(punkt 4.3)* Milliseid serveri teateid tasuks e-postiga saada? Kuidas saaksid 5. osa varundusskripti vea korral teavituse (vihje: systemd `OnFailure=` või skriptis `|| mail ...`)?
+- **K8.** *(punkt 5.3)* Miks varundatakse andmebaas `mariadb-dump`-iga, mitte kataloogi `/var/lib/mysql` kopeerides? Miks varundatakse ka `/root/ca`?
+- **K9.** *(punkt 5.5)* Kas kõik taastus? Kui kaua taastamine aega võttis? Mis oleks juhtunud, kui varundus oleks tehtud samale kettale ja ketas oleks riknenud?
+- **K10.** *(punkt 5.5)* Kuidas vastab sinu varundus 3-2-1 reeglile? Mis on puudu ja kuidas seda parandada? (Vihje: restic toetab SFTP-hoidlat - Ubuntu masin võiks olla varuserver.)
+- **K11.** *(punkt 6.1)* Millal aeguvad sinu serveri ja CA sertifikaadid? Kuidas tagaksid, et keegi märkab enne aegumist?
+- **K12.** *(punkt 6.1)* Kirjuta loetelu kõigist portidest, mis sinu serveris on avatud, ja millise teenuse jaoks. Millised neist peaksid olema kättesaadavad kogu sisevõrgule ja millised ainult kindlatele masinatele?
+- **K13.** *(punkt 6.1)* Kui server tuleks homme nullist uuesti üles ehitada, millised sammud oleksid kõige aeganõudvamad? Kuidas saaks seda kiirendada? (See on hea sissejuhatus moodulisse 16.)
+- **D1.** *(punkt 1.1)* Milline protsess kuulab pordil 53 ja millisel aadressil? Miks see võib Pi-hole'iga konflikti minna?
+- **D2.** *(punkt 1.3)* Mida skript tegi (paketid, teenused, failid)? Miks on parem skript enne käivitamist läbi lugeda kui kasutada `curl ... | sudo bash`?
+- **D3.** *(punkt 1.4)* Mida vastas Pi-hole blokeeritud domeenidele? Mitu domeeni on blokeerimisloendis (veebiliides → *Dashboard* või `pihole status`)?
+- **D4.** *(punkt 1.5)* Kas `kool.lab.example` lahenes Pi-hole'i kaudu? Kirjelda päringu teekonda: klient → ? → ?
+- **D5.** *(punkt 1.6)* Milliseid päringuid Debian tegi? Mis on Pi-hole'i eelised ja puudused võrreldes brauseri reklaamiblokeerijaga? Milline privaatsusküsimus kaasneb päringute logiga?
+- **D6.** *(punkt 2.2)* Kas CoreDNS vastas mõlemale päringule? Millised read tekkisid logis (`log` pistikprogramm)?
+- **D7.** *(punkt 2.3)* Kas uus kirje ilmus ilma taaskäivituseta? Mis juhtub, kui seerianumbrit ei suurenda?
+- **D8.** *(punkt 2.4)* Kuidas tagab selline lahendus, et kaks DNS-serverit annavad sama vastuse? Mis on selle eelis ja puudus võrreldes BIND9 primaar-sekundaar tsooniülekandega (AXFR)?
+- **D9.** *(3. osa)* Täida tabel: BIND9, dnsmasq, CoreDNS, Pi-hole - kas autoriteetne, kas rekursiivne/edastav, seadistuse vorm, kus sa seda kasutaksid?
+- **D10.** *(3. osa)* Kool tahab laborivõrgule sisevõrgu nimesid ja reklaamide blokeerimist. Kirjelda arhitektuur, kasutades selle laboritöö teenuseid.
+<!-- /kysimused -->
 
 ---
 

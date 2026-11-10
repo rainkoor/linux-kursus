@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani virtuaalmasin, millele on ligipääs SSH kaudu tavakasutajana |
 | **Eesmärk** | Harjutada ühendumist, liikumist failisüsteemis ja põhitoiminguid failidega |
 
-**Aruanne:** vasta küsimustele **K1–K18** aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Iga käsu järel vaata hoolega, mida see väljastas.
+**Aruanne:** vasta küsimustele **K1–K18** aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)). Iga käsu järel vaata hoolega, mida see väljastas.
 
 > [!NOTE]
 > **Iseõppijale:** sobib iga Debiani virtuaalmasin, nt VirtualBoxis. Paigalda Debian ilma graafilise töölauata ja vali paigaldamisel tarkvara hulka „SSH server“. Täpsed paigaldussammud on lisas [Laborikeskkond ja paigaldus](../lisad/paigaldus.md).
@@ -32,7 +32,7 @@ Kinnita serveri võti (`yes`) ja sisesta parool.
 
 **1.2** Logi välja käsuga `exit` ja seejärel uuesti sisse.
 
-**K2.** Kas serveri võtit küsiti ka teisel korral? Miks?
+**K2.** Kas SSH küsis serveri võtme kinnitust ka teisel ühendumisel? Miks?
 
 ---
 
@@ -154,7 +154,7 @@ Vihje: `mkdir -p` ja loogelised sulud. Kontrolli tulemust:
 ls -R ~/labor01
 ```
 
-**K13.** Millise käsuga struktuuri lõid?
+**K13.** Millise käsuga lõid kataloogistruktuuri `~/labor01/veebileht` (punkt 5.1)?
 
 **5.2** Loo failid ja kontrolli tulemust:
 
@@ -172,7 +172,7 @@ ls -R
 2. loetle kataloogis `pildid` ainult need failid, mille nimi algab sõnaga `foto`;
 3. kopeeri kõik `.html` failid kataloogi `~/labor01/varukoopiad`.
 
-**K14.** Kirjuta üles kõik kolm käsku.
+**K14.** Kirjuta üles punkti 5.3 kolm metamärkidega käsku (`.jpg` failide kopeerimine, `foto*` failide loetlemine, `.html` failide kopeerimine).
 
 **5.4** Nimeta fail `html/meist.html` ümber failiks `html/tutvustus.html`. Teisalda kataloog `logid` kataloogi `~/labor01` (st ühe taseme võrra kõrgemale).
 
@@ -199,7 +199,7 @@ file ~/labor01/veebileht/pildid/logo.png
 
 **6.2** Proovi kustutada kataloogi `~/labor01/logid` käsuga `rmdir`.
 
-**K16.** Mis juhtus ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?
+**K16.** Mis juhtus, kui proovisid kataloogi `~/labor01/logid` kustutada käsuga `rmdir`, ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?
 
 **6.3** Vaata oma käsuajalugu:
 
@@ -234,6 +234,33 @@ Parool on `bandit0`. Juhised: overthewire.org/wargames/bandit. Läbi vähemalt t
 ## Lisaülesanne (valikuline)
 
 Jätka Banditiga tasemetel 6–15 - need kasutavad mooduli 2 teemasid (`find`, `grep`, `sort`, `uniq`, torud).
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Mis on sinu viip? Mida tähendab selle iga osa?
+- **K2.** *(punkt 1.2)* Kas SSH küsis serveri võtme kinnitust ka teisel ühendumisel? Miks?
+- **K3.** *(punkt 2.1)* Milline Debiani versioon ja koodnimi on masinal? Milline on kerneli versioon?
+- **K4.** *(punkt 2.1)* Kui kaua on masin töötanud?
+- **K5.** *(punkt 2.2)* Millist infot näitab `hostnamectl`, mida eelmised käsud ei näidanud? Kas masin teab, et ta on virtuaalmasin?
+- **K6.** *(punkt 3.1)* Mida teeb võti `-t`? Mida teeb võti `-r`? Mida teeb käsk `ls -ltr`?
+- **K7.** *(punkt 3.2)* Mille poolest erinevad `man 1 passwd` ja `man 5 passwd`?
+- **K8.** *(punkt 3.3)* Millise võtmega küsib `cp` enne olemasoleva faili ülekirjutamist kinnitust?
+- **K9.** *(punkt 4.1)* Milline kataloog avanes käsuga `cd` ilma argumendita? Mis on selle absoluutne tee?
+- **K10.** *(punkt 4.3)* Selgita, miks tee `../../bin` viis kataloogi `/usr/bin`.
+- **K11.** *(punkt 4.4)* Mida näitab väljundis olev nool (`->`)? Kuhu `/bin` tegelikult viitab?
+- **K12.** *(punkt 4.5)* Nimeta kaks peidetud faili. Mille järgi need ära tunned?
+- **K13.** *(punkt 5.1)* Millise käsuga lõid kataloogistruktuuri `~/labor01/veebileht` (punkt 5.1)?
+- **K14.** *(punkt 5.3)* Kirjuta üles punkti 5.3 kolm metamärkidega käsku (`.jpg` failide kopeerimine, `foto*` failide loetlemine, `.html` failide kopeerimine).
+- **K15.** *(punkt 5.6)* Mida väitis käsk `file` faili `logo.png` kohta? Miks ei pidanud ta seda pildiks?
+- **K16.** *(punkt 6.2)* Mis juhtus, kui proovisid kataloogi `~/labor01/logid` kustutada käsuga `rmdir`, ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?
+- **K17.** *(punkt 7.1)* Mitu taset läbisid? Kirjuta iga taseme kohta üks rida: mis oli ülesanne ja millise käsuga selle lahendasid (**ära kirjuta paroole aruandesse**).
+- **K18.** *(punkt 7.1)* Tase 2 ja 3 (failinimed kriipsu või tühikuga, peidetud failid) - miks olid need keerulised ja kuidas neid failinimesid käsureal käsitleda (vt teooria punkt 1.9)?
+<!-- /kysimused -->
 
 ---
 

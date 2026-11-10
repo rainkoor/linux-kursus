@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani virtuaalmasin `sudo` õigusega kasutajaga ja **ligipääs masina konsoolile** (nt Proxmoxi veebiliides). Enne alustamist tee masinast **hetktõmmis** (*snapshot*). 9. osa jaoks soovitatavalt vähemalt 4 protsessorituuma, 4 GiB mälu ja 15 GiB vaba kettaruumi |
 | **Eesmärk** | Uurida alglaadimist ja kernelit, muuta GRUB-i ja kerneli seadistust ning taastada mittekäivituv süsteem |
 
-**Aruanne:** vasta küsimustele **K1–K30**.
+**Aruanne:** vasta küsimustele **K1–K30**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > **Selles laboris rikud teadlikult oma süsteemi.** Tee enne alustamist virtuaalmasinast hetktõmmis (Proxmoxis: masin → *Snapshots* → *Take Snapshot*). Kui midagi läheb lootusetult valesti, saad selle taastada. Osad 5–8 ja 10 tehakse **konsoolis**, mitte SSH kaudu.
@@ -663,6 +663,45 @@ sudo systemctl reset-failed vigane2
 2. Kaitse GRUB parooliga (vt Debiani wiki „GRUB“ või `man grub-mkpasswd-pbkdf2`), nii et menüü kirjete muutmine nõuab parooli. Proovi seejärel uuesti `init=/bin/bash` meetodit.
 3. AlmaLinuxis: lähtesta juurkasutaja parool meetodiga `rd.break` (vt teooria punkt 10.9). Mis juhtub, kui jätad `touch /.autorelabel` tegemata?
 4. Kompileeri kernel uuesti, kuid jäta `make menuconfig`-is välja kõik, mida sinu virtuaalmasin ei vaja (heli, Bluetooth, WiFi, ebavajalikud failisüsteemid). Kui väikeseks suudad kerneli (`/boot/vmlinuz-*`) ja initramfs-i teha nii, et masin endiselt käivitub?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Mis on kerneli versioon? Millised kerneli parameetrid anti käivitamisel? Mitu kernelit on kataloogis `/boot`?
+- **K2.** *(punkt 1.3)* Mitu protsessorituuma ja kui palju mälu on masinal? Mille järgi on näha, et tegu on virtuaalmasinaga (`lspci`, `lscpu` rida `Hypervisor vendor`)?
+- **K3.** *(punkt 1.4)* Mida näitavad `cwd` ja `fd`? Miks on failikirjeldajad 0, 1 ja 2 seotud terminaliga?
+- **K4.** *(punkt 2.1)* Kui kaua alglaadimine kestis (kernel ja kasutajaruum eraldi)? Milline teenus käivitus kõige kauem? Mis on vaike-eesmärk?
+- **K5.** *(punkt 2.2)* Mitu alglaadimist on journal'is? Leia `dmesg` väljundist rida, kus kernel tuvastab süsteemiketta (otsi `sda` või `vda`). Kas logis on vigu?
+- **K6.** *(punkt 2.2)* Proovi `dmesg` ilma `sudo`-ta. Mis juhtus? Milline `sysctl` parameeter seda põhjustab?
+- **K7.** *(punkt 3.2)* Mis juhtus võrguliidestega pärast mooduli laadimist ja eemaldamist? Mis on mooduli `dummy` failitee (`modinfo` rida `filename`)?
+- **K8.** *(punkt 3.4)* Kas `modprobe dummy` laadis mooduli vaatamata `blacklist`-reale? Mida `blacklist` tegelikult takistab? (Vihje: `man modprobe.d`.)
+- **K9.** *(punkt 4.2)* Mis juhtus `ping`-iga? Kas see on hea viis masina „peitmiseks“? Miks?
+- **K10.** *(punkt 4.3)* Milleks on `net.ipv4.ip_forward = 1` vaja? Nimeta kaks olukorda.
+- **K11.** *(punkt 5.1)* Miks ei tohi faili `/boot/grub/grub.cfg` käsitsi muuta? Kust see tuleb?
+- **K12.** *(punkt 5.3)* Mida näitas menüü „Advanced options“? Mis vahe oli alglaadimisel nüüd võrreldes `quiet` parameetriga?
+- **K13.** *(punkt 6.2)* Millised teenused taastamisrežiimis töötasid? Kas võrk töötas? Kas juurfailisüsteem oli kirjutatav? Mis juhtus pärast `exit`-i?
+- **K14.** *(punkt 6.4)* Milline teade näitas logis vea põhjust? Miks oli vaja juurfailisüsteem kirjutatavaks haakida? Kuidas oleks valik `nofail` olukorda muutnud?
+- **K15.** *(punkt 7.3)* Mis oli kesta PID ja miks? Miks küsis süsteem paroolita juurkasutaja õigusi? Mida see ütleb füüsilise ligipääsu ja konsoolile ligipääsu kohta? Kuidas saaks seda takistada?
+- **K16.** *(punkt 8.1)* Millised kernelid on nüüd paigaldatud? Kumb neist käivitub järgmisel alglaadimisel ja miks?
+- **K17.** *(punkt 8.3)* Milline kernel töötas esimese ja milline teise taaskäivituse järel? Milleks on `grub-reboot` kasulik serveris, millele sul füüsilist ligipääsu ei ole?
+- **K18.** *(punkt 9.2)* Millise versiooni valisid ja miks? Kui suur on lahtipakitud lähtekood? Nimeta kolm alamkataloogi ja arva, mida need sisaldavad (vihje: `drivers`, `fs`, `net`, `arch`).
+- **K19.** *(punkt 9.4)* Mitu valikut on seadistuses moodulina (`=m`) ja mitu sisse ehitatud (`=y`)? Kas `EXT4_FS` ja `BTRFS_FS` on sisse ehitatud, moodulina või välja jäetud? Miks võis `localmodconfig` jätta `BTRFS_FS` välja?
+- **K20.** *(punkt 9.6)* Kui kaua kompileerimine kestis (`real` aeg) ja mitu protsessorituuma kasutasid? Millised `.deb` failid tekkisid? Milliseid faile lisas paigaldus kataloogi `/boot`?
+- **K21.** *(punkt 9.8)* Kas sinu kernel töötas? Kuidas erines see distro kernelist (moodulite arv, alglaadimise aeg)? Mis on `localmodconfig` kasutamise risk?
+- **K22.** *(punkt 10.2)* Mida masin käivitamisel näitas? Miks jäid andmed ja partitsioonitabel alles?
+- **K23.** *(punkt 10.4)* Miks seoti enne `chroot`-i kataloogid `/dev`, `/proc` ja `/sys`? Mis vahe on variantidel *Reinstall GRUB boot loader* ja käsitsi `chroot`-il? Millal on vaja käsitsi varianti?
+- **K24.** *(11. osa)* Mis on `ssh.service` seadete `Wants`/`Requires` ja `After` väärtused ning mille poolest need erinevad? Mis juhtuks, kui teenusel oleks `Requires=mariadb.service`, kuid puuduks `After=mariadb.service`? Millist `Type=` kasutavad `ssh`, `chrony` ja `cron`?
+- **K25.** *(11. osa)* Mitu protsessi töötas ja millise kasutajana (`DynamicUser=yes`)? Kas see kasutaja on failis `/etc/passwd`? Too üks näide mallist, mida süsteem ise kasutab (`systemctl list-units '*@*'`).
+- **K26.** *(11. osa)* Milline protsess kuulas pordil 2000 enne esimest ühendust? Mitu `kell@` eksemplari tekkis ja kas need jäid tööle? Nimeta kaks pesa aktiveerimise eelist.
+- **K27.** *(11. osa)* Mitu korda teenus käivitus ja mida see logis? Miks peab teenus kataloogi tühjendama? Too üks näide, kus `.path` üksus oleks halduses kasulik.
+- **K28.** *(11. osa)* Mis oli teenuse turvahinne enne ja pärast karastamist? Kas teenus töötas edasi? Kus asub `aeg.txt` nüüd tegelikult (`ls -l /var/lib/ | grep aeg`)? Miks ebaõnnestus `systemd-run` katse?
+- **K29.** *(11. osa)* Millise oleku ja koodi (`status=…`) näitas `vigane1` ning mida ütles `systemd-analyze verify`? Mis juhtus `vigane2`-ga umbes viie sekundi pärast ja miks? Mida teeb `reset-failed`?
+- **K30.** *(12. osa)* Täida tabel: millises alglaadimise etapis tekib probleem ja millise tööriista või meetodiga seda uurida/lahendada?
+<!-- /kysimused -->
 
 ---
 

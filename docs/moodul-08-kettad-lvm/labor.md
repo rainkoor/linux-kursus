@@ -11,7 +11,7 @@
 | **Vajalik** | AlmaLinuxi virtuaalmasin `sudo` õigusega kasutajaga, **kaks lisaketast** (soovitatavalt 5 GiB ja 3 GiB), ligipääs masina konsoolile |
 | **Eesmärk** | Harjutada partitsioneerimist, failisüsteeme, püsivat haakimist, saaleala ja LVM-i |
 
-**Aruanne:** vasta küsimustele **K1–K18**.
+**Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 ### Lisaketaste lisamine
 
@@ -416,6 +416,33 @@ ning kustutada failist `/etc/fstab` vastavad read (või taastada varukoopia `sud
 
 1. **Juurfailisüsteemi suurendamine:** suurenda Proxmoxis süsteemiketast 2 GiB võrra (*Hardware* → ketas → *Disk Action* → *Resize*). Suurenda seejärel partitsioon, PV, juurköide ja failisüsteem (vt teooria punkt 8.9).
 2. **Püsiv LUKS-köide:** krüpteeri LVM-i köide `lv_db` (andmed kaovad - varunda enne!), lisa see faili `/etc/crypttab` võtmefailiga (`/root/db.key`, õigused `400`) ja `/etc/fstab`-i ning kontrolli, et see avaneb taaskäivitusel automaatselt.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Joonista (või kirjelda) süsteemiketta struktuur: millised partitsioonid on, millised failisüsteemid neil on ja kuhu need on haagitud. Kas süsteem kasutab LVM-i?
+- **K2.** *(punkt 1.2)* Kuidas on juurfailisüsteem ja saaleala failis `/etc/fstab` kirjeldatud - UUID või LVM-i köite tee järgi? Kui palju on köitegrupis vaba ruumi?
+- **K3.** *(punkt 2.1)* Millised on partitsioonide suurused? Miks algab esimene partitsioon 1 MiB juurest, mitte ketta päris algusest?
+- **K4.** *(punkt 2.4)* Mis juhtus failiga `peidus.txt`, kui ketas oli haagitud? Kas fail kadus?
+- **K5.** *(punkt 2.5)* Mis veateate said ja miks? Mida näitas `fuser`?
+- **K6.** *(punkt 3.4)* Miks kasutatakse failis `fstab` UUID-d, mitte seadme nime `/dev/sdb1`? Miks on XFS-i real viimane väli `0`?
+- **K7.** *(punkt 3.5)* Mida näitasid `findmnt --verify` ja `mount -a`? Mis juhtuks taaskäivitusel, kui real **ei oleks** valikut `nofail`?
+- **K8.** *(punkt 4.1)* Kui palju on nüüd saaleala kokku? Miks peavad saalefaili õigused olema `600`?
+- **K9.** *(punkt 5.2)* Kui palju ruumi jäi köitegruppi vabaks?
+- **K10.** *(punkt 5.4)* Mis oli köite suurus ja täituvus enne ja pärast laiendamist? Kas fail `suur.fail` jäi alles? Mida tegi võti `-r`?
+- **K11.** *(punkt 5.5)* Mis juhtus? Miks? (Vasta küsimusele „Do you want to…“ `n`, kui küsitakse.)
+- **K12.** *(punkt 5.6)* Mida teeb `wipefs`? Miks oli vaja enne kustutada fstab-i read?
+- **K13.** *(punkt 5.7)* Kui suur on nüüd köitegrupp ja köide `lv_db`? Millistel füüsilistel ketastel köide `lv_db` asub (`sudo lvs -o +devices`)?
+- **K14.** *(punkt 5.9)* Mis oli hetktõmmise failis? Miks ei ole hetktõmmis varukoopia asendus?
+- **K15.** *(punkt 6.1)* Milline kataloog kataloogis `/var` on suurim? Leia kolm suurimat faili juurfailisüsteemis.
+- **K16.** *(punkt 6.2)* Millal ruum vabanes - pärast `rm`-i või pärast protsessi lõpetamist? Miks?
+- **K17.** *(punkt 7.2)* Kas teksti leidus krüpteeritud seadmest? Milline krüpteerimisalgoritm ja mitu võtmepesa on kasutusel?
+- **K18.** *(punkt 7.3)* Miks on päise varukoopia oluline? Kus tohib seda hoida ja kus mitte?
+<!-- /kysimused -->
 
 ---
 

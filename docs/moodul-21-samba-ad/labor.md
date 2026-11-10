@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 18 laborivõrk OPNsense'i taga, uus Debiani VM `dc1` (2 vCPU, 2 GiB RAM, 20 GiB ketas), Windowsi kliendi VM |
 | **Eesmärk** | Ehitada vaba tarkvaraga Active Directory domeen ja liita sellega Windowsi ning Linuxi masinad |
 
-**Aruanne:** vasta küsimustele **K1–K18**.
+**Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `dc1` `10.0.83.56`, `alma` `10.0.83.55`, `ubuntuklient` `10.0.83.98`, `winklient` `10.0.83.99`. Domeen `ad.lab.example`, NetBIOS-nimi `AD`. Asenda oma võrguplaani väärtustega.
 
@@ -274,6 +274,33 @@ Seejärel taasta: `sudo timedatectl set-ntp true`.
 2. **Failiserver domeenis:** liida `debian2` domeeniga liikmena (winbind või SSSD), loo jagatud kaust, millele on ligipääs ainult grupil `opilased`, ja haagi see Windowsis automaatselt GPO abil.
 3. **Windows Server AD:** kui laboris on Windows Serveri domeen (nt IT25 plaanis `AD1`/`AD2`), liida `alma` sellega ja võrdle samme.
 4. **Varundus:** tee `samba-tool domain backup online` ja taasta domeen uude VM-i.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.56`), mitte `127.0.1.1`-ks?
+- **K2.** *(punkt 1.2)* Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?
+- **K3.** *(punkt 2.3)* Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on `smb.conf` failis jaotises `[global]` peale provisioning'ut?
+- **K4.** *(punkt 3.1)* Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule `www.debian.org`?
+- **K5.** *(punkt 3.2)* Milline pilet tekkis `klist` väljundis ja kui kaua see kehtib? Mis veateate andis vale kasutaja?
+- **K6.** *(punkt 3.4)* Miks on parem suunata ainult domeeni `ad.lab.example` päringud DC-le, mitte panna DC kogu laborivõrgu DNS-iks?
+- **K7.** *(punkt 4.1)* Kirjuta aruandesse käsud, millega lõid kasutaja `mari` ja paigutasid ta OU-sse `Opilased`. Mis on Mari täielik DN?
+- **K8.** *(punkt 4.2)* Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?
+- **K9.** *(punkt 5.2)* Mida näitasid `whoami` ja `$env:LOGONSERVER`? Milliseid Kerberose pileteid on Windowsi kliendil?
+- **K10.** *(punkt 5.3)* Kas Windowsi klient registreeris ennast DNS-is automaatselt?
+- **K11.** *(punkt 6.2)* Kas juhtpaneel oli Jaanile keelatud? Kas see kehtis ka Katile? Miks?
+- **K12.** *(punkt 6.3)* Kuidas on GPO-d nimetatud? Miks on vaja SYSVOL eraldi varundada, kui DC-sid on mitu?
+- **K13.** *(punkt 7.2)* Mida näitas `realm discover`? Millised kirjed on failis `/etc/krb5.keytab` (`klist -k`) ja milleks neid vaja on?
+- **K14.** *(punkt 7.4)* Mis on Mari UID? Kuidas see arvutati (`ldap_id_mapping`)? Kas Maril on pärast sisselogimist Kerberose pilet?
+- **K15.** *(punkt 8.2)* Kas Mari UID on AlmaLinuxis sama mis Ubuntus? Miks?
+- **K16.** *(punkt 9.2)* Kirjuta `realm permit` käsud ja sudoers-rida. Mis juhtus `administrator`-i ja `ain`-i sisselogimisel?
+- **K17.** *(punkt 10.1)* Mis veateate said? Miks?
+- **K18.** *(punkt 10.2)* Mis juhtus ja miks? Kirjelda kolme põhjust, miks Linuxi masin ei pruugi domeeniga liituda.
+<!-- /kysimused -->
 
 ---
 

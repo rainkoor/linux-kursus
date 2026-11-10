@@ -20,7 +20,7 @@ Selles moodulis on kaks laboritööd, kumbki oma distrol:
 | **Vajalik** | AlmaLinuxi virtuaalmasin `sudo` õigusega kasutajaga, internetiühendus |
 | **Eesmärk** | Mõista SELinuxi toimimist ja lahendada tüüpilised SELinuxi probleemid; seadistada automaatsed turvauuendused ja audit |
 
-**Aruanne:** vasta küsimustele **A1–A14**.
+**Aruanne:** vasta küsimustele **A1–A14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** paigaldad veebiserveri, mille failid peavad asuma kataloogis `/srv/veeb` ja mis peab kuulama lisaks pordile 80 ka porti 8888. SELinux ei lase seda vaikimisi teha - sinu ülesanne on probleemid lahendada **SELinuxit välja lülitamata**.
 
@@ -546,6 +546,47 @@ Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB
 **W3.** Võrdle Wazuhi fail2ban-i ja `auditd`-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?
 
 **W4.** Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **A1.** *(punkt 1.1)* Mis režiimis SELinux töötab? Mis on poliitika nimi (`Loaded policy name`)?
+- **A2.** *(punkt 1.2)* Mis tüüp on failidel `/etc/shadow` ja `/etc/passwd`? Mis tüüp on kataloogil `/srv`? Mis kontekstis töötab `sshd`?
+- **A3.** *(punkt 2.3)* Mida server vastas? Failiõigused on `644` - miks ei saa veebiserver faili lugeda?
+- **A4.** *(punkt 2.4)* Kirjuta AVC teatest välja: protsess (`comm`), tegevus (`{ ... }`), allika tüüp (`scontext`) ja sihi tüüp (`tcontext`). Mida soovitab `setroubleshoot`?
+- **A5.** *(punkt 2.6)* Mis muutus faili kontekstis? Miks oli `index.html` kontekst algselt just selline (vihje: kus fail loodi)? Mis vahe on `semanage fcontext` ja `chcon` vahel?
+- **A6.** *(punkt 2.7)* Millise konteksti sai uus fail ja miks ei olnud seekord `restorecon`-i vaja?
+- **A7.** *(punkt 3.1)* Mis juhtus? Leia põhjus käskudega `systemctl status httpd`, `journalctl -u httpd -n 20` ja `ausearch -m AVC -ts recent`.
+- **A8.** *(punkt 3.2)* Millised pordid olid algselt `http_port_t` loendis? Miks piirab SELinux ka porte?
+- **A9.** *(punkt 4.2)* Mis vastuse said? Mida näitab `ausearch -m AVC -ts recent`?
+- **A10.** *(punkt 4.3)* Mida tähendab võti `-P`? Miks on see tõeväärtus vaikimisi väljas? (Mõtle, mida saaks ründaja teha ülevõetud veebiserveriga, mis tohib igale poole ühenduda.)
+- **A11.** *(punkt 5.2)* Millal käivitub `dnf-automatic` järgmisena? Leia ühe turvauuenduse kohta CVE number (`dnf updateinfo info <ID>`). Kui uuendusi pole, leia mõni CVE AlmaLinuxi turvateadete lehelt (errata.almalinux.org).
+- **A12.** *(punkt 6.2)* Millised programmid muutsid faili `/etc/passwd`? Mis on sündmuste juures välja `auid` väärtus ja miks on see oluline, kuigi käsud käivitati `sudo`-ga?
+- **A13.** *(punkt 6.3)* Kus asub auditilogi fail? Miks võib olla hea saata auditilogid teise serverisse?
+- **A14.** *(7. osa)* Täida tabel: SELinuxi probleem → tunnus → lahendus.
+- **B1.** *(punkt 1.1)* Millised on kataloogi `/var/log` suurimad failid? Kes ja millal viimati sisse logis? Kas on ebaõnnestunud sisselogimisi?
+- **B2.** *(punkt 1.3)* Kas teade jõudis nii journal'isse kui ka faili `/var/log/syslog`? Miks?
+- **B3.** *(punkt 1.6)* Mitu faili jäi lõpuks alles ja millised neist on pakitud? Mida tegid valikud `rotate 3` ja `delaycompress`?
+- **B4.** *(punkt 2.1)* Kas automaatsed uuendused on sisse lülitatud? Milliseid hoidlaid (`Allowed-Origins`) need hõlmavad? Kas masin taaskäivitatakse automaatselt (`Automatic-Reboot`)?
+- **B5.** *(punkt 3.3)* Kas Debiani IP-aadress blokeeriti? Mitu katset kulus? Kuidas oli blokeering tulemüüris näha?
+- **B6.** *(punkt 3.4)* Mis juhtus ühenduskatsega blokeeringu ajal? Miks on oluline seada `ignoreip` oma administraatorivõrgule?
+- **B7.** *(punkt 4.1)* Mitu profiili on laaditud? Mitu on enforce- ja mitu complain-režiimis? Nimeta kolm programmi, millel on profiil.
+- **B8.** *(punkt 4.4)* Milliseid faile skript sai lugeda ja milliseid mitte? Kas `sudo` aitas faili `/etc/shadow` lugeda? Miks? Kirjuta üks `DENIED` logirida aruandesse.
+- **B9.** *(punkt 4.5)* Mis vahe oli complain- ja enforce-režiimil? Milleks on complain-režiim kasulik?
+- **B10.** *(punkt 5.1)* Mis on karastamise indeks (*hardening index*)? Nimeta kolm hoiatust (*warnings*) või soovitust (*suggestions*), mis tunduvad sinu serveri jaoks olulised.
+- **B11.** *(punkt 5.2)* Milliseid soovitusi rakendasid ja kuidas? Kas indeks muutus?
+- **B12.** *(punkt 5.3)* Millised pordid ja teenused on väljast nähtavad? Kas `nmap` tuvastas tarkvara versioonid? Kas midagi on avatud, mis ei peaks olema?
+- **B13.** *(6. osa)* Loetle kõik turvameetmed, mis on sinu Ubuntu serveris laboritööde 3, 7 ja 11 järel rakendatud, ja seosta need punktis 11.1 toodud põhimõtetega.
+- **B14.** *(6. osa)* Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?
+- **W1.** *(Lisaülesanne (valikuline): Wazuh SIEM)* Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?
+- **W2.** *(Lisaülesanne (valikuline): Wazuh SIEM)* Milliseid haavatavusi (*Vulnerability Detection*) leiti agentidega masinates? Milliseid CIS-i soovitusi (*Configuration Assessment*) Debiani masin ei täitnud?
+- **W3.** *(Lisaülesanne (valikuline): Wazuh SIEM)* Võrdle Wazuhi fail2ban-i ja `auditd`-ga, mida kasutasid selles laboris: mida pakub tsentraalne süsteem, mida üksikud tööriistad ei paku?
+- **W4.** *(Lisaülesanne (valikuline): Wazuh SIEM)* Kas ründav aadress blokeeriti ja kui kauaks? Mille poolest erineb Wazuhi reageerimine fail2ban-ist (kus otsus tehakse, kus blokeeritakse)?
+<!-- /kysimused -->
 
 ---
 

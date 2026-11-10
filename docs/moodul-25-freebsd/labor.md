@@ -11,7 +11,7 @@
 | **Vajalik** | FreeBSD VM `fbsd` (2 vCPU, 2 GiB RAM, 20 GiB ketas, VirtIO võrk), aadressid `10.0.83.66` (host) ja `10.0.83.67` (jail). Linuxi klient testimiseks (nt `ubuntuklient`) |
 | **Eesmärk** | Paigaldada ja hallata FreeBSD serverit: paketid ja uuendused, teenused, kasutajad, võrk, ZFS-i alglaadimiskeskkonnad, pf ja jail |
 
-**Aruanne:** vasta küsimustele **K1–K12**.
+**Aruanne:** vasta küsimustele **K1–K12**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!NOTE]
 > **HKHK laboris** võib õpetaja anda valmis FreeBSD malli - siis alusta 2. osast. Iseõppijale sobib ka VirtualBox (võrguliides on siis `em0`, mitte `vtnet0`).
@@ -299,6 +299,27 @@ Linuxi kliendist: `curl http://10.0.83.67` ja `curl http://10.0.83.66`. Lisa vaj
 3. **Pordid:** paigalda mõni väike programm pordist (`git clone https://git.FreeBSD.org/ports.git /usr/ports`, `cd /usr/ports/sysutils/tree && make install clean`). Mida küsis `make config`?
 4. **pkgbase:** paigalda teine FreeBSD VM, vali paigaldajas baassüsteem pakettidena ja võrdle uuendamist (`pkg upgrade`) traditsioonilisega.
 5. **Ansible ja FreeBSD:** halda FreeBSD-d mooduli 16 Ansible'iga (`ansible_python_interpreter=/usr/local/bin/python3`, moodulid `community.general.pkgng` ja `community.general.sysrc`).
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Mitu sammu oli paigaldajas võrreldes Debiani paigaldajaga? Mis juhtub, kui proovid `su -` kasutajaga, kes ei ole grupis `wheel`?
+- **K2.** *(punkt 2.2)* Milline on FreeBSD ja kerneli versioon? Millised ZFS-i andmekogumid paigaldaja lõi? Miks ebaõnnestus `sed -i` ilma tühja argumendita ja mida see sulle skriptide kirjutamise kohta ütleb?
+- **K3.** *(punkt 3.1)* Kas `freebsd-update` leidis uuendusi? Kus asuvad `bash` ja nginx-i seadistusfail? Miks just seal, mitte `/bin` ja `/etc` all? Kas `pkg audit` leidis haavatavusi?
+- **K4.** *(punkt 4.2)* Mis vahe on `pw usermod anna -G grupp` ja `pw groupmod grupp -m anna` vahel? Kus on FreeBSD-s parooliräsid (võrdle Linuxi `/etc/shadow`-ga)? Miks on `peeter`-i kest `/usr/local/bin/bash`, mitte `/bin/bash`?
+- **K5.** *(punkt 5.2)* Millises failis on nginx-i lubamise seade ja mis rida `sysrc` sinna kirjutas? Mida sisaldas igapäevane `periodic` aruanne? Kuidas teeksid sama Linuxis (systemd)?
+- **K6.** *(punkt 6.1)* Võrdle FreeBSD võrguseadistust Debiani (`/etc/network/interfaces`), Ubuntu (Netplan) ja AlmaLinuxi (`nmcli`) omaga (moodul 7). Mis on lihtsam, mis on keerulisem?
+- **K7.** *(punkt 7.2)* Mis juhtus failiga `/etc/katse-fail` ja paketiga `tmux` pärast vana keskkonna aktiveerimist? Miks ei mõjutanud see kodukataloogi? Kuidas aitab see põhiversiooni uuendamisel?
+- **K8.** *(punkt 8.2)* Kas klient sattus tabelisse `<ryndajad>`? Pärast mitut ühendust? Mida tähendab pf-i reeglite juures „viimane sobiv reegel kehtib“ ja milleks on `quick`? Võrdle seda lahendust fail2ban-iga (moodul 11).
+- **K9.** *(punkt 9.3)* Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 12) sarnasused ja erinevused?
+- **K10.** *(punkt 9.3)* Mitu megabaiti võttis jail (`zfs list zroot/jails/www`)? Kuidas saaksid hetktõmmisest kiiresti luua teise samasuguse jaili (vihje: `zfs clone`)?
+- **K11.** *(10. osa)* Täida tabel kümne toimingu kohta: kuidas seda tehakse Debianis ja kuidas FreeBSD-s (paketid, uuendus, teenus, kasutaja gruppi, staatiline IP, kuulavad pordid, tulemüür, logid, isoleeritud teenus, tagasivõtt pärast uuendust).
+- **K12.** *(10. osa)* Millises olukorras valiksid serverile FreeBSD ja millises Linuxi? Too vähemalt kaks argumenti mõlema kohta.
+<!-- /kysimused -->
 
 ---
 

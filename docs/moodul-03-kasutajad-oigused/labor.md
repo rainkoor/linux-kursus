@@ -11,7 +11,7 @@
 | **Vajalik** | Ubuntu virtuaalmasin, ligipääs SSH kaudu kasutajana, kellel on `sudo` õigus |
 | **Eesmärk** | Harjutada kasutajate ja gruppide haldust, õigusi, jagatud katalooge ja `sudo` reegleid |
 
-**Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk.
+**Aruanne:** vasta küsimustele **K1–K20**. Kus küsitakse käsku, kirjuta üles kogu käsk. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** väike IT-ettevõte Näidis OÜ võtab kasutusele uue failiserveri. Sinu ülesanne on luua töötajatele kontod ja seadistada osakondadele kataloogid nii, et igaüks pääseb ligi ainult sellele, mida tal on vaja.
 
@@ -289,6 +289,35 @@ sudo rm -r /srv/firma
 1. Ettevõtte juht Kati peab saama lugeda tarkvaraosakonna faili `kood.py`, kuid mitte muuta ega näha teisi tarkvaraosakonna faile. Lahenda see ACL-ide abil. Vihje: Kati vajab kataloogile `tarkvara` ainult õigust `x` ja failile õigust `r`.
 2. Kirjuta üles, mis juhtub, kui jätad punktis 4.2 SGID-õiguse ära (`chmod 770`) ja korrata teste T1–T2.
 3. **Paroolipoliitika:** paigalda `libpam-pwquality`, sea `/etc/security/pwquality.conf`-is `minlen = 12` ja `minclass = 3` ning proovi testkasutajana `passwd`-iga seada nõrka parooli. Lisa `/etc/skel`-i fail `LOEMIND.txt` ja loo uus kasutaja - kas fail kopeeriti?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Mis on sinu UID ja millistesse gruppidesse kuulud? Milline grupp annab sulle `sudo` õiguse?
+- **K2.** *(punkt 1.2)* Nimeta kaks süsteemikasutajat (UID alla 1000). Milline on nende sisselogimiskest ja mida see tähendab?
+- **K3.** *(punkt 1.3)* Miks tavakasutaja faili `/etc/shadow` lugeda ei saa? Võrdle mõlema faili õigusi.
+- **K4.** *(punkt 1.4)* Mida tähendab väljundis täht `L`? Kuidas Ubuntus halduriõigusi kasutatakse, kui juurkasutaja konto on lukus?
+- **K5.** *(punkt 2.2)* Kirjuta käsud kasutajate `jaan` ja `kati` loomiseks.
+- **K6.** *(punkt 2.5)* Mis vahe on käskudel `useradd` ja `adduser`? Millist neist kasutaksid skriptis ja miks?
+- **K7.** *(punkt 2.6)* Mis on kasutaja `mari` põhigrupp ja millised on tema lisagrupid? Millised on kodukataloogide õigused?
+- **K8.** *(punkt 3.1)* Kas see õnnestus? Selgita tulemust kataloogi `/home/mari` õiguste põhjal.
+- **K9.** *(punkt 3.2)* Millised õigused said uus fail ja mis on umask? Arvuta, kuidas umaskist need õigused tulid.
+- **K10.** *(punkt 3.3)* Kirjuta mõlemad käsud.
+- **K11.** *(punkt 4.2)* Selgita kõiki nelja numbrit väärtuses `2770`.
+- **K12.** *(punkt 4.4)* Kirjuta käsk. Millise süsteemikataloogiga on see seadistus sama?
+- **K13.** *(punkt 4.5)* Kirjuta käsud. Millised õigused numbrilisel kujul kataloogile andsid?
+- **K14.** *(punkt 4.6)* Kopeeri väljund aruandesse ja selgita, miks on kataloogi `tarkvara` grupi õigustes `s` ja kataloogi `ühine` muude õigustes `t`.
+- **K15.** *(punkt 5.1)* Esita tabel testide T1–T8 ennustuste ja tulemustega. Miks kuulub fail `kood.py` grupile `tarkvara`, mitte grupile `mari`? Miks sai `jaan` seda muuta?
+- **K16.** *(punkt 6.2)* Mis juhtus kummagi käsuga? Miks?
+- **K17.** *(punkt 6.2)* Miks tuleb sudoers-faile muuta käsuga `visudo`, mitte otse redaktoriga?
+- **K18.** *(punkt 6.3)* Kas logis on näha Toomase katse lugeda faili `/etc/shadow`?
+- **K19.** *(punkt 7.1)* Kirjuta käsud. Miks peab grupi lisamisel kasutama käsus `usermod` võtit `-a`?
+- **K20.** *(punkt 7.2)* Nimeta kolm leitud faili. Miks vajab näiteks `passwd` SUID-õigust?
+<!-- /kysimused -->
 
 ---
 

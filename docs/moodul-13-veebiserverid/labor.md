@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani server `debian1`, AlmaLinux `alma` ja Ubuntu `ubuntusrv` (või laboritöö 7 Ubuntu masin kliendina), oma arvuti brauseriga |
 | **Eesmärk** | Paigaldada ja seadistada terviklik serveriteenuste komplekt, varundada see ja testida taastamist |
 
-**Aruanne:** vasta küsimustele **K1–K14**.
+**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** kool vajab väikest serverit, mis pakub veebisaiti koos õpilaste andmebaasiga, sisevõrgu DNS-i, failide jagamist Linuxi ja Windowsi arvutitele ning igaöist varundust. Selles laboritöös paigaldad veebiserverid, **laboritöös 14 lisad andmebaasid ja laboritöös 15** DNS-i, failijagamise, e-posti, varunduse ja dokumentatsiooni.
 
@@ -331,6 +331,29 @@ Ava brauseris `https://crt.sh/?q=debian.org` (või oma kooli domeen).
 5. **Traefik:** käivita Traefik ja kaks `whoami` konteinerit siltidega (teooria punkt 13.7) ning vaata, kuidas Traefik need automaatselt leiab.
 6. **Rikkekindel jaotur (keepalived):** paigalda HAProxy ka `debian2`-sse sama seadistusega (port 8080) ning mõlemasse masinasse keepalived teooria punkti 13.7 järgi: `ubuntusrv` MASTER (`priority 150`), `debian2` BACKUP (`priority 100`), VIP `10.0.83.50`. Luba tulemüüris VRRP. Käivita kliendist `while true; do curl -s -m 1 http://10.0.83.50:8080/ | grep -o "Server [a-z0-9]*"; sleep 0.5; done` ja peata samal ajal `ubuntusrv`-s HAProxy (`sudo systemctl stop haproxy`). Kui kaua teenus katkes? Kumma masina küljes on VIP (`ip -br a`)? Mis juhtub, kui HAProxy uuesti käivitad?
 7. **Koormustest:** mõõda `ab -n 2000 -c 50`-ga kooli saiti otse ühest taustserverist ja HAProxy kaudu. Võrdle `Requests per second` ja 95. protsentiili. Korda testi, kui üks taustserver on peatatud. Mis oli pudelikael (`top` taustserverites)?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 0.2)* Millised teenused käivitusid pärast paigaldamist automaatselt? Millistel portidel need kuulavad (`sudo ss -tulpn`)?
+- **K2.** *(punkt 1.4)* Mida näitas kolmas päring ja miks? (Vihje: kui ükski `server_name` ei sobi, kasutab nginx pordi **vaikeserverit** - kumb plokk see on?)
+- **K3.** *(punkt 1.5)* Mida näitas `nginx -t`? Miks on oluline kontrollida süntaksit enne `reload`-i?
+- **K4.** *(punkt 3.5)* Mida vastas esimene päring (olekukood ja päis `Location`)? Mis veateate andis teine päring ja miks?
+- **K5.** *(punkt 3.6)* Mida näitas `openssl s_client` väljundis `Verify return code`? Miks ei tohi CA privaatvõtit (`labori-ca.key`) kunagi serverist välja anda?
+- **K6.** *(punkt 4.2)* Mis vastuse said ja miks? Leia põhjus `sudo ausearch -m AVC -ts recent` abil ja paranda see püsivalt (`semanage fcontext` + `restorecon`, moodul 11).
+- **K7.** *(punkt 4.3)* Mis olekukoodi said? Miks ei saa nginx `.htaccess`-faile kasutada ja miks peetakse neid jõudluse mõttes halvemaks?
+- **K8.** *(punkt 5.3)* Mitu rida oli Caddyfile'is ja mitu rida vajaks sama nginx-is (koos sertifikaadi loomisega)? Kes oli sertifikaadi väljaandja? Mis juhtuks, kui nimi oleks avalik (nt `www.example.ee`) ja server internetis?
+- **K9.** *(punkt 6.2)* Kuidas päringud serverite vahel jagunesid? Miks oli vaja saata päis `Host:`?
+- **K10.** *(punkt 6.3)* Mida näitas statistikaleht? Mitu päringut ebaõnnestus pärast Apache'i peatamist ja kui kiiresti HAProxy rikke avastas (`option httpchk`, `check`)?
+- **K11.** *(punkt 6.4)* Miks on logis HAProxy aadress, mitte kliendi oma? Kuidas saab taustserver teada kliendi tegeliku IP (vihje: `X-Forwarded-For`, HAProxy `option forwardfor`)?
+- **K12.** *(punkt 7.2)* Kes väljastas `www.debian.org` sertifikaadi? Mitu sertifikaati oli ahelas ja mis on vahesertifikaadi roll? Mitu päeva sertifikaat kokku kehtib ja mitu on veel jäänud?
+- **K13.** *(punkt 7.2)* Mida näitas crt.sh? Miks ei tasu sisevõrgu masinate nimedele (`proxmox1.lab.kool.ee`) avalikke sertifikaate küsida? Mis oleks lahendus, kui siiski on vaja avalikult usaldatud sertifikaati sisevõrgu serverile?
+- **K14.** *(8. osa)* Täida tabel: nginx, Apache, Caddy, HAProxy - milleks kasutasid, seadistusfail, süntaksi kontrolli käsk, logide asukoht. Millise valiksid kooli uuele veebisaidile ja millise mõne konteineris töötava haldusliidese ette?
+<!-- /kysimused -->
 
 ---
 

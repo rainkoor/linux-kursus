@@ -11,7 +11,7 @@
 | **Vajalik** | Laborivõrk (moodul 18) koos DNS-nimedega (`debian1.lab.example` jt), moodulis 13 loodud oma CA (või loo uus) |
 | **Eesmärk** | Ehitada kooli kasutajate kataloog ja panna Linuxi masinad sellest autentima |
 
-**Aruanne:** vasta küsimustele **K1–K16**. Hoia kõik LDIF-failid kataloogis `~/ldap` ja lisa need oma Giti hoidlasse (moodul 6) - ilma paroolideta!
+**Aruanne:** vasta küsimustele **K1–K16**. Hoia kõik LDIF-failid kataloogis `~/ldap` ja lisa need oma Giti hoidlasse (moodul 6) - ilma paroolideta! Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Stsenaarium:** kool soovib, et õppijad ja õpetajad saaksid kõigisse laborimasinatesse sisse logida ühe kasutajanime ja parooliga.
 
@@ -199,6 +199,31 @@ sudo sss_cache -E
 2. **Replikatsioon:** paigalda teine OpenLDAP-server (`debian2`) ja seadista *syncrepl* replikatsioon. Lisa SSSD-sse mõlemad serverid (`ldap_uri = ldap://debian1…, ldap://debian2…`).
 3. **SSH võtmed LDAP-is:** salvesta kasutajate avalikud SSH-võtmed LDAP-i (skeem `openssh-lpk`) ja seadista SSSD (`sss_ssh_authorizedkeys`) neid kasutama.
 4. **LAM konteineris:** käivita LAM Podmani konteinerina (pilt `ghcr.io/ldapaccountmanager/lam`) ja pane selle ette nginx koos TLS-iga.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.3)* Millised kirjed on kataloogis kohe pärast paigaldust? Millised skeemid on laaditud (`cn=schema,cn=config` alt)?
+- **K2.** *(punkt 2.2)* Kirjuta aruandesse ühe kasutaja LDIF (räsi võid lühendada). Miks on igal kasutajal kolm objektiklassi?
+- **K3.** *(punkt 2.3)* Mis veateate said? Kust tuleb nõue, et atribuut on kohustuslik?
+- **K4.** *(punkt 3.1)* Kirjuta kõik neli käsku.
+- **K5.** *(punkt 3.3)* Kas anonüümne kasutaja nägi räsi? Kas Mari nägi oma räsi? Milline `olcAccess` reegel seda määrab?
+- **K6.** *(punkt 4.2)* Miks esimene käsk õnnestus, aga teine ebaõnnestus? (Vihje: sertifikaadi SAN.)
+- **K7.** *(punkt 4.3)* Mida nägid krüpteerimata ühenduse puhul? Miks on TLS LDAP-i puhul kohustuslik?
+- **K8.** *(punkt 5.2)* Millise UID-numbri LAM andis? Milliseid atribuute lisas LAM, mida sina käsitsi ei lisanud?
+- **K9.** *(punkt 6.1)* Mida näitas `id mari`? Kust see info tuli (vaata `/etc/nsswitch.conf` rida `passwd:`)?
+- **K10.** *(punkt 6.2)* Kas kodukataloog loodi automaatselt? Mis on faili `test.txt` numbriline omanik? Miks on see oluline NFS-i puhul (moodul 15)?
+- **K11.** *(punkt 6.4)* Kas sisselogimine õnnestus, kui server oli maas? Miks? Milline `sssd.conf` valik seda mõjutab?
+- **K12.** *(punkt 6.5)* Kas `kati` sai `sudo` kasutada? Kas `mari` sai? Miks on parem anda õigused grupi kaudu?
+- **K13.** *(punkt 6.6)* Mis juhtus? Mis on teised võimalused konto keelamiseks?
+- **K14.** *(punkt 7.2)* Kas `kati` taastus? Miks on vaja eraldi varundada `cn=config` (`-n 0`) ja andmed (`-n 1`)?
+- **K15.** *(8. osa)* Joonista skeem: kuidas jõuab `ssh mari@ubuntuklient` sisselogimine LDAP-serverini (SSH → PAM → SSSD → TLS → slapd)?
+- **K16.** *(8. osa)* Mis juhtuks koolis, kui ainus LDAP-server rikneks? Kuidas seda riski vähendada?
+<!-- /kysimused -->
 
 ---
 

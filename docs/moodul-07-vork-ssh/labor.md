@@ -11,7 +11,7 @@
 | **Vajalik** | Ubuntu virtuaalmasin (põhimasin), teise masinana **Debiani virtuaalmasin** varasematest laboritest (samas võrgus), oma arvuti SSH kliendiga. Ligipääs Ubuntu masina **konsoolile** (nt Proxmoxi veebiliides) |
 | **Eesmärk** | Harjutada võrgu diagnostikat ja seadistamist, SSH-võtmeid, SSH karastamist, failide sünkroniseerimist ja tulemüüri |
 
-**Aruanne:** vasta küsimustele **K1–K20**.
+**Aruanne:** vasta küsimustele **K1–K20**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!WARNING]
 > **Turvavõrk:** selles laboris muudad võrgu- ja SSH-seadistust, mis võib katkestada sinu ühenduse. Hoia Ubuntu masina konsool brauseris avatuna. Kui midagi läheb valesti, saad konsooli kaudu parandada.
@@ -451,6 +451,35 @@ Kui õpetaja ei ole teisiti öelnud, jäta seadistus alles. Iseõppija võib soo
 8. **SFTP chroot:** loo Ubuntu masinas grupp `sftp-kasutajad` ja kasutaja `partner`, kes saab ainult SFTP kaudu faile laadida kataloogi `/srv/sftp/partner/failid` (teooria punkt 7.7). Kontrolli Debianist: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult `failid`, `ssh partner@ubuntusrv` ei anna käsurida. Muuda siis meelega `sudo chmod 775 /srv/sftp/partner`, proovi uuesti ühenduda ja leia põhjus logist (`journalctl -u ssh`).
 9. **TOTP:** seadista Ubuntu masinas oma kasutajale kaheastmeline autentimine (võti + kood telefonist, teooria punkt 7.7). Kontrolli uues aknas, et küsitakse koodi. Mis juhtub, kui Ubuntu kell on 2 minutit vale (`sudo timedatectl set-ntp false; sudo date -s '+2 min'`)? Taasta lõpuks `sudo timedatectl set-ntp true`.
 10. **IPv6:** leia oma masinate link-local aadressid (`ip -6 a`) ja pingi naabrit: `ping -6 fe80::…%ens18`. Miks on vaja liidese nime (`%ens18`)?
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.1)* Mis on Ubuntu masina võrguliidese nimi, IP-aadress ja võrgumask? Mis on vaikelüüs? Mitu masinat on võrgus `/24` maski korral võimalik aadresseerida?
+- **K2.** *(punkt 1.2)* Miks on failis `/etc/resolv.conf` aadress `127.0.0.53`? Milline on tegelik DNS-server?
+- **K3.** *(punkt 1.3)* Kas masin saab aadressi DHCP-st või on see staatiline? Mille järgi see selgus?
+- **K4.** *(punkt 2.1)* Mitu ruuterit (hüpet) on sinu masina ja aadressi `1.1.1.1` vahel? Milline on keskmine ping-aeg vaikelüüsini ja `1.1.1.1`-ni?
+- **K5.** *(punkt 2.2)* Mis on `www.hkhk.edu.ee` IP-aadress? Milline server vastas esimesele päringule (rida `SERVER`)? Millised on domeeni `hkhk.edu.ee` e-posti serverid?
+- **K6.** *(punkt 2.3)* Miks `ping debian1` ja `getent hosts` töötavad, kuid `dig debian1` vastust ei leia?
+- **K7.** *(punkt 3.1)* Millised teenused kuulavad? Millised kuulavad kõigil aadressidel ja millised ainult `127.0.0.x` aadressil?
+- **K8.** *(punkt 3.3)* Mida näitasid `nc` käsud kummagi pordi kohta? Miks?
+- **K9.** *(punkt 4.2)* Kas aadress oli pärast taaskäivitust alles? Miks?
+- **K10.** *(punkt 4.3)* Mida teeb `netplan try`? Miks on see SSH kaudu töötades oluline? Kas aadress püsis pärast taaskäivitust?
+- **K11.** *(punkt 4.4)* Mis veateate said? Paranda viga.
+- **K12.** *(punkt 5.3)* Mida küsiti sisselogimisel - serveri kasutaja parooli või võtme parooli? Millised on kataloogi `~/.ssh` ja faili `authorized_keys` õigused?
+- **K13.** *(punkt 6.3)* Milliseid faile `rsync` üle kandis? Mis juhtus failiga `dok2.txt` Debiani masinas ja miks? Miks on oluline käivitada `--delete` kõigepealt koos võtmega `-n`?
+- **K14.** *(punkt 6.4)* Selgita tulemust.
+- **K15.** *(punkt 7.5)* Mis veateate said? Miks? Miks on oluline, et karastamise fail algaks väikese numbriga (`10-`)?
+- **K16.** *(punkt 8.3)* Kirjuta testide tulemused. Miks ei saanud sinu arvuti veebiserveriga ühendust, kuid SSH töötas?
+- **K17.** *(punkt 8.5)* Kirjuta lõplik `ufw status numbered` väljund aruandesse.
+- **K18.** *(9. osa)* Kirjelda, millised diagnostikakäsud sa järjest käivitasid, mida iga käsk näitas, mis oli viga ja kuidas selle parandasid.
+- **K19.** *(punkt 10.1)* Milline ajavöönd on seadistatud? Millise serveriga kell sünkroniseeritakse ja kui suur on nihe (*Offset*)? Kas riistvara kell on UTC-s?
+- **K20.** *(punkt 10.4)* Mis juhtus `curl`-i HTTPS-päringuga vale kellaajaga ja miks? Kas Debian näitas `chronyc clients` väljundis Ubuntut?
+<!-- /kysimused -->
 
 ---
 

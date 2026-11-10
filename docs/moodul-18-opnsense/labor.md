@@ -11,7 +11,7 @@
 | **Vajalik** | Proxmoxis isoleeritud sild või SDN VNet (küsi õpetajalt), OPNsense'i ISO, varasemate laboritööde Debiani, AlmaLinuxi ja Ubuntu masinad |
 | **Eesmärk** | Ehitada isoleeritud laborivõrk, mida kaitseb OPNsense, ja seadistada selle teenused |
 
-**Aruanne:** vasta küsimustele **K1–K16** ja lisa oma võrguplaan (vt [paigalduslisa](../lisad/paigaldus.md), punkt 2).
+**Aruanne:** vasta küsimustele **K1–K16** ja lisa oma võrguplaan (vt [paigalduslisa](../lisad/paigaldus.md), punkt 2). Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Tulemus:** pärast seda laborit on sinu masinad isoleeritud võrgus OPNsense'i taga. Seda võrku kasutavad ka moodulid 19–21.
 
@@ -59,6 +59,33 @@ ping -c2 debian.org
 
 - **A (soovitatav):** laborivõrgus on töölauaga klient (nt Ubuntu Desktop või Windows), mida kasutad Proxmoxi konsooli kaudu, ja avad veebiliidese selle brauseris;
 - **B:** luba veebiliides ajutiselt WAN-ist **ainult oma arvuti aadressilt**. OPNsense'i konsoolis (punkt **8**, kest) lülita tulemüür ajutiselt välja käsuga `pfctl -d`, ava oma arvutist `https://WAN_IP`, eemalda kõigepealt *Interfaces* → *WAN* valik *Block private networks* (sinu arvuti aadress on privaatvõrgust), seejärel lisa WAN-i liidesele reegel *Pass*, TCP, allikas = sinu arvuti IP, sihtkoht = *This Firewall*, port 443, ja vajuta *Apply* - see lülitab tulemüüri jälle sisse. Kontrolli konsoolis `pfctl -s info | head -1` (peab olema `Status: Enabled`).
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Kirjuta aruandesse virtuaalmasina riistvara seaded ja selgita, miks vajab tulemüür kahte võrguliidest.
+- **K2.** *(punkt 2.3)* Millise WAN-aadressi sai OPNsense? Milline liides on WAN ja milline LAN (konsooli kokkuvõte)?
+- **K3.** *(punkt 3.1)* Millise aadressi, vaikelüüsi ja DNS-serveri Ubuntu sai? Kas internet töötas? Mille kaudu (vt `tracepath -n 1.1.1.1`)?
+- **K4.** *(punkt 4.2)* Miks lülitasime laboris välja „Block private networks from entering via WAN“? Miks ei tohi seda teha päris interneti ühenduse korral?
+- **K5.** *(punkt 5.2)* Kas Ubuntu sai reserveeritud aadressi? Miks kasutatakse serveritel siiski pigem staatilist aadressi kui DHCP reserveeringut?
+- **K6.** *(punkt 5.3)* Kas DHCP-kliendi nimi (`ubuntuklient`) lahenes? Kes vastas DNS-päringutele?
+- **K7.** *(punkt 6.3)* Kas leht avanes? Millise WAN-i reegli OPNsense automaatselt lõi (*Firewall* → *Rules* → *WAN*)? Mida näitas *Live View* logi ühendumise ajal?
+- **K8.** *(punkt 6.4)* Kas SSH keelati ja veeb töötas? Mis vahe on *Block* ja *Reject* vahel (proovi mõlemat ja vaata, kuidas `ssh` käitub)?
+- **K9.** *(punkt 6.5)* Mis juhtus? Selgita, kuidas reeglite järjekord mõjutab tulemust.
+- **K10.** *(punkt 7.1)* Täida tabel: milline FreeBSD käsk vastab Linuxi käsule `ip a`, `ip r`, `ss -tulpn`, `nft list ruleset`, `systemctl list-units`, `lsblk`? Mis on FreeBSD versioon?
+- **K11.** *(punkt 7.1)* Leia `pfctl -sr` väljundist oma osa 6.4 reegel. Kuidas see erineb veebiliideses nähtust?
+- **K12.** *(punkt 8.1)* Mis vormingus on seadistusfail? Miks peab seda hoidma turvaliselt (vihje: mis seal veel on)?
+- **K13.** *(punkt 8.3)* Mis vahe on OPNsense'i seadistuse varukoopial ja virtuaalmasina hetktõmmisel? Millal kumbagi kasutada?
+- **K14.** *(9. osa)* Joonista oma laborivõrgu skeem: OPNsense (WAN- ja LAN-aadress), kõik masinad koos aadressidega, pordisuunamine.
+- **K15.** *(9. osa)* Too kolm näidet, kus OPNsense'i ja Linuxi serveri (moodul 7 - `ufw`, `firewalld`, `nftables`) tulemüüri ülesanded erinevad.
+- **K16.** *(9. osa)* Mida tuleks teha, enne kui sellist OPNsense'i kasutatakse päris ettevõtte internetiühenduse ees?
+<!-- /kysimused -->
+
+---
 
 > [!NOTE]
 > **Õpetajale:** variant A on turvalisem ja lihtsam. Kui kasutad varianti B, veendu, et õppijad ei jätaks tulemüüri välja lülitatuks ega avaks haldusliidest kogu kooli võrgule.

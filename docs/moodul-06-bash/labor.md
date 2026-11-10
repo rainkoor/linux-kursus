@@ -11,7 +11,7 @@
 | **Vajalik** | Debiani virtuaalmasin, `sudo` õigusega kasutaja. Laboritöö 2 logifail `~/labor02/juurdepaas.log` (kui seda pole, loo see uuesti laboritöö 2 punkti 1.2 järgi) |
 | **Eesmärk** | Kirjutada töökindlaid Bashi skripte tüüpiliste haldusülesannete jaoks |
 
-**Esitamine:** kõik skriptid kataloogis `~/bin` ning aruanne küsimuste **K1–K16** vastustega. Skriptid peavad olema ka 7. osas loodud Git-hoidlas. Iga skript peab läbima ShellCheck'i kontrolli ilma vigade ja hoiatusteta. Infotaseme märkused (*info*, nt SC2012) on lubatud, kui oskad selgitada, miks sa need teadlikult alles jätsid.
+**Esitamine:** kõik skriptid kataloogis `~/bin` ning aruanne küsimuste **K1–K16** vastustega. Skriptid peavad olema ka 7. osas loodud Git-hoidlas. Iga skript peab läbima ShellCheck'i kontrolli ilma vigade ja hoiatusteta. Infotaseme märkused (*info*, nt SC2012) on lubatud, kui oskad selgitada, miks sa need teadlikult alles jätsid. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 **Töövõte:** kirjuta skript osade kaupa ja testi pärast iga muudatust. Ära kirjuta kogu skripti korraga valmis - vigu on siis raske leida.
 
@@ -450,6 +450,31 @@ git push -u github main
 1. Täienda `loo_kasutajad` nii, et see genereerib igale kasutajale juhusliku parooli (`openssl rand -base64 12`), määrab selle (`chpasswd`), sunnib esimesel sisselogimisel parooli vahetama (`chage -d 0`) ja kirjutab kasutajanimed ja paroolid faili, millel on õigused `600`.
 2. Kirjuta skript `seire`, mis kontrollib ketta täituvust, mälu ja koormust ning kirjutab hoiatuse, kui mõni ületab skripti alguses määratud piiri. Kasuta väljumiskoode: 0 - kõik korras, 1 - hoiatus, 2 - kriitiline.
 3. Muuda `logianalyys` nii, et logifaili võib anda ka torust: `cat juurdepaas.log | logianalyys kokku -`.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Millised kataloogid on muutujas `PATH`? Miks oli vaja uuesti sisse logida? (Vihje: vaata faili `~/.profile`.)
+- **K2.** *(punkt 1.4)* Selgita kummagi `ls` käsu tulemust. Mis vahe on ülakomadel ja jutumärkidel?
+- **K3.** *(2. osa)* Kuidas kontrollisid, kas argument on olemas? Miks on oluline, et veateade läheb standardveaväljundisse ja väljumiskood on 1?
+- **K4.** *(2. osa)* Käivita `failiinfo /etc/shadow /usr/bin/passwd /dev/null`. Selgita tulemust.
+- **K5.** *(punkt 3.3)* Miks on proovirežiim sellise skripti puhul oluline? Mis juhtus kolmandal käivitusel?
+- **K6.** *(punkt 3.3)* Miks ei leia `sudo` skripti `~/bin` kataloogist ilma täieliku teeta? (Vihje: `sudo` kasutab oma turvalist `PATH`-i - vaata `sudo grep secure_path /etc/sudoers`.)
+- **K7.** *(punkt 4.1)* Mitu arhiivi jäi alles ja miks? Mida tegi viimane käsk?
+- **K8.** *(punkt 4.1)* Miks on arhiivi loomisel kasulik võti `-C`? Mis oleks ilma selleta teisiti (vaata `tar -tzf`)?
+- **K9.** *(punkt 4.2)* Kirjuta mõlema faili (`varunda.service`, `varunda.timer`) sisu aruandesse.
+- **K10.** *(5. osa)* Miks on `case` siin parem kui `if`-`elif`-ahel?
+- **K11.** *(punkt 6.3)* Loetle kõik ShellCheck'i hoiatused (koodid ja lühike selgitus eesti keeles). Mis läks testi käigus valesti ja miks?
+- **K12.** *(punkt 6.4)* Lisa parandatud skript aruandesse.
+- **K13.** *(punkt 7.4)* Mis vahe on käskudel `git diff` ja `git diff --staged`? Miks on kasulik muudatused enne sissekannet üle vaadata?
+- **K14.** *(punkt 7.5)* Kas Git näitas faili `saladused.txt`? Miks? Mis juhtuks, kui oleksid parooli kogemata sisse kandnud ja hoidla avalikuks teinud?
+- **K15.** *(punkt 7.7)* Kuidas nägi fail `seire.conf` konflikti ajal välja? Mida tähendavad märgid `<<<<<<<`, `=======` ja `>>>>>>>`? Kopeeri `git log --oneline --graph` väljund aruandesse.
+- **K16.** *(punkt 7.9)* Mida tegid `git push` ja `git pull`? Miks on kasulik, et seadistus on kaughoidlas (teises masinas või GitHubis)?
+<!-- /kysimused -->
 
 ---
 

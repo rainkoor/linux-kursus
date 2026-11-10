@@ -11,7 +11,7 @@
 | **Vajalik** | Laboritöö 13 server (nginx ja HTTPS töötavad), `alma` kaugühenduse testiks |
 | **Eesmärk** | Paigaldada ja võrrelda MariaDB-d, PostgreSQL-i, SQLite'i ja Valkeyt, ühendada andmebaas veebirakendusega ning varundada ja taastada andmeid |
 
-**Aruanne:** vasta küsimustele **K1–K14**.
+**Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 Kõigis osades kasutame sama andmestikku: tabel `opilased` (nimi, eriala).
 
@@ -286,6 +286,29 @@ valkey-benchmark -q -n 20000 -t set,get
 2. **Replikatsioon:** paigalda `debian2`-sse MariaDB ja seadista see `debian1` koopiaks (teooria punkt 14.2). Lisa põhiserverisse õpilane ja kontrolli, et ta ilmus koopiasse. Mis juhtub koopias `DROP TABLE`-i järel põhiserveris? Seejärel harjuta **ülevõttu** (teooria punkt 14.2): peata `debian1` MariaDB, tee `debian2` põhiserveriks, kirjuta sinna uus rida ja tee `debian1`-st uue põhiserveri koopia. Mõõda, kui kaua ülevõtt aega võttis.
 3. **PHP seansid Valkeys:** paigalda `php-redis` ja sea PHP-FPM hoidma seansse Valkeys (`session.save_handler = redis`, `session.save_path = "tcp://127.0.0.1:6379"`).
 4. **Adminer konteineris:** käivita Adminer konteinerina (moodul 12) ja halda sellega nii MariaDB-d kui ka PostgreSQL-i.
+
+---
+
+<!-- kysimused -->
+## Aruande küsimused
+
+Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
+
+- **K1.** *(punkt 1.2)* Milliseid andmebaase nägi kasutaja `kool`? Millisel aadressil MariaDB kuulab ja miks on see turvaline?
+- **K2.** *(punkt 1.5)* Miks kasutab PHP-kood funktsiooni `htmlspecialchars()`? Mis võiks juhtuda, kui andmebaasis oleks õpilase nimi `<script>alert(1)</script>`?
+- **K3.** *(punkt 1.5)* Parool on PHP-faili sisse kirjutatud. Millised on selle riskid ja kuidas saaks seda paremini teha?
+- **K4.** *(punkt 1.6)* Mida näitas leht? Millises logis oli viga näha (`/var/log/nginx/kool.error.log`, `journalctl -u php*-fpm`)?
+- **K5.** *(punkt 2.2)* Kas lugemine õnnestus? Mis juhtus `DELETE`-iga? Miks on tulemüüri reegel lisaks kasutaja aadressipiirangule ikkagi vajalik?
+- **K6.** *(punkt 2.3)* Kas MariaDB kuulas taastamise ajal võrgus? Miks on see oluline?
+- **K7.** *(punkt 3.1)* Miks ei lubanud `peer`-autentimine süsteemikasutajal `postgres` ühenduda andmebaasi kasutajana `kool`? Mis vahe on `peer` ja `scram-sha-256` meetodil?
+- **K8.** *(punkt 3.3)* Võrdle MariaDB ja PostgreSQL-i: kuidas luuakse kasutaja, kus määratakse, kust võib ühenduda, ja kuidas varundatakse?
+- **K9.** *(punkt 4.3)* Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 15B Pi-hole või laboritöö 17 Uptime Kuma, uuri ka nende andmebaase.)
+- **K10.** *(punkt 4.3)* Miks ei ole SQLite'il kasutajaid ega porti? Mis on sellest tulenevad eelised ja puudused? Kuidas kaitsta SQLite'i andmeid?
+- **K11.** *(punkt 5.2)* Mis juhtus võtmega `seanss:mari` 31 sekundi pärast? Mitu operatsiooni sekundis Valkey tegi? Miks sobib see vahemäluks ja seansside hoidmiseks?
+- **K12.** *(punkt 5.2)* Millisel aadressil Valkey kuulab? Mis juhtuks, kui port 6379 oleks internetist ilma paroolita kättesaadav?
+- **K13.** *(6. osa)* Täida tabel MariaDB, PostgreSQL, SQLite ja Valkey kohta: tüüp, port, klient, kasutajad ja õigused, varundus, sobiv kasutus.
+- **K14.** *(6. osa)* Kooli uus rakendus vajab: kasutajate ja hinnete andmebaasi, kiiret seansside hoidlat kahe veebiserveri taga (laboritöö 13 HAProxy) ja väikest seadistuse hoidlat. Milliseid andmebaase kasutaksid ja miks?
+<!-- /kysimused -->
 
 ---
 
