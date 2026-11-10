@@ -71,7 +71,7 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 
 **Eeldused:** arvuti tavakasutaja oskused. Varasemat Linuxi kogemust ei ole vaja.
 
-### Millise osa kellele?
+### Kellele milline osa sobib?
 
 | Osa | Kellele | Mida õppija pärast oskab |
 |---|---|---|
