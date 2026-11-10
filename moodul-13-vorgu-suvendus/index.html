@@ -5410,7 +5410,7 @@ ssh<span class="w"> </span>kasutaja@fd83::52<span class="w">                  </
 <p>Link-local aadressi juures on vaja liidese nime (<code>%ens18</code>), sest sama <code>fe80::/64</code> võrk on olemas igal liidesel ja kernel ei tea muidu, kust pakett saata.</p>
 <h3 id="staatiline-ipv6-kolmes-distros">Staatiline IPv6 kolmes distros<a class="headerlink" href="#staatiline-ipv6-kolmes-distros" title="Permanent link">&para;</a></h3>
 <p>Kursuse laborivõrgus kasutame ULA-võrku <code>fd83::/64</code> (masina number nagu IPv4-s, nt <code>alma</code> → <code>fd83::55</code>).</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: /etc/netplan/50-staatiline.yaml (liidese ens18 alla)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: Netplani fail, nt /etc/netplan/50-cloud-init.yaml (liidese ens18 alla)</span>
 <span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.54/24</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fd83::54/64</span>

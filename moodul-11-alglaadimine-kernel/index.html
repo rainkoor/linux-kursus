@@ -6542,6 +6542,7 @@ touch<span class="w"> </span>/.autorelabel<span class="w">          </span><span
 <span class="nb">exit</span>
 <span class="nb">exit</span>
 </code></pre></div>
+<p>Kui <code>rd.break</code> küsib juurkasutaja parooli või teatab, et konto on lukus (uuemates versioonides, kui paigaldusel jäeti juurkasutaja lukku), kasuta ka AlmaLinuxis parameetrit <code>init=/bin/bash</code> nagu Debianis ja lisa enne <code>exec /sbin/init</code> käsk <code>touch /.autorelabel</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Turvalisus</p>
 <p>See näitab, et <strong>füüsiline ligipääs masinale (või virtuaalmasina konsoolile) tähendab ligipääsu kõigele.</strong> Seepärast on serveriruumid lukus, Proxmoxi veebiliides kaitstud ning tundlike süsteemide puhul kasutatakse ketta krüpteerimist ja GRUB-i parooli.</p>

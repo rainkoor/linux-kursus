@@ -6210,7 +6210,7 @@ cat<span class="w"> </span>/etc/network/interfaces<span class="w">            </
 </li>
 </ol>
 <h3 id="ubuntu-netplan">Ubuntu: Netplan<a class="headerlink" href="#ubuntu-netplan" title="Permanent link">&para;</a></h3>
-<p>Netplan loeb kõik <code>.yaml</code> failid kataloogist <code>/etc/netplan/</code> ja paneb need kokku. Paigaldaja on sinna juba ühe faili teinud - <strong>muuda seda faili</strong>, ära lisa teist, muidu võivad kaks faili teineteist segada (nt üks tahab DHCP-d, teine staatilist aadressi).</p>
+<p>Netplan loeb kõik <code>.yaml</code> failid kataloogist <code>/etc/netplan/</code> ja paneb need kokku. Paigaldaja on sinna juba ühe faili teinud. Liidese põhiseadistuse (DHCP või staatiline aadress) muutmiseks <strong>muuda seda faili</strong> - kui kirjutad sama liidese kohta teise faili vastupidise seadistuse, hakkavad failid teineteist segama (üks tahab DHCP-d, teine staatilist aadressi). Eraldi faili võib lisada siis, kui see <strong>täiendab</strong> olemasolevat: lisa-aadress, uus liides või VLAN (nii teeme laboritöödes).</p>
 <h4 id="ubuntu-staatiline-ip">Ubuntu: staatiline IP<a class="headerlink" href="#ubuntu-staatiline-ip" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
@@ -6369,7 +6369,7 @@ getent<span class="w"> </span>hosts<span class="w"> </span>www.debian.org<span c
 <details class="note">
 <summary>Loe lähemalt: Püsivad staatilised marsruudid</summary>
 <p>Vaikelüüs saadab kõik paketid, mille sihtvõrku masin ei tunne, ühte ruuterisse. Kui mõni võrk on kättesaadav <strong>teise ruuteri</strong> kaudu (nt haldusvõrk <code>10.10.0.0/16</code> ruuteri <code>10.0.83.254</code> taga), lisatakse <strong>staatiline marsruut</strong>. <code>ip route add</code> (punkt 7.1) kaob taaskäivitusel; püsivaks tuleb see kirjutada võrguseadistusse:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: /etc/netplan/50-staatiline.yaml, liidese ens18 all</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: Netplani fail (nt /etc/netplan/50-cloud-init.yaml), liidese ens18 all</span>
 <span class="w">      </span><span class="nt">routes</span><span class="p">:</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
 <span class="w">          </span><span class="nt">via</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.1</span>

@@ -5488,14 +5488,14 @@ ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><sp
 <details class="note">
 <summary>Loe lähemalt: FreeBSD jail</summary>
 <p>Esimene päris konteinerilahendus oli <strong>FreeBSD jail</strong> (FreeBSD 4.0, 2000). See lisas <code>chroot</code>-ile eraldatud protsessid, oma IP-aadressi ja piiratud juurkasutaja: jaili sees olev root ei saa muuta kernelit ega näha teisi jaile. Linuxi nimeruumid ja cgroups jõudsid sama tasemeni alles aastaid hiljem.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># /etc/jail.conf (FreeBSD)</span>
-www<span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nv">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/usr/local/jails/www"</span><span class="p">;</span>
-<span class="w">    </span>ip4.addr<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vtnet0|10.0.83.67/24"</span><span class="p">;</span>
-<span class="w">    </span>host.hostname<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"www.lab.example"</span><span class="p">;</span>
-<span class="w">    </span>exec.start<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/bin/sh /etc/rc"</span><span class="p">;</span>
-<span class="w">    </span>exec.stop<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/bin/sh /etc/rc.shutdown"</span><span class="p">;</span>
-<span class="o">}</span>
+<div class="highlight"><pre><span></span><code># /etc/jail.conf (FreeBSD)
+www {
+    path = "/usr/local/jails/www";
+    ip4.addr = "vtnet0|10.0.83.67/24";
+    host.hostname = "www.lab.example";
+    exec.start = "/bin/sh /etc/rc";
+    exec.stop = "/bin/sh /etc/rc.shutdown";
+}
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>service<span class="w"> </span>jail<span class="w"> </span>start<span class="w"> </span>www
 jls<span class="w">                    </span><span class="c1"># töötavad jailid (nagu podman ps)</span>
