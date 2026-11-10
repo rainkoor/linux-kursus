@@ -149,6 +149,25 @@ Failisüsteemi kontroll ja parandamine (failisüsteem peab olema **haakimata**):
 sudo fsck.ext4 -f /dev/sdb1                  # ext4
 sudo xfs_repair /dev/sdb2                    # XFS
 ```
+
+FAT32-failisüsteemi (nt USB-mälu või UEFI partitsiooni jaoks) loob `mkfs.vfat` (pakett `dosfstools`):
+
+```bash
+sudo mkfs.vfat -F 32 -n USB /dev/sdc1        # FAT32, silt USB
+```
+
+Olemasoleva failisüsteemi andmeid ja seadeid näeb ning muudab ilma vormindamata:
+
+```bash
+sudo dumpe2fs -h /dev/sdb1                   # ext4 ülevaade: UUID, plokid, i-sõlmed, viimane kontroll
+sudo tune2fs -L varu /dev/sdb1               # ext4: muuda silti
+sudo tune2fs -m 1 /dev/sdb1                  # ext4: juurkasutajale reserveeritud ruum 5% asemel 1%
+sudo tune2fs -c 30 /dev/sdb1                 # ext4: kontroll iga 30 haakimise järel
+sudo xfs_admin -L logid /dev/sdb2            # XFS: muuda silti (haakimata)
+sudo xfs_info /dev/sdb2                      # XFS ülevaade
+```
+
+ext4 jätab vaikimisi 5% ruumist juurkasutajale, et süsteem töötaks ka siis, kui tavakasutajad on ketta täis kirjutanud. Suurel andmekettal on see palju raisatud ruumi, seepärast vähendatakse seda sageli (`tune2fs -m`).
 ## 8.4 Haakimine
 
 Failisüsteemi kasutamiseks tuleb see **haakida** (*mount*) mõnda kataloogi - **haakepunkti**. Pärast haakimist on failisüsteemi sisu selles kataloogis nähtav.

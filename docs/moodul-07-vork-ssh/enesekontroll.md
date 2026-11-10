@@ -224,6 +224,15 @@ Ajapõhine ühekordne kood, mille telefonirakendus ja server arvutavad ühisest 
 
 </details>
 
+**25.** Võrk `10.10.0.0/16` on kättesaadav ruuteri `10.0.83.254` kaudu. Kuidas lisad selle marsruudi püsivalt AlmaLinuxis ja kuidas kontrollid, millist marsruuti kasutatakse?
+
+<details>
+<summary>Vastus</summary>
+
+`sudo nmcli connection modify ens18 +ipv4.routes "10.10.0.0/16 10.0.83.254"` ja `sudo nmcli connection up ens18`. Kontroll: `ip route` ja `ip route get 10.10.1.5`. Ubuntus lisatakse marsruut Netplani `routes:` alla, Debianis `up ip route add …` rida faili `/etc/network/interfaces`.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Leia oma masina vaikelüüsi IP-aadress ühe käsuga, mis väljastab ainult aadressi.

@@ -284,6 +284,7 @@ cp --help
 
 - `type käsk` - näitab, kas tegu on programmi, kesta sisekäsu või aliasega;
 - `which käsk` - näitab programmi asukohta;
+- `whereis käsk` - näitab programmi, selle lähtekoodi ja kasutusjuhendi failide asukohti;
 - veebis: distro dokumentatsioon, Arch Wiki.
 
 ### Tehisintellekt abilisena

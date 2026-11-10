@@ -663,6 +663,7 @@ sudo systemctl reset-failed vigane2
 2. Kaitse GRUB parooliga (vt Debiani wiki „GRUB“ või `man grub-mkpasswd-pbkdf2`), nii et menüü kirjete muutmine nõuab parooli. Proovi seejärel uuesti `init=/bin/bash` meetodit.
 3. AlmaLinuxis: lähtesta juurkasutaja parool meetodiga `rd.break` (vt teooria punkt 10.9). Mis juhtub, kui jätad `touch /.autorelabel` tegemata?
 4. Kompileeri kernel uuesti, kuid jäta `make menuconfig`-is välja kõik, mida sinu virtuaalmasin ei vaja (heli, Bluetooth, WiFi, ebavajalikud failisüsteemid). Kui väikeseks suudad kerneli (`/boot/vmlinuz-*`) ja initramfs-i teha nii, et masin endiselt käivitub?
+5. **udev:** käivita `udevadm monitor` ja lisa Proxmoxis masinale töö ajal uus ketas (*Hardware* → *Add* → *Hard Disk*). Milliseid sündmusi nägid? Vaata `udevadm info /dev/sdX` ja kirjuta reegel, mis loob kettale viite `/dev/lisaketas` (seerianumbri või `ID_PATH` järgi). Kontrolli pärast `udevadm trigger`-it.
 
 ---
 

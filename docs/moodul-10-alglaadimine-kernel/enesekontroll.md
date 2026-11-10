@@ -233,6 +233,15 @@ Mall on üksuse fail, millest käivitatakse mitu eksemplari, `%i` asendub eksemp
 
 </details>
 
+**26.** Mis on udev ja mida see teeb, kui ühendad masinaga USB-ketta? Kuidas näed seadme omadusi, mille järgi saab udev reegli kirjutada?
+
+<details>
+<summary>Vastus</summary>
+
+udev (`systemd-udevd`) saab kernelilt sündmuse uue seadme kohta, laadib vajaliku mooduli, loob seadmefaili kataloogi `/dev` ja püsivad nimed (`/dev/disk/by-uuid/` jt) ning käivitab reeglid kataloogidest `/usr/lib/udev/rules.d/` ja `/etc/udev/rules.d/`. Omadused: `udevadm info /dev/sdb`; sündmusi saab jälgida käsuga `udevadm monitor`.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Leia ühe käsuga, mitu sekundit masin on töötanud (failist `/proc`).

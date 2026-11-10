@@ -451,6 +451,7 @@ Kui õpetaja ei ole teisiti öelnud, jäta seadistus alles. Iseõppija võib soo
 8. **SFTP chroot:** loo Ubuntu masinas grupp `sftp-kasutajad` ja kasutaja `partner`, kes saab ainult SFTP kaudu faile laadida kataloogi `/srv/sftp/partner/failid` (teooria punkt 7.7). Kontrolli Debianist: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult `failid`, `ssh partner@ubuntusrv` ei anna käsurida. Muuda siis meelega `sudo chmod 775 /srv/sftp/partner`, proovi uuesti ühenduda ja leia põhjus logist (`journalctl -u ssh`).
 9. **TOTP:** seadista Ubuntu masinas oma kasutajale kaheastmeline autentimine (võti + kood telefonist, teooria punkt 7.7). Kontrolli uues aknas, et küsitakse koodi. Mis juhtub, kui Ubuntu kell on 2 minutit vale (`sudo timedatectl set-ntp false; sudo date -s '+2 min'`)? Taasta lõpuks `sudo timedatectl set-ntp true`.
 10. **IPv6:** leia oma masinate link-local aadressid (`ip -6 a`) ja pingi naabrit: `ping -6 fe80::…%ens18`. Miks on vaja liidese nime (`%ens18`)?
+11. **Staatiline marsruut:** lisa AlmaLinuxis püsiv marsruut võrku `10.10.0.0/16` läbi `10.0.83.254` (teooria punkt 7.2) ja Ubuntus sama Netplaniga. Kontrolli `ip route get 10.10.1.5` ning veendu pärast taaskäivitust, et marsruut on alles. (Ruuterit `.254` ei pea olemas olema - kontrollime ainult marsruutimistabelit.)
 
 ---
 

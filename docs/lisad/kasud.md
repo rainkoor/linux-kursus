@@ -112,6 +112,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `dpkg` | Debiani madala taseme pakihaldus (`-l`, `-L`, `-S`) | [4](../moodul-04-pakihaldus/index.md) |
 | `dracut` | Loob initramfs-i uuesti (AlmaLinux) | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `du` | Kataloogide ja failide maht | [8](../moodul-08-kettad-lvm/index.md) |
+| `dumpe2fs` | ext-failisüsteemi andmed (`-h` ülevaade) | [8](../moodul-08-kettad-lvm/index.md) |
 
 ## E
 
@@ -152,6 +153,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `git` | Versioonihaldus (`init`, `add`, `commit`, `log`, `branch`, `push`) | [6](../moodul-06-bash/index.md) |
 | `gpart` | FreeBSD partitsioonide haldus (`gpart show`) | [25](../moodul-25-freebsd/index.md) |
 | `gpasswd` | Lisab või eemaldab grupi liikmeid | [3](../moodul-03-kasutajad-oigused/index.md) |
+| `gpg` | GnuPG: võtmed, allkirjad ja krüpteerimine | [11](../moodul-11-turvalisus-logid/index.md) |
 | `grep` | Otsib mustrile vastavaid ridu (`-r`, `-i`, `-v`, `-E`) | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `groupadd` | Loob grupi | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `groupdel` | Kustutab grupi | [3](../moodul-03-kasutajad-oigused/index.md) |
@@ -220,6 +222,8 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `ldappasswd` | Muudab LDAP-i kasutaja parooli | [20](../moodul-20-openldap/index.md) |
 | `ldapsearch` | LDAP-i otsing | [20](../moodul-20-openldap/index.md) |
 | `ldapwhoami` | Kontrollib LDAP-i autentimist | [20](../moodul-20-openldap/index.md) |
+| `ldconfig` | Uuendab jagatud teekide vahemälu (`-p` näitab teadaolevaid teeke) | [4](../moodul-04-pakihaldus/index.md) |
+| `ldd` | Näitab, milliseid jagatud teeke programm vajab | [4](../moodul-04-pakihaldus/index.md) |
 | `leapp` | AlmaLinuxi põhiversiooni uuendus (ELevate) | [4](../moodul-04-pakihaldus/index.md) |
 | `less` | Pikema faili lehitsemine | [1](../moodul-01-sissejuhatus/index.md) |
 | `ln` | Loob viida (`-s` sümboolne) | [2](../moodul-02-failid-tekst-torud/index.md) |
@@ -235,6 +239,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `lsmod` | Laaditud kerneli moodulid | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `lsof` | Avatud failid ja ühendused protsesside kaupa | [17](../moodul-17-seire/index.md) |
 | `lspci` | PCI-seadmed ja kasutatavad draiverid | [10](../moodul-10-alglaadimine-kernel/index.md) |
+| `lsusb` | USB-seadmed | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `lvcreate` | Loob loogilise köite (ka hetktõmmise) | [8](../moodul-08-kettad-lvm/index.md) |
 | `lvextend` | Suurendab köidet (`-r` koos failisüsteemiga) | [8](../moodul-08-kettad-lvm/index.md) |
 | `lvreduce` | Vähendab köidet (ext4; XFS-i vähendada ei saa) | [8](../moodul-08-kettad-lvm/index.md) |
@@ -253,6 +258,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `mdadm` | Tarkvaraline RAID | [9](../moodul-09-salvestus/index.md) |
 | `mkdir` | Loob kataloogi (`-p` koos vahekataloogidega) | [1](../moodul-01-sissejuhatus/index.md) |
 | `mkfs.ext4` | Loob ext4 failisüsteemi | [8](../moodul-08-kettad-lvm/index.md) |
+| `mkfs.vfat` | Loob FAT32-failisüsteemi (`-F 32`) | [8](../moodul-08-kettad-lvm/index.md) |
 | `mkfs.xfs` | Loob XFS failisüsteemi | [8](../moodul-08-kettad-lvm/index.md) |
 | `mkswap` | Valmistab saaleala ette | [8](../moodul-08-kettad-lvm/index.md) |
 | `mktemp` | Loob turvalise ajutise faili või kataloogi | [6](../moodul-06-bash/index.md) |
@@ -359,6 +365,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `setenforce` | Muudab SELinuxi režiimi ajutiselt | [11](../moodul-11-turvalisus-logid/index.md) |
 | `setfacl` | Seab ACL-i õigusi | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `setsebool` | SELinuxi tõeväärtused (`-P` püsivalt) | [11](../moodul-11-turvalisus-logid/index.md) |
+| `sha256sum` | Arvutab ja kontrollib (`-c`) SHA-256 kontrollsummasid | [11](../moodul-11-turvalisus-logid/index.md) |
 | `shellcheck` | Leiab Bashi skriptidest vigu ja halbu tavasid | [6](../moodul-06-bash/index.md) |
 | `showmount` | NFS-serveri jagatud kataloogid kliendi poolelt | [15](../moodul-15-vorguteenused/index.md) |
 | `slapadd` | LDIF-i import andmebaasi (taastamine) | [20](../moodul-20-openldap/index.md) |
@@ -410,6 +417,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `tr` | Asendab või kustutab märke | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `tracepath` | Näitab teekonda sihtmärgini | [7](../moodul-07-vork-ssh/index.md) |
 | `trap` | Käivitab käsu signaali või skripti lõpu korral | [6](../moodul-06-bash/index.md) |
+| `tune2fs` | Muudab ext-failisüsteemi seadeid (silt, reserveeritud ruum) | [8](../moodul-08-kettad-lvm/index.md) |
 | `tuned-adm` | Jõudlusprofiilide valik | [17](../moodul-17-seire/index.md) |
 | `type` | Näitab, kas käsk on programm, sisekäsk või alias | [2](../moodul-02-failid-tekst-torud/index.md) |
 
@@ -417,6 +425,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 
 | Käsk | Mida teeb | Moodul |
 |---|---|---|
+| `udevadm` | udev: seadme info (`info`), sündmused (`monitor`), reeglite rakendamine | [10](../moodul-10-alglaadimine-kernel/index.md) |
 | `ufw` | Ubuntu lihtne tulemüür | [7](../moodul-07-vork-ssh/index.md) |
 | `ulimit` | Kesta ja protsesside ressursipiirangud | [5](../moodul-05-protsessid-teenused/index.md) |
 | `umask` | Uute failide vaikimisi õigused | [3](../moodul-03-kasutajad-oigused/index.md) |
@@ -452,6 +461,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 |---|---|---|
 | `wc` | Loendab ridu, sõnu ja märke | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `wg` | WireGuard VPN-i olek ja võtmed | [7](../moodul-07-vork-ssh/index.md) |
+| `whereis` | Programmi, lähtekoodi ja kasutusjuhendi asukohad | [1](../moodul-01-sissejuhatus/index.md) |
 | `which` | Näitab, millisest kataloogist käsk käivitatakse | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `who` | Hetkel sisse loginud kasutajad | [3](../moodul-03-kasutajad-oigused/index.md) |
 | `whoami` | Näitab praegust kasutajat | [1](../moodul-01-sissejuhatus/index.md) |
@@ -464,6 +474,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 |---|---|---|
 | `xargs` | Teeb sisendi ridadest teise käsu argumendid | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `xe` | XCP-ng käsurida | [23](../moodul-23-virtualiseerimine/index.md) |
+| `xfs_admin` | Muudab XFS-i seadeid (nt silt `-L`) | [8](../moodul-08-kettad-lvm/index.md) |
 | `xfs_growfs` | Suurendab XFS failisüsteemi | [8](../moodul-08-kettad-lvm/index.md) |
 
 ## Z
@@ -473,6 +484,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `zcat` | Näitab pakitud faili sisu lahti pakkimata | [2](../moodul-02-failid-tekst-torud/index.md) |
 | `zfs` | ZFS-i andmekogumid, hetktõmmised ja `send`/`receive` | [9](../moodul-09-salvestus/index.md) |
 | `zpool` | ZFS-i kogumite haldus (`create`, `status`, `scrub`) | [9](../moodul-09-salvestus/index.md) |
+| `zypper` | SUSE pakihaldur | [4](../moodul-04-pakihaldus/index.md) |
 
 <!-- navigatsioon -->
 ---

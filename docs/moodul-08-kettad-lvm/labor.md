@@ -416,6 +416,7 @@ ning kustutada failist `/etc/fstab` vastavad read (või taastada varukoopia `sud
 
 1. **Juurfailisüsteemi suurendamine:** suurenda Proxmoxis süsteemiketast 2 GiB võrra (*Hardware* → ketas → *Disk Action* → *Resize*). Suurenda seejärel partitsioon, PV, juurköide ja failisüsteem (vt teooria punkt 8.9).
 2. **Püsiv LUKS-köide:** krüpteeri LVM-i köide `lv_db` (andmed kaovad - varunda enne!), lisa see faili `/etc/crypttab` võtmefailiga (`/root/db.key`, õigused `400`) ja `/etc/fstab`-i ning kontrolli, et see avaneb taaskäivitusel automaatselt.
+3. **Failisüsteemi seaded:** vaata `sudo dumpe2fs -h` abil ühe ext4-köite andmeid (UUID, i-sõlmede arv, reserveeritud plokid). Vähenda reserveeritud ruumi 1%-le (`tune2fs -m 1`) ja võrdle `df -h` väljundit enne ja pärast. Loo lisakettale väike FAT32-partitsioon (`mkfs.vfat -F 32`) ja haagi see.
 
 ---
 

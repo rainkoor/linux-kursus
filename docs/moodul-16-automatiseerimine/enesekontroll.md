@@ -116,6 +116,15 @@ Kuivkäivitus: näitab, mida muudetaks (`changed`) ja failide muudatuste erinevu
 
 </details>
 
+**13.** Mis vahe on Ansible'il ja Puppetil seadistuse rakendamise viisis (push ja pull)?
+
+<details>
+<summary>Vastus</summary>
+
+Ansible saadab muudatused juhtmasinast SSH kaudu serveritesse siis, kui administraator mänguraamatu käivitab (*push*), ja ei vaja serverites agenti. Puppetis töötab igas serveris agent, mis küsib keskserverist regulaarselt oma seadistust ja rakendab selle (*pull*), nii et serverid parandavad seadistuse triivi ise.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Kirjuta Ansible'i ülesanne, mis loob kasutaja `abi` (kest `/bin/bash`, lisagrupp `sudo`).

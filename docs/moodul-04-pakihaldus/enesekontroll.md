@@ -161,6 +161,15 @@ Ubuntu: `do-release-upgrade`. AlmaLinux: ELevate projekti `leapp` (`leapp preupg
 
 </details>
 
+**18.** Mis on jagatud teek? Programm annab vea `error while loading shared libraries: libxyz.so.1`. Kuidas leiad põhjuse ja parandad selle, kui teek on kataloogis `/usr/local/lib`?
+
+<details>
+<summary>Vastus</summary>
+
+Jagatud teek (`*.so`) on kood, mida kasutavad korraga paljud programmid ja mis laaditakse programmi käivitamisel. `ldd /tee/programm` näitab, milline teek on puudu (`not found`). Lisa kataloog `/usr/local/lib` faili `/etc/ld.so.conf.d/kohalik.conf` ja käivita `sudo ldconfig`; kontrolli `ldconfig -p | grep libxyz`.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** (A ja B) Uuenda süsteem ühe käsurea abil.

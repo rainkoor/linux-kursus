@@ -170,6 +170,24 @@ Server käivitab reegli peale agendis käsu, nt `firewall-drop` blokeerib ründa
 
 </details>
 
+**19.** Miks ei piisa ISO-faili kontrollimiseks ainult kontrollsummast? Kuidas kontrollid allalaaditud Debiani ISO-faili ehtsust?
+
+<details>
+<summary>Vastus</summary>
+
+Ründaja, kes muudab ISO-faili, võib muuta ka kontrollsummade faili. Seepärast on kontrollsummade fail allkirjastatud distro GnuPG võtmega. Impordi Debiani võti ja võrdle sõrmejälge ametlikul lehel olevaga, kontrolli allkirja (`gpg --verify SHA256SUMS.sign SHA256SUMS`) ja seejärel faili (`sha256sum -c SHA256SUMS --ignore-missing`).
+
+</details>
+
+**20.** Mis vahe on GnuPG-s krüpteerimisel saaja avaliku võtmega (`--encrypt`) ja parooliga (`--symmetric`)?
+
+<details>
+<summary>Vastus</summary>
+
+`--encrypt --recipient` krüpteerib saaja avaliku võtmega ja dekrüpteerida saab ainult tema privaatvõtmega; parooli pole vaja jagada. `--symmetric` krüpteerib parooliga: igaüks, kes parooli teab, saab faili avada - sobib nt enda varukoopiatele.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** (Ubuntu) Leia viimase 24 tunni jooksul kõik ebaõnnestunud SSH-sisselogimised ja loenda IP-aadresside kaupa.

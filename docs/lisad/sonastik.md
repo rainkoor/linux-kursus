@@ -106,6 +106,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | GID | group ID | Grupi numbriline tunnus |
 | GitOps | GitOps | Töövõte, kus süsteemi soovitud olek on Gitis ja kontroller rakendab muudatused automaatselt |
 | GNU | GNU's Not Unix | Vaba tarkvara projekt, mille tööriistad (`bash`, `coreutils`, `gcc`) moodustavad koos Linuxi kerneliga tavalise Linuxi süsteemi |
+| GnuPG | GNU Privacy Guard (GPG) | Avaliku võtme krüptograafia tööriist failide allkirjastamiseks ja krüpteerimiseks (`gpg`) |
 | GPL | GNU General Public License | Copyleft-litsents, mille all on muu hulgas Linuxi kernel |
 | GPO, rühmapoliitika | Group Policy Object | Windowsi arvutite ja kasutajate tsentraalselt hallatav seadistus |
 | Grafana | Grafana | Mõõdikute visualiseerimise ja töölaudade tööriist |
@@ -139,6 +140,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | iSCSI | Internet Small Computer Systems Interface | Protokoll plokkseadmete (ketaste) jagamiseks üle IP-võrgu |
 | ISO-tõmmis | ISO image | Optilise ketta tõmmisfail, millena levitatakse distrode paigaldusmeediat |
 | i-sõlm | inode | Failisüsteemi kirje, mis hoiab faili metaandmeid |
+| jagatud teek | shared library | Programmide ühiskasutuses olev kood (`*.so`), mis laaditakse programmi käivitamisel (`ldd`, `ldconfig`) |
 | jail | jail | FreeBSD isoleeritud keskkond oma failisüsteemi, IP-aadressi ja protsessidega, kuid hosti kerneliga |
 | Jinja2 | Jinja2 | Mallimootor, mida Ansible kasutab muutujatega seadistusfailide loomiseks |
 | journald | systemd-journald | systemd logiteenus, mille logisid loetakse käsuga `journalctl` |
@@ -171,6 +173,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | konsool | console | Otse ühendatud ekraan ja klaviatuur või VM-i konsooliaken |
 | konteiner | container | Isoleeritud protsess oma failisüsteemiga, jagab hosti kernelit |
 | konteinerpilt | container image | Muutumatu mall, millest konteiner käivitatakse |
+| kontrollsumma | checksum | Faili sisust arvutatud räsi, millega kontrollitakse, et fail pole muutunud (`sha256sum`) |
 | koormus | load average | Protsessorit ootavate protsesside keskmine arv |
 | koormusejaotur | load balancer | Jagab päringud mitme taustserveri vahel |
 | koormustest | load test | Serveri jõudluse mõõtmine paljude samaaegsete päringutega (`ab`, `wrk`, k6) |
@@ -201,6 +204,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | leviedastus | broadcast | Pakett, mis saadetakse kõigile kohtvõrgu seadmetele |
 | libvirt | libvirt | KVM-i ja teiste hüperviisorite haldusliides (`virsh`, `virt-manager`) |
 | lighttpd | lighttpd | Väga kerge veebiserver |
+| ligipääsetavus | accessibility | Võimalused, mis teevad süsteemi kasutatavaks erivajadusega inimestele (ekraanilugeja, luup, kleepuvad klahvid) |
 | liides | interface | Võrguühenduse lõpp-punkt (nt `ens18`) |
 | liitliides | bond, link aggregation | Mitu füüsilist võrguliidest ühe loogilise liidesena (rikkekindlus või läbilaskevõime) |
 | liitmistaotlus | pull request, merge request | Ettepanek liita haru muudatused põhiharusse koos ülevaatusega |
@@ -301,6 +305,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Proton | Proton | Valve'i ühilduvuskiht Windowsi mängude käitamiseks Linuxis |
 | protsess | process | Töötav programm |
 | Proxmox Backup Server | Proxmox Backup Server (PBS) | Proxmoxi deduplitseeriv ja inkrementaalne varundusserver |
+| Puppet | Puppet | Agendipõhine seadistushaldur: serverid küsivad keskserverist ise oma seadistust (pull) |
 | PVC | PersistentVolumeClaim | Kubernetese podi taotlus püsiketta järele |
 | põhigrupp | primary group | Kasutaja vaikegrupp, millele kuuluvad tema loodud failid |
 | päringute piirang | rate limit | Teenuse seatud piir, mitu päringut ajaühikus lubatakse (nt Let's Encrypt) |
@@ -332,7 +337,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | rsync | rsync | Failide sünkroonimise tööriist, mis kopeerib ainult muudatused |
 | rsyslog | rsyslog | Traditsiooniline syslogi teenus, mis kirjutab logid `/var/log` failidesse ja saadab neid võrku |
 | RTO | Recovery Time Objective | Kui kiiresti peab teenus pärast riket taastuma |
-| räsi | hash | Paroolist arvutatud pöördumatu väärtus |
+| räsi | hash | Andmetest (nt paroolist või failist) arvutatud lühike pöördumatu väärtus; vt ka kontrollsumma |
 | saaleala | swap | Kettaruum, mida kasutatakse mälu laiendusena |
 | SAN | Subject Alternative Name | Sertifikaadi väli, kus on loetletud kõik nimed, mille jaoks sertifikaat kehtib |
 | scrub | scrub | ZFS-i kõigi andmete läbilugemine ja kontrollsummade kontroll |
@@ -369,6 +374,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | `ssh-agent` | ssh-agent | Programm, mis hoiab lahtikrüpteeritud SSH võtmeid mälus, et parooli ei peaks iga kord sisestama |
 | SSL | Secure Sockets Layer | TLS-i vananenud eelkäija; nimetust kasutatakse sageli TLS-i kohta |
 | SSSD | System Security Services Daemon | Linuxi teenus, mis ühendab NSS-i ja PAM-i LDAP-i või AD-ga |
+| staatiline marsruut | static route | Käsitsi seadistatud marsruut kindlasse võrku kindla ruuteri kaudu |
 | standardsisend | standard input, stdin | Programmi sisendvoog (0) |
 | standardveaväljund | standard error, stderr | Programmi veateadete voog (2) |
 | standardväljund | standard output, stdout | Programmi väljundvoog (1) |
@@ -418,6 +424,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | turvakontekst | security context | SELinuxi märgis failil, protsessil või pordil |
 | turvauuendus | security update | Turvaauku parandav tarkvarauuendus |
 | töölauakeskkond | desktop environment | Graafiline kasutajaliides (GNOME, KDE Plasma, Xfce) |
+| udev | udev | Teenus, mis reageerib riistvara sündmustele: laadib moodulid, loob seadmefailid ja püsivad nimed, käivitab reeglid |
 | UDP | User Datagram Protocol | Ühenduseta transpordiprotokoll (DNS, DHCP, NTP, WireGuard) |
 | UEFI | Unified Extensible Firmware Interface | Tänapäevane püsivara liides, mis asendab BIOS-i; alglaadija on EFI süsteemipartitsioonil |
 | UID | user ID | Kasutaja numbriline tunnus |

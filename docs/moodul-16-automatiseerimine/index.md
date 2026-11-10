@@ -209,6 +209,7 @@ ansible-playbook mänguraamat.yml --ask-vault-pass
 | Tööriist | Kasutus |
 |---|---|
 | **Ansible** | Serverite seadistamine (mis on serveri sees) |
+| **Puppet**, **Chef**, **Salt** | Samuti serverite seadistamine. Puppetis ja Chefis töötab igas serveris **agent**, mis küsib keskserverist regulaarselt oma seadistust ja rakendab selle (*pull*); Ansible saadab muudatused SSH kaudu ise (*push*) ega vaja agenti |
 | **Terraform**/**OpenTofu** | Infrastruktuuri loomine (virtuaalmasinad, võrgud, pilveressursid - ka Proxmoxis) |
 | **cloud-init** | Virtuaalmasina esmane seadistus esimesel käivitusel |
 | **Vagrant** | Arenduse ja labori virtuaalmasinad oma arvutis (punkt 16.3) |

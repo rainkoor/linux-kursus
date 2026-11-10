@@ -9,7 +9,7 @@
 > [!NOTE]
 > **Süsteemihalduri vaade skriptimisele.** See moodul õpetab Bashi skriptimist nii palju, kui süsteemihaldur igapäevatöös vajab: korduvate tegevuste automatiseerimine, töökindlad hooldus- ja varundusskriptid, nende ajastamine ning skriptide ja seadistusfailide hoidmine Gitis. Eesmärk on kirjutada lühikesi praktilisi skripte ja lugeda teiste omi - mitte programmeerimise ega skriptimise täielik valdamine.
 >
-> **HKHK õppijale:** skriptimist käsitletakse põhjalikult eraldi skriptimise aines. See moodul annab Linuxi serverite haldamiseks vajaliku aluse ja seob skriptimise kursuse teiste teemadega.
+> **HKHK õppijale:** skriptimist, sealhulgas Pythonit, käsitletakse põhjalikult eraldi skriptimise aines. See moodul annab Linuxi serverite haldamiseks vajaliku aluse ja seob skriptimise kursuse teiste teemadega.
 
 ## Õpiväljundid
 

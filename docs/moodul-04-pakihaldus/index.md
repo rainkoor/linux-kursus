@@ -63,6 +63,8 @@ Pakihalduri eelised:
 
 **Madala taseme tööriist** (`dpkg`, `rpm`) paigaldab üksiku paketifaili, kuid ei lahenda sõltuvusi ega laadi midagi alla. **Kõrge taseme pakihaldur** (`apt`, `dnf`) teeb kõik selle automaatselt. Igapäevatöös kasutatakse peaaegu alati kõrge taseme tööriista.
 
+Kolmas suurem perekond on **SUSE** (openSUSE, SUSE Linux Enterprise): see kasutab samuti `.rpm` pakette, kuid kõrge taseme pakihaldur on **`zypper`** (`zypper refresh`, `zypper install`, `zypper update`, `zypper search`). Selle kursuse distrodes seda ei ole, kuid käsud on sarnased.
+
 ## 4.2 apt - Debian ja Ubuntu
 
 ### Süsteemi uuendamine
@@ -293,6 +295,17 @@ sudo dnf group install "Development Tools"       # AlmaLinux
 **Puudused võrreldes paketiga:** pakihaldur programmist ei tea, mistõttu ei uuendata seda automaatselt ega saa seda lihtsalt eemaldada. Turvauuendused tuleb ise jälgida. Seepärast kompileeritakse lähtekoodist ainult siis, kui muud võimalust pole.
 
 Käsitsi paigaldatud tarkvara paigutatakse kataloogi `/usr/local` (või `/opt`), et see ei läheks segi pakihalduri hallatavate failidega kataloogis `/usr`.
+
+### Jagatud teegid
+
+Enamik programme ei sisalda kogu koodi ise, vaid kasutab **jagatud teeke** (*shared libraries*, failid `*.so`, nt `libc.so.6`, `libssl.so.3`). Teek laaditakse mällu programmi käivitamisel ja seda kasutavad korraga paljud programmid. Seepärast parandab näiteks OpenSSL-i turvauuendus kõik seda kasutavad programmid korraga (pärast nende taaskäivitust, punkt 4.9).
+
+```bash
+ldd /usr/bin/ssh                       # milliseid teeke programm vajab ja kust need leiti
+ldconfig -p | grep libssl              # teekide vahemälu: kas teek on süsteemile teada
+```
+
+Teeke otsitakse standardkataloogidest (`/lib`, `/usr/lib` ja nende alamkataloogid) ning failis `/etc/ld.so.conf` ja kataloogis `/etc/ld.so.conf.d/` loetletud kataloogidest. Kui paigaldad lähtekoodist teegi kataloogi `/usr/local/lib` ja programm ei leia seda (`error while loading shared libraries: libxyz.so.1: cannot open shared object file`), lisa kataloog faili `/etc/ld.so.conf.d/kohalik.conf` ja uuenda vahemälu käsuga `sudo ldconfig`. Ajutiselt (testimiseks) saab kataloogi anda keskkonnamuutujaga `LD_LIBRARY_PATH`.
 
 ## 4.8 Universaalsed paketid: Snap ja Flatpak
 

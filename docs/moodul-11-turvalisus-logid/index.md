@@ -179,7 +179,7 @@ Pärast `PasswordAuthentication no` seadmist ei saa SSH-sse parooliga sisse murd
 | SSH ainult võtmetega, server sisevõrgus | vähe - piira SSH tulemüüris lubatud võrkudele |
 | SSH internetist kättesaadav | vähendab logide müra ja koormust |
 | Paroolipõhine teenus internetis (WordPressi sisselogimine, e-post, FTP, veebiliides) | **jah** - see on fail2ban-i peamine kasutus tänapäeval |
-| Hulk servereid, tahetakse jagada teavet ründajatest | vaata **CrowdSec**-i (fail2ban-i tänapäevane järeltulija, jagab blokeerimisloendeid) või Wazuhi automaatset reageerimist (punkt 11.10) |
+| Hulk servereid, tahetakse jagada teavet ründajatest | vaata **CrowdSec**-i (fail2ban-i tänapäevane järeltulija, jagab blokeerimisloendeid) või Wazuhi automaatset reageerimist (punkt 11.11) |
 
 **OpenSSH 9.8** ja uuemad oskavad ka ise: seade `PerSourcePenalties` paneb liiga palju vigaseid ühendusi tegevale aadressile ajutise keelu ilma lisatarkvarata. Kontrolli, kas sinu versioonis see on olemas ja sees: `ssh -V` ja `sudo sshd -T | grep -i persourcepenalties`. (Ubuntu 24.04 OpenSSH 9.6 seda veel ei toeta.)
 
@@ -528,7 +528,42 @@ Muud kasulikud tööriistad:
 > [!WARNING]
 > **Ainult oma süsteemid!** Pordiskannimine ja turvatestimine võõraste süsteemide vastu ilma loata on ebaseaduslik. Kooli laboris tee neid ainult oma virtuaalmasinate vastu või õpetaja loal.
 
-## 11.10 Turvasündmuste haldus: Wazuh
+## 11.10 Kontrollsummad ja GnuPG
+
+### Kontrollsummad
+
+**Kontrollsumma** (räsi, *hash*) on faili sisust arvutatud lühike „sõrmejälg“. Kui failis muutub kasvõi üks bitt, muutub ka kontrollsumma. Sellega kontrollitakse, et allalaaditud fail (nt paigaldusmeedia ISO) on terve ja just see, mida tootja avaldas:
+
+```bash
+sha256sum debian-13.iso                              # arvuta
+sha256sum -c SHA256SUMS --ignore-missing             # võrdle tootja avaldatud loendiga: debian-13.iso: OK
+```
+
+Kasuta SHA-256 või tugevamat. `md5sum` ja `sha1sum` sobivad ainult juhuslike vigade leidmiseks, mitte pahatahtliku muutmise vastu.
+
+### GnuPG: allkirjad ja krüpteerimine
+
+Kontrollsumma ise ei tõenda, kes faili avaldas: ründaja, kes muudab ISO-faili, võib muuta ka kontrollsummade faili. Seepärast **allkirjastavad** distrod kontrollsummade faili või paketid oma **GnuPG** (*GNU Privacy Guard*, `gpg`) võtmega. Ka `apt` ja `dnf` kontrollivad iga paketi allkirja hoidla võtmega (moodul 4).
+
+GnuPG kasutab avaliku võtme krüptograafiat nagu SSH: **avaliku võtmega** kontrollitakse allkirja ja krüpteeritakse, **privaatvõtmega** allkirjastatakse ja dekrüpteeritakse.
+
+```bash
+gpg --full-generate-key                              # loo oma võtmepaar
+gpg --list-keys                                      # avalikud võtmed võtmerõngas
+gpg --armor --export mari@kool.ee > mari.asc         # ekspordi avalik võti teistele jagamiseks
+gpg --import peeter.asc                              # impordi kellegi teise avalik võti
+
+gpg --encrypt --recipient peeter@kool.ee aruanne.pdf # krüpteeri Peetrile: aruanne.pdf.gpg
+gpg --decrypt aruanne.pdf.gpg > aruanne.pdf          # dekrüpteeri oma privaatvõtmega
+gpg --symmetric varukoopia.tar.gz                    # krüpteeri ainult parooliga (ilma võtmeteta)
+
+gpg --detach-sign SHA256SUMS                         # allkirjasta: SHA256SUMS.sig
+gpg --verify SHA256SUMS.sig SHA256SUMS               # kontrolli allkirja: "Good signature from ..."
+```
+
+Debiani ISO kontroll näeb välja nii: impordi Debiani allkirjavõti (sõrmejälg on lehel debian.org/CD/verify), kontrolli `gpg --verify SHA256SUMS.sign SHA256SUMS` ja seejärel `sha256sum -c`. Võtme ehtsuse kontrollimiseks võrdle alati **sõrmejälge** (`gpg --fingerprint`) usaldusväärsest allikast saadud väärtusega.
+
+## 11.11 Turvasündmuste haldus: Wazuh
 
 Kui servereid on palju, ei jõua keegi iga masina logisid käsitsi lugeda. **SIEM** (*Security Information and Event Management*) kogub logid ja sündmused kõigist masinatest kokku, analüüsib neid reeglite järgi ja annab märku kahtlastest tegevustest.
 

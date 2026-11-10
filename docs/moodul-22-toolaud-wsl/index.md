@@ -189,6 +189,17 @@ lp -d PRINTER fail.pdf        # prindi
 
 Veebiliides: `http://localhost:631`. Virtuaalne PDF-printer: `sudo apt install printer-driver-cups-pdf`.
 
+### Ligipääsetavus
+
+Kõigil suurematel töölaudadel on ligipääsetavuse seaded (GNOME: *Settings* → *Accessibility*, KDE: *System Settings* → *Accessibility*):
+
+- **ekraanilugeja Orca** loeb ekraanil olevat teksti ette (GNOME-s sisse/välja **Super+Alt+S**);
+- **ekraaniluup**, suur tekst ja **suur kontrastsus** nägemispuudega kasutajale;
+- **ekraaniklaviatuur**, **kleepuvad klahvid** (klahvikombinatsioone saab vajutada ükshaaval), **aeglased klahvid** ja klaviatuuriga hiire juhtimine liikumispuudega kasutajale;
+- visuaalsed hoiatused helisignaalide asemel kuulmispuudega kasutajale.
+
+Administraatorina tasub teada, et need seaded on kasutaja kontol ja et ekraanilugeja vajab heliväljundit ka kaugtöölaual.
+
 ### Varundus ja hetktõmmised
 
 - **Timeshift** teeb süsteemifailidest hetktõmmiseid (rsync või Btrfs) - saab taastada pärast ebaõnnestunud uuendust;

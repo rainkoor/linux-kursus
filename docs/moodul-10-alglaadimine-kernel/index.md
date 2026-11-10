@@ -278,6 +278,33 @@ sudo modprobe -r dummy           # eemalda moodul
 
 Tavaliselt laadib kernel (täpsemalt `udev`) vajalikud moodulid riistvara tuvastamisel automaatselt.
 
+### Riistvara ja udev
+
+```bash
+lspci                            # PCI-seadmed (võrgukaardid, kettakontrollerid); -k näitab kasutatavat draiverit
+lsusb                            # USB-seadmed
+lsblk                            # plokkseadmed
+lscpu; lsmem                     # protsessor ja mälu
+sudo dmidecode -t system         # tootja, mudel ja seerianumber (püsivarast)
+```
+
+Kui kernel tuvastab seadme (alglaadimisel või näiteks USB-mälu ühendamisel), saadab ta sündmuse teenusele **udev** (`systemd-udevd`). udev laadib vajaliku mooduli, loob seadmefaili kataloogi `/dev` (nt `/dev/sdb`), lisab püsivad nimed (`/dev/disk/by-uuid/`, `/dev/disk/by-id/`) ja annab võrguliidesele nime (nt `ens18`).
+
+```bash
+udevadm monitor                          # jälgi sündmusi reaalajas (ühenda/eemalda seade)
+udevadm info /dev/sdb                    # seadme omadused, mille järgi reegleid kirjutatakse
+udevadm info -a /sys/class/net/ens18     # võrguliidese omadused
+```
+
+Reeglid on kataloogides `/usr/lib/udev/rules.d/` (paketid) ja `/etc/udev/rules.d/` (administraator). Näiteks annab järgmine reegel kindla seerianumbriga USB-ketta grupile `varundus` ja loob viite `/dev/varuketas`:
+
+```text
+# /etc/udev/rules.d/90-varuketas.rules
+SUBSYSTEM=="block", ENV{ID_SERIAL_SHORT}=="AA12345678", GROUP="varundus", SYMLINK+="varuketas"
+```
+
+Pärast reegli muutmist: `sudo udevadm control --reload` ja `sudo udevadm trigger` (või ühenda seade uuesti).
+
 ### Püsivad seaded
 
 | Fail | Kasutus |

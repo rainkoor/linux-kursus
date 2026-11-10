@@ -206,6 +206,33 @@ DHCP-le tagasi: `sudo nmcli connection modify ens18 ipv4.method auto ipv4.addres
 
 Menüüpõhine tööriist **`nmtui`** on mugav, kui `nmcli` süntaksit ei mäleta. Ühenduste failid on kataloogis `/etc/NetworkManager/system-connections/`.
 
+### Püsivad staatilised marsruudid
+
+Vaikelüüs saadab kõik paketid, mille sihtvõrku masin ei tunne, ühte ruuterisse. Kui mõni võrk on kättesaadav **teise ruuteri** kaudu (nt haldusvõrk `10.10.0.0/16` ruuteri `10.0.83.254` taga), lisatakse **staatiline marsruut**. `ip route add` (punkt 7.1) kaob taaskäivitusel; püsivaks tuleb see kirjutada võrguseadistusse:
+
+```yaml
+# Ubuntu: /etc/netplan/50-staatiline.yaml, liidese ens18 all
+      routes:
+        - to: default
+          via: 10.0.83.1
+        - to: 10.10.0.0/16
+          via: 10.0.83.254
+```
+
+```text
+# Debian: /etc/network/interfaces, liidese ens18 plokis
+    up ip route add 10.10.0.0/16 via 10.0.83.254
+    down ip route del 10.10.0.0/16 via 10.0.83.254
+```
+
+```bash
+# AlmaLinux: NetworkManager (+ lisab olemasolevatele marsruutidele)
+sudo nmcli connection modify ens18 +ipv4.routes "10.10.0.0/16 10.0.83.254"
+sudo nmcli connection up ens18
+```
+
+Kontrolli: `ip route` (marsruut on tabelis) ja `ip route get 10.10.1.5` (milline marsruut ja liides valitakse). IPv6 marsruudid lisatakse samamoodi (`ipv6.routes`, Netplanis `to: 2001:db8::/32`).
+
 ## 7.3 Nimelahendus ja DNS
 
 Kui kirjutad `ping www.hkhk.edu.ee`, peab süsteem nime kõigepealt IP-aadressiks teisendama. Järjekorra määrab fail `/etc/nsswitch.conf`:

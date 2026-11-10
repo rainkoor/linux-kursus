@@ -529,15 +529,22 @@ sudo nmap -sV UBUNTU_IP
 
 ---
 
+## Lisaülesanne (valikuline): kontrollsummad ja GnuPG
+
+1. Laadi Ubuntu masinasse Debiani väikseima paigaldusmeedia (`netinst`) ISO-fail ning failid `SHA256SUMS` ja `SHA256SUMS.sign` (cdimage.debian.org). Kontrolli allkirja ja kontrollsummat (teooria punkt 11.10). Kust said kindluse, et imporditud võti on päriselt Debiani oma?
+2. Loo endale GnuPG võtmepaar ja vaheta avalikke võtmeid kaasõppijaga. Krüpteeri talle fail ja allkirjasta teine fail. Kontrolli tema saadetud faili allkirja. Muuda allkirjastatud faili ühte tähte - mida näitab `gpg --verify`?
+
+---
+
 ## Lisaülesanne (valikuline): Wazuh SIEM
 
 Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB) mäluga ja vähemalt 2 jälgitavat masinat (nt `debian1` ja `alma`).
 
-1. Paigalda Wazuh ühe sõlmena Dockeriga (teooria punkt 11.10). Muuda vaikeparool.
+1. Paigalda Wazuh ühe sõlmena Dockeriga (teooria punkt 11.11). Muuda vaikeparool.
 2. Lisa veebiliidese viisardiga agendid masinatele `debian1` ja `alma`. Kontrolli, et agendid ühenduvad serveri pordile 1514/tcp ja 1515/tcp. (Docker lisab avaldatud portide reeglid ise ja need ei läbi `ufw` reegleid - mõtle, mida see turvalisuse mõttes tähendab.)
 3. Tekita sündmusi: proovi mõnest masinast `ssh vale@debian1` mitu korda vale parooliga, käivita `sudo` vale parooliga, muuda faili `/etc/passwd` (nt `sudo useradd wazuhtest`).
 4. Leia sündmused veebiliidesest (*Threat Hunting* / *Security events*).
-5. Seadista automaatne reageerimine (teooria punkt 11.10, reegel 5763 ja `firewall-drop`) ning korda SSH jõurünnet mõnest kolmandast masinast. Kontrolli agendis `/var/ossec/logs/active-responses.log` ja `sudo nft list ruleset`.
+5. Seadista automaatne reageerimine (teooria punkt 11.11, reegel 5763 ja `firewall-drop`) ning korda SSH jõurünnet mõnest kolmandast masinast. Kontrolli agendis `/var/ossec/logs/active-responses.log` ja `sudo nft list ruleset`.
 
 > **W1.** Milliste reeglite (reegli ID ja tase) alla sinu tekitatud sündmused liigitati?
 

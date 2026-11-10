@@ -152,6 +152,15 @@ Näiteks kustutatud fail, mida mõni protsess veel avatuna hoiab (`lsof +L1`); i
 
 </details>
 
+**17.** Kuidas muudad olemasoleva ext4-failisüsteemi silti ja juurkasutajale reserveeritud ruumi ilma vormindamata? Kuidas teed XFS-i puhul sildi muutmise?
+
+<details>
+<summary>Vastus</summary>
+
+`sudo tune2fs -L uussilt /dev/sdb1` ja `sudo tune2fs -m 1 /dev/sdb1` (vaikimisi 5%). Andmeid näeb käsuga `sudo dumpe2fs -h /dev/sdb1`. XFS: `sudo xfs_admin -L uussilt /dev/sdb2` (failisüsteem peab olema haakimata).
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Loo kettale `/dev/sdd` GPT-tabel ja üks partitsioon, mis võtab kogu ketta.
