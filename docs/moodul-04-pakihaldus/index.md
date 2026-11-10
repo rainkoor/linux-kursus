@@ -462,7 +462,6 @@ sudo reboot
 
 `leapp preupgrade` leiab takistused (nt vanad kerneli moodulid, puuduvad vastused küsimustele failis `/var/log/leapp/answerfile`). Uuendus toimub taaskäivitusel spetsiaalses keskkonnas ja võtab aega.
 
-> [!WARNING]
 > **Tähtis:** AlmaLinux 10 nõuab protsessorilt x86-64-v3 tuge (vt [paigalduslisa](../lisad/paigaldus.md)). Kontrolli enne uuendust Proxmoxis VM-i protsessori tüüpi.
 
 </details>

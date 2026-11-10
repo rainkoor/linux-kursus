@@ -39,20 +39,6 @@ flowchart TB
     L --> H["Riistvara<br>protsessor, mälu, kettad, võrgukaart"]
 ```
 
-<details>
-<summary>Loe lähemalt: kernel, GNU, UNIX, BSD ja kus Linuxit kasutatakse</summary>
-
-Rangelt võttes on **Linux** operatsioonisüsteemi **kernel** ehk tuum: programm, mis haldab riistvara (protsessor, mälu, kettad, võrk) ja jagab ressursse teiste programmide vahel. Kerneli kirjutas 1991. aastal Soome tudeng **Linus Torvalds** ja seda arendavad tänapäeval tuhanded inimesed üle maailma.
-
-Kernel üksi ei ole veel kasutatav süsteem. Selleks on vaja ka käsurea tööriistu, teeke, pakihaldurit, teenuseid ja muud tarkvara. Suur osa sellest pärineb **GNU projektist**, mistõttu räägitakse vahel ka nimest **GNU/Linux**.
-
-Linux on **vaba ja avatud lähtekoodiga tarkvara**: lähtekood on kõigile kättesaadav ning seda võib uurida, muuta ja levitada.
-
-Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud UNIX-i põhimõtteid, kuid ei sisalda UNIX-i koodi. UNIX-i otsene järeltulija on hoopis **BSD** perekond (FreeBSD, OpenBSD jt), mis on Linuxiga väga sarnane, kuid on terviklik süsteem ja kasutab teistsugust litsentsi. BSD aluseid kasutavad näiteks macOS ja paljud tulemüürid. Linuxi ja BSD erinevustest loe lähemalt lisast [Linuxi distributsioonide ülevaade](../lisad/distrod.md#bsd-ja-linux).
-
-> [!NOTE]
-> **Ajalugu:** kuidas tekkisid UNIX, BSD, GNU ja Linux ning miks Linux on just selline, nagu ta on - sellest räägib lisa [UNIX-i ja Linuxi ajalugu](../lisad/ajalugu.md).
-
 **Kus Linuxit kasutatakse?**
 
 - suurem osa veebiserveritest ja pilveteenustest;
@@ -64,7 +50,21 @@ Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud
 > [!NOTE]
 > **Miks see IT-spetsialistile oluline on?** Kui haldad servereid, võrguseadmeid või pilveteenuseid, puutud Linuxiga kokku peaaegu kindlasti, isegi kui sinu töölaual on Windows.
 
+<details>
+<summary>Loe lähemalt: kernel, GNU, UNIX ja BSD</summary>
+
+Rangelt võttes on **Linux** operatsioonisüsteemi **kernel** ehk tuum: programm, mis haldab riistvara (protsessor, mälu, kettad, võrk) ja jagab ressursse teiste programmide vahel. Kerneli kirjutas 1991. aastal Soome tudeng **Linus Torvalds** ja seda arendavad tänapäeval tuhanded inimesed üle maailma.
+
+Kernel üksi ei ole veel kasutatav süsteem. Selleks on vaja ka käsurea tööriistu, teeke, pakihaldurit, teenuseid ja muud tarkvara. Suur osa sellest pärineb **GNU projektist**, mistõttu räägitakse vahel ka nimest **GNU/Linux**.
+
+Linux on **vaba ja avatud lähtekoodiga tarkvara**: lähtekood on kõigile kättesaadav ning seda võib uurida, muuta ja levitada.
+
+Linux on **UNIX-i-laadne** operatsioonisüsteem: see järgib 1969. aastal loodud UNIX-i põhimõtteid, kuid ei sisalda UNIX-i koodi. UNIX-i otsene järeltulija on hoopis **BSD** perekond (FreeBSD, OpenBSD jt), mis on Linuxiga väga sarnane, kuid on terviklik süsteem ja kasutab teistsugust litsentsi. BSD aluseid kasutavad näiteks macOS ja paljud tulemüürid. Linuxi ja BSD erinevustest loe lähemalt lisast [Linuxi distributsioonide ülevaade](../lisad/distrod.md#bsd-ja-linux).
+
 </details>
+
+> [!NOTE]
+> **Ajalugu:** kuidas tekkisid UNIX, BSD, GNU ja Linux ning miks Linux on just selline, nagu ta on - sellest räägib lisa [UNIX-i ja Linuxi ajalugu](../lisad/ajalugu.md).
 
 ## 1.2 Distributsioonid
 
@@ -95,7 +95,6 @@ Need kolm on valitud, sest koos katavad need kaks levinuimat serveridistrode per
 
 Sama perekonna distrod on väga sarnased: kui oskad Debianit, saad hakkama ka Ubuntuga. Perekondade vahel erinevad peamiselt pakihaldus, mõne konfiguratsioonifaili asukoht ja vaikimisi turvalahendused. Käsurea põhitõed, mida selles moodulis õpid, on kõigis distrodes samad.
 
-> [!NOTE]
 > **Märkus:** distrode versioonid muutuvad. Kehtiv versioon ja toe kestus on alati kirjas distro kodulehel.
 
 </details>

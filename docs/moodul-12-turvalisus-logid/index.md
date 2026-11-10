@@ -309,7 +309,6 @@ Pärast `PasswordAuthentication no` seadmist ei saa SSH-sse parooliga sisse murd
 **OpenSSH 9.8** ja uuemad oskavad ka ise: seade `PerSourcePenalties` paneb liiga palju vigaseid ühendusi tegevale aadressile ajutise keelu ilma lisatarkvarata. Kontrolli, kas sinu versioonis see on olemas ja sees: `ssh -V` ja `sudo sshd -T | grep -i persourcepenalties`. (Ubuntu 24.04 OpenSSH 9.6 seda veel ei toeta.)
 
 Kokkuvõttes: fail2ban ei asenda võtmepõhist autentimist ega tulemüüri, kuid on lihtne ja levinud vahend paroolidega kaitstud teenuste jaoks - seepärast tasub seda osata.
-> [!NOTE]
 > **Kas fail2ban on vajalik, kui paroolid on keelatud?** Pärast `PasswordAuthentication no` seadmist ei saa parooliga sisse murda. `fail2ban` vähendab siiski logide müra ja koormust ning kaitseb ka teisi teenuseid (veebiserveri sisselogimine, e-post), mille jaoks saab samuti vanglaid seadistada.
 
 </details>

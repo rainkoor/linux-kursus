@@ -778,7 +778,6 @@ sudo chown partner:partner /srv/sftp/partner/failid       # kasutaja kirjutab al
 sudo sshd -t && sudo systemctl reload ssh
 ```
 
-> [!IMPORTANT]
 > **`ChrootDirectory` ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.** Muidu keeldub `sshd` ühendusest (logis `bad ownership or modes for chroot directory`). Seepärast kirjutab kasutaja alamkataloogi `failid`, mitte otse chroot-kataloogi.
 
 Kontrolli: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult kataloogi `failid`; `ssh partner@ubuntusrv` aga ei ava käsurida (*This service allows sftp connections only*). Kui sul on `AllowGroups`, lisa sinna ka `sftp-kasutajad`. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga `sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot`.
@@ -818,7 +817,6 @@ sudo sshd -t && sudo systemctl reload ssh
 ssh mari@ubuntusrv               # UUES aknas: kõigepealt võti, siis küsitakse "Verification code"
 ```
 
-> [!WARNING]
 > **Esimene väärtus jääb kehtima.** Punkti 7.7 karastamise failis `10-karastamine.conf` on `KbdInteractiveAuthentication no`. Seepärast on TOTP-faili nimi `05-...`, et see loetaks enne. Hoia muudatuse ajal teine seanss lahti ja testi uues aknas.
 
 `nullok` lubab kasutajatel, kellel TOTP pole veel seadistatud, sisse logida ainult võtmega - nii saab TOTP-i järk-järgult kasutusele võtta. Kui kõik kasutajad on selle seadistanud, eemalda `nullok`. Kaota telefon → kasuta varukoodi või logi sisse konsoolist.
@@ -1040,7 +1038,6 @@ chronyc clients             # kes on aega küsinud
 
 Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 22).
 
-> [!NOTE]
 > **Virtuaalmasinad:** Proxmoxi VM-ides tuleb NTP klient hoida tööl ka siis, kui kasutatakse QEMU agenti. Pärast hetktõmmise taastamist võib kell olla väga vale - chrony parandab selle (`makestep` seadistusfailis lubab suure hüppe esimestel uuendustel).
 
 </details>

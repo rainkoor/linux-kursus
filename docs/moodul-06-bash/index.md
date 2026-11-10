@@ -58,7 +58,6 @@ Kest on tavaline programm ja neid on mitu. Igal kasutajal on oma **sisselogimisk
 
 `fish` ei ole POSIX-ühilduv: muutuja omistatakse käsuga `set nimi väärtus`, tingimus lõpeb sõnaga `end`, `&&` asemel on vanemates versioonides `; and`. Internetist kopeeritud Bashi käsurida ei pruugi `fish`-is töötada.
 
-> [!TIP]
 > **Interaktiivne kest ja skriptikest on eri asjad.** Igapäevatööks võid valida endale meeldiva kesta (`zsh`, `fish`), kuid **skriptid kirjuta Bashis või POSIX `sh`-s** ja määra kest skripti esimesel real (`#!/bin/bash`). Skripti käivitab see kest, mis on esimesel real, mitte sinu sisselogimiskest. Süsteemikasutajatele ja juurkasutajale jäta vaikekest.
 
 </details>
