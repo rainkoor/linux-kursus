@@ -6158,10 +6158,9 @@ sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="
 </table>
 <p><strong>OpenSSH 9.8</strong> ja uuemad oskavad ka ise: seade <code>PerSourcePenalties</code> paneb liiga palju vigaseid ühendusi tegevale aadressile ajutise keelu ilma lisatarkvarata. Kontrolli, kas sinu versioonis see on olemas ja sees: <code>ssh -V</code> ja <code>sudo sshd -T | grep -i persourcepenalties</code>. (Ubuntu 24.04 OpenSSH 9.6 seda veel ei toeta.)</p>
 <p>Kokkuvõttes: fail2ban ei asenda võtmepõhist autentimist ega tulemüüri, kuid on lihtne ja levinud vahend paroolidega kaitstud teenuste jaoks - seepärast tasub seda osata.</p>
-<div class="admonition note">
-<p class="admonition-title">Märkus</p>
+<blockquote>
 <p><strong>Kas fail2ban on vajalik, kui paroolid on keelatud?</strong> Pärast <code>PasswordAuthentication no</code> seadmist ei saa parooliga sisse murda. <code>fail2ban</code> vähendab siiski logide müra ja koormust ning kaitseb ka teisi teenuseid (veebiserveri sisselogimine, e-post), mille jaoks saab samuti vanglaid seadistada.</p>
-</div>
+</blockquote>
 </details>
 <h2 id="125-kohustuslik-juurdepääsukontroll">12.5 Kohustuslik juurdepääsukontroll<a class="headerlink" href="#125-kohustuslik-juurdepääsukontroll" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">

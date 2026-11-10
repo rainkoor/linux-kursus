@@ -6804,10 +6804,9 @@ sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</sp
 sudo<span class="w"> </span>chown<span class="w"> </span>partner:partner<span class="w"> </span>/srv/sftp/partner/failid<span class="w">       </span><span class="c1"># kasutaja kirjutab alamkataloogi</span>
 sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>ssh
 </code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">Oluline</p>
+<blockquote>
 <p><strong><code>ChrootDirectory</code> ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.</strong> Muidu keeldub <code>sshd</code> ühendusest (logis <code>bad ownership or modes for chroot directory</code>). Seepärast kirjutab kasutaja alamkataloogi <code>failid</code>, mitte otse chroot-kataloogi.</p>
-</div>
+</blockquote>
 <p>Kontrolli: <code>sftp partner@ubuntusrv</code> töötab ja <code>ls /</code> näitab ainult kataloogi <code>failid</code>; <code>ssh partner@ubuntusrv</code> aga ei ava käsurida (<em>This service allows sftp connections only</em>). Kui sul on <code>AllowGroups</code>, lisa sinna ka <code>sftp-kasutajad</code>. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga <code>sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot</code>.</p>
 </details>
 <details class="note">
@@ -6832,10 +6831,9 @@ AuthenticationMethods publickey,keyboard-interactive
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>ssh
 ssh<span class="w"> </span>mari@ubuntusrv<span class="w">               </span><span class="c1"># UUES aknas: kõigepealt võti, siis küsitakse "Verification code"</span>
 </code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Hoiatus</p>
+<blockquote>
 <p><strong>Esimene väärtus jääb kehtima.</strong> Punkti 7.7 karastamise failis <code>10-karastamine.conf</code> on <code>KbdInteractiveAuthentication no</code>. Seepärast on TOTP-faili nimi <code>05-...</code>, et see loetaks enne. Hoia muudatuse ajal teine seanss lahti ja testi uues aknas.</p>
-</div>
+</blockquote>
 <p><code>nullok</code> lubab kasutajatel, kellel TOTP pole veel seadistatud, sisse logida ainult võtmega - nii saab TOTP-i järk-järgult kasutusele võtta. Kui kõik kasutajad on selle seadistanud, eemalda <code>nullok</code>. Kaota telefon → kasuta varukoodi või logi sisse konsoolist.</p>
 </details>
 <h2 id="78-tulemüür">7.8 Tulemüür<a class="headerlink" href="#78-tulemüür" title="Permanent link">&para;</a></h2>
@@ -7088,10 +7086,9 @@ local stratum 10            # anna aega ka siis, kui internet on maas
 chronyc<span class="w"> </span>clients<span class="w">             </span><span class="c1"># kes on aega küsinud</span>
 </code></pre></div>
 <p>Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 22).</p>
-<div class="admonition note">
-<p class="admonition-title">Virtuaalmasinad</p>
-<p>Proxmoxi VM-ides tuleb NTP klient hoida tööl ka siis, kui kasutatakse QEMU agenti. Pärast hetktõmmise taastamist võib kell olla väga vale - chrony parandab selle (<code>makestep</code> seadistusfailis lubab suure hüppe esimestel uuendustel).</p>
-</div>
+<blockquote>
+<p><strong>Virtuaalmasinad:</strong> Proxmoxi VM-ides tuleb NTP klient hoida tööl ka siis, kui kasutatakse QEMU agenti. Pärast hetktõmmise taastamist võib kell olla väga vale - chrony parandab selle (<code>makestep</code> seadistusfailis lubab suure hüppe esimestel uuendustel).</p>
+</blockquote>
 </details>
 <hr />
 <h2 id="distrode-erinevused">Distrode erinevused<a class="headerlink" href="#distrode-erinevused" title="Permanent link">&para;</a></h2>

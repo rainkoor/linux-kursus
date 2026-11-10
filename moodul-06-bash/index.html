@@ -6073,10 +6073,9 @@
 </table>
 <p><strong>POSIX-ühilduvus</strong> tähendab, et kest mõistab standardiga (punkt 2.1 moodulis 2) kirjeldatud süntaksit: muutujad <code>nimi=väärtus</code>, <code>if … then … fi</code>, <code>for … do … done</code>, <code>$(käsk)</code>, <code>&amp;&amp;</code>, <code>||</code>, torud ja ümbersuunamised. POSIX-süntaksis kirjutatud skript töötab igas POSIX-kestas - <code>dash</code>-is, <code>bash</code>-is, <code>zsh</code>-is, FreeBSD <code>sh</code>-s ja BusyBoxis. Bashi laiendused (<code>[[ ]]</code>, massiivid, <code>{1..5}</code>, <code>(( ))</code>) töötavad ainult <code>bash</code>-is ja osaliselt <code>zsh</code>-is.</p>
 <p><code>fish</code> ei ole POSIX-ühilduv: muutuja omistatakse käsuga <code>set nimi väärtus</code>, tingimus lõpeb sõnaga <code>end</code>, <code>&amp;&amp;</code> asemel on vanemates versioonides <code>; and</code>. Internetist kopeeritud Bashi käsurida ei pruugi <code>fish</code>-is töötada.</p>
-<div class="admonition tip">
-<p class="admonition-title">Näpunäide</p>
+<blockquote>
 <p><strong>Interaktiivne kest ja skriptikest on eri asjad.</strong> Igapäevatööks võid valida endale meeldiva kesta (<code>zsh</code>, <code>fish</code>), kuid <strong>skriptid kirjuta Bashis või POSIX <code>sh</code>-s</strong> ja määra kest skripti esimesel real (<code>#!/bin/bash</code>). Skripti käivitab see kest, mis on esimesel real, mitte sinu sisselogimiskest. Süsteemikasutajatele ja juurkasutajale jäta vaikekest.</p>
-</div>
+</blockquote>
 </details>
 <h3 id="kesta-vahetamine">Kesta vahetamine<a class="headerlink" href="#kesta-vahetamine" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$SHELL</span><span class="w">                 </span><span class="c1"># sisselogimiskest (failist /etc/passwd)</span>

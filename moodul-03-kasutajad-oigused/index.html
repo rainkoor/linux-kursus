@@ -6463,10 +6463,9 @@ ls<span class="w"> </span>-la<span class="w"> </span>/home/testija
     A3 -.- M3["pam_pwquality"]
     A4 -.- M4["pam_mkhomedir&lt;br&gt;pam_limits"]</code></pre>
 <p>Näiteks moodulid: <code>pam_unix</code> (tavaline parool), <code>pam_pwquality</code> (parooli tugevus), <code>pam_faillock</code> (lukustamine valede katsete järel), <code>pam_limits</code> (ressursipiirangud, moodul 5), <code>pam_mkhomedir</code> (kodukataloog, moodulid 24–25), <code>pam_sss</code> (LDAP/AD).</p>
-<div class="admonition warning">
-<p class="admonition-title">Hoiatus</p>
-<p>Vigane PAM-i seadistus võib takistada <strong>kõigil</strong> sisselogimist, ka <code>sudo</code>-t. Hoia muutmise ajal teises aknas juurkasutaja kest lahti ja testi uues aknas. Debianis ja Ubuntus muuda PAM-i võimalusel käsuga <code>pam-auth-update</code>, AlmaLinuxis käsuga <code>authselect</code>, mitte faile käsitsi.</p>
-</div>
+<blockquote>
+<p><strong>Hoiatus:</strong> vigane PAM-i seadistus võib takistada <strong>kõigil</strong> sisselogimist, ka <code>sudo</code>-t. Hoia muutmise ajal teises aknas juurkasutaja kest lahti ja testi uues aknas. Debianis ja Ubuntus muuda PAM-i võimalusel käsuga <code>pam-auth-update</code>, AlmaLinuxis käsuga <code>authselect</code>, mitte faile käsitsi.</p>
+</blockquote>
 </details>
 <h3 id="parooli-tugevus-pam_pwquality">Parooli tugevus: pam_pwquality<a class="headerlink" href="#parooli-tugevus-pam_pwquality" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libpam-pwquality<span class="w">          </span><span class="c1"># Debian, Ubuntu (lisab mooduli common-password faili)</span>
