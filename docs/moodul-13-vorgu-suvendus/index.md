@@ -95,7 +95,7 @@ Link-local aadressi juures on vaja liidese nime (`%ens18`), sest sama `fe80::/64
 Kursuse laborivõrgus kasutame ULA-võrku `fd83::/64` (masina number nagu IPv4-s, nt `alma` → `fd83::55`).
 
 ```yaml
-# Ubuntu: /etc/netplan/50-staatiline.yaml (liidese ens18 alla)
+# Ubuntu: Netplani fail, nt /etc/netplan/50-cloud-init.yaml (liidese ens18 alla)
       addresses:
         - 10.0.83.54/24
         - fd83::54/64

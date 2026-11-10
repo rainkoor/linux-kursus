@@ -192,12 +192,19 @@ NIMI="$(hostname)-$(date +%F_%H%M)"
 
 logger -t varundus "algus: $NIMI"
 mkdir -p "$SIHT"
-tar --acls --xattrs -czpf "$SIHT/$NIMI.tar.gz" /etc /home 2>/dev/null || {
-    logger -t varundus -p user.err "VIGA: tar ebaõnnestus"; exit 1; }
+kood=0
+tar --acls --xattrs -czpf "$SIHT/$NIMI.tar.gz" /etc /home 2>/dev/null || kood=$?
+if (( kood == 1 )); then                       # 1 = hoiatus: mõni fail muutus lugemise ajal
+    logger -t varundus -p user.warning "hoiatus: mõni fail muutus varundamise ajal"
+elif (( kood > 1 )); then                      # 2 = päris viga, arhiiv ei ole usaldusväärne
+    logger -t varundus -p user.err "VIGA: tar ebaõnnestus (kood $kood)"; exit 1
+fi
 tar -tzf "$SIHT/$NIMI.tar.gz" > /dev/null      # kontrolli, et arhiiv on loetav
 find "$SIHT" -name "$(hostname)-*.tar.gz" -mtime +"$HOIA" -delete
 logger -t varundus "valmis: $NIMI ($(du -h "$SIHT/$NIMI.tar.gz" | cut -f1))"
 ```
+
+`tar` lõpetab koodiga `1` ka siis, kui mõni fail muutus varundamise ajal (näiteks kasutaja töötab parajasti oma kodukataloogis) - arhiiv on siiski tehtud. Kood `2` tähendab päris viga. Seepärast eristab skript neid: hoiatus logitakse ja töö jätkub, vea korral skript katkestab ja taimeri `OnFailure=` teatab sellest.
 
 Ajasta systemd taimeriga (moodul 5):
 

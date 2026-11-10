@@ -434,6 +434,8 @@ exit
 exit
 ```
 
+Kui `rd.break` küsib juurkasutaja parooli või teatab, et konto on lukus (uuemates versioonides, kui paigaldusel jäeti juurkasutaja lukku), kasuta ka AlmaLinuxis parameetrit `init=/bin/bash` nagu Debianis ja lisa enne `exec /sbin/init` käsk `touch /.autorelabel`.
+
 > [!WARNING]
 > **Turvalisus:** see näitab, et **füüsiline ligipääs masinale (või virtuaalmasina konsoolile) tähendab ligipääsu kõigele.** Seepärast on serveriruumid lukus, Proxmoxi veebiliides kaitstud ning tundlike süsteemide puhul kasutatakse ketta krüpteerimist ja GRUB-i parooli.
 

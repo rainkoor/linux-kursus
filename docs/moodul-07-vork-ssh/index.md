@@ -165,7 +165,7 @@ Pärast igat muudatust: [Kontrolli tulemust](#kontrolli-tulemust).
 
 ### Ubuntu: Netplan
 
-Netplan loeb kõik `.yaml` failid kataloogist `/etc/netplan/` ja paneb need kokku. Paigaldaja on sinna juba ühe faili teinud - **muuda seda faili**, ära lisa teist, muidu võivad kaks faili teineteist segada (nt üks tahab DHCP-d, teine staatilist aadressi).
+Netplan loeb kõik `.yaml` failid kataloogist `/etc/netplan/` ja paneb need kokku. Paigaldaja on sinna juba ühe faili teinud. Liidese põhiseadistuse (DHCP või staatiline aadress) muutmiseks **muuda seda faili** - kui kirjutad sama liidese kohta teise faili vastupidise seadistuse, hakkavad failid teineteist segama (üks tahab DHCP-d, teine staatilist aadressi). Eraldi faili võib lisada siis, kui see **täiendab** olemasolevat: lisa-aadress, uus liides või VLAN (nii teeme laboritöödes).
 
 #### Ubuntu: staatiline IP
 
@@ -360,7 +360,7 @@ Kui `ping 1.1.1.1` töötab, aga nimega mitte, on viga DNS-i seadistuses (punkt 
 Vaikelüüs saadab kõik paketid, mille sihtvõrku masin ei tunne, ühte ruuterisse. Kui mõni võrk on kättesaadav **teise ruuteri** kaudu (nt haldusvõrk `10.10.0.0/16` ruuteri `10.0.83.254` taga), lisatakse **staatiline marsruut**. `ip route add` (punkt 7.1) kaob taaskäivitusel; püsivaks tuleb see kirjutada võrguseadistusse:
 
 ```yaml
-# Ubuntu: /etc/netplan/50-staatiline.yaml, liidese ens18 all
+# Ubuntu: Netplani fail (nt /etc/netplan/50-cloud-init.yaml), liidese ens18 all
       routes:
         - to: default
           via: 10.0.83.1

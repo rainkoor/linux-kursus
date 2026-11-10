@@ -96,7 +96,7 @@ Tänapäeval kasutatakse `chroot`-i peamiselt süsteemi parandamiseks, pakettide
 
 Esimene päris konteinerilahendus oli **FreeBSD jail** (FreeBSD 4.0, 2000). See lisas `chroot`-ile eraldatud protsessid, oma IP-aadressi ja piiratud juurkasutaja: jaili sees olev root ei saa muuta kernelit ega näha teisi jaile. Linuxi nimeruumid ja cgroups jõudsid sama tasemeni alles aastaid hiljem.
 
-```sh
+```text
 # /etc/jail.conf (FreeBSD)
 www {
     path = "/usr/local/jails/www";
