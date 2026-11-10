@@ -5283,6 +5283,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reset-failed<span c
 <li>Kaitse GRUB parooliga (vt Debiani wiki „GRUB“ või <code>man grub-mkpasswd-pbkdf2</code>), nii et menüü kirjete muutmine nõuab parooli. Proovi seejärel uuesti <code>init=/bin/bash</code> meetodit.</li>
 <li>AlmaLinuxis: lähtesta juurkasutaja parool meetodiga <code>rd.break</code> (vt teooria punkt 10.9). Mis juhtub, kui jätad <code>touch /.autorelabel</code> tegemata?</li>
 <li>Kompileeri kernel uuesti, kuid jäta <code>make menuconfig</code>-is välja kõik, mida sinu virtuaalmasin ei vaja (heli, Bluetooth, WiFi, ebavajalikud failisüsteemid). Kui väikeseks suudad kerneli (<code>/boot/vmlinuz-*</code>) ja initramfs-i teha nii, et masin endiselt käivitub?</li>
+<li><strong>udev:</strong> käivita <code>udevadm monitor</code> ja lisa Proxmoxis masinale töö ajal uus ketas (<em>Hardware</em> → <em>Add</em> → <em>Hard Disk</em>). Milliseid sündmusi nägid? Vaata <code>udevadm info /dev/sdX</code> ja kirjuta reegel, mis loob kettale viite <code>/dev/lisaketas</code> (seerianumbri või <code>ID_PATH</code> järgi). Kontrolli pärast <code>udevadm trigger</code>-it.</li>
 </ol>
 <hr />
 <!-- kysimused -->

@@ -1147,6 +1147,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="4.7 Tarkvara kompileerimine lähtekoodist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jagatud-teegid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jagatud teegid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5020,6 +5037,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="4.7 Tarkvara kompileerimine lähtekoodist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jagatud-teegid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jagatud teegid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5270,6 +5304,7 @@
 </tbody>
 </table>
 <p><strong>Madala taseme tööriist</strong> (<code>dpkg</code>, <code>rpm</code>) paigaldab üksiku paketifaili, kuid ei lahenda sõltuvusi ega laadi midagi alla. <strong>Kõrge taseme pakihaldur</strong> (<code>apt</code>, <code>dnf</code>) teeb kõik selle automaatselt. Igapäevatöös kasutatakse peaaegu alati kõrge taseme tööriista.</p>
+<p>Kolmas suurem perekond on <strong>SUSE</strong> (openSUSE, SUSE Linux Enterprise): see kasutab samuti <code>.rpm</code> pakette, kuid kõrge taseme pakihaldur on <strong><code>zypper</code></strong> (<code>zypper refresh</code>, <code>zypper install</code>, <code>zypper update</code>, <code>zypper search</code>). Selle kursuse distrodes seda ei ole, kuid käsud on sarnased.</p>
 <h2 id="42-apt---debian-ja-ubuntu">4.2 apt - Debian ja Ubuntu<a class="headerlink" href="#42-apt---debian-ja-ubuntu" title="Permanent link">&para;</a></h2>
 <h3 id="süsteemi-uuendamine">Süsteemi uuendamine<a class="headerlink" href="#süsteemi-uuendamine" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w">              </span><span class="c1"># laadi hoidlatest värske pakettide loend</span>
@@ -5540,6 +5575,12 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>group<span class="w"> </s
 </code></pre></div>
 <p><strong>Puudused võrreldes paketiga:</strong> pakihaldur programmist ei tea, mistõttu ei uuendata seda automaatselt ega saa seda lihtsalt eemaldada. Turvauuendused tuleb ise jälgida. Seepärast kompileeritakse lähtekoodist ainult siis, kui muud võimalust pole.</p>
 <p>Käsitsi paigaldatud tarkvara paigutatakse kataloogi <code>/usr/local</code> (või <code>/opt</code>), et see ei läheks segi pakihalduri hallatavate failidega kataloogis <code>/usr</code>.</p>
+<h3 id="jagatud-teegid">Jagatud teegid<a class="headerlink" href="#jagatud-teegid" title="Permanent link">&para;</a></h3>
+<p>Enamik programme ei sisalda kogu koodi ise, vaid kasutab <strong>jagatud teeke</strong> (<em>shared libraries</em>, failid <code>*.so</code>, nt <code>libc.so.6</code>, <code>libssl.so.3</code>). Teek laaditakse mällu programmi käivitamisel ja seda kasutavad korraga paljud programmid. Seepärast parandab näiteks OpenSSL-i turvauuendus kõik seda kasutavad programmid korraga (pärast nende taaskäivitust, punkt 4.9).</p>
+<div class="highlight"><pre><span></span><code>ldd<span class="w"> </span>/usr/bin/ssh<span class="w">                       </span><span class="c1"># milliseid teeke programm vajab ja kust need leiti</span>
+ldconfig<span class="w"> </span>-p<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>libssl<span class="w">              </span><span class="c1"># teekide vahemälu: kas teek on süsteemile teada</span>
+</code></pre></div>
+<p>Teeke otsitakse standardkataloogidest (<code>/lib</code>, <code>/usr/lib</code> ja nende alamkataloogid) ning failis <code>/etc/ld.so.conf</code> ja kataloogis <code>/etc/ld.so.conf.d/</code> loetletud kataloogidest. Kui paigaldad lähtekoodist teegi kataloogi <code>/usr/local/lib</code> ja programm ei leia seda (<code>error while loading shared libraries: libxyz.so.1: cannot open shared object file</code>), lisa kataloog faili <code>/etc/ld.so.conf.d/kohalik.conf</code> ja uuenda vahemälu käsuga <code>sudo ldconfig</code>. Ajutiselt (testimiseks) saab kataloogi anda keskkonnamuutujaga <code>LD_LIBRARY_PATH</code>.</p>
 <h2 id="48-universaalsed-paketid-snap-ja-flatpak">4.8 Universaalsed paketid: Snap ja Flatpak<a class="headerlink" href="#48-universaalsed-paketid-snap-ja-flatpak" title="Permanent link">&para;</a></h2>
 <p><strong>Snap</strong> ja <strong>Flatpak</strong> on distrost sõltumatud paketivormingud. Pakett sisaldab programmi koos kõigi selle sõltuvustega ja töötab isoleeritult ülejäänud süsteemist.</p>
 <table>

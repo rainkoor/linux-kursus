@@ -5142,6 +5142,18 @@ sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>-f<span class="w"> <
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>fsck.ext4<span class="w"> </span>-f<span class="w"> </span>/dev/sdb1<span class="w">                  </span><span class="c1"># ext4</span>
 sudo<span class="w"> </span>xfs_repair<span class="w"> </span>/dev/sdb2<span class="w">                    </span><span class="c1"># XFS</span>
 </code></pre></div>
+<p>FAT32-failisüsteemi (nt USB-mälu või UEFI partitsiooni jaoks) loob <code>mkfs.vfat</code> (pakett <code>dosfstools</code>):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkfs.vfat<span class="w"> </span>-F<span class="w"> </span><span class="m">32</span><span class="w"> </span>-n<span class="w"> </span>USB<span class="w"> </span>/dev/sdc1<span class="w">        </span><span class="c1"># FAT32, silt USB</span>
+</code></pre></div>
+<p>Olemasoleva failisüsteemi andmeid ja seadeid näeb ning muudab ilma vormindamata:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dumpe2fs<span class="w"> </span>-h<span class="w"> </span>/dev/sdb1<span class="w">                   </span><span class="c1"># ext4 ülevaade: UUID, plokid, i-sõlmed, viimane kontroll</span>
+sudo<span class="w"> </span>tune2fs<span class="w"> </span>-L<span class="w"> </span>varu<span class="w"> </span>/dev/sdb1<span class="w">               </span><span class="c1"># ext4: muuda silti</span>
+sudo<span class="w"> </span>tune2fs<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span>/dev/sdb1<span class="w">                  </span><span class="c1"># ext4: juurkasutajale reserveeritud ruum 5% asemel 1%</span>
+sudo<span class="w"> </span>tune2fs<span class="w"> </span>-c<span class="w"> </span><span class="m">30</span><span class="w"> </span>/dev/sdb1<span class="w">                 </span><span class="c1"># ext4: kontroll iga 30 haakimise järel</span>
+sudo<span class="w"> </span>xfs_admin<span class="w"> </span>-L<span class="w"> </span>logid<span class="w"> </span>/dev/sdb2<span class="w">            </span><span class="c1"># XFS: muuda silti (haakimata)</span>
+sudo<span class="w"> </span>xfs_info<span class="w"> </span>/dev/sdb2<span class="w">                      </span><span class="c1"># XFS ülevaade</span>
+</code></pre></div>
+<p>ext4 jätab vaikimisi 5% ruumist juurkasutajale, et süsteem töötaks ka siis, kui tavakasutajad on ketta täis kirjutanud. Suurel andmekettal on see palju raisatud ruumi, seepärast vähendatakse seda sageli (<code>tune2fs -m</code>).</p>
 <h2 id="84-haakimine">8.4 Haakimine<a class="headerlink" href="#84-haakimine" title="Permanent link">&para;</a></h2>
 <p>Failisüsteemi kasutamiseks tuleb see <strong>haakida</strong> (<em>mount</em>) mõnda kataloogi - <strong>haakepunkti</strong>. Pärast haakimist on failisüsteemi sisu selles kataloogis nähtav.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/andmed

@@ -2012,6 +2012,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#riistvara-ja-udev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riistvara ja udev
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#püsivad-seaded" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5096,6 +5107,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#riistvara-ja-udev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riistvara ja udev
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#püsivad-seaded" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5828,6 +5850,23 @@ sudo<span class="w"> </span>modprobe<span class="w"> </span>dummy<span class="w"
 sudo<span class="w"> </span>modprobe<span class="w"> </span>-r<span class="w"> </span>dummy<span class="w">           </span><span class="c1"># eemalda moodul</span>
 </code></pre></div>
 <p>Tavaliselt laadib kernel (täpsemalt <code>udev</code>) vajalikud moodulid riistvara tuvastamisel automaatselt.</p>
+<h3 id="riistvara-ja-udev">Riistvara ja udev<a class="headerlink" href="#riistvara-ja-udev" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>lspci<span class="w">                            </span><span class="c1"># PCI-seadmed (võrgukaardid, kettakontrollerid); -k näitab kasutatavat draiverit</span>
+lsusb<span class="w">                            </span><span class="c1"># USB-seadmed</span>
+lsblk<span class="w">                            </span><span class="c1"># plokkseadmed</span>
+lscpu<span class="p">;</span><span class="w"> </span>lsmem<span class="w">                     </span><span class="c1"># protsessor ja mälu</span>
+sudo<span class="w"> </span>dmidecode<span class="w"> </span>-t<span class="w"> </span>system<span class="w">         </span><span class="c1"># tootja, mudel ja seerianumber (püsivarast)</span>
+</code></pre></div>
+<p>Kui kernel tuvastab seadme (alglaadimisel või näiteks USB-mälu ühendamisel), saadab ta sündmuse teenusele <strong>udev</strong> (<code>systemd-udevd</code>). udev laadib vajaliku mooduli, loob seadmefaili kataloogi <code>/dev</code> (nt <code>/dev/sdb</code>), lisab püsivad nimed (<code>/dev/disk/by-uuid/</code>, <code>/dev/disk/by-id/</code>) ja annab võrguliidesele nime (nt <code>ens18</code>).</p>
+<div class="highlight"><pre><span></span><code>udevadm<span class="w"> </span>monitor<span class="w">                          </span><span class="c1"># jälgi sündmusi reaalajas (ühenda/eemalda seade)</span>
+udevadm<span class="w"> </span>info<span class="w"> </span>/dev/sdb<span class="w">                    </span><span class="c1"># seadme omadused, mille järgi reegleid kirjutatakse</span>
+udevadm<span class="w"> </span>info<span class="w"> </span>-a<span class="w"> </span>/sys/class/net/ens18<span class="w">     </span><span class="c1"># võrguliidese omadused</span>
+</code></pre></div>
+<p>Reeglid on kataloogides <code>/usr/lib/udev/rules.d/</code> (paketid) ja <code>/etc/udev/rules.d/</code> (administraator). Näiteks annab järgmine reegel kindla seerianumbriga USB-ketta grupile <code>varundus</code> ja loob viite <code>/dev/varuketas</code>:</p>
+<div class="highlight"><pre><span></span><code># /etc/udev/rules.d/90-varuketas.rules
+SUBSYSTEM=="block", ENV{ID_SERIAL_SHORT}=="AA12345678", GROUP="varundus", SYMLINK+="varuketas"
+</code></pre></div>
+<p>Pärast reegli muutmist: <code>sudo udevadm control --reload</code> ja <code>sudo udevadm trigger</code> (või ühenda seade uuesti).</p>
 <h3 id="püsivad-seaded">Püsivad seaded<a class="headerlink" href="#püsivad-seaded" title="Permanent link">&para;</a></h3>
 <table>
 <thead>

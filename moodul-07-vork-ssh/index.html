@@ -1417,6 +1417,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#püsivad-staatilised-marsruudid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Püsivad staatilised marsruudid
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5022,6 +5033,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#püsivad-staatilised-marsruudid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Püsivad staatilised marsruudid
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5697,6 +5719,24 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 </code></pre></div>
 <p>DHCP-le tagasi: <code>sudo nmcli connection modify ens18 ipv4.method auto ipv4.addresses "" ipv4.gateway ""</code>.</p>
 <p>Menüüpõhine tööriist <strong><code>nmtui</code></strong> on mugav, kui <code>nmcli</code> süntaksit ei mäleta. Ühenduste failid on kataloogis <code>/etc/NetworkManager/system-connections/</code>.</p>
+<h3 id="püsivad-staatilised-marsruudid">Püsivad staatilised marsruudid<a class="headerlink" href="#püsivad-staatilised-marsruudid" title="Permanent link">&para;</a></h3>
+<p>Vaikelüüs saadab kõik paketid, mille sihtvõrku masin ei tunne, ühte ruuterisse. Kui mõni võrk on kättesaadav <strong>teise ruuteri</strong> kaudu (nt haldusvõrk <code>10.10.0.0/16</code> ruuteri <code>10.0.83.254</code> taga), lisatakse <strong>staatiline marsruut</strong>. <code>ip route add</code> (punkt 7.1) kaob taaskäivitusel; püsivaks tuleb see kirjutada võrguseadistusse:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: /etc/netplan/50-staatiline.yaml, liidese ens18 all</span>
+<span class="w">      </span><span class="nt">routes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">          </span><span class="nt">via</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.1</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.10.0.0/16</span>
+<span class="w">          </span><span class="nt">via</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.254</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># Debian: /etc/network/interfaces, liidese ens18 plokis
+    up ip route add 10.10.0.0/16 via 10.0.83.254
+    down ip route del 10.10.0.0/16 via 10.0.83.254
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># AlmaLinux: NetworkManager (+ lisab olemasolevatele marsruutidele)</span>
+sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span>+ipv4.routes<span class="w"> </span><span class="s2">"10.10.0.0/16 10.0.83.254"</span>
+sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>up<span class="w"> </span>ens18
+</code></pre></div>
+<p>Kontrolli: <code>ip route</code> (marsruut on tabelis) ja <code>ip route get 10.10.1.5</code> (milline marsruut ja liides valitakse). IPv6 marsruudid lisatakse samamoodi (<code>ipv6.routes</code>, Netplanis <code>to: 2001:db8::/32</code>).</p>
 <h2 id="73-nimelahendus-ja-dns">7.3 Nimelahendus ja DNS<a class="headerlink" href="#73-nimelahendus-ja-dns" title="Permanent link">&para;</a></h2>
 <p>Kui kirjutad <code>ping www.hkhk.edu.ee</code>, peab süsteem nime kõigepealt IP-aadressiks teisendama. Järjekorra määrab fail <code>/etc/nsswitch.conf</code>:</p>
 <div class="highlight"><pre><span></span><code>hosts: files dns

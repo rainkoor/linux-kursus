@@ -4529,6 +4529,11 @@
 <summary>Vastus</summary>
 <p>Ajapõhine ühekordne kood, mille telefonirakendus ja server arvutavad ühisest saladusest ja kellaajast; kood vahetub iga 30 sekundi järel, seega vale kellaga server ei aktsepteeri õiget koodi. <code>AuthenticationMethods publickey,keyboard-interactive</code> nõuab mõlemat: kõigepealt võti, seejärel PAM-i kaudu küsitav kood.</p>
 </details>
+<p><strong>25.</strong> Võrk <code>10.10.0.0/16</code> on kättesaadav ruuteri <code>10.0.83.254</code> kaudu. Kuidas lisad selle marsruudi püsivalt AlmaLinuxis ja kuidas kontrollid, millist marsruuti kasutatakse?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>sudo nmcli connection modify ens18 +ipv4.routes "10.10.0.0/16 10.0.83.254"</code> ja <code>sudo nmcli connection up ens18</code>. Kontroll: <code>ip route</code> ja <code>ip route get 10.10.1.5</code>. Ubuntus lisatakse marsruut Netplani <code>routes:</code> alla, Debianis <code>up ip route add …</code> rida faili <code>/etc/network/interfaces</code>.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> Leia oma masina vaikelüüsi IP-aadress ühe käsuga, mis väljastab ainult aadressi.</p>
 <details class="success">

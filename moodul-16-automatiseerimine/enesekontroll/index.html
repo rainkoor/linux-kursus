@@ -4469,6 +4469,11 @@
 <summary>Vastus</summary>
 <p>Kuivkäivitus: näitab, mida muudetaks (<code>changed</code>) ja failide muudatuste erinevust, ilma midagi muutmata. Nii näed enne päris käivitust, kas mänguraamat teeb seda, mida ootad.</p>
 </details>
+<p><strong>13.</strong> Mis vahe on Ansible'il ja Puppetil seadistuse rakendamise viisis (push ja pull)?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Ansible saadab muudatused juhtmasinast SSH kaudu serveritesse siis, kui administraator mänguraamatu käivitab (<em>push</em>), ja ei vaja serverites agenti. Puppetis töötab igas serveris agent, mis küsib keskserverist regulaarselt oma seadistust ja rakendab selle (<em>pull</em>), nii et serverid parandavad seadistuse triivi ise.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> Kirjuta Ansible'i ülesanne, mis loob kasutaja <code>abi</code> (kest <code>/bin/bash</code>, lisagrupp <code>sudo</code>).</p>
 <details class="success">

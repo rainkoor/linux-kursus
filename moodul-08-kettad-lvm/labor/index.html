@@ -5007,6 +5007,7 @@ sudo<span class="w"> </span>pvremove<span class="w"> </span>/dev/sdb<span class=
 <ol>
 <li><strong>Juurfailisüsteemi suurendamine:</strong> suurenda Proxmoxis süsteemiketast 2 GiB võrra (<em>Hardware</em> → ketas → <em>Disk Action</em> → <em>Resize</em>). Suurenda seejärel partitsioon, PV, juurköide ja failisüsteem (vt teooria punkt 8.9).</li>
 <li><strong>Püsiv LUKS-köide:</strong> krüpteeri LVM-i köide <code>lv_db</code> (andmed kaovad - varunda enne!), lisa see faili <code>/etc/crypttab</code> võtmefailiga (<code>/root/db.key</code>, õigused <code>400</code>) ja <code>/etc/fstab</code>-i ning kontrolli, et see avaneb taaskäivitusel automaatselt.</li>
+<li><strong>Failisüsteemi seaded:</strong> vaata <code>sudo dumpe2fs -h</code> abil ühe ext4-köite andmeid (UUID, i-sõlmede arv, reserveeritud plokid). Vähenda reserveeritud ruumi 1%-le (<code>tune2fs -m 1</code>) ja võrdle <code>df -h</code> väljundit enne ja pärast. Loo lisakettale väike FAT32-partitsioon (<code>mkfs.vfat -F 32</code>) ja haagi see.</li>
 </ol>
 <hr />
 <!-- kysimused -->

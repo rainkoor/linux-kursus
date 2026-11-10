@@ -4494,6 +4494,11 @@
 <summary>Vastus</summary>
 <p>Ubuntu: <code>do-release-upgrade</code>. AlmaLinux: ELevate projekti <code>leapp</code> (<code>leapp preupgrade</code>, <code>leapp upgrade</code>); RHEL-i perekonnas eelistatakse siiski uut paigaldust.</p>
 </details>
+<p><strong>18.</strong> Mis on jagatud teek? Programm annab vea <code>error while loading shared libraries: libxyz.so.1</code>. Kuidas leiad põhjuse ja parandad selle, kui teek on kataloogis <code>/usr/local/lib</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Jagatud teek (<code>*.so</code>) on kood, mida kasutavad korraga paljud programmid ja mis laaditakse programmi käivitamisel. <code>ldd /tee/programm</code> näitab, milline teek on puudu (<code>not found</code>). Lisa kataloog <code>/usr/local/lib</code> faili <code>/etc/ld.so.conf.d/kohalik.conf</code> ja käivita <code>sudo ldconfig</code>; kontrolli <code>ldconfig -p | grep libxyz</code>.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> (A ja B) Uuenda süsteem ühe käsurea abil.</p>
 <details class="success">

@@ -4815,14 +4815,20 @@ sudo<span class="w"> </span>nmap<span class="w"> </span>-sV<span class="w"> </sp
 <p>Võrdle SELinuxit (laboritöö 11A) ja AppArmorit: mis on nende põhimõtteline erinevus? Kumba oli sinu arvates lihtsam kasutada?</p>
 </div>
 <hr />
+<h2 id="lisaülesanne-valikuline-kontrollsummad-ja-gnupg">Lisaülesanne (valikuline): kontrollsummad ja GnuPG<a class="headerlink" href="#lisaülesanne-valikuline-kontrollsummad-ja-gnupg" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Laadi Ubuntu masinasse Debiani väikseima paigaldusmeedia (<code>netinst</code>) ISO-fail ning failid <code>SHA256SUMS</code> ja <code>SHA256SUMS.sign</code> (cdimage.debian.org). Kontrolli allkirja ja kontrollsummat (teooria punkt 11.10). Kust said kindluse, et imporditud võti on päriselt Debiani oma?</li>
+<li>Loo endale GnuPG võtmepaar ja vaheta avalikke võtmeid kaasõppijaga. Krüpteeri talle fail ja allkirjasta teine fail. Kontrolli tema saadetud faili allkirja. Muuda allkirjastatud faili ühte tähte - mida näitab <code>gpg --verify</code>?</li>
+</ol>
+<hr />
 <h2 id="lisaülesanne-valikuline-wazuh-siem">Lisaülesanne (valikuline): Wazuh SIEM<a class="headerlink" href="#lisaülesanne-valikuline-wazuh-siem" title="Permanent link">&para;</a></h2>
 <p>Vajalik: Dockeriga Ubuntu masin (moodul 12) vähemalt 4 GiB (soovitatavalt 8 GiB) mäluga ja vähemalt 2 jälgitavat masinat (nt <code>debian1</code> ja <code>alma</code>).</p>
 <ol>
-<li>Paigalda Wazuh ühe sõlmena Dockeriga (teooria punkt 11.10). Muuda vaikeparool.</li>
+<li>Paigalda Wazuh ühe sõlmena Dockeriga (teooria punkt 11.11). Muuda vaikeparool.</li>
 <li>Lisa veebiliidese viisardiga agendid masinatele <code>debian1</code> ja <code>alma</code>. Kontrolli, et agendid ühenduvad serveri pordile 1514/tcp ja 1515/tcp. (Docker lisab avaldatud portide reeglid ise ja need ei läbi <code>ufw</code> reegleid - mõtle, mida see turvalisuse mõttes tähendab.)</li>
 <li>Tekita sündmusi: proovi mõnest masinast <code>ssh vale@debian1</code> mitu korda vale parooliga, käivita <code>sudo</code> vale parooliga, muuda faili <code>/etc/passwd</code> (nt <code>sudo useradd wazuhtest</code>).</li>
 <li>Leia sündmused veebiliidesest (<em>Threat Hunting</em> / <em>Security events</em>).</li>
-<li>Seadista automaatne reageerimine (teooria punkt 11.10, reegel 5763 ja <code>firewall-drop</code>) ning korda SSH jõurünnet mõnest kolmandast masinast. Kontrolli agendis <code>/var/ossec/logs/active-responses.log</code> ja <code>sudo nft list ruleset</code>.</li>
+<li>Seadista automaatne reageerimine (teooria punkt 11.11, reegel 5763 ja <code>firewall-drop</code>) ning korda SSH jõurünnet mõnest kolmandast masinast. Kontrolli agendis <code>/var/ossec/logs/active-responses.log</code> ja <code>sudo nft list ruleset</code>.</li>
 </ol>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus W1</p>

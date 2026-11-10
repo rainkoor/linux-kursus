@@ -2285,15 +2285,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1110-turvasündmuste-haldus-wazuh" class="md-nav__link">
+  <a href="#1110-kontrollsummad-ja-gnupg" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11.10 Turvasündmuste haldus: Wazuh
+        11.10 Kontrollsummad ja GnuPG
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="11.10 Turvasündmuste haldus: Wazuh">
+    <nav class="md-nav" aria-label="11.10 Kontrollsummad ja GnuPG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kontrollsummad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kontrollsummad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnupg-allkirjad-ja-krüpteerimine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GnuPG: allkirjad ja krüpteerimine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1111-turvasündmuste-haldus-wazuh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.11 Turvasündmuste haldus: Wazuh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.11 Turvasündmuste haldus: Wazuh">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5095,15 +5134,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1110-turvasündmuste-haldus-wazuh" class="md-nav__link">
+  <a href="#1110-kontrollsummad-ja-gnupg" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11.10 Turvasündmuste haldus: Wazuh
+        11.10 Kontrollsummad ja GnuPG
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="11.10 Turvasündmuste haldus: Wazuh">
+    <nav class="md-nav" aria-label="11.10 Kontrollsummad ja GnuPG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kontrollsummad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kontrollsummad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnupg-allkirjad-ja-krüpteerimine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GnuPG: allkirjad ja krüpteerimine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1111-turvasündmuste-haldus-wazuh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.11 Turvasündmuste haldus: Wazuh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.11 Turvasündmuste haldus: Wazuh">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5416,7 +5494,7 @@ sudo<span class="w"> </span>fail2ban-client<span class="w"> </span><span class="
 </tr>
 <tr>
 <td>Hulk servereid, tahetakse jagada teavet ründajatest</td>
-<td>vaata <strong>CrowdSec</strong>-i (fail2ban-i tänapäevane järeltulija, jagab blokeerimisloendeid) või Wazuhi automaatset reageerimist (punkt 11.10)</td>
+<td>vaata <strong>CrowdSec</strong>-i (fail2ban-i tänapäevane järeltulija, jagab blokeerimisloendeid) või Wazuhi automaatset reageerimist (punkt 11.11)</td>
 </tr>
 </tbody>
 </table>
@@ -5850,7 +5928,30 @@ sudo<span class="w"> </span>lynis<span class="w"> </span>audit<span class="w"> <
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Ainult oma süsteemid!</strong> Pordiskannimine ja turvatestimine võõraste süsteemide vastu ilma loata on ebaseaduslik. Kooli laboris tee neid ainult oma virtuaalmasinate vastu või õpetaja loal.</p>
 </div>
-<h2 id="1110-turvasündmuste-haldus-wazuh">11.10 Turvasündmuste haldus: Wazuh<a class="headerlink" href="#1110-turvasündmuste-haldus-wazuh" title="Permanent link">&para;</a></h2>
+<h2 id="1110-kontrollsummad-ja-gnupg">11.10 Kontrollsummad ja GnuPG<a class="headerlink" href="#1110-kontrollsummad-ja-gnupg" title="Permanent link">&para;</a></h2>
+<h3 id="kontrollsummad">Kontrollsummad<a class="headerlink" href="#kontrollsummad" title="Permanent link">&para;</a></h3>
+<p><strong>Kontrollsumma</strong> (räsi, <em>hash</em>) on faili sisust arvutatud lühike „sõrmejälg“. Kui failis muutub kasvõi üks bitt, muutub ka kontrollsumma. Sellega kontrollitakse, et allalaaditud fail (nt paigaldusmeedia ISO) on terve ja just see, mida tootja avaldas:</p>
+<div class="highlight"><pre><span></span><code>sha256sum<span class="w"> </span>debian-13.iso<span class="w">                              </span><span class="c1"># arvuta</span>
+sha256sum<span class="w"> </span>-c<span class="w"> </span>SHA256SUMS<span class="w"> </span>--ignore-missing<span class="w">             </span><span class="c1"># võrdle tootja avaldatud loendiga: debian-13.iso: OK</span>
+</code></pre></div>
+<p>Kasuta SHA-256 või tugevamat. <code>md5sum</code> ja <code>sha1sum</code> sobivad ainult juhuslike vigade leidmiseks, mitte pahatahtliku muutmise vastu.</p>
+<h3 id="gnupg-allkirjad-ja-krüpteerimine">GnuPG: allkirjad ja krüpteerimine<a class="headerlink" href="#gnupg-allkirjad-ja-krüpteerimine" title="Permanent link">&para;</a></h3>
+<p>Kontrollsumma ise ei tõenda, kes faili avaldas: ründaja, kes muudab ISO-faili, võib muuta ka kontrollsummade faili. Seepärast <strong>allkirjastavad</strong> distrod kontrollsummade faili või paketid oma <strong>GnuPG</strong> (<em>GNU Privacy Guard</em>, <code>gpg</code>) võtmega. Ka <code>apt</code> ja <code>dnf</code> kontrollivad iga paketi allkirja hoidla võtmega (moodul 4).</p>
+<p>GnuPG kasutab avaliku võtme krüptograafiat nagu SSH: <strong>avaliku võtmega</strong> kontrollitakse allkirja ja krüpteeritakse, <strong>privaatvõtmega</strong> allkirjastatakse ja dekrüpteeritakse.</p>
+<div class="highlight"><pre><span></span><code>gpg<span class="w"> </span>--full-generate-key<span class="w">                              </span><span class="c1"># loo oma võtmepaar</span>
+gpg<span class="w"> </span>--list-keys<span class="w">                                      </span><span class="c1"># avalikud võtmed võtmerõngas</span>
+gpg<span class="w"> </span>--armor<span class="w"> </span>--export<span class="w"> </span>mari@kool.ee<span class="w"> </span>&gt;<span class="w"> </span>mari.asc<span class="w">         </span><span class="c1"># ekspordi avalik võti teistele jagamiseks</span>
+gpg<span class="w"> </span>--import<span class="w"> </span>peeter.asc<span class="w">                              </span><span class="c1"># impordi kellegi teise avalik võti</span>
+
+gpg<span class="w"> </span>--encrypt<span class="w"> </span>--recipient<span class="w"> </span>peeter@kool.ee<span class="w"> </span>aruanne.pdf<span class="w"> </span><span class="c1"># krüpteeri Peetrile: aruanne.pdf.gpg</span>
+gpg<span class="w"> </span>--decrypt<span class="w"> </span>aruanne.pdf.gpg<span class="w"> </span>&gt;<span class="w"> </span>aruanne.pdf<span class="w">          </span><span class="c1"># dekrüpteeri oma privaatvõtmega</span>
+gpg<span class="w"> </span>--symmetric<span class="w"> </span>varukoopia.tar.gz<span class="w">                    </span><span class="c1"># krüpteeri ainult parooliga (ilma võtmeteta)</span>
+
+gpg<span class="w"> </span>--detach-sign<span class="w"> </span>SHA256SUMS<span class="w">                         </span><span class="c1"># allkirjasta: SHA256SUMS.sig</span>
+gpg<span class="w"> </span>--verify<span class="w"> </span>SHA256SUMS.sig<span class="w"> </span>SHA256SUMS<span class="w">               </span><span class="c1"># kontrolli allkirja: "Good signature from ..."</span>
+</code></pre></div>
+<p>Debiani ISO kontroll näeb välja nii: impordi Debiani allkirjavõti (sõrmejälg on lehel debian.org/CD/verify), kontrolli <code>gpg --verify SHA256SUMS.sign SHA256SUMS</code> ja seejärel <code>sha256sum -c</code>. Võtme ehtsuse kontrollimiseks võrdle alati <strong>sõrmejälge</strong> (<code>gpg --fingerprint</code>) usaldusväärsest allikast saadud väärtusega.</p>
+<h2 id="1111-turvasündmuste-haldus-wazuh">11.11 Turvasündmuste haldus: Wazuh<a class="headerlink" href="#1111-turvasündmuste-haldus-wazuh" title="Permanent link">&para;</a></h2>
 <p>Kui servereid on palju, ei jõua keegi iga masina logisid käsitsi lugeda. <strong>SIEM</strong> (<em>Security Information and Event Management</em>) kogub logid ja sündmused kõigist masinatest kokku, analüüsib neid reeglite järgi ja annab märku kahtlastest tegevustest.</p>
 <p><strong>Wazuh</strong> on vaba SIEM- ja XDR-platvorm, mida kasutatakse ka koolides ja väiksemates ettevõtetes. Sellel on kolm osa:</p>
 <table>
