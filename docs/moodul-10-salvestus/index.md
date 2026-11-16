@@ -145,7 +145,7 @@ Ketta vahetus peeglis: `sudo zpool replace tank /dev/sdc /dev/sdf` ja jälgi `zp
 <summary>Loe lähemalt: ZFS Proxmoxis ja TrueNASis</summary>
 
 - **Proxmox VE:** paigaldaja pakub süsteemikettale ZFS-i (nt *ZFS RAID1*), pool nimega `rpool`. Virtuaalmasinate kettad on zvol-id (`rpool/data/vm-101-disk-0`), Proxmoxi hetktõmmised on ZFS-i hetktõmmised ja **Storage Replication** kasutab `zfs send`-i, et kopeerida VM-e teise sõlme. Mälu: ARC võtab vaikimisi kuni poole RAM-ist (uuemates versioonides väiksema piiriga) - seda saab piirata failis `/etc/modprobe.d/zfs.conf` (`options zfs zfs_arc_max=…`).
-- **TrueNAS** (Community Edition põhineb Debianil, vanem CORE FreeBSD-l) on ZFS-ile ehitatud NAS: poolid, dataset'id, SMB- ja NFS-jagamised, automaatsed hetktõmmised ja replikatsioon on veebiliideses. TrueNASi kasutamist failiserverina käsitleb moodul 18 (punkt 18.7).
+- **TrueNAS** (Community Edition põhineb Debianil, vanem CORE FreeBSD-l) on ZFS-ile ehitatud NAS: poolid, dataset'id, SMB- ja NFS-jagamised, automaatsed hetktõmmised ja replikatsioon on veebiliideses. TrueNASi kasutamist failiserverina käsitleb moodul 19 (punkt 19.7).
 
 </details>
 
@@ -166,7 +166,7 @@ ZFS-i CDDL-litsents ei ühildu Linuxi kerneli GPL-iga, mistõttu ZFS ei ole kern
 
 FreeBSD on ZFS-i teine kodu. ZFS lisati FreeBSD-sse juba 2008. aastal (versioon 7.0), ammu enne kui see Linuxis kasutatavaks muutus. BSD litsents ühildub CDDL-iga, nii et ZFS on FreeBSD baassüsteemi osa ja kerneli kaasas - eraldi moodulit ega DKMS-i pole vaja. Alates FreeBSD 13-st kasutavad FreeBSD ja Linux sama **OpenZFS**-i koodi, seega selle punkti käsud (`zpool`, `zfs`) töötavad FreeBSD-s samamoodi.
 
-FreeBSD paigaldaja pakub vaikimisi juurfailisüsteemi ZFS-il (*Auto (ZFS)*, kogum `zroot`). Koos alglaadimiskeskkondadega (`bectl`) saab süsteemi pärast ebaõnnestunud uuendust sekunditega eelmisse olekusse tagasi viia. Vanem TrueNAS CORE ja paljud salvestusseadmed põhinevad seetõttu FreeBSD-l. Vt moodul 29, punkt 29.9.
+FreeBSD paigaldaja pakub vaikimisi juurfailisüsteemi ZFS-il (*Auto (ZFS)*, kogum `zroot`). Koos alglaadimiskeskkondadega (`bectl`) saab süsteemi pärast ebaõnnestunud uuendust sekunditega eelmisse olekusse tagasi viia. Vanem TrueNAS CORE ja paljud salvestusseadmed põhinevad seetõttu FreeBSD-l. Vt moodul 30, punkt 30.9.
 
 </details>
 
@@ -175,7 +175,7 @@ FreeBSD paigaldaja pakub vaikimisi juurfailisüsteemi ZFS-il (*Auto (ZFS)*, kogu
 > [!TIP]
 > **Lühidalt:** Ketta kiirust mõõdetakse **läbilaskevõime** (MB/s) ja **IOPS**-i järgi. `dd` annab kiire hinnangu, `fio` täpse mõõtmise, `iostat -xz` näitab koormust töö ajal.
 
-Ketta jõudlust on vaja hinnata, kui server on aeglane, kui võrreldakse salvestuslahendusi (kohalik SSD, Proxmoxi Ceph, iSCSI - moodul 22) või kui kahtlustatakse riistvara riket. Olulised näitajad:
+Ketta jõudlust on vaja hinnata, kui server on aeglane, kui võrreldakse salvestuslahendusi (kohalik SSD, Proxmoxi Ceph, iSCSI - moodul 23) või kui kahtlustatakse riistvara riket. Olulised näitajad:
 
 | Näitaja | Tähendus | Kus oluline |
 |---|---|---|
@@ -261,7 +261,7 @@ sudo smartctl -a /dev/nvme0               # NVMe kettad
 
 Olulised atribuudid (HDD/SATA SSD): `Reallocated_Sector_Ct`, `Current_Pending_Sector`, `Offline_Uncorrectable` - kui need kasvavad, tuleb ketas vahetada. NVMe puhul vaata `Percentage Used` ja `Media and Data Integrity Errors`.
 
-Teenus `smartd` jälgib kettaid pidevalt ja saadab probleemist teate (`/etc/smartd.conf`, e-post - moodul 20). Proxmox ja TrueNAS näitavad SMART-i olekut veebiliideses.
+Teenus `smartd` jälgib kettaid pidevalt ja saadab probleemist teate (`/etc/smartd.conf`, e-post - moodul 21). Proxmox ja TrueNAS näitavad SMART-i olekut veebiliideses.
 
 > [!NOTE]
 > **Virtuaalmasinas** ei ole SMART-i infot - virtuaalne ketas ei ole füüsiline seade. Ketaste tervist jälgitakse hüperviisori (Proxmoxi sõlme) tasemel.

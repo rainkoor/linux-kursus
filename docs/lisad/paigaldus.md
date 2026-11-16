@@ -1,5 +1,5 @@
 <!-- navigatsioon -->
-[← Moodul 29. Enesekontroll](../moodul-29-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
+[← Moodul 30. Enesekontroll](../moodul-30-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
 <!-- /navigatsioon -->
 
 # Laborikeskkond ja serverite paigaldus
@@ -7,7 +7,7 @@
 Kursuse laboritööd eeldavad, et sul on olemas **Debiani**, **Ubuntu** ja **AlmaLinuxi** virtuaalmasinad, millele saad SSH kaudu ligi. See lisa kirjeldab, kuidas laborikeskkond planeerida, virtuaalmasinad luua ja kõik kolm distrot serveriks paigaldada.
 
 > [!NOTE]
-> **HKHK õppijale: masinad on enamasti juba olemas.** Kooli Proxmoxis on iga laboritöö jaoks vajalikud virtuaalmasinad valmis tehtud mallidest - **ise ei pea midagi paigaldama**. Sinu jaoks on olulised punktid 1 (sisselogimine ja oma võrk), 2 (võrguplaan) ja 7 (esimesed sammud: parool, hostinimi, IP-aadress, uuendused). Punktid 3-6 ja 8 (VM-i loomine, distrode paigaldus, mallid) on vajalikud ainult erijuhtudel: kui laboritöö või projekt seda eraldi nõuab (nt moodul 22 PXE-paigaldus, moodul 27, lõpuprojekt) või kui õpetaja nii ütleb. Iseõppija vajab kõiki punkte.
+> **HKHK õppijale: masinad on enamasti juba olemas.** Kooli Proxmoxis on iga laboritöö jaoks vajalikud virtuaalmasinad valmis tehtud mallidest - **ise ei pea midagi paigaldama**. Sinu jaoks on olulised punktid 1 (sisselogimine ja oma võrk), 2 (võrguplaan) ja 7 (esimesed sammud: parool, hostinimi, IP-aadress, uuendused). Punktid 3-6 ja 8 (VM-i loomine, distrode paigaldus, mallid) on vajalikud ainult erijuhtudel: kui laboritöö või projekt seda eraldi nõuab (nt moodul 23 PXE-paigaldus, moodul 28, lõpuprojekt) või kui õpetaja nii ütleb. Iseõppija vajab kõiki punkte.
 
 Juhend on kirjutatud eelkõige **Proxmox VE** jaoks (HKHK labor), kuid lisatud on ka märkused **VirtualBoxi** ja **WSL-i** kasutajatele.
 
@@ -52,7 +52,7 @@ Vaata oma mõne virtuaalmasina *Hardware* → *Network Device*:
 | `vmbrX` (nt `vmbr208`) | `10.0.X.0/24` (nt `10.0.208.0/24`) | `10.0.X.1` |
 | `vnetX` (SDN) | `192.168.X.0/24` | `192.168.X.1` |
 
-**Alguses ei ole võrgus DHCP-serverit**, sest paljudes laborites seadistab õppija selle ise (moodulid 21 ja 22). Seepärast seadista masinate võrk esialgu käsitsi (moodul 7 ja punkt 7 allpool).
+**Alguses ei ole võrgus DHCP-serverit**, sest õppija seadistab selle ise (moodul 18). Seepärast seadista masinate võrk esialgu käsitsi (moodul 7 ja punkt 7 allpool).
 
 Selle kursuse näidetes on õppija võrguks `10.0.83.0/24` - asenda `83` oma võrgu numbriga.
 
@@ -79,26 +79,26 @@ Enne virtuaalmasinate loomist tee **võrguplaan**. See hoiab ära IP-aadresside 
 
 ### IP-aadresside plaan
 
-Kursuse laboritööd kasutavad seda plaani. Sama masin teenib mitut laboritööd: nt `debian1` on veebi-, andmebaasi-, DNS- ja failiserver (laboritööd 15–18), DHCP-server (22) ja LDAP-server (24).
+Kursuse laboritööd kasutavad seda plaani. Sama masin teenib mitut laboritööd: nt `debian1` on veebi-, andmebaasi-, DNS- ja failiserver (laboritööd 15–19), DHCP-server (18) ja LDAP-server (25).
 
 | Virtuaalmasina nimi | Hostinimi | IP-aadress | Teenused (laboritööd) |
 |---|---|---|---|
-| `debian1-IT24-MariMaasikas` | `debian1` | `10.0.83.52` | SSH, varundus (9), veeb (15), andmebaasid (16), DNS (17), failiserver (18), DHCP/PXE (22), LDAP (24) |
-| `debian2-IT24-MariMaasikas` | `debian2` | `10.0.83.53` | SSH, DNS-i sekundaarserver (17), kaugvarundus (18), iSCSI (22) |
-| `ubuntu-IT24-MariMaasikas` | `ubuntusrv` (ka `mail`) | `10.0.83.54` | SSH, tulemüür (7, 12), varuserver (9), võrgu süvendus (13), konteinerid (14), Pi-hole (17B), seire (20), e-post (23) |
-| `alma-IT24-MariMaasikas` | `alma` | `10.0.83.55` | SSH, SELinux (12), võrgu süvendus (13), konteinerid ja Ansible'i juhtmasin (14, 19), Apache (15) |
-| `dc1-IT24-MariMaasikas` | `dc1` | `10.0.83.56` | Samba AD DC (25) |
-| `ubuntuklient-IT24-MariMaasikas` | `ubuntuklient` | DHCP (`10.0.83.98` reserveeritud) | töölaud (26), domeeni liige (24–25) |
-| `winklient-IT24-MariMaasikas` | `winklient` | DHCP (`10.0.83.99` reserveeritud) | Windowsi klient (18, 25, 26) |
-| `k3s1-IT24-MariMaasikas` … `k3s3-…` | `k3s1`, `k3s2`, `k3s3` | `10.0.83.61`–`10.0.83.63` | Kubernetese klaster (28) |
-| `pbs-IT24-MariMaasikas` | `pbs` | `10.0.83.65` | Proxmox Backup Server (27) |
-| `fbsd-IT24-MariMaasikas` | `fbsd` | `10.0.83.66` (jail `www`: `10.0.83.67`) | FreeBSD server (29) |
+| `debian1-IT24-MariMaasikas` | `debian1` | `10.0.83.52` | SSH, varundus (9), veeb (15), andmebaasid (16), DNS (17), DHCP (18), failiserver (19), PXE (23), LDAP (25) |
+| `debian2-IT24-MariMaasikas` | `debian2` | `10.0.83.53` | SSH, DNS-i sekundaarserver (17), kaugvarundus (19), iSCSI (23) |
+| `ubuntu-IT24-MariMaasikas` | `ubuntusrv` (ka `mail`) | `10.0.83.54` | SSH, tulemüür (7, 12), varuserver (9), võrgu süvendus (13), konteinerid (14), Pi-hole (17B), seire (21), e-post (24) |
+| `alma-IT24-MariMaasikas` | `alma` | `10.0.83.55` | SSH, SELinux (12), võrgu süvendus (13), konteinerid ja Ansible'i juhtmasin (14, 20), Apache (15) |
+| `dc1-IT24-MariMaasikas` | `dc1` | `10.0.83.56` | Samba AD DC (26) |
+| `ubuntuklient-IT24-MariMaasikas` | `ubuntuklient` | DHCP (`10.0.83.98` reserveeritud) | töölaud (27), domeeni liige (25–26) |
+| `winklient-IT24-MariMaasikas` | `winklient` | DHCP (`10.0.83.99` reserveeritud) | Windowsi klient (19, 26, 27) |
+| `k3s1-IT24-MariMaasikas` … `k3s3-…` | `k3s1`, `k3s2`, `k3s3` | `10.0.83.61`–`10.0.83.63` | Kubernetese klaster (29) |
+| `pbs-IT24-MariMaasikas` | `pbs` | `10.0.83.65` | Proxmox Backup Server (28) |
+| `fbsd-IT24-MariMaasikas` | `fbsd` | `10.0.83.66` (jail `www`: `10.0.83.67`) | FreeBSD server (30) |
 | - | - | `10.0.83.50` | virtuaalne IP (keepalived, 15) |
-| - | - | `10.0.83.64` | k3s klastri virtuaalne IP (28, lisaülesanne) |
+| - | - | `10.0.83.64` | k3s klastri virtuaalne IP (29, lisaülesanne) |
 
 Võrgu süvenduse laboris (13) kasutatakse lisaks IPv6 ULA-võrku `fd83::/64` (masina number nagu IPv4-s) ning lisavõrke `10.20.0.0/24`, `10.30.0.0/24`, `10.40.0.0/24` ja `10.99.0.0/24` (WireGuard).
 
-Ruuteriks (`.1`) on Proxmoxi sild või moodulis 21 sinu enda OPNsense.
+Ruuteriks (`.1`) on Proxmoxi sild või moodulis 22 sinu enda OPNsense. DHCP vahemikku hakkab jagama sinu enda DHCP-server (moodul 18).
 
 Head tavad:
 
@@ -298,7 +298,7 @@ sudo hostnamectl set-hostname uusnimi
 
 Kui masina-ID on sama, saavad kloonid DHCP-serverilt (mis kasutab masina-ID-st tuletatud tunnust) **sama IP-aadressi** - see on klassikaline laboriprobleem.
 
-Suuremas mahus kasutatakse **cloud-init**-i (Proxmoxis *Cloud-Init* vaheleht), mis seadistab kloonile esimesel käivitusel nime, kasutaja, SSH-võtme ja IP-aadressi automaatselt, ning **Vagrantit** või **Ansible'it** (moodul 19).
+Suuremas mahus kasutatakse **cloud-init**-i (Proxmoxis *Cloud-Init* vaheleht), mis seadistab kloonile esimesel käivitusel nime, kasutaja, SSH-võtme ja IP-aadressi automaatselt, ning **Vagrantit** või **Ansible'it** (moodul 20).
 
 ---
 
@@ -346,12 +346,12 @@ wsl -d Debian                    # käivita distro
 wsl --shutdown                   # peata kõik
 ```
 
-Windowsi kettad on Linuxis kataloogis `/mnt/c`, Linuxi failid Windowsis aadressil `\\wsl.localhost\Debian`. Täpsemalt (seadistus, systemd, failid, varundus) vt valikmoodul 26, punkt 26.9.
+Windowsi kettad on Linuxis kataloogis `/mnt/c`, Linuxi failid Windowsis aadressil `\\wsl.localhost\Debian`. Täpsemalt (seadistus, systemd, failid, varundus) vt valikmoodul 27, punkt 27.9.
 
 **Piirangud:** WSL sobib moodulitele 1–4 ja 6 (osaliselt 14 ja 19), kuid ei sobi ülejäänud serverilaboriteks, sest võrk on vaikimisi NAT-i taga ning alglaadimine, GRUB, kettahaldus ja tulemüür erinevad päris süsteemist. Kui jõuad moodulini 5, loo virtuaalmasinad (punktid 3–7) - VirtualBoxis (punkt 9) või oma Proxmoxis.
 
 <!-- navigatsioon -->
 ---
 
-[← Moodul 29. Enesekontroll](../moodul-29-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
+[← Moodul 30. Enesekontroll](../moodul-30-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
 <!-- /navigatsioon -->

@@ -88,7 +88,7 @@ ls --version                # versioon ja projekt (GNU coreutils)
 | Kus | Tööriistad | Mida arvestada |
 |---|---|---|
 | Debian, Ubuntu, AlmaLinux | GNU | Kõik selle kursuse näited |
-| FreeBSD, macOS | BSD | Võtmed osaliselt erinevad (`sed -i ''`, `ls -G`), vt moodul 29 |
+| FreeBSD, macOS | BSD | Võtmed osaliselt erinevad (`sed -i ''`, `ls -G`), vt moodul 30 |
 | Alpine, konteinerid, ruuterid | **BusyBox**: üks väike programm, mis asendab sadu käske | Ainult põhivõtmed; pikki GNU võtmeid sageli pole |
 
 Kui kirjutad skripti, mis peab töötama igal pool, kasuta ainult POSIX-võtmeid. Kui skript töötab ainult sinu Linuxi serverites, võid GNU lisavõimalusi julgelt kasutada.
@@ -608,7 +608,7 @@ FreeBSD kasutab GNU tööriistade asemel **BSD tööriistu** (vt punkt 2.1). Sam
 | Süsteemilogi | journald, osaliselt `/var/log/syslog` või `/var/log/messages` | ainult tekstifailid, peamine `/var/log/messages` |
 | `locate` andmebaas | `plocate` uuendab ise | uuendab iganädalane `periodic`-töö (`/usr/libexec/locate.updatedb`) |
 
-Torud, ümbersuunamine, `grep`, `sort`, `uniq`, `cut`, `awk` ja regulaaravaldised töötavad samamoodi. FreeBSD-ga tutvume moodulis 29.
+Torud, ümbersuunamine, `grep`, `sort`, `uniq`, `cut`, `awk` ja regulaaravaldised töötavad samamoodi. FreeBSD-ga tutvume moodulis 30.
 
 </details>
 

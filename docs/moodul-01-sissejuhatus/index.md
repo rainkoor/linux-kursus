@@ -17,7 +17,8 @@ Mooduli läbinud õppija:
 - leiab käskude kohta abi süsteemi dokumentatsioonist;
 - kirjeldab Linuxi failisüsteemi hierarhiat;
 - liigub failisüsteemis absoluutsete ja suhteliste teede abil;
-- loob, kopeerib, teisaldab ja kustutab faile ning katalooge.
+- loob, kopeerib, teisaldab ja kustutab faile ning katalooge;
+- hindab, kas riistvara sobib valitud distrole ja ülesandele, ning nimetab paigaldusviise ja litsentsitüüpe.
 
 > [!NOTE]
 > **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
@@ -524,6 +525,89 @@ date                   # kuupäev ja kellaaeg
 
 Fail `/etc/os-release` on olemas kõigis tänapäevastes distrodes ning on kõige kindlam viis distro ja selle versiooni tuvastamiseks.
 
+## 1.11 Riistvara, paigaldus ja litsentsid
+
+> [!TIP]
+> **Lühidalt:** Enne paigaldust kontrolli, kas riistvarast piisab: protsessor (`lscpu`), mälu (`free -h`) ja ketas (`lsblk`). Server ilma töölauata töötab 1-2 GiB mäluga, töölaud vajab vähemalt 4 GiB. Linuxi distrod on vaba tarkvara, kuid „tasuta“ ei tähenda „tingimusteta“ - litsents ütleb, mida koodiga teha tohib, ja tugi võib olla tasuline.
+
+### Kas riistvarast piisab?
+
+Igal distrol on miinimumnõuded, kuid need ütlevad ainult, et süsteem käivitub. Tegelik vajadus sõltub sellest, **mida masin tegema hakkab**.
+
+| | Miinimum (käivitub) | Mõistlik algus | Märkus |
+|---|---|---|---|
+| Debian, server ilma töölauata | 512 MiB mälu, 4 GiB ketast | 1-2 GiB, 20 GiB | Kõige väiksema nõudlusega |
+| Ubuntu Server | 1 GiB, 5 GiB | 2-4 GiB, 25 GiB | |
+| AlmaLinux, server | 1,5-2 GiB, 10 GiB | 2-4 GiB, 20 GiB | AlmaLinux 10 nõuab protsessorilt taset **x86-64-v3** (umbes 2013+) |
+| Töölaud (GNOME, KDE) | 2-4 GiB, 25 GiB | 8 GiB, SSD | Graafiline keskkond ja veebibrauser on suurimad mälukasutajad |
+
+Arvud on ligikaudsed ja muutuvad versiooniti - kontrolli alati distro paigaldusjuhendist. Töötavas masinas näed riistvara nii:
+
+```bash
+lscpu                  # protsessor: mudel, tuumade arv, arhitektuur, virtualiseerimise tugi
+free -h                # mälu: kokku, kasutusel, vaba
+lsblk                  # kettad ja nende suurus
+df -h /                # kui palju juurfailisüsteemis ruumi on
+ip -br link            # võrguliidesed
+```
+
+**Mille järgi riistvara valida?**
+
+| Roll | Mis on kõige tähtsam |
+|---|---|
+| Kontoritöö tööjaam | 8 GiB mälu, SSD, toetatud graafika- ja WiFi-kiip |
+| Failiserver | ketaste maht ja töökindlus (RAID või ZFS, moodul 10), võrgukiirus |
+| Veebi- ja rakendusserver | mälu ja protsessorituumad vastavalt koormusele |
+| Andmebaasiserver | palju mälu ja kiire ketas (SSD/NVMe) |
+| Virtualiseerimisserver | palju mälu ja tuumi, protsessori virtualiseerimise tugi (VT-x/AMD-V), ECC-mälu |
+
+Küsi alati kolm küsimust: **kui palju kasutajaid**, **kui palju andmeid** (ja kui kiiresti see kasvab) ning **mis juhtub, kui masin on tund aega maas**. Vastustest sõltub, kas piisab vanast lauaarvutist või on vaja serveririistvara koos varutoite ja peegeldatud ketastega. Kontrolli ka, et riistvara on Linuxis toetatud - probleeme teevad kõige sagedamini WiFi-kaardid, väga uus riistvara ja mõned RAID-kontrollerid.
+
+### Paigaldusviisid ja kujutisfailid
+
+| Viis | Kuidas | Millal |
+|---|---|---|
+| **ISO-fail** USB-pulgal või virtuaalses CD-seadmes | käivita paigaldaja ja vasta küsimustele | üksik arvuti või VM; vt [paigalduslisa](../lisad/paigaldus.md) |
+| **Võrgupaigaldus** (*netinst*) | väike ISO, paketid laaditakse internetist | Debiani tavaline viis |
+| **Mall ja kloon** | valmis paigaldatud VM-ist tehakse koopiad | laborid ja virtualiseerimisplatvormid (HKHK Proxmox) |
+| **Pilvepilt** (*cloud image*) + cloud-init | valmis kettakujutis, seadistus esimesel käivitusel | pilv ja automatiseerimine (moodul 20) |
+| **Võrgust alglaadimine** (PXE) + vastustefail | paigaldus ilma käsitsi vastamata | klassiruum, kümned arvutid (valikmoodul 23) |
+
+**Kujutisfail** on terve ketta või andmekandja sisu ühes failis:
+
+| Laiend | Sisu | Kasutus |
+|---|---|---|
+| `.iso` | CD/DVD kujutis | paigaldusmeedia |
+| `.img` | toorkujutis kettast või mälupulgast | Raspberry Pi, sardseadmed, USB-kujutised |
+| `.qcow2`, `.vmdk`, `.vhdx` | virtuaalmasina ketas | Proxmox/KVM, VMware, Hyper-V |
+
+Enne kasutamist **kontrolli allalaaditud faili kontrollsummat** - nii tead, et fail ei ole allalaadimisel rikutud ega kellegi poolt muudetud (lähemalt moodulis 12):
+
+```bash
+sha256sum debian-13.1.0-amd64-netinst.iso      # võrdle distro kodulehel avaldatud väärtusega
+```
+
+USB-pulgale kirjutatakse kujutis Windowsis programmiga Rufus või balenaEtcher, Linuxis käsuga `dd` (ettevaatust: vale seadme nimi kustutab vale ketta, moodul 8). **Ventoy** teeb pulgast mitme ISO-ga alglaadimismenüü: kopeeri ISO-failid lihtsalt pulgale.
+
+### Litsentsid ja tugi
+
+Linux ja suurem osa selle tarkvarast on **vaba ja avatud lähtekoodiga** - seda võib tasuta kasutada, uurida, muuta ja levitada. Litsents määrab, mis tingimustel:
+
+| Litsentsitüüp | Näited | Põhitingimus |
+|---|---|---|
+| **Vastastikune** (*copyleft*) | GPL (Linuxi kernel, GNU tööriistad, MariaDB) | Kui levitad muudetud versiooni, pead avaldama ka selle lähtekoodi sama litsentsiga |
+| **Lubav** (*permissive*) | MIT, BSD, Apache 2.0 (nginx, PostgreSQL, FreeBSD, Kubernetes) | Koodi võib kasutada ka kinnises tootes; tuleb säilitada autoriõiguse märge |
+| **Omanduslik** (*proprietary*) | Windows, Oracle Database, osa draivereid ja püsivara | Kasutusõigus ostetakse; lähtekoodi ei saa, tingimused määrab tootja (sageli kasutajate, tuumade või serverite arvu järgi) |
+
+Mida see haldurile tähendab:
+
+- **Tasuta tarkvara, tasuline tugi.** Debian ja AlmaLinux on tasuta ja kogukonna toega. Red Hat Enterprise Linux (RHEL), SUSE Linux Enterprise ja Ubuntu Pro on **tellimusega**: makstakse toe, pikema uuendusperioodi ja sertifitseerimise eest, mitte tarkvara enda eest. Seepärast on AlmaLinux (RHEL-iga ühilduv ja tasuta) õppimiseks ja paljudele asutustele hea valik.
+- **Toe kestus.** Iga väljalaset toetatakse piiratud aja (Debian umbes 5 aastat, Ubuntu LTS 5 aastat, AlmaLinux 10 aastat). Pärast seda turvauuendusi ei tule - uuendus tuleb planeerida (moodul 4).
+- **Kõik serveris ei ole vaba tarkvara.** Osa püsivara ja draivereid (nt Nvidia) on omanduslikud. Debianis on need eraldi hoidla osas `non-free-firmware`, AlmaLinuxis kolmandate osapoolte hoidlates.
+- **Kommertstarkvara Linuxis** (andmebaasid, varundus- ja seiretarkvara) vajab oma litsentsi - loe tingimusi enne paigaldamist ja pea litsentside üle arvet.
+
+GPL-i ja BSD-litsentsi erinevusest ning selle mõjust loe lisast [Linuxi distributsioonide ülevaade](../lisad/distrod.md).
+
 ---
 
 ## Distrode erinevused
@@ -558,6 +642,8 @@ Halduriõigusi ja `sudo` käsku käsitleme lähemalt moodulis 3.
 | `touch fail` | Loo tühi fail |
 | `cp -r allikas siht` | Kopeeri |
 | `mv allikas siht` | Teisalda või nimeta ümber |
+| `lscpu`, `free -h`, `lsblk` | Riistvara: protsessor, mälu, kettad |
+| `sha256sum fail` | Faili kontrollsumma |
 | `rm -r tee` | Kustuta (jäädavalt!) |
 | `cat`, `less`, `head`, `tail` | Vaata faili sisu |
 | `file fail` | Näita faili tüüpi |

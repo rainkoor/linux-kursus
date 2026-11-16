@@ -143,6 +143,42 @@ Linuxis on laiend lihtsalt osa failinimest ega määra faili tüüpi. Tüüpi sa
 
 </details>
 
+**16.** Milliste käskudega näed töötavas masinas protsessorit, mälu ja kettaid?
+
+<details>
+<summary>Vastus</summary>
+
+`lscpu` (protsessor), `free -h` (mälu), `lsblk` ja `df -h` (kettad ja vaba ruum).
+
+</details>
+
+**17.** Miks ei piisa riistvara valimisel distro miinimumnõuete vaatamisest?
+
+<details>
+<summary>Vastus</summary>
+
+Miinimumnõuded ütlevad ainult, et süsteem käivitub. Tegelik vajadus sõltub masina rollist: kasutajate arvust, andmete mahust ja kasvust, teenustest ning sellest, kui kaua tohib masin maas olla.
+
+</details>
+
+**18.** Mille poolest erinevad vastastikune (GPL) ja lubav (MIT, BSD, Apache) litsents?
+
+<details>
+<summary>Vastus</summary>
+
+GPL nõuab, et muudetud versiooni levitamisel avaldatakse ka lähtekood sama litsentsiga. Lubav litsents lubab koodi kasutada ka kinnises tootes, kui autoriõiguse märge säilib.
+
+</details>
+
+**19.** Mis vahe on failidel `.iso`, `.img` ja `.qcow2`? Miks kontrollitakse allalaaditud kujutise kontrollsummat?
+
+<details>
+<summary>Vastus</summary>
+
+`.iso` on CD/DVD kujutis (paigaldusmeedia), `.img` ketta või mälupulga toorkujutis, `.qcow2` virtuaalmasina ketas (KVM/Proxmox). Kontrollsumma (`sha256sum`) näitab, et fail ei ole allalaadimisel rikutud ega muudetud.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** Loo **ühe käsuga** kataloogid `~/test/2024`, `~/test/2025` ja `~/test/2026`.

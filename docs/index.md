@@ -23,14 +23,14 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 | Osa | Kellele | Mida õppija pärast oskab |
 |---|---|---|
 | **Põhiosa**<br>moodulid 1–9, ~84 h | Kõigile IT-õppijatele, kes alustavad Linuxiga nullist: kutseõppe esimese kursuse õppijad, iseõppijad, aga ka tugispetsialistid, võrguhaldurid ja arendajad, kes vajavad töös käsurida. Eeldab ainult arvuti tavakasutaja oskusi. | Kasutab käsurida enesekindlalt ja haldab iseseisvalt üht Linuxi serverit: kasutajad ja õigused, paketid, teenused, lihtsad skriptid, võrk, SSH, kettad ning varundus ja taastamine. Teemad katavad suures osas algtaseme sertifikaadi LPI Linux Essentials nõuded. |
-| **Süvendusosa**<br>moodulid 10–20, ~98 h + lõpuprojekt | Süsteemihalduse eriala õppijatele (nt IT-süsteemide nooremspetsialist) ja iseõppijatele, kes tahavad töötada Linuxi administraatorina. Eeldab põhiosa läbimist või samaväärset kogemust. | Paigaldab, turvab ja hooldab tüüpilisi serveriteenuseid (veeb, andmebaasid, DNS, failiserver), seadistab keerukamaid võrke (IPv6, VLAN, VPN), lahendab alglaadimise ja jõudluse probleeme ning tunneb automatiseerimise ja seire põhimõtteid. Teemad ja tase on lähedased tuntud Linuxi sertifikaatide nõuetele: Red Hat RHCSA, Linux Foundation LFCS, CompTIA Linux+ ja LPI LPIC-1. Eksamiks valmistudes võrdle kursust sertifikaadi ametliku teemade loendiga. |
-| **Valikmoodulid**<br>moodulid 21–29 | Edasijõudnutele ja huvilistele, kes on süvendusosa (või selle vajalikud moodulid) läbinud ja tahavad mõnda valdkonda lähemalt tundma õppida. Õpetaja saab valida moodulid rühma vajaduste järgi; kiiremad õppijad saavad neid teha iseseisvalt. | Sõltub moodulist: tulemüür, võrgust paigaldus, e-posti server, kataloogiteenused ja domeen, töölaua Linux, virtualiseerimine, Kubernetes või FreeBSD. Osa mooduleid (nt Kubernetes) on sissejuhatavad: teema põhjalikum käsitlus on HKHK õppijal teistes erialaainetes. |
+| **Süvendusosa**<br>moodulid 10–21, ~104 h + lõpuprojekt | Süsteemihalduse eriala õppijatele (nt IT-süsteemide nooremspetsialist) ja iseõppijatele, kes tahavad töötada Linuxi administraatorina. Eeldab põhiosa läbimist või samaväärset kogemust. | Paigaldab, turvab ja hooldab tüüpilisi serveriteenuseid (veeb, andmebaasid, DNS, failiserver), seadistab keerukamaid võrke (IPv6, VLAN, VPN), lahendab alglaadimise ja jõudluse probleeme ning tunneb automatiseerimise ja seire põhimõtteid. Teemad ja tase on lähedased tuntud Linuxi sertifikaatide nõuetele: Red Hat RHCSA, Linux Foundation LFCS, CompTIA Linux+ ja LPI LPIC-1. Eksamiks valmistudes võrdle kursust sertifikaadi ametliku teemade loendiga. |
+| **Valikmoodulid**<br>moodulid 22–30 | Edasijõudnutele ja huvilistele, kes on süvendusosa (või selle vajalikud moodulid) läbinud ja tahavad mõnda valdkonda lähemalt tundma õppida. Õpetaja saab valida moodulid rühma vajaduste järgi; kiiremad õppijad saavad neid teha iseseisvalt. | Sõltub moodulist: tulemüür, võrgust paigaldus, e-posti server, kataloogiteenused ja domeen, töölaua Linux, virtualiseerimine, Kubernetes või FreeBSD. Osa mooduleid (nt Kubernetes) on sissejuhatavad: teema põhjalikum käsitlus on HKHK õppijal teistes erialaainetes. HKHK õppijale kuuluvad rakenduskava järgi kursuse hulka ka kataloogiteenuse, töölaua ja FreeBSD moodulid - vt [vastavus rakenduskavale](kava.md#vastavus-hkhk-rakenduskavale). |
 
 Iga mooduli alguses on kirjas tema **eeldused**, nii et valikmooduleid ei pea tegema järjest.
 
 ## Ülesehitus
 
-Kursus koosneb **20 moodulist** (põhiosa 1–9 ja süvendusosa 10–20), kahest proovieksamist ([põhiosa](proovieksam-pohiosa.md) ja [süvendusosa](proovieksam.md)), [lõpuprojektist](lopuprojekt.md) ning **9 valikmoodulist** (21–29: OPNsense, DHCP/PXE/iSCSI, e-posti server, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes, FreeBSD server). Iga moodul sisaldab kolme osa:
+Kursus koosneb **21 moodulist** (põhiosa 1–9 ja süvendusosa 10–21), kahest proovieksamist ([põhiosa](proovieksam-pohiosa.md) ja [süvendusosa](proovieksam.md)), [lõpuprojektist](lopuprojekt.md) ning **9 valikmoodulist** (21–29: OPNsense, DHCP/PXE/iSCSI, e-posti server, OpenLDAP, Samba AD, töölaua Linux ja WSL, virtualiseerimine, Kubernetes, FreeBSD server). Iga moodul sisaldab kolme osa:
 
 | Fail | Sisu |
 |---|---|
@@ -222,17 +222,27 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     [:octicons-arrow-right-24: Teooria](moodul-17-dns/index.md) · [Labor](moodul-17-dns/labor.md) · [Enesekontroll](moodul-17-dns/enesekontroll.md)
 
--   :material-folder-network:{ .lg .middle } **18. Failiserverid**
+-   :material-ip-network:{ .lg .middle } **18. DHCP**
 
     ---
 
-    NFS, autofs, Samba, ühiskaustade õigused, TrueNAS, varundus ja dokumenteerimine.
+    DHCP toimimine, Kea DHCP-server, reserveeringud, kliendid ja rendid, tõrkeotsing.
+
+    *6 h · Debian, Ubuntu, AlmaLinux*
+
+    [:octicons-arrow-right-24: Teooria](moodul-18-dhcp/index.md) · [Labor](moodul-18-dhcp/labor.md) · [Enesekontroll](moodul-18-dhcp/enesekontroll.md)
+
+-   :material-folder-network:{ .lg .middle } **19. Faili- ja prindiserverid**
+
+    ---
+
+    NFS, autofs, Samba, ühiskaustade õigused, prindiserver (CUPS), TrueNAS, varundus ja dokumenteerimine.
 
     *8 h · Debian, Ubuntu, Windows*
 
-    [:octicons-arrow-right-24: Teooria](moodul-18-failiserverid/index.md) · [Labor](moodul-18-failiserverid/labor.md) · [Enesekontroll](moodul-18-failiserverid/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-19-failiserverid/index.md) · [Labor](moodul-19-failiserverid/labor.md) · [Enesekontroll](moodul-19-failiserverid/enesekontroll.md)
 
--   :material-robot-industrial:{ .lg .middle } **19. Automatiseerimine**
+-   :material-robot-industrial:{ .lg .middle } **20. Automatiseerimine**
 
     ---
 
@@ -240,9 +250,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *10 h · AlmaLinux, Debian, Ubuntu*
 
-    [:octicons-arrow-right-24: Teooria](moodul-19-automatiseerimine/index.md) · [Labor](moodul-19-automatiseerimine/labor.md) · [Enesekontroll](moodul-19-automatiseerimine/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-20-automatiseerimine/index.md) · [Labor](moodul-20-automatiseerimine/labor.md) · [Enesekontroll](moodul-20-automatiseerimine/enesekontroll.md)
 
--   :material-chart-line:{ .lg .middle } **20. Seire ja jõudlus**
+-   :material-chart-line:{ .lg .middle } **21. Seire ja jõudlus**
 
     ---
 
@@ -250,7 +260,7 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *8 h · Debian, Ubuntu*
 
-    [:octicons-arrow-right-24: Teooria](moodul-20-seire/index.md) · [Labor](moodul-20-seire/labor.md) · [Enesekontroll](moodul-20-seire/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-21-seire/index.md) · [Labor](moodul-21-seire/labor.md) · [Enesekontroll](moodul-21-seire/enesekontroll.md)
 
 </div>
 
@@ -280,7 +290,7 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
 <div class="grid cards" markdown>
 
--   :material-wall-fire:{ .lg .middle } **21. OPNsense tulemüür**
+-   :material-wall-fire:{ .lg .middle } **22. OPNsense tulemüür**
 
     ---
 
@@ -288,19 +298,19 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *8 h · OPNsense (FreeBSD)*
 
-    [:octicons-arrow-right-24: Teooria](moodul-21-opnsense/index.md) · [Labor](moodul-21-opnsense/labor.md) · [Enesekontroll](moodul-21-opnsense/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-22-opnsense/index.md) · [Labor](moodul-22-opnsense/labor.md) · [Enesekontroll](moodul-22-opnsense/enesekontroll.md)
 
--   :material-ip-network:{ .lg .middle } **22. DHCP, PXE ja iSCSI**
+-   :material-lan-pending:{ .lg .middle } **23. PXE ja iSCSI**
 
     ---
 
-    Kea DHCP, võrgust alglaadimine, automaatne paigaldus ja iSCSI.
+    Võrgust alglaadimine (PXE), automaatne paigaldus ja iSCSI.
 
-    *10 h · Debian*
+    *8 h · Debian, AlmaLinux*
 
-    [:octicons-arrow-right-24: Teooria](moodul-22-dhcp-pxe-iscsi/index.md) · [Labor](moodul-22-dhcp-pxe-iscsi/labor.md) · [Enesekontroll](moodul-22-dhcp-pxe-iscsi/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-23-pxe-iscsi/index.md) · [Labor](moodul-23-pxe-iscsi/labor.md) · [Enesekontroll](moodul-23-pxe-iscsi/enesekontroll.md)
 
--   :material-email-outline:{ .lg .middle } **23. E-posti server**
+-   :material-email-outline:{ .lg .middle } **24. E-posti server**
 
     ---
 
@@ -308,9 +318,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *10 h · Ubuntu, Debian*
 
-    [:octicons-arrow-right-24: Teooria](moodul-23-e-post/index.md) · [Labor](moodul-23-e-post/labor.md) · [Enesekontroll](moodul-23-e-post/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-24-e-post/index.md) · [Labor](moodul-24-e-post/labor.md) · [Enesekontroll](moodul-24-e-post/enesekontroll.md)
 
--   :material-card-account-details:{ .lg .middle } **24. OpenLDAP**
+-   :material-card-account-details:{ .lg .middle } **25. OpenLDAP**
 
     ---
 
@@ -318,9 +328,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *8 h · Debian, Ubuntu*
 
-    [:octicons-arrow-right-24: Teooria](moodul-24-openldap/index.md) · [Labor](moodul-24-openldap/labor.md) · [Enesekontroll](moodul-24-openldap/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-25-openldap/index.md) · [Labor](moodul-25-openldap/labor.md) · [Enesekontroll](moodul-25-openldap/enesekontroll.md)
 
--   :material-domain:{ .lg .middle } **25. Samba AD**
+-   :material-domain:{ .lg .middle } **26. Samba AD**
 
     ---
 
@@ -328,9 +338,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *10 h · Debian, Windows*
 
-    [:octicons-arrow-right-24: Teooria](moodul-25-samba-ad/index.md) · [Labor](moodul-25-samba-ad/labor.md) · [Enesekontroll](moodul-25-samba-ad/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-26-samba-ad/index.md) · [Labor](moodul-26-samba-ad/labor.md) · [Enesekontroll](moodul-26-samba-ad/enesekontroll.md)
 
--   :material-monitor:{ .lg .middle } **26. Töölaua Linux ja WSL**
+-   :material-monitor:{ .lg .middle } **27. Töölaua Linux ja WSL**
 
     ---
 
@@ -338,9 +348,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *8 h · Ubuntu, Kali, Windows*
 
-    [:octicons-arrow-right-24: Teooria](moodul-26-toolaud-wsl/index.md) · [Labor](moodul-26-toolaud-wsl/labor.md) · [Enesekontroll](moodul-26-toolaud-wsl/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-27-toolaud-wsl/index.md) · [Labor](moodul-27-toolaud-wsl/labor.md) · [Enesekontroll](moodul-27-toolaud-wsl/enesekontroll.md)
 
--   :material-server-network:{ .lg .middle } **27. Virtualiseerimine**
+-   :material-server-network:{ .lg .middle } **28. Virtualiseerimine**
 
     ---
 
@@ -348,9 +358,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *12 h · Debian, Proxmox VE, XCP-ng*
 
-    [:octicons-arrow-right-24: Teooria](moodul-27-virtualiseerimine/index.md) · [Labor](moodul-27-virtualiseerimine/labor.md) · [Enesekontroll](moodul-27-virtualiseerimine/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-28-virtualiseerimine/index.md) · [Labor](moodul-28-virtualiseerimine/labor.md) · [Enesekontroll](moodul-28-virtualiseerimine/enesekontroll.md)
 
--   :simple-kubernetes:{ .lg .middle } **28. Kubernetes: k3s**
+-   :simple-kubernetes:{ .lg .middle } **29. Kubernetes: k3s**
 
     ---
 
@@ -358,9 +368,9 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *10 h · Debian*
 
-    [:octicons-arrow-right-24: Teooria](moodul-28-kubernetes/index.md) · [Labor](moodul-28-kubernetes/labor.md) · [Enesekontroll](moodul-28-kubernetes/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-29-kubernetes/index.md) · [Labor](moodul-29-kubernetes/labor.md) · [Enesekontroll](moodul-29-kubernetes/enesekontroll.md)
 
--   :simple-freebsd:{ .lg .middle } **29. FreeBSD server**
+-   :simple-freebsd:{ .lg .middle } **30. FreeBSD server**
 
     ---
 
@@ -368,7 +378,7 @@ Vaata [kursuse täielikku kava](kava.md), mõistete [eesti-inglise sõnastikku](
 
     *10 h · FreeBSD*
 
-    [:octicons-arrow-right-24: Teooria](moodul-29-freebsd/index.md) · [Labor](moodul-29-freebsd/labor.md) · [Enesekontroll](moodul-29-freebsd/enesekontroll.md)
+    [:octicons-arrow-right-24: Teooria](moodul-30-freebsd/index.md) · [Labor](moodul-30-freebsd/labor.md) · [Enesekontroll](moodul-30-freebsd/enesekontroll.md)
 
 </div>
 

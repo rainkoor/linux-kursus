@@ -43,7 +43,7 @@ hosts: files mdns4_minimal [NOTFOUND=return] dns
 | `mdns4_minimal` | Kohaliku võrgu `.local` nimed (Avahi, printerid) - seepärast ei sobi `.local` sisevõrgu domeeniks |
 | `dns` | DNS-server(id) failist `/etc/resolv.conf` |
 | `resolve` | otse systemd-resolved (mõnes distros) |
-| `sss`, `ldap` | Kataloogiteenused (valikmoodulid 24-25) |
+| `sss`, `ldap` | Kataloogiteenused (valikmoodulid 25-26) |
 
 Programmid kasutavad nime lahendamiseks C-teegi funktsiooni `getaddrinfo()`, mis järgib `nsswitch.conf`-i. Seepärast:
 
@@ -366,13 +366,13 @@ BIND9 on klassika, kuid praktikas kasutatakse sageli kergemaid või kitsama otst
 | Tarkvara | Liik | Tüüpiline kasutus |
 |---|---|---|
 | **BIND9** | autoriteetne + rekursiivne | klassikaline täisfunktsionaalne DNS, suured tsoonid, DNSSEC |
-| **Unbound** | rekursiivne | turvaline vahemäluga resolver (OPNsense'i vaikimisi DNS, moodul 21) |
+| **Unbound** | rekursiivne | turvaline vahemäluga resolver (OPNsense'i vaikimisi DNS, moodul 22) |
 | **dnsmasq** | edastav vahemälu + DHCP + TFTP | väikesed võrgud, kodu- ja laboriruuterid, libvirt, Pi-hole'i alus |
 | **CoreDNS** | autoriteetne + edastav, pistikprogrammidega | konteinerid, Kubernetes (vaikimisi klastri DNS), seadistus ühes failis |
 | **PowerDNS** | autoriteetne (andmebaasiga) + eraldi Recursor | teenusepakkujad, API-ga hallatavad tsoonid |
 | **Pi-hole**, AdGuard Home | filtreeriv DNS | reklaami- ja jälitusdomeenide blokeerimine kogu võrgule |
 | **systemd-resolved** | kohalik kliendipoolne vahemälu | Ubuntu jt töölaud ja server (`127.0.0.53`, moodul 7) |
-| **Windows Server DNS** | autoriteetne + rekursiivne | Active Directory (valikmoodul 25) |
+| **Windows Server DNS** | autoriteetne + rekursiivne | Active Directory (valikmoodul 26) |
 
 ### dnsmasq
 
@@ -445,7 +445,7 @@ services:
     restart: unless-stopped
 ```
 
-**Näide päriselust: HKHK Proxmoxi labori DNS.** Kooli laboris teenindavad sisevõrgu tsooni kaks CoreDNS-serverit (`ns1` ja `ns2`), mis töötavad Dockeris Compose'iga. Mõlemal on identne tsoonifail ja kogu seadistus (`Corefile` ja tsoonid, ka pöördtsoonid) on **Giti hoidlas**. Kumbki server tõmbab ajastatud tööga iga paari minuti järel hoidlast muudatused (`git pull`). Kirje lisamiseks muudetakse tsoonifaili ja suurendatakse seerianumbrit Gitis. Mõne minuti pärast on muudatus mõlemas serveris ja ajalugu näitab, kes ja millal kirjet muutis. See on lihtne **infrastruktuur koodina** (moodul 19) - ilma eraldi primaar-sekundaar-replikatsioonita.
+**Näide päriselust: HKHK Proxmoxi labori DNS.** Kooli laboris teenindavad sisevõrgu tsooni kaks CoreDNS-serverit (`ns1` ja `ns2`), mis töötavad Dockeris Compose'iga. Mõlemal on identne tsoonifail ja kogu seadistus (`Corefile` ja tsoonid, ka pöördtsoonid) on **Giti hoidlas**. Kumbki server tõmbab ajastatud tööga iga paari minuti järel hoidlast muudatused (`git pull`). Kirje lisamiseks muudetakse tsoonifaili ja suurendatakse seerianumbrit Gitis. Mõne minuti pärast on muudatus mõlemas serveris ja ajalugu näitab, kes ja millal kirjet muutis. See on lihtne **infrastruktuur koodina** (moodul 20) - ilma eraldi primaar-sekundaar-replikatsioonita.
 
 ### Pi-hole
 

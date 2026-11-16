@@ -7,11 +7,11 @@
 | | |
 |---|---|
 | **Distro** | Debian |
-| **Kestus** | 2 × 90 minutit |
+| **Kestus** | 2-3 × 90 minutit |
 | **Vajalik** | Debiani virtuaalmasin, millele on ligipääs SSH kaudu tavakasutajana |
 | **Eesmärk** | Harjutada ühendumist, liikumist failisüsteemis ja põhitoiminguid failidega |
 
-> **Aruanne:** vasta küsimustele **K1–K18** aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)). Iga käsu järel vaata hoolega, mida see väljastas.
+> **Aruanne:** vasta küsimustele **K1–K21** aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)). Iga käsu järel vaata hoolega, mida see väljastas.
 
 > [!NOTE]
 > **Iseõppijale:** sobib iga Debiani virtuaalmasin, nt VirtualBoxis. Paigalda Debian ilma graafilise töölauata ja vali paigaldamisel tarkvara hulka „SSH server“. Täpsed paigaldussammud on lisas [Laborikeskkond ja paigaldus](../lisad/paigaldus.md).
@@ -231,6 +231,35 @@ Parool on `bandit0`. Juhised: overthewire.org/wargames/bandit. Läbi vähemalt t
 
 ---
 
+## 8. osa. Riistvara, distro ja litsents
+
+**8.1** Vaata oma virtuaalmasina riistvara (teooria punkt 1.11):
+
+```bash
+lscpu | head -20
+free -h
+lsblk
+df -h /
+```
+
+> **K19.** Mitu protsessorituuma, kui palju mälu ja kui suur ketas on sinu masinal? Kui palju mälu on praegu kasutusel? Kas sellest riistvarast piisaks sama distro töölauaversioonile? Põhjenda.
+
+**8.2** Lahenda ülesanne (aruandes, ilma masinata):
+
+> **K20.** Väike raamatupidamisbüroo (5 töötajat) vajab: a) viit tööjaama kontoritööks ja veebirakenduste kasutamiseks, b) ühte failiserverit dokumentide jaoks (umbes 200 GiB andmeid, kasvab 50 GiB aastas). Paku mõlema jaoks välja riistvara (protsessor, mälu, ketas) ja distro ning **põhjenda valikut**. Mida küsiksid kliendilt enne otsustamist?
+
+**8.3** Uuri litsentse:
+
+```bash
+less /usr/share/common-licenses/GPL-3      # Debian, Ubuntu; välju klahviga q
+ls /usr/share/common-licenses/             # Debian, Ubuntu
+ls /usr/share/licenses/ | head             # AlmaLinux
+```
+
+> **K21.** Millised litsentsid leidsid? Mille poolest erineb GPL lubavast litsentsist (MIT, BSD)? Mille eest maksab asutus, kes ostab Red Hat Enterprise Linuxi tellimuse, kui tarkvara ise on vaba?
+
+---
+
 ## Lisaülesanne (valikuline)
 
 Jätka Banditiga tasemetel 6–15 - need kasutavad mooduli 2 teemasid (`find`, `grep`, `sort`, `uniq`, torud).
@@ -260,6 +289,9 @@ Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures 
 - **K16.** *(punkt 6.2)* Mis juhtus, kui proovisid kataloogi `~/labor01/logid` kustutada käsuga `rmdir`, ja miks? Millise käsuga saab kataloogi koos sisuga kustutada?
 - **K17.** *(punkt 7.1)* Mitu taset läbisid? Kirjuta iga taseme kohta üks rida: mis oli ülesanne ja millise käsuga selle lahendasid (**ära kirjuta paroole aruandesse**).
 - **K18.** *(punkt 7.1)* Tase 2 ja 3 (failinimed kriipsu või tühikuga, peidetud failid) - miks olid need keerulised ja kuidas neid failinimesid käsureal käsitleda (vt teooria punkt 1.9)?
+- **K19.** *(punkt 8.1)* Mitu protsessorituuma, kui palju mälu ja kui suur ketas on sinu masinal? Kui palju mälu on praegu kasutusel? Kas sellest riistvarast piisaks sama distro töölauaversioonile? Põhjenda.
+- **K20.** *(punkt 8.2)* Väike raamatupidamisbüroo (5 töötajat) vajab: a) viit tööjaama kontoritööks ja veebirakenduste kasutamiseks, b) ühte failiserverit dokumentide jaoks (umbes 200 GiB andmeid, kasvab 50 GiB aastas). Paku mõlema jaoks välja riistvara (protsessor, mälu, ketas) ja distro ning **põhjenda valikut**. Mida küsiksid kliendilt enne otsustamist?
+- **K21.** *(punkt 8.3)* Millised litsentsid leidsid? Mille poolest erineb GPL lubavast litsentsist (MIT, BSD)? Mille eest maksab asutus, kes ostab Red Hat Enterprise Linuxi tellimuse, kui tarkvara ise on vaba?
 <!-- /kysimused -->
 
 ---

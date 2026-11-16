@@ -9,7 +9,7 @@
 > [!NOTE]
 > **Süsteemihalduri vaade veebiserveritele.** See moodul õpetab veebiserverit paigaldama, seadistama ja hoidma nii, nagu Linuxi serveri haldur seda vajab: nginx ja Apache saidid, HTTPS ja sertifikaadid, koormuse jaotus ja varundus. Eesmärk on töötav ja turvaline veebiserver laboris - mitte veebirakenduste arendus ega suurte veebiplatvormide täielik valdamine.
 >
-> **HKHK õppijale:** veebiservereid ja rakendusservereid käsitletakse põhjalikumalt eraldi moodulites (nt veebiserveri paigaldus, rakendusserverid). See moodul annab neile Linuxi serveri poolt vaadates aluse.
+> **HKHK õppijale:** rakendusservereid ja nende teenuseid käsitletakse põhjalikumalt eraldi moodulis „Rakendusserverid ja -teenused“. See moodul annab sellele Linuxi serveri poolt vaadates aluse.
 
 ## Õpiväljundid
 
@@ -34,7 +34,7 @@ Mooduli läbinud õppija:
 > [!TIP]
 > **Lühidalt:** Iga serveriteenus käib sama töövooga: paigalda → seadista → kontrolli süntaksit → käivita ja luba → ava tulemüür → testi → vaata logisid → varunda.
 
-Moodulites 15–18 paneme kokku kõik varem õpitu: pakihaldus, teenused, võrk, tulemüür, õigused, skriptid ja varundus. Selles moodulis tegeleme veebiserveritega, moodulis 16 andmebaasidega, moodulis 17 DNS-iga ja moodulis 18 failiserveri, varunduse ja dokumentatsiooniga. Tüüpiline väikese asutuse server pakub järgmisi teenuseid:
+Moodulites 15–19 paneme kokku kõik varem õpitu: pakihaldus, teenused, võrk, tulemüür, õigused, skriptid ja varundus. Selles moodulis tegeleme veebiserveritega, moodulis 16 andmebaasidega, moodulis 17 DNS-iga, moodulis 18 DHCP-ga ja moodulis 19 failiserveri, varunduse ja dokumentatsiooniga. Tüüpiline väikese asutuse server pakub järgmisi teenuseid:
 
 | Teenus | Tarkvara (näited) | Port |
 |---|---|---|
@@ -259,7 +259,7 @@ openssl req -in minukool.csr -noout -text | grep -A1 "Subject Alternative"
 
 CSR (mitte võti!) saadetakse CA-le, CA valideerib domeeni ja organisatsiooni ning väljastab sertifikaadi koos **vahesertifikaatidega**. Serverisse pannakse nende ühendfail (serveri sertifikaat esimesena, siis vahesertifikaadid) - puuduv vahesertifikaat on levinuim viga, mille puhul brauser töötab, kuid `curl` või telefon kaebab.
 
-**7. Kehtivus lüheneb.** Avalike sertifikaatide maksimaalne kehtivus on CA/Browser Forumi otsusega lühenemas: alates 15.03.2026 kuni **200 päeva**, alates 15.03.2027 kuni **100 päeva** ja alates 15.03.2029 kuni **47 päeva**. Let's Encrypt plaanib minna 90 päevalt 64 päevale (veebruar 2027) ja 45 päevale (veebruar 2028). Seega **käsitsi uuendamine ei ole enam realistlik** - sertifikaadid peavad uuenema automaatselt ja nende aegumist tuleb jälgida (Uptime Kuma, Prometheus, moodul 20).
+**7. Kehtivus lüheneb.** Avalike sertifikaatide maksimaalne kehtivus on CA/Browser Forumi otsusega lühenemas: alates 15.03.2026 kuni **200 päeva**, alates 15.03.2027 kuni **100 päeva** ja alates 15.03.2029 kuni **47 päeva**. Let's Encrypt plaanib minna 90 päevalt 64 päevale (veebruar 2027) ja 45 päevale (veebruar 2028). Seega **käsitsi uuendamine ei ole enam realistlik** - sertifikaadid peavad uuenema automaatselt ja nende aegumist tuleb jälgida (Uptime Kuma, Prometheus, moodul 21).
 
 **8. Avalikkus ja turvalisus.**
 
@@ -611,7 +611,7 @@ journalctl -u keepalived -f          # oleku muutused: Entering MASTER/BACKUP ST
 | **Tulemüür** | VRRP ei ole TCP ega UDP, vaid IP-protokoll 112. firewalld: `firewall-cmd --permanent --add-rich-rule='rule protocol value="vrrp" accept'`; ufw: lisa faili `/etc/ufw/before.rules` rida `-A ufw-before-input -p 112 -j ACCEPT` |
 | **Teenus peab kuulama VIP-il** | `bind *:80` kuulab kõigil aadressidel ja sobib. Kui seod teenuse otse VIP-iga, vajab varumasin `sysctl net.ipv4.ip_nonlocal_bind=1`, sest aadressi tal veel ei ole |
 | **Multicast** | VRRP kasutab vaikimisi multicast-aadressi `224.0.0.18`. Kui võrk seda ei luba (osa pilvi ja SDN-võrke), kasuta `unicast_src_ip` ja `unicast_peer { teise-masina-IP }` |
-| **Seadistuse sünkroon** | keepalived ei kopeeri HAProxy seadistust - mõlemas masinas peab see olema sama (sobib hästi Ansible'iga, moodul 19) |
+| **Seadistuse sünkroon** | keepalived ei kopeeri HAProxy seadistust - mõlemas masinas peab see olema sama (sobib hästi Ansible'iga, moodul 20) |
 | **Lõhestunud aju** (*split brain*) | kui masinad üksteist ei näe (nt tulemüür blokeerib VRRP), arvavad mõlemad, et on MASTER, ja VIP on kahes kohas. Kontrolli alati `ip -br a` mõlemas masinas |
 
 Sama põhimõtet (VIP + VRRP) kasutavad ka ruuterid ja tulemüürid (OPNsense'is ja FreeBSD-s sarnane protokoll CARP) ning andmebaaside ülevõtt (moodul 16).
@@ -637,7 +637,7 @@ Olulised read väljundis:
 Teised tööriistad: **`wrk`** (`apt install wrk`; kiirem, kestusepõhine: `wrk -t2 -c50 -d30s URL`) ja **k6** (testid kirjutatakse JavaScriptis, sobib keerukamate kasutajastsenaariumide jaoks).
 
 > [!WARNING]
-> **Testi ainult enda servereid.** Koormustest võõra saidi vastu on sisuliselt teenusetõkestusrünnak (DoS). Laboris jälgi testi ajal taustserverites `top`-i ja HAProxy statistikalehte (moodul 20): kas pudelikael on protsessor, võrk või rakendus?
+> **Testi ainult enda servereid.** Koormustest võõra saidi vastu on sisuliselt teenusetõkestusrünnak (DoS). Laboris jälgi testi ajal taustserverites `top`-i ja HAProxy statistikalehte (moodul 21): kas pudelikael on protsessor, võrk või rakendus?
 
 <details>
 <summary>Loe lähemalt: Traefik</summary>

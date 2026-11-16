@@ -489,7 +489,7 @@ sudo mount /dev/sda2 /mnt/boot                       # /boot on LVM-ist väljas
 **AlmaLinux** kasutab käske `grub2-install` ja `grub2-mkconfig -o /boot/grub2/grub.cfg`. UEFI-süsteemis ei käivitata RHEL-i perekonnas `grub2-install`-i, vaid paigaldatakse alglaadija paketid uuesti: `dnf reinstall grub2-efi-x64 shim-x64`.
 
 > [!NOTE]
-> **Märkus:** püsivara saab süsteemi käivitada ka **võrgust** (PXE). Nii töötavad võrgupaigaldus, kettatõmmiste levitamine (FOG) ja ka võrgust käivitatavad taastetööriistad - vt valikmoodul 22.
+> **Märkus:** püsivara saab süsteemi käivitada ka **võrgust** (PXE). Nii töötavad võrgupaigaldus, kettatõmmiste levitamine (FOG) ja ka võrgust käivitatavad taastetööriistad - vt valikmoodul 23.
 
 ## 11.10 Kernelite haldus ja kompileerimine
 
@@ -827,7 +827,7 @@ Teenus peab kataloogi tühjendama, muidu käivitatakse see kohe uuesti.
 
 ### Haakimine (.mount ja .automount)
 
-systemd teeb faili `/etc/fstab` ridadest automaatselt `.mount` üksused (nt `/srv/andmed` → `srv-andmed.mount`). Seepärast saab haakimist kasutada sõltuvusena (`RequiresMountsFor=/srv/andmed`) ja pärast fstab-i muutmist on vaja `systemctl daemon-reload`. fstab-i valik `x-systemd.automount` haagib failisüsteemi alles esimesel kasutamisel - sobib võrgukettale (vrd autofs, moodul 18).
+systemd teeb faili `/etc/fstab` ridadest automaatselt `.mount` üksused (nt `/srv/andmed` → `srv-andmed.mount`). Seepärast saab haakimist kasutada sõltuvusena (`RequiresMountsFor=/srv/andmed`) ja pärast fstab-i muutmist on vaja `systemctl daemon-reload`. fstab-i valik `x-systemd.automount` haagib failisüsteemi alles esimesel kasutamisel - sobib võrgukettale (vrd autofs, moodul 19).
 
 ```bash
 systemctl list-units --type=mount

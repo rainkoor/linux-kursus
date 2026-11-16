@@ -174,7 +174,7 @@ sudo /usr/local/sbin/varunda-andmed
 journalctl -t varundus -n 5
 ```
 
-**4.2** Loo veateate üksus, mis kirjutab logisse ja faili `/var/log/varundus-VIGA` (päris süsteemis saadaks see e-kirja, moodul 20):
+**4.2** Loo veateate üksus, mis kirjutab logisse ja faili `/var/log/varundus-VIGA` (päris süsteemis saadaks see e-kirja, moodul 21):
 
 ```ini
 # /etc/systemd/system/varundus-viga.service

@@ -615,7 +615,7 @@ Mitme ketta ühendamine töökindluseks (RAID, `mdadm`), ZFS, ketaste jõudluse 
 <details>
 <summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
 
-FreeBSD-s on samad mõisted (ketas, partitsioon, failisüsteem, haakimine, `/etc/fstab`, saaleala), kuid tööriistad on teised. LVM-i FreeBSD-s pole: selle asemel on modulaarne kettakiht **GEOM** ja eelkõige **ZFS**, mida paigaldaja pakub vaikimisi (vt moodul 29, punkt 29.9).
+FreeBSD-s on samad mõisted (ketas, partitsioon, failisüsteem, haakimine, `/etc/fstab`, saaleala), kuid tööriistad on teised. LVM-i FreeBSD-s pole: selle asemel on modulaarne kettakiht **GEOM** ja eelkõige **ZFS**, mida paigaldaja pakub vaikimisi (vt moodul 30, punkt 30.9).
 
 | | Linux | FreeBSD |
 |---|---|---|

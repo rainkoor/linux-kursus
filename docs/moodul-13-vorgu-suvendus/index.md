@@ -146,7 +146,7 @@ flowchart TB
     end
 ```
 
-- **Proxmox** loob vaikimisi silla `vmbr0`, mille küljes on füüsiline kaart ja kõigi VM-ide virtuaalsed võrgukaardid (moodul 27).
+- **Proxmox** loob vaikimisi silla `vmbr0`, mille küljes on füüsiline kaart ja kõigi VM-ide virtuaalsed võrgukaardid (moodul 28).
 - **Podman ja Docker** loovad silla (`podman0`, `docker0`) ja ühendavad iga konteineri sellega **veth-paari** kaudu (moodul 14).
 - **libvirt** loob silla `virbr0` NAT-iga.
 
@@ -244,7 +244,7 @@ iface ens19.20 inet static
     address 10.20.0.52/24
 ```
 
-VLAN-e kasutatakse koolides ja ettevõtetes võrkude eraldamiseks (õpetajad, õpilased, serverid, külalised, IP-telefonid). VLAN-ide vahel liikumine käib alati läbi ruuteri või tulemüüri (nt OPNsense, moodul 21), kus saab liiklust piirata.
+VLAN-e kasutatakse koolides ja ettevõtetes võrkude eraldamiseks (õpetajad, õpilased, serverid, külalised, IP-telefonid). VLAN-ide vahel liikumine käib alati läbi ruuteri või tulemüüri (nt OPNsense, moodul 22), kus saab liiklust piirata.
 
 > [!NOTE]
 > **Proxmoxis** saab VM-i võrgukaardile määrata VLAN-i (*VLAN Tag*), kui sild on *VLAN aware*. Siis märgistab Proxmox kaadrid ise ja VM näeb tavalist märgistamata võrku. Kui VM peab ise mitut VLAN-i nägema (nt tulemüür), jäetakse märgis tühjaks ja VLAN-id seadistatakse VM-is nagu eespool.
@@ -425,7 +425,7 @@ Serveri tulemüüris ava **51820/udp** (`sudo ufw allow 51820/udp`, `sudo firewa
 | **Kahe asukoha ühendamine** (*site-to-site*) | Kaks Linuxi (või OPNsense) ruuterit, mõlemas `AllowedIPs` teise asukoha võrk; NAT-i pole vaja, kui mõlemas võrgus lisatakse marsruut |
 
 > [!NOTE]
-> OPNsense'is (moodul 21) on WireGuard veebiliideses (*VPN* → *WireGuard*). Kooli võrgust välja ühendudes järgi alati asutuse IT-reegleid - ära ava omavoliliselt tunneleid sisevõrku.
+> OPNsense'is (moodul 22) on WireGuard veebiliideses (*VPN* → *WireGuard*). Kooli võrgust välja ühendudes järgi alati asutuse IT-reegleid - ära ava omavoliliselt tunneleid sisevõrku.
 
 Teisi VPN-e: **OpenVPN** (vanem, TLS-põhine, töötab ka TCP-pordil 443 piiravates võrkudes) ja **IPsec** (standardne, ühildub ruuterite ja tulemüüridega, keerulisem seadistada).
 
@@ -486,7 +486,7 @@ Selle mooduli teemad on FreeBSD-s olemas ja seadistatakse failis `/etc/rc.conf`:
 | WireGuard | kernelis | kernelis (`if_wg`), `pkg install wireguard-tools` |
 | Liikluse analüüs | `tcpdump` | `tcpdump` baassüsteemis |
 
-FreeBSD võrgupinu on tuntud jõudluse poolest. Selle peal töötavad OPNsense ja pfSense (moodul 21), Juniperi ruuterite Junos ja Netflixi videoedastuse serverid.
+FreeBSD võrgupinu on tuntud jõudluse poolest. Selle peal töötavad OPNsense ja pfSense (moodul 22), Juniperi ruuterite Junos ja Netflixi videoedastuse serverid.
 
 </details>
 

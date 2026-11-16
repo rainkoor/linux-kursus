@@ -76,6 +76,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | deduplitseerimistegur | deduplication factor | Näitab, mitu korda vähem ruumi andmed deduplitseerimise tõttu võtavad |
 | Deployment | Deployment | Kubernetese objekt, mis hoiab rakenduse soovitud arvu pode ja haldab uuendusi |
 | DHCP | Dynamic Host Configuration Protocol | Protokoll, millega võrguseadmed saavad automaatselt IP-aadressi ja võrguseaded |
+| DHCP relee | DHCP relay | Ruuteri funktsioon, mis edastab DHCP-päringud teise võrgu serverile |
 | diferentsiaalvarundus | differential backup | Varundus, mis kopeerib kõik viimasest täisvarundusest muutunud andmed |
 | distributsioon, distro | distribution | Kernelist ja tarkvarast koosnev terviklik OS |
 | DIT | Directory Information Tree | LDAP-kataloogi puukujuline struktuur |
@@ -143,6 +144,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | initsiaator | initiator | iSCSI klient, mis kasutab võrguketast |
 | inventuur | inventory | Ansible'i hallatavate serverite loend |
 | IOPS | Input/Output Operations Per Second | Ketta sisend-väljundoperatsioonide arv sekundis |
+| IPP | Internet Printing Protocol | Võrguprintimise protokoll (port 631), mida kasutab CUPS |
 | iptables | iptables | Vanem Linuxi tulemüüri tööriist; asendunud nftables'iga |
 | IPv6 | Internet Protocol version 6 | 128-bitiste aadressidega IP-protokolli versioon |
 | iPXE | iPXE | Laiendatud võrgualglaadija, mis oskab laadida ka HTTP kaudu ja käivitada skripte |
@@ -188,10 +190,12 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | koormus | load average | Protsessorit ootavate protsesside keskmine arv |
 | koormusejaotur | load balancer | Jagab päringud mitme taustserveri vahel |
 | koormustest | load test | Serveri jõudluse mõõtmine paljude samaaegsete päringutega (`ab`, `wrk`, k6) |
+| KPI | Key Performance Indicator | Mõõdetav tulemusnäitaja, mille järgi hinnatakse, kas teenus täidab eesmärki |
 | kubeconfig | kubeconfig | `kubectl`-i seadistusfail klastri aadressi ja ligipääsuvõtmetega (k3s-is `/etc/rancher/k3s/k3s.yaml`) |
 | kubectl | kubectl | Kubernetese klastri käsurea haldustööriist |
 | kubelet | kubelet | Kubernetese sõlme agent, mis käivitab podide konteinerid ja annab olekust teada |
 | Kubernetes | Kubernetes | Konteinerite orkestreerimise platvorm mitme serveri klastris |
+| kujutisfail | image file | Terve andmekandja või ketta sisu ühes failis (.iso, .img, .qcow2) |
 | kuvaprotokoll | display protocol | Rakenduste ja ekraani suhtlusviis (Wayland, X11) |
 | KVM | Kernel-based Virtual Machine | Linuxi kerneli virtualiseerimismoodul |
 | kvoorum | quorum | Klastri sõlmede enamus, mis on vajalik otsuste tegemiseks |
@@ -204,6 +208,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | käsuajalugu | command history | Varem sisestatud käskude loend |
 | käsurežiim | command-line mode | vim-i režiim (`:`), kus antakse käske, nt `:wq` |
 | käsurida | command line | Tekstipõhine töökeskkond |
+| kättesaadavus | availability | Osa ajast, mil teenus töötab (nt 99,9%) |
 | köide | volume | Püsiv andmehoidla konteineri jaoks |
 | köitegrupp | volume group, VG | LVM-is füüsiliste köidete ühendatud ruum |
 | LACP | Link Aggregation Control Protocol | Mitme võrguliidese ühendamine üheks loogiliseks liideseks (802.3ad) |
@@ -231,6 +236,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Longhorn | Longhorn | Kubernetese hajus plokksalvestus, mis replikeerib andmeid sõlmede vahel |
 | loogiline köide | logical volume, LV | LVM-is köitegrupist eraldatud kasutatav osa |
 | LTS | Long Term Support | Pika toega väljalase (nt Ubuntu LTS - 5 aastat tavatuge) |
+| lubav litsents | permissive licence | Litsents, mis lubab koodi kasutada ka kinnises tootes (MIT, BSD, Apache) |
 | LUKS | Linux Unified Key Setup | Linuxi ketta krüpteerimise standard (`cryptsetup`) |
 | LUN | Logical Unit Number | iSCSI sihtmärgi poolt jagatav üksik ketas |
 | LVM-thin | LVM thin provisioning | LVM-i õhukeselt eraldatud kogum, millest ruumi võetakse alles kirjutamisel (Proxmoxi `local-lvm`) |
@@ -254,6 +260,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Molecule | Molecule | Ansible'i rollide testimise raamistik |
 | MTA | Mail Transfer Agent | E-kirju edastav server (nt Postfix) |
 | MUA | Mail User Agent | Kasutaja e-posti programm (Thunderbird, Outlook) |
+| muudatuste logi | change log | Kirjed selle kohta, mis, millal ja miks süsteemis muudeti |
 | muutuja | variable | Nimega väärtus |
 | muutumatu distro | immutable / atomic distribution | Ainult lugemiseks süsteem, mida uuendatakse tervikuna (SteamOS, Silverblue) |
 | mõõdik | metric | Arvuline näitaja ajas (nt protsessori kasutus) |
@@ -273,6 +280,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | NTP | Network Time Protocol | Kellaaja sünkroniseerimise protokoll (port 123/udp) |
 | objektiklass | object class | LDAP-kirje tüüp, mis määrab kohustuslikud ja lubatud atribuudid |
 | olekupõhine tulemüür | stateful firewall | Tulemüür, mis jätab ühendused meelde ja lubab automaatselt vastuspaketid |
+| omanduslik tarkvara | proprietary software | Kinnise lähtekoodiga tarkvara, mille kasutusõigus ostetakse |
 | OOM killer | out-of-memory killer | Kerneli mehhanism, mis mälu lõppemisel lõpetab protsessi |
 | OpenLDAP | OpenLDAP | Avatud lähtekoodiga LDAP-kataloogiserver (`slapd`) |
 | OpenZFS | OpenZFS | ZFS-i avatud lähtekoodiga arendus, mida kasutavad nii FreeBSD kui ka Linux |
@@ -316,6 +324,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | PostgreSQL | PostgreSQL | Võimas avatud lähtekoodiga relatsiooniline andmebaas |
 | PPA | Personal Package Archive | Ubuntu isiklik pakettide hoidla |
 | preseed | preseed | Debiani automaatse paigalduse vastustefail |
+| prindiserver | print server | Server, mis hoiab printerite järjekordi ja jagab printereid võrku |
 | privaatvõti | private key | Võtmepaari salajane osa |
 | PromQL | Prometheus Query Language | Prometheuse päringukeel |
 | proovieksam | mock exam | Praktiline harjutuseksam ajapiiranguga |
@@ -384,7 +393,9 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | skeem | schema | Reeglid, millised objektiklassid ja atribuudid kataloogis (LDAP, AD) lubatud on |
 | skeletikataloog | skeleton directory | `/etc/skel` - failid, mis kopeeritakse uue kasutaja kodukataloogi |
 | skript | script | Käskude jada sisaldav tekstifail |
+| SLA | Service Level Agreement | Teenusetaseme leping: lubatud teenuse tase ja reageerimisaeg |
 | SLAAC | Stateless Address Autoconfiguration | IPv6 aadressi automaatne seadistamine ruuteri teadaannete põhjal |
+| SLO | Service Level Objective | Teenusetaseme eesmärk: sisemine sihtväärtus ühele näitajale |
 | SMART | Self-Monitoring, Analysis and Reporting Technology | Ketaste enesediagnostika (`smartctl`) |
 | SMB | Server Message Block | Windowsi failijagamise protokoll; Linuxis Samba |
 | SOA | Start of Authority | Tsooni põhikirje: nimeserver, seerianumber ja ajad |
@@ -422,6 +433,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | zvol | ZFS volume | ZFS-i pooli sees olev plokkseade |
 | taastamisrežiim | rescue mode | Vähendatud režiim süsteemi hoolduseks |
 | taastamistest | restore test | Päris taastamine testkeskkonda koos aja mõõtmisega, et kontrollida varukoopia kasutatavust |
+| tagasipööramine | rollback, downgrade | Muudatuse tagasivõtmine või paketi viimine vanemale versioonile |
 | tagasisidestus | loopback | Liides, mille kaudu masin räägib iseendaga (`lo`) |
 | taimer | timer | systemd üksus ajastatud käivitamiseks |
 | taust | background | Töö, mis töötab ilma kesta ootamata |
@@ -471,6 +483,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | vaikelüüs | default gateway | Ruuter, kuhu saadetakse kohalikust võrgust väljuv liiklus |
 | Valkey | Valkey | Redisest tuletatud vaba võti-väärtus andmebaas |
 | varundus | backup | Andmetest koopia tegemine taastamise jaoks |
+| vastastikune litsents | copyleft licence | Litsents, mis nõuab muudetud versiooni levitamist sama litsentsiga (nt GPL) |
 | vastustefail | answer file | Fail, mis vastab paigaldaja küsimustele ette (kickstart, preseed, autoinstall) |
 | vdev | virtual device | ZFS-i ketaste rühm (üksik, peegel, raidz) |
 | veth-paar | veth pair | Kaks omavahel ühendatud virtuaalset võrguliidest, millega ühendatakse konteiner sillaga |

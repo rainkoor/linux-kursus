@@ -951,7 +951,7 @@ Soovi korral saab ka Debianis kasutada `ufw`-d (`sudo apt install ufw`). **Kasut
 
 - logide sündmusi ei saa eri masinate vahel ajaliselt kõrvutada;
 - TLS-sertifikaate peetakse kehtetuks („not yet valid“ või „expired“);
-- Kerberos ja Active Directory keelduvad autentimast, kui erinevus on üle 5 minuti (valikmoodul 25);
+- Kerberos ja Active Directory keelduvad autentimast, kui erinevus on üle 5 minuti (valikmoodul 26);
 - ajastatud tööd (cron, systemd taimerid) käivituvad valel ajal;
 - failide muutmisajad, varundus ja replikatsioon lähevad sassi.
 
@@ -1036,7 +1036,7 @@ sudo ufw allow from 10.0.83.0/24 to any port 123 proto udp
 chronyc clients             # kes on aega küsinud
 ```
 
-Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 22).
+Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, moodul 18).
 
 > **Virtuaalmasinad:** Proxmoxi VM-ides tuleb NTP klient hoida tööl ka siis, kui kasutatakse QEMU agenti. Pärast hetktõmmise taastamist võib kell olla väga vale - chrony parandab selle (`makestep` seadistusfailis lubab suure hüppe esimestel uuendustel).
 
@@ -1061,7 +1061,7 @@ Kliendid saavad ajaserveri aadressi ka DHCP-st (valik 42, valikmoodul 22).
 <details>
 <summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
 
-Võrgu põhimõtted (aadress, mask, lüüs, DNS, pordid) ja OpenSSH on FreeBSD-s samad - OpenSSH ongi pärit OpenBSD projektist. Käsud ja seadistusfailid on teised (vt moodul 29, punktid 29.8 ja 29.10):
+Võrgu põhimõtted (aadress, mask, lüüs, DNS, pordid) ja OpenSSH on FreeBSD-s samad - OpenSSH ongi pärit OpenBSD projektist. Käsud ja seadistusfailid on teised (vt moodul 30, punktid 30.8 ja 29.10):
 
 | | Linux | FreeBSD |
 |---|---|---|
@@ -1075,7 +1075,7 @@ Võrgu põhimõtted (aadress, mask, lüüs, DNS, pordid) ja OpenSSH on FreeBSD-s
 | Tulemüür | nftables, ufw, firewalld | **pf** (OpenBSD-st) või ipfw |
 | Ajasünkroonimine | `chronyd`, `systemd-timesyncd` | `ntpd` baassüsteemis (`sysrc ntpd_enable=YES`) |
 
-pf-i reeglid on loetavamad kui nftables'i omad, kuid kehtib **viimane sobiv reegel**, kui reeglil pole võtmesõna `quick`. Sama pf on OPNsense'i tulemüüri aluseks (moodul 21).
+pf-i reeglid on loetavamad kui nftables'i omad, kuid kehtib **viimane sobiv reegel**, kui reeglil pole võtmesõna `quick`. Sama pf on OPNsense'i tulemüüri aluseks (moodul 22).
 
 </details>
 

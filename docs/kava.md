@@ -29,7 +29,7 @@ Kursuse läbinud õppija:
 
 ## Maht ja ülesehitus
 
-Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 204 kontakttundi** koos laboritöödega (põhiosa 84 h, süvendusosa 98 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (86 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
+Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 210 kontakttundi** koos laboritöödega (põhiosa 84 h, süvendusosa 104 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (84 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
 
 ### Põhiosa: Linuxi kasutamine ja haldus
 
@@ -58,37 +58,77 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 204 kontakttundi** ko
 | 15 | [Veebiserverid](moodul-15-veebiserverid/index.md) | 10 | Debian, AlmaLinux, Ubuntu |
 | 16 | [Andmebaasid](moodul-16-andmebaasid/index.md) | 8 | Debian, AlmaLinux |
 | 17 | [DNS ja nimelahendus](moodul-17-dns/index.md) | 8 | Debian (17B: Ubuntu) |
-| 18 | [Failiserverid](moodul-18-failiserverid/index.md) | 8 | Debian, Ubuntu, Windows |
-| 19 | [Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](moodul-19-automatiseerimine/index.md) | 10 | AlmaLinux, Debian, Ubuntu |
-| 20 | [Seire ja jõudlus](moodul-20-seire/index.md) | 8 | Debian, Ubuntu |
+| 18 | [DHCP](moodul-18-dhcp/index.md) | 6 | Debian, Ubuntu, AlmaLinux |
+| 19 | [Faili- ja prindiserverid](moodul-19-failiserverid/index.md) | 8 | Debian, Ubuntu, Windows |
+| 20 | [Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](moodul-20-automatiseerimine/index.md) | 10 | AlmaLinux, Debian, Ubuntu |
+| 21 | [Seire ja jõudlus](moodul-21-seire/index.md) | 8 | Debian, Ubuntu |
 | - | [Proovieksam: süvendusosa](proovieksam.md) | 4 | AlmaLinux |
 | - | [Lõpuprojekt](lopuprojekt.md) (kolm taset) | 16 (12–32) | Õppija valik |
 
-Moodul 14 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodul 13 süvendab mooduli 7 võrguteadmisi (IPv6, sild, VLAN, bond, NAT, VPN). Moodulites 15–18 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS → failiserver, varundus ja dokumentatsioon), mida moodulites 19–20 automatiseeritakse ja seiratakse. Moodulid 19 ja 20 on **sissejuhatavad ja ülevaatlikud**: HKHK-s käsitletakse automatiseerimist ja seiret põhjalikult eraldi ainetes „IT-süsteemide automatiseerimine“ ja „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit.
+Moodul 14 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodul 13 süvendab mooduli 7 võrguteadmisi (IPv6, sild, VLAN, bond, NAT, VPN). Moodulites 15–19 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS → DHCP → failiserver, varundus ja dokumentatsioon), mida moodulites 20–21 automatiseeritakse ja seiratakse. Moodulid 20 ja 21 on **sissejuhatavad ja ülevaatlikud**: HKHK-s käsitletakse automatiseerimist ja seiret põhjalikult eraldi ainetes „IT-süsteemide automatiseerimine“ ja „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit.
 
 ### Valikmoodulid
 
 | Nr | Moodul | Maht (h) | Laboritöö distro |
 |---|---|---|---|
-| 21 | [BSD praktikas: OPNsense tulemüür](moodul-21-opnsense/index.md) | 8 | OPNsense (FreeBSD), Debian, Ubuntu |
-| 22 | [Võrgu infrastruktuur: DHCP, PXE ja iSCSI](moodul-22-dhcp-pxe-iscsi/index.md) | 10 | Debian, AlmaLinux, Ubuntu |
-| 23 | [E-posti server](moodul-23-e-post/index.md) | 10 | Ubuntu, Debian |
-| 24 | [Kataloogiteenused: OpenLDAP](moodul-24-openldap/index.md) | 8 | Debian (server), Ubuntu ja AlmaLinux (kliendid) |
-| 25 | [Active Directory Linuxis: Samba AD DC](moodul-25-samba-ad/index.md) | 10 | Debian (DC), Ubuntu, AlmaLinux, Windows |
-| 26 | [Linux töölaual ja WSL](moodul-26-toolaud-wsl/index.md) | 8 | Ubuntu Desktop, Kali, Windows (WSL) |
-| 27 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](moodul-27-virtualiseerimine/index.md) | 12 | Debian, Proxmox VE, XCP-ng |
-| 28 | [Kubernetes: k3s](moodul-28-kubernetes/index.md) | 10 | Debian |
-| 29 | [FreeBSD server](moodul-29-freebsd/index.md) | 10 | FreeBSD |
+| 22 | [BSD praktikas: OPNsense tulemüür](moodul-22-opnsense/index.md) | 8 | OPNsense (FreeBSD), Debian, Ubuntu |
+| 23 | [Võrgu infrastruktuur: PXE ja iSCSI](moodul-23-pxe-iscsi/index.md) | 8 | Debian, AlmaLinux |
+| 24 | [E-posti server](moodul-24-e-post/index.md) | 10 | Ubuntu, Debian |
+| 25 | [Kataloogiteenused: OpenLDAP](moodul-25-openldap/index.md) | 8 | Debian (server), Ubuntu ja AlmaLinux (kliendid) |
+| 26 | [Active Directory Linuxis: Samba AD DC](moodul-26-samba-ad/index.md) | 10 | Debian (DC), Ubuntu, AlmaLinux, Windows |
+| 27 | [Linux töölaual ja WSL](moodul-27-toolaud-wsl/index.md) | 8 | Ubuntu Desktop, Kali, Windows (WSL) |
+| 28 | [Virtualiseerimine: KVM, Proxmox VE ja XCP-ng](moodul-28-virtualiseerimine/index.md) | 12 | Debian, Proxmox VE, XCP-ng |
+| 29 | [Kubernetes: k3s](moodul-29-kubernetes/index.md) | 10 | Debian |
+| 30 | [FreeBSD server](moodul-30-freebsd/index.md) | 10 | FreeBSD |
 
-Valikmoodulid 21, 22, 24 ja 25 ehitavad üksteise peale (OPNsense'i laborivõrk → DHCP/PXE → LDAP → AD). E-posti server (23) eeldab DNS-i moodulit 17. Moodulid 26–29 on iseseisvad (moodul 28 eeldab konteinereid ja veebiservereid, moodulid 14–15; moodul 29 eeldab põhiosa ja sobib hästi pärast moodulit 21).
+Valikmoodulid 22, 25 ja 26 ehitavad üksteise peale (OPNsense'i laborivõrk → LDAP → AD). PXE ja iSCSI (23) eeldab DHCP moodulit 18, e-posti server (24) DNS-i moodulit 17. Moodulid 27–30 on iseseisvad (moodul 29 eeldab konteinereid ja veebiservereid, moodulid 14–15; moodul 30 eeldab põhiosa ja sobib hästi pärast moodulit 22).
 
 Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalmasinad ja paigaldus) on kirjeldatud lisas [Laborikeskkond ja paigaldus](lisad/paigaldus.md). Kõik laboritööd kasutavad sama IP-plaani, nii et õppija ehitab ühe keskkonna, mis kasvab moodulist moodulisse.
+
+## Vastavus HKHK rakenduskavale
+
+HKHK IT-süsteemide nooremspetsialisti õppekavas vastab sellele kursusele moodul **„Linux operatsioonisüsteemide haldus“** (8 EKAP). Kursus on rakenduskavast laiem; allolev tabel näitab, millised moodulid ja laboritööd katavad rakenduskava õpiväljundid ja hindamiskriteeriumid.
+
+| Rakenduskava | Kursuse moodulid ja laboritööd |
+|---|---|
+| **ÕV 1. Paigaldab ja seadistab tööjaamadele erinevaid Linux/BSD distributsioone** | |
+| 1.1 hindab riistvarakomponentide piisavust ja sobivust | moodul 1 (punkt 1.11, laboritöö 1 osa 8), [paigalduslisa](lisad/paigaldus.md), valikmoodul 27 |
+| 1.2 paigaldab süsteeme ja süsteemi komponente | [paigalduslisa](lisad/paigaldus.md) (Debian, Ubuntu, AlmaLinux), moodul 4, valikmoodulid 27 (töölaud) ja 30 (FreeBSD) |
+| 1.3 tunneb peamisi klaviatuuri otseteid ja käsurea käske | moodulid 1–3, lisa [Käskude register](lisad/kasud.md) |
+| Teemad: distrod, arhitektuur, hierarhia, ajalugu, litsentsid, paigaldusmeetodid, kujutisfailid | moodul 1, lisad [distrod](lisad/distrod.md) ja [ajalugu](lisad/ajalugu.md) |
+| Teemad: rakendustarkvara, uuendused ja versioonituvastus, kasutajad ja õigused, varukoopiad | moodulid 3, 4 ja 9 |
+| **ÕV 2. Paigaldab ja seadistab Linux/BSD servereid ja teenuseid** | |
+| 2.1 paigaldab uuendusi ja tuvastab versiooni muudatusi, kasutades automatiseerimis- või keskhaldusvahendeid | moodul 4 (laboritöö 4 osad 5–6), moodul 12 (automaatsed uuendused), moodul 20 (Ansible) |
+| 2.2 loob kasutajad ja grupid ning annab juurdepääsuõigusi | moodul 3, moodul 19 (ühiskaustad), valikmoodulid 25–26 (kesksed kasutajad) |
+| 2.3 teostab rutiinseid hooldustegevusi | moodulid 4, 5, 8 ja 12 |
+| 2.4 uuendab tarkvarapakette ja sooritab distributsiooniuuendusi | moodul 4 (punktid 4.9–4.10, laboritöö 4 osa 6) |
+| 2.5 tagab talitluspidevuse: varundab ja seirab | moodulid 9, 10 ja 21 (KPI ja kättesaadavus: punkt 21.1, laboritöö 21 osa 7) |
+| Teemad: deemonid, hoidlad, pakihaldurid, andmekandjad, logid | moodulid 4, 5, 8, 10 ja 12 |
+| Teemad: taristuteenused (marsruutimine, DHCP, DNS) | moodulid 13, 17 ja 18 |
+| Teemad: virtualiseerimine (KVM, hüperviisorid) | valikmoodul 28; HKHK-s ka aine „Majutuskeskkonna riistvara“ |
+| Teemad: serveriteenused (failiserver, kataloogiteenus, veebirakenduste majutamine, privaatpilv) | moodulid 15, 16 ja 19, valikmoodulid 25–26, lõpuprojekti teemad |
+| **ÕV 3. Paigaldab ja seadistab ettevõtte tööd toetavaid taristuteenuseid (projekt)** | |
+| 3.1 annab sisendi majutuskeskkonna planeerimiseks ja valikuks | [lõpuprojekti](lopuprojekt.md) projektiplaan (riistvara vajadus ja põhjendus), moodul 1 (punkt 1.11) |
+| 3.2 paigaldab vajalikud taristuteenused väike- ja keskmise suurusega ettevõtte näitel | moodulid 15–19 („kooli väikeserver“), [lõpuprojekt](lopuprojekt.md) |
+| 3.3 seadistab VPN-, DNS-, DHCP-, LDAP-, print-, faili- ja veebiservereid | VPN: moodul 13 · DNS: moodul 17 · DHCP: moodul 18 · LDAP: valikmoodul 25 (või 26) · print- ja failiserver: moodul 19 · veebiserver: moodul 15 |
+| 3.4 dokumenteerib lahenduse, koostab juhendid ja teadmusbaasi artiklid | moodul 19 (punkt 19.10), [lõpuprojekti](lopuprojekt.md) dokumentatsiooninõuded |
+
+**HKHK õppijale** kuuluvad rakenduskava täitmiseks kursuse hulka ka need valikmoodulid:
+
+| Valikmoodul | Miks |
+|---|---|
+| 25 OpenLDAP **või** 26 Samba AD | kataloogiteenus ja LDAP (kriteerium 3.3) |
+| 27 Linux töölaual ja WSL | tööjaama paigaldus ja seadistus (õpiväljund 1) |
+| 30 FreeBSD server | BSD paigaldus ja haldus (mooduli eesmärk: Linux/BSD) |
+| 28 Virtualiseerimine | soovitatav; teemat käsitleb ka aine „Majutuskeskkonna riistvara“ |
+
+Iseõppijale ja teistele koolidele jäävad need moodulid valikuliseks.
 
 ## Moodulite sisu
 
 ### Moodul 1. Linux ja käsurida
 
-**Teemad:** mis on Linux, kernel ja distributsioon, distrode perekonnad, terminal ja kest, SSH-ühendus, käsu ülesehitus, abi leidmine (`man`, `--help`), failisüsteemi hierarhia, liikumine kataloogides, failide ja kataloogide loomine, kopeerimine, teisaldamine ja kustutamine, failide sisu vaatamine, metamärgid, süsteemi info (`uname`, `hostnamectl`, `uptime`), tehisintellekt abilisena, harjutusmäng OverTheWire Bandit.
+**Teemad:** mis on Linux, kernel ja distributsioon, distrode perekonnad, terminal ja kest, SSH-ühendus, käsu ülesehitus, abi leidmine (`man`, `--help`), failisüsteemi hierarhia, riistvara hindamine, paigaldusviisid ja kujutisfailid, litsentsid ja tugi, liikumine kataloogides, failide ja kataloogide loomine, kopeerimine, teisaldamine ja kustutamine, failide sisu vaatamine, metamärgid, süsteemi info (`uname`, `hostnamectl`, `uptime`), tehisintellekt abilisena, harjutusmäng OverTheWire Bandit.
 
 **Õpiväljundid:** õppija ühendub serveriga SSH kaudu, liigub failisüsteemis absoluutsete ja suhteliste teede abil, teeb põhitoiminguid failide ja kataloogidega ning leiab käskude kohta abi.
 
@@ -112,7 +152,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 ### Moodul 4. Tarkvara ja pakihaldus
 
-**Teemad:** paketid ja hoidlad, `apt` ja `dpkg` (Debian, Ubuntu), `dnf` ja `rpm` (AlmaLinux), süsteemi uuendamine, pakettide otsimine ja eemaldamine, paigaldusajalugu ja tagasivõtmine (`dnf history`), kolmandate osapoolte hoidlad (EPEL, PPA) ja nende riskid, tarkvara kompileerimine lähtekoodist, Snap ja Flatpak, uuenduste hea tava, väljalaske uuendamine (Debian 12 → 13, `do-release-upgrade`, ELevate), jagatud teegid (`ldd`, `ldconfig`), SUSE ja `zypper`.
+**Teemad:** paketid ja hoidlad, `apt` ja `dpkg` (Debian, Ubuntu), `dnf` ja `rpm` (AlmaLinux), süsteemi uuendamine, muudatuse mõju hindamine ja tagasipööramine, väljalaske uuendamine, pakettide otsimine ja eemaldamine, paigaldusajalugu ja tagasivõtmine (`dnf history`), kolmandate osapoolte hoidlad (EPEL, PPA) ja nende riskid, tarkvara kompileerimine lähtekoodist, Snap ja Flatpak, uuenduste hea tava, väljalaske uuendamine (Debian 12 → 13, `do-release-upgrade`, ELevate), jagatud teegid (`ldd`, `ldconfig`), SUSE ja `zypper`.
 
 **Õpiväljundid:** õppija paigaldab, uuendab ja eemaldab tarkvara kõigil kolmel distrol ning selgitab pakihaldurite erinevusi.
 
@@ -222,15 +262,23 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** BIND 9 administraatori juhend; Julia Evans „Mess With DNS“.
 
-### Moodul 18. Failiserverid
+### Moodul 18. DHCP
 
-**Teemad:** failide jagamise viisid (NFS, SMB, SFTP, iSCSI), NFS ja ekspordi valikud, autofs, Samba (jagamised, kasutajad, prügikast, SELinux), ühiskausta õigused (SGID ja vaikimisi ACL), TrueNAS, failiserveri ja kogu serveri varundus, serveri dokumenteerimine, käsiraamat ja otsuste logi.
+**Teemad:** DHCP tööpõhimõte (DORA, rent, valikud, relee), DHCP-serverid Linuxis (Kea, ISC DHCP, dnsmasq), Kea seadistus (alamvõrk, vahemik, valikud, reserveeringud), kliendi pool ja rendid, tõrkeotsing (`tcpdump`, logid, kaks DHCP-serverit), DHCP ja DNS koos, varundus ja võrguplaan.
+
+**Õpiväljundid:** õppija seadistab laborivõrgule Linuxi DHCP-serveri koos reserveeringutega, leiab DHCP vigu ning hoiab võrguplaani ajakohasena.
+
+**Iseõppeks:** Kea Administrator Reference Manual.
+
+### Moodul 19. Faili- ja prindiserverid
+
+**Teemad:** failide jagamise viisid (NFS, SMB, SFTP, iSCSI), NFS ja ekspordi valikud, autofs, Samba (jagamised, kasutajad, prügikast, SELinux), ühiskausta õigused (SGID ja vaikimisi ACL), TrueNAS, prindiserver (CUPS), failiserveri ja kogu serveri varundus, serveri dokumenteerimine, käsiraamat ja otsuste logi.
 
 **Õpiväljundid:** õppija jagab faile Linuxi ja Windowsi klientidele, seadistab ühiskaustade õigused, varundab ja taastab kogu serveri ning dokumenteerib selle koos käsiraamatuga.
 
 **Iseõppeks:** Samba Wiki; `man 5 exports`.
 
-### Moodul 19. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
+### Moodul 20. Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina
 
 **Teemad:** automatiseerimise astmed (Bashi skriptid, cron ja systemd taimerid, Git, konteinerid, Ansible), infrastruktuur koodina, idempotentsus, Ansible (inventuur, ad-hoc käsud, mänguraamatud, mallid, käsitlejad, Vault, eri distrod, rollid ja muutujafailid), Ansible'i koodi testimine (`ansible-lint`, idempotentsuse test, Molecule), Vagrant laborikeskkonna loomiseks, virtuaalmasinad koodina (cloud-init, OpenTofu), Puppet ja teised seadistushaldurid (push vs pull).
 
@@ -238,15 +286,15 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** Ansible'i dokumentatsioon; J. Geerling „Ansible for DevOps“.
 
-### Moodul 20. Seire ja jõudlus
+### Moodul 21. Seire ja jõudlus
 
-**Teemad:** mõõdikud, logid ja häired, USE meetod, `uptime`, `top`, `vmstat`, `iostat`, `pidstat`, `sar`, `strace`, `lsof`, jõudlusprofiilid (`tuned`), Prometheus, node_exporter ja Grafana, PromQL, häired, Uptime Kuma, Zabbixi tutvustus, e-posti teavitused (Postfix relee).
+**Teemad:** mõõdikud, logid ja häired, KPI ja teenusetase (SLA, kättesaadavus), USE meetod, `uptime`, `top`, `vmstat`, `iostat`, `pidstat`, `sar`, `strace`, `lsof`, jõudlusprofiilid (`tuned`), Prometheus, node_exporter ja Grafana, PromQL, häired, Uptime Kuma, Zabbixi tutvustus, e-posti teavitused (Postfix relee).
 
 **Õpiväljundid:** õppija leiab jõudlusprobleemi põhjuse süstemaatiliselt ja ehitab laborivõrgule seiresüsteemi.
 
 **Iseõppeks:** B. Gregg „Systems Performance“; Prometheuse ja Grafana dokumentatsioon.
 
-### Valikmoodul 21. BSD praktikas: OPNsense tulemüür
+### Valikmoodul 22. BSD praktikas: OPNsense tulemüür
 
 **Teemad:** isoleeritud laborivõrgu kavandamine (WAN/LAN, Proxmoxi sild või SDN), OPNsense'i paigaldus ja konsoolimenüü, veebiliides, DHCP (Dnsmasq, Kea) ja Unbound DNS, tulemüürireeglid ja aliased, NAT ja pordisuunamine, logid, varundus, FreeBSD ja Linuxi käsud.
 
@@ -254,15 +302,15 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** OPNsense'i dokumentatsioon (docs.opnsense.org).
 
-### Valikmoodul 22. Võrgu infrastruktuur: DHCP, PXE ja iSCSI
+### Valikmoodul 23. Võrgu infrastruktuur: PXE ja iSCSI
 
-**Teemad:** DHCP tööpõhimõte (DORA, valikud, releed), Kea DHCP, ISC DHCP võrdlus, reserveeringud, PXE alglaadimine (TFTP, iPXE, BIOS ja UEFI, netboot.xyz, FOG), automaatne paigaldus (kickstart, preseed, autoinstall), iSCSI sihtmärk (`targetcli`) ja initsiaator (`iscsiadm`), CHAP.
+**Teemad:** PXE alglaadimine (DHCP valikud, TFTP, iPXE, BIOS ja UEFI, netboot.xyz, FOG), automaatne paigaldus (kickstart, preseed, autoinstall), iSCSI (sihtmärk `targetcli`-ga, initsiaator Linuxis ja Windowsis, CHAP, `_netdev`).
 
-**Õpiväljundid:** õppija seadistab laborivõrgule Linuxi DHCP-serveri, võrgust alglaadimise koos automaatse paigaldusega ja iSCSI plokksalvestuse.
+**Õpiväljundid:** õppija seadistab laborivõrgus võrgust alglaadimise koos automaatse paigaldusega ja iSCSI plokksalvestuse.
 
-**Iseõppeks:** Kea Administrator Reference Manual; Red Hati dokumentatsioon „Managing storage devices“.
+**Iseõppeks:** netboot.xyz dokumentatsioon; Red Hati dokumentatsioon „Managing storage devices“.
 
-### Valikmoodul 23. E-posti server
+### Valikmoodul 24. E-posti server
 
 **Teemad:** e-kirja teekond (MUA, MSA, MTA, MDA), SMTP ja IMAP, e-posti DNS-kirjed (MX, PTR, SPF, DKIM, DMARC), Postfix (vastuvõtt, aliased, releekaitse, järjekord), Dovecot (IMAP, TLS, autentimine), autenditud saatmine (*submission*), OpenDKIM, rämpsposti tõrje ja fail2ban, testimine (`swaks`) ja tõrkeotsing, varundus, oma server või pilvepost.
 
@@ -270,7 +318,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** Postfixi ja Dovecoti dokumentatsioon.
 
-### Valikmoodul 24. Kataloogiteenused: OpenLDAP
+### Valikmoodul 25. Kataloogiteenused: OpenLDAP
 
 **Teemad:** tsentraalne autentimine, LDAP-i andmemudel (DIT, DN, objektiklassid, skeemid), OpenLDAP-i paigaldus ja `cn=config`, LDIF, otsingud ja muudatused, ligipääsureeglid, TLS, LDAP Account Manager, SSSD kliendid, varundus.
 
@@ -278,7 +326,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** OpenLDAP Administrator's Guide; `man sssd-ldap`.
 
-### Valikmoodul 25. Active Directory Linuxis: Samba AD DC
+### Valikmoodul 26. Active Directory Linuxis: Samba AD DC
 
 **Teemad:** Active Directory põhimõisted, Kerberos ja DNS, Samba AD domeenikontrolleri paigaldus, `samba-tool`, Windowsi kliendi liitmine ja RSAT, rühmapoliitika, Linuxi klientide liitmine (realmd, SSSD), paroolipoliitika, DNS-kirjed, teine domeenikontroller ja varundus, ligipääsu ja `sudo` piiramine gruppidega, Windows Server AD-ga liitumine, veaotsing.
 
@@ -286,7 +334,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** Samba Wiki; Red Hati dokumentatsioon „Integrating RHEL systems directly with Windows Active Directory“.
 
-### Valikmoodul 26. Linux töölaual ja WSL
+### Valikmoodul 27. Linux töölaual ja WSL
 
 **Teemad:** töölaua Linuxi suundumused (mängud ja SteamOS, digitaalne suveräänsus, Windows 10 toe lõpp), töölaua distrod ja muutumatud distrod, graafiline süsteem (Wayland, X11, sisselogimishaldur, töölauakeskkonnad), Flatpak ja Snap, Windowsi programmide alternatiivid, Proton, haldus (uuendused, printerid, Timeshift, ID-kaart, kaugtöölaud), Kali Linux, WSL, ligipääsetavus.
 
@@ -294,7 +342,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** Flathubi ja ProtonDB veebilehed; Microsoft Learn - WSL; Kali dokumentatsioon.
 
-### Valikmoodul 27. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
+### Valikmoodul 28. Virtualiseerimine: KVM, Proxmox VE ja XCP-ng
 
 **Teemad:** hüperviisorite tüübid, riistvaraline tugi ja pesastatud virtualiseerimine, KVM, QEMU ja libvirt, Proxmox VE (paigaldus, hoidlad, uuendused, VM-id ja LXC, salvestus, sillad, VLAN-id, NAT, varundus (`vzdump` ja Proxmox Backup Server: deduplitseerimine, säilitusreeglid, kontroll, üksikfailide taastamine), mallid ja cloud-init mall, kasutajad ja õigused, REST API ja `pvesh`, klaster), XCP-ng (`xe`, külalistööriistad) ja Xen Orchestra. HKHK-s käsitletakse hüperviisoreid põhjalikumalt aines „Majutuskeskkonna riistvara“.
 
@@ -302,7 +350,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** Proxmox VE dokumentatsioon ja wiki; XCP-ng dokumentatsioon.
 
-### Valikmoodul 28. Kubernetes: k3s
+### Valikmoodul 29. Kubernetes: k3s
 
 **Teemad:** konteinerite orkestreerimine ja millal seda vaja ei ole, Kubernetese ülesehitus (juhtkiht, kubelet, containerd, CNI) ja deklaratiivne haldus, distributsioonide võrdlus (kubeadm, k3s, RKE2, k0s, MicroK8s, minikube, kind, Talos), k3s mitmesõlmelise klastri paigaldus, `kubectl`, Pod, Deployment, Service, Ingress (Traefik) ja TLS, skaleerimine, järkjärguline uuendus ja tagasivõtt, ConfigMap ja Secret, püsikettad (PVC, `local-path`), Helm, sõlme hooldus, uuendamine ja varundus, kõrge kättesaadavus etcd-ga, GitOps (Argo CD, Flux).
 
@@ -310,7 +358,7 @@ Laborikeskkonna ettevalmistus (HKHK Proxmoxi ligipääs, võrguplaan, virtuaalma
 
 **Iseõppeks:** k3s ja Kubernetese dokumentatsioon; minikube või kind oma arvutis; „Kubernetes the Hard Way“.
 
-### Valikmoodul 29. FreeBSD server
+### Valikmoodul 30. FreeBSD server
 
 **Teemad:** BSD perekond ja FreeBSD, baassüsteem ja `/usr/local`, paigaldus ZFS juurfailisüsteemiga, GNU ja BSD tööriistade erinevused, `pkg`, pordid ja pkgbase, baassüsteemi uuendamine (`freebsd-update`), teenused rc.d süsteemiga (`rc.conf`, `sysrc`, `service`), logid, `newsyslog` ja `periodic`, kasutajad (`pw`, `vipw`, grupp `wheel`, `doas`), võrk (`ifconfig`, `rc.conf`), ZFS-i hetktõmmised ja alglaadimiskeskkonnad (`bectl`), tulemüür pf (tabelid, ühenduste piiramine), jailid, FreeBSD ja Linuxi halduse võrdlus.
 
@@ -333,8 +381,8 @@ Täpsem juhend koos teemade, nõuete ja hindamiskriteeriumidega: [lõpuprojekt](
 | Tase | Eeldused | Maht | Näited |
 |---|---|---|---|
 | **Algtase** | moodulid 1–9 | 12 h | üks turvatud ja varundatud server, halduskriptide komplekt, oma systemd teenus |
-| **Edasijõudnud** | moodulid 1–20 | 16 h | veebirakenduse platvorm, Ansible'iga hallatav serveripark, labori infrastruktuuriteenused, konteinerplatvorm |
-| **Meister** | moodulid 1–20 + valikmoodulid | 24–32 h | kõrge kättesaadavusega teenus, virtualiseerimisplatvorm koodina, kooli võrk ja kasutajahaldus, turvaseire, Kubernetese platvorm |
+| **Edasijõudnud** | moodulid 1–21 | 16 h | veebirakenduse platvorm, Ansible'iga hallatav serveripark, labori infrastruktuuriteenused, konteinerplatvorm |
+| **Meister** | moodulid 1–21 + valikmoodulid | 24–32 h | kõrge kättesaadavusega teenus, virtualiseerimisplatvorm koodina, kooli võrk ja kasutajahaldus, turvaseire, Kubernetese platvorm |
 
 Projekti juurde kuuluvad kirjalik dokumentatsioon (soovitatavalt Git-repos) ja esitlus.
 

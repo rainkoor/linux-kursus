@@ -7,11 +7,11 @@
 | | |
 |---|---|
 | **Distrod** | Debian, Ubuntu ja AlmaLinux (kõik kolm) |
-| **Kestus** | 2 × 90 minutit |
-| **Vajalik** | Kolm virtuaalmasinat (Debian, Ubuntu, AlmaLinux), igaühes `sudo` õigusega kasutaja ja internetiühendus |
+| **Kestus** | 3 × 90 minutit |
+| **Vajalik** | Kolm virtuaalmasinat (Debian, Ubuntu, AlmaLinux), igaühes `sudo` õigusega kasutaja ja internetiühendus; 6. osa jaoks eraldi Debian 12 virtuaalmasin |
 | **Eesmärk** | Harjutada pakihaldust kahe perekonna distrodel ja võrrelda nende erinevusi |
 
-> **Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K16**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
+> **Aruanne:** täida võrdlustabel (1. osa lõpus) ja vasta küsimustele **K1–K22**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
 > [!NOTE]
 > **Erandina kasutad selles laboris kõiki kolme distrot.** Hoia kolm SSH-seanssi korraga lahti (nt Windows Terminali eri vahekaartidel), et saaksid tulemusi kohe võrrelda. Jälgi viipa, et teaksid, millises masinas oled.
@@ -245,11 +245,94 @@ which -a hello
 
 ---
 
-## 5. osa. Kokkuvõte
+## 5. osa. Muudatuse mõju ja tagasipööramine
 
-> **K15.** Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
+Selles osas teed uuenduse nii, nagu seda tehakse päris serveris: salvestad oleku enne, teed muudatuse, võrdled ja oskad selle tagasi võtta (teooria punkt 4.9).
 
-> **K16.** Mida tuleks teha enne olulise serveri suurt uuendust?
+**5.1** AlmaLinuxis: paigalda veebiserver, et masinas oleks teenus, mille tööd jälgida:
+
+```bash
+sudo dnf install -y httpd
+sudo systemctl enable --now httpd
+curl -sI http://localhost | head -1
+```
+
+**5.2** Salvesta olek enne muudatust teooria punkti 4.9 („Muudatuse mõju hindamine“, samm 1) käskudega kataloogi `~/muudatus`.
+
+**5.3** Vaata, kas paketist `httpd` on hoidlas mitu versiooni, ja vii see võimalusel vanemale versioonile. Kui vanemat versiooni ei ole, tee sama mõne teise paketiga, millel on (nt `dnf --showduplicates list kernel`), või jätka punktist 5.4.
+
+```bash
+dnf --showduplicates list httpd
+sudo dnf downgrade httpd
+rpm -q httpd
+```
+
+> **K15.** Mitu versiooni oli hoidlas? Milline versioon oli enne ja milline pärast? Miks ei ole vanemale versioonile minek alati võimalik?
+
+**5.4** Uuenda pakett uuesti viimasele versioonile ja salvesta olek pärast muudatust (failid `parast-…`). Võrdle.
+
+```bash
+sudo dnf upgrade httpd
+diff ~/muudatus/enne-teenused.txt ~/muudatus/parast-teenused.txt
+systemctl --failed
+sudo dnf needs-restarting -s
+curl -sI http://localhost | head -1
+```
+
+> **K16.** Mida näitas võrdlus: kas teenused, pordid ja vead logis olid enne ja pärast samad? Kas mõni teenus vajas taaskäivitust? Kuidas kontrollisid, et veebiserver töötab ka kasutaja poolt vaadates?
+
+**5.5** Võta kogu paigaldus tagasi `dnf` ajaloo abil (nagu punktis 2.4) ja kontrolli, et `httpd` on eemaldatud.
+
+> **K17.** Kirjuta selle muudatuse kohta muudatuste logi kirje: mis, millal, miks, tulemus ja kuidas tagasi võtta.
+
+## 6. osa. Väljalaske uuendus: Debian 12 → 13
+
+Versioonide üleminek on kõige suurem muudatus, mida pakihalduriga teha saab. Tee seda **eraldi masinas**, mitte oma põhilises Debianis.
+
+**6.1** Loo Proxmoxis uus Debian 12 VM (mall või ISO; õpetaja ütleb, kumb) ja uuenda see täielikult. **Tee hetktõmmis.**
+
+**6.2** Salvesta olek enne (teooria punkt 4.9): versioon, kernel, teenused, pordid ja pakettide arv.
+
+```bash
+cat /etc/debian_version; uname -r
+dpkg -l | grep -c '^ii'
+df -h /
+```
+
+**6.3** Tee väljalaske uuendus teooria punkti 4.10 („Debian 12 → 13“) järgi. Tee seda Proxmoxi konsoolis või `tmux`-is. Pane kirja, milliste seadistusfailide kohta `apt` küsis ja mida vastasid.
+
+**6.4** Pärast taaskäivitust salvesta olek uuesti ja võrdle.
+
+```bash
+cat /etc/debian_version; uname -r
+dpkg -l | grep -c '^ii'
+systemctl --failed
+journalctl -p err -b --no-pager | tail -20
+sudo apt autoremove --purge
+```
+
+> **K18.** Täida tabel „enne ja pärast“: Debiani versioon, kerneli versioon, pakettide arv, vaba kettaruum, ebaõnnestunud teenused. Kui kaua uuendus aega võttis?
+
+> **K19.** Milliste seadistusfailide kohta `apt` küsis ja mida valisid? Mida tähendab vaikimisi vastus **N**?
+
+**6.5** Teisenda hoidlad uude vormingusse ja vaata tulemust:
+
+```bash
+sudo apt modernize-sources
+cat /etc/apt/sources.list.d/debian.sources
+```
+
+**6.6** Proovi tagasiteed: taasta Proxmoxis punktis 6.1 tehtud hetktõmmis ja kontrolli versiooni.
+
+> **K20.** Mis versioon oli masinas pärast hetktõmmise taastamist? Miks on hetktõmmis väljalaske uuenduse ainus kindel tagasitee? Mida tuleks päris serveris enne sellist uuendust veel teha?
+
+---
+
+## 7. osa. Kokkuvõte
+
+> **K21.** Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
+
+> **K22.** Võrdle kolme muudatust, mida selles laboritöös tegid: paketi uuendus, paketi tagasipööramine ja väljalaske uuendus. Kui suur on igaühe risk ja milline on igaühe tagasitee?
 
 ---
 
@@ -257,8 +340,7 @@ which -a hello
 
 1. Debianis: uuri hoidlate seadistust ja lisa **backports** hoidla (vt Debiani dokumentatsioonist „Backports“). Võrdle mõne paketi versiooni tava- ja backports hoidlas käsuga `apt policy`.
 2. AlmaLinuxis: paigalda tarkvaragrupp `"Development Tools"` ja kompileeri `hello` ka seal. Mis on erinev?
-3. **Väljalaske uuendus:** paigalda Proxmoxi uus Debian 12 VM (või klooni olemasolev), **tee hetktõmmis** ja uuenda see Debian 13-ks (teooria punkt 4.10). Pane kirja: mitu paketti uuendati, milliste seadistusfailide kohta küsiti ja mis on `cat /etc/debian_version` väljund enne ja pärast. Lõpuks teisenda hoidlad käsuga `apt modernize-sources` ja vaata faili `/etc/apt/sources.list.d/debian.sources`.
-4. **AlmaLinux 9 → 10 (ainult analüüs):** AlmaLinux 9 hetktõmmisega VM-is paigalda ELevate ja käivita `sudo leapp preupgrade`. Uuri aruannet `/var/log/leapp/leapp-report.txt`: millised takistused (*inhibitor*) leiti?
+3. **AlmaLinux 9 → 10 (ainult analüüs):** AlmaLinux 9 hetktõmmisega VM-is paigalda ELevate ja käivita `sudo leapp preupgrade`. Uuri aruannet `/var/log/leapp/leapp-report.txt`: millised takistused (*inhibitor*) leiti?
 
 ---
 
@@ -281,8 +363,14 @@ Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures 
 - **K12.** *(punkt 4.4)* Kuhu programm paigaldati? Miks ütleb `dpkg -S`, et fail ei kuulu ühtegi paketti?
 - **K13.** *(punkt 4.5)* Mitu `hello` programmi on nüüd süsteemis ja millised on nende versioonid? Kumb neist käivitub, kui kirjutad lihtsalt `hello`, ja miks? (Vihje: vaata muutujat `PATH`.)
 - **K14.** *(punkt 4.6)* Too kolm põhjust, miks on paketist paigaldamine üldjuhul parem kui lähtekoodist kompileerimine.
-- **K15.** *(5. osa)* Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
-- **K16.** *(5. osa)* Mida tuleks teha enne olulise serveri suurt uuendust?
+- **K15.** *(punkt 5.3)* Mitu versiooni oli hoidlas? Milline versioon oli enne ja milline pärast? Miks ei ole vanemale versioonile minek alati võimalik?
+- **K16.** *(punkt 5.4)* Mida näitas võrdlus: kas teenused, pordid ja vead logis olid enne ja pärast samad? Kas mõni teenus vajas taaskäivitust? Kuidas kontrollisid, et veebiserver töötab ka kasutaja poolt vaadates?
+- **K17.** *(punkt 5.5)* Kirjuta selle muudatuse kohta muudatuste logi kirje: mis, millal, miks, tulemus ja kuidas tagasi võtta.
+- **K18.** *(punkt 6.4)* Täida tabel „enne ja pärast“: Debiani versioon, kerneli versioon, pakettide arv, vaba kettaruum, ebaõnnestunud teenused. Kui kaua uuendus aega võttis?
+- **K19.** *(punkt 6.4)* Milliste seadistusfailide kohta `apt` küsis ja mida valisid? Mida tähendab vaikimisi vastus **N**?
+- **K20.** *(punkt 6.6)* Mis versioon oli masinas pärast hetktõmmise taastamist? Miks on hetktõmmis väljalaske uuenduse ainus kindel tagasitee? Mida tuleks päris serveris enne sellist uuendust veel teha?
+- **K21.** *(7. osa)* Kujutle, et pead paigaldama serverisse tarkvara, mida distro ametlikus hoidlas ei ole. Järjesta järgmised võimalused alates kõige eelistatumast ja põhjenda: tootja ametlik hoidla, juhusliku inimese PPA või kolmanda osapoole hoidla, lähtekoodist kompileerimine, veebist leitud skript `curl ... | sudo bash`, EPEL (AlmaLinuxis).
+- **K22.** *(7. osa)* Võrdle kolme muudatust, mida selles laboritöös tegid: paketi uuendus, paketi tagasipööramine ja väljalaske uuendus. Kui suur on igaühe risk ja milline on igaühe tagasitee?
 <!-- /kysimused -->
 
 ---

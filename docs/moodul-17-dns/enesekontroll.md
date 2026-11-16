@@ -1,5 +1,5 @@
 <!-- navigatsioon -->
-[← Laboritöö 17. Kooli väikeserver, III osa: DNS](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 18. Failiserverid →](../moodul-18-failiserverid/index.md)
+[← Laboritöö 17. Kooli väikeserver, III osa: DNS](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 18. DHCP →](../moodul-18-dhcp/index.md)
 <!-- /navigatsioon -->
 
 # Moodul 17. Enesekontroll
@@ -180,5 +180,5 @@ dig www.debian.org +trace
 <!-- navigatsioon -->
 ---
 
-[← Laboritöö 17. Kooli väikeserver, III osa: DNS](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 18. Failiserverid →](../moodul-18-failiserverid/index.md)
+[← Laboritöö 17. Kooli väikeserver, III osa: DNS](labor.md) · [Sisukord](../../README.md#sisukord) · [Moodul 18. DHCP →](../moodul-18-dhcp/index.md)
 <!-- /navigatsioon -->

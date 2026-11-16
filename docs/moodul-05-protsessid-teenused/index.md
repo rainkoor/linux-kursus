@@ -572,7 +572,7 @@ at -c 3                             # töö nr 3 sisu
 atrm 3                              # kustuta
 ```
 
-Väljund saadetakse kasutajale e-postiga (moodul 20). systemd alternatiiv: `sudo systemd-run --on-active=30min systemctl restart nginx`.
+Väljund saadetakse kasutajale e-postiga (moodul 21). systemd alternatiiv: `sudo systemd-run --on-active=30min systemctl restart nginx`.
 
 ## 5.10 Ressursipiirangud: ulimit ja systemd
 
@@ -643,7 +643,7 @@ Kasutajate seansid on systemd-s **lõikudes** (`user-1000.slice`) - piiranguid s
 <details>
 <summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
 
-Protsessid, signaalid, `ps`, `top`, `kill`, `nice`, esi- ja taustatööd ning `cron` töötavad FreeBSD-s samamoodi. Käsu `ps aux` võtmed ongi pärit BSD-st. FreeBSD-s pole aga systemd-d - teenuseid haldavad lihtsad shelliskriptid **rc.d** ja üks seadistusfail `/etc/rc.conf` (vt moodul 29, punkt 29.6):
+Protsessid, signaalid, `ps`, `top`, `kill`, `nice`, esi- ja taustatööd ning `cron` töötavad FreeBSD-s samamoodi. Käsu `ps aux` võtmed ongi pärit BSD-st. FreeBSD-s pole aga systemd-d - teenuseid haldavad lihtsad shelliskriptid **rc.d** ja üks seadistusfail `/etc/rc.conf` (vt moodul 30, punkt 30.6):
 
 | Linux (systemd) | FreeBSD (rc.d) |
 |---|---|

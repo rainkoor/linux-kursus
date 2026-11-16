@@ -119,7 +119,7 @@ jexec www sh           # kest jaili sees (nagu podman exec -it)
 | Pildid ja register | jah (OCI, Docker Hub) | traditsiooniliselt ei; abitööriistad nt Bastille |
 | Linuxi pildid | jah | ei (sama kernel = FreeBSD) |
 
-Jaile käsitleme lähemalt moodulis 29 (punkt 29.11).
+Jaile käsitleme lähemalt moodulis 30 (punkt 30.11).
 
 </details>
 
@@ -396,7 +396,7 @@ sudo systemctl enable --now podman-auto-update.timer   # uuenda iga päev automa
 | `/etc/containers/systemd/*.container` | Konteiner teenusena (Quadlet) |
 | `AutoUpdate=registry`, `podman auto-update`, `podman-auto-update.timer` | Automaatsed pildiuuendused |
 
-**Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil. Konteinerite käitamine mitme serveri klastris on valikmoodulis [24. Kubernetes: k3s](../moodul-28-kubernetes/index.md).
+**Järgmised sammud:** tee [laboritöö](labor.md) ja kontrolli oma teadmisi [enesekontrolli](enesekontroll.md) abil. Konteinerite käitamine mitme serveri klastris on valikmoodulis [24. Kubernetes: k3s](../moodul-29-kubernetes/index.md).
 
 ## Lisamaterjal
 

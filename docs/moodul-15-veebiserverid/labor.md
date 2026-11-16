@@ -13,7 +13,7 @@
 
 > **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
-**Stsenaarium:** kool vajab väikest serverit, mis pakub veebisaiti koos õpilaste andmebaasiga, sisevõrgu DNS-i, failide jagamist Linuxi ja Windowsi arvutitele ning igaöist varundust. Selles laboritöös paigaldad veebiserverid, **laboritöös 16** lisad andmebaasid, **laboritöös 17** DNS-i ning **laboritöös 18** failijagamise, varunduse ja dokumentatsiooni.
+**Stsenaarium:** kool vajab väikest serverit, mis pakub veebisaiti koos õpilaste andmebaasiga, sisevõrgu DNS-i, failide jagamist Linuxi ja Windowsi arvutitele ning igaöist varundust. Selles laboritöös paigaldad veebiserverid, **laboritöös 16** lisad andmebaasid, **laboritöös 17** DNS-i ning **laboritöös 19** failijagamise, varunduse ja dokumentatsiooni.
 
 Laboris kasutatavad tähised:
 

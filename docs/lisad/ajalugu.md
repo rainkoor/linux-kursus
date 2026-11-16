@@ -151,7 +151,7 @@ Samal ajal arenes edasi BSD. AT&T ja Berkeley vaheline kohtuvaidlus (1992–1994
 | 2010 | **Lennart Poettering** ja **Kay Sievers** alustavad **systemd** arendust (vt punkt 6.3 ja moodul 5) |
 | 2011 | Esimesed **Chromebookid** - Google'i ChromeOS põhineb Linuxil |
 | 2012 | **Raspberry Pi** - odav pisiarvuti, millest sai Linuxi õppimise ja sardsüsteemide lemmik |
-| 2013 | **Docker** teeb konteinerid populaarseks (vt moodul 14). Valve kuulutab välja **SteamOS**-i (vt moodul 26) |
+| 2013 | **Docker** teeb konteinerid populaarseks (vt moodul 14). Valve kuulutab välja **SteamOS**-i (vt moodul 27) |
 | 2014 | Google avaldab konteinerite orkestreerimissüsteemi **Kubernetes** |
 | 2016 | Microsoft lisab Windowsi **WSL**-i (*Windows Subsystem for Linux*), 2019 tuleb WSL 2 päris Linuxi kerneliga |
 | 2017 | Kõik TOP500 nimekirja superarvutid töötavad Linuxil |

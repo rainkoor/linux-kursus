@@ -1,5 +1,5 @@
 <!-- navigatsioon -->
-[← Proovieksam: süvendusosa](proovieksam.md) · [Sisukord](../README.md#sisukord) · [Moodul 21. BSD praktikas: OPNsense tulemüür →](moodul-21-opnsense/index.md)
+[← Proovieksam: süvendusosa](proovieksam.md) · [Sisukord](../README.md#sisukord) · [Moodul 22. BSD praktikas: OPNsense tulemüür →](moodul-22-opnsense/index.md)
 <!-- /navigatsioon -->
 
 # Lõpuprojekt
@@ -10,7 +10,7 @@ Projektil on **kolm taset**. Vali tase vastavalt sellele, kui kaugele oled kursu
 
 | | **Algtase** | **Edasijõudnud** | **Meister** |
 |---|---|---|---|
-| Eeldused | põhiosa (moodulid 1–9) | moodulid 1–20 | moodulid 1–20 ja vähemalt kaks valikmoodulit |
+| Eeldused | põhiosa (moodulid 1–9) | moodulid 1–21 | moodulid 1–21 ja vähemalt kaks valikmoodulit |
 | Maht | 12 tundi | 16 tundi | 24–32 tundi |
 | Masinaid | 1 (+ klient) | 2–4 | 4 või rohkem, sh võrguseade või hüperviisor |
 | Distrod | üks | vähemalt kaks perekonda (Debian ja Red Hat) | segakeskkond (Linux, Windows, BSD/OPNsense) |
@@ -29,7 +29,7 @@ Projektil on **kolm taset**. Vali tase vastavalt sellele, kui kaugele oled kursu
 | 4. Dokumenteerimine | Git-hoidla koos dokumentatsiooniga | 2 h | 2 h | 3–4 h |
 | 5. Esitlus | esitlus ja demo | 1 h | 2 h | 2–3 h |
 
-**Projektiplaan** (1 lk): eesmärk, masinad ja nende rollid, IP-plaan (vt [paigalduslisa](lisad/paigaldus.md), punkt 2), teenused, ajakava, riskid („mis võib valesti minna“).
+**Projektiplaan** (1 lk): eesmärk, masinad ja nende rollid, **riistvara vajadus koos põhjendusega** (protsessor, mälu, ketas iga masina kohta ja miks just nii palju - moodul 1, punkt 1.11), IP-plaan (vt [paigalduslisa](lisad/paigaldus.md), punkt 2), teenused, mõõdetavad nõuded (nt kättesaadavus, varunduse sagedus - moodul 21, punkt 21.1), ajakava, riskid („mis võib valesti minna“).
 
 ---
 
@@ -69,7 +69,7 @@ Paigalda mõni server-tarkvara, mis ei ole distro hoidlas (nt Minecrafti server,
 
 ## 2. Edasijõudnud
 
-**Eeldused:** moodulid 1–20 · **Maht:** 16 tundi · **Distrod:** vähemalt kaks perekonda (Debian/Ubuntu ja AlmaLinux)
+**Eeldused:** moodulid 1–21 · **Maht:** 16 tundi · **Distrod:** vähemalt kaks perekonda (Debian/Ubuntu ja AlmaLinux)
 
 Edasijõudnute tasemel ehitad mitmest masinast koosneva teenuse, mis on automatiseeritud, turvatud, varundatud ja seiratud.
 
@@ -79,7 +79,7 @@ Edasijõudnute tasemel ehitad mitmest masinast koosneva teenuse, mis on automati
 
 Paigalda avatud lähtekoodiga veebirakendus (nt WordPress, Nextcloud, Moodle, Gitea, BookStack) tootmiskõlbulikult.
 
-- **Põhinõuded:** veebiserver + rakendus + andmebaas eraldi masinates (moodulid 15–16); HTTPS oma CA või Caddy `tls internal`-iga (Let's Encrypt ainult siis, kui serveril on avalik DNS-nimi, moodul 15); eraldi andmebaasikasutaja ja andmebaas kättesaadav ainult veebiserverile; DNS-nimi (moodul 17); tulemüür ja SELinux/AppArmor; igaöine varundus teise masinasse koos testitud taastamisega; kättesaadavuse seire (Uptime Kuma, moodul 20).
+- **Põhinõuded:** veebiserver + rakendus + andmebaas eraldi masinates (moodulid 15–16); HTTPS oma CA või Caddy `tls internal`-iga (Let's Encrypt ainult siis, kui serveril on avalik DNS-nimi, moodul 15); eraldi andmebaasikasutaja ja andmebaas kättesaadav ainult veebiserverile; DNS-nimi (moodul 17); tulemüür ja SELinux/AppArmor; igaöine varundus teise masinasse koos testitud taastamisega; kättesaadavuse seire (Uptime Kuma, moodul 21).
 - **Lisanõuded:** rakendus konteinerites koos Quadletiga (moodul 14); Valkey vahemäluks; fail2ban rakenduse sisselogimisele; Prometheus + Grafana.
 
 > [!NOTE]
@@ -87,21 +87,21 @@ Paigalda avatud lähtekoodiga veebirakendus (nt WordPress, Nextcloud, Moodle, Gi
 
 **E2. Ansible'iga hallatav serveripark**
 
-Ehita vähemalt kolmest serverist koosnev keskkond, mis seadistatakse täielikult Ansible'iga (moodul 19).
+Ehita vähemalt kolmest serverist koosnev keskkond, mis seadistatakse täielikult Ansible'iga (moodul 20).
 
 - **Põhinõuded:** vähemalt kaks eri distrot; ühine baasseadistus (kasutajad, SSH karastamine, tulemüür, automaatsed uuendused, ajavöönd, NTP); vähemalt kaks teenust (nt veeb ja andmebaas või DNS); mänguraamat on idempotentne; kõik Gitis.
-- **Lisanõuded:** rollid ja `group_vars` (moodul 19); Ansible Vault saladuste jaoks; node_exporter ja Prometheus Ansible'iga (moodul 20); mänguraamat ehitab tühjast masinast töötava serveri; testimine (`ansible-lint`, idempotentsuse test, Molecule, moodul 19).
+- **Lisanõuded:** rollid ja `group_vars` (moodul 20); Ansible Vault saladuste jaoks; node_exporter ja Prometheus Ansible'iga (moodul 21); mänguraamat ehitab tühjast masinast töötava serveri; testimine (`ansible-lint`, idempotentsuse test, Molecule, moodul 20).
 
 **E3. Kooli labori infrastruktuuriteenused**
 
-Ehita väikese labori põhiteenused (moodulid 9, 17, 18 ja 20).
+Ehita väikese labori põhiteenused (moodulid 9, 17, 18, 19 ja 21).
 
-- **Põhinõuded:** DNS-server (sisevõrgu tsoon + rekursioon, BIND9 või CoreDNS); failijagamine Linuxile (NFS + autofs) ja Windowsile (Samba); keskne logiserver (rsyslog), kuhu saadavad logisid vähemalt kaks masinat; e-posti teavitused (Postfix); varundus teise masinasse.
+- **Põhinõuded:** DNS-server (sisevõrgu tsoon + rekursioon, BIND9 või CoreDNS); DHCP-server (Kea) koos reserveeringutega; failijagamine Linuxile (NFS + autofs) ja Windowsile (Samba); keskne logiserver (rsyslog), kuhu saadavad logisid vähemalt kaks masinat; e-posti teavitused (Postfix); varundus teise masinasse.
 - **Lisanõuded:** teine DNS-server; Pi-hole; failiserver TrueNASil koos replikatsiooniga; seire ja häired (Prometheus/Grafana või Zabbix).
 
 **E4. Konteineritel põhinev teenuseplatvorm**
 
-- **Põhinõuded:** vähemalt kolm teenust konteinerites (nt rakendus, andmebaas, haldusliides) Compose'i või Quadletiga (moodul 14); pöördpuhver koos HTTPS-iga (Caddy või Traefik, moodul 15); püsivad andmed köidetes ja nende varundus; teenused käivituvad alglaadimisel; konteinerite logid ja seire (moodul 20); kõik konfiguratsioon Gitis.
+- **Põhinõuded:** vähemalt kolm teenust konteinerites (nt rakendus, andmebaas, haldusliides) Compose'i või Quadletiga (moodul 14); pöördpuhver koos HTTPS-iga (Caddy või Traefik, moodul 15); püsivad andmed köidetes ja nende varundus; teenused käivituvad alglaadimisel; konteinerite logid ja seire (moodul 21); kõik konfiguratsioon Gitis.
 - **Lisanõuded:** juurkasutajata (*rootless*) konteinerid; oma konteinerpilt; automaatsed pildiuuendused (`podman auto-update`, moodul 14) koos tagasivõtmisega; Ansible'i mänguraamat, mis ehitab platvormi nullist.
 
 ### Kohustuslik edasijõudnute tasemel
@@ -117,7 +117,7 @@ Ehita väikese labori põhiteenused (moodulid 9, 17, 18 ja 20).
 
 ## 3. Meister
 
-**Eeldused:** moodulid 1–20 ja vähemalt kaks valikmoodulit · **Maht:** 24–32 tundi · **Keskkond:** segakeskkond
+**Eeldused:** moodulid 1–21 ja vähemalt kaks valikmoodulit · **Maht:** 24–32 tundi · **Keskkond:** segakeskkond
 
 Meistritasemel ehitad lahenduse, mis võiks töötada päris asutuses: see talub üksikute komponentide riket, on ehitatav nullist koodi järgi, seiratav ja dokumenteeritud nii, et keegi teine saab selle üle võtta. Kõik põhi- ja lisanõuetes nimetatud vahendid on kursusel käsitletud (sulgudes on moodul); meistritaseme raskus on nende **kombineerimises** üheks töökindlaks tervikuks.
 
@@ -125,32 +125,32 @@ Meistritasemel ehitad lahenduse, mis võiks töötada päris asutuses: see talub
 
 **M1. Kõrge kättesaadavusega veebiteenus**
 
-- **Põhinõuded:** vähemalt kaks veebiserverit koormusejaoturi taga (HAProxy või nginx, moodul 15); koormusejaoturi enda rikkekindlus (kaks jaoturit + `keepalived` virtuaalse IP-ga, moodul 15); andmebaasi replikatsioon ja dokumenteeritud ülevõtt (moodul 16); jagatud failisalvestus (NFS, moodul 18); seansid Valkeys (moodul 16); seire ja häired (moodul 20); kogu keskkond Ansible'iga nullist ehitatav; **rikketest**: lülita välja üks veebiserver, üks jaotur ja andmebaasi põhiserver - dokumenteeri, mis juhtus ja kui kaua teenus häiritud oli.
-- **Lisanõuded:** käsitsi ülevõtu harjutus koos ajamõõtmisega (moodul 16), automaatne ülevõtt (Galera, MaxScale) kokkuleppel õpetajaga; rakendus konteinerites või k3s klastris (valikmoodul 28); koormustest (`ab`, `wrk`) ja jõudlusanalüüs (moodulid 15 ja 20).
+- **Põhinõuded:** vähemalt kaks veebiserverit koormusejaoturi taga (HAProxy või nginx, moodul 15); koormusejaoturi enda rikkekindlus (kaks jaoturit + `keepalived` virtuaalse IP-ga, moodul 15); andmebaasi replikatsioon ja dokumenteeritud ülevõtt (moodul 16); jagatud failisalvestus (NFS, moodul 19); seansid Valkeys (moodul 16); seire ja häired (moodul 21); kogu keskkond Ansible'iga nullist ehitatav; **rikketest**: lülita välja üks veebiserver, üks jaotur ja andmebaasi põhiserver - dokumenteeri, mis juhtus ja kui kaua teenus häiritud oli.
+- **Lisanõuded:** käsitsi ülevõtu harjutus koos ajamõõtmisega (moodul 16), automaatne ülevõtt (Galera, MaxScale) kokkuleppel õpetajaga; rakendus konteinerites või k3s klastris (valikmoodul 29); koormustest (`ab`, `wrk`) ja jõudlusanalüüs (moodulid 15 ja 21).
 
 **M2. Virtualiseerimisplatvorm koodina**
 
-- **Põhinõuded:** vähemalt kahesõlmeline Proxmox VE klaster (pesastatult või füüsiliselt, moodul 27) või XCP-ng kogum; jagatud salvestus (NFS, iSCSI või Ceph) või ZFS-i replikatsioon; virtuaalmasinad luuakse koodina (cloud-init mall, moodul 27, + OpenTofu või Ansible'i `community.general.proxmox_kvm`, moodul 19) ja seadistatakse Ansible'iga; varundus Proxmox Backup Serverisse (moodul 27) koos taastamistestiga; kasutajad ja õigused (realm, rollid, kogumid); seire.
-- **Lisanõuded:** kõrge kättesaadavus (HA) koos rikketestiga; SDN võrgud; API-põhine haldusskript (moodulid 6 ja 27) õppijate laborite loomiseks.
+- **Põhinõuded:** vähemalt kahesõlmeline Proxmox VE klaster (pesastatult või füüsiliselt, moodul 28) või XCP-ng kogum; jagatud salvestus (NFS, iSCSI või Ceph) või ZFS-i replikatsioon; virtuaalmasinad luuakse koodina (cloud-init mall, moodul 28, + OpenTofu või Ansible'i `community.general.proxmox_kvm`, moodul 20) ja seadistatakse Ansible'iga; varundus Proxmox Backup Serverisse (moodul 28) koos taastamistestiga; kasutajad ja õigused (realm, rollid, kogumid); seire.
+- **Lisanõuded:** kõrge kättesaadavus (HA) koos rikketestiga; SDN võrgud; API-põhine haldusskript (moodulid 6 ja 28) õppijate laborite loomiseks.
 
 **M3. Kooli võrk ja kasutajahaldus**
 
-Ühenda valikmoodulite teemad terviklikuks väikeasutuse taristuks (moodulid 21–25).
+Ühenda valikmoodulite teemad terviklikuks väikeasutuse taristuks (moodulid 22–26).
 
-- **Põhinõuded:** OPNsense ruuter ja tulemüür (VLAN-id serveritele ja klientidele, WireGuard VPN kaugtööks); Samba AD domeen (kaks domeenikontrollerit) või OpenLDAP; DHCP ja DNS integreeritud domeeniga; PXE-paigaldus vastustefailiga (kickstart, preseed või autoinstall, moodul 22), mille järel Ansible liidab uue Linuxi masina domeeniga; failiserver gruppide õigustega; Windowsi ja Linuxi kliendid; GPO-d; tsentraalne logimine; varundus ja taastamisplaan.
+- **Põhinõuded:** OPNsense ruuter ja tulemüür (VLAN-id serveritele ja klientidele, WireGuard VPN kaugtööks); Samba AD domeen (kaks domeenikontrollerit) või OpenLDAP; DHCP ja DNS integreeritud domeeniga; PXE-paigaldus vastustefailiga (kickstart, preseed või autoinstall, moodul 23), mille järel Ansible liidab uue Linuxi masina domeeniga; failiserver gruppide õigustega; Windowsi ja Linuxi kliendid; GPO-d; tsentraalne logimine; varundus ja taastamisplaan.
 - **Lisanõuded:** domeenikontrolleri rikketest; LDAPS/Kerberos kõigil ühendustel; kasutajate elutsükkel skriptiga (loomine CSV-st, lukustamine, kustutamine).
 
 **M4. Turvaseire ja intsidendi lahendamine**
 
-- **Põhinõuded:** isoleeritud laborivõrk (OPNsense); vähemalt kolm sihtserverit, mis on karastatud CIS-i soovituste järgi (Lynis, moodul 12); tsentraalne turvaseire (Wazuh) kõigis masinates; failide terviklikkuse kontroll ja haavatavuste skaneerimine; **intsidendi simulatsioon** Kaliga (moodul 26) isoleeritud võrgus (õpetaja loal): rünnaku avastamine Wazuhis, analüüs, tõkestamine ja intsidendi aruanne.
+- **Põhinõuded:** isoleeritud laborivõrk (OPNsense); vähemalt kolm sihtserverit, mis on karastatud CIS-i soovituste järgi (Lynis, moodul 12); tsentraalne turvaseire (Wazuh) kõigis masinates; failide terviklikkuse kontroll ja haavatavuste skaneerimine; **intsidendi simulatsioon** Kaliga (moodul 27) isoleeritud võrgus (õpetaja loal): rünnaku avastamine Wazuhis, analüüs, tõkestamine ja intsidendi aruanne.
 - **Lisanõuded:** automaatne reageerimine (Wazuh active response, moodul 12); logide säilitamine eraldi serveris, mida rünnatav masin muuta ei saa; turvapoliitika Ansible'iga.
 
 **M5. Kubernetese platvorm**
 
-Eeldab valikmoodulit 28.
+Eeldab valikmoodulit 29.
 
-- **Põhinõuded:** k3s klaster vähemalt kolmest sõlmest (moodul 28); vähemalt kaks rakendust (nt veebirakendus ja selle andmebaas või eraldi VM-is andmebaas, moodul 16) manifestide või Helmiga; Ingress koos TLS-iga (labori CA, moodul 15); püsiandmed PVC-ga ja nende varundus; ConfigMap'id ja Secret'id (saladused **ei ole** Gitis avatekstina); kõik manifestid ja Helmi `values.yaml` failid Gitis; **rikketest**: sõlme väljalülitamine ja järkjärguline uuendus koos tagasivõtuga; klastri oleku varundus ja taastamisjuhend.
-- **Lisanõuded:** kõrge kättesaadavus (kolm serverit etcd-ga + virtuaalne IP, moodulid 15 ja 28); GitOps Argo CD-ga; seire `kube-prometheus-stack`-iga (moodul 20); sõlmed luuakse OpenTofu ja cloud-initiga (moodulid 19 ja 27).
+- **Põhinõuded:** k3s klaster vähemalt kolmest sõlmest (moodul 29); vähemalt kaks rakendust (nt veebirakendus ja selle andmebaas või eraldi VM-is andmebaas, moodul 16) manifestide või Helmiga; Ingress koos TLS-iga (labori CA, moodul 15); püsiandmed PVC-ga ja nende varundus; ConfigMap'id ja Secret'id (saladused **ei ole** Gitis avatekstina); kõik manifestid ja Helmi `values.yaml` failid Gitis; **rikketest**: sõlme väljalülitamine ja järkjärguline uuendus koos tagasivõtuga; klastri oleku varundus ja taastamisjuhend.
+- **Lisanõuded:** kõrge kättesaadavus (kolm serverit etcd-ga + virtuaalne IP, moodulid 15 ja 29); GitOps Argo CD-ga; seire `kube-prometheus-stack`-iga (moodul 21); sõlmed luuakse OpenTofu ja cloud-initiga (moodulid 20 ja 28).
 
 **M6. Oma teema**
 
@@ -178,12 +178,18 @@ Kõik edasijõudnute taseme kohustuslikud osad, lisaks:
 | Arhitektuuri joonis (masinad, IP-d, teenused, pordid, andmevood; ASCII või Mermaid) | lihtne | ✔ | ✔ |
 | Turvameetmed | lühidalt | ✔ | riskianalüüs |
 | Seire ja häired | - | ✔ | ✔ |
+| **Rutiinsete tegevuste juhend**: kuidas teha igapäevaseid haldustoiminguid (nt uue kasutaja lisamine, uuendamine, varukoopia kontroll) | vähemalt 2 tegevust | vähemalt 4 tegevust | käsiraamatu osana |
+| **Lõppkasutaja juhend**: kuidas teenust kasutada, kirjutatud inimesele, kes ei ole IT-spetsialist (nt „kuidas ühendada võrguketas“, „kuidas vahetada parooli“) | ✔ | ✔ | ✔ |
+| **Muudatuste logi**: mis, millal ja miks tehti (Git-ajalugu + fail `MUUDATUSED.md` või piletisüsteem) | ✔ | ✔ | ✔ |
 | **Käsiraamat** (*runbook*): tüüpilised haldustoimingud ja rikete lahendamine | - | - | ✔ |
+| **Teadmusbaasi artikkel**: ühe projekti käigus lahendatud probleemi kirjeldus (sümptom, põhjus, lahendus) | - | ✔ | vähemalt 2 |
 | **Otsuste logi**: miks valisid just selle tarkvara või lahenduse (vähemalt 3 otsust) | - | - | ✔ |
 | Rikketesti ja taastamistesti protokoll (aeg, tulemus) | - | taastamine | ✔ |
 | Teadaolevad piirangud, edasiarenduse ideed, kasutatud allikad | ✔ | ✔ | ✔ |
 
 Lisa kataloogi `dokumentatsioon/` tõendid: ekraanipildid, olulised käsuväljundid, testide tulemused.
+
+**Kellele kirjutad?** Projektis on kolm lugejat ja igaühele oma dokument: **haldur** (paigaldus- ja taastamisjuhend, rutiinsete tegevuste juhend - täpsed käsud), **lõppkasutaja** (lühike, piltidega, ilma erialaterminiteta) ja **järgmine kolleeg**, kes otsib lahendust samale veale (teadmusbaasi artikkel). Kui koolis või praktikakohas on kasutusel piletisüsteem, pea projekti tööde üle arvet seal; muidu piisab muudatuste logist. Mõõdetavate nõuete (projektiplaan) täitmist näita seireandmete või testide tulemustega.
 
 ## Esitlus
 
@@ -233,5 +239,5 @@ Palju õnne - oled läbinud Linuxi ja BSD kursuse nullist süsteemihalduseni! J�
 <!-- navigatsioon -->
 ---
 
-[← Proovieksam: süvendusosa](proovieksam.md) · [Sisukord](../README.md#sisukord) · [Moodul 21. BSD praktikas: OPNsense tulemüür →](moodul-21-opnsense/index.md)
+[← Proovieksam: süvendusosa](proovieksam.md) · [Sisukord](../README.md#sisukord) · [Moodul 22. BSD praktikas: OPNsense tulemüür →](moodul-22-opnsense/index.md)
 <!-- /navigatsioon -->

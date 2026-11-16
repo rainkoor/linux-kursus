@@ -258,7 +258,7 @@ podman system prune -a
 
 1. **Kooli saidi pilt registrisse:** saada oma pilt GitHubi konteineriregistrisse (`ghcr.io`) ja käivita see Debiani masinas Podmaniga.
 2. **Docker:** paigalda Ubuntu masinasse Docker (Dockeri ametlikust hoidlast) ja käivita sama `compose.yaml` käsuga `docker compose up -d`. Mis on erinev?
-3. **Mailpit:** käivita konteinerina kirjapüüdja Mailpit (`axllent/mailpit`, veebiliides pordil 8025). Hiljem saad sinna suunata Postfixi kirjad (moodul 20) (`relayhost = [127.0.0.1]:1025`).
+3. **Mailpit:** käivita konteinerina kirjapüüdja Mailpit (`axllent/mailpit`, veebiliides pordil 8025). Hiljem saad sinna suunata Postfixi kirjad (moodul 21) (`relayhost = [127.0.0.1]:1025`).
 4. **Automaatne uuendus:** lisa oma Quadleti konteinerile `AutoUpdate=registry`, käivita `podman auto-update --dry-run` ja luba `podman-auto-update.timer`. Millal taimer järgmisena käivitub (`systemctl list-timers`)? Miks on täpne pildisilt turvalisem kui `latest`?
 
 ---

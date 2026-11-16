@@ -9,7 +9,7 @@
 > [!NOTE]
 > **Süsteemihalduri vaade andmebaasidele.** See moodul õpetab andmebaasiserverit paigaldama ja hoidma: kasutajad ja õigused, turvaline ligipääs, varundus ja taastamine ning replikatsiooni põhimõte. Eesmärk on, et oskaksid rakendusele andmebaasi valmis seada ja seda hallata - mitte SQL-i ega andmebaaside disaini põhjalik õppimine.
 >
-> **HKHK õppijale:** andmebaase ja SQL-i käsitletakse põhjalikumalt eraldi ainetes. See moodul annab andmebaasiserveri haldamiseks vajaliku aluse.
+> **HKHK õppijale:** andmebaasiservereid, SQL-i ja andmemudeleid käsitletakse põhjalikumalt eraldi moodulis „Rakendusserverid ja -teenused“. See moodul annab andmebaasiserveri paigaldamiseks ja haldamiseks vajaliku aluse.
 
 ## Õpiväljundid
 
@@ -41,7 +41,7 @@ Peaaegu iga rakendus hoiab oma andmeid andmebaasis. Administraator ei pea olema 
 | **Manustatud** (*embedded*) | andmebaas on üks fail, teek rakenduse sees | **SQLite** | töölauarakendused, telefonid, väikesed teenused (Uptime Kuma, Grafana) |
 | **Võti-väärtus** | kiire mälupõhine hoidla | **Valkey**/Redis | vahemälu, seansid, järjekorrad |
 | **Dokumendipõhine** | JSON-dokumendid | MongoDB, CouchDB | paindliku struktuuriga andmed |
-| **Aegread** | mõõdikud ajas | Prometheuse TSDB, InfluxDB | seire (moodul 20) |
+| **Aegread** | mõõdikud ajas | Prometheuse TSDB, InfluxDB | seire (moodul 21) |
 | **Otsingumootor** | täistekstiotsing | OpenSearch, Elasticsearch | logid, SIEM (Wazuh, moodul 12) |
 
 **SQL** (*Structured Query Language*) on relatsiooniliste andmebaaside ühine keel. Põhikäsud (`CREATE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `GRANT`) on MariaDB-s, PostgreSQL-is ja SQLite'is peaaegu samad, erinevused on peamiselt halduskäskudes.
@@ -376,7 +376,7 @@ Lisa serveriplokis ka `index index.php index.html;`.
 | Paroolid ei ole koodis ega Gitis | seadistusfail piiratud õigustega, keskkonnamuutujad, saladuste haldus |
 | Varundus **dump-tööriistaga** ja regulaarselt testitud taastamine | töötava andmebaasi failide koopia võib olla katki |
 | Uuendused (`unattended-upgrades`, `dnf-automatic`) | andmebaasiserverite turvaaugud on tõsised |
-| Logid ja seire (moodul 20): ühenduste arv, aeglased päringud, kettaruum | andmebaas täidab ketta sageli märkamatult |
+| Logid ja seire (moodul 21): ühenduste arv, aeglased päringud, kettaruum | andmebaas täidab ketta sageli märkamatult |
 
 ### Andmebaasi varundus ja taastamistest
 
@@ -394,7 +394,7 @@ find "$SIHT" -name '*.sql.gz' -mtime +7 -delete
 logger -t varundus "andmebaasid varundatud"
 ```
 
-`--single-transaction` teeb InnoDB tabelitest järjepideva hetkeseisu ilma tabeleid lukustamata. Dump-failid varundatakse seejärel koos `/etc`-iga restic'uga teise masinasse (moodul 9, laboritöö 18).
+`--single-transaction` teeb InnoDB tabelitest järjepideva hetkeseisu ilma tabeleid lukustamata. Dump-failid varundatakse seejärel koos `/etc`-iga restic'uga teise masinasse (moodul 9, laboritöö 19).
 
 **Taastamistest** on andmebaasi puhul eriti oluline - dump võib olla tühi, katki või aegunud. Taasta regulaarselt testandmebaasi ja kontrolli sisu:
 

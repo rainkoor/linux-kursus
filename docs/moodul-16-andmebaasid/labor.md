@@ -233,7 +233,7 @@ head kool.sql
 sudo find / -xdev \( -name "*.db" -o -name "*.sqlite" \) -size +1k 2>/dev/null | head
 ```
 
-> **K9.** Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 17B Pi-hole või laboritöö 20 Uptime Kuma, uuri ka nende andmebaase.)
+> **K9.** Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 17B Pi-hole või laboritöö 21 Uptime Kuma, uuri ka nende andmebaase.)
 
 > **K10.** Miks ei ole SQLite'il kasutajaid ega porti? Mis on sellest tulenevad eelised ja puudused? Kuidas kaitsta SQLite'i andmeid?
 
@@ -302,7 +302,7 @@ Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures 
 - **K6.** *(punkt 2.3)* Kas MariaDB kuulas taastamise ajal võrgus? Miks on see oluline?
 - **K7.** *(punkt 3.1)* Miks ei lubanud `peer`-autentimine süsteemikasutajal `postgres` ühenduda andmebaasi kasutajana `kool`? Mis vahe on `peer` ja `scram-sha-256` meetodil?
 - **K8.** *(punkt 3.3)* Võrdle MariaDB ja PostgreSQL-i: kuidas luuakse kasutaja, kus määratakse, kust võib ühenduda, ja kuidas varundatakse?
-- **K9.** *(punkt 4.3)* Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 17B Pi-hole või laboritöö 20 Uptime Kuma, uuri ka nende andmebaase.)
+- **K9.** *(punkt 4.3)* Kas leidsid süsteemist mõne SQLite'i faili? Milliste programmide omad? (Kui sul on laboritöö 17B Pi-hole või laboritöö 21 Uptime Kuma, uuri ka nende andmebaase.)
 - **K10.** *(punkt 4.3)* Miks ei ole SQLite'il kasutajaid ega porti? Mis on sellest tulenevad eelised ja puudused? Kuidas kaitsta SQLite'i andmeid?
 - **K11.** *(punkt 5.2)* Mis juhtus võtmega `seanss:mari` 31 sekundi pärast? Mitu operatsiooni sekundis Valkey tegi? Miks sobib see vahemäluks ja seansside hoidmiseks?
 - **K12.** *(punkt 5.2)* Millisel aadressil Valkey kuulab? Mis juhtuks, kui port 6379 oleks internetist ilma paroolita kättesaadav?

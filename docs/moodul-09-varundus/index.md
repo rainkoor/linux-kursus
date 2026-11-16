@@ -11,7 +11,7 @@
 
 Iga süsteemihaldur kaotab kunagi andmeid: ketas rikneb, keegi kustutab vale kataloogi, uuendus rikub seadistuse või lunavara krüpteerib serveri. Vahe on selles, kas see on ebameeldiv pärastlõuna või asutuse katastroof. Selles moodulis paneme kokku varem õpitu - `tar` (moodul 2), `rsync` ja SSH (moodul 7), skriptid (moodul 6), taimerid (moodul 5) ja kettad (moodul 8) - ning ehitame töökindla varunduse, mida oskame ka **taastada**.
 
-Teenuste (veebisait, andmebaas, DNS, failiserver) eripärad on süvendusosa moodulites 15-18 - igaühes on oma alalõik varunduse kohta.
+Teenuste (veebisait, andmebaas, DNS, failiserver) eripärad on süvendusosa moodulites 15-19 - igaühes on oma alalõik varunduse kohta.
 
 ## Õpiväljundid
 
@@ -100,7 +100,7 @@ Väiksem RPO ja RTO maksavad rohkem (sagedasem varundus, rohkem salvestust, dubl
 | Paigaldatud pakettide loend | `dpkg --get-selections`, `rpm -qa` | Süsteemi kiiremaks taastamiseks |
 | Võtmed ja sertifikaadid | `/root/ca`, `/etc/ssl/private`, `/etc/ssh` | Hoia krüpteeritult |
 
-**Mida mitte varundada:** `/proc`, `/sys`, `/dev`, `/run`, `/tmp`, vahemälud (`/var/cache`), pakettide failid (need saab uuesti alla laadida). Operatsioonisüsteemi ennast varundatakse tavaliselt kas **virtuaalmasinana tervikuna** (Proxmox Backup Server, moodul 27) või üldse mitte - see paigaldatakse uuesti ja seadistus taastatakse varukoopiast või automaatikaga (moodul 19).
+**Mida mitte varundada:** `/proc`, `/sys`, `/dev`, `/run`, `/tmp`, vahemälud (`/var/cache`), pakettide failid (need saab uuesti alla laadida). Operatsioonisüsteemi ennast varundatakse tavaliselt kas **virtuaalmasinana tervikuna** (Proxmox Backup Server, moodul 28) või üldse mitte - see paigaldatakse uuesti ja seadistus taastatakse varukoopiast või automaatikaga (moodul 20).
 
 ## 9.5 Täis-, juurdekasvu- ja diferentsiaalvarundus
 
@@ -245,7 +245,7 @@ journalctl -t varundus                       # skripti logi
 
 - `Persistent=true` - kui masin oli kell 02:30 väljas, tehakse varundus kohe pärast käivitust;
 - `Nice` ja `IOSchedulingClass=idle` - varundus ei aeglusta teenuseid;
-- `OnFailure=` käivitab vea korral teise üksuse, mis teatab veast (näide laboritöös; e-posti teavitused ja seire on moodulis 20).
+- `OnFailure=` käivitab vea korral teise üksuse, mis teatab veast (näide laboritöös; e-posti teavitused ja seire on moodulis 21).
 
 **Kontrolli varundust regulaarselt:** taimer, mis on pool aastat vaikselt vigadega töötanud, on halvem kui varunduse puudumine, sest see annab vale kindlustunde.
 
@@ -297,7 +297,7 @@ Taastamise kohta tuleb ette teada:
 
 1. **Mida** taastada: üks fail, kataloog, terve server?
 2. **Kust**: milline koopia (kuupäev) ja kus see asub?
-3. **Kuidas**: sammud, mida saab järgida ka keegi teine (moodul 18, käsiraamat);
+3. **Kuidas**: sammud, mida saab järgida ka keegi teine (moodul 19, käsiraamat);
 4. **Kui kaua** see võtab - kas mahub RTO sisse?
 
 Taastamise reeglid:
@@ -319,7 +319,7 @@ Taastamise reeglid:
 | `tar`, `rsync` | Lihtsad, igal pool olemas |
 | **restic** | Krüpteeritud, deduplitseeriv; sihtkohaks kataloog, SFTP, S3, Backblaze jt |
 | **borg** (BorgBackup) | Sarnane restic'uga, väga tõhus; vajab sihtmasinas samuti borg'i |
-| **Proxmox Backup Server** | Virtuaalmasinate ja konteinerite deduplitseeriv varundus (valikmoodul 27) |
+| **Proxmox Backup Server** | Virtuaalmasinate ja konteinerite deduplitseeriv varundus (valikmoodul 28) |
 | LVM ja ZFS hetktõmmised | Järjepidev seis varundamise ajaks (moodulid 8, 10); ZFS `send/receive` teise masinasse |
 | Bacula, Bareos, Veeam | Suurte asutuste tsentraalsed varunduslahendused |
 
@@ -341,7 +341,7 @@ Varundustööriistad töötavad kõigis distrodes ühtemoodi; erinevus on peamis
 <details>
 <summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
 
-Varunduse põhimõtted (3-2-1, RPO/RTO, taastamise test) ei sõltu süsteemist. `tar` (FreeBSD-s bsdtar), `rsync` ja `restic` (`pkg install rsync restic`) töötavad samamoodi. FreeBSD-s on lisaks kaks ZFS-i võimalust (vt moodul 29, punkt 29.9):
+Varunduse põhimõtted (3-2-1, RPO/RTO, taastamise test) ei sõltu süsteemist. `tar` (FreeBSD-s bsdtar), `rsync` ja `restic` (`pkg install rsync restic`) töötavad samamoodi. FreeBSD-s on lisaks kaks ZFS-i võimalust (vt moodul 30, punkt 30.9):
 
 ```sh
 zfs snapshot -r zroot/usr/home@2026-11-10        # hetktõmmis kõigist kodukataloogidest
@@ -350,7 +350,7 @@ bectl create enne-uuendust                       # alglaadimiskeskkond enne süs
 ```
 
 - **ZFS-i hetktõmmis** on kohe olemas ega võta alguses ruumi. Samas masinas on see ikkagi ainult tagasivõtu võimalus, mitte varukoopia (punkt 9.1).
-- **`zfs send`** kopeerib hetktõmmise teise masinasse ja edaspidi ainult muutused (`zfs send -i`). Nii töötavad ka Proxmoxi replikatsioon ja TrueNASi varundus (moodulid 10 ja 18).
+- **`zfs send`** kopeerib hetktõmmise teise masinasse ja edaspidi ainult muutused (`zfs send -i`). Nii töötavad ka Proxmoxi replikatsioon ja TrueNASi varundus (moodulid 10 ja 19).
 - **Alglaadimiskeskkond** (`bectl`) on süsteemiketta kloon, kuhu saab ebaõnnestunud uuenduse järel tagasi minna. See ei asenda andmete varundust.
 
 </details>

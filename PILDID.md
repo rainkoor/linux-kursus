@@ -24,27 +24,27 @@ Materjalis on peidetud kohatäited kujul `<!-- PILT: ../pildid/FAIL.png | kirjel
 | `m12-wazuh-armatuurlaud.png` | Wazuhi veebiliidese ülevaade (agentide olek, turvasündmused) | `docs/moodul-12-turvalisus-logid/index.md`, 12.11 Turvasündmuste haldus: Wazuh |
 | `m15-brauseri-hoiatus.png` | Brauseri hoiatus isesigneeritud sertifikaadi korral | `docs/moodul-15-veebiserverid/index.md`, Labor ja päris maailm |
 | `m15-sertifikaadi-ahel.png` | Brauseri sertifikaadivaade: labori CA → serveri sertifikaat (pärast CA usaldamist) | `docs/moodul-15-veebiserverid/index.md`, Oma CA (sisevõrk ja labor) |
-| `m20-grafana-node-exporter.png` | Grafana töölaud *Node Exporter Full* (CPU, mälu, ketas) | `docs/moodul-20-seire/index.md`, Grafana |
-| `m20-uptime-kuma.png` | Uptime Kuma jälgitavate teenuste nimekiri | `docs/moodul-20-seire/index.md`, 20.6 Kättesaadavus: Uptime Kuma |
-| `m21-konsoolimenuu.png` | OPNsense'i konsoolimenüü (liidesed ja aadressid, valikud 0-13) | `docs/moodul-21-opnsense/index.md`, Konsoolimenüü |
-| `m21-armatuurlaud.png` | OPNsense'i veebiliidese armatuurlaud (*Lobby → Dashboard*) | `docs/moodul-21-opnsense/index.md`, Veebiliides |
-| `m21-tulemuurireeglid.png` | *Firewall → Rules → LAN* reeglite loend | `docs/moodul-21-opnsense/index.md`, Reegli osad |
-| `m21-pordisuunamine.png` | *Firewall → NAT → Port Forward* reegli vorm | `docs/moodul-21-opnsense/index.md`, NAT ja pordisuunamine |
-| `m22-netbootxyz-menuu.png` | netboot.xyz menüü võrgust alglaadimisel | `docs/moodul-22-dhcp-pxe-iscsi/index.md`, Automaatne paigaldus: kickstart, preseed ja autoinstall |
-| `m24-lam-kasutajad.png` | LAM-i kasutajate loend (`ou=kasutajad`) | `docs/moodul-24-openldap/index.md`, 24.4 LDIF ja kirjete haldus |
-| `m25-aduc.png` | *Active Directory Users and Computers* Samba domeeniga | `docs/moodul-25-samba-ad/index.md`, RSAT - haldus Windowsist |
-| `m25-gpo-haldus.png` | *Group Policy Management* - lingitud rühmapoliitika | `docs/moodul-25-samba-ad/index.md`, Rühmapoliitika näide |
-| `m26-gnome-toolaud.png` | Ubuntu GNOME töölaud (*Activities* vaade) | `docs/moodul-26-toolaud-wsl/index.md`, 26.3 Graafiline süsteem |
-| `m26-wsl-terminal.png` | Windows Terminal: PowerShell `wsl -l -v` ja Ubuntu vahekaart | `docs/moodul-26-toolaud-wsl/index.md`, Paigaldus ja põhikäsud (PowerShell) |
-| `m27-proxmox-ulevaade.png` | Proxmoxi veebiliides: sõlm, VM-id ja konteinerid, *Summary* | `docs/moodul-27-virtualiseerimine/index.md`, Virtuaalmasinad |
-| `m27-proxmox-varunduse-too.png` | *Datacenter → Backup* ajastatud varunduse töö | `docs/moodul-27-virtualiseerimine/index.md`, Varundus, mallid ja kloonid |
-| `m27-pbs-andmehoidla.png` | PBS-i andmehoidla *Summary* koos deduplitseerimisteguriga | `docs/moodul-27-virtualiseerimine/index.md`, Proxmox Backup Server |
-| `m27-cloud-init.png` | VM-i vahekaart *Cloud-Init* (kasutaja, SSH-võti, IP) | `docs/moodul-27-virtualiseerimine/index.md`, Cloud-init mall |
-| `m27-xen-orchestra.png` | Xen Orchestra VM-ide loend | `docs/moodul-27-virtualiseerimine/index.md`, Xen Orchestra |
-| `m29-bsdinstall-zfs.png` | bsdinstall *ZFS Configuration* aken | `docs/moodul-29-freebsd/index.md`, 29.2 Paigaldus |
-| `m29-alglaadija-be.png` | FreeBSD alglaadija menüü, *Boot Environments* valik | `docs/moodul-29-freebsd/index.md`, 29.9 ZFS ja alglaadimiskeskkonnad |
+| `m21-grafana-node-exporter.png` | Grafana töölaud *Node Exporter Full* (CPU, mälu, ketas) | `docs/moodul-21-seire/index.md`, Grafana |
+| `m21-uptime-kuma.png` | Uptime Kuma jälgitavate teenuste nimekiri | `docs/moodul-21-seire/index.md`, 20.6 Kättesaadavus: Uptime Kuma |
+| `m22-konsoolimenuu.png` | OPNsense'i konsoolimenüü (liidesed ja aadressid, valikud 0-13) | `docs/moodul-22-opnsense/index.md`, Konsoolimenüü |
+| `m22-armatuurlaud.png` | OPNsense'i veebiliidese armatuurlaud (*Lobby → Dashboard*) | `docs/moodul-22-opnsense/index.md`, Veebiliides |
+| `m22-tulemuurireeglid.png` | *Firewall → Rules → LAN* reeglite loend | `docs/moodul-22-opnsense/index.md`, Reegli osad |
+| `m22-pordisuunamine.png` | *Firewall → NAT → Port Forward* reegli vorm | `docs/moodul-22-opnsense/index.md`, NAT ja pordisuunamine |
+| `m23-netbootxyz-menuu.png` | netboot.xyz menüü võrgust alglaadimisel | `docs/moodul-23-pxe-iscsi/index.md`, Automaatne paigaldus: kickstart, preseed ja autoinstall |
+| `m25-lam-kasutajad.png` | LAM-i kasutajate loend (`ou=kasutajad`) | `docs/moodul-25-openldap/index.md`, 24.4 LDIF ja kirjete haldus |
+| `m26-aduc.png` | *Active Directory Users and Computers* Samba domeeniga | `docs/moodul-26-samba-ad/index.md`, RSAT - haldus Windowsist |
+| `m26-gpo-haldus.png` | *Group Policy Management* - lingitud rühmapoliitika | `docs/moodul-26-samba-ad/index.md`, Rühmapoliitika näide |
+| `m27-gnome-toolaud.png` | Ubuntu GNOME töölaud (*Activities* vaade) | `docs/moodul-27-toolaud-wsl/index.md`, 26.3 Graafiline süsteem |
+| `m27-wsl-terminal.png` | Windows Terminal: PowerShell `wsl -l -v` ja Ubuntu vahekaart | `docs/moodul-27-toolaud-wsl/index.md`, Paigaldus ja põhikäsud (PowerShell) |
+| `m28-proxmox-ulevaade.png` | Proxmoxi veebiliides: sõlm, VM-id ja konteinerid, *Summary* | `docs/moodul-28-virtualiseerimine/index.md`, Virtuaalmasinad |
+| `m28-proxmox-varunduse-too.png` | *Datacenter → Backup* ajastatud varunduse töö | `docs/moodul-28-virtualiseerimine/index.md`, Varundus, mallid ja kloonid |
+| `m28-pbs-andmehoidla.png` | PBS-i andmehoidla *Summary* koos deduplitseerimisteguriga | `docs/moodul-28-virtualiseerimine/index.md`, Proxmox Backup Server |
+| `m28-cloud-init.png` | VM-i vahekaart *Cloud-Init* (kasutaja, SSH-võti, IP) | `docs/moodul-28-virtualiseerimine/index.md`, Cloud-init mall |
+| `m28-xen-orchestra.png` | Xen Orchestra VM-ide loend | `docs/moodul-28-virtualiseerimine/index.md`, Xen Orchestra |
+| `m30-bsdinstall-zfs.png` | bsdinstall *ZFS Configuration* aken | `docs/moodul-30-freebsd/index.md`, 29.2 Paigaldus |
+| `m30-alglaadija-be.png` | FreeBSD alglaadija menüü, *Boot Environments* valik | `docs/moodul-30-freebsd/index.md`, 29.9 ZFS ja alglaadimiskeskkonnad |
 
-Kokku 28 pilti. Kõige suurem mõju on OPNsense'i (moodul 21), Proxmoxi ja PBS-i (moodul 27) ning paigalduslisa piltidel - neid samme tehakse veebiliideses ja tekst üksi on algajale raske.
+Kokku 28 pilti. Kõige suurem mõju on OPNsense'i (moodul 22), Proxmoxi ja PBS-i (moodul 28) ning paigalduslisa piltidel - neid samme tehakse veebiliideses ja tekst üksi on algajale raske.
 
 ## Logod ja maskotid (README ja avaleht)
 

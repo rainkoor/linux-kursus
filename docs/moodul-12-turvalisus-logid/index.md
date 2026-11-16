@@ -714,7 +714,7 @@ Pärast muudatust taaskäivita server (`sudo docker compose restart wazuh.manage
 | Logid | journald, rsyslog, logrotate | syslogd, `newsyslog` |
 | Igapäevane turvaaruanne | (eraldi seadistada) | `periodic` saadab juurkasutajale aruande (SUID-failid, sisselogimised, tulemüür) |
 | Kohustuslik juurdepääsukontroll | SELinux, AppArmor | MAC-raamistik (`mac_bsdextended`, `mac_portacl`) - vähem levinud |
-| Isoleerimine | konteinerid, nimeruumid | jailid (moodul 14 ja 29) |
+| Isoleerimine | konteinerid, nimeruumid | jailid (moodul 14 ja 30) |
 | Kerneli turvatase | - | `securelevel` - kõrgemal tasemel ei saa isegi juurkasutaja muuta nt kaitstud faile |
 | Auditeerimine | auditd | `auditd` (BSM-formaat) baassüsteemis |
 | fail2ban | pakett | pakett (`pkg search fail2ban`), tulemüür pf |

@@ -556,7 +556,7 @@ flowchart LR
     A4 -.- M4["pam_mkhomedir<br>pam_limits"]
 ```
 
-Näiteks moodulid: `pam_unix` (tavaline parool), `pam_pwquality` (parooli tugevus), `pam_faillock` (lukustamine valede katsete järel), `pam_limits` (ressursipiirangud, moodul 5), `pam_mkhomedir` (kodukataloog, moodulid 24–25), `pam_sss` (LDAP/AD).
+Näiteks moodulid: `pam_unix` (tavaline parool), `pam_pwquality` (parooli tugevus), `pam_faillock` (lukustamine valede katsete järel), `pam_limits` (ressursipiirangud, moodul 5), `pam_mkhomedir` (kodukataloog, moodulid 25–26), `pam_sss` (LDAP/AD).
 
 > **Hoiatus:** vigane PAM-i seadistus võib takistada **kõigil** sisselogimist, ka `sudo`-t. Hoia muutmise ajal teises aknas juurkasutaja kest lahti ja testi uues aknas. Debianis ja Ubuntus muuda PAM-i võimalusel käsuga `pam-auth-update`, AlmaLinuxis käsuga `authselect`, mitte faile käsitsi.
 
@@ -666,7 +666,7 @@ Kasutajate ja õiguste põhimõtted (omanik, grupp, `rwx`, `chmod`, `chown`, `um
 | Halduriõigus | `sudo` (grupp `sudo` või `wheel`) | `su` ainult grupi `wheel` liikmetele; `sudo` või `doas` paigalda paketina |
 | ACL | `setfacl`, `getfacl` | samad käsud, UFS-il tuleb ACL haakimisel lubada, ZFS-il on NFSv4 ACL-id |
 
-Lähemalt vt moodul 29, punkt 29.7.
+Lähemalt vt moodul 30, punkt 30.7.
 
 </details>
 

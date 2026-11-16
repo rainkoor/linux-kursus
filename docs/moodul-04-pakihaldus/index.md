@@ -359,7 +359,7 @@ Serverites eelistatakse üldjuhul distro tavapakette. Ubuntu serveris on Snap va
 ## 4.9 Uuenduste hea tava
 
 > [!TIP]
-> **Lühidalt:** Uuenda regulaarselt, turvauuendused kohe. Vaata enne üle, mida uuendatakse, ja taaskäivita pärast teegi uuendust teenused (`needrestart`).
+> **Lühidalt:** Uuenda regulaarselt, turvauuendused kohe. Vaata enne üle, mida uuendatakse, tee hetktõmmis, ja võrdle süsteemi olekut enne ja pärast (teenused, pordid, vead logis). Pärast teegi uuendust taaskäivita teenused (`needrestart`).
 
 - uuenda süsteeme **regulaarselt**, eriti turvauuendused;
 - loe enne uuenduse kinnitamist, mida pakihaldur teha kavatseb, eriti kui midagi **eemaldatakse**;
@@ -377,6 +377,47 @@ sudo needrestart              # Debian/Ubuntu: näitab ja pakub taaskäivitada t
 sudo dnf needs-restarting -s  # AlmaLinux: teenused, mis vajavad taaskäivitust
 sudo dnf needs-restarting -r  # AlmaLinux: kas on vaja kogu masina taaskäivitust
 ```
+
+### Muudatuse mõju hindamine
+
+Iga uuendus, versioonivahetus ja tagasipööramine on **muudatus**, mis võib midagi katki teha. Hea haldur ei küsi ainult „kas käsk õnnestus?“, vaid „kas süsteem teeb pärast muudatust sama, mida enne?“. Selleks on kindel töökäik:
+
+1. **Olek enne.** Salvesta, milline süsteem enne muudatust oli - sellega võrdled hiljem:
+
+    ```bash
+    mkdir -p ~/muudatus && cd ~/muudatus
+    cat /etc/os-release > enne-versioon.txt; uname -r >> enne-versioon.txt
+    systemctl list-units --type=service --state=running --no-legend > enne-teenused.txt
+    systemctl --failed --no-legend > enne-vead.txt
+    sudo ss -tulpn > enne-pordid.txt
+    dpkg -l > enne-paketid.txt          # AlmaLinux: rpm -qa | sort > enne-paketid.txt
+    ```
+
+2. **Mis muutub?** Vaata enne kinnitamist, mida pakihaldur teha kavatseb: `apt list --upgradable` ja `apt -s upgrade` (simulatsioon) või `dnf check-update`. Olulise paketi kohta loe muudatuste logi (`apt changelog nginx`, `dnf changelog nginx`).
+3. **Tagasitee.** Tee hetktõmmis või varukoopia ja mõtle läbi, kuidas muudatuse tagasi võtad (järgmine alapunkt).
+4. **Muudatus.** Tee uuendus hooldusajal ja konsoolist või `tmux`-is.
+5. **Olek pärast.** Korda sammu 1 käske failidesse `parast-…` ja võrdle:
+
+    ```bash
+    diff enne-teenused.txt parast-teenused.txt
+    diff enne-pordid.txt parast-pordid.txt
+    systemctl --failed
+    journalctl -p err -b --no-pager | tail -20
+    ```
+
+    Kontrolli ka teenust **kasutaja poolt vaadates**: kas veebileht avaneb, kas rakendus saab andmebaasiga ühendust, kas sisselogimine töötab.
+6. **Dokumenteeri.** Kirjuta muudatuste logisse: mis, millal, miks, tulemus ja kuidas tagasi võtta. Sellest logist leiad nädal hiljem vastuse küsimusele „mis vahepeal muutus?“.
+
+### Tagasipööramine
+
+| Olukord | Debian, Ubuntu | AlmaLinux |
+|---|---|---|
+| Paigalda paketi kindel (vanem) versioon | `apt policy nginx`, siis `sudo apt install nginx=<versioon>` | `dnf --showduplicates list nginx`, siis `sudo dnf downgrade nginx` |
+| Võta tagasi terve toiming | puudub; ajalugu on failis `/var/log/apt/history.log` | `dnf history`, `sudo dnf history undo <ID>` |
+| Hoia vana versiooni alles | `sudo apt-mark hold nginx` | `sudo dnf versionlock add nginx` |
+| Võta tagasi kogu uuendus | hetktõmmise või varukoopia taastamine | sama |
+
+Debiani ja Ubuntu hoidlas on tavaliselt ainult paketi uusim versioon, seepärast on vanemale versioonile minek seal sageli võimatu - töökindel tagasitee on **hetktõmmis**. Väljalaske uuendust (punkt 4.10) ei saa pakihalduriga üldse tagasi pöörata.
 
 ### Paketi versiooni lukustamine
 
@@ -483,7 +524,7 @@ sudo reboot
 <details>
 <summary>Loe lähemalt: Kuidas on see FreeBSD-s?</summary>
 
-FreeBSD-s on tarkvara jagatud kaheks (vt moodul 29, punkt 29.5):
+FreeBSD-s on tarkvara jagatud kaheks (vt moodul 30, punkt 30.5):
 
 - **Baassüsteem** (kernel, põhikäsud, `/etc`) arendatakse ühes projektis ja seda uuendab `freebsd-update`.
 - **Lisatarkvara** (nginx, bash, Python) paigaldab pakihaldur `pkg` ja see läheb kataloogi `/usr/local`, seadistus `/usr/local/etc`.
