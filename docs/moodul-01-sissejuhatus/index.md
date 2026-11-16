@@ -306,26 +306,19 @@ Tehisintellekti vestlusrobotid (ChatGPT, Claude, Copilot jt) oskavad selgitada k
 ## 1.7 Failisüsteemi hierarhia
 
 > [!TIP]
-> **Lühidalt:** Linuxis on üks kataloogipuu, mis algab juurest `/`. Tähtsamad kohad: `/home` - kasutajate failid, `/etc` - seadistus, `/var/log` - logid.
+> **Lühidalt:** Linuxis on üks kataloogipuu, mis algab juurest `/`. Tähtsamad kohad: `/home` - kasutajate failid, `/etc` - seadistus, `/var/log` - logid, `/usr/bin` - programmid, `/usr/lib` - teegid.
 
 Windowsis on igal kettal oma täht (`C:`, `D:`). Linuxis on **üks puu**, mis algab **juurkataloogist** `/`. Kõik kettad, USB-mälud ja võrgukettad haagitakse selle puu mõnda kataloogi.
 
 Kataloogide paigutust kirjeldab standard **FHS** (*Filesystem Hierarchy Standard*):
 
-```mermaid
-flowchart TB
-    R["/"] --> home["/home<br>kasutajad"]
-    R --> etc["/etc<br>seadistus"]
-    R --> var["/var<br>logid, andmed"]
-    R --> usr["/usr<br>programmid"]
-    R --> boot["/boot<br>kernel"]
-    R --> dev["/dev<br>seadmed"]
-    R --> tmp["/tmp<br>ajutised failid"]
-    R --> root["/root<br>juurkasutaja"]
-    home --> mari["/home/mari"]
-    var --> log["/var/log"]
-    usr --> bin["/usr/bin"]
-```
+[![Linuxi failisüsteemi hierarhia: juurkataloog, esimese taseme kataloogid ja olulisemad alamkataloogid koos selgitustega](../pildid/fhs.svg)](../pildid/fhs.svg)
+
+*Joonise suurelt avamiseks klõpsa sellel (telefonis saab seal suurendada).*
+
+Joonisel on **esimese taseme kataloogid** (sinised) ja nende olulisemad **alamkataloogid** (hallid). Mõni kataloog on ainult viit teisele: tänapäevastes distrodes on `/bin` tegelikult `/usr/bin`, `/lib` on `/usr/lib` jne (vaata ise: `ls -l /`).
+
+**Mis on teek?** **Teek** (*library*) on valmis koodi kogum, mida paljud programmid kasutavad ühiselt - näiteks failide lugemiseks, krüpteerimiseks või võrguühenduseks. Programm ei sisalda seda koodi ise, vaid laadib teegi käivitamisel. Teegid on failid laiendiga `.so` (*shared object*) kataloogis `/usr/lib` - Windowsis vastavad neile `.dll`-failid. Kasu: kui teegis parandatakse turvaviga (nt OpenSSL-is), saavad parandus kõik programmid korraga, ilma et neid peaks ükshaaval uuendama. Seda, milliseid teeke programm vajab, näitab käsk `ldd` (nt `ldd /usr/bin/ls`). Teekidest ja nende sõltuvustest on lähemalt juttu moodulis 4.
 
 <details>
 <summary>Loe lähemalt: kõik põhikataloogid</summary>
@@ -338,8 +331,10 @@ flowchart TB
 | `/etc` | Süsteemi ja teenuste konfiguratsioonifailid |
 | `/var` | Muutuvad andmed: logid (`/var/log`), vahemälu, andmebaasid |
 | `/tmp` | Ajutised failid, kustutatakse tavaliselt taaskäivitusel |
-| `/usr` | Paigaldatud programmid ja teegid (`/usr/bin`, `/usr/lib`) |
+| `/usr` | Paigaldatud programmid (`/usr/bin`, `/usr/sbin`), teegid (`/usr/lib`), dokumentatsioon (`/usr/share`) ja käsitsi paigaldatud tarkvara (`/usr/local`) |
 | `/bin`, `/sbin` | Põhikäsud. Tänapäevastes distrodes viidad kataloogidele `/usr/bin` ja `/usr/sbin` |
+| `/lib`, `/lib64` | Teegid. Tänapäevastes distrodes viidad kataloogidele `/usr/lib` ja `/usr/lib64` |
+| `/run` | Töötava süsteemi ajutised andmed (nt teenuste PID-failid); kaovad taaskäivitusel |
 | `/boot` | Kernel ja alglaadija failid |
 | `/dev` | Seadmefailid (kettad, terminalid) |
 | `/proc`, `/sys` | Virtuaalsed failisüsteemid kerneli ja protsesside info jaoks |

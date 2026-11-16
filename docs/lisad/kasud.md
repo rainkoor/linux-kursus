@@ -131,8 +131,10 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | Käsk | Mida teeb | Moodul |
 |---|---|---|
 | `echo` | Väljastab teksti | [2](../moodul-02-failid-tekst-torud/index.md) |
+| `env` | Näitab keskkonnamuutujaid; käivitab käsu muudetud keskkonnaga | [6](../moodul-06-bash/index.md) |
 | `ethtool` | Võrguliidese kiirus, duplex ja draiveri info | [21](../moodul-21-seire/index.md) |
 | `exit` | Lõpetab skripti antud väljumiskoodiga | [6](../moodul-06-bash/index.md) |
+| `export` | Teeb muutujast keskkonnamuutuja | [6](../moodul-06-bash/index.md) |
 | `exportfs` | NFS-i jagatud kataloogid | [19](../moodul-19-failiserverid/index.md) |
 
 ## F
@@ -235,7 +237,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `ldapsearch` | LDAP-i otsing | [25](../moodul-25-openldap/index.md) |
 | `ldapwhoami` | Kontrollib LDAP-i autentimist | [25](../moodul-25-openldap/index.md) |
 | `ldconfig` | Uuendab jagatud teekide vahemälu (`-p` näitab teadaolevaid teeke) | [4](../moodul-04-pakihaldus/index.md) |
-| `ldd` | Näitab, milliseid jagatud teeke programm vajab | [4](../moodul-04-pakihaldus/index.md) |
+| `ldd` | Näitab, milliseid jagatud teeke programm vajab | [1](../moodul-01-sissejuhatus/index.md), [4](../moodul-04-pakihaldus/index.md) |
 | `leapp` | AlmaLinuxi põhiversiooni uuendus (ELevate) | [4](../moodul-04-pakihaldus/index.md) |
 | `less` | Pikema faili lehitsemine | [1](../moodul-01-sissejuhatus/index.md) |
 | `ln` | Loob viida (`-s` sümboolne) | [2](../moodul-02-failid-tekst-torud/index.md) |
@@ -333,6 +335,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `podman-compose` | Mitme konteineri rakendus `compose.yaml` järgi | [14](../moodul-14-konteinerid/index.md) |
 | `postfix` | Postfixi juhtimine (`check`, `reload`) | [21](../moodul-21-seire/index.md), [24](../moodul-24-e-post/index.md) |
 | `postsuper` | Postfixi järjekorra haldus (kirjade kustutamine) | [24](../moodul-24-e-post/index.md) |
+| `printenv` | Näitab keskkonnamuutuja väärtust | [6](../moodul-06-bash/index.md) |
 | `proxmox-backup-client` | Varundab Linuxi masina katalooge Proxmox Backup Serverisse | [28](../moodul-28-virtualiseerimine/index.md) |
 | `proxmox-backup-manager` | Proxmox Backup Serveri haldus (andmehoidlad, kasutajad, õigused) | [28](../moodul-28-virtualiseerimine/index.md) |
 | `ps` | Protsesside loetelu (`aux`, `-ef`) | [5](../moodul-05-protsessid-teenused/index.md) |
@@ -397,6 +400,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `snap` | Snap-pakettide haldus | [4](../moodul-04-pakihaldus/index.md) |
 | `sockstat` | FreeBSD kuulavad pordid (nagu `ss`) | [22](../moodul-22-opnsense/index.md) |
 | `sort` | Sorteerib ridu | [2](../moodul-02-failid-tekst-torud/index.md) |
+| `source` (`.`) | Loeb faili käsud praegusesse kesta | [6](../moodul-06-bash/index.md) |
 | `sqlite3` | SQLite andmebaasi klient | [16](../moodul-16-andmebaasid/index.md) |
 | `ss` | Kuulavad pordid ja ühendused (`-tulpn`) | [7](../moodul-07-vork-ssh/index.md) |
 | `ssh` | Turvaline kaugühendus serverisse | [1](../moodul-01-sissejuhatus/index.md) |
@@ -453,6 +457,7 @@ Moodulite kokkuvõtetes on samad käsud teemade kaupa. Mõisteid selgitab [sõna
 | `umount` | Lahutab failisüsteemi | [8](../moodul-08-kettad-lvm/index.md) |
 | `uname` | Kerneli ja arhitektuuri info | [1](../moodul-01-sissejuhatus/index.md) |
 | `uniq` | Eemaldab või loendab järjestikused korduvad read (`-c`) | [2](../moodul-02-failid-tekst-torud/index.md) |
+| `unset` | Kustutab muutuja | [6](../moodul-06-bash/index.md) |
 | `update-grub` | Genereerib GRUB-i menüü (Debian, Ubuntu) | [11](../moodul-11-alglaadimine-kernel/index.md) |
 | `update-initramfs` | Loob initramfs-i uuesti (Debian, Ubuntu) | [11](../moodul-11-alglaadimine-kernel/index.md) |
 | `uptime` | Kui kaua süsteem on töötanud ja keskmine koormus | [1](../moodul-01-sissejuhatus/index.md) |

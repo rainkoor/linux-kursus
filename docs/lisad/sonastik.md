@@ -102,6 +102,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | DV-, OV- ja EV-sertifikaat | domain / organization / extended validation | Sertifikaadi kontrollitase: ainult domeen, organisatsioon või laiendatud kontroll |
 | eesmärk | target | systemd üksuste rühm, mis kirjeldab süsteemi olekut |
 | eksportija | exporter | Programm, mis teeb mõõdikud Prometheusele kättesaadavaks (nt node_exporter) |
+| eksportimine | export | Kesta muutuja muutmine keskkonnamuutujaks, et alamprotsessid selle päriksid |
 | eksport (NFS) | export | NFS-serveri jagatud kataloog ja selle õigused (`/etc/exports`) |
 | EPEL | Extra Packages for Enterprise Linux | RHEL-i perekonna lisapakettide hoidla |
 | erivolitused | capabilities | Juurkasutaja õiguste jaotus väiksemateks osadeks (nt `CAP_NET_BIND_SERVICE`) |
@@ -191,6 +192,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | Kerberos | Kerberos | Piletitel põhinev võrguautentimise protokoll |
 | kerneli moodul | kernel module | Töö ajal laaditav kerneli osa (nt draiver) |
 | kernel, tuum | kernel | Operatsioonisüsteemi riistvara haldav osa |
+| keskkond | environment | Nimi-väärtus paaride kogum, mille protsess saab käivitamisel vanemprotsessilt kaasa |
 | keskkonnamuutuja | environment variable | Muutuja, mis pärandatakse käivitatavatele programmidele |
 | kest | shell | Käske tõlgendav programm, nt Bash, `sh`, `zsh` või `fish`; vt ka sisselogimiskest |
 | kickstart | kickstart | Red Hati perekonna automaatse paigalduse vastustefail (`inst.ks=`) |
@@ -322,6 +324,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | paroolipoliitika | password policy | Nõuded parooli pikkusele, keerukusele ja aegumisele (`pam_pwquality`, `chage`) |
 | partitsioon | partition | Ketta osa |
 | partitsioonitabel | partition table | Ketta partitsioonide kirjeldus (MBR, GPT) |
+| PATH | PATH | Keskkonnamuutuja: kataloogide loend, kust kest käske otsib |
 | Patroni | Patroni | PostgreSQL-i kõrge kättesaadavuse haldur automaatse ülevõtuga |
 | peidetud fail | hidden file | Punktiga algava nimega fail |
 | periodic | periodic | FreeBSD igapäevaste, -nädalaste ja -kuiste hooldusskriptide käivitaja |
@@ -475,6 +478,7 @@ Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatak
 | taustserver | backend | Koormusejaoturi või pöördpuhvri taga töötav server |
 | tavarežiim | normal mode | vim-i vaikerežiim, kus klahvid on käsud (liikumine, kustutamine, kopeerimine) |
 | tee | path | Faili või kataloogi asukoht |
+| teek | library | Valmis koodi kogum, mida programmid kasutavad (vt ka jagatud teek) |
 | teenus | service, daemon | Taustal töötav programm |
 | teeüksus | path unit | systemd üksus, mis käivitab teenuse faili või kataloogi muutumisel |
 | tekstiredaktor | text editor | Programm tekstifailide muutmiseks (nano, vim) |

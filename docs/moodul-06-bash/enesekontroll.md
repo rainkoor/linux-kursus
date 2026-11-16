@@ -224,6 +224,33 @@ Sisselogimiskest (SSH, konsool, `su -`) loeb `/etc/profile` ja `~/.profile` (võ
 
 </details>
 
+**25.** Mis vahe on kesta muutujal ja keskkonnamuutujal? Kuidas teed kesta muutujast keskkonnamuutuja?
+
+<details>
+<summary>Vastus</summary>
+
+Kesta muutuja on olemas ainult praeguses kestas. Keskkonnamuutuja (`export nimi`) koopia antakse kõigile programmidele ja skriptidele, mis sellest kestast käivitatakse.
+
+</details>
+
+**26.** Skript `seaded.sh` sisaldab rida `export EDITOR=vim`. Käivitad selle `./seaded.sh` ja seejärel `echo $EDITOR` näitab vana väärtust. Miks? Kuidas saada muutuja oma kesta?
+
+<details>
+<summary>Vastus</summary>
+
+Skript töötab eraldi alamprotsessis ja alamprotsess ei saa muuta vanema (sinu kesta) keskkonda. Muutujad saab oma kesta lugeda käsuga `source seaded.sh` (või `. seaded.sh`).
+
+</details>
+
+**27.** Mis on `PATH` ja miks ei saa oma skripti käivitada lihtsalt nimega `skript.sh`, vaid tuleb kirjutada `./skript.sh`?
+
+<details>
+<summary>Vastus</summary>
+
+`PATH` on kooloniga eraldatud kataloogide loend, kust kest käske järjest otsib. Praegune kataloog ei ole turvalisuse pärast `PATH`-is, seepärast tuleb anda tee (`./`). Oma skriptide kataloogi saab lisada: `export PATH="$HOME/bin:$PATH"`.
+
+</details>
+
 ## Praktilised miniülesanded
 
 **1.** `paaris` - saab argumendina arvu ja ütleb, kas see on paaris või paaritu. Kui argument pole täisarv, kirjutab veateate ja lõpetab koodiga 1.
@@ -336,6 +363,18 @@ git log -3 --stat
 
 ```bash
 git checkout HEAD~2 -- seire.conf
+```
+
+</details>
+
+**8.** Näita kellaaega Tokyos ilma süsteemi ajavööndit muutmata ja kuva oma `PATH` nii, et iga kataloog on eraldi real.
+
+<details>
+<summary>Lahendus</summary>
+
+```bash
+TZ=Asia/Tokyo date
+echo "$PATH" | tr ':' '\n'
 ```
 
 </details>

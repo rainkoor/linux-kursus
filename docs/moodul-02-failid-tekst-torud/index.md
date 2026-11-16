@@ -77,11 +77,13 @@ Käsud nagu `ls`, `grep` või `ps` ei ole kerneli ega kesta osa, vaid eraldi pro
 | `iproute2` | `ip`, `ss` | Linuxi projekt |
 
 ```bash
-type ls                     # kas käsk on programm, kesta sisekäsk või alias
+type ls                     # kas käsk on programm, kesta sisekäsk või alias - ja kust see leiti
 dpkg -S /usr/bin/ls         # Debian, Ubuntu: coreutils: /usr/bin/ls
 rpm -qf /usr/bin/ls         # AlmaLinux: coreutils-9...
 ls --version                # versioon ja projekt (GNU coreutils)
 ```
+
+Millistest kataloogidest kest käske otsib, määrab keskkonnamuutuja `PATH` (`echo $PATH`). Keskkonnamuutujatest on lähemalt juttu moodulis 6, punkt 6.2.
 
 **GNU, POSIX, BSD ja BusyBox.** Standard **POSIX** kirjeldab, millised käsud ja võtmed peavad Unixi-laadses süsteemis olemas olema. GNU tööriistad teevad rohkem: neil on pikad võtmed (`--help`, `--human-readable`) ja lisavõimalused (`grep -P`, `sed -i`, `date -d`), mida mujal ei pruugi olla.
 

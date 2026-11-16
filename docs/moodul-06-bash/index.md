@@ -130,7 +130,7 @@ Debiani ja Ubuntu `~/.profile` loeb omakorda `~/.bashrc`-i, seega piisab tavalis
 ## 6.2 Muutujad
 
 > [!TIP]
-> **Lühidalt:** Muutuja omistatakse ilma tühikuteta: `nimi=Mari`, kasutatakse `$nimi`-ga. Käsu väljund muutujasse: `kuupaev=$(date +%F)`.
+> **Lühidalt:** Muutuja omistatakse ilma tühikuteta: `nimi=Mari`, kasutatakse `$nimi`-ga. Käsu väljund muutujasse: `kuupaev=$(date +%F)`. `export` teeb muutujast **keskkonnamuutuja**, mille koopia saavad kõik sealt käivitatud programmid; `PATH` ütleb, kust käske otsitakse.
 
 ```bash
 nimi="Mari"
@@ -148,6 +148,8 @@ Reeglid:
 
 ### Keskkonnamuutujad
 
+**Keskkond** (*environment*) on nimi-väärtus paaride kogum, mille iga protsess saab käivitamisel kaasa. Programmid loevad sealt oma seadeid: kus on kodukataloog (`HOME`), kust käske otsida (`PATH`), mis keeles teateid näidata (`LANG`), millist tekstiredaktorit avada (`EDITOR`). Nii saab sama programmi käitumist muuta ilma selle seadistusfaili puutumata.
+
 Mõned muutujad on alati olemas:
 
 | Muutuja | Sisu |
@@ -156,24 +158,74 @@ Mõned muutujad on alati olemas:
 | `$HOME` | Kodukataloog |
 | `$PWD` | Praegune kataloog |
 | `$PATH` | Kataloogid, kust käske otsitakse |
-| `$SHELL` | Kasutaja kest |
-| `$HOSTNAME` | Masina nimi |
-| `$RANDOM` | Juhuslik arv 0–32767 |
+| `$SHELL` | Kasutaja sisselogimiskest |
+| `$LANG` | Keel ja lokaat (moodul 3, punkt 3.14) |
+| `$EDITOR` | Vaiketekstiredaktor (nt `crontab -e`, `visudo` kasutavad seda) |
+| `$HOSTNAME` | Masina nimi (bashi muutuja) |
+| `$RANDOM` | Juhuslik arv 0–32767 (bashi muutuja) |
 
 ```bash
 env                          # kõik keskkonnamuutujad
-echo $PATH
-export MINU_SEADE="väärtus"  # muutuja pärandatakse ka käivitatavatele programmidele
+printenv PATH                # ühe muutuja väärtus (sama mis echo $PATH)
+set | less                   # kõik kesta muutujad ja funktsioonid, ka eksportimata
+unset MINU_SEADE             # kustuta muutuja
 ```
 
-Ilma `export`-ita on muutuja nähtav ainult praeguses kestas, mitte sealt käivitatud programmides ja skriptides.
-
-Püsivad muutujad ja aliased kirjutatakse faili `~/.bashrc`:
+**Kesta muutuja ja keskkonnamuutuja.** Tavaline muutuja on olemas ainult praeguses kestas. `export` teeb sellest keskkonnamuutuja: siis saavad selle **koopia** kõik programmid ja skriptid, mida sellest kestast edaspidi käivitad.
 
 ```bash
-alias ll='ls -lh'
-export EDITOR=nano
+linn=Haapsalu
+bash -c 'echo "Linn: $linn"'      # Linn:          - alamprotsess muutujat ei näe
+export linn
+bash -c 'echo "Linn: $linn"'      # Linn: Haapsalu
 ```
+
+Pärandamine käib ainult **ühes suunas**: vanemalt lapsele. Skript, mis muudab või ekspordib muutujat, ei muuda sinu kesta keskkonda, sest skript töötab eraldi protsessis. Kui tahad, et faili muutujad jõuaksid sinu kesta, loe see sisse käsuga `source fail` (ehk `. fail`).
+
+**Ühe käsu jaoks** saab muutuja anda käsu ette - see kehtib ainult sellele käsule:
+
+```bash
+LANG=C ls --help             # ingliskeelne abi (hea veateadete otsimiseks internetist)
+TZ=America/New_York date     # kellaaeg teises ajavööndis
+EDITOR=vim crontab -e        # seekord vim, mitte vaikeredaktor
+```
+
+**`PATH`** on kooloniga eraldatud kataloogide loend. Kui kirjutad käsu ilma teeta (`ls`), otsib kest seda nendest kataloogidest järjest ja käivitab esimese leitu:
+
+```bash
+echo $PATH                   # nt /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin
+type ls                      # kust käsk leiti (või kas see on sisekäsk või alias)
+```
+
+Praegune kataloog ei ole `PATH`-is turvalisuse pärast - muidu võiks keegi panna ühiskasutatavasse kataloogi pahatahtliku faili nimega `ls`. Seepärast käivitatakse oma skript kujul `./skript.sh`. Oma skriptide kataloogi lisamiseks `PATH`-i kirjuta faili `~/.bashrc`:
+
+```bash
+export PATH="$HOME/bin:$PATH"   # oma kataloog ette, vana loend alles
+```
+
+Ära kirjuta `PATH=$HOME/bin` (ilma `:$PATH`-ita) - siis kaovad kõik süsteemi käsud ja isegi `ls` ei tööta enam. Kui see juhtus, ava uus terminal või kirjuta `export PATH=/usr/local/bin:/usr/bin:/bin`.
+
+**Kus keskkond seadistatakse:**
+
+| Kus | Kehtib | Näide |
+|---|---|---|
+| `~/.bashrc` | sinu interaktiivsed bashi kestad | `export EDITOR=nano`, `alias ll='ls -lh'` |
+| `~/.profile` (või `~/.bash_profile`) | sinu sisselogimine (ka graafiline) | `PATH` laiendamine |
+| `/etc/environment` | kõik kasutajad; ainult `NIMI=väärtus` read, ilma kesta süntaksita | `LANG=en_US.UTF-8` |
+| `/etc/profile.d/*.sh` | kõigi kasutajate sisselogimiskestad | asutuse ühised seaded |
+| systemd teenus: `Environment=`, `EnvironmentFile=` | ainult see teenus | moodul 11, punkt 11.11 |
+| crontab'i algus: `PATH=…`, `MAILTO=…` | selle kasutaja cron'i tööd | moodul 5, punkt 5.8 |
+
+Kesta seadistusfailidest (millal millist loetakse) on juttu punktis 6.1.
+
+> [!WARNING]
+> **Keskkond ei ole alati sama.** Kolm tavalist üllatust:
+>
+> - **cron** käivitab tööd väga väikese keskkonnaga (lühike `PATH`, ei loe `~/.bashrc`-d) - kasuta skriptides täisteid (moodul 5);
+> - **sudo** puhastab keskkonna ja kasutab oma `PATH`-i (`secure_path`). Kui käsk vajab muutujat, anna see käsu ette: `sudo env RESTIC_REPOSITORY=/varu restic snapshots` või kasuta `sudo -E` (säilitab keskkonna, kui `sudoers` seda lubab);
+> - **systemd teenus** ei näe sinu kesta muutujaid - need tuleb anda üksuse failis (`Environment=`).
+
+Keskkonnamuutujatega antakse programmidele sageli ka paroole ja võtmeid (nt `RESTIC_PASSWORD_FILE`, moodul 9). Protsessi keskkonda näeb ainult tema omanik ja juurkasutaja (`/proc/PID/environ`), kuid ära kirjuta saladusi otse käsureale - need jäävad kesta ajalukku (`~/.bash_history`). Parem on viidata failile, millel on õigused `600`.
 
 ### Käskude asendus
 
