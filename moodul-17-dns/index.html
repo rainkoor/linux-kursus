@@ -5189,6 +5189,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5695,7 +5723,7 @@ resolvectl<span class="w"> </span>statistics<span class="w">           </span><s
 sudo<span class="w"> </span>resolvectl<span class="w"> </span>flush-caches<span class="w">    </span><span class="c1"># tühjenda vahemälu (pärast DNS-i muudatust)</span>
 </code></pre></div>
 <p>systemd-resolved oskab ka <strong>liidesepõhist DNS-i</strong> (<em>split DNS</em>): domeen <code>lab.example</code> küsitakse labori serverilt, kõik muu teiselt. Seda kasutavad näiteks VPN-id (moodul 13):</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>resolvectl<span class="w"> </span>dns<span class="w"> </span>wg0<span class="w"> </span><span class="m">10</span>.0.83.52
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>resolvectl<span class="w"> </span>dns<span class="w"> </span>wg0<span class="w"> </span><span class="m">10</span>.0.83.152
 sudo<span class="w"> </span>resolvectl<span class="w"> </span>domain<span class="w"> </span>wg0<span class="w"> </span><span class="s1">'~lab.example'</span><span class="w">      </span><span class="c1"># tilde: ainult marsruutimiseks, mitte search'iks</span>
 </code></pre></div>
 <h2 id="172-kuidas-dns-töötab">17.2 Kuidas DNS töötab<a class="headerlink" href="#172-kuidas-dns-töötab" title="Permanent link">&para;</a></h2>
@@ -5785,12 +5813,12 @@ sudo<span class="w"> </span>resolvectl<span class="w"> </span>domain<span class=
 <tr>
 <td><code>A</code></td>
 <td>Nimi → IPv4-aadress</td>
-<td><code>kool → 10.0.83.52</code></td>
+<td><code>kool → 10.0.83.152</code></td>
 </tr>
 <tr>
 <td><code>AAAA</code></td>
 <td>Nimi → IPv6-aadress</td>
-<td><code>kool → fd83::52</code></td>
+<td><code>kool → fd83::152</code></td>
 </tr>
 <tr>
 <td><code>CNAME</code></td>
@@ -5850,10 +5878,10 @@ sudo<span class="w"> </span>resolvectl<span class="w"> </span>domain<span class=
                 300 )       ; negatiivse vastuse TTL
         IN  NS  ns1.lab.example.
 
-ns1     IN  A      10.0.83.52
-kool    IN  A      10.0.83.52
+ns1     IN  A      10.0.83.152
+kool    IN  A      10.0.83.152
 www     IN  CNAME  kool
-db      IN  A      10.0.83.53
+db      IN  A      10.0.83.153
 </code></pre></div>
 <p>Olulised reeglid:</p>
 <ul>
@@ -5870,10 +5898,10 @@ dig<span class="w"> </span>@localhost<span class="w"> </span>kool.lab.example<sp
 dig<span class="w"> </span>@localhost<span class="w"> </span>www.lab.example
 </code></pre></div>
 <p>BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (<code>allow-recursion</code> vaikimisi <code>localnets; localhost;</code>), nii et kliendid saavad sama serveri kaudu lahendada ka internetinimesid. Kliendid tuleb seadistada kasutama seda serverit (Netplan, <code>nmcli</code>, <code>/etc/resolv.conf</code> - vt moodul 7) ja tulemüüris peab olema avatud port 53 (UDP ja TCP).</p>
-<p><strong>Uue kirje lisamine samm-sammult</strong> (nt uus server <code>seire</code> aadressiga <code>10.0.83.54</code>) - see on DNS-i haldaja kõige sagedasem töö:</p>
+<p><strong>Uue kirje lisamine samm-sammult</strong> (nt uus server <code>seire</code> aadressiga <code>10.0.83.154</code>) - see on DNS-i haldaja kõige sagedasem töö:</p>
 <ol>
 <li>Ava tsoonifail: <code>sudo nano /etc/bind/db.lab.example</code>.</li>
-<li>Lisa kirje: <code>seire   IN  A   10.0.83.54</code>.</li>
+<li>Lisa kirje: <code>seire   IN  A   10.0.83.154</code>.</li>
 <li><strong>Suurenda seerianumbrit</strong> SOA-s (nt <code>2026110801</code> → <code>2026110802</code>). Kui unustad, ei saa sekundaarserver muudatusest teada.</li>
 <li>
 <p>Kontrolli ja rakenda:</p>
@@ -5883,8 +5911,8 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 </li>
 <li>
 <p>Kontrolli vastust - ka sekundaarserverist, kui see on olemas:</p>
-<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@localhost<span class="w"> </span>seire.lab.example<span class="w"> </span>+short<span class="w">          </span><span class="c1"># 10.0.83.54</span>
-dig<span class="w"> </span>@10.0.83.53<span class="w"> </span>seire.lab.example<span class="w"> </span>+short<span class="w">         </span><span class="c1"># sekundaar (punkt 17.5)</span>
+<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@localhost<span class="w"> </span>seire.lab.example<span class="w"> </span>+short<span class="w">          </span><span class="c1"># 10.0.83.154</span>
+dig<span class="w"> </span>@10.0.83.153<span class="w"> </span>seire.lab.example<span class="w"> </span>+short<span class="w">         </span><span class="c1"># sekundaar (punkt 17.5)</span>
 </code></pre></div>
 </li>
 <li>
@@ -5896,7 +5924,7 @@ dig<span class="w"> </span>@10.0.83.53<span class="w"> </span>seire.lab.example<
 <p><code>.example</code> on reserveeritud näidete jaoks ja ei kuulu kunagi kellelegi. Sisevõrgus kasutatakse sageli oma domeeni alamdomeeni (nt <code>lab.hkhk.ee</code>) või tippdomeeni <code>.internal</code>. Lõpuga <code>.local</code> tasub vältida, sest seda kasutab mDNS.</p>
 </div>
 <h3 id="pöördtsoon">Pöördtsoon<a class="headerlink" href="#pöördtsoon" title="Permanent link">&para;</a></h3>
-<p>Pöördtsoon vastab küsimusele „kelle aadress see on?“ (<code>dig -x 10.0.83.52</code>). Seda vajavad logid, e-posti serverid (saaja kontrollib saatja PTR-kirjet) ja paljud diagnostikatööriistad. Võrgu <code>10.0.83.0/24</code> pöördtsooni nimi on aadressi osad tagurpidi + <code>in-addr.arpa</code>:</p>
+<p>Pöördtsoon vastab küsimusele „kelle aadress see on?“ (<code>dig -x 10.0.83.152</code>). Seda vajavad logid, e-posti serverid (saaja kontrollib saatja PTR-kirjet) ja paljud diagnostikatööriistad. Võrgu <code>10.0.83.0/24</code> pöördtsooni nimi on aadressi osad tagurpidi + <code>in-addr.arpa</code>:</p>
 <div class="highlight"><pre><span></span><code># /etc/bind/named.conf.local
 zone "83.0.10.in-addr.arpa" {
     type primary;
@@ -5907,14 +5935,14 @@ zone "83.0.10.in-addr.arpa" {
 $TTL 3600
 @   IN  SOA ns1.lab.example. admin.lab.example. ( 2026110801 3600 900 604800 300 )
     IN  NS  ns1.lab.example.
-52  IN  PTR debian1.lab.example.
-53  IN  PTR debian2.lab.example.
-54  IN  PTR ubuntusrv.lab.example.
-55  IN  PTR alma.lab.example.
+152  IN  PTR debian1.lab.example.
+153  IN  PTR debian2.lab.example.
+154  IN  PTR ubuntusrv.lab.example.
+155  IN  PTR alma.lab.example.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>named-checkzone<span class="w"> </span><span class="m">83</span>.0.10.in-addr.arpa<span class="w"> </span>/etc/bind/db.10.0.83
 sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>named
-dig<span class="w"> </span>@localhost<span class="w"> </span>-x<span class="w"> </span><span class="m">10</span>.0.83.55<span class="w"> </span>+short
+dig<span class="w"> </span>@localhost<span class="w"> </span>-x<span class="w"> </span><span class="m">10</span>.0.83.155<span class="w"> </span>+short
 </code></pre></div>
 <p>IPv6 pöördtsoon on <code>ip6.arpa</code> all, iga kuueteistkümnendnumber eraldi (pikk, kuid põhimõte sama).</p>
 <h3 id="rekursioon-ja-ligipääs">Rekursioon ja ligipääs<a class="headerlink" href="#rekursioon-ja-ligipääs" title="Permanent link">&para;</a></h3>
@@ -5948,8 +5976,8 @@ sudo<span class="w"> </span>rndc<span class="w"> </span>flush<span class="w">   
 </div>
 <p>Üks DNS-server on <strong>üksik rikkekoht</strong>: kui see on maas, ei tööta midagi. Iga tsoonil peab olema vähemalt <strong>kaks</strong> nimeserverit (domeeni registripidajad nõuavad seda). Sekundaarserver saab tsooni koopia primaarilt <strong>tsooniülekandega</strong> (AXFR, muudatuste korral IXFR).</p>
 <pre class="mermaid"><code>sequenceDiagram
-    participant P as ns1 (primaar)&lt;br&gt;10.0.83.52
-    participant S as ns2 (sekundaar)&lt;br&gt;10.0.83.53
+    participant P as ns1 (primaar)&lt;br&gt;10.0.83.152
+    participant S as ns2 (sekundaar)&lt;br&gt;10.0.83.153
     Note over P: admin muudab tsooni&lt;br&gt;ja suurendab seerianumbrit
     P-&gt;&gt;S: NOTIFY: lab.example muutus
     S-&gt;&gt;P: SOA? (kontrollib seerianumbrit)
@@ -5961,23 +5989,23 @@ sudo<span class="w"> </span>rndc<span class="w"> </span>flush<span class="w">   
 <div class="highlight"><pre><span></span><code>zone "lab.example" {
     type primary;
     file "/etc/bind/db.lab.example";
-    allow-transfer { 10.0.83.53; };
-    also-notify { 10.0.83.53; };
+    allow-transfer { 10.0.83.153; };
+    also-notify { 10.0.83.153; };
 };
 </code></pre></div>
-<p>Lisa tsoonifaili teine NS-kirje (<code>IN NS ns2.lab.example.</code> ja <code>ns2 IN A 10.0.83.53</code>) ning suurenda seerianumbrit.</p>
+<p>Lisa tsoonifaili teine NS-kirje (<code>IN NS ns2.lab.example.</code> ja <code>ns2 IN A 10.0.83.153</code>) ning suurenda seerianumbrit.</p>
 <p>Sekundaaris (<code>debian2</code>):</p>
 <div class="highlight"><pre><span></span><code>zone "lab.example" {
     type secondary;
     file "/var/cache/bind/db.lab.example";     # BIND kirjutab selle ise
-    primaries { 10.0.83.52; };
+    primaries { 10.0.83.152; };
 };
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>named-checkconf<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>named
 sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>named<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>transfer<span class="w">     </span><span class="c1"># "Transfer completed"</span>
-dig<span class="w"> </span>@10.0.83.53<span class="w"> </span>kool.lab.example<span class="w"> </span>+short
-dig<span class="w"> </span>@10.0.83.52<span class="w"> </span>lab.example<span class="w"> </span>SOA<span class="w"> </span>+short<span class="w">           </span><span class="c1"># võrdle seerianumbreid</span>
-dig<span class="w"> </span>@10.0.83.53<span class="w"> </span>lab.example<span class="w"> </span>SOA<span class="w"> </span>+short
+dig<span class="w"> </span>@10.0.83.153<span class="w"> </span>kool.lab.example<span class="w"> </span>+short
+dig<span class="w"> </span>@10.0.83.152<span class="w"> </span>lab.example<span class="w"> </span>SOA<span class="w"> </span>+short<span class="w">           </span><span class="c1"># võrdle seerianumbreid</span>
+dig<span class="w"> </span>@10.0.83.153<span class="w"> </span>lab.example<span class="w"> </span>SOA<span class="w"> </span>+short
 </code></pre></div>
 <p>SOA-kirje ajad juhivad sekundaari käitumist: <code>refresh</code> - kui tihti kontrollib muudatusi ise (kui NOTIFY ei jõudnud kohale), <code>retry</code> - kui tihti proovib ebaõnnestumisel uuesti, <code>expire</code> - kui kaua vastab vana koopiaga, kui primaar ei vasta.</p>
 <div class="admonition note">
@@ -6054,7 +6082,7 @@ server=9.9.9.9
 local=/lab.example/           # see domeen vastatakse ainult kohalikult
 domain=lab.example
 expand-hosts                  # lisa /etc/hosts nimedele domeen
-address=/www.lab.example/10.0.83.52
+address=/www.lab.example/10.0.83.152
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>dnsmasq
 dig<span class="w"> </span>@localhost<span class="w"> </span>www.lab.example<span class="w"> </span>+short
@@ -6165,6 +6193,7 @@ resolvectl<span class="w"> </span>query<span class="w"> </span>--legend<span cla
 <p class="admonition-title">Lühidalt</p>
 <p>Otsi viga järjest: kas server vastab (<code>dig @server nimi</code>), kas vastus on autoriteetne (<code>aa</code>), kas tsoon laadis (<code>journalctl -u named</code>), kas seerianumber suurenes, kas tulemüür lubab porti 53.</p>
 </div>
+<p>Üldine töökäik on lisas <a href="../lisad/torkeotsing/">tõrkeotsingu töövoog</a>; siin on selle DNS-i osa.</p>
 <table>
 <thead>
 <tr>
@@ -6420,6 +6449,8 @@ sudo<span class="w"> </span>ss<span class="w"> </span>-tulpn<span class="w"> </s
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

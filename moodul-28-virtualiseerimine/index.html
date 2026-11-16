@@ -5260,6 +5260,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6270,7 +6298,7 @@ pvesm<span class="w"> </span>list<span class="w"> </span>pbs<span class="w">    
 <p><em>Summary</em> vaates on näha <strong>deduplitseerimistegur</strong> (<em>Deduplication Factor</em>) - mitu korda vähem ruumi kulub võrreldes tavaliste varukoopiatega.</p>
 <p><strong>Taastamine.</strong> Proxmoxis vali salvestus <code>pbs</code> → varukoopia → <em>Restore</em> (kogu masin, soovitatavalt uue ID-ga ja <em>Unique</em>) või <em>File Restore</em> (sirvi varukoopia failisüsteemi ja laadi alla üksikud failid).</p>
 <p><strong>Tavalise Linuxi serveri varundus.</strong> <code>proxmox-backup-client</code> (pakett Proxmoxi hoidlast) varundab katalooge PBS-i - sobib nt füüsilisele serverile või kodukataloogidele:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PBS_REPOSITORY</span><span class="o">=</span><span class="s1">'pve@pbs@10.0.83.65:andmed'</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PBS_REPOSITORY</span><span class="o">=</span><span class="s1">'pve@pbs@10.0.83.165:andmed'</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">PBS_FINGERPRINT</span><span class="o">=</span><span class="s1">'&lt;sõrmejälg&gt;'</span>
 proxmox-backup-client<span class="w"> </span>backup<span class="w"> </span>etc.pxar:/etc
 proxmox-backup-client<span class="w"> </span>snapshot<span class="w"> </span>list
@@ -6294,7 +6322,7 @@ qm<span class="w"> </span>template<span class="w"> </span><span class="m">9000</
 <span class="c1"># kloon: nimi, IP, kasutaja ja võti</span>
 qm<span class="w"> </span>clone<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="m">201</span><span class="w"> </span>--name<span class="w"> </span>k3s1<span class="w"> </span>--full
 qm<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">201</span><span class="w"> </span>--ciuser<span class="w"> </span>kasutaja<span class="w"> </span>--sshkeys<span class="w"> </span>/root/.ssh/id_ed25519.pub<span class="w"> </span><span class="se">\</span>
-<span class="w">   </span>--ipconfig0<span class="w"> </span><span class="nv">ip</span><span class="o">=</span><span class="m">10</span>.0.83.61/24,gw<span class="o">=</span><span class="m">10</span>.0.83.1<span class="w"> </span>--nameserver<span class="w"> </span><span class="m">10</span>.0.83.1
+<span class="w">   </span>--ipconfig0<span class="w"> </span><span class="nv">ip</span><span class="o">=</span><span class="m">10</span>.0.83.161/24,gw<span class="o">=</span><span class="m">10</span>.0.83.1<span class="w"> </span>--nameserver<span class="w"> </span><span class="m">10</span>.0.83.1
 qm<span class="w"> </span>resize<span class="w"> </span><span class="m">201</span><span class="w"> </span>scsi0<span class="w"> </span>20G
 qm<span class="w"> </span>start<span class="w"> </span><span class="m">201</span>
 </code></pre></div>
@@ -6685,6 +6713,8 @@ sudo<span class="w"> </span>./xo-install.sh<span class="w">          </span><spa
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

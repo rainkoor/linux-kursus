@@ -4934,6 +4934,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5175,12 +5203,12 @@
 <p>Rikkis põhiserveri asendamine koopiaga. Koopias: kontrolli replikatsiooni olekut, <code>STOP REPLICA</code>, <code>RESET REPLICA ALL</code>, <code>read_only = OFF</code> (ka seadistusfailis) ning suuna rakendus uuele serverile (nimi või virtuaalne IP). Vana server võtaks vastu kirjutusi ja andmed läheksid lahku (<em>split brain</em>) - sellest tehakse uue põhiserveri koopia.</p>
 </details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> Kirjuta SQL-käsud, mis loovad andmebaasi <code>moodle</code> ja kasutaja <code>moodle</code>, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt <code>10.0.83.55</code>.</p>
+<p><strong>1.</strong> Kirjuta SQL-käsud, mis loovad andmebaasi <code>moodle</code> ja kasutaja <code>moodle</code>, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt <code>10.0.83.155</code>.</p>
 <details class="success">
 <summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">moodle</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Tugev-Parool-456'</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">moodle</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.155'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Tugev-Parool-456'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">moodle</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'moodle'</span><span class="o">@</span><span class="s1">'10.0.83.155'</span><span class="p">;</span>
 </code></pre></div>
 </details>
 <p><strong>2.</strong> Loo PostgreSQL-is roll <code>moodle</code> parooliga ja andmebaas <code>moodle</code>, mille omanik see roll on.</p>
@@ -5190,10 +5218,10 @@
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">moodle</span><span class="w"> </span><span class="k">OWNER</span><span class="w"> </span><span class="n">moodle</span><span class="p">;</span>
 </code></pre></div>
 </details>
-<p><strong>3.</strong> Kirjuta <code>pg_hba.conf</code> rida, mis lubab rollil <code>moodle</code> ühenduda andmebaasi <code>moodle</code> ainult aadressilt <code>10.0.83.55</code> paroolitõendusega.</p>
+<p><strong>3.</strong> Kirjuta <code>pg_hba.conf</code> rida, mis lubab rollil <code>moodle</code> ühenduda andmebaasi <code>moodle</code> ainult aadressilt <code>10.0.83.155</code> paroolitõendusega.</p>
 <details class="success">
 <summary>Lahendus</summary>
-<div class="highlight"><pre><span></span><code>host  moodle  moodle  10.0.83.55/32  scram-sha-256
+<div class="highlight"><pre><span></span><code>host  moodle  moodle  10.0.83.155/32  scram-sha-256
 </code></pre></div>
 </details>
 <p><strong>4.</strong> Ekspordi SQLite'i andmebaasist <code>kool.db</code> tabel <code>opilased</code> CSV-failiks.</p>
@@ -5299,6 +5327,8 @@
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

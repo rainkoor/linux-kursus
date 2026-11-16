@@ -5022,6 +5022,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5407,14 +5435,14 @@ sudo<span class="w"> </span>lsof<span class="w"> </span>-i<span class="w"> </spa
 </div>
 <h2 id="5-osa-prometheus-ja-grafana">5. osa. Prometheus ja Grafana<a class="headerlink" href="#5-osa-prometheus-ja-grafana" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Paigalda node_exporter masinatesse <code>debian1</code> ja <code>ubuntusrv</code> (<code>sudo apt install prometheus-node-exporter</code>) ning <code>alma</code>-sse konteinerina (teooria punkt 21.5). Ava tulemüüris port 9100 ainult seireserverile. Kontrolli seireserverist:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://10.0.83.52:9100/metrics<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span>^node_
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://10.0.83.152:9100/metrics<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span>^node_
 </code></pre></div>
 <p><strong>5.2</strong> Loo <code>ubuntusrv</code>-s kataloog <code>~/seire</code>, failid <code>compose.yaml</code> ja <code>prometheus.yml</code> (teooria punkt 21.5) ning käivita. Lisa kataloog oma Git-hoidlasse.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/seire
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 docker<span class="w"> </span>compose<span class="w"> </span>ps
 </code></pre></div>
-<p>Ava <code>http://10.0.83.54:9090/targets</code>.</p>
+<p>Ava <code>http://10.0.83.154:9090/targets</code>.</p>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus K7</p>
 <p>Kas kõik sihtmärgid olid <strong>UP</strong>? Kui mõni oli <strong>DOWN</strong>, mis oli põhjus (tulemüür, vale IP, eksportija ei tööta)?</p>
@@ -5424,7 +5452,7 @@ docker<span class="w"> </span>compose<span class="w"> </span>ps
 <p class="admonition-title">Küsimus K8</p>
 <p>Kirjuta PromQL-päring, mis näitab iga masina vaba mälu protsentides. Mis oli tulemus?</p>
 </div>
-<p><strong>5.4</strong> Ava Grafana (<code>http://10.0.83.54:3000</code>), muuda administraatori parool, lisa andmeallikas Prometheus (<code>http://prometheus:9090</code>) ja impordi armatuurlaud ID <strong>1860</strong>.</p>
+<p><strong>5.4</strong> Ava Grafana (<code>http://10.0.83.154:3000</code>), muuda administraatori parool, lisa andmeallikas Prometheus (<code>http://prometheus:9090</code>) ja impordi armatuurlaud ID <strong>1860</strong>.</p>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus K9</p>
 <p>Miks on Grafanas andmeallika aadress <code>http://prometheus:9090</code>, mitte <code>http://localhost:9090</code>? (Vihje: moodul 14, Compose'i võrk.)</p>
@@ -5438,8 +5466,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>ps
 <p><strong>6.1</strong> Käivita <code>ubuntusrv</code>-s Uptime Kuma (teooria punkt 21.6) ja lisa jälgimised:</p>
 <ul>
 <li>HTTPS: <code>https://kool.lab.example</code> (laboritöö 15) - lisa <code>ubuntusrv</code>-le labori CA või lülita sertifikaadikontroll välja ja põhjenda;</li>
-<li>DNS: <code>kool.lab.example</code> serveris <code>10.0.83.52</code> (laboritöö 17);</li>
-<li>TCP-port: <code>10.0.83.53:445</code> (Samba).</li>
+<li>DNS: <code>kool.lab.example</code> serveris <code>10.0.83.152</code> (laboritöö 17);</li>
+<li>TCP-port: <code>10.0.83.153:445</code> (Samba).</li>
 </ul>
 <p><strong>6.2</strong> Peata <code>debian1</code>-s nginx (<code>sudo systemctl stop nginx</code>), oota ja vaata, millal Uptime Kuma probleemi märkas. Käivita nginx uuesti.</p>
 <div class="admonition kysimus">
@@ -5611,6 +5639,8 @@ rm<span class="w"> </span>~/katkine.sh
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

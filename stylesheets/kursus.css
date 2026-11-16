@@ -16,3 +16,42 @@
   -webkit-mask-image: var(--md-admonition-icon--kysimus);
   mask-image: var(--md-admonition-icon--kysimus);
 }
+
+/* Sorditavad tabelid (javascripts/sorditav.js) */
+.md-typeset th.sorditav {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.md-typeset th.sorditav::after {
+  content: " ↕";
+  opacity: 0.35;
+}
+.md-typeset th.sorditav[data-suund="kasvav"]::after {
+  content: " ▲";
+  opacity: 0.9;
+}
+.md-typeset th.sorditav[data-suund="kahanev"]::after {
+  content: " ▼";
+  opacity: 0.9;
+}
+.md-typeset th.sorditav:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: -2px;
+}
+.md-typeset input.tabeliotsing {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0.8em 0 0.4em;
+  padding: 0.45em 0.7em;
+  font: inherit;
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+}
+.md-typeset input.tabeliotsing:focus {
+  outline: 2px solid var(--md-accent-fg-color);
+  border-color: transparent;
+}

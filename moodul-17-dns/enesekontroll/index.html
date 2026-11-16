@@ -4934,6 +4934,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5175,39 +5203,39 @@
 <p>DNSSEC allkirjastab kirjed, nii et resolver saab kontrollida, et vastust pole võltsitud (vahemälu mürgitamise vastu). DoT ja DoH krüpteerivad päringud kliendi ja resolveri vahel (pealtkuulamise vastu). DNSSEC ei krüpteeri, DoT/DoH ei kontrolli kirjete ehtsust.</p>
 </details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> Lisa tsooni <code>lab.example</code> e-posti server <code>mail.lab.example</code> (IP <code>10.0.83.58</code>) koos MX-kirjega.</p>
+<p><strong>1.</strong> Lisa tsooni <code>lab.example</code> e-posti server <code>mail.lab.example</code> (IP <code>10.0.83.158</code>) koos MX-kirjega.</p>
 <details class="success">
 <summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>; 1 (tsoonifaili, suurenda seerianumbrit)
 @       IN  MX  10 mail.lab.example.
-mail    IN  A   10.0.83.58
+mail    IN  A   10.0.83.158
 </code></pre></div>
 </details>
-<p><strong>2.</strong> Lisa pöördtsooni <code>83.0.10.in-addr.arpa</code> kirje, mis seob aadressi <code>10.0.83.66</code> nimega <code>fbsd.lab.example</code>, ja kontrolli seda.</p>
+<p><strong>2.</strong> Lisa pöördtsooni <code>83.0.10.in-addr.arpa</code> kirje, mis seob aadressi <code>10.0.83.166</code> nimega <code>fbsd.lab.example</code>, ja kontrolli seda.</p>
 <details class="success">
 <summary>Lahendus</summary>
-<div class="highlight"><pre><span></span><code>66  IN  PTR fbsd.lab.example.
+<div class="highlight"><pre><span></span><code>166  IN  PTR fbsd.lab.example.
 </code></pre></div>
 <p>Suurenda seerianumbrit, siis:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>named-checkzone<span class="w"> </span><span class="m">83</span>.0.10.in-addr.arpa<span class="w"> </span>/etc/bind/db.10.0.83
 sudo<span class="w"> </span>rndc<span class="w"> </span>reload
-dig<span class="w"> </span>@localhost<span class="w"> </span>-x<span class="w"> </span><span class="m">10</span>.0.83.66<span class="w"> </span>+short
+dig<span class="w"> </span>@localhost<span class="w"> </span>-x<span class="w"> </span><span class="m">10</span>.0.83.166<span class="w"> </span>+short
 </code></pre></div>
 </details>
-<p><strong>3.</strong> Kirjuta <code>debian2</code> BIND9 seadistusse tsooni <code>lab.example</code> sekundaarkirjeldus (primaar <code>10.0.83.52</code>).</p>
+<p><strong>3.</strong> Kirjuta <code>debian2</code> BIND9 seadistusse tsooni <code>lab.example</code> sekundaarkirjeldus (primaar <code>10.0.83.152</code>).</p>
 <details class="success">
 <summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>zone "lab.example" {
     type secondary;
     file "/var/cache/bind/db.lab.example";
-    primaries { 10.0.83.52; };
+    primaries { 10.0.83.152; };
 };
 </code></pre></div>
 </details>
 <p><strong>4.</strong> Leia, kas kirje <code>www.lab.example</code> vastus tuleb serveri enda tsoonist või vahemälust, ning vaata päringu kogu teekonda juurest alates nimele <code>www.debian.org</code>.</p>
 <details class="success">
 <summary>Lahendus</summary>
-<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@10.0.83.52<span class="w"> </span>www.lab.example<span class="w"> </span>+norecurse<span class="w">    </span><span class="c1"># lipp aa = autoriteetne vastus</span>
+<div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@10.0.83.152<span class="w"> </span>www.lab.example<span class="w"> </span>+norecurse<span class="w">    </span><span class="c1"># lipp aa = autoriteetne vastus</span>
 dig<span class="w"> </span>www.debian.org<span class="w"> </span>+trace
 </code></pre></div>
 </details>
@@ -5308,6 +5336,8 @@ dig<span class="w"> </span>www.debian.org<span class="w"> </span>+trace
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

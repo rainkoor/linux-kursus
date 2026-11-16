@@ -4863,6 +4863,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../distrod/" class="md-nav__link">
         
   
@@ -5021,7 +5049,7 @@
 
 
 <h1 id="sõnastik">Sõnastik<a class="headerlink" href="#sõnastik" title="Permanent link">&para;</a></h1>
-<p>Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatakse koos uute moodulitega.</p>
+<p>Kursusel kasutatavad mõisted koos ingliskeelse vastega. Sõnastikku täiendatakse koos uute moodulitega. Kursuse veebilehel saab tabelit <strong>sortida</strong>, klõpsates veeru pealkirjal (nt inglise keele järgi), ja <strong>otsida</strong> tabeli kohal olevast väljast.</p>
 <table>
 <thead>
 <tr>
@@ -5035,11 +5063,6 @@
 <td>absoluutne tee</td>
 <td>absolute path</td>
 <td>Juurkataloogist <code>/</code> algav tee</td>
-</tr>
-<tr>
-<td>access-port</td>
-<td>access port</td>
-<td>Kommutaatori port, mis edastab ühe VLAN-i kaadreid ilma märgiseta</td>
 </tr>
 <tr>
 <td>ACL</td>
@@ -5097,6 +5120,11 @@
 <td>Struktureeritud andmete kogum ja seda haldav server</td>
 </tr>
 <tr>
+<td>andmehoidla (PBS)</td>
+<td>datastore</td>
+<td>Proxmox Backup Serveri kataloog, kus hoitakse varukoopiate tükke</td>
+</tr>
+<tr>
 <td>Ansible</td>
 <td>Ansible</td>
 <td>Agendita automatiseerimisvahend, mis seadistab masinaid SSH kaudu YAML-is kirjutatud mänguraamatute järgi</td>
@@ -5110,6 +5138,11 @@
 <td>API</td>
 <td>Application Programming Interface</td>
 <td>Programmiliides, mille kaudu teine programm saab teenust kasutada (nt Proxmoxi REST API)</td>
+</tr>
+<tr>
+<td>API-võti</td>
+<td>API token</td>
+<td>Salajane võti, millega programm end teenuse API-s tuvastab</td>
 </tr>
 <tr>
 <td>ARC</td>
@@ -5152,6 +5185,11 @@
 <td>Kerneli auditisündmusi (sh SELinuxi keelamised) logiv teenus; logi <code>/var/log/audit/audit.log</code></td>
 </tr>
 <tr>
+<td>autenditud saatmine</td>
+<td>submission</td>
+<td>Kirja saatmine kasutaja programmist serverisse pordil 587 autentimise ja TLS-iga</td>
+</tr>
+<tr>
 <td>autofs</td>
 <td>automounter</td>
 <td>Teenus, mis haagib võrgukettad automaatselt esimesel kasutamisel ja lahutab jõudeolekus</td>
@@ -5160,6 +5198,11 @@
 <td>avalik võti</td>
 <td>public key</td>
 <td>Võtmepaari jagatav osa</td>
+</tr>
+<tr>
+<td>avatud lähtekood</td>
+<td>open source</td>
+<td>Tarkvara, mille lähtekood on avalik ja mida võib uurida, muuta ja levitada</td>
 </tr>
 <tr>
 <td>avatud relee</td>
@@ -5202,7 +5245,7 @@
 <td>Vana arvuti püsivara liides; asendunud UEFI-ga</td>
 </tr>
 <tr>
-<td>box</td>
+<td>box (Vagranti kast)</td>
 <td>box</td>
 <td>Vagranti valmis põhitõmmis virtuaalmasina loomiseks</td>
 </tr>
@@ -5274,7 +5317,7 @@
 <tr>
 <td>CNI</td>
 <td>Container Network Interface</td>
-<td>Liides ja pluginad, mis loovad podide võrgu (k3s-is Flannel)</td>
+<td>Liides ja pistikprogrammid, mis loovad podide võrgu (k3s-is Flannel)</td>
 </tr>
 <tr>
 <td>Compose</td>
@@ -5347,9 +5390,9 @@
 <td>Tavaline õiguste mudel, kus faili omanik otsustab õiguste üle (rwx); vt MAC</td>
 </tr>
 <tr>
+<td>dataset (andmekogum)</td>
 <td>dataset</td>
-<td>dataset</td>
-<td>ZFS-i pooli sees olev failisüsteem oma omadustega</td>
+<td>ZFS-i pooli sees olev failisüsteem oma omadustega; eesti keeles ka <em>andmekogum</em></td>
 </tr>
 <tr>
 <td>deduplitseerimine</td>
@@ -5427,6 +5470,11 @@
 <td>Kerge DNS-, DHCP- ja TFTP-server</td>
 </tr>
 <tr>
+<td>DNSSEC</td>
+<td>DNS Security Extensions</td>
+<td>DNS-vastuste digiallkirjastamine võltsimise vastu</td>
+</tr>
+<tr>
 <td>doas</td>
 <td>doas</td>
 <td>OpenBSD-st pärit lihtne <code>sudo</code> alternatiiv (<code>/usr/local/etc/doas.conf</code>)</td>
@@ -5447,14 +5495,29 @@
 <td>Ühise kataloogi ja turvapoliitikaga haldusala Active Directorys</td>
 </tr>
 <tr>
+<td>DORA</td>
+<td>Discover, Offer, Request, Acknowledge</td>
+<td>DHCP nelja sõnumi vahetus aadressi saamisel</td>
+</tr>
+<tr>
 <td>Dovecot</td>
 <td>Dovecot</td>
 <td>IMAP- ja POP3-server ning e-posti autentimisteenus</td>
 </tr>
 <tr>
+<td>draiverita printimine</td>
+<td>driverless printing (IPP Everywhere)</td>
+<td>Printimine ilma tootja draiverita standardse IPP-protokolli abil</td>
+</tr>
+<tr>
 <td>DSA</td>
 <td>Debian Security Advisory</td>
 <td>Debiani turvateade parandatud haavatavuse kohta</td>
+</tr>
+<tr>
+<td>DV-, OV- ja EV-sertifikaat</td>
+<td>domain / organization / extended validation</td>
+<td>Sertifikaadi kontrollitase: ainult domeen, organisatsioon või laiendatud kontroll</td>
 </tr>
 <tr>
 <td>eesmärk</td>
@@ -5475,6 +5538,11 @@
 <td>EPEL</td>
 <td>Extra Packages for Enterprise Linux</td>
 <td>RHEL-i perekonna lisapakettide hoidla</td>
+</tr>
+<tr>
+<td>erivolitused</td>
+<td>capabilities</td>
+<td>Juurkasutaja õiguste jaotus väiksemateks osadeks (nt <code>CAP_NET_BIND_SERVICE</code>)</td>
 </tr>
 <tr>
 <td>esiplaan</td>
@@ -5505,6 +5573,11 @@
 <td>fail2ban</td>
 <td>fail2ban</td>
 <td>Teenus, mis loeb logisid ja blokeerib tulemüüris korduvalt ebaõnnestunud sisselogimisega aadressid</td>
+</tr>
+<tr>
+<td>failide tervikluse seire</td>
+<td>file integrity monitoring (FIM)</td>
+<td>Oluliste failide muutumise jälgimine kontrollsummade abil (AIDE, Wazuh)</td>
 </tr>
 <tr>
 <td>failisüsteem</td>
@@ -5642,6 +5715,11 @@
 <td>Tarkvarapakettide allikas</td>
 </tr>
 <tr>
+<td>hoidla osa</td>
+<td>component</td>
+<td>Debiani ja Ubuntu hoidla jaotis (<code>main</code>, <code>contrib</code>, <code>non-free</code>, <code>universe</code>)</td>
+</tr>
+<tr>
 <td>hoidla (Git)</td>
 <td>repository</td>
 <td>Projekti kataloog koos muudatuste ajalooga</td>
@@ -5752,6 +5830,11 @@
 <td>Failisüsteemi kirje, mis hoiab faili metaandmeid</td>
 </tr>
 <tr>
+<td>jagatud DNS</td>
+<td>split DNS</td>
+<td>Lahendus, kus sama nimi või eri domeenid lahendatakse sõltuvalt võrgust või liidesest eri serverites</td>
+</tr>
+<tr>
 <td>jagatud teek</td>
 <td>shared library</td>
 <td>Programmide ühiskasutuses olev kood (<code>*.so</code>), mis laaditakse programmi käivitamisel (<code>ldd</code>, <code>ldconfig</code>)</td>
@@ -5792,9 +5875,19 @@
 <td>Piiramatute õigustega kasutaja</td>
 </tr>
 <tr>
+<td>juurkasutajata konteiner</td>
+<td>rootless container</td>
+<td>Konteiner, mis töötab tavakasutaja õigustes</td>
+</tr>
+<tr>
 <td>juurkataloog</td>
 <td>root directory</td>
 <td>Kataloogipuu algus <code>/</code></td>
+</tr>
+<tr>
+<td>juurkomplekt</td>
+<td>rootkit</td>
+<td>Pahavara, mis peidab ründaja kohalolu süsteemis</td>
 </tr>
 <tr>
 <td>järkjärguline uuendus</td>
@@ -5805,6 +5898,11 @@
 <td>kaheastmeline autentimine</td>
 <td>two-factor authentication (2FA)</td>
 <td>Sisselogimine kahe eri teguriga, nt SSH võti ja telefoni kood</td>
+</tr>
+<tr>
+<td>kahe asukoha VPN</td>
+<td>site-to-site VPN</td>
+<td>VPN, mis ühendab kaks võrku (nt kontor ja filiaal)</td>
 </tr>
 <tr>
 <td>Kali Linux</td>
@@ -5835,6 +5933,11 @@
 <td>kaughoidla</td>
 <td>remote</td>
 <td>Teises masinas (nt GitHubis) asuv Giti hoidla, kuhu tehakse <code>push</code> ja kust <code>pull</code></td>
+</tr>
+<tr>
+<td>kaugtöö VPN</td>
+<td>road warrior VPN</td>
+<td>VPN, millega üksik kasutaja ühendub asutuse võrku</td>
 </tr>
 <tr>
 <td>k3s</td>
@@ -5892,6 +5995,11 @@
 <td>Mitme teineteist täiendava kaitsekihi kasutamine</td>
 </tr>
 <tr>
+<td>kleepuv bitt (sticky bit)</td>
+<td>sticky bit</td>
+<td>Kataloogil: faile saab kustutada ainult nende omanik</td>
+</tr>
+<tr>
 <td>kodukataloog</td>
 <td>home directory</td>
 <td>Kasutaja isiklik kataloog, nt <code>/home/mari</code></td>
@@ -5915,6 +6023,11 @@
 <td>konteiner</td>
 <td>container</td>
 <td>Isoleeritud protsess oma failisüsteemiga, jagab hosti kernelit</td>
+</tr>
+<tr>
+<td>konteinerikäitur</td>
+<td>container runtime</td>
+<td>Tarkvara, mis konteinereid tegelikult käivitab (containerd, CRI-O, crun)</td>
 </tr>
 <tr>
 <td>konteinerpilt</td>
@@ -6172,6 +6285,11 @@
 <td>Pika toega väljalase (nt Ubuntu LTS - 5 aastat tavatuge)</td>
 </tr>
 <tr>
+<td>lubatud loend</td>
+<td>allowlist</td>
+<td>Loend aadressidest või domeenidest, mis on alati lubatud (vastand: keelatud loend)</td>
+</tr>
+<tr>
 <td>lubav litsents</td>
 <td>permissive licence</td>
 <td>Litsents, mis lubab koodi kasutada ka kinnises tootes (MIT, BSD, Apache)</td>
@@ -6210,6 +6328,11 @@
 <td>Lynis</td>
 <td>Lynis</td>
 <td>Süsteemi turvalisuse auditeerimise tööriist, mis annab karastamise soovitusi</td>
+</tr>
+<tr>
+<td>magistraalport (trunk-port)</td>
+<td>trunk port</td>
+<td>Kommutaatori port, mis edastab mitme VLAN-i kaadreid märgistega</td>
 </tr>
 <tr>
 <td>Maildir</td>
@@ -6272,6 +6395,11 @@
 <td>Active Directory kõrgeim struktuur: üks või mitu ühise skeemiga domeeni</td>
 </tr>
 <tr>
+<td>migreerimine</td>
+<td>migration</td>
+<td>Virtuaalmasina teisaldamine ühest hostist teise (töö ajal: <em>live migration</em>)</td>
+</tr>
+<tr>
 <td>minikube</td>
 <td>minikube</td>
 <td>Ühe sõlme Kubernetese klaster arendaja arvutis</td>
@@ -6290,6 +6418,11 @@
 <td>MUA</td>
 <td>Mail User Agent</td>
 <td>Kasutaja e-posti programm (Thunderbird, Outlook)</td>
+</tr>
+<tr>
+<td>multiedastus</td>
+<td>multicast</td>
+<td>Paketi saatmine korraga kindlale masinate rühmale</td>
 </tr>
 <tr>
 <td>muudatuste logi</td>
@@ -6315,6 +6448,11 @@
 <td>mänguraamat</td>
 <td>playbook</td>
 <td>Ansible'i ülesannete kirjeldus YAML-failis</td>
+</tr>
+<tr>
+<td>MX-kirje</td>
+<td>MX record</td>
+<td>DNS-kirje, mis nimetab domeeni e-posti vastuvõtva serveri</td>
 </tr>
 <tr>
 <td>NAS</td>
@@ -6387,6 +6525,11 @@
 <td>LDAP-kirje tüüp, mis määrab kohustuslikud ja lubatud atribuudid</td>
 </tr>
 <tr>
+<td>olekuleht</td>
+<td>status page</td>
+<td>Avalik leht, mis näitab teenuste kättesaadavust (nt Uptime Kuma)</td>
+</tr>
+<tr>
 <td>olekupõhine tulemüür</td>
 <td>stateful firewall</td>
 <td>Tulemüür, mis jätab ühendused meelde ja lubab automaatselt vastuspaketid</td>
@@ -6422,6 +6565,11 @@
 <td>Konteinerite automaatne paigutamine, käivitamine, skaleerimine ja taastamine mitme masina vahel</td>
 </tr>
 <tr>
+<td>osapool (WireGuard)</td>
+<td>peer</td>
+<td>WireGuardi tunneli teine ots oma avaliku võtme ja lubatud aadressidega</td>
+</tr>
+<tr>
 <td>otsuste logi</td>
 <td>decision log, ADR</td>
 <td>Kirjed oluliste tehniliste valikute ja nende põhjuste kohta</td>
@@ -6454,7 +6602,7 @@
 <tr>
 <td>pakkuja (OpenTofu)</td>
 <td>provider</td>
-<td>OpenTofu/Terraformi lisamoodul, mis suhtleb kindla platvormi API-ga (nt Proxmox)</td>
+<td>OpenTofu/Terraformi pistikprogramm, mis suhtleb kindla platvormi API-ga (nt Proxmox)</td>
 </tr>
 <tr>
 <td>PAM</td>
@@ -6532,6 +6680,11 @@
 <td>Protsessi numbriline tunnus</td>
 </tr>
 <tr>
+<td>pidevalt uuenev väljalase</td>
+<td>rolling release</td>
+<td>Distro, millel ei ole eraldi versioone: paketid uuenevad pidevalt (nt Arch, openSUSE Tumbleweed)</td>
+</tr>
+<tr>
 <td>pilet</td>
 <td>ticket</td>
 <td>Kerberose ajutine tõend autentimiseks (nt TGT)</td>
@@ -6540,6 +6693,11 @@
 <td>pilvetõmmis</td>
 <td>cloud image</td>
 <td>Valmis paigaldatud kettatõmmis koos cloud-initiga, millest tehakse virtuaalmasina mall</td>
+</tr>
+<tr>
+<td>pistikprogramm</td>
+<td>plugin</td>
+<td>Lisaprogramm, mis laiendab põhiprogrammi võimalusi (nt CoreDNS-i, OPNsense'i, zsh-i või Grafana pistikprogrammid)</td>
 </tr>
 <tr>
 <td>pkgbase</td>
@@ -6562,9 +6720,9 @@
 <td>Deemonita konteinerimootor, mis töötab ka ilma juurkasutajata</td>
 </tr>
 <tr>
-<td>pool</td>
+<td>pool (kogum)</td>
 <td>pool, zpool</td>
-<td>ZFS-i ketaste ühine salvestusruum</td>
+<td>ZFS-i ketaste ühine salvestusruum; eesti keeles ka <em>kogum</em></td>
 </tr>
 <tr>
 <td>pordid</td>
@@ -6617,6 +6775,11 @@
 <td>Server, mis hoiab printerite järjekordi ja jagab printereid võrku</td>
 </tr>
 <tr>
+<td>privaatsuslaiendid</td>
+<td>privacy extensions</td>
+<td>IPv6 ajutised aadressid, mille liidese osa vahetub regulaarselt</td>
+</tr>
+<tr>
 <td>privaatvõti</td>
 <td>private key</td>
 <td>Võtmepaari salajane osa</td>
@@ -6667,9 +6830,19 @@
 <td>Kasutaja vaikegrupp, millele kuuluvad tema loodud failid</td>
 </tr>
 <tr>
+<td>päis</td>
+<td>header</td>
+<td>Kirja või paketi algusosa metaandmetega (nt <code>From:</code>, <code>Received:</code>)</td>
+</tr>
+<tr>
 <td>päringute piirang</td>
 <td>rate limit</td>
 <td>Teenuse seatud piir, mitu päringut ajaühikus lubatakse (nt Let's Encrypt)</td>
+</tr>
+<tr>
+<td>pääsuport (access-port)</td>
+<td>access port</td>
+<td>Kommutaatori port, mis edastab ühe VLAN-i kaadreid ilma märgiseta</td>
 </tr>
 <tr>
 <td>pöördpuhverserver</td>
@@ -6717,14 +6890,14 @@
 <td>Microsofti kaugtöölaua protokoll</td>
 </tr>
 <tr>
-<td>realm</td>
-<td>realm</td>
-<td>Kerberose haldusala, kirjutatakse suurtähtedega (nt <code>AD.LAB.EXAMPLE</code>)</td>
-</tr>
-<tr>
 <td>realmd</td>
 <td>realmd</td>
 <td>Tööriist (<code>realm join</code>), mis liidab Linuxi masina domeeniga ja seadistab SSSD</td>
+</tr>
+<tr>
+<td>realm (valdkond)</td>
+<td>realm</td>
+<td>Kerberose haldusala (eesti keeles ka <em>valdkond</em>), kirjutatakse suurtähtedega (nt <code>AD.LAB.EXAMPLE</code>)</td>
 </tr>
 <tr>
 <td>register</td>
@@ -6772,9 +6945,19 @@
 <td>Protsessi või teenuse lubatud ressursside ülempiir (<code>ulimit</code>, <code>MemoryMax=</code>)</td>
 </tr>
 <tr>
+<td>riistvarakell (RTC)</td>
+<td>real-time clock</td>
+<td>Emaplaadi patareitoitel kell, mis töötab ka väljalülitatud arvutis</td>
+</tr>
+<tr>
 <td>rikketest</td>
 <td>failover test</td>
 <td>Komponendi teadlik väljalülitamine, et kontrollida lahenduse töökindlust</td>
+</tr>
+<tr>
+<td>ringjaotus (round robin)</td>
+<td>round robin</td>
+<td>Koormuse jaotamine kordamööda kõigile serveritele</td>
 </tr>
 <tr>
 <td>roll (Ansible)</td>
@@ -6790,11 +6973,6 @@
 <td>root_squash</td>
 <td>root squash</td>
 <td>NFS-i vaikevalik, mis muudab kliendi juurkasutaja serveris õigusteta kasutajaks</td>
-</tr>
-<tr>
-<td>round robin</td>
-<td>round robin</td>
-<td>Koormuse jaotamine kordamööda kõigile serveritele</td>
 </tr>
 <tr>
 <td>RPO</td>
@@ -6822,6 +7000,11 @@
 <td>Kui kiiresti peab teenus pärast riket taastuma</td>
 </tr>
 <tr>
+<td>ruuteri teade (RA)</td>
+<td>router advertisement</td>
+<td>IPv6 ruuteri teade võrgu prefiksi ja vaikelüüsiga; SLAAC-i alus</td>
+</tr>
+<tr>
 <td>räsi</td>
 <td>hash</td>
 <td>Andmetest (nt paroolist või failist) arvutatud lühike pöördumatu väärtus; vt ka kontrollsumma</td>
@@ -6837,7 +7020,7 @@
 <td>Sertifikaadi väli, kus on loetletud kõik nimed, mille jaoks sertifikaat kehtib</td>
 </tr>
 <tr>
-<td>scrub</td>
+<td>scrub (tervikluse kontroll)</td>
 <td>scrub</td>
 <td>ZFS-i kõigi andmete läbilugemine ja kontrollsummade kontroll</td>
 </tr>
@@ -6862,6 +7045,11 @@
 <td>Kubernetese objekt saladuste (paroolid, võtmed) hoidmiseks; vaikimisi ainult base64-kodeeritud</td>
 </tr>
 <tr>
+<td>seisvad andmed</td>
+<td>data at rest</td>
+<td>Kettal hoitavad andmed (vastandina liikuvatele); kaitseb ketta krüpteerimine</td>
+</tr>
+<tr>
 <td>sekundaarserver</td>
 <td>secondary server</td>
 <td>DNS-server, mis hoiab primaari tsoonist koopiat ja vastab samamoodi</td>
@@ -6875,6 +7063,11 @@
 <td>sertifitseerimiskeskus</td>
 <td>certificate authority, CA</td>
 <td>Asutus või süsteem, mis allkirjastab sertifikaate</td>
+</tr>
+<tr>
+<td>servaseade</td>
+<td>edge device</td>
+<td>Väike seade võrgu serval (nt tööstusarvuti, Raspberry Pi), kus rakendus töötab andmete tekkimise kohas</td>
 </tr>
 <tr>
 <td>SFTP</td>
@@ -7067,14 +7260,14 @@
 <td>Valve'i Arch-põhine mängudistro</td>
 </tr>
 <tr>
-<td>sticky bit</td>
-<td>sticky bit</td>
-<td>Kataloogil: faile saab kustutada ainult nende omanik</td>
-</tr>
-<tr>
 <td>StorageClass</td>
 <td>StorageClass</td>
 <td>Kubernetese objekt, mis määrab, kuidas ja kust püsikettad luuakse (k3s-is <code>local-path</code>)</td>
+</tr>
+<tr>
+<td>STP</td>
+<td>Spanning Tree Protocol</td>
+<td>Protokoll, mis väldib kommutaatorite ja sildade võrgus silmuseid</td>
 </tr>
 <tr>
 <td>strace</td>
@@ -7139,12 +7332,17 @@
 <tr>
 <td>zsh</td>
 <td>Z shell</td>
-<td>Bashi-sarnane, peaaegu POSIX-ühilduv kest täiustatud lõpetamise ja pluginatega (macOS-i vaikekest)</td>
+<td>Bashi-sarnane, peaaegu POSIX-ühilduv kest täiustatud lõpetamise ja pistikprogrammidega (macOS-i vaikekest)</td>
 </tr>
 <tr>
 <td>zvol</td>
 <td>ZFS volume</td>
 <td>ZFS-i pooli sees olev plokkseade</td>
+</tr>
+<tr>
+<td>taastamine soovitud hetkeni (PITR)</td>
+<td>point-in-time recovery</td>
+<td>Andmebaasi taastamine varukoopiast ja logidest kindla ajahetkeni</td>
 </tr>
 <tr>
 <td>taastamisrežiim</td>
@@ -7177,6 +7375,11 @@
 <td>Töö, mis töötab ilma kesta ootamata</td>
 </tr>
 <tr>
+<td>taustsalvesti (iSCSI)</td>
+<td>backstore</td>
+<td>iSCSI sihtmärgi taga olev tegelik salvesti: fail, LVM-köide või ketas</td>
+</tr>
+<tr>
 <td>taustserver</td>
 <td>backend</td>
 <td>Koormusejaoturi või pöördpuhvri taga töötav server</td>
@@ -7205,6 +7408,11 @@
 <td>tekstiredaktor</td>
 <td>text editor</td>
 <td>Programm tekstifailide muutmiseks (nano, vim)</td>
+</tr>
+<tr>
+<td>tellimus</td>
+<td>subscription</td>
+<td>Tasuline tugi ja uuendused vabale tarkvarale (RHEL, Ubuntu Pro, Proxmox)</td>
 </tr>
 <tr>
 <td>terminal</td>
@@ -7262,11 +7470,6 @@
 <td>Konteineritele mõeldud pöördpuhver ja koormusejaotur</td>
 </tr>
 <tr>
-<td>trunk-port</td>
-<td>trunk port</td>
-<td>Kommutaatori port, mis edastab mitme VLAN-i kaadreid märgistega</td>
-</tr>
-<tr>
 <td>tsoon</td>
 <td>zone</td>
 <td>DNS-is ühe domeeni kirjete kogum</td>
@@ -7282,6 +7485,11 @@
 <td>Korduvalt täidetav koodiplokk</td>
 </tr>
 <tr>
+<td>TTL</td>
+<td>Time To Live</td>
+<td>DNS-kirje vahemälus hoidmise aeg; IP-paketis lubatud hüpete arv</td>
+</tr>
+<tr>
 <td>tulemüür</td>
 <td>firewall</td>
 <td>Võrguliikluse filtreerimise süsteem</td>
@@ -7295,6 +7503,11 @@
 <td>turvakontekst</td>
 <td>security context</td>
 <td>SELinuxi märgis failil, protsessil või pordil</td>
+</tr>
+<tr>
+<td>turvaline vaikimisi</td>
+<td>secure by default</td>
+<td>Põhimõte, et värske paigaldus on turvaline ilma lisaseadistuseta</td>
 </tr>
 <tr>
 <td>turvauuendus</td>
@@ -7325,6 +7538,11 @@
 <td>UEFI</td>
 <td>Unified Extensible Firmware Interface</td>
 <td>Tänapäevane püsivara liides, mis asendab BIOS-i; alglaadija on EFI süsteemipartitsioonil</td>
+</tr>
+<tr>
+<td>UFS</td>
+<td>Unix File System</td>
+<td>FreeBSD klassikaline failisüsteem</td>
 </tr>
 <tr>
 <td>UID</td>
@@ -7392,14 +7610,44 @@
 <td>Unikaalne identifikaator, millega nt failisüsteemi <code>/etc/fstab</code>-is tuvastatakse</td>
 </tr>
 <tr>
+<td>vaba tarkvara</td>
+<td>free software</td>
+<td>Tarkvara, mida kasutaja võib vabalt kasutada, uurida, muuta ja levitada (vabadus, mitte hind)</td>
+</tr>
+<tr>
+<td>vahemälu mürgitamine</td>
+<td>cache poisoning</td>
+<td>Rünne, kus resolveri vahemällu sokutatakse võltsitud DNS-vastus</td>
+</tr>
+<tr>
 <td>vaikelüüs</td>
 <td>default gateway</td>
 <td>Ruuter, kuhu saadetakse kohalikust võrgust väljuv liiklus</td>
 </tr>
 <tr>
+<td>vaikimisi keelamine</td>
+<td>default deny</td>
+<td>Tulemüüri põhimõte: keela kõik ja luba ainult vajalik</td>
+</tr>
+<tr>
+<td>vaikne andmeriknemine</td>
+<td>bit rot, silent data corruption</td>
+<td>Andmete märkamatu muutumine kandjal; avastavad kontrollsummad (ZFS, Btrfs)</td>
+</tr>
+<tr>
+<td>valija (DKIM)</td>
+<td>selector</td>
+<td>DKIM-võtme nimi DNS-is (<code>valija._domainkey.domeen</code>)</td>
+</tr>
+<tr>
 <td>Valkey</td>
 <td>Valkey</td>
 <td>Redisest tuletatud vaba võti-väärtus andmebaas</td>
+</tr>
+<tr>
+<td>vanaisa-isa-poeg skeem (GFS)</td>
+<td>grandfather-father-son</td>
+<td>Varukoopiate säilitusskeem: päevased, nädalased ja kuised koopiad</td>
 </tr>
 <tr>
 <td>varundus</td>
@@ -7460,6 +7708,11 @@
 <td>VNC</td>
 <td>Virtual Network Computing</td>
 <td>Graafilise töölaua kaugjuhtimise protokoll (nt Proxmoxi konsool)</td>
+</tr>
+<tr>
+<td>volitamata DHCP-server</td>
+<td>rogue DHCP server</td>
+<td>Võrku loata ühendatud DHCP-server, mis jagab klientidele valesid seadeid</td>
 </tr>
 <tr>
 <td>vormindama</td>
@@ -7567,6 +7820,11 @@
 <td>Lugemis-, kirjutus- ja käivitusõigus (<code>rwx</code>)</td>
 </tr>
 <tr>
+<td>ühendus (NetworkManager)</td>
+<td>connection</td>
+<td>NetworkManageri salvestatud võrguseadistus, mis on seotud liidesega</td>
+</tr>
+<tr>
 <td>üksik rikkepunkt</td>
 <td>single point of failure</td>
 <td>Komponent, mille rikke korral lakkab kogu teenus töötamast</td>
@@ -7577,6 +7835,11 @@
 <td>systemd hallatav objekt (teenus, taimer jne)</td>
 </tr>
 <tr>
+<td>ülesanne (Ansible)</td>
+<td>task</td>
+<td>Mänguraamatu üks samm: ühe mooduli käivitamine kindlate parameetritega</td>
+</tr>
+<tr>
 <td>ülevõtt</td>
 <td>failover</td>
 <td>Rikkis põhisüsteemi ülesannete üleviimine varusüsteemile</td>
@@ -7585,6 +7848,11 @@
 <td>ümbersuunamine</td>
 <td>redirection</td>
 <td>Voo suunamine faili või failist (<code>&gt;</code>, <code>&lt;</code>)</td>
+</tr>
+<tr>
+<td>ümbrik (e-post)</td>
+<td>envelope</td>
+<td>SMTP-s edastatavad saatja ja saaja aadressid (<code>MAIL FROM</code>, <code>RCPT TO</code>), mis võivad erineda kirja päisest</td>
 </tr>
 <tr>
 <td>X11</td>
@@ -7715,6 +7983,8 @@
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

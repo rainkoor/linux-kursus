@@ -4875,6 +4875,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5053,7 +5081,7 @@
 <p class="admonition-title">Aruanne</p>
 <p>Vasta küsimustele <strong>K1–K18</strong>. Kõik küsimused on koos ka lehe lõpus (<a href="#aruande-küsimused">Aruande küsimused</a>).</p>
 </div>
-<p>Tähised võrguplaani näite järgi: võrk <code>10.0.83.0/24</code>, OPNsense <code>10.0.83.1</code>, <code>dc1</code> <code>10.0.83.56</code>, <code>alma</code> <code>10.0.83.55</code>, <code>ubuntuklient</code> <code>10.0.83.98</code>, <code>winklient</code> <code>10.0.83.99</code>. Domeen <code>ad.lab.example</code>, NetBIOS-nimi <code>AD</code>. Asenda oma võrguplaani väärtustega.</p>
+<p>Tähised võrguplaani näite järgi: võrk <code>10.0.83.0/24</code>, OPNsense <code>10.0.83.1</code>, <code>dc1</code> <code>10.0.83.156</code>, <code>alma</code> <code>10.0.83.155</code>, <code>ubuntuklient</code> <code>10.0.83.198</code>, <code>winklient</code> <code>10.0.83.199</code>. Domeen <code>ad.lab.example</code>, NetBIOS-nimi <code>AD</code>. Asenda oma võrguplaani väärtustega.</p>
 <div class="admonition warning">
 <p class="admonition-title">Enne alustamist</p>
 <p>HKHK laboris on <code>dc1</code> mallist olemas, iseõppija paigaldab selle (vt <a href="../../lisad/paigaldus/">paigalduslisa</a>). Anna sellele staatiline aadress ja <strong>tee hetktõmmis</strong> (snapshot). Provisioning'ut on lihtsam korrata puhtalt masinalt kui ebaõnnestunud katset parandada.</p>
@@ -5069,7 +5097,7 @@ ip<span class="w"> </span>-br<span class="w"> </span>a
 </code></pre></div>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus K1</p>
-<p>Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.56</code>), mitte <code>127.0.1.1</code>-ks?</p>
+<p>Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.156</code>), mitte <code>127.0.1.1</code>-ks?</p>
 </div>
 <p><strong>1.2</strong> Kontrolli kellaaega:</p>
 <div class="highlight"><pre><span></span><code>timedatectl
@@ -5116,7 +5144,7 @@ kinit<span class="w"> </span>vale-kasutaja
 <div class="highlight"><pre><span></span><code>smbclient<span class="w"> </span>-L<span class="w"> </span>localhost<span class="w"> </span>-N
 smbclient<span class="w"> </span>//localhost/netlogon<span class="w"> </span>-U<span class="w"> </span>Administrator<span class="w"> </span>-c<span class="w"> </span><span class="s1">'ls'</span>
 </code></pre></div>
-<p><strong>3.4</strong> Seadista OPNsense'is Unbound Query Forwarding domeenile <code>ad.lab.example</code> → <code>10.0.83.56</code> (teooria punkt 26.3). Testi teisest masinast (nt <code>debian1</code>), mille DNS on OPNsense:</p>
+<p><strong>3.4</strong> Seadista OPNsense'is Unbound Query Forwarding domeenile <code>ad.lab.example</code> → <code>10.0.83.156</code> (teooria punkt 26.3). Testi teisest masinast (nt <code>debian1</code>), mille DNS on OPNsense:</p>
 <div class="highlight"><pre><span></span><code>host<span class="w"> </span>-t<span class="w"> </span>SRV<span class="w"> </span>_ldap._tcp.ad.lab.example
 </code></pre></div>
 <div class="admonition kysimus">
@@ -5175,12 +5203,12 @@ sudo<span class="w"> </span>samba-tool<span class="w"> </span>user<span class="w
 <p class="admonition-title">Küsimus K8</p>
 <p>Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?</p>
 </div>
-<p><strong>4.3</strong> Lisa DNS-kirjed: <code>www.ad.lab.example → 10.0.83.55</code> ning pöördtsoon <code>83.0.10.in-addr.arpa</code> koos <code>dc1</code> PTR-kirjega.</p>
+<p><strong>4.3</strong> Lisa DNS-kirjed: <code>www.ad.lab.example → 10.0.83.155</code> ning pöördtsoon <code>83.0.10.in-addr.arpa</code> koos <code>dc1</code> PTR-kirjega.</p>
 <div class="highlight"><pre><span></span><code>host<span class="w"> </span>www.ad.lab.example
-host<span class="w"> </span><span class="m">10</span>.0.83.56
+host<span class="w"> </span><span class="m">10</span>.0.83.156
 </code></pre></div>
 <h2 id="5-osa-windowsi-klient">5. osa. Windowsi klient<a class="headerlink" href="#5-osa-windowsi-klient" title="Permanent link">&para;</a></h2>
-<p><strong>5.1</strong> Seadista <code>winklient</code> DNS-iks <code>10.0.83.56</code>. Kontrolli PowerShellis:</p>
+<p><strong>5.1</strong> Seadista <code>winklient</code> DNS-iks <code>10.0.83.156</code>. Kontrolli PowerShellis:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">Resolve-DnsName</span> <span class="n">-Type</span> <span class="n">SRV</span> <span class="n">_ldap</span><span class="p">.</span><span class="n">_tcp</span><span class="p">.</span><span class="n">ad</span><span class="p">.</span><span class="n">lab</span><span class="p">.</span><span class="n">example</span>
 <span class="nb">Test-NetConnection</span> <span class="n">dc1</span><span class="p">.</span><span class="n">ad</span><span class="p">.</span><span class="n">lab</span><span class="p">.</span><span class="n">example</span> <span class="n">-Port</span> <span class="n">389</span>
 <span class="n">w32tm</span> <span class="p">/</span><span class="n">stripchart</span> <span class="p">/</span><span class="n">computer</span><span class="p">:</span><span class="n">dc1</span><span class="p">.</span><span class="n">ad</span><span class="p">.</span><span class="n">lab</span><span class="p">.</span><span class="n">example</span> <span class="p">/</span><span class="n">samples</span><span class="p">:</span><span class="n">3</span>
@@ -5223,7 +5251,7 @@ host<span class="w"> </span>winklient.ad.lab.example
 <hr />
 <h1 id="laboritöö-26b-linuxi-kliendid-ubuntu-almalinux">Laboritöö 26B. Linuxi kliendid (Ubuntu, AlmaLinux)<a class="headerlink" href="#laboritöö-26b-linuxi-kliendid-ubuntu-almalinux" title="Permanent link">&para;</a></h1>
 <h2 id="7-osa-ubuntu-liitmine-domeeniga">7. osa. Ubuntu liitmine domeeniga<a class="headerlink" href="#7-osa-ubuntu-liitmine-domeeniga" title="Permanent link">&para;</a></h2>
-<p><strong>7.1</strong> Seadista <code>ubuntuklient</code> hostinimeks <code>ubuntuklient.ad.lab.example</code> ja DNS-iks <code>10.0.83.56</code> (Netplan, moodul 7) või OPNsense, kui Query Forwarding on tehtud. Kontrolli kella.</p>
+<p><strong>7.1</strong> Seadista <code>ubuntuklient</code> hostinimeks <code>ubuntuklient.ad.lab.example</code> ja DNS-iks <code>10.0.83.156</code> (Netplan, moodul 7) või OPNsense, kui Query Forwarding on tehtud. Kontrolli kella.</p>
 <p><strong>7.2</strong> Paigalda paketid ja liitu (teooria punkt 26.7):</p>
 <div class="highlight"><pre><span></span><code>realm<span class="w"> </span>discover<span class="w"> </span>ad.lab.example
 sudo<span class="w"> </span>realm<span class="w"> </span>join<span class="w"> </span>-U<span class="w"> </span>Administrator<span class="w"> </span>ad.lab.example
@@ -5289,7 +5317,7 @@ kinit<span class="w"> </span>mari
 <hr />
 <h2 id="lisaülesanne-valikuline">Lisaülesanne (valikuline)<a class="headerlink" href="#lisaülesanne-valikuline" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Teine DC:</strong> paigalda <code>dc2</code> (<code>10.0.83.57</code>) ja liida see domeeniga DC-na. Kontrolli replikatsiooni (<code>samba-tool drs showrepl</code>), lülita <code>dc1</code> välja ja proovi sisse logida.</li>
+<li><strong>Teine DC:</strong> paigalda <code>dc2</code> (<code>10.0.83.157</code>) ja liida see domeeniga DC-na. Kontrolli replikatsiooni (<code>samba-tool drs showrepl</code>), lülita <code>dc1</code> välja ja proovi sisse logida.</li>
 <li><strong>Failiserver domeenis:</strong> liida <code>debian2</code> domeeniga liikmena (winbind või SSSD), loo jagatud kaust, millele on ligipääs ainult grupil <code>opilased</code>, ja haagi see Windowsis automaatselt GPO abil.</li>
 <li><strong>Windows Server AD:</strong> kui laboris on Windows Serveri domeen (nt IT25 plaanis <code>AD1</code>/<code>AD2</code>), liida <code>alma</code> sellega ja võrdle samme.</li>
 <li><strong>Varundus:</strong> tee <code>samba-tool domain backup online</code> ja taasta domeen uude VM-i.</li>
@@ -5299,7 +5327,7 @@ kinit<span class="w"> </span>mari
 <h2 id="aruande-küsimused">Aruande küsimused<a class="headerlink" href="#aruande-küsimused" title="Permanent link">&para;</a></h2>
 <p>Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.</p>
 <ul>
-<li><strong>K1.</strong> <em>(punkt 1.1)</em> Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.56</code>), mitte <code>127.0.1.1</code>-ks?</li>
+<li><strong>K1.</strong> <em>(punkt 1.1)</em> Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (<code>10.0.83.156</code>), mitte <code>127.0.1.1</code>-ks?</li>
 <li><strong>K2.</strong> <em>(punkt 1.2)</em> Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?</li>
 <li><strong>K3.</strong> <em>(punkt 2.3)</em> Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on <code>smb.conf</code> failis jaotises <code>[global]</code> peale provisioning'ut?</li>
 <li><strong>K4.</strong> <em>(punkt 3.1)</em> Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule <code>www.debian.org</code>?</li>
@@ -5422,6 +5450,8 @@ kinit<span class="w"> </span>mari
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

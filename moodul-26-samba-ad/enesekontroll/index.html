@@ -4934,6 +4934,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5197,10 +5225,10 @@
 sudo<span class="w"> </span>samba-tool<span class="w"> </span>group<span class="w"> </span>addmembers<span class="w"> </span>opilased<span class="w"> </span>peeter
 </code></pre></div>
 </details>
-<p><strong>2.</strong> Lisa DNS-kirje <code>nas.ad.lab.example → 10.0.83.53</code>.</p>
+<p><strong>2.</strong> Lisa DNS-kirje <code>nas.ad.lab.example → 10.0.83.153</code>.</p>
 <details class="success">
 <summary>Lahendus</summary>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>nas<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.53<span class="w"> </span>-U<span class="w"> </span>administrator
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>nas<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.153<span class="w"> </span>-U<span class="w"> </span>administrator
 </code></pre></div>
 </details>
 <p><strong>3.</strong> Kirjuta käsk, mis näitab, kas DNS-is on Kerberose SRV-kirje.</p>
@@ -5318,6 +5346,8 @@ sudo<span class="w"> </span>samba-tool<span class="w"> </span>group<span class="
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

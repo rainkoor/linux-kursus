@@ -5116,6 +5116,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5594,7 +5622,7 @@
 </tr>
 <tr>
 <td>Paigaldusviis</td>
-<td><em>Distribution Sets</em> (traditsiooniline; FreeBSD 15 pakub ka baassüsteemi pakettidena - vt 25.5)</td>
+<td><em>Distribution Sets</em> (traditsiooniline; FreeBSD 15 pakub ka baassüsteemi pakettidena - vt 30.5)</td>
 </tr>
 <tr>
 <td>Komponendid</td>
@@ -5791,7 +5819,7 @@ host<span class="w"> </span>www.freebsd.org<span class="w">             </span><
 </code></pre></div>
 <p>Staatiline aadress kirjutatakse <code>/etc/rc.conf</code>-i:</p>
 <div class="highlight"><pre><span></span><code>sysrc<span class="w"> </span><span class="nv">hostname</span><span class="o">=</span><span class="s2">"fbsd.lab.example"</span>
-sysrc<span class="w"> </span><span class="nv">ifconfig_vtnet0</span><span class="o">=</span><span class="s2">"inet 10.0.83.66/24"</span>
+sysrc<span class="w"> </span><span class="nv">ifconfig_vtnet0</span><span class="o">=</span><span class="s2">"inet 10.0.83.166/24"</span>
 sysrc<span class="w"> </span><span class="nv">defaultrouter</span><span class="o">=</span><span class="s2">"10.0.83.1"</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"nameserver 10.0.83.1"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/resolv.conf
 service<span class="w"> </span>netif<span class="w"> </span>restart<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>service<span class="w"> </span>routing<span class="w"> </span>restart
@@ -5845,7 +5873,7 @@ service<span class="w"> </span>pf<span class="w"> </span>start<span class="w">  
 pfctl<span class="w"> </span>-sr<span class="w">                        </span><span class="c1"># aktiivsed reeglid</span>
 pfctl<span class="w"> </span>-si<span class="w">                        </span><span class="c1"># statistika</span>
 pfctl<span class="w"> </span>-t<span class="w"> </span>ryndajad<span class="w"> </span>-T<span class="w"> </span>show<span class="w">        </span><span class="c1"># tabeli sisu</span>
-pfctl<span class="w"> </span>-t<span class="w"> </span>ryndajad<span class="w"> </span>-T<span class="w"> </span>delete<span class="w"> </span><span class="m">10</span>.0.83.99
+pfctl<span class="w"> </span>-t<span class="w"> </span>ryndajad<span class="w"> </span>-T<span class="w"> </span>delete<span class="w"> </span><span class="m">10</span>.0.83.199
 pfctl<span class="w"> </span>-f<span class="w"> </span>/etc/pf.conf<span class="w">            </span><span class="c1"># laadi muudatused uuesti</span>
 </code></pre></div>
 <div class="admonition warning">
@@ -5857,8 +5885,8 @@ pfctl<span class="w"> </span>-f<span class="w"> </span>/etc/pf.conf<span class="
 <pre class="mermaid"><code>flowchart TB
     subgraph H ["FreeBSD host - üks kernel"]
         direction LR
-        J1["jail www&lt;br&gt;10.0.83.67&lt;br&gt;nginx"]
-        J2["jail db&lt;br&gt;10.0.83.68&lt;br&gt;PostgreSQL"]
+        J1["jail www&lt;br&gt;10.0.83.167&lt;br&gt;nginx"]
+        J2["jail db&lt;br&gt;10.0.83.168&lt;br&gt;PostgreSQL"]
         HS["host ise&lt;br&gt;sshd, pf"]
         J1 ~~~ J2 ~~~ HS
     end
@@ -5905,7 +5933,7 @@ cp<span class="w"> </span>/etc/resolv.conf<span class="w"> </span>/etc/localtime
 www {
     host.hostname = "www.lab.example";
     path = "/usr/local/jails/$name";
-    ip4.addr = "vtnet0|10.0.83.67/24";
+    ip4.addr = "vtnet0|10.0.83.167/24";
     mount.devfs;
     exec.clean;
     exec.start = "/bin/sh /etc/rc";
@@ -6168,6 +6196,8 @@ service<span class="w"> </span>-j<span class="w"> </span>www<span class="w"> </s
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

@@ -5094,6 +5094,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5453,7 +5481,7 @@
 <h2 id="131-ipv6">13.1 IPv6<a class="headerlink" href="#131-ipv6" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">Lühidalt</p>
-<p>IPv6 aadress on 128-bitine ja kirjutatakse kuueteistkümnendsüsteemis (<code>fd83::54/64</code>). Masin saab aadressi tavaliselt ise (SLAAC), serverile antakse staatiline. Käsud on samad mis IPv4-l, võtmega <code>-6</code>.</p>
+<p>IPv6 aadress on 128-bitine ja kirjutatakse kuueteistkümnendsüsteemis (<code>fd83::154/64</code>). Masin saab aadressi tavaliselt ise (SLAAC), serverile antakse staatiline. Käsud on samad mis IPv4-l, võtmega <code>-6</code>.</p>
 </div>
 <p>IPv4-aadresse on umbes 4 miljardit ja need on ammu otsas - internet on seni toiminud NAT-i abil. <strong>IPv6</strong> aadressid on <strong>128-bitised</strong> (IPv4 on 32-bitine), seega jätkub neid igale seadmele. Suur osa mobiilivõrkudest ja koduühendustest kasutab juba IPv6-t ning serveriadministraator kohtab seda kindlasti.</p>
 <h3 id="aadressi-kirjutamine">Aadressi kirjutamine<a class="headerlink" href="#aadressi-kirjutamine" title="Permanent link">&para;</a></h3>
@@ -5546,22 +5574,22 @@ ping<span class="w"> </span>-c2<span class="w"> </span>fe80::be24:11ff:fe2a:1b3c
 ss<span class="w"> </span>-6<span class="w"> </span>-tlpn<span class="w">                            </span><span class="c1"># IPv6 kuulavad pordid</span>
 dig<span class="w"> </span>AAAA<span class="w"> </span>debian.org<span class="w"> </span>+short
 curl<span class="w"> </span>-6<span class="w"> </span>https://ifconfig.co<span class="w">            </span><span class="c1"># mis on minu avalik IPv6-aadress?</span>
-ssh<span class="w"> </span>kasutaja@fd83::52<span class="w">                  </span><span class="c1"># ssh kasutaja@[fd83::52]:2222 pordiga; scp/rsync vajavad nurksulgusid</span>
+ssh<span class="w"> </span>kasutaja@fd83::152<span class="w">                  </span><span class="c1"># ssh kasutaja@[fd83::152]:2222 pordiga; scp/rsync vajavad nurksulgusid</span>
 </code></pre></div>
 <p>Link-local aadressi juures on vaja liidese nime (<code>%ens18</code>), sest sama <code>fe80::/64</code> võrk on olemas igal liidesel ja kernel ei tea muidu, kust pakett saata.</p>
 <h3 id="staatiline-ipv6-kolmes-distros">Staatiline IPv6 kolmes distros<a class="headerlink" href="#staatiline-ipv6-kolmes-distros" title="Permanent link">&para;</a></h3>
-<p>Kursuse laborivõrgus kasutame ULA-võrku <code>fd83::/64</code> (masina number nagu IPv4-s, nt <code>alma</code> → <code>fd83::55</code>).</p>
+<p>Kursuse laborivõrgus kasutame ULA-võrku <code>fd83::/64</code> (masina number nagu IPv4-s, nt <code>alma</code> → <code>fd83::155</code>).</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: Netplani fail, nt /etc/netplan/50-cloud-init.yaml (liidese ens18 alla)</span>
 <span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.54/24</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fd83::54/64</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.154/24</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fd83::154/64</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code># Debian: /etc/network/interfaces (lisa IPv4 ploki järele)
 iface ens18 inet6 static
-    address fd83::52/64
+    address fd83::152/64
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># AlmaLinux: NetworkManager</span>
-sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span>ipv6.method<span class="w"> </span>manual<span class="w"> </span>ipv6.addresses<span class="w"> </span>fd83::55/64
+sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span>ipv6.method<span class="w"> </span>manual<span class="w"> </span>ipv6.addresses<span class="w"> </span>fd83::155/64
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>up<span class="w"> </span>ens18
 </code></pre></div>
 <p>Kui võrgus on IPv6-ruuter, lisatakse ka <code>gateway6</code> (Netplan <code>routes: - to: default via: …</code>, nmcli <code>ipv6.gateway</code>). Laboris piisab samas võrgulõigus suhtlemisest.</p>
@@ -5584,7 +5612,7 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <pre class="mermaid"><code>flowchart TB
     NET["füüsiline võrk"] --- ENS["ens18&lt;br&gt;füüsiline kaart"]
     subgraph H["Host"]
-        ENS --- BR["br0 / vmbr0&lt;br&gt;sild, 10.0.83.10"]
+        ENS --- BR["br0 / vmbr0&lt;br&gt;sild, 10.0.83.110"]
         BR --- T1["tap: VM 101"]
         BR --- T2["tap: VM 102"]
         BR --- V1["veth: konteiner"]
@@ -5597,7 +5625,7 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <p>Kui füüsiline liides lisatakse silda, liigub tema IP-aadress <strong>sillale</strong> - liides ise jääb ilma aadressita.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># AlmaLinux: NetworkManager</span>
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>bridge<span class="w"> </span>ifname<span class="w"> </span>br0<span class="w"> </span>con-name<span class="w"> </span>br0<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.55/24<span class="w"> </span>ipv4.gateway<span class="w"> </span><span class="m">10</span>.0.83.1<span class="w"> </span>ipv4.dns<span class="w"> </span><span class="m">10</span>.0.83.1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.155/24<span class="w"> </span>ipv4.gateway<span class="w"> </span><span class="m">10</span>.0.83.1<span class="w"> </span>ipv4.dns<span class="w"> </span><span class="m">10</span>.0.83.1<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>bridge.stp<span class="w"> </span>no
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>bridge-slave<span class="w"> </span>ifname<span class="w"> </span>ens19<span class="w"> </span>master<span class="w"> </span>br0
 </code></pre></div>
@@ -5668,19 +5696,19 @@ ip<span class="w"> </span>-d<span class="w"> </span>link<span class="w"> </span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># AlmaLinux: püsivalt</span>
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>vlan<span class="w"> </span>con-name<span class="w"> </span>vlan20<span class="w"> </span>dev<span class="w"> </span>ens19<span class="w"> </span>id<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.20.0.55/24
+<span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.20.0.155/24
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu: Netplan</span>
 <span class="w">  </span><span class="nt">vlans</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">vlan20</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
 <span class="w">      </span><span class="nt">link</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ens19</span>
-<span class="w">      </span><span class="nt">addresses</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.20.0.54/24</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">addresses</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.20.0.154/24</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code># Debian: /etc/network/interfaces (pakett vlan)
 auto ens19.20
 iface ens19.20 inet static
-    address 10.20.0.52/24
+    address 10.20.0.152/24
 </code></pre></div>
 <p>VLAN-e kasutatakse koolides ja ettevõtetes võrkude eraldamiseks (õpetajad, õpilased, serverid, külalised, IP-telefonid). VLAN-ide vahel liikumine käib alati läbi ruuteri või tulemüüri (nt OPNsense, moodul 22), kus saab liiklust piirata.</p>
 <div class="admonition note">
@@ -5728,7 +5756,7 @@ iface ens19.20 inet static
 <div class="highlight"><pre><span></span><code><span class="c1"># AlmaLinux: NetworkManager</span>
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>bond<span class="w"> </span>con-name<span class="w"> </span>bond0<span class="w"> </span>ifname<span class="w"> </span>bond0<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>bond.options<span class="w"> </span><span class="s2">"mode=active-backup,miimon=100"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.30.0.55/24
+<span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.30.0.155/24
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>ethernet<span class="w"> </span>ifname<span class="w"> </span>ens19<span class="w"> </span>master<span class="w"> </span>bond0
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>add<span class="w"> </span><span class="nb">type</span><span class="w"> </span>ethernet<span class="w"> </span>ifname<span class="w"> </span>ens20<span class="w"> </span>master<span class="w"> </span>bond0
 </code></pre></div>
@@ -5741,7 +5769,7 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <span class="w">  </span><span class="nt">bonds</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">bond0</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ens19</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">ens20</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">addresses</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.30.0.54/24</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">addresses</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.30.0.154/24</span><span class="p p-Indicator">]</span>
 <span class="w">      </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">active-backup</span>
 <span class="w">        </span><span class="nt">mii-monitor-interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
@@ -5749,7 +5777,7 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <div class="highlight"><pre><span></span><code># Debian: /etc/network/interfaces (pakett ifenslave)
 auto bond0
 iface bond0 inet static
-    address 10.30.0.52/24
+    address 10.30.0.152/24
     bond-slaves ens19 ens20
     bond-mode active-backup
     bond-miimon 100
@@ -5893,7 +5921,7 @@ ping<span class="w"> </span><span class="m">10</span>.99.0.1
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tcpdump<span class="w">              </span><span class="c1"># AlmaLinux: sudo dnf install tcpdump</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-n<span class="w"> </span>icmp<span class="w">         </span><span class="c1"># ainult ping-paketid, ilma nimelahenduseta (-n)</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-n<span class="w"> </span>port<span class="w"> </span><span class="m">53</span><span class="w">      </span><span class="c1"># DNS-päringud</span>
-sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>any<span class="w"> </span>-n<span class="w"> </span>host<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>and<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>
+sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>any<span class="w"> </span>-n<span class="w"> </span>host<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>and<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens19<span class="w"> </span>-n<span class="w"> </span>-e<span class="w"> </span>vlan<span class="w">      </span><span class="c1"># VLAN-märgised (-e näitab Etherneti päist)</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-n<span class="w"> </span>icmp6<span class="w">        </span><span class="c1"># IPv6 naabrite leidmine ja ping</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-w<span class="w"> </span>puuk.pcap<span class="w">    </span><span class="c1"># salvesta faili, ava hiljem Wiresharkis</span>
@@ -6173,6 +6201,8 @@ sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

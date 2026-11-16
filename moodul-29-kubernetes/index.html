@@ -5261,6 +5261,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6029,17 +6057,17 @@
 <tbody>
 <tr>
 <td><code>k3s1</code></td>
-<td><code>10.0.83.61</code></td>
+<td><code>10.0.83.161</code></td>
 <td>server (juhtkiht + töökoormus)</td>
 </tr>
 <tr>
 <td><code>k3s2</code></td>
-<td><code>10.0.83.62</code></td>
+<td><code>10.0.83.162</code></td>
 <td>agent (töösõlm)</td>
 </tr>
 <tr>
 <td><code>k3s3</code></td>
-<td><code>10.0.83.63</code></td>
+<td><code>10.0.83.163</code></td>
 <td>agent (töösõlm)</td>
 </tr>
 </tbody>
@@ -6047,7 +6075,7 @@
 <h3 id="server">Server<a class="headerlink" href="#server" title="Permanent link">&para;</a></h3>
 <p>Seadistus kirjutatakse enne paigaldust faili <code>/etc/rancher/k3s/config.yaml</code> (iga võti vastab käsurea võtmele <code>--node-ip</code> jne):</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/rancher/k3s/config.yaml (k3s1)</span>
-<span class="nt">node-ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.61</span>
+<span class="nt">node-ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.161</span>
 <span class="nt">tls-san</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k3s1.lab.example</span>
 <span class="nt">write-kubeconfig-mode</span><span class="p">:</span><span class="w"> </span><span class="s">"0600"</span>
@@ -6077,7 +6105,7 @@ kubectl<span class="w"> </span>get<span class="w"> </span>nodes
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># k3s2 ja k3s3</span>
 curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span>-o<span class="w"> </span>k3s-install.sh
-sudo<span class="w"> </span><span class="nv">K3S_URL</span><span class="o">=</span>https://10.0.83.61:6443<span class="w"> </span><span class="nv">K3S_TOKEN</span><span class="o">=</span><span class="s1">'&lt;token&gt;'</span><span class="w"> </span><span class="nv">INSTALL_K3S_CHANNEL</span><span class="o">=</span>stable<span class="w"> </span>sh<span class="w"> </span>k3s-install.sh
+sudo<span class="w"> </span><span class="nv">K3S_URL</span><span class="o">=</span>https://10.0.83.161:6443<span class="w"> </span><span class="nv">K3S_TOKEN</span><span class="o">=</span><span class="s1">'&lt;token&gt;'</span><span class="w"> </span><span class="nv">INSTALL_K3S_CHANNEL</span><span class="o">=</span>stable<span class="w"> </span>sh<span class="w"> </span>k3s-install.sh
 systemctl<span class="w"> </span>status<span class="w"> </span>k3s-agent
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide<span class="w">        </span><span class="c1"># k3s1-s: kolm sõlme olekus Ready</span>
@@ -6548,12 +6576,12 @@ kubectl<span class="w"> </span>uncordon<span class="w"> </span>k3s2
 <div class="highlight"><pre><span></span><code><span class="c1"># esimene server: /etc/rancher/k3s/config.yaml</span>
 <span class="nt">cluster-init</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;ühine-salajane-token&gt;"</span>
-<span class="nt">tls-san</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">k3s.lab.example</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0.83.64</span><span class="p p-Indicator">]</span>
+<span class="nt">tls-san</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">k3s.lab.example</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0.83.164</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># teine ja kolmas server</span>
-<span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://10.0.83.64:6443</span><span class="w">      </span><span class="c1"># virtuaalne IP (keepalived) või DNS-nimi</span>
+<span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://10.0.83.164:6443</span><span class="w">      </span><span class="c1"># virtuaalne IP (keepalived) või DNS-nimi</span>
 <span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;ühine-salajane-token&gt;"</span>
-<span class="nt">tls-san</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">k3s.lab.example</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0.83.64</span><span class="p p-Indicator">]</span>
+<span class="nt">tls-san</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">k3s.lab.example</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0.83.164</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>Agendid ühendatakse samuti <strong>virtuaalse IP</strong> või DNS-nime kaudu, mitte ühe serveri aadressiga. Kolmest serverist võib üks rikki minna; kahe rikke korral peatub klastri juhtimine.</p>
 <h3 id="seire">Seire<a class="headerlink" href="#seire" title="Permanent link">&para;</a></h3>
@@ -6765,6 +6793,8 @@ kubectl<span class="w"> </span>uncordon<span class="w"> </span>k3s2
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

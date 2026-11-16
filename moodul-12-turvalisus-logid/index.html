@@ -5328,6 +5328,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6687,10 +6715,10 @@ sudo<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"
 <p>Kõige lihtsam on kasutada veebiliidese nuppu <em>Deploy new agent</em>: vali operatsioonisüsteem ja arhitektuur, sisesta serveri aadress ning liides genereerib käsud. Need näevad välja umbes nii:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Debian / Ubuntu</span>
 wget<span class="w"> </span>https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_&lt;versioon&gt;_amd64.deb
-sudo<span class="w"> </span><span class="nv">WAZUH_MANAGER</span><span class="o">=</span><span class="s1">'10.0.83.54'</span><span class="w"> </span><span class="nv">WAZUH_AGENT_NAME</span><span class="o">=</span><span class="s1">'debian1'</span><span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>./wazuh-agent_&lt;versioon&gt;_amd64.deb
+sudo<span class="w"> </span><span class="nv">WAZUH_MANAGER</span><span class="o">=</span><span class="s1">'10.0.83.154'</span><span class="w"> </span><span class="nv">WAZUH_AGENT_NAME</span><span class="o">=</span><span class="s1">'debian1'</span><span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>./wazuh-agent_&lt;versioon&gt;_amd64.deb
 
 <span class="c1"># AlmaLinux</span>
-sudo<span class="w"> </span><span class="nv">WAZUH_MANAGER</span><span class="o">=</span><span class="s1">'10.0.83.54'</span><span class="w"> </span><span class="nv">WAZUH_AGENT_NAME</span><span class="o">=</span><span class="s1">'alma'</span><span class="w"> </span>rpm<span class="w"> </span>-ihv<span class="w"> </span>https://packages.wazuh.com/4.x/yum/wazuh-agent-&lt;versioon&gt;.x86_64.rpm
+sudo<span class="w"> </span><span class="nv">WAZUH_MANAGER</span><span class="o">=</span><span class="s1">'10.0.83.154'</span><span class="w"> </span><span class="nv">WAZUH_AGENT_NAME</span><span class="o">=</span><span class="s1">'alma'</span><span class="w"> </span>rpm<span class="w"> </span>-ihv<span class="w"> </span>https://packages.wazuh.com/4.x/yum/wazuh-agent-&lt;versioon&gt;.x86_64.rpm
 
 sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>wazuh-agent
@@ -6698,6 +6726,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 <p>Agent peab olema <strong>sama või vanem versioon</strong> kui server. Agent ühendub serveriga pordil <strong>1514/tcp</strong> (sündmused) ja registreerub pordil <strong>1515/tcp</strong> - need peavad olema serveris kättesaadavad. (Docker avaldab konteineri pordid ise iptables/nftables reeglitega, mis ei läbi <code>ufw</code>-d - piira ligipääsu vajadusel OPNsense'is või Dockeri reeglitega.) Windowsi agent paigaldatakse MSI-paketiga samast veebiliidese viisardist.</p>
 <p>Agendi seadistus on failis <code>/var/ossec/etc/ossec.conf</code>, logi <code>/var/ossec/logs/ossec.log</code>.</p>
 <h3 id="automaatne-reageerimine-active-response">Automaatne reageerimine (active response)<a class="headerlink" href="#automaatne-reageerimine-active-response" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Lisaväljakutse</p>
+<p>Automaatne reageerimine on Wazuhi valikulise osa edasijõudnute teema. Eksamil seda ei nõuta.</p>
+</div>
 <p>Wazuh võib sündmusele ka ise reageerida - näiteks blokeerida SSH-d murda prooviva aadressi kõigis agentides, sarnaselt fail2ban-iga, kuid tsentraalselt. Reageerimine seadistatakse <strong>serveri</strong> seadistusfailis (Dockeri paigalduses <code>single-node/config/wazuh_cluster/wazuh_manager.conf</code>), <code>&lt;ossec_config&gt;</code> ploki sisse:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;active-response&gt;</span>
 <span class="w">  </span><span class="nt">&lt;command&gt;</span>firewall-drop<span class="nt">&lt;/command&gt;</span><span class="w">   </span><span class="cm">&lt;!-- valmis käsk: lisab tulemüürireegli --&gt;</span>
@@ -7004,6 +7036,8 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

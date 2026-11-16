@@ -5445,6 +5445,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6154,6 +6182,10 @@
 <p class="admonition-title">Kuidas seda lehte lugeda</p>
 <p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Märkus</p>
+<p><strong>HKHK õppijale: osa sellest on juba tehtud.</strong> Kohe pärast kursuse sissejuhatust ja esimesi käske näitas õpetaja staatilise IP seadistamise ette ning seadistasite juhendi järgi kaasa kolm esimest masinat (Debian, Ubuntu, AlmaLinux). See oli vajalik, sest laborivõrgus pole alguses DHCP-serverit ja ilma staatilise aadressita poleks masinatel võrku olnud. Esimesel korral oli eesmärk ühenduvus tööle saada; nüüd õpime süvitsi, mida iga seadistusrida tähendab, kuidas võrk Linuxis töötab ja kuidas vigu leida. Kiirjuhendid leiad punktist 7.2: <a href="#debian-staatiline-ip">Debian</a> · <a href="#ubuntu-staatiline-ip">Ubuntu</a> · <a href="#almalinux-networkmanager">AlmaLinux</a> · <a href="#kontrolli-tulemust">Kontrolli tulemust</a>. Iseõppija, kelle masinad said aadressi DHCP-ga, seadistab staatilise aadressi siin esimest korda.</p>
+</div>
 <hr />
 <h2 id="71-võrguliidesed-ja-aadressid">7.1 Võrguliidesed ja aadressid<a class="headerlink" href="#71-võrguliidesed-ja-aadressid" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
@@ -6169,7 +6201,7 @@ ip<span class="w"> </span>neigh<span class="w">                     </span><span
 </code></pre></div>
 <p><code>ip -br a</code> väljund:</p>
 <div class="highlight"><pre><span></span><code>lo               UNKNOWN        127.0.0.1/8 ::1/128
-ens18            UP             10.0.83.54/24 fe80::be24:11ff:fe2a:1b3c/64
+ens18            UP             10.0.83.154/24 fe80::be24:11ff:fe2a:1b3c/64
 </code></pre></div>
 <table>
 <thead>
@@ -6192,7 +6224,7 @@ ens18            UP             10.0.83.54/24 fe80::be24:11ff:fe2a:1b3c/64
 <td>Liides on aktiivne</td>
 </tr>
 <tr>
-<td><code>10.0.83.54/24</code></td>
+<td><code>10.0.83.154/24</code></td>
 <td>IPv4-aadress ja võrgumask (<code>/24</code> = <code>255.255.255.0</code>)</td>
 </tr>
 <tr>
@@ -6204,8 +6236,8 @@ ens18            UP             10.0.83.54/24 fe80::be24:11ff:fe2a:1b3c/64
 <h3 id="marsruudid">Marsruudid<a class="headerlink" href="#marsruudid" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>ip<span class="w"> </span>route
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>default via 10.0.83.1 dev ens18 proto dhcp src 10.0.83.54 metric 100
-10.0.83.0/24 dev ens18 proto kernel scope link src 10.0.83.54
+<div class="highlight"><pre><span></span><code>default via 10.0.83.1 dev ens18 proto dhcp src 10.0.83.154 metric 100
+10.0.83.0/24 dev ens18 proto kernel scope link src 10.0.83.154
 </code></pre></div>
 <ul>
 <li><code>default via 10.0.83.1</code> - <strong>vaikelüüs</strong>: kõik paketid, mis ei lähe kohalikku võrku, saadetakse sellele ruuterile;</li>
@@ -6213,8 +6245,8 @@ ens18            UP             10.0.83.54/24 fe80::be24:11ff:fe2a:1b3c/64
 </ul>
 <h3 id="ajutised-muudatused">Ajutised muudatused<a class="headerlink" href="#ajutised-muudatused" title="Permanent link">&para;</a></h3>
 <p><code>ip</code> käsuga tehtud muudatused kehtivad <strong>ainult taaskäivituseni</strong>. Need sobivad testimiseks:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ip<span class="w"> </span>address<span class="w"> </span>add<span class="w"> </span><span class="m">10</span>.0.83.60/24<span class="w"> </span>dev<span class="w"> </span>ens18<span class="w">    </span><span class="c1"># lisa aadress</span>
-sudo<span class="w"> </span>ip<span class="w"> </span>address<span class="w"> </span>del<span class="w"> </span><span class="m">10</span>.0.83.60/24<span class="w"> </span>dev<span class="w"> </span>ens18<span class="w">    </span><span class="c1"># eemalda aadress</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ip<span class="w"> </span>address<span class="w"> </span>add<span class="w"> </span><span class="m">10</span>.0.83.160/24<span class="w"> </span>dev<span class="w"> </span>ens18<span class="w">    </span><span class="c1"># lisa aadress</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>address<span class="w"> </span>del<span class="w"> </span><span class="m">10</span>.0.83.160/24<span class="w"> </span>dev<span class="w"> </span>ens18<span class="w">    </span><span class="c1"># eemalda aadress</span>
 sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>ens18<span class="w"> </span>down<span class="w">                       </span><span class="c1"># lülita liides välja (ettevaatust SSH kaudu!)</span>
 sudo<span class="w"> </span>ip<span class="w"> </span>route<span class="w"> </span>add<span class="w"> </span><span class="m">10</span>.0.0.0/8<span class="w"> </span>via<span class="w"> </span><span class="m">10</span>.0.83.254<span class="w">   </span><span class="c1"># lisa marsruut</span>
 </code></pre></div>
@@ -6235,29 +6267,29 @@ sudo<span class="w"> </span>ip<span class="w"> </span>route<span class="w"> </sp
 <tbody>
 <tr>
 <td><code>debian1</code></td>
-<td><code>10.0.83.52/24</code></td>
+<td><code>10.0.83.152/24</code></td>
 </tr>
 <tr>
 <td><code>debian2</code></td>
-<td><code>10.0.83.53/24</code></td>
+<td><code>10.0.83.153/24</code></td>
 </tr>
 <tr>
 <td><code>ubuntusrv</code></td>
-<td><code>10.0.83.54/24</code></td>
+<td><code>10.0.83.154/24</code></td>
 </tr>
 <tr>
 <td><code>alma</code></td>
-<td><code>10.0.83.55/24</code></td>
+<td><code>10.0.83.155/24</code></td>
 </tr>
 </tbody>
 </table>
-<p>Kõik masinad on samas alamvõrgus <code>10.0.83.0/24</code> ja kasutavad sama vaikelüüsi <code>10.0.83.1</code>, kuid aadressi viimane osa on igal masinal erinev. Selle mooduli näidetes kasutame samu aadresse: Ubuntu näited <code>.54</code>, Debiani näited <code>.52</code> ja AlmaLinuxi näited <code>.55</code>.</p>
+<p>Kõik masinad on samas alamvõrgus <code>10.0.83.0/24</code> ja kasutavad sama vaikelüüsi <code>10.0.83.1</code>, kuid aadressi viimane osa on igal masinal erinev. Selle mooduli näidetes kasutame samu aadresse: Ubuntu näited <code>.154</code>, Debiani näited <code>.152</code> ja AlmaLinuxi näited <code>.155</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Oluline</p>
 <p><strong>Enne staatilise aadressi kasutuselevõttu kontrolli, et see on vaba.</strong> Kooli laboris annab aadressi õpetaja; ära võta suvalist aadressi. Kontrolli teisest masinast samas võrgus:</p>
-<div class="highlight"><pre><span></span><code>ping<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>.0.83.60<span class="w">                       </span><span class="c1"># vastus = aadress on juba kasutusel</span>
-ip<span class="w"> </span>neigh<span class="w"> </span>show<span class="w"> </span><span class="m">10</span>.0.83.60<span class="w">                  </span><span class="c1"># kas aadressil on MAC-aadress (naabertabelis)?</span>
-sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>ens18<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>.0.83.60<span class="w">    </span><span class="c1"># duplikaadi tuvastus (pakett iputils-arping)</span>
+<div class="highlight"><pre><span></span><code>ping<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>.0.83.160<span class="w">                       </span><span class="c1"># vastus = aadress on juba kasutusel</span>
+ip<span class="w"> </span>neigh<span class="w"> </span>show<span class="w"> </span><span class="m">10</span>.0.83.160<span class="w">                  </span><span class="c1"># kas aadressil on MAC-aadress (naabertabelis)?</span>
+sudo<span class="w"> </span>arping<span class="w"> </span>-D<span class="w"> </span>-I<span class="w"> </span>ens18<span class="w"> </span>-c2<span class="w"> </span><span class="m">10</span>.0.83.160<span class="w">    </span><span class="c1"># duplikaadi tuvastus (pakett iputils-arping)</span>
 </code></pre></div>
 <p>Ka <code>ping</code>-ile mittevastav aadress võib olla kasutusel (tulemüür, väljalülitatud masin), seega kontrolli kindlasti ka aadressiplaani.</p>
 </div>
@@ -6301,7 +6333,7 @@ sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span
 </tr>
 </tbody>
 </table>
-<p>Näidetes on igal masinal oma aadress (punkt 7.1): Ubuntu (<code>ubuntusrv</code>) <code>10.0.83.54/24</code>, Debian (<code>debian1</code>) <code>10.0.83.52/24</code> ja AlmaLinux (<code>alma</code>) <code>10.0.83.55/24</code>. Vaikelüüs ja DNS-server on <code>10.0.83.1</code>, domeen <code>lab.example</code>. <strong>Kui kopeerid näite, kirjuta sinna oma masina aadress ja liidese nimi.</strong></p>
+<p>Näidetes on igal masinal oma aadress (punkt 7.1): Ubuntu (<code>ubuntusrv</code>) <code>10.0.83.154/24</code>, Debian (<code>debian1</code>) <code>10.0.83.152/24</code> ja AlmaLinux (<code>alma</code>) <code>10.0.83.155/24</code>. Vaikelüüs ja DNS-server on <code>10.0.83.1</code>, domeen <code>lab.example</code>. <strong>Kui kopeerid näite, kirjuta sinna oma masina aadress ja liidese nimi.</strong></p>
 <p><strong>Kiirviited:</strong></p>
 <table>
 <thead>
@@ -6373,7 +6405,7 @@ sudo<span class="w"> </span>cat<span class="w"> </span>/etc/netplan/50-cloud-ini
 <span class="w">    </span><span class="nt">ens18</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.54/24</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.154/24</span>
 <span class="w">      </span><span class="nt">routes</span><span class="p">:</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
 <span class="w">          </span><span class="nt">via</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.1</span>
@@ -6427,10 +6459,10 @@ iface lo inet loopback
 
 auto ens18
 iface ens18 inet static
-    address 10.0.83.52/24
+    address 10.0.83.152/24
     gateway 10.0.83.1
 </code></pre></div>
-<p>Maski võib kirjutada ka eraldi reale: <code>address 10.0.83.52</code> ja <code>netmask 255.255.255.0</code>.</p>
+<p>Maski võib kirjutada ka eraldi reale: <code>address 10.0.83.152</code> ja <code>netmask 255.255.255.0</code>.</p>
 </li>
 <li>
 <p>Kirjuta DNS-serverid faili <code>/etc/resolv.conf</code> (<code>sudo nano /etc/resolv.conf</code>):</p>
@@ -6466,7 +6498,7 @@ nmcli<span class="w"> </span>connection<span class="w"> </span>show<span class="
 <p>Muuda ühenduse seaded (kõik ühe käsuga):</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.method<span class="w"> </span>manual<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.55/24<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ipv4.addresses<span class="w"> </span><span class="m">10</span>.0.83.155/24<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.gateway<span class="w"> </span><span class="m">10</span>.0.83.1<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.dns<span class="w"> </span><span class="s2">"10.0.83.1 1.1.1.1"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ipv4.dns-search<span class="w"> </span>lab.example
@@ -6491,7 +6523,7 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <ol>
 <li><code>sudo nmtui</code> → <strong>Edit a connection</strong> → vali ühendus (nt <code>ens18</code>) → <strong>Edit</strong>.</li>
 <li><strong>IPv4 CONFIGURATION</strong>: muuda <code>&lt;Automatic&gt;</code> → <code>&lt;Manual&gt;</code> ja vali <code>&lt;Show&gt;</code>.</li>
-<li>Täida väljad: <strong>Addresses</strong> <code>10.0.83.55/24</code>, <strong>Gateway</strong> <code>10.0.83.1</code>, <strong>DNS servers</strong> <code>10.0.83.1</code>, <strong>Search domains</strong> <code>lab.example</code>. Liigu väljade vahel <strong>Tab</strong>-iga.</li>
+<li>Täida väljad: <strong>Addresses</strong> <code>10.0.83.155/24</code>, <strong>Gateway</strong> <code>10.0.83.1</code>, <strong>DNS servers</strong> <code>10.0.83.1</code>, <strong>Search domains</strong> <code>lab.example</code>. Liigu väljade vahel <strong>Tab</strong>-iga.</li>
 <li><strong>OK</strong> → <strong>Back</strong> → <strong>Activate a connection</strong> → vali ühendus ja tee <strong>Deactivate</strong>, seejärel <strong>Activate</strong>, et muudatus jõustuks.</li>
 <li><strong>Quit</strong> ja kontrolli.</li>
 </ol>
@@ -6550,7 +6582,7 @@ sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="
 <h3 id="etchosts">/etc/hosts<a class="headerlink" href="#etchosts" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>127.0.0.1       localhost
 127.0.1.1       ubuntusrv
-10.0.83.52   debian1 debian1.lab.example
+10.0.83.152   debian1 debian1.lab.example
 </code></pre></div>
 <p>Fail on kasulik väikeses laboris või testimisel. Suuremas võrgus kasutatakse DNS-i.</p>
 <h3 id="etcresolvconf-ja-systemd-resolved">/etc/resolv.conf ja systemd-resolved<a class="headerlink" href="#etcresolvconf-ja-systemd-resolved" title="Permanent link">&para;</a></h3>
@@ -6682,6 +6714,7 @@ tcp   LISTEN 127.0.0.1:3306      0.0.0.0:*         users:(("mariadbd",pid=950,fd
 <p class="admonition-title">Lühidalt</p>
 <p>Otsi viga kihtide kaupa alt üles: liides ja aadress → lüüs (<code>ping</code>) → internet → DNS (<code>dig</code>) → teenus ja port (<code>curl</code>, <code>nc</code>).</p>
 </div>
+<p>See punkt on üldise tõrkeotsingu töövoo (lisa <a href="../lisad/torkeotsing/">tõrkeotsingu töövoog</a>) võrguosa: 3. sammus „vaata olekut“ liigud siin kihtide kaupa alt üles.</p>
 <p>Kui „internet ei tööta“, liigu <strong>altpoolt üles</strong>, kihthaaval. Iga samm kontrollib üht asja:</p>
 <table>
 <thead>
@@ -6740,7 +6773,7 @@ tcp   LISTEN 127.0.0.1:3306      0.0.0.0:*         users:(("mariadbd",pid=950,fd
 <div class="highlight"><pre><span></span><code>tracepath<span class="w"> </span>debian.org<span class="w">             </span><span class="c1"># näita teed sihtkohani (ruuterid vahel)</span>
 mtr<span class="w"> </span>debian.org<span class="w">                   </span><span class="c1"># tracepath + ping reaalajas (pakett mtr)</span>
 curl<span class="w"> </span>-v<span class="w"> </span>http://localhost<span class="w">         </span><span class="c1"># HTTP-päring koos üksikasjadega</span>
-nc<span class="w"> </span>-zv<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span><span class="m">22</span><span class="w">          </span><span class="c1"># kas port on avatud (pakett netcat)</span>
+nc<span class="w"> </span>-zv<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span><span class="m">22</span><span class="w">          </span><span class="c1"># kas port on avatud (pakett netcat)</span>
 sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>port<span class="w"> </span><span class="m">53</span><span class="w">    </span><span class="c1"># vaata võrguliiklust (pakett tcpdump)</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -6776,10 +6809,10 @@ sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </
 </code></pre></div>
 <p>Võtmed salvestatakse failidesse <code>~/.ssh/id_ed25519</code> (privaatne) ja <code>~/.ssh/id_ed25519.pub</code> (avalik). <strong>Määra võtmele parool</strong> (<em>passphrase</em>) - kui keegi su privaatvõtme varastab, ei saa ta seda ilma paroolita kasutada.</p>
 <p><strong>2. Kopeeri avalik võti serverisse:</strong></p>
-<div class="highlight"><pre><span></span><code>ssh-copy-id<span class="w"> </span>mari@10.0.83.54
+<div class="highlight"><pre><span></span><code>ssh-copy-id<span class="w"> </span>mari@10.0.83.154
 </code></pre></div>
 <p>Windowsis käsku <code>ssh-copy-id</code> ei ole. PowerShellis saab sama teha nii:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">type </span><span class="nv">$env:USERPROFILE</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span><span class="p">.</span><span class="n">pub</span> <span class="p">|</span> <span class="n">ssh</span> <span class="n">mari</span><span class="nv">@10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">83</span><span class="p">.</span><span class="n">54</span> <span class="s2">"mkdir -p ~/.ssh &amp;&amp; chmod 700 ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys &amp;&amp; chmod 600 ~/.ssh/authorized_keys"</span>
+<div class="highlight"><pre><span></span><code><span class="nb">type </span><span class="nv">$env:USERPROFILE</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span><span class="p">.</span><span class="n">pub</span> <span class="p">|</span> <span class="n">ssh</span> <span class="n">mari</span><span class="nv">@10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">83</span><span class="p">.</span><span class="n">154</span> <span class="s2">"mkdir -p ~/.ssh &amp;&amp; chmod 700 ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys &amp;&amp; chmod 600 ~/.ssh/authorized_keys"</span>
 </code></pre></div>
 <p>Avalik võti lisatakse serveris faili <code>~/.ssh/authorized_keys</code>.</p>
 <p><strong>3. Ühendu</strong> - nüüd küsitakse privaatvõtme parooli (kui määrasid), mitte serveri kasutaja parooli.</p>
@@ -6796,12 +6829,12 @@ ssh-add<span class="w"> </span>~/.ssh/id_ed25519
 <h3 id="kliendi-seadistusfail-sshconfig">Kliendi seadistusfail ~/.ssh/config<a class="headerlink" href="#kliendi-seadistusfail-sshconfig" title="Permanent link">&para;</a></h3>
 <p>Pikkade käskude asemel saab ühendused kirjeldada failis <code>~/.ssh/config</code>:</p>
 <div class="highlight"><pre><span></span><code>Host ubuntusrv
-    HostName 10.0.83.54
+    HostName 10.0.83.154
     User mari
     IdentityFile ~/.ssh/id_ed25519
 
 Host debian1
-    HostName 10.0.83.52
+    HostName 10.0.83.152
     User mari
     Port 2222
 
@@ -6814,7 +6847,7 @@ Host *.lab.example
 <div class="highlight"><pre><span></span><code>@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
 </code></pre></div>
 <p>See võib tähendada rünnakut (keegi on sinu ja serveri vahel), kuid laboris tähendab see tavaliselt, et virtuaalmasin paigaldati uuesti. Kui oled kindel, et muudatus on oodatud, eemalda vana kirje:</p>
-<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-R<span class="w"> </span><span class="m">10</span>.0.83.54
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-R<span class="w"> </span><span class="m">10</span>.0.83.154
 </code></pre></div>
 <h3 id="failide-kopeerimine-scp-ja-rsync">Failide kopeerimine: scp ja rsync<a class="headerlink" href="#failide-kopeerimine-scp-ja-rsync" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>fail.txt<span class="w"> </span>ubuntusrv:/tmp/<span class="w">                  </span><span class="c1"># kopeeri serverisse</span>
@@ -6842,8 +6875,8 @@ rsync<span class="w"> </span>-avz<span class="w"> </span>ubuntusrv:/var/www/<spa
 <details class="note">
 <summary>Loe lähemalt: Hüppeserver: ProxyJump</summary>
 <p>Sageli ei ole sisevõrgu masinad otse ligipääsetavad, vaid ainult läbi <strong>hüppeserveri</strong> (<em>bastion</em>, <em>jump host</em>). Selle asemel, et logida esmalt hüppeserverisse ja sealt edasi, teeb SSH seda ühe käsuga:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-J<span class="w"> </span>kasutaja@hupe.kool.ee<span class="w"> </span>kasutaja@10.0.83.52
-scp<span class="w"> </span>-J<span class="w"> </span>kasutaja@hupe.kool.ee<span class="w"> </span>fail.txt<span class="w"> </span>kasutaja@10.0.83.52:/tmp/
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-J<span class="w"> </span>kasutaja@hupe.kool.ee<span class="w"> </span>kasutaja@10.0.83.152
+scp<span class="w"> </span>-J<span class="w"> </span>kasutaja@hupe.kool.ee<span class="w"> </span>fail.txt<span class="w"> </span>kasutaja@10.0.83.152:/tmp/
 </code></pre></div>
 <p><code>~/.ssh/config</code>:</p>
 <div class="highlight"><pre><span></span><code>Host hupe
@@ -6855,7 +6888,7 @@ Host labor-*
     User kasutaja
 
 Host labor-debian1
-    HostName 10.0.83.52
+    HostName 10.0.83.152
 </code></pre></div>
 <p>Nüüd <code>ssh labor-debian1</code> ühendub läbi hüppeserveri. Privaatvõti jääb sinu arvutisse - hüppeserver ainult edastab krüpteeritud ühenduse (erinevalt <code>ssh -A</code> agendi edastamisest, mida tasub vältida).</p>
 </details>
@@ -6948,7 +6981,7 @@ sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w"> </spa
 <blockquote>
 <p><strong><code>ChrootDirectory</code> ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.</strong> Muidu keeldub <code>sshd</code> ühendusest (logis <code>bad ownership or modes for chroot directory</code>). Seepärast kirjutab kasutaja alamkataloogi <code>failid</code>, mitte otse chroot-kataloogi.</p>
 </blockquote>
-<p>Kontrolli: <code>sftp partner@ubuntusrv</code> töötab ja <code>ls /</code> näitab ainult kataloogi <code>failid</code>; <code>ssh partner@ubuntusrv</code> aga ei ava käsurida (<em>This service allows sftp connections only</em>). Kui sul on <code>AllowGroups</code>, lisa sinna ka <code>sftp-kasutajad</code>. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga <code>sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot</code>.</p>
+<p>Kontrolli: <code>sftp partner@ubuntusrv</code> töötab ja <code>ls /</code> näitab ainult kataloogi <code>failid</code>; <code>ssh partner@ubuntusrv</code> aga ei ava käsurida (<em>This service allows sftp connections only</em>). Kui sul on <code>AllowGroups</code>, lisa sinna ka <code>sftp-kasutajad</code>. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga <code>sudo sshd -T -C user=partner,host=x,addr=10.0.83.152 | grep -i chroot</code>.</p>
 </details>
 <details class="note">
 <summary>Loe lähemalt: Kaheastmeline autentimine (TOTP)</summary>
@@ -7065,7 +7098,7 @@ ssh<span class="w"> </span>mari@ubuntusrv<span class="w">               </span><
 </tr>
 </tbody>
 </table>
-<p>Kontrolli alati <strong>teisest masinast</strong>, kas port on avatud või suletud: <code>nc -zv 10.0.83.54 80</code>.</p>
+<p>Kontrolli alati <strong>teisest masinast</strong>, kas port on avatud või suletud: <code>nc -zv 10.0.83.154 80</code>.</p>
 <pre class="mermaid"><code>flowchart LR
     P["sissetulev pakett"] --&gt; E{"Kas kuulub juba&lt;br&gt;lubatud ühendusse?"}
     E -- jah --&gt; OK["✅ lubatud"]
@@ -7320,7 +7353,7 @@ chronyc<span class="w"> </span>clients<span class="w">             </span><span 
 <tr>
 <td>Püsiv seadistus</td>
 <td>Netplan, ifupdown, NetworkManager</td>
-<td><code>/etc/rc.conf</code>: <code>ifconfig_vtnet0="inet 10.0.83.66/24"</code>, <code>defaultrouter="10.0.83.1"</code></td>
+<td><code>/etc/rc.conf</code>: <code>ifconfig_vtnet0="inet 10.0.83.166/24"</code>, <code>defaultrouter="10.0.83.1"</code></td>
 </tr>
 <tr>
 <td>DNS</td>
@@ -7515,6 +7548,8 @@ chronyc<span class="w"> </span>clients<span class="w">             </span><span 
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

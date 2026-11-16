@@ -5083,6 +5083,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5495,12 +5523,12 @@ sudo<span class="w"> </span>exportfs<span class="w"> </span>-v<span class="w">  
 </code></pre></div>
 <p><strong>Klient:</strong></p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nfs-common
-showmount<span class="w"> </span>-e<span class="w"> </span><span class="m">10</span>.0.83.52
+showmount<span class="w"> </span>-e<span class="w"> </span><span class="m">10</span>.0.83.152
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/nfs
-sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs<span class="w"> </span><span class="m">10</span>.0.83.52:/srv/nfs/jagatud<span class="w"> </span>/mnt/nfs
+sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs<span class="w"> </span><span class="m">10</span>.0.83.152:/srv/nfs/jagatud<span class="w"> </span>/mnt/nfs
 </code></pre></div>
 <p>Püsivalt (<code>/etc/fstab</code>):</p>
-<div class="highlight"><pre><span></span><code>10.0.83.52:/srv/nfs/jagatud  /mnt/nfs  nfs  defaults,_netdev,nofail  0  0
+<div class="highlight"><pre><span></span><code>10.0.83.152:/srv/nfs/jagatud  /mnt/nfs  nfs  defaults,_netdev,nofail  0  0
 </code></pre></div>
 <p><code>_netdev</code> ütleb, et failisüsteem vajab võrku.</p>
 <div class="admonition note">
@@ -5542,7 +5570,7 @@ sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </sp
 </tr>
 </tbody>
 </table>
-<p>Mitu klienti eri õigustega: <code>/srv/nfs/jagatud  10.0.83.0/24(ro,sync) 10.0.83.53(rw,sync,no_root_squash)</code>. Tühikud on olulised: <code>10.0.83.0/24 (rw)</code> (tühikuga) annaks <code>rw</code> <strong>kõigile</strong>!</p>
+<p>Mitu klienti eri õigustega: <code>/srv/nfs/jagatud  10.0.83.0/24(ro,sync) 10.0.83.153(rw,sync,no_root_squash)</code>. Tühikud on olulised: <code>10.0.83.0/24 (rw)</code> (tühikuga) annaks <code>rw</code> <strong>kõigile</strong>!</p>
 <p><strong>Tulemüür:</strong> NFSv4 vajab ainult porti <strong>2049/tcp</strong> (<code>sudo ufw allow from 10.0.83.0/24 to any port nfs</code>, <code>sudo firewall-cmd --permanent --add-service=nfs</code>). Vana NFSv3 ja <code>showmount</code> kasutavad lisaks <code>rpcbind</code>-i ja muutuvaid porte (<code>--add-service=rpc-bind --add-service=mountd</code>).</p>
 <h2 id="193-autofs-haakimine-vajadusel">19.3 autofs: haakimine vajadusel<a class="headerlink" href="#193-autofs-haakimine-vajadusel" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
@@ -5594,8 +5622,8 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 </code></pre></div>
 <p>Ühendamine:</p>
 <ul>
-<li><strong>Windows:</strong> Exploreris <code>\\10.0.83.52\jagatud</code>;</li>
-<li><strong>Linux:</strong> <code>smbclient //10.0.83.52/jagatud -U mari</code> või haakimine <code>mount -t cifs</code> (pakett <code>cifs-utils</code>).</li>
+<li><strong>Windows:</strong> Exploreris <code>\\10.0.83.152\jagatud</code>;</li>
+<li><strong>Linux:</strong> <code>smbclient //10.0.83.152/jagatud -U mari</code> või haakimine <code>mount -t cifs</code> (pakett <code>cifs-utils</code>).</li>
 </ul>
 <h2 id="195-ühiskausta-õigused-sgid-ja-acl">19.5 Ühiskausta õigused: SGID ja ACL<a class="headerlink" href="#195-ühiskausta-õigused-sgid-ja-acl" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
@@ -5782,7 +5810,7 @@ systemctl<span class="w"> </span>status<span class="w"> </span>cups
 </code></pre></div>
 <p>Veebiliides on aadressil <code>https://server:631</code> (logi sisse <code>lpadmin</code> grupi kasutajana). Sama saab teha käsurealt:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Lisa võrguprinter (tänapäevased printerid töötavad ilma draiverita: -m everywhere)</span>
-sudo<span class="w"> </span>lpadmin<span class="w"> </span>-p<span class="w"> </span>kontor<span class="w"> </span>-E<span class="w"> </span>-v<span class="w"> </span>ipp://10.0.83.200/ipp/print<span class="w"> </span>-m<span class="w"> </span>everywhere<span class="w"> </span>-D<span class="w"> </span><span class="s2">"Kontori printer"</span><span class="w"> </span>-L<span class="w"> </span><span class="s2">"2. korrus"</span>
+sudo<span class="w"> </span>lpadmin<span class="w"> </span>-p<span class="w"> </span>kontor<span class="w"> </span>-E<span class="w"> </span>-v<span class="w"> </span>ipp://10.0.83.120/ipp/print<span class="w"> </span>-m<span class="w"> </span>everywhere<span class="w"> </span>-D<span class="w"> </span><span class="s2">"Kontori printer"</span><span class="w"> </span>-L<span class="w"> </span><span class="s2">"2. korrus"</span>
 sudo<span class="w"> </span>lpadmin<span class="w"> </span>-p<span class="w"> </span>kontor<span class="w"> </span>-o<span class="w"> </span>printer-is-shared<span class="o">=</span><span class="nb">true</span><span class="w">      </span><span class="c1"># jaga võrku</span>
 sudo<span class="w"> </span>lpadmin<span class="w"> </span>-d<span class="w"> </span>kontor<span class="w">                                 </span><span class="c1"># vaikeprinter</span>
 
@@ -6098,6 +6126,8 @@ sudo<span class="w"> </span>-E<span class="w"> </span>restic<span class="w"> </s
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

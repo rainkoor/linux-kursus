@@ -5000,6 +5000,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5278,7 +5306,7 @@
 <p class="admonition-title">Hoiatus</p>
 <p><strong>Tee seda laboritööd ainult oma laborivõrgus!</strong> Kontrolli enne alustamist, et <code>debian1</code> võrguliides on Proxmoxis ühendatud sinu enda silda või VNet-i, mitte kooli võrku. Kui sinu võrgus jagab aadresse juba mõni teine seade (nt valikmooduli 22 OPNsense või koduruuter), lülita selle DHCP-server enne Kea käivitamist välja.</p>
 </div>
-<p>Tähised võrguplaani näite järgi: võrk <code>10.0.83.0/24</code>, vaikelüüs <code>10.0.83.1</code>, <code>debian1</code> <code>10.0.83.52</code>, DHCP vahemik <code>10.0.83.80–99</code>, reserveeringud <code>10.0.83.98</code> ja <code>10.0.83.99</code>. Asenda oma võrguplaani väärtustega.</p>
+<p>Tähised võrguplaani näite järgi: võrk <code>10.0.83.0/24</code>, vaikelüüs <code>10.0.83.1</code>, <code>debian1</code> <code>10.0.83.152</code>, DHCP vahemik <code>10.0.83.180–199</code>, reserveeringud <code>10.0.83.198</code> ja <code>10.0.83.199</code>. Asenda oma võrguplaani väärtustega.</p>
 <hr />
 <h2 id="1-osa-kea-dhcp-server">1. osa. Kea DHCP-server<a class="headerlink" href="#1-osa-kea-dhcp-server" title="Permanent link">&para;</a></h2>
 <p><strong>1.1</strong> Kontrolli <code>debian1</code> võrguseadistust - DHCP-serveril endal peab olema staatiline aadress:</p>
@@ -5303,7 +5331,7 @@ wc<span class="w"> </span>-l<span class="w"> </span>/etc/kea/kea-dhcp4.conf.orig
 <p class="admonition-title">Küsimus K2</p>
 <p>Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?</p>
 </div>
-<p><strong>1.4</strong> Kirjuta fail <code>/etc/kea/kea-dhcp4.conf</code> teooria punkti 18.3 põhjal oma võrguplaani järgi. Reserveeringut veel ära lisa. DNS-serveriks pane oma laboritöö 17 DNS-server (<code>10.0.83.52</code>); kui sul seda ei ole, siis vaikelüüs.</p>
+<p><strong>1.4</strong> Kirjuta fail <code>/etc/kea/kea-dhcp4.conf</code> teooria punkti 18.3 põhjal oma võrguplaani järgi. Reserveeringut veel ära lisa. DNS-serveriks pane oma laboritöö 17 DNS-server (<code>10.0.83.152</code>); kui sul seda ei ole, siis vaikelüüs.</p>
 <p><strong>1.5</strong> Kontrolli süntaksit. Tee meelega viga (kustuta mõni koma) ja kontrolli uuesti. Paranda.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>kea-dhcp4<span class="w"> </span>-t<span class="w"> </span>/etc/kea/kea-dhcp4.conf
 </code></pre></div>
@@ -5343,9 +5371,9 @@ resolvectl<span class="w"> </span>status<span class="w"> </span><span class="p">
 <p class="admonition-title">Küsimus K6</p>
 <p>Millise aadressi sai <code>alma</code>? Mis juhtuks teenustega, mida teised masinad kasutavad <code>alma</code> vana aadressi kaudu? Miks on serveritel staatiline aadress?</p>
 </div>
-<p><strong>2.5</strong> Taasta <code>alma</code> staatiline aadress (<code>10.0.83.55</code>) ja kontrolli ühendust.</p>
+<p><strong>2.5</strong> Taasta <code>alma</code> staatiline aadress (<code>10.0.83.155</code>) ja kontrolli ühendust.</p>
 <h2 id="3-osa-reserveering-ja-valikud">3. osa. Reserveering ja valikud<a class="headerlink" href="#3-osa-reserveering-ja-valikud" title="Permanent link">&para;</a></h2>
-<p><strong>3.1</strong> Lisa Ubuntu kliendile reserveering võrguplaanis olevale aadressile (<code>10.0.83.98</code>) teooria punkti 18.3 juhendi järgi. Kontrolli süntaksit, taaskäivita Kea ja uuenda kliendi renti.</p>
+<p><strong>3.1</strong> Lisa Ubuntu kliendile reserveering võrguplaanis olevale aadressile (<code>10.0.83.198</code>) teooria punkti 18.3 juhendi järgi. Kontrolli süntaksit, taaskäivita Kea ja uuenda kliendi renti.</p>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus K7</p>
 <p>Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?</p>
@@ -5386,7 +5414,7 @@ resolvectl<span class="w"> </span>status<span class="w"> </span><span class="p">
 <ol>
 <li><strong>ISC DHCP võrdlus:</strong> seadista samale võrgule (Kea peatatuna) ISC DHCP teooria punkti 18.5 järgi ja võrdle seadistusfaile ning logisid. Lõpuks eemalda ISC DHCP ja käivita Kea.</li>
 <li><strong>dnsmasq:</strong> proovi eraldi testvõrgus dnsmasq-i DHCP-d (teooria punkt 18.2) ja kontrolli, et DHCP-ga antud nimi lahendub kohe ka DNS-is.</li>
-<li><strong>Windowsi klient:</strong> lisa reserveering Windowsi kliendile (<code>10.0.83.99</code>) ja kontrolli käskudega <code>ipconfig /all</code>, <code>ipconfig /release</code> ja <code>ipconfig /renew</code>.</li>
+<li><strong>Windowsi klient:</strong> lisa reserveering Windowsi kliendile (<code>10.0.83.199</code>) ja kontrolli käskudega <code>ipconfig /all</code>, <code>ipconfig /release</code> ja <code>ipconfig /renew</code>.</li>
 </ol>
 <hr />
 <h2 id="koristamine">Koristamine<a class="headerlink" href="#koristamine" title="Permanent link">&para;</a></h2>
@@ -5513,6 +5541,8 @@ resolvectl<span class="w"> </span>status<span class="w"> </span><span class="p">
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

@@ -5360,6 +5360,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6154,7 +6182,7 @@ kdestroy<span class="w">                             </span><span class="c1"># k
 </tr>
 <tr>
 <td>DC IP</td>
-<td><code>10.0.83.56</code> (staatiline)</td>
+<td><code>10.0.83.156</code> (staatiline)</td>
 </tr>
 <tr>
 <td>DNS-domeen / Kerberose realm</td>
@@ -6175,7 +6203,7 @@ kdestroy<span class="w">                             </span><span class="c1"># k
 <li>Kasuta <strong>alamdomeeni</strong> (<code>ad.lab.example</code>), mitte domeeni, mida juba haldab teine DNS-server. Ära kasuta <code>.local</code> lõppu (konflikt mDNS-iga).</li>
 <li>Hostinimi ei tohi olla sama mis NetBIOS-domeen ja peab olema kuni 15 märki.</li>
 <li>DC aadress peab olema staatiline.</li>
-<li>OPNsense'is suunatakse <code>ad.lab.example</code> päringud DC-le: <em>Services</em> → <em>Unbound DNS</em> → <em>Query Forwarding</em> → domeen <code>ad.lab.example</code>, server <code>10.0.83.56</code>. Nii lahendavad nimesid ka masinad, mille DNS on OPNsense.</li>
+<li>OPNsense'is suunatakse <code>ad.lab.example</code> päringud DC-le: <em>Services</em> → <em>Unbound DNS</em> → <em>Query Forwarding</em> → domeen <code>ad.lab.example</code>, server <code>10.0.83.156</code>. Nii lahendavad nimesid ka masinad, mille DNS on OPNsense.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
@@ -6188,10 +6216,10 @@ kdestroy<span class="w">                             </span><span class="c1"># k
 </code></pre></div>
 <p>Fail <code>/etc/hosts</code> (rida <code>127.0.1.1 dc1</code> eemalda või asenda):</p>
 <div class="highlight"><pre><span></span><code>127.0.0.1       localhost
-10.0.83.56      dc1.ad.lab.example dc1
+10.0.83.156      dc1.ad.lab.example dc1
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>hostname<span class="w"> </span>-f<span class="w">          </span><span class="c1"># dc1.ad.lab.example</span>
-hostname<span class="w"> </span>-i<span class="w">          </span><span class="c1"># 10.0.83.56</span>
+hostname<span class="w"> </span>-i<span class="w">          </span><span class="c1"># 10.0.83.156</span>
 </code></pre></div>
 <h3 id="paketid">Paketid<a class="headerlink" href="#paketid" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>samba-ad-dc<span class="w"> </span>krb5-user<span class="w"> </span>winbind<span class="w"> </span>dnsutils<span class="w"> </span>chrony<span class="w"> </span>smbclient
@@ -6225,7 +6253,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 <h3 id="dc-enda-dns">DC enda DNS<a class="headerlink" href="#dc-enda-dns" title="Permanent link">&para;</a></h3>
 <p>DC peab kasutama iseennast DNS-serverina. Debianis ifupdown-iga muuda <code>/etc/network/interfaces</code> rida <code>dns-nameservers</code> või otse <code>/etc/resolv.conf</code>:</p>
 <div class="highlight"><pre><span></span><code>search ad.lab.example
-nameserver 10.0.83.56
+nameserver 10.0.83.156
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
@@ -6283,13 +6311,13 @@ sudo<span class="w"> </span>samba-tool<span class="w"> </span>domain<span class=
 </code></pre></div>
 <h3 id="dns-kirjed">DNS-kirjed<a class="headerlink" href="#dns-kirjed" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>zonelist<span class="w"> </span>dc1<span class="w"> </span>-U<span class="w"> </span>administrator
-sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>www<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.55<span class="w"> </span>-U<span class="w"> </span>administrator
+sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>www<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.155<span class="w"> </span>-U<span class="w"> </span>administrator
 sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>query<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>@<span class="w"> </span>ALL<span class="w"> </span>-U<span class="w"> </span>administrator
-sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>delete<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>www<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.55<span class="w"> </span>-U<span class="w"> </span>administrator
+sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>delete<span class="w"> </span>dc1<span class="w"> </span>ad.lab.example<span class="w"> </span>www<span class="w"> </span>A<span class="w"> </span><span class="m">10</span>.0.83.155<span class="w"> </span>-U<span class="w"> </span>administrator
 </code></pre></div>
 <p>Pöördtsooni (PTR-kirjed) jaoks:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>zonecreate<span class="w"> </span>dc1<span class="w"> </span><span class="m">83</span>.0.10.in-addr.arpa<span class="w"> </span>-U<span class="w"> </span>administrator
-sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span><span class="m">83</span>.0.10.in-addr.arpa<span class="w"> </span><span class="m">56</span><span class="w"> </span>PTR<span class="w"> </span>dc1.ad.lab.example<span class="w"> </span>-U<span class="w"> </span>administrator
+sudo<span class="w"> </span>samba-tool<span class="w"> </span>dns<span class="w"> </span>add<span class="w"> </span>dc1<span class="w"> </span><span class="m">83</span>.0.10.in-addr.arpa<span class="w"> </span><span class="m">156</span><span class="w"> </span>PTR<span class="w"> </span>dc1.ad.lab.example<span class="w"> </span>-U<span class="w"> </span>administrator
 </code></pre></div>
 <h3 id="kataloogi-vaatamine-ldap-i-kaudu">Kataloogi vaatamine LDAP-i kaudu<a class="headerlink" href="#kataloogi-vaatamine-ldap-i-kaudu" title="Permanent link">&para;</a></h3>
 <p>AD on LDAP-kataloog - mooduli 25 tööriistad töötavad ka siin (Kerberose piletiga):</p>
@@ -6308,7 +6336,7 @@ sudo<span class="w"> </span>ldbsearch<span class="w"> </span>-H<span class="w"> 
 <hr />
 <h2 id="266-windowsi-klient">26.6 Windowsi klient<a class="headerlink" href="#266-windowsi-klient" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Seadista Windowsi võrguliidese DNS-iks DC (<code>10.0.83.56</code>) või OPNsense, kui seal on Query Forwarding.</li>
+<li>Seadista Windowsi võrguliidese DNS-iks DC (<code>10.0.83.156</code>) või OPNsense, kui seal on Query Forwarding.</li>
 <li>
 <p>Kontrolli PowerShellis:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">Resolve-DnsName</span> <span class="n">-Type</span> <span class="n">SRV</span> <span class="n">_ldap</span><span class="p">.</span><span class="n">_tcp</span><span class="p">.</span><span class="n">ad</span><span class="p">.</span><span class="n">lab</span><span class="p">.</span><span class="n">example</span>
@@ -6716,6 +6744,8 @@ sudo<span class="w"> </span>samba_dnsupdate<span class="w"> </span>--verbose<spa
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

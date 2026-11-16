@@ -5033,6 +5033,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5417,8 +5445,8 @@ curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: mi
 <h2 id="2-osa-nimed-klientides">2. osa. Nimed klientides<a class="headerlink" href="#2-osa-nimed-klientides" title="Permanent link">&para;</a></h2>
 <p>DNS-serveri seadistame moodulis 17. Seni lisa saitide nimed <strong>kõigi masinate</strong> (Ubuntu klient, <code>alma</code>, <code>ubuntusrv</code>) faili <code>/etc/hosts</code>:</p>
 <div class="highlight"><pre><span></span><code>SERVER_IP  kool.lab.example info.lab.example www.lab.example debian1.lab.example debian1
-10.0.83.55 alma.lab.example alma
-10.0.83.54 ubuntusrv.lab.example ubuntusrv caddy.lab.example
+10.0.83.155 alma.lab.example alma
+10.0.83.154 ubuntusrv.lab.example ubuntusrv caddy.lab.example
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>getent<span class="w"> </span>hosts<span class="w"> </span>kool.lab.example
 curl<span class="w"> </span>http://info.lab.example
@@ -5509,7 +5537,7 @@ sudo<span class="w"> </span>restorecon<span class="w"> </span>-Rv<span class="w"
 <span class="nt">&lt;/VirtualHost&gt;</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apachectl<span class="w"> </span>configtest<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>httpd
-curl<span class="w"> </span>--resolve<span class="w"> </span>kool.lab.example:443:10.0.83.55<span class="w"> </span>https://kool.lab.example/<span class="w">     </span><span class="c1"># Ubuntu kliendist, labori CA on usaldatud</span>
+curl<span class="w"> </span>--resolve<span class="w"> </span>kool.lab.example:443:10.0.83.155<span class="w"> </span>https://kool.lab.example/<span class="w">     </span><span class="c1"># Ubuntu kliendist, labori CA on usaldatud</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Märkus</p>
@@ -5592,7 +5620,7 @@ dig<span class="w"> </span>+short<span class="w"> </span>CAA<span class="w"> </s
 <li><strong>Let's Encrypt staging (kui sul on oma domeen ja DNS-i haldus):</strong> hangi <code>certbot certonly --manual --preferred-challenges dns --staging -d test.&lt;sinu domeen&gt;</code> abil testsertifikaat DNS-01 väljakutsega ja vaata, millise TXT-kirje certbot sind looma palub. Uuri tulemust <code>openssl x509 -noout -issuer -dates</code>.</li>
 <li><strong>HTTPS HAProxys:</strong> lõpeta TLS HAProxys labori CA sertifikaadiga: <code>cat kool.crt kool.key | sudo tee /etc/haproxy/kool.pem</code> (õigused <code>600</code>) ja <code>bind *:8443 ssl crt /etc/haproxy/kool.pem</code>; taustale suuna HTTP-ga.</li>
 <li><strong>Traefik:</strong> käivita Traefik ja kaks <code>whoami</code> konteinerit siltidega (teooria punkt 15.7) ning vaata, kuidas Traefik need automaatselt leiab.</li>
-<li><strong>Rikkekindel jaotur (keepalived):</strong> paigalda HAProxy ka <code>debian2</code>-sse sama seadistusega (port 8080) ning mõlemasse masinasse keepalived teooria punkti 15.7 järgi: <code>ubuntusrv</code> MASTER (<code>priority 150</code>), <code>debian2</code> BACKUP (<code>priority 100</code>), VIP <code>10.0.83.50</code>. Luba tulemüüris VRRP. Käivita kliendist <code>while true; do curl -s -m 1 http://10.0.83.50:8080/ | grep -o "Server [a-z0-9]*"; sleep 0.5; done</code> ja peata samal ajal <code>ubuntusrv</code>-s HAProxy (<code>sudo systemctl stop haproxy</code>). Kui kaua teenus katkes? Kumma masina küljes on VIP (<code>ip -br a</code>)? Mis juhtub, kui HAProxy uuesti käivitad?</li>
+<li><strong>Rikkekindel jaotur (keepalived):</strong> paigalda HAProxy ka <code>debian2</code>-sse sama seadistusega (port 8080) ning mõlemasse masinasse keepalived teooria punkti 15.7 järgi: <code>ubuntusrv</code> MASTER (<code>priority 150</code>), <code>debian2</code> BACKUP (<code>priority 100</code>), VIP <code>10.0.83.150</code>. Luba tulemüüris VRRP. Käivita kliendist <code>while true; do curl -s -m 1 http://10.0.83.150:8080/ | grep -o "Server [a-z0-9]*"; sleep 0.5; done</code> ja peata samal ajal <code>ubuntusrv</code>-s HAProxy (<code>sudo systemctl stop haproxy</code>). Kui kaua teenus katkes? Kumma masina küljes on VIP (<code>ip -br a</code>)? Mis juhtub, kui HAProxy uuesti käivitad?</li>
 <li><strong>Koormustest:</strong> mõõda <code>ab -n 2000 -c 50</code>-ga kooli saiti otse ühest taustserverist ja HAProxy kaudu. Võrdle <code>Requests per second</code> ja 95. protsentiili. Korda testi, kui üks taustserver on peatatud. Mis oli pudelikael (<code>top</code> taustserverites)?</li>
 </ol>
 <hr />
@@ -5719,6 +5747,8 @@ dig<span class="w"> </span>+short<span class="w"> </span>CAA<span class="w"> </s
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

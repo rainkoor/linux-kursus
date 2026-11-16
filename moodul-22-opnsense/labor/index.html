@@ -5033,6 +5033,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5417,7 +5445,7 @@ ping<span class="w"> </span>-c2<span class="w"> </span>debian.org
 <p><strong>4.3</strong> Paigalda pistikprogramm <code>os-qemu-guest-agent</code> (<em>System</em> → <em>Firmware</em> → <em>Plugins</em>) ja kontrolli Proxmoxis, et OPNsense'i IP-aadressid on <em>Summary</em> lehel näha.</p>
 <h2 id="5-osa-dhcp-ja-dns">5. osa. DHCP ja DNS<a class="headerlink" href="#5-osa-dhcp-ja-dns" title="Permanent link">&para;</a></h2>
 <p><strong>5.1</strong> Ava DHCP-teenuse seaded (vaikimisi <em>Services</em> → <em>Dnsmasq DNS &amp; DHCP</em>) ja kontrolli vahemikku. Leia antud rendid.</p>
-<p><strong>5.2</strong> Lisa <strong>staatiline vastendus</strong>: Ubuntu kliendi MAC-aadress (Ubuntus <code>ip link</code>) → võrguplaanis reserveeritud aadress (nt <code>10.0.83.98</code>), hostinimi <code>ubuntuklient</code>. Ubuntus uuenda renti:</p>
+<p><strong>5.2</strong> Lisa <strong>staatiline vastendus</strong>: Ubuntu kliendi MAC-aadress (Ubuntus <code>ip link</code>) → võrguplaanis reserveeritud aadress (nt <code>10.0.83.198</code>), hostinimi <code>ubuntuklient</code>. Ubuntus uuenda renti:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>networkctl<span class="w"> </span>renew<span class="w"> </span>&lt;liides&gt;<span class="w">    </span><span class="c1"># või taaskäivita</span>
 ip<span class="w"> </span>-br<span class="w"> </span>a
 </code></pre></div>
@@ -5681,6 +5709,8 @@ top
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

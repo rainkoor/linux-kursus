@@ -5350,6 +5350,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5962,6 +5990,10 @@
 <p class="admonition-title">Kuidas seda lehte lugeda</p>
 <p>Iga teema algab kastiga <strong>Lühidalt</strong> - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse <strong>Loe lähemalt</strong> - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.</p>
 </div>
+<div class="admonition info">
+<p class="admonition-title">Oluline</p>
+<p><strong>HKHK õppijale: kõigepealt võrk.</strong> HKHK Proxmoxi laborivõrgus ei ole alguses DHCP-serverit, seega uuel virtuaalmasinal pole võrguühendust ega saa SSH-ga ühenduda. Pärast kursuse sissejuhatust ja esimesi käske näitab ja selgitab õpetaja staatilise IP seadistamise ette; õppijad teevad juhendi järgi kaasa kolme esimese masina (Debian, Ubuntu, AlmaLinux) Proxmoxi konsoolis. Selle sammu eesmärk on saada masinad võrku, mitte veel võrgu seadistust süvitsi õppida. Seejärel algab moodul 1. Juhendid: <a href="../moodul-07-vork-ssh/#debian-staatiline-ip">Debian</a> · <a href="../moodul-07-vork-ssh/#ubuntu-staatiline-ip">Ubuntu</a> · <a href="../moodul-07-vork-ssh/#almalinux-nmtui">AlmaLinux</a> · <a href="../moodul-07-vork-ssh/#kontrolli-tulemust">kontroll</a>. Aadressid leiad <a href="../lisad/paigaldus/#2-võrguplaan">paigalduslisa võrguplaanist</a>. Moodulis 7 käsitleme võrgu põhimõtteid ja seadistamist põhjalikult. Kui õpid iseseisvalt (VirtualBox, koduruuter), saab masin aadressi enamasti DHCP-ga ja selle sammu võid vahele jätta.</p>
+</div>
 <hr />
 <h2 id="11-mis-on-linux">1.1 Mis on Linux?<a class="headerlink" href="#11-mis-on-linux" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
@@ -6116,10 +6148,10 @@
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>kasutaja@aadress
 </code></pre></div>
 <p>Näiteks:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>mari@10.0.83.52
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>mari@10.0.83.152
 </code></pre></div>
 <p>Esimesel ühendumisel küsib SSH, kas usaldad serveri võtit:</p>
-<div class="highlight"><pre><span></span><code>The authenticity of host '10.0.83.52' can't be established.
+<div class="highlight"><pre><span></span><code>The authenticity of host '10.0.83.152' can't be established.
 ED25519 key fingerprint is SHA256:...
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 </code></pre></div>
@@ -6955,6 +6987,8 @@ ip<span class="w"> </span>-br<span class="w"> </span>link<span class="w">       
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

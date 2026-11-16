@@ -5222,6 +5222,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5703,7 +5731,7 @@
 <li>seadistab Apache'i virtuaalhostid nii Debianis kui ka AlmaLinuxis;</li>
 <li>kasutab Caddyt automaatse HTTPS-i ja lihtsa pöördpuhvri jaoks ning tunneb kergemaid veebiservereid (lighttpd);</li>
 <li>seadistab pöördpuhvri ja koormuse jaotuse (nginx <code>upstream</code>, HAProxy) ning kirjeldab Traefiki rolli;</li>
-<li>teeb koormusejaoturi rikkekindlaks virtuaalse IP-aadressiga (keepalived, VRRP) ja mõõdab veebiserveri jõudlust koormustestiga;</li>
+<li>teeb koormusejaoturi rikkekindlaks virtuaalse IP-aadressiga (keepalived, VRRP; lisaväljakutse) ja mõõdab veebiserveri jõudlust koormustestiga;</li>
 <li>valib olukorrale sobiva veebiserveri.</li>
 </ul>
 <div class="admonition note">
@@ -6321,12 +6349,12 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 <p>Kui üks server ei jaksa või peab teenus töötama ka ühe serveri rikke korral, pannakse mitu <strong>taustserverit</strong> (<em>backend</em>) ühe <strong>koormusejaoturi</strong> (<em>load balancer</em>) taha.</p>
 <pre class="mermaid"><code>flowchart LR
     K["klient"] --&gt; H["HAProxy&lt;br&gt;:80 / :443"]
-    H --&gt; D["debian1 (nginx)&lt;br&gt;10.0.83.52"]
-    H --&gt; A["alma (Apache)&lt;br&gt;10.0.83.55"]</code></pre>
+    H --&gt; D["debian1 (nginx)&lt;br&gt;10.0.83.152"]
+    H --&gt; A["alma (Apache)&lt;br&gt;10.0.83.155"]</code></pre>
 <h3 id="nginx-upstream">nginx upstream<a class="headerlink" href="#nginx-upstream" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">upstream</span><span class="w"> </span><span class="s">kool_taust</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">10.0.83.52</span><span class="p">:</span><span class="mi">80</span><span class="p">;</span>
-<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">10.0.83.55</span><span class="p">:</span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">10.0.83.152</span><span class="p">:</span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">10.0.83.155</span><span class="p">:</span><span class="mi">80</span><span class="p">;</span>
 <span class="w">    </span><span class="c1"># least_conn;             # vaikimisi round robin</span>
 <span class="p">}</span>
 <span class="k">server</span><span class="w"> </span><span class="p">{</span>
@@ -6352,8 +6380,8 @@ backend koolisait
     balance roundrobin
     option httpchk
     http-check send meth GET uri / ver HTTP/1.1 hdr Host kool.lab.example
-    server debian1 10.0.83.52:80 check
-    server alma    10.0.83.55:80 check
+    server debian1 10.0.83.152:80 check
+    server alma    10.0.83.155:80 check
 
 listen statistika
     bind *:8404
@@ -6367,9 +6395,13 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="
 </code></pre></div>
 <p>Tervisekontroll saadab päise <code>Host</code>, et taustserverid vastaksid õige saidiga (muidu võib nt AlmaLinuxi Apache'i vaikeleht vastata koodiga 403 ja server märgitakse rikkis olevaks). Statistikaleht (<code>http://&lt;server&gt;:8404</code>) näitab iga taustserveri olekut (UP/DOWN) ja liiklust.</p>
 <h3 id="jaoturi-enda-rikkekindlus-keepalived-ja-vrrp">Jaoturi enda rikkekindlus: keepalived ja VRRP<a class="headerlink" href="#jaoturi-enda-rikkekindlus-keepalived-ja-vrrp" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Lisaväljakutse</p>
+<p>Kõrge kättesaadavus on edasijõudnute teema (laboritöö 15 lisaülesanne). Eksamil seda ei nõuta, kuid põhimõte - ükski ühekordne komponent ei tohi kogu teenust maha võtta - on oluline teada.</p>
+</div>
 <p>HAProxy jätab rikkis taustserveri välja, aga mis saab siis, kui rikki läheb <strong>jaotur ise</strong>? Siis on jaotur <strong>üksik rikkepunkt</strong> (<em>single point of failure</em>). Lahendus: kaks jaoturit ja nende vahel <strong>virtuaalne IP-aadress</strong> (VIP), mis on alati selle masina küljes, mis parajasti töötab. Kliendid ja DNS kasutavad ainult VIP-i.</p>
 <pre class="mermaid"><code>flowchart LR
-    K["klient"] --&gt; VIP(("VIP&lt;br&gt;10.0.83.50"))
+    K["klient"] --&gt; VIP(("VIP&lt;br&gt;10.0.83.150"))
     VIP --&gt; M["ubuntusrv (MASTER)&lt;br&gt;HAProxy + keepalived"]
     VIP -. "rikke korral" .-&gt; B["debian2 (BACKUP)&lt;br&gt;HAProxy + keepalived"]
     M --&gt; T["debian1, alma"]
@@ -6402,7 +6434,7 @@ vrrp_instance VEEB {
         auth_pass Kool2026    # sama mõlemas masinas (max 8 märki)
     }
     virtual_ipaddress {
-        10.0.83.50/24
+        10.0.83.150/24
     }
     track_script {
         kontrolli_haproxy
@@ -6448,7 +6480,7 @@ journalctl<span class="w"> </span>-u<span class="w"> </span>keepalived<span clas
 <h3 id="koormustest">Koormustest<a class="headerlink" href="#koormustest" title="Permanent link">&para;</a></h3>
 <p>Enne kui väidad, et lahendus „talub koormust“, mõõda seda. Koormustest saadab serverile palju samaaegseid päringuid ja mõõdab vastamise kiirust ning vigu.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2-utils<span class="w">      </span><span class="c1"># ab (AlmaLinuxis: dnf install httpd-tools)</span>
-ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><span class="w"> </span>-c<span class="w"> </span><span class="m">50</span><span class="w"> </span>http://10.0.83.50:8080/<span class="w">      </span><span class="c1"># 2000 päringut, 50 korraga</span>
+ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><span class="w"> </span>-c<span class="w"> </span><span class="m">50</span><span class="w"> </span>http://10.0.83.150:8080/<span class="w">      </span><span class="c1"># 2000 päringut, 50 korraga</span>
 </code></pre></div>
 <p>Olulised read väljundis:</p>
 <table>
@@ -6856,6 +6888,8 @@ ab<span class="w"> </span>-n<span class="w"> </span><span class="m">2000</span><
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

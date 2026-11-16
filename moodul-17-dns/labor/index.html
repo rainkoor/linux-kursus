@@ -4989,6 +4989,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5353,7 +5381,7 @@ dig<span class="w"> </span>@localhost<span class="w"> </span>lab.example<span cl
 <p class="admonition-title">Küsimus K4</p>
 <p>Mida näitab <code>debian2</code> logi tsooniülekande kohta? Millises vormingus on sekundaari salvestatud tsoonifail (proovi <code>file</code> ja <code>head</code> - vihje: BIND kasutab vaikimisi binaarvormingut <code>raw</code>)?</p>
 </div>
-<p><strong>3.2</strong> Lisa <code>debian1</code> tsooni uus kirje <code>uus IN A 10.0.83.70</code>, suurenda seerianumbrit, laadi uuesti ja kontrolli kohe <code>debian2</code>-st: <code>dig @localhost uus.lab.example +short</code>.</p>
+<p><strong>3.2</strong> Lisa <code>debian1</code> tsooni uus kirje <code>uus IN A 10.0.83.170</code>, suurenda seerianumbrit, laadi uuesti ja kontrolli kohe <code>debian2</code>-st: <code>dig @localhost uus.lab.example +short</code>.</p>
 <p><strong>3.3</strong> Peata <code>debian1</code>-s BIND9 (<code>sudo systemctl stop named</code>) ja küsi Ubuntu kliendist mõlemalt serverilt:</p>
 <div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@debian1.lab.example<span class="w"> </span>kool.lab.example<span class="w"> </span>+short<span class="w">     </span><span class="c1"># kasuta IP-aadressi, kui nimi ei lahene</span>
 dig<span class="w"> </span>@DEBIAN2_IP<span class="w"> </span>kool.lab.example<span class="w"> </span>+short
@@ -5517,7 +5545,7 @@ dig<span class="w"> </span>@localhost<span class="w"> </span>www.debian.org<span
 <p class="admonition-title">Küsimus D6</p>
 <p>Kas CoreDNS vastas mõlemale päringule? Millised read tekkisid logis (<code>log</code> pistikprogramm)?</p>
 </div>
-<p><strong>2.3</strong> Lisa tsoonifaili uus kirje <code>test IN A 10.0.83.60</code>, <strong>suurenda seerianumbrit</strong> ja oota ~1 minut ilma konteinerit taaskäivitamata:</p>
+<p><strong>2.3</strong> Lisa tsoonifaili uus kirje <code>test IN A 10.0.83.160</code>, <strong>suurenda seerianumbrit</strong> ja oota ~1 minut ilma konteinerit taaskäivitamata:</p>
 <div class="highlight"><pre><span></span><code>dig<span class="w"> </span>@localhost<span class="w"> </span>test.lab.example<span class="w"> </span>+short
 </code></pre></div>
 <div class="admonition kysimus">
@@ -5668,6 +5696,8 @@ dig<span class="w"> </span>@localhost<span class="w"> </span>www.debian.org<span
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

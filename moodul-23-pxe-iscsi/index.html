@@ -5089,6 +5089,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5499,7 +5527,7 @@
 <p>DHCP-server saab kliendi püsivara tuvastada valiku 93 (<em>client system architecture</em>) järgi ja jagada õige faili. Kea-s tehakse seda <strong>kliendiklassidega</strong> (<code>client-classes</code>).</p>
 <h3 id="pxe-kea-s">PXE Kea-s<a class="headerlink" href="#pxe-kea-s" title="Permanent link">&para;</a></h3>
 <p>Lihtsaim seadistus (ainult BIOS-kliendid) - lisa alamvõrgu juurde:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">"next-server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.53"</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nt">"next-server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.153"</span><span class="p">,</span>
 <span class="nt">"boot-file-name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netboot.xyz.kpxe"</span>
 </code></pre></div>
 <h3 id="tftp-server">TFTP-server<a class="headerlink" href="#tftp-server" title="Permanent link">&para;</a></h3>
@@ -5577,7 +5605,7 @@ echo "Paigaldatud kickstartiga $(date +%F)" &gt; /etc/motd
 <p><strong>iPXE skript</strong> käivitab paigaldaja otse võrgust (kerneli ja initrd failid on hoidla kataloogis <code>images/pxeboot/</code>):</p>
 <div class="highlight"><pre><span></span><code>#!ipxe
 set repo https://repo.almalinux.org/almalinux/10/BaseOS/x86_64/os
-kernel ${repo}/images/pxeboot/vmlinuz inst.repo=${repo} inst.ks=http://10.0.83.53/ks.cfg ip=dhcp
+kernel ${repo}/images/pxeboot/vmlinuz inst.repo=${repo} inst.ks=http://10.0.83.153/ks.cfg ip=dhcp
 initrd ${repo}/images/pxeboot/initrd.img
 boot
 </code></pre></div>
@@ -5585,7 +5613,7 @@ boot
 <div class="highlight"><pre><span></span><code><span class="nt">"boot-file-name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"undionly.kpxe"</span><span class="p">,</span>
 <span class="nt">"client-classes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ipxe"</span><span class="p">,</span><span class="w"> </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option[77].hex == 'iPXE'"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"boot-file-name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://10.0.83.53/boot.ipxe"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">"boot-file-name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://10.0.83.153/boot.ipxe"</span><span class="w"> </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
 <p><strong>Preseed (Debian)</strong> on ridadest koosnev fail kujul <code>d-i küsimus tüüp väärtus</code>, näiteks:</p>
@@ -5710,13 +5738,13 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> <
 <div class="highlight"><pre><span></span><code>InitiatorName=iqn.2026-11.example.lab:alma
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>iscsid
-sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>discovery<span class="w"> </span>-t<span class="w"> </span>sendtargets<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.0.83.53<span class="w">     </span><span class="c1"># avasta sihtmärgid</span>
+sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>discovery<span class="w"> </span>-t<span class="w"> </span>sendtargets<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.0.83.153<span class="w">     </span><span class="c1"># avasta sihtmärgid</span>
 sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>--login<span class="w">                               </span><span class="c1"># logi sisse</span>
 lsblk<span class="w">                                                       </span><span class="c1"># uus ketas, nt /dev/sdb</span>
 sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>session<span class="w">                                    </span><span class="c1"># aktiivsed seansid</span>
 </code></pre></div>
 <p>Automaatne sisselogimine alglaadimisel:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2026-11.example.lab:debian2.disk01<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.0.83.53<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2026-11.example.lab:debian2.disk01<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.0.83.153<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--op<span class="w"> </span>update<span class="w"> </span>-n<span class="w"> </span>node.startup<span class="w"> </span>-v<span class="w"> </span>automatic
 </code></pre></div>
 <p>Edasi on see tavaline ketas (moodul 8): partitsioon, failisüsteem, haakimine. Failis <code>/etc/fstab</code> kasuta <strong>UUID-d</strong> ja valikut <strong><code>_netdev</code></strong>, et haakimist proovitaks alles pärast võrgu ja iSCSI seansi tekkimist:</p>
@@ -5910,6 +5938,8 @@ sudo<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> <
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

@@ -5055,6 +5055,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5372,7 +5400,7 @@
 </tr>
 <tr>
 <td><strong>Vajalik</strong></td>
-<td>FreeBSD VM <code>fbsd</code> (2 vCPU, 2 GiB RAM, 20 GiB ketas, VirtIO võrk), aadressid <code>10.0.83.66</code> (host) ja <code>10.0.83.67</code> (jail). Linuxi klient testimiseks (nt <code>ubuntuklient</code>)</td>
+<td>FreeBSD VM <code>fbsd</code> (2 vCPU, 2 GiB RAM, 20 GiB ketas, VirtIO võrk), aadressid <code>10.0.83.166</code> (host) ja <code>10.0.83.167</code> (jail). Linuxi klient testimiseks (nt <code>ubuntuklient</code>)</td>
 </tr>
 <tr>
 <td><strong>Eesmärk</strong></td>
@@ -5487,7 +5515,7 @@ less<span class="w"> </span>/var/mail/root
 <hr />
 <h2 id="6-osa-staatiline-aadress">6. osa. Staatiline aadress<a class="headerlink" href="#6-osa-staatiline-aadress" title="Permanent link">&para;</a></h2>
 <p><strong>6.1</strong> <strong>Proxmoxi konsoolis</strong> (mitte SSH-s):</p>
-<div class="highlight"><pre><span></span><code>sysrc<span class="w"> </span><span class="nv">ifconfig_vtnet0</span><span class="o">=</span><span class="s2">"inet 10.0.83.66/24"</span>
+<div class="highlight"><pre><span></span><code>sysrc<span class="w"> </span><span class="nv">ifconfig_vtnet0</span><span class="o">=</span><span class="s2">"inet 10.0.83.166/24"</span>
 sysrc<span class="w"> </span><span class="nv">defaultrouter</span><span class="o">=</span><span class="s2">"10.0.83.1"</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"nameserver 10.0.83.1"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/resolv.conf
 service<span class="w"> </span>netif<span class="w"> </span>restart<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>service<span class="w"> </span>routing<span class="w"> </span>restart
@@ -5540,10 +5568,10 @@ pfctl<span class="w"> </span>-sr
 pfctl<span class="w"> </span>-si
 </code></pre></div>
 <p><strong>8.2</strong> Testi Linuxi kliendist:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>kasutaja@10.0.83.66<span class="w">                    </span><span class="c1"># peab töötama</span>
-curl<span class="w"> </span>-I<span class="w"> </span>http://10.0.83.66<span class="w">                  </span><span class="c1"># peab töötama</span>
-<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">3</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">BatchMode</span><span class="o">=</span>yes<span class="w"> </span>kasutaja@10.0.83.66<span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">done</span>
-ssh<span class="w"> </span>kasutaja@10.0.83.66<span class="w">                    </span><span class="c1"># kas töötab veel?</span>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>kasutaja@10.0.83.166<span class="w">                    </span><span class="c1"># peab töötama</span>
+curl<span class="w"> </span>-I<span class="w"> </span>http://10.0.83.166<span class="w">                  </span><span class="c1"># peab töötama</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">3</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">BatchMode</span><span class="o">=</span>yes<span class="w"> </span>kasutaja@10.0.83.166<span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+ssh<span class="w"> </span>kasutaja@10.0.83.166<span class="w">                    </span><span class="c1"># kas töötab veel?</span>
 </code></pre></div>
 <p>FreeBSD-s:</p>
 <div class="highlight"><pre><span></span><code>pfctl<span class="w"> </span>-t<span class="w"> </span>ryndajad<span class="w"> </span>-T<span class="w"> </span>show
@@ -5557,11 +5585,11 @@ pfctl<span class="w"> </span>-t<span class="w"> </span>ryndajad<span class="w"> 
 <hr />
 <h2 id="9-osa-jail">9. osa. Jail<a class="headerlink" href="#9-osa-jail" title="Permanent link">&para;</a></h2>
 <p><strong>9.1</strong> Hosti nginx kuulab praegu kõigil aadressidel, ka jailile antaval. Lase sel kuulata ainult hosti aadressil:</p>
-<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="s1">'s/listen[[:space:]]*80;/listen 10.0.83.66:80;/'</span><span class="w"> </span>/usr/local/etc/nginx/nginx.conf
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">''</span><span class="w"> </span><span class="s1">'s/listen[[:space:]]*80;/listen 10.0.83.166:80;/'</span><span class="w"> </span>/usr/local/etc/nginx/nginx.conf
 nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>service<span class="w"> </span>nginx<span class="w"> </span>restart
 sockstat<span class="w"> </span>-4l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nginx
 </code></pre></div>
-<p><strong>9.2</strong> Loo jail <code>www</code> teooria punkti 30.11 järgi (aadress <code>10.0.83.67</code>), käivita see ja paigalda sinna nginx (kui <code>pkg</code> küsib jailis enda paigaldamist, vasta <code>y</code>):</p>
+<p><strong>9.2</strong> Loo jail <code>www</code> teooria punkti 30.11 järgi (aadress <code>10.0.83.167</code>), käivita see ja paigalda sinna nginx (kui <code>pkg</code> küsib jailis enda paigaldamist, vasta <code>y</code>):</p>
 <div class="highlight"><pre><span></span><code>zfs<span class="w"> </span>create<span class="w"> </span>-o<span class="w"> </span><span class="nv">mountpoint</span><span class="o">=</span>/usr/local/jails<span class="w"> </span>zroot/jails
 zfs<span class="w"> </span>create<span class="w"> </span>zroot/jails/www
 fetch<span class="w"> </span>https://download.freebsd.org/releases/amd64/<span class="k">$(</span>freebsd-version<span class="w"> </span>-u<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d-<span class="w"> </span>-f1-2<span class="k">)</span>/base.txz<span class="w"> </span>-o<span class="w"> </span>/tmp/base.txz
@@ -5582,7 +5610,7 @@ ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><sp
 sockstat<span class="w"> </span>-4l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nginx
 zfs<span class="w"> </span>snapshot<span class="w"> </span>zroot/jails/www@puhas
 </code></pre></div>
-<p>Linuxi kliendist: <code>curl http://10.0.83.67</code> ja <code>curl http://10.0.83.66</code>. Lisa vajadusel pf-i reeglisse jaili aadress (reegel <code>to port { http, https }</code> kehtib kõigile hosti aadressidele).</p>
+<p>Linuxi kliendist: <code>curl http://10.0.83.167</code> ja <code>curl http://10.0.83.166</code>. Lisa vajadusel pf-i reeglisse jaili aadress (reegel <code>to port { http, https }</code> kehtib kõigile hosti aadressidele).</p>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus K9</p>
 <p>Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 14) sarnasused ja erinevused?</p>
@@ -5735,6 +5763,8 @@ zfs<span class="w"> </span>snapshot<span class="w"> </span>zroot/jails/www@puhas
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

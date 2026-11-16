@@ -5000,6 +5000,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5365,17 +5393,17 @@ curl<span class="w"> </span>-sk<span class="w"> </span>https://kool.lab.example/
 sudo<span class="w"> </span>mariadb<span class="w"> </span>kool<span class="w"> </span>&lt;<span class="w"> </span>~/kool.sql
 curl<span class="w"> </span>-sk<span class="w"> </span>https://kool.lab.example/opilased.php<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">"&lt;tr&gt;"</span>
 </code></pre></div>
-<p><strong>2.2</strong> Luba <code>alma</code>-l lugeda andmebaasi <code>kool</code>: muuda <code>bind-address</code> (<code>/etc/mysql/mariadb.conf.d/50-server.cnf</code>) laborivõrgu aadressile <code>10.0.83.52</code>, loo kasutaja ainult lugemisõigusega ja ava tulemüür ainult <code>alma</code>-le:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'aruanne'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Aruande-Parool-1'</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">kool</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'aruanne'</span><span class="o">@</span><span class="s1">'10.0.83.55'</span><span class="p">;</span>
+<p><strong>2.2</strong> Luba <code>alma</code>-l lugeda andmebaasi <code>kool</code>: muuda <code>bind-address</code> (<code>/etc/mysql/mariadb.conf.d/50-server.cnf</code>) laborivõrgu aadressile <code>10.0.83.152</code>, loo kasutaja ainult lugemisõigusega ja ava tulemüür ainult <code>alma</code>-le:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'aruanne'</span><span class="o">@</span><span class="s1">'10.0.83.155'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Aruande-Parool-1'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">kool</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'aruanne'</span><span class="o">@</span><span class="s1">'10.0.83.155'</span><span class="p">;</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mariadb
-sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.0.83.55<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">3306</span><span class="w"> </span>proto<span class="w"> </span>tcp
+sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.0.83.155<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">3306</span><span class="w"> </span>proto<span class="w"> </span>tcp
 </code></pre></div>
 <p><code>alma</code>-s:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mariadb
-mariadb<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>-u<span class="w"> </span>aruanne<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">"SELECT * FROM kool.opilased;"</span>
-mariadb<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>-u<span class="w"> </span>aruanne<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">"DELETE FROM kool.opilased;"</span>
+mariadb<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>-u<span class="w"> </span>aruanne<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">"SELECT * FROM kool.opilased;"</span>
+mariadb<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>-u<span class="w"> </span>aruanne<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">"DELETE FROM kool.opilased;"</span>
 </code></pre></div>
 <div class="admonition kysimus">
 <p class="admonition-title">Küsimus K5</p>
@@ -5408,9 +5436,9 @@ sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> <
 <p class="admonition-title">Küsimus K7</p>
 <p>Miks ei lubanud <code>peer</code>-autentimine süsteemikasutajal <code>postgres</code> ühenduda andmebaasi kasutajana <code>kool</code>? Mis vahe on <code>peer</code> ja <code>scram-sha-256</code> meetodil?</p>
 </div>
-<p><strong>3.2</strong> Luba <code>alma</code>-st ühendus: <code>listen_addresses = 'localhost,10.0.83.52'</code> failis <code>postgresql.conf</code> ja <code>pg_hba.conf</code>-i rida <code>host kool kool 10.0.83.55/32 scram-sha-256</code>. Taaskäivita ja ava tulemüür pordile 5432 ainult <code>alma</code>-le. <code>alma</code>-s:</p>
+<p><strong>3.2</strong> Luba <code>alma</code>-st ühendus: <code>listen_addresses = 'localhost,10.0.83.152'</code> failis <code>postgresql.conf</code> ja <code>pg_hba.conf</code>-i rida <code>host kool kool 10.0.83.155/32 scram-sha-256</code>. Taaskäivita ja ava tulemüür pordile 5432 ainult <code>alma</code>-le. <code>alma</code>-s:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql
-psql<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>-U<span class="w"> </span>kool<span class="w"> </span>-d<span class="w"> </span>kool<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT COUNT(*) FROM opilased;"</span>
+psql<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>-U<span class="w"> </span>kool<span class="w"> </span>-d<span class="w"> </span>kool<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT COUNT(*) FROM opilased;"</span>
 </code></pre></div>
 <p><strong>3.3</strong> Varunda ja taasta:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>pg_dump<span class="w"> </span>-Fc<span class="w"> </span>kool<span class="w"> </span>&gt;<span class="w"> </span>~/kool.dump
@@ -5619,6 +5647,8 @@ sudo<span class="w"> </span>ss<span class="w"> </span>-tlpn<span class="w"> </sp
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

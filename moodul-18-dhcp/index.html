@@ -5078,6 +5078,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5433,8 +5461,8 @@
     participant K as Klient
     participant S as DHCP-server
     K-&gt;&gt;S: DHCPDISCOVER (leviedastus): „Kas keegi jagab aadresse?“
-    S-&gt;&gt;K: DHCPOFFER: „Võta 10.0.83.85“
-    K-&gt;&gt;S: DHCPREQUEST (leviedastus): „Tahan 10.0.83.85“
+    S-&gt;&gt;K: DHCPOFFER: „Võta 10.0.83.185“
+    K-&gt;&gt;S: DHCPREQUEST (leviedastus): „Tahan 10.0.83.185“
     S-&gt;&gt;K: DHCPACK: „Kinnitan, rent 24 h“</code></pre>
 <p>Esimene sõnum on <strong>leviedastus</strong> (<em>broadcast</em>), sest kliendil pole veel aadressi ega teadmist serveri kohta. Seepärast töötab DHCP vaikimisi ainult ühe võrgusegmendi piires. Teistesse võrkudesse edastab päringud <strong>DHCP relee</strong> (<em>relay</em>, nt ruuteris).</p>
 <p><strong>Rendi</strong> (<em>lease</em>) kestuse järel peab klient aadressi uuendama. Klient proovib uuendada juba poole rendiaja möödudes.</p>
@@ -5518,9 +5546,9 @@
 </table>
 <p>Selles moodulis kasutame <strong>Kea</strong>-d. Kuna paljud olemasolevad juhendid kasutavad ISC DHCP-d, on punktis 18.5 ka selle seadistuse võrdlus.</p>
 <p>dnsmasq-i (moodul 17, punkt 17.6) DHCP käib paari reaga failis <code>/etc/dnsmasq.conf</code> ja antud nimed lahenduvad kohe ka DNS-is:</p>
-<div class="highlight"><pre><span></span><code>dhcp-range=10.0.83.80,10.0.83.99,24h
+<div class="highlight"><pre><span></span><code>dhcp-range=10.0.83.180,10.0.83.199,24h
 dhcp-option=option:router,10.0.83.1
-dhcp-host=bc:24:11:12:34:56,ubuntuklient,10.0.83.98
+dhcp-host=bc:24:11:12:34:56,ubuntuklient,10.0.83.198
 </code></pre></div>
 <h2 id="183-kea-dhcp-server">18.3 Kea DHCP-server<a class="headerlink" href="#183-kea-dhcp-server" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
@@ -5553,14 +5581,14 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> <
 <span class="w">      </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">"subnet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.0/24"</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">"pools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"pool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.80 - 10.0.83.99"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"pools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"pool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.180 - 10.0.83.199"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">],</span>
 <span class="w">        </span><span class="nt">"option-data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">          </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"routers"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.1"</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">],</span>
 <span class="w">        </span><span class="nt">"reservations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">          </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">"hw-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bc:24:11:12:34:56"</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">"ip-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.98"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"ip-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.198"</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ubuntuklient"</span>
 <span class="w">          </span><span class="p">}</span>
 <span class="w">        </span><span class="p">]</span>
@@ -5629,7 +5657,7 @@ journalctl<span class="w"> </span>-u<span class="w"> </span>kea-dhcp4-server<spa
 <li>Leia kliendi MAC-aadress: kliendis <code>ip -br link</code>, serveris rentide failist või Proxmoxis masina <em>Hardware</em> → <em>Network Device</em>.</li>
 <li>
 <p>Lisa alamvõrgu <code>reservations</code> loendisse uus kirje (jälgi komasid kirjete vahel):</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"hw-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bc:24:11:aa:bb:cc"</span><span class="p">,</span><span class="w"> </span><span class="nt">"ip-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.99"</span><span class="p">,</span><span class="w"> </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"winklient"</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"hw-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bc:24:11:aa:bb:cc"</span><span class="p">,</span><span class="w"> </span><span class="nt">"ip-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.83.199"</span><span class="p">,</span><span class="w"> </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"winklient"</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -5670,7 +5698,7 @@ ipconfig<span class="w"> </span>/renew
 <p>Vanemates süsteemides ja juhendites on seadistus failis <code>/etc/dhcp/dhcpd.conf</code>:</p>
 <div class="highlight"><pre><span></span><code>authoritative;
 subnet 10.0.83.0 netmask 255.255.255.0 {
-    range 10.0.83.80 10.0.83.99;
+    range 10.0.83.180 10.0.83.199;
     option routers 10.0.83.1;
     option domain-name-servers 10.0.83.1;
     option domain-name "lab.example";
@@ -5679,7 +5707,7 @@ subnet 10.0.83.0 netmask 255.255.255.0 {
 }
 host ubuntuklient {
     hardware ethernet bc:24:11:12:34:56;
-    fixed-address 10.0.83.98;
+    fixed-address 10.0.83.198;
 }
 </code></pre></div>
 <p>Liides määratakse Debianis failis <code>/etc/default/isc-dhcp-server</code> (<code>INTERFACESv4="ens18"</code>), rendid on failis <code>/var/lib/dhcp/dhcpd.leases</code>. Mõisted (alamvõrk, vahemik, valikud, reserveering) on Keaga samad - erineb ainult süntaks. Uutel süsteemidel kasuta Kea-d.</p>
@@ -5688,6 +5716,7 @@ host ubuntuklient {
 <p class="admonition-title">Lühidalt</p>
 <p>Kui klient aadressi ei saa, kontrolli järjest: kas teenus töötab, kas see kuulab õigel liidesel, kas tulemüür lubab UDP porti 67, kas vahemikus on vabu aadresse, kas võrgus on teine DHCP-server. <code>tcpdump port 67 or port 68</code> näitab, kas päringud jõuavad kohale.</p>
 </div>
+<p>Üldine töökäik on lisas <a href="../lisad/torkeotsing/">tõrkeotsingu töövoog</a>; siin on selle DHCP osa.</p>
 <table>
 <thead>
 <tr>
@@ -5961,6 +5990,8 @@ host ubuntuklient {
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

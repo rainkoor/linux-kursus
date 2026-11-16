@@ -4934,6 +4934,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5175,11 +5203,11 @@
 <p>Oma server: andmed asutuse kontrolli all, pole kasutajapõhist tasu, täielik paindlikkus. Pilv: kättetoimetavus ja maine on teenusepakkuja mure, rämpsposti ja viiruste tõrje, kõrge kättesaadavus ja varundus, vähem hooldustööd ja turvaauke.</p>
 </details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> Kirjuta tsooni <code>kool.example</code> kirjed: MX serverile <code>post.kool.example</code> (<code>10.0.83.70</code>), SPF, mis lubab ainult MX-serveril saata, ja DMARC poliitikaga <code>quarantine</code>.</p>
+<p><strong>1.</strong> Kirjuta tsooni <code>kool.example</code> kirjed: MX serverile <code>post.kool.example</code> (<code>10.0.83.170</code>), SPF, mis lubab ainult MX-serveril saata, ja DMARC poliitikaga <code>quarantine</code>.</p>
 <details class="success">
 <summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>@       IN  MX   10 post.kool.example.
-post    IN  A    10.0.83.70
+post    IN  A    10.0.83.170
 @       IN  TXT  "v=spf1 mx -all"
 _dmarc  IN  TXT  "v=DMARC1; p=quarantine; rua=mailto:postmaster@kool.example"
 </code></pre></div>
@@ -5296,6 +5324,8 @@ swaks<span class="w"> </span>--to<span class="w"> </span>jaan@lab.example<span c
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

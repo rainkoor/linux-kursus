@@ -5450,6 +5450,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6157,7 +6185,7 @@
 <li>muudab kerneli parameetreid käsuga <code>sysctl</code>;</li>
 <li>taastab süsteemi, mis ei käivitu, parandab GRUB-i taastemeedialt ja lähtestab juurkasutaja parooli;</li>
 <li>vahetab kasutatavat kernelit ja eemaldab vanu kerneleid;</li>
-<li>kompileerib ja paigaldab kerneli lähtekoodist;</li>
+<li>kompileerib ja paigaldab kerneli lähtekoodist (lisaväljakutse);</li>
 <li>seadistab teenuste sõltuvused ja tüübid, kasutab mallitud, pesa- ja teeüksuseid ning kasutajateenuseid;</li>
 <li>karastab teenuse systemd turvaseadetega ja lahendab teenuste käivitusvigu.</li>
 </ul>
@@ -6640,6 +6668,7 @@ net.ipv4.ip_forward = 1
 <p class="admonition-title">Lühidalt</p>
 <p>Kui süsteem ei käivitu, kasuta GRUB-is parameetrit <code>systemd.unit=rescue.target</code>, <code>init=/bin/bash</code> või AlmaLinuxis <code>rd.break</code>. GRUB-i parandad taastemeedialt <code>chroot</code>-iga. Nii saad lähtestada ka juurkasutaja parooli.</p>
 </div>
+<p>Ka siin kehtib üldine <a href="../lisad/torkeotsing/">tõrkeotsingu töövoog</a>: enne muutmist vaata logisid (<code>journalctl -b -1</code>), muuda üht asja korraga ja kirjuta üles, mida tegid.</p>
 <h3 id="kui-süsteem-satub-hädaolukorra-režiimi">Kui süsteem satub hädaolukorra režiimi<a class="headerlink" href="#kui-süsteem-satub-hädaolukorra-režiimi" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>You are in emergency mode. After logging in, type "journalctl -xb" to view
 system logs, "systemctl reboot" to reboot, "systemctl default" or "exit"
@@ -6806,13 +6835,17 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </
 </code></pre></div>
 <p>AlmaLinuxis määrab alles hoitavate kernelite arvu failis <code>/etc/dnf/dnf.conf</code> rida <code>installonly_limit=3</code>. <strong>Töötavat kernelit ei saa eemaldada</strong> ja alati tasub alles hoida vähemalt üks varukernel.</p>
 <details class="note">
-<summary>Loe lähemalt: Kernelivälised moodulid ja DKMS</summary>
+<summary>Loe lähemalt (lisaväljakutse): Kernelivälised moodulid ja DKMS</summary>
 <p>Mõned draiverid (nt NVIDIA graafikadraiver, ZFS, VirtualBoxi moodulid) ei ole kerneli osa. Need tuleb iga uue kerneli jaoks uuesti kompileerida. Seda teeb automaatselt <strong>DKMS</strong> (<em>Dynamic Kernel Module Support</em>):</p>
 <div class="highlight"><pre><span></span><code>dkms<span class="w"> </span>status<span class="w">                      </span><span class="c1"># millised moodulid on DKMS-i all ja millistele kernelitele kompileeritud</span>
 </code></pre></div>
 <p>Kui pärast kerneli uuendust mõni draiver ei tööta, on põhjus sageli DKMS-i kompileerimisvea taga (<code>journalctl -b | grep -i dkms</code>).</p>
 </details>
 <h3 id="oma-kerneli-kompileerimine">Oma kerneli kompileerimine<a class="headerlink" href="#oma-kerneli-kompileerimine" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Lisaväljakutse</p>
+<p>Edasijõudnutele ja huvilistele. Distro kernelist piisab peaaegu alati; see alapunkt näitab, kuidas kernel valmib. Eksamil ja põhiülesannetes seda ei nõuta (laboritöö 11 valikuline osa V).</p>
+</div>
 <p>Enamasti pole oma kernelit vaja kompileerida - distro kernel on testitud ja saab turvauuendusi. Oma kernel võib siiski olla vajalik, kui:</p>
 <ul>
 <li>vajad funktsiooni või draiverit, mida distro kernelis pole;</li>
@@ -7454,6 +7487,8 @@ sudo<span class="w"> </span>grubby<span class="w"> </span>--info<span class="o">
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

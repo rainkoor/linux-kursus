@@ -5033,6 +5033,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5328,7 +5356,7 @@
 </tr>
 <tr>
 <td><strong>Vajalik</strong></td>
-<td>Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp <code>host</code>): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) Debian Xen Orchestra jaoks (2 vCPU, 3 GiB) ja Proxmox Backup Server (2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB + andmeketas 32 GiB, nt <code>10.0.83.65</code>). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini</td>
+<td>Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp <code>host</code>): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) Debian Xen Orchestra jaoks (2 vCPU, 3 GiB) ja Proxmox Backup Server (2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB + andmeketas 32 GiB, nt <code>10.0.83.165</code>). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini</td>
 </tr>
 <tr>
 <td><strong>Eesmärk</strong></td>
@@ -5453,7 +5481,7 @@ pvesm<span class="w"> </span>list<span class="w"> </span>local-lvm
 <p class="admonition-title">Küsimus K9</p>
 <p>Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?</p>
 </div>
-<p><strong>4.3 Proxmox Backup Server.</strong> Paigalda PBS ISO-st eraldi VM-i (teooria punkt 28.3, <em>Proxmox Backup Server</em>): staatiline IP (nt <code>10.0.83.65</code>), seejärel ava <code>https://10.0.83.65:8007</code>. Lülita hoidlad <em>no-subscription</em> peale ja uuenda (<code>apt update &amp;&amp; apt full-upgrade</code>). Loo andmekettale andmehoidla <code>andmed</code> (<em>Administration</em> → <em>Storage / Disks</em> → <em>Directory</em>, <em>Add as Datastore</em>).</p>
+<p><strong>4.3 Proxmox Backup Server.</strong> Paigalda PBS ISO-st eraldi VM-i (teooria punkt 28.3, <em>Proxmox Backup Server</em>): staatiline IP (nt <code>10.0.83.165</code>), seejärel ava <code>https://10.0.83.165:8007</code>. Lülita hoidlad <em>no-subscription</em> peale ja uuenda (<code>apt update &amp;&amp; apt full-upgrade</code>). Loo andmekettale andmehoidla <code>andmed</code> (<em>Administration</em> → <em>Storage / Disks</em> → <em>Directory</em>, <em>Add as Datastore</em>).</p>
 <p><strong>4.4</strong> PBS-i konsoolis loo Proxmoxi jaoks kasutaja ja vaata sõrmejälge:</p>
 <div class="highlight"><pre><span></span><code>proxmox-backup-manager<span class="w"> </span>user<span class="w"> </span>create<span class="w"> </span>pve@pbs<span class="w"> </span>--password<span class="w"> </span><span class="s1">'Pikk-parool-2026'</span>
 proxmox-backup-manager<span class="w"> </span>acl<span class="w"> </span>update<span class="w"> </span>/datastore/andmed<span class="w"> </span>DatastoreBackup<span class="w"> </span>--auth-id<span class="w"> </span>pve@pbs
@@ -5678,6 +5706,8 @@ xl<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><s
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

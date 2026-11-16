@@ -4934,6 +4934,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lisad/distrod/" class="md-nav__link">
         
   
@@ -5132,7 +5160,7 @@
 <p><strong>4.</strong> Kirjuta aadress <code>fd83:0000:0000:0000:0000:0000:0000:0055</code> lühikujul. Mis liiki aadress see on?</p>
 <details class="success">
 <summary>Vastus</summary>
-<p><code>fd83::55</code>. See on ULA (<em>Unique Local Address</em>, <code>fd00::/8</code>) - privaatvõrgu aadress nagu IPv4 <code>10.0.0.0/8</code>, internetti seda ei marsruudita.</p>
+<p><code>fd83::155</code>. See on ULA (<em>Unique Local Address</em>, <code>fd00::/8</code>) - privaatvõrgu aadress nagu IPv4 <code>10.0.0.0/8</code>, internetti seda ei marsruudita.</p>
 </details>
 <p><strong>5.</strong> Mis on SLAAC ja miks antakse serverile pigem staatiline IPv6-aadress?</p>
 <details class="success">
@@ -5152,7 +5180,7 @@
 <p><strong>8.</strong> Mis vahe on access- ja trunk-pordil? Kumba vajab hüperviisor, mille VM-id on eri VLAN-ides?</p>
 <details class="success">
 <summary>Vastus</summary>
-<p>Access-port edastab ühe VLAN-i kaadreid ilma märgiseta (tavaline arvuti), trunk-port mitme VLAN-i kaadreid 802.1Q märgisega. Hüperviisor vajab trunk-porti ja jagab VLAN-id VM-idele (nt Proxmoxi VLAN-aware sild ja VM-i <em>VLAN Tag</em>).</p>
+<p>Pääsuport (access-port) edastab ühe VLAN-i kaadreid ilma märgiseta (tavaline arvuti), magistraalport (trunk-port) mitme VLAN-i kaadreid 802.1Q märgisega. Hüperviisor vajab magistraalporti ja jagab VLAN-id VM-idele (nt Proxmoxi VLAN-aware sild ja VM-i <em>VLAN Tag</em>).</p>
 </details>
 <p><strong>9.</strong> Millise bond'i režiimi valid, kui kommutaator LACP-d ei toeta, ja millise, kui toetab ning tahad ka suuremat koguläbilaskevõimet?</p>
 <details class="success">
@@ -5180,10 +5208,10 @@
 <p>Serveri tulemüür viskab paketi ära (<code>drop</code>) või vastus läheb teist teed (vale marsruut/asümmeetriline marsruutimine). Kui pordil keegi ei kuulaks, saadaks kernel vastuseks <code>RST</code>.</p>
 </details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> Lisa AlmaLinuxi liidesele <code>ens18</code> püsivalt IPv6-aadress <code>fd83::55/64</code> ja kontrolli seda.</p>
+<p><strong>1.</strong> Lisa AlmaLinuxi liidesele <code>ens18</code> püsivalt IPv6-aadress <code>fd83::155/64</code> ja kontrolli seda.</p>
 <details class="success">
 <summary>Lahendus</summary>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span>ipv6.method<span class="w"> </span>manual<span class="w"> </span>ipv6.addresses<span class="w"> </span>fd83::55/64
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span>ens18<span class="w"> </span>ipv6.method<span class="w"> </span>manual<span class="w"> </span>ipv6.addresses<span class="w"> </span>fd83::155/64
 sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>up<span class="w"> </span>ens18
 ip<span class="w"> </span>-6<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>ens18
 </code></pre></div>
@@ -5218,10 +5246,10 @@ ip<span class="w"> </span>-6<span class="w"> </span>-br<span class="w"> </span>a
 </code></pre></div>
 <p>Lisaks <code>net.ipv4.ip_forward = 1</code> ja tulemüüri <code>forward</code> luba.</p>
 </details>
-<p><strong>4.</strong> Püüa liidesel <code>ens18</code> ainult DNS-päringuid masinast <code>10.0.83.52</code> ja salvesta need faili.</p>
+<p><strong>4.</strong> Püüa liidesel <code>ens18</code> ainult DNS-päringuid masinast <code>10.0.83.152</code> ja salvesta need faili.</p>
 <details class="success">
 <summary>Lahendus</summary>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-n<span class="w"> </span>-w<span class="w"> </span>dns.pcap<span class="w"> </span>host<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>and<span class="w"> </span>port<span class="w"> </span><span class="m">53</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>ens18<span class="w"> </span>-n<span class="w"> </span>-w<span class="w"> </span>dns.pcap<span class="w"> </span>host<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>and<span class="w"> </span>port<span class="w"> </span><span class="m">53</span>
 </code></pre></div>
 </details>
 
@@ -5321,6 +5349,8 @@ ip<span class="w"> </span>-6<span class="w"> </span>-br<span class="w"> </span>a
     
     
       <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../javascripts/sorditav.js"></script>
       
     
   </body>

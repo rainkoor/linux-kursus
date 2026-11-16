@@ -5255,6 +5255,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -6049,8 +6077,8 @@ sudo<span class="w"> </span>iftop<span class="w"> </span>-i<span class="w"> </sp
 </code></pre></div>
 <p>Kui kahtlustad, et võrk on aeglane, mõõda <strong>läbilaskevõimet</strong> kahe masina vahel ja kontrolli liidese kiirust:</p>
 <div class="highlight"><pre><span></span><code>iperf3<span class="w"> </span>-s<span class="w">                                  </span><span class="c1"># masinas A: server (port 5201/tcp)</span>
-iperf3<span class="w"> </span>-c<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>-t<span class="w"> </span><span class="m">10</span><span class="w">                 </span><span class="c1"># masinas B: mõõda 10 sekundit A suunas</span>
-iperf3<span class="w"> </span>-c<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>-R<span class="w">                    </span><span class="c1"># vastupidine suund</span>
+iperf3<span class="w"> </span>-c<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>-t<span class="w"> </span><span class="m">10</span><span class="w">                 </span><span class="c1"># masinas B: mõõda 10 sekundit A suunas</span>
+iperf3<span class="w"> </span>-c<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>-R<span class="w">                    </span><span class="c1"># vastupidine suund</span>
 sudo<span class="w"> </span>ethtool<span class="w"> </span>ens18<span class="w">                         </span><span class="c1"># liidese kiirus ja duplex (Speed, Duplex, Link detected)</span>
 mtr<span class="w"> </span>-rwc<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">1</span>.1.1.1<span class="w">                        </span><span class="c1"># pakettide kadu ja viide iga hüppe kaupa</span>
 </code></pre></div>
@@ -6236,9 +6264,9 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9100/metr
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node</span>
 <span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.52:9100</span><span class="w">      </span><span class="c1"># debian1</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.54:9100</span><span class="w">      </span><span class="c1"># ubuntusrv</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.55:9100</span><span class="w">      </span><span class="c1"># alma</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.152:9100</span><span class="w">      </span><span class="c1"># debian1</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.154:9100</span><span class="w">      </span><span class="c1"># ubuntusrv</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.83.155:9100</span><span class="w">      </span><span class="c1"># alma</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/seire<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
@@ -6578,6 +6606,8 @@ mailq<span class="w">                                       </span><span class="
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

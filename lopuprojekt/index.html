@@ -5093,6 +5093,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5585,7 +5613,7 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Näide - WordPress</p>
-<p><code>alma</code> (veebiserver): nginx + PHP-FPM (<code>php-mysqlnd</code>, <code>php-gd</code>, <code>php-xml</code>, <code>php-mbstring</code>, <code>php-intl</code>, <code>php-zip</code>), SELinux lubab veebiserveril andmebaasiga ühenduda (<code>setsebool -P httpd_can_network_connect_db on</code>) ja kirjutada üleslaadimiste kataloogi (<code>semanage fcontext … httpd_sys_rw_content_t</code>); <code>debian2</code> (andmebaas): MariaDB, kus kasutaja <code>'wordpress'@'10.0.83.55'</code> ja <code>bind-address</code> laborivõrgu aadressil, tulemüüris port 3306 lubatud ainult veebiserverile; <code>wp-config.php</code> õigused <code>640</code>; HTTPS oma CA sertifikaadiga; igaöine <code>mariadb-dump</code> + <code>wp-content</code> varundus resticuga; taastamistest uude VM-i. Lisanõudeks sobib WordPressi CLI (<code>wp-cli</code>) ja fail2ban WordPressi sisselogimislehele.</p>
+<p><code>alma</code> (veebiserver): nginx + PHP-FPM (<code>php-mysqlnd</code>, <code>php-gd</code>, <code>php-xml</code>, <code>php-mbstring</code>, <code>php-intl</code>, <code>php-zip</code>), SELinux lubab veebiserveril andmebaasiga ühenduda (<code>setsebool -P httpd_can_network_connect_db on</code>) ja kirjutada üleslaadimiste kataloogi (<code>semanage fcontext … httpd_sys_rw_content_t</code>); <code>debian2</code> (andmebaas): MariaDB, kus kasutaja <code>'wordpress'@'10.0.83.155'</code> ja <code>bind-address</code> laborivõrgu aadressil, tulemüüris port 3306 lubatud ainult veebiserverile; <code>wp-config.php</code> õigused <code>640</code>; HTTPS oma CA sertifikaadiga; igaöine <code>mariadb-dump</code> + <code>wp-content</code> varundus resticuga; taastamistest uude VM-i. Lisanõudeks sobib WordPressi CLI (<code>wp-cli</code>) ja fail2ban WordPressi sisselogimislehele.</p>
 </div>
 <p><strong>E2. Ansible'iga hallatav serveripark</strong></p>
 <p>Ehita vähemalt kolmest serverist koosnev keskkond, mis seadistatakse täielikult Ansible'iga (moodul 20).</p>
@@ -5729,7 +5757,7 @@
 <td>✔</td>
 </tr>
 <tr>
-<td><strong>Teadmusbaasi artikkel</strong>: ühe projekti käigus lahendatud probleemi kirjeldus (sümptom, põhjus, lahendus)</td>
+<td><strong>Teadmusbaasi artikkel</strong>: ühe projekti käigus lahendatud probleemi kirjeldus (sümptom, põhjus, lahendus; vorm <a href="../lisad/torkeotsing/#7-dokumenteeri">tõrkeotsingu lisas</a>)</td>
 <td>-</td>
 <td>✔</td>
 <td>vähemalt 2</td>
@@ -5971,6 +5999,8 @@
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>

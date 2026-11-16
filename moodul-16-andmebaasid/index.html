@@ -5089,6 +5089,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lisad/torkeotsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tõrkeotsingu töövoog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lisad/distrod/" class="md-nav__link">
         
   
@@ -5437,7 +5465,7 @@
 <li>kasutab Valkey/Redise võti-väärtus hoidlat vahemäluna;</li>
 <li>paigaldab dünaamilise veebirakenduse (nginx + PHP + MariaDB);</li>
 <li>varundab ja taastab andmebaase ning taastab unustatud administraatori parooli;</li>
-<li>kirjeldab replikatsiooni põhimõtet ning viib rikke korral koopia põhiserveriks (ülevõtt).</li>
+<li>kirjeldab replikatsiooni põhimõtet ning viib rikke korral koopia põhiserveriks (ülevõtt; lisaväljakutse).</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Kuidas seda lehte lugeda</p>
@@ -5575,7 +5603,7 @@ sudo<span class="w"> </span>mariadb<span class="w">                         </sp
 <span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
 </code></pre></div>
-<p>Vaikimisi kuulab MariaDB ainult aadressil <code>127.0.0.1</code> (<code>bind-address</code> failis <code>/etc/mysql/mariadb.conf.d/50-server.cnf</code>). <strong>Andmebaas ei tohiks olla internetist kättesaadav.</strong> Kui teine server peab andmebaasiga ühenduma, muuda <code>bind-address</code>, loo kasutaja kindla IP-ga (<code>'kool'@'10.0.83.53'</code>) ja luba tulemüüris ainult see aadress.</p>
+<p>Vaikimisi kuulab MariaDB ainult aadressil <code>127.0.0.1</code> (<code>bind-address</code> failis <code>/etc/mysql/mariadb.conf.d/50-server.cnf</code>). <strong>Andmebaas ei tohiks olla internetist kättesaadav.</strong> Kui teine server peab andmebaasiga ühenduma, muuda <code>bind-address</code>, loo kasutaja kindla IP-ga (<code>'kool'@'10.0.83.153'</code>) ja luba tulemüüris ainult see aadress.</p>
 <p>Varundus ja taastamine:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mariadb-dump<span class="w"> </span>--single-transaction<span class="w"> </span>kool<span class="w"> </span>&gt;<span class="w"> </span>kool-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql
 sudo<span class="w"> </span>mariadb-dump<span class="w"> </span>--all-databases<span class="w"> </span>--single-transaction<span class="w"> </span>&gt;<span class="w"> </span>koik.sql
@@ -5609,6 +5637,10 @@ sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </
 <p>See töötab ainult juurkasutaja õigustega serveris. Andmebaasi kaitseb seega lõpuks operatsioonisüsteemi turvalisus - kes saab serveris <code>root</code>-iks, saab ka andmebaasi.</p>
 </div>
 <h3 id="replikatsioon-lühidalt">Replikatsioon lühidalt<a class="headerlink" href="#replikatsioon-lühidalt" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Lisaväljakutse</p>
+<p>Replikatsioon ja ülevõtt on edasijõudnute teema (laboritöö 16 lisaülesanne). Põhioskus on varundus ja taastamine (punkt 16.7).</p>
+</div>
 <p><strong>Replikatsioon</strong> hoiab teises serveris (<em>replica</em>) andmebaasist pidevalt uuendatavat koopiat: lugemispäringuid saab jagada ja põhiserveri rikke korral on andmed alles. Põhimõte MariaDB-s:</p>
 <div class="highlight"><pre><span></span><code># põhiserver (primary), /etc/mysql/mariadb.conf.d/60-repl.cnf
 [mariadb]
@@ -5621,10 +5653,10 @@ server_id = 2
 read_only = ON
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1">-- põhiserveris: replikatsioonikasutaja</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'repl'</span><span class="o">@</span><span class="s1">'10.0.83.53'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Repl-Parool-1'</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'repl'</span><span class="o">@</span><span class="s1">'10.0.83.53'</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'repl'</span><span class="o">@</span><span class="s1">'10.0.83.153'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Repl-Parool-1'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'repl'</span><span class="o">@</span><span class="s1">'10.0.83.153'</span><span class="p">;</span>
 <span class="c1">-- koopias (pärast andmete esmast kopeerimist mariadb-dump --master-data=1 abil):</span>
-<span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">'10.0.83.52'</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">'repl'</span><span class="p">,</span>
+<span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">'10.0.83.152'</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">'repl'</span><span class="p">,</span>
 <span class="w">    </span><span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">'Repl-Parool-1'</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_USE_GTID</span><span class="o">=</span><span class="n">slave_pos</span><span class="p">;</span>
 <span class="k">START</span><span class="w"> </span><span class="n">REPLICA</span><span class="p">;</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">REPLICA</span><span class="w"> </span><span class="n">STATUS</span><span class="err">\</span><span class="k">G</span>
@@ -5733,10 +5765,10 @@ sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> <
 </ul>
 <div class="highlight"><pre><span></span><code># TYPE  DATABASE  USER  ADDRESS          METHOD
 local   all       all                    peer
-host    kool      kool  10.0.83.55/32    scram-sha-256
+host    kool      kool  10.0.83.155/32    scram-sha-256
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>postgresql
-psql<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.52<span class="w"> </span>-U<span class="w"> </span>kool<span class="w"> </span>-d<span class="w"> </span>kool<span class="w">           </span><span class="c1"># teisest masinast</span>
+psql<span class="w"> </span>-h<span class="w"> </span><span class="m">10</span>.0.83.152<span class="w"> </span>-U<span class="w"> </span>kool<span class="w"> </span>-d<span class="w"> </span>kool<span class="w">           </span><span class="c1"># teisest masinast</span>
 </code></pre></div>
 <p>Varundus ja taastamine:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>pg_dump<span class="w"> </span>-Fc<span class="w"> </span>kool<span class="w"> </span>&gt;<span class="w"> </span>kool.dump<span class="w">        </span><span class="c1"># kohandatud vorming, pakitud</span>
@@ -5857,7 +5889,7 @@ ls<span class="w"> </span>/run/php/<span class="w">                          </s
 <td>häkitud rakendus ei pääse teistele andmetele ligi</td>
 </tr>
 <tr>
-<td>Andmebaas kuulab ainult <code>127.0.0.1</code> või sisevõrgus kindlatele masinatele (tulemüür, <code>pg_hba.conf</code>, kasutaja <code>'kool'@'10.0.83.55'</code>)</td>
+<td>Andmebaas kuulab ainult <code>127.0.0.1</code> või sisevõrgus kindlatele masinatele (tulemüür, <code>pg_hba.conf</code>, kasutaja <code>'kool'@'10.0.83.155'</code>)</td>
 <td>andmebaas ei tohi kunagi olla internetist kättesaadav</td>
 </tr>
 <tr>
@@ -6098,6 +6130,8 @@ sudo<span class="w"> </span>mariadb<span class="w"> </span>-e<span class="w"> </
     
     
       <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/sorditav.js"></script>
       
     
   </body>
