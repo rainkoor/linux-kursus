@@ -6379,7 +6379,7 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-s<span class="w"> </
 <h2 id="62-muutujad">6.2 Muutujad<a class="headerlink" href="#62-muutujad" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">Lühidalt</p>
-<p>Muutuja omistatakse ilma tühikuteta: <code>nimi=Mari</code>, kasutatakse <code>$nimi</code>-ga. Käsu väljund muutujasse: <code>kuupaev=$(date +%F)</code>.</p>
+<p>Muutuja omistatakse ilma tühikuteta: <code>nimi=Mari</code>, kasutatakse <code>$nimi</code>-ga. Käsu väljund muutujasse: <code>kuupaev=$(date +%F)</code>. <code>export</code> teeb muutujast <strong>keskkonnamuutuja</strong>, mille koopia saavad kõik sealt käivitatud programmid; <code>PATH</code> ütleb, kust käske otsitakse.</p>
 </div>
 <div class="highlight"><pre><span></span><code><span class="nv">nimi</span><span class="o">=</span><span class="s2">"Mari"</span>
 <span class="nv">vanus</span><span class="o">=</span><span class="m">17</span>
@@ -6394,6 +6394,7 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-s<span class="w"> </
 <li>muutujate nimed on tõstutundlikud. Kokkuleppe järgi kasutatakse oma muutujate jaoks väiketähti ja keskkonnamuutujate jaoks suurtähti.</li>
 </ul>
 <h3 id="keskkonnamuutujad">Keskkonnamuutujad<a class="headerlink" href="#keskkonnamuutujad" title="Permanent link">&para;</a></h3>
+<p><strong>Keskkond</strong> (<em>environment</em>) on nimi-väärtus paaride kogum, mille iga protsess saab käivitamisel kaasa. Programmid loevad sealt oma seadeid: kus on kodukataloog (<code>HOME</code>), kust käske otsida (<code>PATH</code>), mis keeles teateid näidata (<code>LANG</code>), millist tekstiredaktorit avada (<code>EDITOR</code>). Nii saab sama programmi käitumist muuta ilma selle seadistusfaili puutumata.</p>
 <p>Mõned muutujad on alati olemas:</p>
 <table>
 <thead>
@@ -6421,27 +6422,104 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-s<span class="w"> </
 </tr>
 <tr>
 <td><code>$SHELL</code></td>
-<td>Kasutaja kest</td>
+<td>Kasutaja sisselogimiskest</td>
+</tr>
+<tr>
+<td><code>$LANG</code></td>
+<td>Keel ja lokaat (moodul 3, punkt 3.14)</td>
+</tr>
+<tr>
+<td><code>$EDITOR</code></td>
+<td>Vaiketekstiredaktor (nt <code>crontab -e</code>, <code>visudo</code> kasutavad seda)</td>
 </tr>
 <tr>
 <td><code>$HOSTNAME</code></td>
-<td>Masina nimi</td>
+<td>Masina nimi (bashi muutuja)</td>
 </tr>
 <tr>
 <td><code>$RANDOM</code></td>
-<td>Juhuslik arv 0–32767</td>
+<td>Juhuslik arv 0–32767 (bashi muutuja)</td>
 </tr>
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code>env<span class="w">                          </span><span class="c1"># kõik keskkonnamuutujad</span>
-<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">MINU_SEADE</span><span class="o">=</span><span class="s2">"väärtus"</span><span class="w">  </span><span class="c1"># muutuja pärandatakse ka käivitatavatele programmidele</span>
+printenv<span class="w"> </span>PATH<span class="w">                </span><span class="c1"># ühe muutuja väärtus (sama mis echo $PATH)</span>
+<span class="nb">set</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w">                   </span><span class="c1"># kõik kesta muutujad ja funktsioonid, ka eksportimata</span>
+<span class="nb">unset</span><span class="w"> </span>MINU_SEADE<span class="w">             </span><span class="c1"># kustuta muutuja</span>
 </code></pre></div>
-<p>Ilma <code>export</code>-ita on muutuja nähtav ainult praeguses kestas, mitte sealt käivitatud programmides ja skriptides.</p>
-<p>Püsivad muutujad ja aliased kirjutatakse faili <code>~/.bashrc</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s1">'ls -lh'</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">EDITOR</span><span class="o">=</span>nano
+<p><strong>Kesta muutuja ja keskkonnamuutuja.</strong> Tavaline muutuja on olemas ainult praeguses kestas. <code>export</code> teeb sellest keskkonnamuutuja: siis saavad selle <strong>koopia</strong> kõik programmid ja skriptid, mida sellest kestast edaspidi käivitad.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">linn</span><span class="o">=</span>Haapsalu
+bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "Linn: $linn"'</span><span class="w">      </span><span class="c1"># Linn:          - alamprotsess muutujat ei näe</span>
+<span class="nb">export</span><span class="w"> </span>linn
+bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "Linn: $linn"'</span><span class="w">      </span><span class="c1"># Linn: Haapsalu</span>
 </code></pre></div>
+<p>Pärandamine käib ainult <strong>ühes suunas</strong>: vanemalt lapsele. Skript, mis muudab või ekspordib muutujat, ei muuda sinu kesta keskkonda, sest skript töötab eraldi protsessis. Kui tahad, et faili muutujad jõuaksid sinu kesta, loe see sisse käsuga <code>source fail</code> (ehk <code>. fail</code>).</p>
+<p><strong>Ühe käsu jaoks</strong> saab muutuja anda käsu ette - see kehtib ainult sellele käsule:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">LANG</span><span class="o">=</span>C<span class="w"> </span>ls<span class="w"> </span>--help<span class="w">             </span><span class="c1"># ingliskeelne abi (hea veateadete otsimiseks internetist)</span>
+<span class="nv">TZ</span><span class="o">=</span>America/New_York<span class="w"> </span>date<span class="w">     </span><span class="c1"># kellaaeg teises ajavööndis</span>
+<span class="nv">EDITOR</span><span class="o">=</span>vim<span class="w"> </span>crontab<span class="w"> </span>-e<span class="w">        </span><span class="c1"># seekord vim, mitte vaikeredaktor</span>
+</code></pre></div>
+<p><strong><code>PATH</code></strong> on kooloniga eraldatud kataloogide loend. Kui kirjutad käsu ilma teeta (<code>ls</code>), otsib kest seda nendest kataloogidest järjest ja käivitab esimese leitu:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span><span class="w">                   </span><span class="c1"># nt /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin</span>
+<span class="nb">type</span><span class="w"> </span>ls<span class="w">                      </span><span class="c1"># kust käsk leiti (või kas see on sisekäsk või alias)</span>
+</code></pre></div>
+<p>Praegune kataloog ei ole <code>PATH</code>-is turvalisuse pärast - muidu võiks keegi panna ühiskasutatavasse kataloogi pahatahtliku faili nimega <code>ls</code>. Seepärast käivitatakse oma skript kujul <code>./skript.sh</code>. Oma skriptide kataloogi lisamiseks <code>PATH</code>-i kirjuta faili <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w">   </span><span class="c1"># oma kataloog ette, vana loend alles</span>
+</code></pre></div>
+<p>Ära kirjuta <code>PATH=$HOME/bin</code> (ilma <code>:$PATH</code>-ita) - siis kaovad kõik süsteemi käsud ja isegi <code>ls</code> ei tööta enam. Kui see juhtus, ava uus terminal või kirjuta <code>export PATH=/usr/local/bin:/usr/bin:/bin</code>.</p>
+<p><strong>Kus keskkond seadistatakse:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kus</th>
+<th>Kehtib</th>
+<th>Näide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.bashrc</code></td>
+<td>sinu interaktiivsed bashi kestad</td>
+<td><code>export EDITOR=nano</code>, <code>alias ll='ls -lh'</code></td>
+</tr>
+<tr>
+<td><code>~/.profile</code> (või <code>~/.bash_profile</code>)</td>
+<td>sinu sisselogimine (ka graafiline)</td>
+<td><code>PATH</code> laiendamine</td>
+</tr>
+<tr>
+<td><code>/etc/environment</code></td>
+<td>kõik kasutajad; ainult <code>NIMI=väärtus</code> read, ilma kesta süntaksita</td>
+<td><code>LANG=en_US.UTF-8</code></td>
+</tr>
+<tr>
+<td><code>/etc/profile.d/*.sh</code></td>
+<td>kõigi kasutajate sisselogimiskestad</td>
+<td>asutuse ühised seaded</td>
+</tr>
+<tr>
+<td>systemd teenus: <code>Environment=</code>, <code>EnvironmentFile=</code></td>
+<td>ainult see teenus</td>
+<td>moodul 11, punkt 11.11</td>
+</tr>
+<tr>
+<td>crontab'i algus: <code>PATH=…</code>, <code>MAILTO=…</code></td>
+<td>selle kasutaja cron'i tööd</td>
+<td>moodul 5, punkt 5.8</td>
+</tr>
+</tbody>
+</table>
+<p>Kesta seadistusfailidest (millal millist loetakse) on juttu punktis 6.1.</p>
+<div class="admonition warning">
+<p class="admonition-title">Hoiatus</p>
+<p><strong>Keskkond ei ole alati sama.</strong> Kolm tavalist üllatust:</p>
+<ul>
+<li><strong>cron</strong> käivitab tööd väga väikese keskkonnaga (lühike <code>PATH</code>, ei loe <code>~/.bashrc</code>-d) - kasuta skriptides täisteid (moodul 5);</li>
+<li><strong>sudo</strong> puhastab keskkonna ja kasutab oma <code>PATH</code>-i (<code>secure_path</code>). Kui käsk vajab muutujat, anna see käsu ette: <code>sudo env RESTIC_REPOSITORY=/varu restic snapshots</code> või kasuta <code>sudo -E</code> (säilitab keskkonna, kui <code>sudoers</code> seda lubab);</li>
+<li><strong>systemd teenus</strong> ei näe sinu kesta muutujaid - need tuleb anda üksuse failis (<code>Environment=</code>).</li>
+</ul>
+</div>
+<p>Keskkonnamuutujatega antakse programmidele sageli ka paroole ja võtmeid (nt <code>RESTIC_PASSWORD_FILE</code>, moodul 9). Protsessi keskkonda näeb ainult tema omanik ja juurkasutaja (<code>/proc/PID/environ</code>), kuid ära kirjuta saladusi otse käsureale - need jäävad kesta ajalukku (<code>~/.bash_history</code>). Parem on viidata failile, millel on õigused <code>600</code>.</p>
 <h3 id="käskude-asendus">Käskude asendus<a class="headerlink" href="#käskude-asendus" title="Permanent link">&para;</a></h3>
 <p>Käsu väljundi saab salvestada muutujasse:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">tana</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>

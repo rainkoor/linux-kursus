@@ -5262,6 +5262,21 @@
 <summary>Vastus</summary>
 <p>Sisselogimiskest (SSH, konsool, <code>su -</code>) loeb <code>/etc/profile</code> ja <code>~/.profile</code> (või <code>~/.bash_profile</code>); iga interaktiivne Bash loeb <code>~/.bashrc</code>. Aliased kirjutatakse faili <code>~/.bashrc</code>, sest Debiani ja Ubuntu <code>~/.profile</code> loeb selle ka sisselogimisel.</p>
 </details>
+<p><strong>25.</strong> Mis vahe on kesta muutujal ja keskkonnamuutujal? Kuidas teed kesta muutujast keskkonnamuutuja?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Kesta muutuja on olemas ainult praeguses kestas. Keskkonnamuutuja (<code>export nimi</code>) koopia antakse kõigile programmidele ja skriptidele, mis sellest kestast käivitatakse.</p>
+</details>
+<p><strong>26.</strong> Skript <code>seaded.sh</code> sisaldab rida <code>export EDITOR=vim</code>. Käivitad selle <code>./seaded.sh</code> ja seejärel <code>echo $EDITOR</code> näitab vana väärtust. Miks? Kuidas saada muutuja oma kesta?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p>Skript töötab eraldi alamprotsessis ja alamprotsess ei saa muuta vanema (sinu kesta) keskkonda. Muutujad saab oma kesta lugeda käsuga <code>source seaded.sh</code> (või <code>. seaded.sh</code>).</p>
+</details>
+<p><strong>27.</strong> Mis on <code>PATH</code> ja miks ei saa oma skripti käivitada lihtsalt nimega <code>skript.sh</code>, vaid tuleb kirjutada <code>./skript.sh</code>?</p>
+<details class="success">
+<summary>Vastus</summary>
+<p><code>PATH</code> on kooloniga eraldatud kataloogide loend, kust kest käske järjest otsib. Praegune kataloog ei ole turvalisuse pärast <code>PATH</code>-is, seepärast tuleb anda tee (<code>./</code>). Oma skriptide kataloogi saab lisada: <code>export PATH="$HOME/bin:$PATH"</code>.</p>
+</details>
 <h2 id="praktilised-miniülesanded">Praktilised miniülesanded<a class="headerlink" href="#praktilised-miniülesanded" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> <code>paaris</code> - saab argumendina arvu ja ütleb, kas see on paaris või paaritu. Kui argument pole täisarv, kirjutab veateate ja lõpetab koodiga 1.</p>
 <details class="success">
@@ -5338,6 +5353,13 @@ find<span class="w"> </span><span class="s2">"</span><span class="nv">$kataloog<
 <details class="success">
 <summary>Lahendus</summary>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>HEAD~2<span class="w"> </span>--<span class="w"> </span>seire.conf
+</code></pre></div>
+</details>
+<p><strong>8.</strong> Näita kellaaega Tokyos ilma süsteemi ajavööndit muutmata ja kuva oma <code>PATH</code> nii, et iga kataloog on eraldi real.</p>
+<details class="success">
+<summary>Lahendus</summary>
+<div class="highlight"><pre><span></span><code><span class="nv">TZ</span><span class="o">=</span>Asia/Tokyo<span class="w"> </span>date
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">':'</span><span class="w"> </span><span class="s1">'\n'</span>
 </code></pre></div>
 </details>
 

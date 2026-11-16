@@ -6004,11 +6004,12 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><span class="nb">type</span><span class="w"> </span>ls<span class="w">                     </span><span class="c1"># kas käsk on programm, kesta sisekäsk või alias</span>
+<div class="highlight"><pre><span></span><code><span class="nb">type</span><span class="w"> </span>ls<span class="w">                     </span><span class="c1"># kas käsk on programm, kesta sisekäsk või alias - ja kust see leiti</span>
 dpkg<span class="w"> </span>-S<span class="w"> </span>/usr/bin/ls<span class="w">         </span><span class="c1"># Debian, Ubuntu: coreutils: /usr/bin/ls</span>
 rpm<span class="w"> </span>-qf<span class="w"> </span>/usr/bin/ls<span class="w">         </span><span class="c1"># AlmaLinux: coreutils-9...</span>
 ls<span class="w"> </span>--version<span class="w">                </span><span class="c1"># versioon ja projekt (GNU coreutils)</span>
 </code></pre></div>
+<p>Millistest kataloogidest kest käske otsib, määrab keskkonnamuutuja <code>PATH</code> (<code>echo $PATH</code>). Keskkonnamuutujatest on lähemalt juttu moodulis 6, punkt 6.2.</p>
 <p><strong>GNU, POSIX, BSD ja BusyBox.</strong> Standard <strong>POSIX</strong> kirjeldab, millised käsud ja võtmed peavad Unixi-laadses süsteemis olemas olema. GNU tööriistad teevad rohkem: neil on pikad võtmed (<code>--help</code>, <code>--human-readable</code>) ja lisavõimalused (<code>grep -P</code>, <code>sed -i</code>, <code>date -d</code>), mida mujal ei pruugi olla.</p>
 <table>
 <thead>

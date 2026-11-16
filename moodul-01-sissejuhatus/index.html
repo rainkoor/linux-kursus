@@ -6326,22 +6326,14 @@ man<span class="w"> </span>-k<span class="w"> </span>copy
 <h2 id="17-failisüsteemi-hierarhia">1.7 Failisüsteemi hierarhia<a class="headerlink" href="#17-failisüsteemi-hierarhia" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">Lühidalt</p>
-<p>Linuxis on üks kataloogipuu, mis algab juurest <code>/</code>. Tähtsamad kohad: <code>/home</code> - kasutajate failid, <code>/etc</code> - seadistus, <code>/var/log</code> - logid.</p>
+<p>Linuxis on üks kataloogipuu, mis algab juurest <code>/</code>. Tähtsamad kohad: <code>/home</code> - kasutajate failid, <code>/etc</code> - seadistus, <code>/var/log</code> - logid, <code>/usr/bin</code> - programmid, <code>/usr/lib</code> - teegid.</p>
 </div>
 <p>Windowsis on igal kettal oma täht (<code>C:</code>, <code>D:</code>). Linuxis on <strong>üks puu</strong>, mis algab <strong>juurkataloogist</strong> <code>/</code>. Kõik kettad, USB-mälud ja võrgukettad haagitakse selle puu mõnda kataloogi.</p>
 <p>Kataloogide paigutust kirjeldab standard <strong>FHS</strong> (<em>Filesystem Hierarchy Standard</em>):</p>
-<pre class="mermaid"><code>flowchart TB
-    R["/"] --&gt; home["/home&lt;br&gt;kasutajad"]
-    R --&gt; etc["/etc&lt;br&gt;seadistus"]
-    R --&gt; var["/var&lt;br&gt;logid, andmed"]
-    R --&gt; usr["/usr&lt;br&gt;programmid"]
-    R --&gt; boot["/boot&lt;br&gt;kernel"]
-    R --&gt; dev["/dev&lt;br&gt;seadmed"]
-    R --&gt; tmp["/tmp&lt;br&gt;ajutised failid"]
-    R --&gt; root["/root&lt;br&gt;juurkasutaja"]
-    home --&gt; mari["/home/mari"]
-    var --&gt; log["/var/log"]
-    usr --&gt; bin["/usr/bin"]</code></pre>
+<p><a href="../pildid/fhs.svg"><img alt="Linuxi failisüsteemi hierarhia: juurkataloog, esimese taseme kataloogid ja olulisemad alamkataloogid koos selgitustega" src="../pildid/fhs.svg" /></a></p>
+<p><em>Joonise suurelt avamiseks klõpsa sellel (telefonis saab seal suurendada).</em></p>
+<p>Joonisel on <strong>esimese taseme kataloogid</strong> (sinised) ja nende olulisemad <strong>alamkataloogid</strong> (hallid). Mõni kataloog on ainult viit teisele: tänapäevastes distrodes on <code>/bin</code> tegelikult <code>/usr/bin</code>, <code>/lib</code> on <code>/usr/lib</code> jne (vaata ise: <code>ls -l /</code>).</p>
+<p><strong>Mis on teek?</strong> <strong>Teek</strong> (<em>library</em>) on valmis koodi kogum, mida paljud programmid kasutavad ühiselt - näiteks failide lugemiseks, krüpteerimiseks või võrguühenduseks. Programm ei sisalda seda koodi ise, vaid laadib teegi käivitamisel. Teegid on failid laiendiga <code>.so</code> (<em>shared object</em>) kataloogis <code>/usr/lib</code> - Windowsis vastavad neile <code>.dll</code>-failid. Kasu: kui teegis parandatakse turvaviga (nt OpenSSL-is), saavad parandus kõik programmid korraga, ilma et neid peaks ükshaaval uuendama. Seda, milliseid teeke programm vajab, näitab käsk <code>ldd</code> (nt <code>ldd /usr/bin/ls</code>). Teekidest ja nende sõltuvustest on lähemalt juttu moodulis 4.</p>
 <details class="note">
 <summary>Loe lähemalt: kõik põhikataloogid</summary>
 <table>
@@ -6378,11 +6370,19 @@ man<span class="w"> </span>-k<span class="w"> </span>copy
 </tr>
 <tr>
 <td><code>/usr</code></td>
-<td>Paigaldatud programmid ja teegid (<code>/usr/bin</code>, <code>/usr/lib</code>)</td>
+<td>Paigaldatud programmid (<code>/usr/bin</code>, <code>/usr/sbin</code>), teegid (<code>/usr/lib</code>), dokumentatsioon (<code>/usr/share</code>) ja käsitsi paigaldatud tarkvara (<code>/usr/local</code>)</td>
 </tr>
 <tr>
 <td><code>/bin</code>, <code>/sbin</code></td>
 <td>Põhikäsud. Tänapäevastes distrodes viidad kataloogidele <code>/usr/bin</code> ja <code>/usr/sbin</code></td>
+</tr>
+<tr>
+<td><code>/lib</code>, <code>/lib64</code></td>
+<td>Teegid. Tänapäevastes distrodes viidad kataloogidele <code>/usr/lib</code> ja <code>/usr/lib64</code></td>
+</tr>
+<tr>
+<td><code>/run</code></td>
+<td>Töötava süsteemi ajutised andmed (nt teenuste PID-failid); kaovad taaskäivitusel</td>
 </tr>
 <tr>
 <td><code>/boot</code></td>
