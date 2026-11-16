@@ -8,7 +8,7 @@
 |---|---|
 | **Platvormid** | Debian (KVM ja libvirt), Proxmox VE, XCP-ng ja Debian (Xen Orchestra) |
 | **Kestus** | 5 × 90 minutit |
-| **Vajalik** | Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp `host`): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) Debian Xen Orchestra jaoks (2 vCPU, 3 GiB) ja Proxmox Backup Server (2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB + andmeketas 32 GiB, nt `10.0.83.65`). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini |
+| **Vajalik** | Kooli Proxmoxis pesastatud virtualiseerimisega VM-id (protsessori tüüp `host`): Debian (2 vCPU, 4 GiB RAM, 20 GiB), Proxmox VE (4 vCPU, 8 GiB RAM, 64 GiB), XCP-ng (2 vCPU, 4 GiB, 64 GiB) Debian Xen Orchestra jaoks (2 vCPU, 3 GiB) ja Proxmox Backup Server (2 vCPU, 4 GiB RAM, süsteemiketas 32 GiB + andmeketas 32 GiB, nt `10.0.83.165`). Füüsiline server (nt aines „Majutuskeskkonna riistvara“) sobib veel paremini |
 | **Eesmärk** | Mõista, kuidas Linux virtualiseerib, ning paigaldada ja hallata kahte avatud hüperviisorit |
 
 > **Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
@@ -145,7 +145,7 @@ pvesm list local-lvm
 
 > **K9.** Mis vahe oli kloonide loomise kiirusel ja ruumikasutusel? Miks ei tohi lingitud klooni malli kustutada?
 
-**4.3 Proxmox Backup Server.** Paigalda PBS ISO-st eraldi VM-i (teooria punkt 28.3, *Proxmox Backup Server*): staatiline IP (nt `10.0.83.65`), seejärel ava `https://10.0.83.65:8007`. Lülita hoidlad *no-subscription* peale ja uuenda (`apt update && apt full-upgrade`). Loo andmekettale andmehoidla `andmed` (*Administration* → *Storage / Disks* → *Directory*, *Add as Datastore*).
+**4.3 Proxmox Backup Server.** Paigalda PBS ISO-st eraldi VM-i (teooria punkt 28.3, *Proxmox Backup Server*): staatiline IP (nt `10.0.83.165`), seejärel ava `https://10.0.83.165:8007`. Lülita hoidlad *no-subscription* peale ja uuenda (`apt update && apt full-upgrade`). Loo andmekettale andmehoidla `andmed` (*Administration* → *Storage / Disks* → *Directory*, *Add as Datastore*).
 
 **4.4** PBS-i konsoolis loo Proxmoxi jaoks kasutaja ja vaata sõrmejälge:
 

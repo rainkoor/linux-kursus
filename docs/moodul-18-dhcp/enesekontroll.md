@@ -131,7 +131,7 @@ Pikk rent (nt 24 h) sobib püsivate seadmetega võrku: vähem liiklust ja kliend
 
 </details>
 
-**3.** Kirjuta ISC DHCP reserveering masinale `printer` (MAC `00:11:22:33:44:55`, IP `10.0.83.20`).
+**3.** Kirjuta ISC DHCP reserveering masinale `printer` (MAC `00:11:22:33:44:55`, IP `10.0.83.120`).
 
 <details>
 <summary>Lahendus</summary>
@@ -139,7 +139,7 @@ Pikk rent (nt 24 h) sobib püsivate seadmetega võrku: vähem liiklust ja kliend
 ```text
 host printer {
     hardware ethernet 00:11:22:33:44:55;
-    fixed-address 10.0.83.20;
+    fixed-address 10.0.83.120;
 }
 ```
 

@@ -114,7 +114,7 @@ Laboris on domeenikontroller **eraldi virtuaalmasin**, sest DC peab ise olema DN
 |---|---|
 | DC hostinimi | `dc1` |
 | DC FQDN | `dc1.ad.lab.example` |
-| DC IP | `10.0.83.56` (staatiline) |
+| DC IP | `10.0.83.156` (staatiline) |
 | DNS-domeen / Kerberose realm | `ad.lab.example` / `AD.LAB.EXAMPLE` |
 | NetBIOS-domeen | `AD` |
 | DNS edastaja (forwarder) | `10.0.83.1` (OPNsense Unbound) |
@@ -124,7 +124,7 @@ Reeglid:
 - Kasuta **alamdomeeni** (`ad.lab.example`), mitte domeeni, mida juba haldab teine DNS-server. Ära kasuta `.local` lõppu (konflikt mDNS-iga).
 - Hostinimi ei tohi olla sama mis NetBIOS-domeen ja peab olema kuni 15 märki.
 - DC aadress peab olema staatiline.
-- OPNsense'is suunatakse `ad.lab.example` päringud DC-le: *Services* → *Unbound DNS* → *Query Forwarding* → domeen `ad.lab.example`, server `10.0.83.56`. Nii lahendavad nimesid ka masinad, mille DNS on OPNsense.
+- OPNsense'is suunatakse `ad.lab.example` päringud DC-le: *Services* → *Unbound DNS* → *Query Forwarding* → domeen `ad.lab.example`, server `10.0.83.156`. Nii lahendavad nimesid ka masinad, mille DNS on OPNsense.
 
 > [!NOTE]
 > **Märkus:** laboris võib kõigi domeeniga liituvate masinate DNS-iks panna otse DC. Siis peab DC oskama edastada ka välised päringud (`dns forwarder`).
@@ -143,12 +143,12 @@ Fail `/etc/hosts` (rida `127.0.1.1 dc1` eemalda või asenda):
 
 ```text
 127.0.0.1       localhost
-10.0.83.56      dc1.ad.lab.example dc1
+10.0.83.156      dc1.ad.lab.example dc1
 ```
 
 ```bash
 hostname -f          # dc1.ad.lab.example
-hostname -i          # 10.0.83.56
+hostname -i          # 10.0.83.156
 ```
 
 ### Paketid
@@ -199,7 +199,7 @@ DC peab kasutama iseennast DNS-serverina. Debianis ifupdown-iga muuda `/etc/netw
 
 ```text
 search ad.lab.example
-nameserver 10.0.83.56
+nameserver 10.0.83.156
 ```
 
 > [!NOTE]
@@ -284,16 +284,16 @@ sudo samba-tool domain passwordsettings set --min-pwd-length=10 --max-pwd-age=18
 
 ```bash
 sudo samba-tool dns zonelist dc1 -U administrator
-sudo samba-tool dns add dc1 ad.lab.example www A 10.0.83.55 -U administrator
+sudo samba-tool dns add dc1 ad.lab.example www A 10.0.83.155 -U administrator
 sudo samba-tool dns query dc1 ad.lab.example @ ALL -U administrator
-sudo samba-tool dns delete dc1 ad.lab.example www A 10.0.83.55 -U administrator
+sudo samba-tool dns delete dc1 ad.lab.example www A 10.0.83.155 -U administrator
 ```
 
 Pöördtsooni (PTR-kirjed) jaoks:
 
 ```bash
 sudo samba-tool dns zonecreate dc1 83.0.10.in-addr.arpa -U administrator
-sudo samba-tool dns add dc1 83.0.10.in-addr.arpa 56 PTR dc1.ad.lab.example -U administrator
+sudo samba-tool dns add dc1 83.0.10.in-addr.arpa 156 PTR dc1.ad.lab.example -U administrator
 ```
 
 ### Kataloogi vaatamine LDAP-i kaudu
@@ -327,7 +327,7 @@ Kataloog ja DNS replitseeritakse automaatselt; kontrolli `samba-tool drs showrep
 
 ## 26.6 Windowsi klient
 
-1. Seadista Windowsi võrguliidese DNS-iks DC (`10.0.83.56`) või OPNsense, kui seal on Query Forwarding.
+1. Seadista Windowsi võrguliidese DNS-iks DC (`10.0.83.156`) või OPNsense, kui seal on Query Forwarding.
 2. Kontrolli PowerShellis:
 
     ```powershell

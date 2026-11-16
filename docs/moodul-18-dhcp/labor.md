@@ -16,7 +16,7 @@
 > [!WARNING]
 > **Tee seda laboritööd ainult oma laborivõrgus!** Kontrolli enne alustamist, et `debian1` võrguliides on Proxmoxis ühendatud sinu enda silda või VNet-i, mitte kooli võrku. Kui sinu võrgus jagab aadresse juba mõni teine seade (nt valikmooduli 22 OPNsense või koduruuter), lülita selle DHCP-server enne Kea käivitamist välja.
 
-Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, vaikelüüs `10.0.83.1`, `debian1` `10.0.83.52`, DHCP vahemik `10.0.83.80–99`, reserveeringud `10.0.83.98` ja `10.0.83.99`. Asenda oma võrguplaani väärtustega.
+Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, vaikelüüs `10.0.83.1`, `debian1` `10.0.83.152`, DHCP vahemik `10.0.83.180–199`, reserveeringud `10.0.83.198` ja `10.0.83.199`. Asenda oma võrguplaani väärtustega.
 
 ---
 
@@ -49,7 +49,7 @@ wc -l /etc/kea/kea-dhcp4.conf.orig
 
 > **K2.** Mitu rida on näidisseadistuses? Miks on parem kirjutada oma lühike seadistus kui muuta pikka näidisfaili?
 
-**1.4** Kirjuta fail `/etc/kea/kea-dhcp4.conf` teooria punkti 18.3 põhjal oma võrguplaani järgi. Reserveeringut veel ära lisa. DNS-serveriks pane oma laboritöö 17 DNS-server (`10.0.83.52`); kui sul seda ei ole, siis vaikelüüs.
+**1.4** Kirjuta fail `/etc/kea/kea-dhcp4.conf` teooria punkti 18.3 põhjal oma võrguplaani järgi. Reserveeringut veel ära lisa. DNS-serveriks pane oma laboritöö 17 DNS-server (`10.0.83.152`); kui sul seda ei ole, siis vaikelüüs.
 
 **1.5** Kontrolli süntaksit. Tee meelega viga (kustuta mõni koma) ja kontrolli uuesti. Paranda.
 
@@ -99,11 +99,11 @@ sudo tcpdump -ni ens18 -v port 67 or port 68
 
 > **K6.** Millise aadressi sai `alma`? Mis juhtuks teenustega, mida teised masinad kasutavad `alma` vana aadressi kaudu? Miks on serveritel staatiline aadress?
 
-**2.5** Taasta `alma` staatiline aadress (`10.0.83.55`) ja kontrolli ühendust.
+**2.5** Taasta `alma` staatiline aadress (`10.0.83.155`) ja kontrolli ühendust.
 
 ## 3. osa. Reserveering ja valikud
 
-**3.1** Lisa Ubuntu kliendile reserveering võrguplaanis olevale aadressile (`10.0.83.98`) teooria punkti 18.3 juhendi järgi. Kontrolli süntaksit, taaskäivita Kea ja uuenda kliendi renti.
+**3.1** Lisa Ubuntu kliendile reserveering võrguplaanis olevale aadressile (`10.0.83.198`) teooria punkti 18.3 juhendi järgi. Kontrolli süntaksit, taaskäivita Kea ja uuenda kliendi renti.
 
 > **K7.** Kas klient sai reserveeritud aadressi kohe? Kui ei, miks (vihje: olemasolev rent)? Kuidas probleemi lahendasid?
 
@@ -145,7 +145,7 @@ sudo tar -czf /root/kea-$(date +%F).tar.gz /etc/kea /var/lib/kea
 
 1. **ISC DHCP võrdlus:** seadista samale võrgule (Kea peatatuna) ISC DHCP teooria punkti 18.5 järgi ja võrdle seadistusfaile ning logisid. Lõpuks eemalda ISC DHCP ja käivita Kea.
 2. **dnsmasq:** proovi eraldi testvõrgus dnsmasq-i DHCP-d (teooria punkt 18.2) ja kontrolli, et DHCP-ga antud nimi lahendub kohe ka DNS-is.
-3. **Windowsi klient:** lisa reserveering Windowsi kliendile (`10.0.83.99`) ja kontrolli käskudega `ipconfig /all`, `ipconfig /release` ja `ipconfig /renew`.
+3. **Windowsi klient:** lisa reserveering Windowsi kliendile (`10.0.83.199`) ja kontrolli käskudega `ipconfig /all`, `ipconfig /release` ja `ipconfig /renew`.
 
 ---
 

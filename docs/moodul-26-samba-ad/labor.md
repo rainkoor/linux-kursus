@@ -13,7 +13,7 @@
 
 > **Aruanne:** vasta küsimustele **K1–K18**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
-Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `dc1` `10.0.83.56`, `alma` `10.0.83.55`, `ubuntuklient` `10.0.83.98`, `winklient` `10.0.83.99`. Domeen `ad.lab.example`, NetBIOS-nimi `AD`. Asenda oma võrguplaani väärtustega.
+Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, OPNsense `10.0.83.1`, `dc1` `10.0.83.156`, `alma` `10.0.83.155`, `ubuntuklient` `10.0.83.198`, `winklient` `10.0.83.199`. Domeen `ad.lab.example`, NetBIOS-nimi `AD`. Asenda oma võrguplaani väärtustega.
 
 > [!WARNING]
 > **Enne alustamist:** HKHK laboris on `dc1` mallist olemas, iseõppija paigaldab selle (vt [paigalduslisa](../lisad/paigaldus.md)). Anna sellele staatiline aadress ja **tee hetktõmmis** (snapshot). Provisioning'ut on lihtsam korrata puhtalt masinalt kui ebaõnnestunud katset parandada.
@@ -33,7 +33,7 @@ hostname -i
 ip -br a
 ```
 
-> **K1.** Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.56`), mitte `127.0.1.1`-ks?
+> **K1.** Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.156`), mitte `127.0.1.1`-ks?
 
 **1.2** Kontrolli kellaaega:
 
@@ -91,7 +91,7 @@ smbclient -L localhost -N
 smbclient //localhost/netlogon -U Administrator -c 'ls'
 ```
 
-**3.4** Seadista OPNsense'is Unbound Query Forwarding domeenile `ad.lab.example` → `10.0.83.56` (teooria punkt 26.3). Testi teisest masinast (nt `debian1`), mille DNS on OPNsense:
+**3.4** Seadista OPNsense'is Unbound Query Forwarding domeenile `ad.lab.example` → `10.0.83.156` (teooria punkt 26.3). Testi teisest masinast (nt `debian1`), mille DNS on OPNsense:
 
 ```bash
 host -t SRV _ldap._tcp.ad.lab.example
@@ -124,16 +124,16 @@ sudo samba-tool user show mari
 
 > **K8.** Mis juhtus? Millised on domeeni vaikimisi paroolinõuded?
 
-**4.3** Lisa DNS-kirjed: `www.ad.lab.example → 10.0.83.55` ning pöördtsoon `83.0.10.in-addr.arpa` koos `dc1` PTR-kirjega.
+**4.3** Lisa DNS-kirjed: `www.ad.lab.example → 10.0.83.155` ning pöördtsoon `83.0.10.in-addr.arpa` koos `dc1` PTR-kirjega.
 
 ```bash
 host www.ad.lab.example
-host 10.0.83.56
+host 10.0.83.156
 ```
 
 ## 5. osa. Windowsi klient
 
-**5.1** Seadista `winklient` DNS-iks `10.0.83.56`. Kontrolli PowerShellis:
+**5.1** Seadista `winklient` DNS-iks `10.0.83.156`. Kontrolli PowerShellis:
 
 ```powershell
 Resolve-DnsName -Type SRV _ldap._tcp.ad.lab.example
@@ -188,7 +188,7 @@ sudo ls -R /var/lib/samba/sysvol/ad.lab.example/Policies/ | head -30
 
 ## 7. osa. Ubuntu liitmine domeeniga
 
-**7.1** Seadista `ubuntuklient` hostinimeks `ubuntuklient.ad.lab.example` ja DNS-iks `10.0.83.56` (Netplan, moodul 7) või OPNsense, kui Query Forwarding on tehtud. Kontrolli kella.
+**7.1** Seadista `ubuntuklient` hostinimeks `ubuntuklient.ad.lab.example` ja DNS-iks `10.0.83.156` (Netplan, moodul 7) või OPNsense, kui Query Forwarding on tehtud. Kontrolli kella.
 
 **7.2** Paigalda paketid ja liitu (teooria punkt 26.7):
 
@@ -270,7 +270,7 @@ Seejärel taasta: `sudo timedatectl set-ntp true`.
 
 ## Lisaülesanne (valikuline)
 
-1. **Teine DC:** paigalda `dc2` (`10.0.83.57`) ja liida see domeeniga DC-na. Kontrolli replikatsiooni (`samba-tool drs showrepl`), lülita `dc1` välja ja proovi sisse logida.
+1. **Teine DC:** paigalda `dc2` (`10.0.83.157`) ja liida see domeeniga DC-na. Kontrolli replikatsiooni (`samba-tool drs showrepl`), lülita `dc1` välja ja proovi sisse logida.
 2. **Failiserver domeenis:** liida `debian2` domeeniga liikmena (winbind või SSSD), loo jagatud kaust, millele on ligipääs ainult grupil `opilased`, ja haagi see Windowsis automaatselt GPO abil.
 3. **Windows Server AD:** kui laboris on Windows Serveri domeen (nt IT25 plaanis `AD1`/`AD2`), liida `alma` sellega ja võrdle samme.
 4. **Varundus:** tee `samba-tool domain backup online` ja taasta domeen uude VM-i.
@@ -282,7 +282,7 @@ Seejärel taasta: `sudo timedatectl set-ntp true`.
 
 Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures küsimust küsitakse. Kopeeri loend oma aruande alguseks ja kirjuta vastus iga küsimuse alla. Kus küsitakse käsku, kirjuta üles kogu käsk.
 
-- **K1.** *(punkt 1.1)* Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.56`), mitte `127.0.1.1`-ks?
+- **K1.** *(punkt 1.1)* Miks peab DC hostinimi lahenduma kohalikuks IP-aadressiks (`10.0.83.156`), mitte `127.0.1.1`-ks?
 - **K2.** *(punkt 1.2)* Miks on kellaaeg AD-s nii oluline? Kui suur võib olla kellade erinevus?
 - **K3.** *(punkt 2.3)* Milliseid porte Samba kuulab? Millist teenust iga port pakub? Mis on `smb.conf` failis jaotises `[global]` peale provisioning'ut?
 - **K4.** *(punkt 3.1)* Mida näitavad SRV-kirjed? Miks vajavad kliendid neid? Kust tuli vastus päringule `www.debian.org`?

@@ -83,7 +83,7 @@ Paigalda avatud lähtekoodiga veebirakendus (nt WordPress, Nextcloud, Moodle, Gi
 - **Lisanõuded:** rakendus konteinerites koos Quadletiga (moodul 14); Valkey vahemäluks; fail2ban rakenduse sisselogimisele; Prometheus + Grafana.
 
 > [!NOTE]
-> **Näide - WordPress:** `alma` (veebiserver): nginx + PHP-FPM (`php-mysqlnd`, `php-gd`, `php-xml`, `php-mbstring`, `php-intl`, `php-zip`), SELinux lubab veebiserveril andmebaasiga ühenduda (`setsebool -P httpd_can_network_connect_db on`) ja kirjutada üleslaadimiste kataloogi (`semanage fcontext … httpd_sys_rw_content_t`); `debian2` (andmebaas): MariaDB, kus kasutaja `'wordpress'@'10.0.83.55'` ja `bind-address` laborivõrgu aadressil, tulemüüris port 3306 lubatud ainult veebiserverile; `wp-config.php` õigused `640`; HTTPS oma CA sertifikaadiga; igaöine `mariadb-dump` + `wp-content` varundus resticuga; taastamistest uude VM-i. Lisanõudeks sobib WordPressi CLI (`wp-cli`) ja fail2ban WordPressi sisselogimislehele.
+> **Näide - WordPress:** `alma` (veebiserver): nginx + PHP-FPM (`php-mysqlnd`, `php-gd`, `php-xml`, `php-mbstring`, `php-intl`, `php-zip`), SELinux lubab veebiserveril andmebaasiga ühenduda (`setsebool -P httpd_can_network_connect_db on`) ja kirjutada üleslaadimiste kataloogi (`semanage fcontext … httpd_sys_rw_content_t`); `debian2` (andmebaas): MariaDB, kus kasutaja `'wordpress'@'10.0.83.155'` ja `bind-address` laborivõrgu aadressil, tulemüüris port 3306 lubatud ainult veebiserverile; `wp-config.php` õigused `640`; HTTPS oma CA sertifikaadiga; igaöine `mariadb-dump` + `wp-content` varundus resticuga; taastamistest uude VM-i. Lisanõudeks sobib WordPressi CLI (`wp-cli`) ja fail2ban WordPressi sisselogimislehele.
 
 **E2. Ansible'iga hallatav serveripark**
 
@@ -182,7 +182,7 @@ Kõik edasijõudnute taseme kohustuslikud osad, lisaks:
 | **Lõppkasutaja juhend**: kuidas teenust kasutada, kirjutatud inimesele, kes ei ole IT-spetsialist (nt „kuidas ühendada võrguketas“, „kuidas vahetada parooli“) | ✔ | ✔ | ✔ |
 | **Muudatuste logi**: mis, millal ja miks tehti (Git-ajalugu + fail `MUUDATUSED.md` või piletisüsteem) | ✔ | ✔ | ✔ |
 | **Käsiraamat** (*runbook*): tüüpilised haldustoimingud ja rikete lahendamine | - | - | ✔ |
-| **Teadmusbaasi artikkel**: ühe projekti käigus lahendatud probleemi kirjeldus (sümptom, põhjus, lahendus) | - | ✔ | vähemalt 2 |
+| **Teadmusbaasi artikkel**: ühe projekti käigus lahendatud probleemi kirjeldus (sümptom, põhjus, lahendus; vorm [tõrkeotsingu lisas](lisad/torkeotsing.md#7-dokumenteeri)) | - | ✔ | vähemalt 2 |
 | **Otsuste logi**: miks valisid just selle tarkvara või lahenduse (vähemalt 3 otsust) | - | - | ✔ |
 | Rikketesti ja taastamistesti protokoll (aeg, tulemus) | - | taastamine | ✔ |
 | Teadaolevad piirangud, edasiarenduse ideed, kasutatud allikad | ✔ | ✔ | ✔ |

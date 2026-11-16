@@ -1,5 +1,5 @@
 <!-- navigatsioon -->
-[← Laborikeskkond ja serverite paigaldus](paigaldus.md) · [Sisukord](../../README.md#sisukord) · [UNIX-i ja Linuxi ajalugu →](ajalugu.md)
+[← Tõrkeotsingu töövoog](torkeotsing.md) · [Sisukord](../../README.md#sisukord) · [UNIX-i ja Linuxi ajalugu →](ajalugu.md)
 <!-- /navigatsioon -->
 
 # Linuxi distributsioonide ülevaade
@@ -207,5 +207,5 @@ Kursusel käsitletakse BSD-d kahes valikmoodulis: [moodul 22](../moodul-22-opnse
 <!-- navigatsioon -->
 ---
 
-[← Laborikeskkond ja serverite paigaldus](paigaldus.md) · [Sisukord](../../README.md#sisukord) · [UNIX-i ja Linuxi ajalugu →](ajalugu.md)
+[← Tõrkeotsingu töövoog](torkeotsing.md) · [Sisukord](../../README.md#sisukord) · [UNIX-i ja Linuxi ajalugu →](ajalugu.md)
 <!-- /navigatsioon -->

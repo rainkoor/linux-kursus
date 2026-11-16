@@ -250,7 +250,7 @@ info.lab.example {
 
 </details>
 
-**4.** Kirjuta HAProxy taustserverite plokk, mis jagab päringud serveritele `10.0.83.52` ja `10.0.83.55` (port 80) vähima ühenduste arvu järgi ja kontrollib nende tervist.
+**4.** Kirjuta HAProxy taustserverite plokk, mis jagab päringud serveritele `10.0.83.152` ja `10.0.83.155` (port 80) vähima ühenduste arvu järgi ja kontrollib nende tervist.
 
 <details>
 <summary>Lahendus</summary>
@@ -258,8 +258,8 @@ info.lab.example {
 ```text
 backend koolisait
     balance leastconn
-    server debian1 10.0.83.52:80 check
-    server alma    10.0.83.55:80 check
+    server debian1 10.0.83.152:80 check
+    server alma    10.0.83.155:80 check
 ```
 
 </details>

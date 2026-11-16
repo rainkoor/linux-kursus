@@ -29,7 +29,7 @@ Kursuse läbinud õppija:
 
 ## Maht ja ülesehitus
 
-Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 210 kontakttundi** koos laboritöödega (põhiosa 84 h, süvendusosa 104 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lisaks on **valikmoodulid (84 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
+Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 210 kontakttundi** koos laboritöödega (põhiosa 84 h, süvendusosa 104 h, proovieksamid 2 + 4 h ja lõpuprojekt 16 h). Lõpuprojekti maht sõltub valitud tasemest: algtase 12 h, edasijõudnute tase 16 h, meistritase 24–32 h; kogumahus on arvestatud edasijõudnute tasemega. Lisaks on **valikmoodulid (84 h)**, mida saab kasutada eraldi kursustena, süvendusena või lõpuprojekti ettevalmistuseks. Mahtu saab kohandada õppekava järgi.
 
 ### Põhiosa: Linuxi kasutamine ja haldus
 
@@ -45,6 +45,8 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 210 kontakttundi** ko
 | 8 | [Kettad, failisüsteemid ja LVM](moodul-08-kettad-lvm/index.md) | 8 | AlmaLinux |
 | 9 | [Varundus ja taastamine](moodul-09-varundus/index.md) | 8 | Debian, Ubuntu |
 | - | [Proovieksam: põhiosa](proovieksam-pohiosa.md) | 2 | Debian |
+
+**HKHK õppes** seadistatakse kolme esimese masina (Debian, Ubuntu, AlmaLinux) võrk kohe pärast sissejuhatust ja esimesi käske ning enne mooduli 1 alustamist. Õpetaja näitab ja selgitab seadistuse ette, õppijad teevad staatilise IP juhendi järgi Proxmoxi konsoolis kaasa ([paigalduslisa](lisad/paigaldus.md#oma-võrgu-leidmine)). Seda on vaja, sest laborivõrgus pole alguses DHCP-serverit ning masinatel puuduks muidu võrguühendus. Võrgu seadistust õpitakse põhjalikult moodulis 7.
 
 ### Süvendusosa: serverid ja automatiseerimine
 
@@ -63,7 +65,7 @@ Kursus koosneb kolmest osast. Soovituslik kogumaht on **ca 210 kontakttundi** ko
 | 20 | [Automatiseerimine: Ansible, Vagrant ja infrastruktuur koodina](moodul-20-automatiseerimine/index.md) | 10 | AlmaLinux, Debian, Ubuntu |
 | 21 | [Seire ja jõudlus](moodul-21-seire/index.md) | 8 | Debian, Ubuntu |
 | - | [Proovieksam: süvendusosa](proovieksam.md) | 4 | AlmaLinux |
-| - | [Lõpuprojekt](lopuprojekt.md) (kolm taset) | 16 (12–32) | Õppija valik |
+| - | [Lõpuprojekt](lopuprojekt.md) (kolm taset) | 16 (tasemeti 12 / 16 / 24–32) | Õppija valik |
 
 Moodul 14 annab konteinerite alused, mida serverimoodulites kasutatakse alternatiivse paigaldusviisina. Moodul 13 süvendab mooduli 7 võrguteadmisi (IPv6, sild, VLAN, bond, NAT, VPN). Moodulites 15–19 ehitatakse samm-sammult üks „kooli väikeserver“ (veeb → andmebaasid → DNS → DHCP → failiserver, varundus ja dokumentatsioon), mida moodulites 20–21 automatiseeritakse ja seiratakse. Moodulid 20 ja 21 on **sissejuhatavad ja ülevaatlikud**: HKHK-s käsitletakse automatiseerimist ja seiret põhjalikult eraldi ainetes „IT-süsteemide automatiseerimine“ ja „IT-süsteemide monitooring“, mis läbitakse pärast Linuxi ja BSD halduse moodulit.
 

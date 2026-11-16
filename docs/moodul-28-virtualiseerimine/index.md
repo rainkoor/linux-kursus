@@ -334,7 +334,7 @@ Ajastatud varundus: *Datacenter* → *Backup* → *Add*, sihtkohaks `pbs`.
 **Tavalise Linuxi serveri varundus.** `proxmox-backup-client` (pakett Proxmoxi hoidlast) varundab katalooge PBS-i - sobib nt füüsilisele serverile või kodukataloogidele:
 
 ```bash
-export PBS_REPOSITORY='pve@pbs@10.0.83.65:andmed'
+export PBS_REPOSITORY='pve@pbs@10.0.83.165:andmed'
 export PBS_FINGERPRINT='<sõrmejälg>'
 proxmox-backup-client backup etc.pxar:/etc
 proxmox-backup-client snapshot list
@@ -361,7 +361,7 @@ qm template 9000
 # kloon: nimi, IP, kasutaja ja võti
 qm clone 9000 201 --name k3s1 --full
 qm set 201 --ciuser kasutaja --sshkeys /root/.ssh/id_ed25519.pub \
-   --ipconfig0 ip=10.0.83.61/24,gw=10.0.83.1 --nameserver 10.0.83.1
+   --ipconfig0 ip=10.0.83.161/24,gw=10.0.83.1 --nameserver 10.0.83.1
 qm resize 201 scsi0 20G
 qm start 201
 ```

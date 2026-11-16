@@ -1,7 +1,7 @@
 """MkDocsi hook: eemaldab GitHubi navigatsiooniread ja teisendab GitHubi stiilis märkused (> [!NOTE] jt) Materiali kastideks.
 
 Lisaks:
-- märkus sildiga **Lühidalt:** saab eraldi kastitüübi (abstract);
+- märkus sildiga **Lühidalt:** saab eraldi kastitüübi (abstract), sildiga **Lisaväljakutse:** kastitüübi example;
 - plokk <details><summary>…</summary> … </details> saab Materiali avatavaks kastiks
   (enesekontrolli "Vastus" ja "Lahendus" rohelise kastina);
 - laboritöödes, kus on aruande küsimuste loend (<!-- kysimused -->, tools/kysimused.py),
@@ -54,6 +54,8 @@ def on_page_markdown(markdown, **kwargs):
                 sisu[0] = jark[:1].upper() + jark[1:]
                 if pealkiri == "Lühidalt":
                     liik = "abstract"
+                elif pealkiri == "Lisaväljakutse":
+                    liik = "example"
         if valja and valja[-1].strip():
             valja.append("")
         valja.append(f'!!! {liik} "{pealkiri.replace(chr(34), chr(39))}"')

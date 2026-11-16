@@ -1,5 +1,5 @@
 <!-- navigatsioon -->
-[← Moodul 30. Enesekontroll](../moodul-30-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
+[← Moodul 30. Enesekontroll](../moodul-30-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Tõrkeotsingu töövoog →](torkeotsing.md)
 <!-- /navigatsioon -->
 
 # Laborikeskkond ja serverite paigaldus
@@ -52,9 +52,22 @@ Vaata oma mõne virtuaalmasina *Hardware* → *Network Device*:
 | `vmbrX` (nt `vmbr208`) | `10.0.X.0/24` (nt `10.0.208.0/24`) | `10.0.X.1` |
 | `vnetX` (SDN) | `192.168.X.0/24` | `192.168.X.1` |
 
-**Alguses ei ole võrgus DHCP-serverit**, sest õppija seadistab selle ise (moodul 18). Seepärast seadista masinate võrk esialgu käsitsi (moodul 7 ja punkt 7 allpool).
+**Alguses ei ole võrgus DHCP-serverit**, sest õppija seadistab selle ise (moodul 18). Värskelt loodud masinal seega **võrku ei ole**: ei saa uuendada, pakette paigaldada ega SSH-ga ühenduda.
 
-Selle kursuse näidetes on õppija võrguks `10.0.83.0/24` - asenda `83` oma võrgu numbriga.
+> [!IMPORTANT]
+> **HKHK õppes seadistame võrgu kohe alguses, enne moodulit 1.** Pärast kursuse sissejuhatust ja esimesi käske (sisselogimine virtuaalmasina konsoolis, `ip -br a`, tekstiredaktor `nano`) näitab ja selgitab õpetaja Proxmoxi konsoolis ette, kuidas staatiline IP-aadress seadistada. Õppijad teevad sama juhendi järgi kaasa kõigis kolmes esimeses masinas (Debian, Ubuntu, AlmaLinux). Eesmärk on saada masinatele võrk, et saaks hiljem kasutada SSH-d, paigaldada uuendusi ja teha laboritöid; praegu ei pea võrgu seadistuse kõiki üksikasju iseseisvalt mõistma. Võrgu põhimõtteid ja eri distrode seadistusi õpime põhjalikult moodulis 7.
+
+| Masin | Aadress (näide) | Juhend |
+|---|---|---|
+| `debian1` | `10.0.83.152/24` | [Debian: staatiline IP](../moodul-07-vork-ssh/index.md#debian-staatiline-ip) |
+| `ubuntusrv` | `10.0.83.154/24` | [Ubuntu: staatiline IP](../moodul-07-vork-ssh/index.md#ubuntu-staatiline-ip) |
+| `alma` | `10.0.83.155/24` | [AlmaLinux: nmtui](../moodul-07-vork-ssh/index.md#almalinux-nmtui) või [nmcli](../moodul-07-vork-ssh/index.md#almalinux-staatiline-ip-nmcli) |
+
+Vaikelüüs ja DNS-server on `10.0.83.1`. Enne alustamist loe läbi [Enne alustamist](../moodul-07-vork-ssh/index.md#enne-alustamist), lõpuks kontrolli tulemust: [Kontrolli tulemust](../moodul-07-vork-ssh/index.md#kontrolli-tulemust). Kogu teema: [moodul 7, punkt 7.2](../moodul-07-vork-ssh/index.md#72-püsiv-võrguseadistus).
+
+Iseõppijale VirtualBoxis või kodusel Proxmoxil ei ole see samm kriitiline: seal annab aadressi enamasti DHCP (VirtualBoxi NAT või koduruuter) ja võrk töötab kohe. Staatiline aadress on vaja alles siis, kui masinad peavad üksteist kindlalt aadressilt leidma.
+
+Selle kursuse näidetes on õppija võrguks `10.0.83.0/24` - asenda `83` oma võrgu numbriga. Linuxi kursuse masinad kasutavad selles võrgus aadresse **`.100`–`.199`**; aadressid `.2`–`.99` on HKHK-s Windowsi kursuse laborimasinate jaoks, nii et mõlema kursuse masinad saavad samas võrgus korraga töötada.
 
 ### Probleemid ja lahendused
 
@@ -75,7 +88,7 @@ Enne virtuaalmasinate loomist tee **võrguplaan**. See hoiab ära IP-aadresside 
 
 | Võrk | Vaikelüüs | Võrgumask | Leviaadress | DHCP vahemik |
 |---|---|---|---|---|
-| `10.0.83.0/24` | `10.0.83.1` | `255.255.255.0` | `10.0.83.255` | `10.0.83.80`–`10.0.83.99` |
+| `10.0.83.0/24` | `10.0.83.1` | `255.255.255.0` | `10.0.83.255` | `10.0.83.180`–`10.0.83.199` |
 
 ### IP-aadresside plaan
 
@@ -83,18 +96,18 @@ Kursuse laboritööd kasutavad seda plaani. Sama masin teenib mitut laboritööd
 
 | Virtuaalmasina nimi | Hostinimi | IP-aadress | Teenused (laboritööd) |
 |---|---|---|---|
-| `debian1-IT24-MariMaasikas` | `debian1` | `10.0.83.52` | SSH, varundus (9), veeb (15), andmebaasid (16), DNS (17), DHCP (18), failiserver (19), PXE (23), LDAP (25) |
-| `debian2-IT24-MariMaasikas` | `debian2` | `10.0.83.53` | SSH, DNS-i sekundaarserver (17), kaugvarundus (19), iSCSI (23) |
-| `ubuntu-IT24-MariMaasikas` | `ubuntusrv` (ka `mail`) | `10.0.83.54` | SSH, tulemüür (7, 12), varuserver (9), võrgu süvendus (13), konteinerid (14), Pi-hole (17B), seire (21), e-post (24) |
-| `alma-IT24-MariMaasikas` | `alma` | `10.0.83.55` | SSH, SELinux (12), võrgu süvendus (13), konteinerid ja Ansible'i juhtmasin (14, 20), Apache (15) |
-| `dc1-IT24-MariMaasikas` | `dc1` | `10.0.83.56` | Samba AD DC (26) |
-| `ubuntuklient-IT24-MariMaasikas` | `ubuntuklient` | DHCP (`10.0.83.98` reserveeritud) | töölaud (27), domeeni liige (25–26) |
-| `winklient-IT24-MariMaasikas` | `winklient` | DHCP (`10.0.83.99` reserveeritud) | Windowsi klient (19, 26, 27) |
-| `k3s1-IT24-MariMaasikas` … `k3s3-…` | `k3s1`, `k3s2`, `k3s3` | `10.0.83.61`–`10.0.83.63` | Kubernetese klaster (29) |
-| `pbs-IT24-MariMaasikas` | `pbs` | `10.0.83.65` | Proxmox Backup Server (28) |
-| `fbsd-IT24-MariMaasikas` | `fbsd` | `10.0.83.66` (jail `www`: `10.0.83.67`) | FreeBSD server (30) |
-| - | - | `10.0.83.50` | virtuaalne IP (keepalived, 15) |
-| - | - | `10.0.83.64` | k3s klastri virtuaalne IP (29, lisaülesanne) |
+| `debian1-IT24-MariMaasikas` | `debian1` | `10.0.83.152` | SSH, varundus (9), veeb (15), andmebaasid (16), DNS (17), DHCP (18), failiserver (19), PXE (23), LDAP (25) |
+| `debian2-IT24-MariMaasikas` | `debian2` | `10.0.83.153` | SSH, DNS-i sekundaarserver (17), kaugvarundus (19), iSCSI (23) |
+| `ubuntu-IT24-MariMaasikas` | `ubuntusrv` (ka `mail`) | `10.0.83.154` | SSH, tulemüür (7, 12), varuserver (9), võrgu süvendus (13), konteinerid (14), Pi-hole (17B), seire (21), e-post (24) |
+| `alma-IT24-MariMaasikas` | `alma` | `10.0.83.155` | SSH, SELinux (12), võrgu süvendus (13), konteinerid ja Ansible'i juhtmasin (14, 20), Apache (15) |
+| `dc1-IT24-MariMaasikas` | `dc1` | `10.0.83.156` | Samba AD DC (26) |
+| `ubuntuklient-IT24-MariMaasikas` | `ubuntuklient` | DHCP (`10.0.83.198` reserveeritud) | töölaud (27), domeeni liige (25–26) |
+| `winklient-IT24-MariMaasikas` | `winklient` | DHCP (`10.0.83.199` reserveeritud) | Windowsi klient (19, 26, 27) |
+| `k3s1-IT24-MariMaasikas` … `k3s3-…` | `k3s1`, `k3s2`, `k3s3` | `10.0.83.161`–`10.0.83.163` | Kubernetese klaster (29) |
+| `pbs-IT24-MariMaasikas` | `pbs` | `10.0.83.165` | Proxmox Backup Server (28) |
+| `fbsd-IT24-MariMaasikas` | `fbsd` | `10.0.83.166` (jail `www`: `10.0.83.167`) | FreeBSD server (30) |
+| - | - | `10.0.83.150` | virtuaalne IP (keepalived, 15) |
+| - | - | `10.0.83.164` | k3s klastri virtuaalne IP (29, lisaülesanne) |
 
 Võrgu süvenduse laboris (13) kasutatakse lisaks IPv6 ULA-võrku `fd83::/64` (masina number nagu IPv4-s) ning lisavõrke `10.20.0.0/24`, `10.30.0.0/24`, `10.40.0.0/24` ja `10.99.0.0/24` (WireGuard).
 
@@ -233,7 +246,13 @@ sudo dnf install qemu-guest-agent vim curl
 sudo hostnamectl set-hostname debian1
 ```
 
-Staatilise aadressi seadistamine on igas distros erinev - vt moodul 7 (Debian: `/etc/network/interfaces`, Ubuntu: Netplan, AlmaLinux: `nmcli`).
+Staatilise aadressi seadistamine on igas distros erinev. HKHK laboris tee seda **enne punkti 7.1**, sest ilma võrguta uuendusi paigaldada ei saa (vt [Oma võrgu leidmine](#oma-võrgu-leidmine)):
+
+| Masin | Aadress (näide) | Juhend |
+|---|---|---|
+| `debian1` | `10.0.83.152/24` | [Debian: staatiline IP](../moodul-07-vork-ssh/index.md#debian-staatiline-ip) |
+| `ubuntusrv` | `10.0.83.154/24` | [Ubuntu: staatiline IP](../moodul-07-vork-ssh/index.md#ubuntu-staatiline-ip) |
+| `alma` | `10.0.83.155/24` | [AlmaLinux: nmtui](../moodul-07-vork-ssh/index.md#almalinux-nmtui) või [nmcli](../moodul-07-vork-ssh/index.md#almalinux-staatiline-ip-nmcli) |
 
 ### 7.3 SSH-võtmed
 
@@ -241,13 +260,13 @@ Loo oma arvutis võtmepaar ja kopeeri avalik võti serverisse (vt moodul 7):
 
 ```bash
 ssh-keygen -t ed25519
-ssh-copy-id kasutaja@10.0.83.52
+ssh-copy-id kasutaja@10.0.83.152
 ```
 
 Windowsis PowerShellis:
 
 ```powershell
-type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh kasutaja@10.0.83.52 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh kasutaja@10.0.83.152 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
 Kui võtmega sisselogimine töötab, keela paroolid (vt moodul 7, punkt 7.7). **Ubuntus** pane tähele faili `/etc/ssh/sshd_config.d/50-cloud-init.conf` - kui see on olemas ja sisaldab rida `PasswordAuthentication yes`, kehtib see sinu `sshd_config`-i muudatuse asemel.
@@ -350,8 +369,64 @@ Windowsi kettad on Linuxis kataloogis `/mnt/c`, Linuxi failid Windowsis aadressi
 
 **Piirangud:** WSL sobib moodulitele 1–4 ja 6 (osaliselt 14 ja 19), kuid ei sobi ülejäänud serverilaboriteks, sest võrk on vaikimisi NAT-i taga ning alglaadimine, GRUB, kettahaldus ja tulemüür erinevad päris süsteemist. Kui jõuad moodulini 5, loo virtuaalmasinad (punktid 3–7) - VirtualBoxis (punkt 9) või oma Proxmoxis.
 
+---
+
+## 11. Testitud versioonid
+
+Distrod uuenevad pidevalt: uus väljalase võib muuta paketi nime, seadistusfaili vormingut või käsu väljundit. Seepärast on siin kirjas, **millise versiooniga iga laboritöö viimati algusest lõpuni läbi tehti**. Täida tabelit enne iga kursuse algust: tee laboritöö puhtast hetktõmmisest läbi ja kirjuta üles versioon (`cat /etc/os-release`, FreeBSD-s `freebsd-version`), kuupäev ja leitud probleemid.
+
+**Sihtversioonid** (kursuse kirjutamise ajal, november 2026):
+
+| Distro | Versioon | Kontrolli uusimat |
+|---|---|---|
+| Debian | 13 „trixie“ (13.7) | debian.org/releases/stable |
+| Ubuntu Server | 24.04 LTS | ubuntu.com/about/release-cycle |
+| AlmaLinux | 10 | almalinux.org |
+| FreeBSD | 15.1-RELEASE | freebsd.org/releases |
+| Proxmox VE | 9 | proxmox.com |
+
+**Laboritööd:**
+
+| Laboritöö | Distro | Versioon (ISO) | Kontrollitud | Märkused |
+|---|---|---|---|---|
+| [1. Esimesed sammud käsureal](../moodul-01-sissejuhatus/labor.md) | Debian | | | |
+| [2. Logide analüüs ja failide haldus](../moodul-02-failid-tekst-torud/labor.md) | Debian | | | |
+| [3. Kasutajad, grupid ja jagatud kataloogid](../moodul-03-kasutajad-oigused/labor.md) | Ubuntu Server | | | |
+| [4. Pakihaldus kolmel distrol](../moodul-04-pakihaldus/labor.md) | Debian, Ubuntu ja AlmaLinux | | | |
+| [5. Protsessid, teenused ja ajastamine](../moodul-05-protsessid-teenused/labor.md) | AlmaLinux | | | |
+| [6. Halduskriptid ja Git](../moodul-06-bash/labor.md) | Debian | | | |
+| [7. Võrk, SSH ja tulemüür](../moodul-07-vork-ssh/labor.md) | Ubuntu Server | | | |
+| [8. Kettad, failisüsteemid ja LVM](../moodul-08-kettad-lvm/labor.md) | AlmaLinux | | | |
+| [9. Varundus ja taastamine](../moodul-09-varundus/labor.md) | Debian, Ubuntu | | | |
+| [10. Salvestus: RAID, jõudlus, taastamine ja ZFS](../moodul-10-salvestus/labor.md) | AlmaLinux, Ubuntu | | | |
+| [11A. Alglaadimine, kernel ja taastamine](../moodul-11-alglaadimine-kernel/labor.md) | Debian | | | |
+| [11B. systemd süvitsi](../moodul-11-alglaadimine-kernel/labor.md#1-osa-systemd-süvitsi) | Debian | | | |
+| [12. Turvalisus ja logid](../moodul-12-turvalisus-logid/labor.md) | AlmaLinux | | | |
+| [13. Võrgu süvendus](../moodul-13-vorgu-suvendus/labor.md) | Ubuntu, AlmaLinux, Debian | | | |
+| [14. Konteinerid](../moodul-14-konteinerid/labor.md) | AlmaLinux | | | |
+| [15. Veebiserverid](../moodul-15-veebiserverid/labor.md) | Debian, AlmaLinux, Ubuntu | | | |
+| [16. Andmebaasid](../moodul-16-andmebaasid/labor.md) | Debian, AlmaLinux | | | |
+| [17. Kooli väikeserver, III osa: DNS](../moodul-17-dns/labor.md) | Debian, klient Ubuntu | | | |
+| [18. DHCP-server](../moodul-18-dhcp/labor.md) | Debian, Ubuntu ja AlmaLinux | | | |
+| [19. Kooli väikeserver, IV osa: faili- ja prindiserver, varundus ja dokumentatsioon](../moodul-19-failiserverid/labor.md) | Debian, klient Ubuntu, Windows | | | |
+| [20. Ansible ja Vagrant](../moodul-20-automatiseerimine/labor.md) | AlmaLinux, Debian ja Ubuntu | | | |
+| [21. Seire ja jõudlus](../moodul-21-seire/labor.md) | Debian, Ubuntu, AlmaLinux | | | |
+| [22. OPNsense laborivõrgu tulemüürina](../moodul-22-opnsense/labor.md) | OPNsense | | | |
+| [23. PXE ja iSCSI](../moodul-23-pxe-iscsi/labor.md) | Debian, AlmaLinux | | | |
+| [24. E-posti server](../moodul-24-e-post/labor.md) | Ubuntu 24.04, Debian, klient: Debian või Ubuntu töölaud | | | |
+| [25. OpenLDAP-kataloog ja Linuxi kliendid](../moodul-25-openldap/labor.md) | Debian, Ubuntu ja AlmaLinux | | | |
+| [26. Samba AD domeen](../moodul-26-samba-ad/labor.md) | Debian, Ubuntu ja AlmaLinux - domeeni liikmed, Windows 10/11 Pro või Education | | | |
+| [27. Linux töölaual, Kali ja WSL](../moodul-27-toolaud-wsl/labor.md) | Ubuntu Desktop 24.04, Kali Linux, Windows 11 | | | |
+| [28. KVM, Proxmox VE ja XCP-ng](../moodul-28-virtualiseerimine/labor.md) | Proxmox VE, XCP-ng | | | |
+| [29. k3s klaster](../moodul-29-kubernetes/labor.md) | Debian 13 | | | |
+| [30. FreeBSD server](../moodul-30-freebsd/labor.md) | FreeBSD 15 | | | |
+| [Proovieksam: põhiosa](../proovieksam-pohiosa.md) + kontrollskript | Debian | | | |
+| [Proovieksam: süvendusosa](../proovieksam.md) + kontrollskript | AlmaLinux | | | |
+
+Tühi rida tähendab, et laboritöö on kirjutatud dokumentatsiooni ja kogemuse põhjal, kuid pole veel päris masinas algusest lõpuni läbi tehtud. Kui leiad laboritööst vea, anna õpetajale teada (või tee GitHubis *issue*).
+
 <!-- navigatsioon -->
 ---
 
-[← Moodul 30. Enesekontroll](../moodul-30-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Linuxi distributsioonide ülevaade →](distrod.md)
+[← Moodul 30. Enesekontroll](../moodul-30-freebsd/enesekontroll.md) · [Sisukord](../../README.md#sisukord) · [Tõrkeotsingu töövoog →](torkeotsing.md)
 <!-- /navigatsioon -->

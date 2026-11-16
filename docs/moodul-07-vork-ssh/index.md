@@ -25,6 +25,9 @@ Mooduli läbinud õppija:
 > [!NOTE]
 > **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
 
+> [!NOTE]
+> **HKHK õppijale: osa sellest on juba tehtud.** Kohe pärast kursuse sissejuhatust ja esimesi käske näitas õpetaja staatilise IP seadistamise ette ning seadistasite juhendi järgi kaasa kolm esimest masinat (Debian, Ubuntu, AlmaLinux). See oli vajalik, sest laborivõrgus pole alguses DHCP-serverit ja ilma staatilise aadressita poleks masinatel võrku olnud. Esimesel korral oli eesmärk ühenduvus tööle saada; nüüd õpime süvitsi, mida iga seadistusrida tähendab, kuidas võrk Linuxis töötab ja kuidas vigu leida. Kiirjuhendid leiad punktist 7.2: [Debian](#debian-staatiline-ip) · [Ubuntu](#ubuntu-staatiline-ip) · [AlmaLinux](#almalinux-networkmanager) · [Kontrolli tulemust](#kontrolli-tulemust). Iseõppija, kelle masinad said aadressi DHCP-ga, seadistab staatilise aadressi siin esimest korda.
+
 ---
 
 ## 7.1 Võrguliidesed ja aadressid
@@ -46,7 +49,7 @@ ip neigh                     # ARP-tabel: naabrite MAC-aadressid
 
 ```text
 lo               UNKNOWN        127.0.0.1/8 ::1/128
-ens18            UP             10.0.83.54/24 fe80::be24:11ff:fe2a:1b3c/64
+ens18            UP             10.0.83.154/24 fe80::be24:11ff:fe2a:1b3c/64
 ```
 
 | Osa | Tähendus |
@@ -54,7 +57,7 @@ ens18            UP             10.0.83.54/24 fe80::be24:11ff:fe2a:1b3c/64
 | `lo` | Tagasisidestusliides (*loopback*): masin räägib iseendaga, aadress `127.0.0.1` |
 | `ens18` | Võrgukaart. Nime annab süsteem riistvara asukoha järgi (Proxmoxi VirtIO kaart on sageli `ens18`) |
 | `UP` | Liides on aktiivne |
-| `10.0.83.54/24` | IPv4-aadress ja võrgumask (`/24` = `255.255.255.0`) |
+| `10.0.83.154/24` | IPv4-aadress ja võrgumask (`/24` = `255.255.255.0`) |
 | `fe80::...` | IPv6 lingikohalik aadress |
 
 ### Marsruudid
@@ -64,8 +67,8 @@ ip route
 ```
 
 ```text
-default via 10.0.83.1 dev ens18 proto dhcp src 10.0.83.54 metric 100
-10.0.83.0/24 dev ens18 proto kernel scope link src 10.0.83.54
+default via 10.0.83.1 dev ens18 proto dhcp src 10.0.83.154 metric 100
+10.0.83.0/24 dev ens18 proto kernel scope link src 10.0.83.154
 ```
 
 - `default via 10.0.83.1` - **vaikelüüs**: kõik paketid, mis ei lähe kohalikku võrku, saadetakse sellele ruuterile;
@@ -76,8 +79,8 @@ default via 10.0.83.1 dev ens18 proto dhcp src 10.0.83.54 metric 100
 `ip` käsuga tehtud muudatused kehtivad **ainult taaskäivituseni**. Need sobivad testimiseks:
 
 ```bash
-sudo ip address add 10.0.83.60/24 dev ens18    # lisa aadress
-sudo ip address del 10.0.83.60/24 dev ens18    # eemalda aadress
+sudo ip address add 10.0.83.160/24 dev ens18    # lisa aadress
+sudo ip address del 10.0.83.160/24 dev ens18    # eemalda aadress
 sudo ip link set ens18 down                       # lülita liides välja (ettevaatust SSH kaudu!)
 sudo ip route add 10.0.0.0/8 via 10.0.83.254   # lisa marsruut
 ```
@@ -93,20 +96,20 @@ Kursuse laboris on igal masinal oma aadress (vt lisa [Laborikeskkond ja paigaldu
 
 | Masin | Aadress |
 |---|---|
-| `debian1` | `10.0.83.52/24` |
-| `debian2` | `10.0.83.53/24` |
-| `ubuntusrv` | `10.0.83.54/24` |
-| `alma` | `10.0.83.55/24` |
+| `debian1` | `10.0.83.152/24` |
+| `debian2` | `10.0.83.153/24` |
+| `ubuntusrv` | `10.0.83.154/24` |
+| `alma` | `10.0.83.155/24` |
 
-Kõik masinad on samas alamvõrgus `10.0.83.0/24` ja kasutavad sama vaikelüüsi `10.0.83.1`, kuid aadressi viimane osa on igal masinal erinev. Selle mooduli näidetes kasutame samu aadresse: Ubuntu näited `.54`, Debiani näited `.52` ja AlmaLinuxi näited `.55`.
+Kõik masinad on samas alamvõrgus `10.0.83.0/24` ja kasutavad sama vaikelüüsi `10.0.83.1`, kuid aadressi viimane osa on igal masinal erinev. Selle mooduli näidetes kasutame samu aadresse: Ubuntu näited `.154`, Debiani näited `.152` ja AlmaLinuxi näited `.155`.
 
 > [!IMPORTANT]
 > **Enne staatilise aadressi kasutuselevõttu kontrolli, et see on vaba.** Kooli laboris annab aadressi õpetaja; ära võta suvalist aadressi. Kontrolli teisest masinast samas võrgus:
 >
 > ```bash
-> ping -c2 10.0.83.60                       # vastus = aadress on juba kasutusel
-> ip neigh show 10.0.83.60                  # kas aadressil on MAC-aadress (naabertabelis)?
-> sudo arping -D -I ens18 -c2 10.0.83.60    # duplikaadi tuvastus (pakett iputils-arping)
+> ping -c2 10.0.83.160                       # vastus = aadress on juba kasutusel
+> ip neigh show 10.0.83.160                  # kas aadressil on MAC-aadress (naabertabelis)?
+> sudo arping -D -I ens18 -c2 10.0.83.160    # duplikaadi tuvastus (pakett iputils-arping)
 > ```
 >
 > Ka `ping`-ile mittevastav aadress võib olla kasutusel (tulemüür, väljalülitatud masin), seega kontrolli kindlasti ka aadressiplaani.
@@ -131,7 +134,7 @@ Uus nimi tuleks lisada ka faili `/etc/hosts`.
 | Debian (server) | ifupdown | `/etc/network/interfaces`, DNS `/etc/resolv.conf` | `sudo ifdown ens18 && sudo ifup ens18` |
 | AlmaLinux | NetworkManager | `nmcli` või `nmtui` | `sudo nmcli connection up ens18` |
 
-Näidetes on igal masinal oma aadress (punkt 7.1): Ubuntu (`ubuntusrv`) `10.0.83.54/24`, Debian (`debian1`) `10.0.83.52/24` ja AlmaLinux (`alma`) `10.0.83.55/24`. Vaikelüüs ja DNS-server on `10.0.83.1`, domeen `lab.example`. **Kui kopeerid näite, kirjuta sinna oma masina aadress ja liidese nimi.**
+Näidetes on igal masinal oma aadress (punkt 7.1): Ubuntu (`ubuntusrv`) `10.0.83.154/24`, Debian (`debian1`) `10.0.83.152/24` ja AlmaLinux (`alma`) `10.0.83.155/24`. Vaikelüüs ja DNS-server on `10.0.83.1`, domeen `lab.example`. **Kui kopeerid näite, kirjuta sinna oma masina aadress ja liidese nimi.**
 
 **Kiirviited:**
 
@@ -191,7 +194,7 @@ Netplan loeb kõik `.yaml` failid kataloogist `/etc/netplan/` ja paneb need kokk
         ens18:
           dhcp4: false
           addresses:
-            - 10.0.83.54/24
+            - 10.0.83.154/24
           routes:
             - to: default
               via: 10.0.83.1
@@ -252,11 +255,11 @@ Debiani serveris (ilma töölauata) seadistab võrku **ifupdown** failist `/etc/
 
     auto ens18
     iface ens18 inet static
-        address 10.0.83.52/24
+        address 10.0.83.152/24
         gateway 10.0.83.1
     ```
 
-    Maski võib kirjutada ka eraldi reale: `address 10.0.83.52` ja `netmask 255.255.255.0`.
+    Maski võib kirjutada ka eraldi reale: `address 10.0.83.152` ja `netmask 255.255.255.0`.
 
 3. Kirjuta DNS-serverid faili `/etc/resolv.conf` (`sudo nano /etc/resolv.conf`):
 
@@ -303,7 +306,7 @@ nmcli connection show          # kõik ühendused
     ```bash
     sudo nmcli connection modify ens18 \
         ipv4.method manual \
-        ipv4.addresses 10.0.83.55/24 \
+        ipv4.addresses 10.0.83.155/24 \
         ipv4.gateway 10.0.83.1 \
         ipv4.dns "10.0.83.1 1.1.1.1" \
         ipv4.dns-search lab.example
@@ -332,7 +335,7 @@ Menüüga tööriist on mugav, kui `nmcli` süntaksit ei mäleta:
 
 1. `sudo nmtui` → **Edit a connection** → vali ühendus (nt `ens18`) → **Edit**.
 2. **IPv4 CONFIGURATION**: muuda `<Automatic>` → `<Manual>` ja vali `<Show>`.
-3. Täida väljad: **Addresses** `10.0.83.55/24`, **Gateway** `10.0.83.1`, **DNS servers** `10.0.83.1`, **Search domains** `lab.example`. Liigu väljade vahel **Tab**-iga.
+3. Täida väljad: **Addresses** `10.0.83.155/24`, **Gateway** `10.0.83.1`, **DNS servers** `10.0.83.1`, **Search domains** `lab.example`. Liigu väljade vahel **Tab**-iga.
 4. **OK** → **Back** → **Activate a connection** → vali ühendus ja tee **Deactivate**, seejärel **Activate**, et muudatus jõustuks.
 5. **Quit** ja kontrolli.
 
@@ -414,7 +417,7 @@ flowchart TD
 ```text
 127.0.0.1       localhost
 127.0.1.1       ubuntusrv
-10.0.83.52   debian1 debian1.lab.example
+10.0.83.152   debian1 debian1.lab.example
 ```
 
 Fail on kasulik väikeses laboris või testimisel. Suuremas võrgus kasutatakse DNS-i.
@@ -502,6 +505,8 @@ Vanemates juhendites kasutatav `netstat` (pakett `net-tools`) teeb sama, kuid on
 > [!TIP]
 > **Lühidalt:** Otsi viga kihtide kaupa alt üles: liides ja aadress → lüüs (`ping`) → internet → DNS (`dig`) → teenus ja port (`curl`, `nc`).
 
+See punkt on üldise tõrkeotsingu töövoo (lisa [tõrkeotsingu töövoog](../lisad/torkeotsing.md)) võrguosa: 3. sammus „vaata olekut“ liigud siin kihtide kaupa alt üles.
+
 Kui „internet ei tööta“, liigu **altpoolt üles**, kihthaaval. Iga samm kontrollib üht asja:
 
 | Samm | Käsk | Kui ei tööta, siis probleem on… |
@@ -534,7 +539,7 @@ Täiendavad tööriistad:
 tracepath debian.org             # näita teed sihtkohani (ruuterid vahel)
 mtr debian.org                   # tracepath + ping reaalajas (pakett mtr)
 curl -v http://localhost         # HTTP-päring koos üksikasjadega
-nc -zv 10.0.83.52 22          # kas port on avatud (pakett netcat)
+nc -zv 10.0.83.152 22          # kas port on avatud (pakett netcat)
 sudo tcpdump -i ens18 port 53    # vaata võrguliiklust (pakett tcpdump)
 ```
 
@@ -582,13 +587,13 @@ Võtmed salvestatakse failidesse `~/.ssh/id_ed25519` (privaatne) ja `~/.ssh/id_e
 **2. Kopeeri avalik võti serverisse:**
 
 ```bash
-ssh-copy-id mari@10.0.83.54
+ssh-copy-id mari@10.0.83.154
 ```
 
 Windowsis käsku `ssh-copy-id` ei ole. PowerShellis saab sama teha nii:
 
 ```powershell
-type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh mari@10.0.83.54 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh mari@10.0.83.154 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
 Avalik võti lisatakse serveris faili `~/.ssh/authorized_keys`.
@@ -615,12 +620,12 @@ Pikkade käskude asemel saab ühendused kirjeldada failis `~/.ssh/config`:
 
 ```text
 Host ubuntusrv
-    HostName 10.0.83.54
+    HostName 10.0.83.154
     User mari
     IdentityFile ~/.ssh/id_ed25519
 
 Host debian1
-    HostName 10.0.83.52
+    HostName 10.0.83.152
     User mari
     Port 2222
 
@@ -641,7 +646,7 @@ Esimesel ühendumisel salvestab klient serveri võtme sõrmejälje faili `~/.ssh
 See võib tähendada rünnakut (keegi on sinu ja serveri vahel), kuid laboris tähendab see tavaliselt, et virtuaalmasin paigaldati uuesti. Kui oled kindel, et muudatus on oodatud, eemalda vana kirje:
 
 ```bash
-ssh-keygen -R 10.0.83.54
+ssh-keygen -R 10.0.83.154
 ```
 
 ### Failide kopeerimine: scp ja rsync
@@ -685,8 +690,8 @@ Nüüd avab sinu arvutis aadress `http://localhost:8080` serveri `ubuntusrv` por
 Sageli ei ole sisevõrgu masinad otse ligipääsetavad, vaid ainult läbi **hüppeserveri** (*bastion*, *jump host*). Selle asemel, et logida esmalt hüppeserverisse ja sealt edasi, teeb SSH seda ühe käsuga:
 
 ```bash
-ssh -J kasutaja@hupe.kool.ee kasutaja@10.0.83.52
-scp -J kasutaja@hupe.kool.ee fail.txt kasutaja@10.0.83.52:/tmp/
+ssh -J kasutaja@hupe.kool.ee kasutaja@10.0.83.152
+scp -J kasutaja@hupe.kool.ee fail.txt kasutaja@10.0.83.152:/tmp/
 ```
 
 `~/.ssh/config`:
@@ -701,7 +706,7 @@ Host labor-*
     User kasutaja
 
 Host labor-debian1
-    HostName 10.0.83.52
+    HostName 10.0.83.152
 ```
 
 Nüüd `ssh labor-debian1` ühendub läbi hüppeserveri. Privaatvõti jääb sinu arvutisse - hüppeserver ainult edastab krüpteeritud ühenduse (erinevalt `ssh -A` agendi edastamisest, mida tasub vältida).
@@ -780,7 +785,7 @@ sudo sshd -t && sudo systemctl reload ssh
 
 > **`ChrootDirectory` ja kõik selle ülemkataloogid peavad kuuluma juurkasutajale ja keegi teine ei tohi neisse kirjutada.** Muidu keeldub `sshd` ühendusest (logis `bad ownership or modes for chroot directory`). Seepärast kirjutab kasutaja alamkataloogi `failid`, mitte otse chroot-kataloogi.
 
-Kontrolli: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult kataloogi `failid`; `ssh partner@ubuntusrv` aga ei ava käsurida (*This service allows sftp connections only*). Kui sul on `AllowGroups`, lisa sinna ka `sftp-kasutajad`. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga `sudo sshd -T -C user=partner,host=x,addr=10.0.83.52 | grep -i chroot`.
+Kontrolli: `sftp partner@ubuntusrv` töötab ja `ls /` näitab ainult kataloogi `failid`; `ssh partner@ubuntusrv` aga ei ava käsurida (*This service allows sftp connections only*). Kui sul on `AllowGroups`, lisa sinna ka `sftp-kasutajad`. Kehtivaid seadeid konkreetsele kasutajale näeb käsuga `sudo sshd -T -C user=partner,host=x,addr=10.0.83.152 | grep -i chroot`.
 
 </details>
 
@@ -850,7 +855,7 @@ Linuxi kernelis on pakettide filtreerimise raamistik **netfilter**. Selle reegle
 | Vaata reegleid | `sudo ufw status numbered` | `sudo firewall-cmd --list-all` | `sudo nft list ruleset` |
 | Eemalda reegel | `sudo ufw delete <nr>` | `sudo firewall-cmd --permanent --remove-service=http` + `--reload` | kustuta rida failist, `sudo systemctl reload nftables` |
 
-Kontrolli alati **teisest masinast**, kas port on avatud või suletud: `nc -zv 10.0.83.54 80`.
+Kontrolli alati **teisest masinast**, kas port on avatud või suletud: `nc -zv 10.0.83.154 80`.
 
 ```mermaid
 flowchart LR
@@ -1069,7 +1074,7 @@ Võrgu põhimõtted (aadress, mask, lüüs, DNS, pordid) ja OpenSSH on FreeBSD-s
 | Marsruudid | `ip r` | `netstat -rn` |
 | Kuulavad pordid | `ss -tulpn` | `sockstat -4l` |
 | Liidese nimi VM-is | `ens18`, `eth0` | `vtnet0` |
-| Püsiv seadistus | Netplan, ifupdown, NetworkManager | `/etc/rc.conf`: `ifconfig_vtnet0="inet 10.0.83.66/24"`, `defaultrouter="10.0.83.1"` |
+| Püsiv seadistus | Netplan, ifupdown, NetworkManager | `/etc/rc.conf`: `ifconfig_vtnet0="inet 10.0.83.166/24"`, `defaultrouter="10.0.83.1"` |
 | DNS | systemd-resolved või `/etc/resolv.conf` | `/etc/resolv.conf` |
 | SSH-server | `ssh`/`sshd` teenus | `sshd` baassüsteemis, `sysrc sshd_enable=YES` |
 | Tulemüür | nftables, ufw, firewalld | **pf** (OpenBSD-st) või ipfw |

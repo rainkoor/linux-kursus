@@ -118,14 +118,14 @@ Oma server: andmed asutuse kontrolli all, pole kasutajapõhist tasu, täielik pa
 
 ## Praktilised miniülesanded
 
-**1.** Kirjuta tsooni `kool.example` kirjed: MX serverile `post.kool.example` (`10.0.83.70`), SPF, mis lubab ainult MX-serveril saata, ja DMARC poliitikaga `quarantine`.
+**1.** Kirjuta tsooni `kool.example` kirjed: MX serverile `post.kool.example` (`10.0.83.170`), SPF, mis lubab ainult MX-serveril saata, ja DMARC poliitikaga `quarantine`.
 
 <details>
 <summary>Lahendus</summary>
 
 ```text
 @       IN  MX   10 post.kool.example.
-post    IN  A    10.0.83.70
+post    IN  A    10.0.83.170
 @       IN  TXT  "v=spf1 mx -all"
 _dmarc  IN  TXT  "v=DMARC1; p=quarantine; rua=mailto:postmaster@kool.example"
 ```

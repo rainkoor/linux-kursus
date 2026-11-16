@@ -84,8 +84,8 @@ Projekti kataloogis `~/ansible`:
 ```ini
 # inventuur.ini
 [veebiserverid]
-debian1 ansible_host=10.0.83.52
-ubuntusrv ansible_host=10.0.83.54
+debian1 ansible_host=10.0.83.152
+ubuntusrv ansible_host=10.0.83.154
 
 [all:vars]
 ansible_user=mari

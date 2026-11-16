@@ -10,6 +10,8 @@ Eestikeelne avatud õppematerjal Linuxi (ja BSD) õppimiseks: esimesest käsust 
 
 Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on kirjutatud nii, et sobib ka iseseisvaks õppimiseks.
 
+**Linux ja BSD.** Kursus on Linuxi-keskne: põhi- ja süvendusosa õpetavad Linuxit (Debian, Ubuntu, AlmaLinux) ja näitavad igas põhiteemas võrdluseks, kuidas sama asi käib FreeBSD-s (plokid „Kuidas on see FreeBSD-s?“). BSD-d harjutatakse praktiliselt valikmoodulites [30. FreeBSD server](docs/moodul-30-freebsd/index.md) ja 22 (OPNsense). Iseõppijale on need valikulised, HKHK õppijale on moodul 30 kohustuslik, sest rakenduskava käsitleb Linuxi ja BSD haldust koos.
+
 ## Sisukord
 
 [Kursuse kava](docs/kava.md) kirjeldab iga mooduli teemasid ja õpiväljundeid; veebilehel on sama sisu menüüs. Iga mooduli juures on teooria, laboritöö ja enesekontroll.
@@ -62,6 +64,7 @@ Materjal on loodud Haapsalu Kutsehariduskeskuse (HKHK) IT-õppe tarbeks, kuid on
 **Lisad**
 
 - [Laborikeskkond ja paigaldus](docs/lisad/paigaldus.md)
+- [Tõrkeotsingu töövoog](docs/lisad/torkeotsing.md)
 - [Distrode ülevaade](docs/lisad/distrod.md)
 - [UNIX-i ja Linuxi ajalugu](docs/lisad/ajalugu.md)
 - [Sõnastik](docs/lisad/sonastik.md)
@@ -112,7 +115,7 @@ Need kolm katavad suurema osa reaalsetest Linuxi serveritest. Teiste distrode ü
 
 ## Kuidas materjali kasutada?
 
-**Õppijana:** loe moodulid järjest läbi, tee iga mooduli laboritöö ja kontrolli end enesekontrolli küsimustega. Ära ainult loe - kirjuta iga käsk ise läbi ja katseta. Põhi- ja süvendusosa moodulites algab iga teema kastiga **Lühidalt**, kus on kõige tähtsam paari lausega. Pikemad taustaselgitused on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
+**Õppijana:** loe moodulid järjest läbi, tee iga mooduli laboritöö ja kontrolli end enesekontrolli küsimustega. Ära ainult loe - kirjuta iga käsk ise läbi ja katseta. HKHK Proxmoxi laboris seadistate pärast kursuse sissejuhatust ja esimesi käske õpetaja ette näitamisel ning selgitamisel kolme esimese masina (Debian, Ubuntu, AlmaLinux) võrgu ([juhend](docs/lisad/paigaldus.md#oma-võrgu-leidmine)). Seda on vaja, sest laborivõrgus pole alguses DHCP-serverit. Õppijad teevad staatilise IP seadistamise juhendi järgi kaasa; seejärel algab moodul 1 ja võrgu seadistust õpitakse põhjalikult moodulis 7. Põhi- ja süvendusosa moodulites algab iga teema kastiga **Lühidalt**, kus on kõige tähtsam paari lausega. Pikemad taustaselgitused on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu. Kastiga **Lisaväljakutse** märgitud teemad (nt kerneli kompileerimine, kõrge kättesaadavus) on edasijõudnutele ega ole eksamil nõutud.
 
 **Õpetajana:** kava sisaldab soovituslikku mahtu tundides ja iga mooduli õpiväljundeid. Laboritööd on mõeldud tegemiseks virtuaalmasinas (nt Proxmox VE, VirtualBox), kus õppija võib julgelt asju katki teha. Laboritööde kontrollvastused ja proovieksamite näidislahendused ei ole avalikud - need on eraldi õpetaja materjalides (küsi autorilt).
 

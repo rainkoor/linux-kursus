@@ -16,7 +16,7 @@
 > [!WARNING]
 > **Tee kõiki selle labori osi ainult isoleeritud laborivõrgus!** Kontrolli enne alustamist, et `debian1` võrguliides on Proxmoxis ühendatud sinu isoleeritud silda/VNet-i, mitte kooli võrku.
 
-Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, vaikelüüs `10.0.83.1`, `debian1` `10.0.83.52`, `debian2` `10.0.83.53`, `alma` `10.0.83.55`, DHCP vahemik `10.0.83.80–99`. Asenda oma võrguplaani väärtustega.
+Tähised võrguplaani näite järgi: võrk `10.0.83.0/24`, vaikelüüs `10.0.83.1`, `debian1` `10.0.83.152`, `debian2` `10.0.83.153`, `alma` `10.0.83.155`, DHCP vahemik `10.0.83.180–199`. Asenda oma võrguplaani väärtustega.
 
 ---
 
@@ -35,7 +35,7 @@ sudo ufw allow 69/udp
 
 ```bash
 sudo apt install tftp-hpa
-tftp 10.0.83.52 -c get netboot.xyz.kpxe && ls -l netboot.xyz.kpxe
+tftp 10.0.83.152 -c get netboot.xyz.kpxe && ls -l netboot.xyz.kpxe
 ```
 
 **1.3** Lisa Kea alamvõrgu seadistusse PXE valikud (teooria punkt 23.1) - `next-server` = `debian1` aadress, `boot-file-name` = `netboot.xyz.kpxe`. Kontrolli ja taaskäivita Kea.
@@ -90,7 +90,7 @@ sudo systemctl restart iscsid
 **3.2** Avasta sihtmärk, logi sisse ja leia uus ketas:
 
 ```bash
-sudo iscsiadm -m discovery -t sendtargets -p 10.0.83.53
+sudo iscsiadm -m discovery -t sendtargets -p 10.0.83.153
 lsblk
 sudo iscsiadm -m node --login
 lsblk

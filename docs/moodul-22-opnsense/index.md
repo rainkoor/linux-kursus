@@ -53,9 +53,9 @@ flowchart TD
         W --- L
     end
     L --- S{{"isoleeritud laborivõrk"}}
-    S --- D1["debian1<br>10.0.83.52"]
-    S --- D2["debian2<br>10.0.83.53"]
-    S --- A["alma<br>10.0.83.55"]
+    S --- D1["debian1<br>10.0.83.152"]
+    S --- D2["debian2<br>10.0.83.153"]
+    S --- A["alma<br>10.0.83.155"]
     S --- U["ubuntuklient<br>DHCP"]
 ```
 
@@ -168,7 +168,7 @@ OPNsense kasutab DNS-i lahendajana **Unbound**-i (*Services* → *Unbound DNS*).
 
 - lahendab klientide eest internetinimesid;
 - oskab registreerida DHCP-klientide nimed (nt `ubuntuklient.lab.example`);
-- võimaldab lisada käsitsi kirjeid (*Overrides* → *Hosts*), nt `www.lab.example → 10.0.83.55`;
+- võimaldab lisada käsitsi kirjeid (*Overrides* → *Hosts*), nt `www.lab.example → 10.0.83.155`;
 - võimaldab suunata kindla domeeni päringud teisele serverile (*Query Forwarding*) - nt `ad.lab.example` päringud domeenikontrollerile (moodul 26).
 
 ## 22.5 Tulemüür
@@ -207,7 +207,7 @@ Pärast muutmist vajuta **Apply changes**.
 
 | Alias | Tüüp | Sisu |
 |---|---|---|
-| `serverid` | Host(s) | `10.0.83.52`, `10.0.83.53`, `10.0.83.55` |
+| `serverid` | Host(s) | `10.0.83.152`, `10.0.83.153`, `10.0.83.155` |
 | `veebipordid` | Port(s) | `80`, `443` |
 | `haldusvork` | Network(s) | `10.10.0.0/24` |
 
@@ -225,7 +225,7 @@ Nii on reeglid loetavad ja muudatuse (nt uus server) saab teha ühes kohas.
 | Protocol | TCP |
 | Destination | WAN address |
 | Destination port | 8080 |
-| Redirect target IP | `10.0.83.55` |
+| Redirect target IP | `10.0.83.155` |
 | Redirect target port | 80 |
 | Description | Veebiserver alma |
 

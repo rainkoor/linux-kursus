@@ -100,7 +100,7 @@ Esimene päris konteinerilahendus oli **FreeBSD jail** (FreeBSD 4.0, 2000). See 
 # /etc/jail.conf (FreeBSD)
 www {
     path = "/usr/local/jails/www";
-    ip4.addr = "vtnet0|10.0.83.67/24";
+    ip4.addr = "vtnet0|10.0.83.167/24";
     host.hostname = "www.lab.example";
     exec.start = "/bin/sh /etc/rc";
     exec.stop = "/bin/sh /etc/rc.shutdown";

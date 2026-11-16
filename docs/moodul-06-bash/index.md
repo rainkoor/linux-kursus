@@ -49,7 +49,7 @@ Mooduli läbinud õppija:
 |---|---|---|---|
 | **`bash`** | jah (+ laiendused) | Debian, Ubuntu, AlmaLinux kasutajatel | Linuxi standard; selle mooduli skriptid |
 | **`sh`** / **`dash`** | jah (ainult POSIX) | Debiani ja Ubuntu `/bin/sh` | Väike ja kiire; süsteemiskriptid |
-| **`zsh`** | peaaegu (+ omad laiendused) | macOS, Kali | Väga hea automaatne lõpetamine, pluginad (nt Oh My Zsh) |
+| **`zsh`** | peaaegu (+ omad laiendused) | macOS, Kali | Väga hea automaatne lõpetamine, pistikprogrammid (nt Oh My Zsh) |
 | **`fish`** | **ei** | - | Kõige kasutajasõbralikum: soovitused, värvid ja lõpetamine ilma seadistamata, kuid oma süntaks |
 | **`ksh`**, **`tcsh`** | `ksh` jah, `tcsh` ei | vanemad Unixid, FreeBSD juurkasutaja (`tcsh` kuni 13. versioonini) | Ajaloolised, kohtab vanades süsteemides |
 

@@ -76,7 +76,7 @@ Kasutaja peab kuuluma gruppi `wheel`. `doas` on OpenBSD-st pärit lihtne `sudo` 
 <details>
 <summary>Vastus</summary>
 
-`sysrc ifconfig_vtnet0="inet 10.0.83.66/24"`, `sysrc defaultrouter="10.0.83.1"`, DNS `/etc/resolv.conf`; rakendamiseks `service netif restart && service routing restart`.
+`sysrc ifconfig_vtnet0="inet 10.0.83.166/24"`, `sysrc defaultrouter="10.0.83.1"`, DNS `/etc/resolv.conf`; rakendamiseks `service netif restart && service routing restart`.
 
 </details>
 

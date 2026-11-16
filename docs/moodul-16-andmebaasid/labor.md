@@ -128,24 +128,24 @@ sudo mariadb kool < ~/kool.sql
 curl -sk https://kool.lab.example/opilased.php | grep -c "<tr>"
 ```
 
-**2.2** Luba `alma`-l lugeda andmebaasi `kool`: muuda `bind-address` (`/etc/mysql/mariadb.conf.d/50-server.cnf`) laborivõrgu aadressile `10.0.83.52`, loo kasutaja ainult lugemisõigusega ja ava tulemüür ainult `alma`-le:
+**2.2** Luba `alma`-l lugeda andmebaasi `kool`: muuda `bind-address` (`/etc/mysql/mariadb.conf.d/50-server.cnf`) laborivõrgu aadressile `10.0.83.152`, loo kasutaja ainult lugemisõigusega ja ava tulemüür ainult `alma`-le:
 
 ```sql
-CREATE USER 'aruanne'@'10.0.83.55' IDENTIFIED BY 'Aruande-Parool-1';
-GRANT SELECT ON kool.* TO 'aruanne'@'10.0.83.55';
+CREATE USER 'aruanne'@'10.0.83.155' IDENTIFIED BY 'Aruande-Parool-1';
+GRANT SELECT ON kool.* TO 'aruanne'@'10.0.83.155';
 ```
 
 ```bash
 sudo systemctl restart mariadb
-sudo ufw allow from 10.0.83.55 to any port 3306 proto tcp
+sudo ufw allow from 10.0.83.155 to any port 3306 proto tcp
 ```
 
 `alma`-s:
 
 ```bash
 sudo dnf install -y mariadb
-mariadb -h 10.0.83.52 -u aruanne -p -e "SELECT * FROM kool.opilased;"
-mariadb -h 10.0.83.52 -u aruanne -p -e "DELETE FROM kool.opilased;"
+mariadb -h 10.0.83.152 -u aruanne -p -e "SELECT * FROM kool.opilased;"
+mariadb -h 10.0.83.152 -u aruanne -p -e "DELETE FROM kool.opilased;"
 ```
 
 > **K5.** Kas lugemine õnnestus? Mis juhtus `DELETE`-iga? Miks on tulemüüri reegel lisaks kasutaja aadressipiirangule ikkagi vajalik?
@@ -182,11 +182,11 @@ Kui `\c kool kool` annab vea `Peer authentication failed`, ühendu `psql -h loca
 
 > **K7.** Miks ei lubanud `peer`-autentimine süsteemikasutajal `postgres` ühenduda andmebaasi kasutajana `kool`? Mis vahe on `peer` ja `scram-sha-256` meetodil?
 
-**3.2** Luba `alma`-st ühendus: `listen_addresses = 'localhost,10.0.83.52'` failis `postgresql.conf` ja `pg_hba.conf`-i rida `host kool kool 10.0.83.55/32 scram-sha-256`. Taaskäivita ja ava tulemüür pordile 5432 ainult `alma`-le. `alma`-s:
+**3.2** Luba `alma`-st ühendus: `listen_addresses = 'localhost,10.0.83.152'` failis `postgresql.conf` ja `pg_hba.conf`-i rida `host kool kool 10.0.83.155/32 scram-sha-256`. Taaskäivita ja ava tulemüür pordile 5432 ainult `alma`-le. `alma`-s:
 
 ```bash
 sudo dnf install -y postgresql
-psql -h 10.0.83.52 -U kool -d kool -c "SELECT COUNT(*) FROM opilased;"
+psql -h 10.0.83.152 -U kool -d kool -c "SELECT COUNT(*) FROM opilased;"
 ```
 
 **3.3** Varunda ja taasta:

@@ -13,7 +13,7 @@
 
 > **Aruanne:** vasta küsimustele **K1–K12**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
-Laboris kasutatavad tähised: `MAIL_IP` - Ubuntu masina aadress (`10.0.83.54`), `DNS_IP` - `debian1` aadress.
+Laboris kasutatavad tähised: `MAIL_IP` - Ubuntu masina aadress (`10.0.83.154`), `DNS_IP` - `debian1` aadress.
 
 ---
 

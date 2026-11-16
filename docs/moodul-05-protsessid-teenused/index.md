@@ -428,6 +428,8 @@ Sõltuvused, teenuse tüübid, mallid, pesa- ja teeüksused, kasutajateenused ni
 > [!TIP]
 > **Lühidalt:** `journalctl` näitab logisid: `-u teenus` - ühe teenuse logi, `-f` - jälgi reaalajas, `-p err` - ainult vead, `-b` - selle alglaadimise logi.
 
+Logid on tõrkeotsingu põhitööriist. Kogu töökäik - sümptomist kuni dokumenteerimiseni - on lisas [tõrkeotsingu töövoog](../lisad/torkeotsing.md).
+
 systemd kogub kõigi teenuste ja kerneli logid ühte kohta - **journal'isse**. Seda loetakse käsuga `journalctl`.
 
 ```bash

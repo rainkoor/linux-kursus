@@ -63,7 +63,7 @@ FreeBSD paigaldaja **bsdinstall** on tekstipõhine ja lühike. Proxmoxis: tüüp
 |---|---|
 | Klaviatuur | *Estonian* (või jäta vaikimisi) |
 | Hostinimi | `fbsd.lab.example` |
-| Paigaldusviis | *Distribution Sets* (traditsiooniline; FreeBSD 15 pakub ka baassüsteemi pakettidena - vt 25.5) |
+| Paigaldusviis | *Distribution Sets* (traditsiooniline; FreeBSD 15 pakub ka baassüsteemi pakettidena - vt 30.5) |
 | Komponendid | vaikimisi; `kernel-dbg` ja `lib32` võib laboris eemaldada |
 | Partitsioonid | **Auto (ZFS)**, *stripe* ühe kettaga, GPT (BIOS + UEFI) |
 | Võrk | `vtnet0`, IPv4 DHCP (staatiline aadress hiljem, 25.8) |
@@ -212,7 +212,7 @@ Staatiline aadress kirjutatakse `/etc/rc.conf`-i:
 
 ```sh
 sysrc hostname="fbsd.lab.example"
-sysrc ifconfig_vtnet0="inet 10.0.83.66/24"
+sysrc ifconfig_vtnet0="inet 10.0.83.166/24"
 sysrc defaultrouter="10.0.83.1"
 echo "nameserver 10.0.83.1" > /etc/resolv.conf
 service netif restart && service routing restart
@@ -281,7 +281,7 @@ service pf start                 # NB! võib katkestada olemasoleva SSH-seansi
 pfctl -sr                        # aktiivsed reeglid
 pfctl -si                        # statistika
 pfctl -t ryndajad -T show        # tabeli sisu
-pfctl -t ryndajad -T delete 10.0.83.99
+pfctl -t ryndajad -T delete 10.0.83.199
 pfctl -f /etc/pf.conf            # laadi muudatused uuesti
 ```
 
@@ -296,8 +296,8 @@ pfctl -f /etc/pf.conf            # laadi muudatused uuesti
 flowchart TB
     subgraph H ["FreeBSD host - üks kernel"]
         direction LR
-        J1["jail www<br>10.0.83.67<br>nginx"]
-        J2["jail db<br>10.0.83.68<br>PostgreSQL"]
+        J1["jail www<br>10.0.83.167<br>nginx"]
+        J2["jail db<br>10.0.83.168<br>PostgreSQL"]
         HS["host ise<br>sshd, pf"]
         J1 ~~~ J2 ~~~ HS
     end
@@ -326,7 +326,7 @@ cp /etc/resolv.conf /etc/localtime /usr/local/jails/www/etc/
 www {
     host.hostname = "www.lab.example";
     path = "/usr/local/jails/$name";
-    ip4.addr = "vtnet0|10.0.83.67/24";
+    ip4.addr = "vtnet0|10.0.83.167/24";
     mount.devfs;
     exec.clean;
     exec.start = "/bin/sh /etc/rc";

@@ -28,7 +28,7 @@ Mooduli läbinud õppija:
 ## 13.1 IPv6
 
 > [!TIP]
-> **Lühidalt:** IPv6 aadress on 128-bitine ja kirjutatakse kuueteistkümnendsüsteemis (`fd83::54/64`). Masin saab aadressi tavaliselt ise (SLAAC), serverile antakse staatiline. Käsud on samad mis IPv4-l, võtmega `-6`.
+> **Lühidalt:** IPv6 aadress on 128-bitine ja kirjutatakse kuueteistkümnendsüsteemis (`fd83::154/64`). Masin saab aadressi tavaliselt ise (SLAAC), serverile antakse staatiline. Käsud on samad mis IPv4-l, võtmega `-6`.
 
 IPv4-aadresse on umbes 4 miljardit ja need on ammu otsas - internet on seni toiminud NAT-i abil. **IPv6** aadressid on **128-bitised** (IPv4 on 32-bitine), seega jätkub neid igale seadmele. Suur osa mobiilivõrkudest ja koduühendustest kasutab juba IPv6-t ning serveriadministraator kohtab seda kindlasti.
 
@@ -85,31 +85,31 @@ ping -c2 fe80::be24:11ff:fe2a:1b3c%ens18   # link-local aadressi juurde tuleb li
 ss -6 -tlpn                            # IPv6 kuulavad pordid
 dig AAAA debian.org +short
 curl -6 https://ifconfig.co            # mis on minu avalik IPv6-aadress?
-ssh kasutaja@fd83::52                  # ssh kasutaja@[fd83::52]:2222 pordiga; scp/rsync vajavad nurksulgusid
+ssh kasutaja@fd83::152                  # ssh kasutaja@[fd83::152]:2222 pordiga; scp/rsync vajavad nurksulgusid
 ```
 
 Link-local aadressi juures on vaja liidese nime (`%ens18`), sest sama `fe80::/64` võrk on olemas igal liidesel ja kernel ei tea muidu, kust pakett saata.
 
 ### Staatiline IPv6 kolmes distros
 
-Kursuse laborivõrgus kasutame ULA-võrku `fd83::/64` (masina number nagu IPv4-s, nt `alma` → `fd83::55`).
+Kursuse laborivõrgus kasutame ULA-võrku `fd83::/64` (masina number nagu IPv4-s, nt `alma` → `fd83::155`).
 
 ```yaml
 # Ubuntu: Netplani fail, nt /etc/netplan/50-cloud-init.yaml (liidese ens18 alla)
       addresses:
-        - 10.0.83.54/24
-        - fd83::54/64
+        - 10.0.83.154/24
+        - fd83::154/64
 ```
 
 ```text
 # Debian: /etc/network/interfaces (lisa IPv4 ploki järele)
 iface ens18 inet6 static
-    address fd83::52/64
+    address fd83::152/64
 ```
 
 ```bash
 # AlmaLinux: NetworkManager
-sudo nmcli connection modify ens18 ipv6.method manual ipv6.addresses fd83::55/64
+sudo nmcli connection modify ens18 ipv6.method manual ipv6.addresses fd83::155/64
 sudo nmcli connection up ens18
 ```
 
@@ -139,7 +139,7 @@ Sildu kasutavad kõik virtualiseerimis- ja konteinerilahendused:
 flowchart TB
     NET["füüsiline võrk"] --- ENS["ens18<br>füüsiline kaart"]
     subgraph H["Host"]
-        ENS --- BR["br0 / vmbr0<br>sild, 10.0.83.10"]
+        ENS --- BR["br0 / vmbr0<br>sild, 10.0.83.110"]
         BR --- T1["tap: VM 101"]
         BR --- T2["tap: VM 102"]
         BR --- V1["veth: konteiner"]
@@ -155,7 +155,7 @@ Kui füüsiline liides lisatakse silda, liigub tema IP-aadress **sillale** - lii
 ```bash
 # AlmaLinux: NetworkManager
 sudo nmcli connection add type bridge ifname br0 con-name br0 \
-    ipv4.method manual ipv4.addresses 10.0.83.55/24 ipv4.gateway 10.0.83.1 ipv4.dns 10.0.83.1 \
+    ipv4.method manual ipv4.addresses 10.0.83.155/24 ipv4.gateway 10.0.83.1 ipv4.dns 10.0.83.1 \
     bridge.stp no
 sudo nmcli connection add type bridge-slave ifname ens19 master br0
 ```
@@ -225,7 +225,7 @@ ip -d link show ens19.20                  # näitab: vlan protocol 802.1Q id 20
 ```bash
 # AlmaLinux: püsivalt
 sudo nmcli connection add type vlan con-name vlan20 dev ens19 id 20 \
-    ipv4.method manual ipv4.addresses 10.20.0.55/24
+    ipv4.method manual ipv4.addresses 10.20.0.155/24
 ```
 
 ```yaml
@@ -234,14 +234,14 @@ sudo nmcli connection add type vlan con-name vlan20 dev ens19 id 20 \
     vlan20:
       id: 20
       link: ens19
-      addresses: [10.20.0.54/24]
+      addresses: [10.20.0.154/24]
 ```
 
 ```text
 # Debian: /etc/network/interfaces (pakett vlan)
 auto ens19.20
 iface ens19.20 inet static
-    address 10.20.0.52/24
+    address 10.20.0.152/24
 ```
 
 VLAN-e kasutatakse koolides ja ettevõtetes võrkude eraldamiseks (õpetajad, õpilased, serverid, külalised, IP-telefonid). VLAN-ide vahel liikumine käib alati läbi ruuteri või tulemüüri (nt OPNsense, moodul 22), kus saab liiklust piirata.
@@ -269,7 +269,7 @@ VLAN-e kasutatakse koolides ja ettevõtetes võrkude eraldamiseks (õpetajad, õ
 # AlmaLinux: NetworkManager
 sudo nmcli connection add type bond con-name bond0 ifname bond0 \
     bond.options "mode=active-backup,miimon=100" \
-    ipv4.method manual ipv4.addresses 10.30.0.55/24
+    ipv4.method manual ipv4.addresses 10.30.0.155/24
 sudo nmcli connection add type ethernet ifname ens19 master bond0
 sudo nmcli connection add type ethernet ifname ens20 master bond0
 ```
@@ -284,7 +284,7 @@ network:
   bonds:
     bond0:
       interfaces: [ens19, ens20]
-      addresses: [10.30.0.54/24]
+      addresses: [10.30.0.154/24]
       parameters:
         mode: active-backup
         mii-monitor-interval: 100
@@ -294,7 +294,7 @@ network:
 # Debian: /etc/network/interfaces (pakett ifenslave)
 auto bond0
 iface bond0 inet static
-    address 10.30.0.52/24
+    address 10.30.0.152/24
     bond-slaves ens19 ens20
     bond-mode active-backup
     bond-miimon 100
@@ -440,7 +440,7 @@ Kui ühendus ei tööta ja tavalised käsud (moodul 7, punkt 7.5) põhjust ei n�
 sudo apt install tcpdump              # AlmaLinux: sudo dnf install tcpdump
 sudo tcpdump -i ens18 -n icmp         # ainult ping-paketid, ilma nimelahenduseta (-n)
 sudo tcpdump -i ens18 -n port 53      # DNS-päringud
-sudo tcpdump -i any -n host 10.0.83.52 and tcp port 22
+sudo tcpdump -i any -n host 10.0.83.152 and tcp port 22
 sudo tcpdump -i ens19 -n -e vlan      # VLAN-märgised (-e näitab Etherneti päist)
 sudo tcpdump -i ens18 -n icmp6        # IPv6 naabrite leidmine ja ping
 sudo tcpdump -i ens18 -w puuk.pcap    # salvesta faili, ava hiljem Wiresharkis

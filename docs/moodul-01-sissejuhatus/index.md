@@ -23,6 +23,9 @@ Mooduli läbinud õppija:
 > [!NOTE]
 > **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
 
+> [!IMPORTANT]
+> **HKHK õppijale: kõigepealt võrk.** HKHK Proxmoxi laborivõrgus ei ole alguses DHCP-serverit, seega uuel virtuaalmasinal pole võrguühendust ega saa SSH-ga ühenduda. Pärast kursuse sissejuhatust ja esimesi käske näitab ja selgitab õpetaja staatilise IP seadistamise ette; õppijad teevad juhendi järgi kaasa kolme esimese masina (Debian, Ubuntu, AlmaLinux) Proxmoxi konsoolis. Selle sammu eesmärk on saada masinad võrku, mitte veel võrgu seadistust süvitsi õppida. Seejärel algab moodul 1. Juhendid: [Debian](../moodul-07-vork-ssh/index.md#debian-staatiline-ip) · [Ubuntu](../moodul-07-vork-ssh/index.md#ubuntu-staatiline-ip) · [AlmaLinux](../moodul-07-vork-ssh/index.md#almalinux-nmtui) · [kontroll](../moodul-07-vork-ssh/index.md#kontrolli-tulemust). Aadressid leiad [paigalduslisa võrguplaanist](../lisad/paigaldus.md#2-võrguplaan). Moodulis 7 käsitleme võrgu põhimõtteid ja seadistamist põhjalikult. Kui õpid iseseisvalt (VirtualBox, koduruuter), saab masin aadressi enamasti DHCP-ga ja selle sammu võid vahele jätta.
+
 ---
 
 ## 1.1 Mis on Linux?
@@ -156,13 +159,13 @@ ssh kasutaja@aadress
 Näiteks:
 
 ```bash
-ssh mari@10.0.83.52
+ssh mari@10.0.83.152
 ```
 
 Esimesel ühendumisel küsib SSH, kas usaldad serveri võtit:
 
 ```text
-The authenticity of host '10.0.83.52' can't be established.
+The authenticity of host '10.0.83.152' can't be established.
 ED25519 key fingerprint is SHA256:...
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```

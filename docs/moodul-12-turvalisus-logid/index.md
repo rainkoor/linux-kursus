@@ -655,10 +655,10 @@ Kõige lihtsam on kasutada veebiliidese nuppu *Deploy new agent*: vali operatsio
 ```bash
 # Debian / Ubuntu
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_<versioon>_amd64.deb
-sudo WAZUH_MANAGER='10.0.83.54' WAZUH_AGENT_NAME='debian1' dpkg -i ./wazuh-agent_<versioon>_amd64.deb
+sudo WAZUH_MANAGER='10.0.83.154' WAZUH_AGENT_NAME='debian1' dpkg -i ./wazuh-agent_<versioon>_amd64.deb
 
 # AlmaLinux
-sudo WAZUH_MANAGER='10.0.83.54' WAZUH_AGENT_NAME='alma' rpm -ihv https://packages.wazuh.com/4.x/yum/wazuh-agent-<versioon>.x86_64.rpm
+sudo WAZUH_MANAGER='10.0.83.154' WAZUH_AGENT_NAME='alma' rpm -ihv https://packages.wazuh.com/4.x/yum/wazuh-agent-<versioon>.x86_64.rpm
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now wazuh-agent
@@ -669,6 +669,9 @@ Agent peab olema **sama või vanem versioon** kui server. Agent ühendub serveri
 Agendi seadistus on failis `/var/ossec/etc/ossec.conf`, logi `/var/ossec/logs/ossec.log`.
 
 ### Automaatne reageerimine (active response)
+
+> [!NOTE]
+> **Lisaväljakutse:** automaatne reageerimine on Wazuhi valikulise osa edasijõudnute teema. Eksamil seda ei nõuta.
 
 Wazuh võib sündmusele ka ise reageerida - näiteks blokeerida SSH-d murda prooviva aadressi kõigis agentides, sarnaselt fail2ban-iga, kuid tsentraalselt. Reageerimine seadistatakse **serveri** seadistusfailis (Dockeri paigalduses `single-node/config/wazuh_cluster/wazuh_manager.conf`), `<ossec_config>` ploki sisse:
 

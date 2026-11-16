@@ -13,7 +13,7 @@
 
 > **Aruanne:** vasta küsimustele **K1–K14**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
 
-Tähised: `kasutaja` - sinu kasutajanimi. IP-aadressid on paigalduslisa plaanist (`10.0.83.61`–`63`); asenda `83` oma võrgu numbriga.
+Tähised: `kasutaja` - sinu kasutajanimi. IP-aadressid on paigalduslisa plaanist (`10.0.83.161`–`63`); asenda `83` oma võrgu numbriga.
 
 ---
 
@@ -23,16 +23,16 @@ Tähised: `kasutaja` - sinu kasutajanimi. IP-aadressid on paigalduslisa plaanist
 
 | Masin | IP |
 |---|---|
-| `k3s1` | `10.0.83.61` |
-| `k3s2` | `10.0.83.62` |
-| `k3s3` | `10.0.83.63` |
+| `k3s1` | `10.0.83.161` |
+| `k3s2` | `10.0.83.162` |
+| `k3s3` | `10.0.83.163` |
 
 **0.2** Lisa kõigi kolme masina ja Ubuntu kliendi faili `/etc/hosts`:
 
 ```text
-10.0.83.61 k3s1.lab.example k3s1 kool.k8s.lab.example
-10.0.83.62 k3s2.lab.example k3s2
-10.0.83.63 k3s3.lab.example k3s3
+10.0.83.161 k3s1.lab.example k3s1 kool.k8s.lab.example
+10.0.83.162 k3s2.lab.example k3s2
+10.0.83.163 k3s3.lab.example k3s3
 ```
 
 **0.3** Igas sõlmes:
@@ -55,7 +55,7 @@ Tee kõigist masinatest **hetktõmmis** „enne k3s-i“.
 ```bash
 sudo mkdir -p /etc/rancher/k3s
 sudo tee /etc/rancher/k3s/config.yaml <<'EOF'
-node-ip: 10.0.83.61
+node-ip: 10.0.83.161
 tls-san:
   - k3s1.lab.example
 write-kubeconfig-mode: "0600"
@@ -95,9 +95,9 @@ sudo cat /var/lib/rancher/k3s/server/node-token
 
 ```bash
 sudo mkdir -p /etc/rancher/k3s
-echo "node-ip: 10.0.83.62" | sudo tee /etc/rancher/k3s/config.yaml
+echo "node-ip: 10.0.83.162" | sudo tee /etc/rancher/k3s/config.yaml
 curl -sfL https://get.k3s.io -o k3s-install.sh
-sudo K3S_URL=https://10.0.83.61:6443 K3S_TOKEN='<token>' INSTALL_K3S_CHANNEL=stable sh k3s-install.sh
+sudo K3S_URL=https://10.0.83.161:6443 K3S_TOKEN='<token>' INSTALL_K3S_CHANNEL=stable sh k3s-install.sh
 systemctl status k3s-agent
 ```
 
@@ -233,7 +233,7 @@ Loo teooria punkti 29.8 Ingress failina `ingress.yaml` ja rakenda see.
 ```bash
 curl -I http://kool.k8s.lab.example
 curl https://kool.k8s.lab.example
-curl --resolve kool.k8s.lab.example:443:10.0.83.63 https://kool.k8s.lab.example
+curl --resolve kool.k8s.lab.example:443:10.0.83.163 https://kool.k8s.lab.example
 ```
 
 > **K8.** Kas HTTPS töötas ilma hoiatuseta? Viimane käsk saatis päringu sõlmele `k3s3` - kas vastus tuli, isegi kui sellel sõlmel ei pruugi `kool` podi olla? Miks? Milline komponent päringu vastu võttis?
@@ -390,7 +390,7 @@ Kui klastrit enam ei vaja: `sudo /usr/local/bin/k3s-agent-uninstall.sh` agentide
 
 ## Lisaülesanne (valikuline)
 
-1. **Kõrge kättesaadavus:** ehita kolmest serverist koosnev klaster sisseehitatud etcd-ga (teooria punkt 29.11; `cluster-init`) ja virtuaalse IP-ga `10.0.83.64` (keepalived, moodul 15). Lülita üks server välja: kas `kubectl` töötab edasi? Lülita teine välja: mis juhtub ja miks? Tee `sudo k3s etcd-snapshot save` ja leia tõmmis.
+1. **Kõrge kättesaadavus:** ehita kolmest serverist koosnev klaster sisseehitatud etcd-ga (teooria punkt 29.11; `cluster-init`) ja virtuaalse IP-ga `10.0.83.164` (keepalived, moodul 15). Lülita üks server välja: kas `kubectl` töötab edasi? Lülita teine välja: mis juhtub ja miks? Tee `sudo k3s etcd-snapshot save` ja leia tõmmis.
 2. **GitOps Argo CD-ga:** paigalda Argo CD (`kubectl create namespace argocd` ja `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`), loo Argo CD rakendus, mis jälgib sinu Git-hoidla kataloogi `k8s/`, ja muuda Gitis koopiate arvu. Kui kiiresti muudatus klastrisse jõudis? Mis juhtub, kui muudad koopiate arvu `kubectl scale`-iga?
 3. **Seire:** paigalda Helmiga `kube-prometheus-stack` (hoidla `https://prometheus-community.github.io/helm-charts`) ja ava Grafana `kubectl port-forward`-iga. Leia töölaud, mis näitab podide mälukasutust nimeruumide kaupa.
 4. **AlmaLinuxi sõlm:** lisa klastrisse agendiks AlmaLinuxi masin (SELinux `enforcing`, firewalld). Mida paigaldusskript lisaks paigaldas (`rpm -qa | grep -i selinux`)? Milliseid tulemüürireegleid oli vaja?

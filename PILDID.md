@@ -1,6 +1,12 @@
 # Ekraanipiltide plaan
 
-Materjalis on peidetud kohatäited kujul `<!-- PILT: ../pildid/FAIL.png | kirjeldus -->`. Need ei ole veebilehel nähtavad. Kui pilt on tehtud, salvesta see kausta `docs/pildid/` täpselt allolevas tabelis toodud nimega - seejärel asendatakse kohatäide pildiga (`![kirjeldus](../pildid/FAIL.png)`).
+Materjalis on peidetud kohatäited kujul `<!-- PILT: ../pildid/FAIL.png | kirjeldus -->`. Need ei ole veebilehel nähtavad. Kui pilt on tehtud:
+
+1. salvesta see kausta `docs/pildid/` **täpselt** allolevas tabelis toodud nimega;
+2. käivita kursuse juurkataloogis `python3 tools/pildid.py` - skript asendab kõik kohatäited, mille pilt on olemas, pildiga (`![kirjeldus](../pildid/FAIL.png)`) ja näitab, millised pildid on veel puudu ning kas mõni salvestatud fail on vale nimega;
+3. lisa muudatused Gitti (`git add docs/pildid docs && git commit`).
+
+Pilt on siis nähtav nii GitHubis kui ka veebilehel. Skripti võib käivitada nii tihti kui vaja (`--kuiva` näitab ainult olukorda ega muuda midagi).
 
 ## Nõuded piltidele
 

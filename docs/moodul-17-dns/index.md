@@ -70,7 +70,7 @@ sudo resolvectl flush-caches    # tühjenda vahemälu (pärast DNS-i muudatust)
 systemd-resolved oskab ka **liidesepõhist DNS-i** (*split DNS*): domeen `lab.example` küsitakse labori serverilt, kõik muu teiselt. Seda kasutavad näiteks VPN-id (moodul 13):
 
 ```bash
-sudo resolvectl dns wg0 10.0.83.52
+sudo resolvectl dns wg0 10.0.83.152
 sudo resolvectl domain wg0 '~lab.example'      # tilde: ainult marsruutimiseks, mitte search'iks
 ```
 
@@ -145,8 +145,8 @@ dig www.debian.org | grep -A2 "ANSWER SECTION"     # TTL on teine väli; korda -
 |---|---|---|
 | `SOA` | Tsooni põhiandmed | seerianumber, aegumisajad |
 | `NS` | Tsooni nimeserver | `ns1.lab.example.` |
-| `A` | Nimi → IPv4-aadress | `kool → 10.0.83.52` |
-| `AAAA` | Nimi → IPv6-aadress | `kool → fd83::52` |
+| `A` | Nimi → IPv4-aadress | `kool → 10.0.83.152` |
+| `AAAA` | Nimi → IPv6-aadress | `kool → fd83::152` |
 | `CNAME` | Nimi → teine nimi (alias) | `www → kool` |
 | `MX` | E-posti server (koos eelistusega) | `10 mail.lab.example.` |
 | `TXT` | Vaba tekst: SPF, DKIM, DMARC, domeeni omandi tõendamine | `"v=spf1 mx -all"` |
@@ -190,10 +190,10 @@ $TTL 3600
                 300 )       ; negatiivse vastuse TTL
         IN  NS  ns1.lab.example.
 
-ns1     IN  A      10.0.83.52
-kool    IN  A      10.0.83.52
+ns1     IN  A      10.0.83.152
+kool    IN  A      10.0.83.152
 www     IN  CNAME  kool
-db      IN  A      10.0.83.53
+db      IN  A      10.0.83.153
 ```
 
 Olulised reeglid:
@@ -215,10 +215,10 @@ dig @localhost www.lab.example
 
 BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (`allow-recursion` vaikimisi `localnets; localhost;`), nii et kliendid saavad sama serveri kaudu lahendada ka internetinimesid. Kliendid tuleb seadistada kasutama seda serverit (Netplan, `nmcli`, `/etc/resolv.conf` - vt moodul 7) ja tulemüüris peab olema avatud port 53 (UDP ja TCP).
 
-**Uue kirje lisamine samm-sammult** (nt uus server `seire` aadressiga `10.0.83.54`) - see on DNS-i haldaja kõige sagedasem töö:
+**Uue kirje lisamine samm-sammult** (nt uus server `seire` aadressiga `10.0.83.154`) - see on DNS-i haldaja kõige sagedasem töö:
 
 1. Ava tsoonifail: `sudo nano /etc/bind/db.lab.example`.
-2. Lisa kirje: `seire   IN  A   10.0.83.54`.
+2. Lisa kirje: `seire   IN  A   10.0.83.154`.
 3. **Suurenda seerianumbrit** SOA-s (nt `2026110801` → `2026110802`). Kui unustad, ei saa sekundaarserver muudatusest teada.
 4. Kontrolli ja rakenda:
 
@@ -230,8 +230,8 @@ BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (`allow-
 5. Kontrolli vastust - ka sekundaarserverist, kui see on olemas:
 
     ```bash
-    dig @localhost seire.lab.example +short          # 10.0.83.54
-    dig @10.0.83.53 seire.lab.example +short         # sekundaar (punkt 17.5)
+    dig @localhost seire.lab.example +short          # 10.0.83.154
+    dig @10.0.83.153 seire.lab.example +short         # sekundaar (punkt 17.5)
     ```
 
 6. Kui on pöördtsoon, lisa sinna ka `PTR`-kirje (allpool) ja suurenda ka selle seerianumbrit.
@@ -241,7 +241,7 @@ BIND9 on Debianis vaikimisi ka rekursiivne resolver kohalikule võrgule (`allow-
 
 ### Pöördtsoon
 
-Pöördtsoon vastab küsimusele „kelle aadress see on?“ (`dig -x 10.0.83.52`). Seda vajavad logid, e-posti serverid (saaja kontrollib saatja PTR-kirjet) ja paljud diagnostikatööriistad. Võrgu `10.0.83.0/24` pöördtsooni nimi on aadressi osad tagurpidi + `in-addr.arpa`:
+Pöördtsoon vastab küsimusele „kelle aadress see on?“ (`dig -x 10.0.83.152`). Seda vajavad logid, e-posti serverid (saaja kontrollib saatja PTR-kirjet) ja paljud diagnostikatööriistad. Võrgu `10.0.83.0/24` pöördtsooni nimi on aadressi osad tagurpidi + `in-addr.arpa`:
 
 ```text
 # /etc/bind/named.conf.local
@@ -256,16 +256,16 @@ zone "83.0.10.in-addr.arpa" {
 $TTL 3600
 @   IN  SOA ns1.lab.example. admin.lab.example. ( 2026110801 3600 900 604800 300 )
     IN  NS  ns1.lab.example.
-52  IN  PTR debian1.lab.example.
-53  IN  PTR debian2.lab.example.
-54  IN  PTR ubuntusrv.lab.example.
-55  IN  PTR alma.lab.example.
+152  IN  PTR debian1.lab.example.
+153  IN  PTR debian2.lab.example.
+154  IN  PTR ubuntusrv.lab.example.
+155  IN  PTR alma.lab.example.
 ```
 
 ```bash
 sudo named-checkzone 83.0.10.in-addr.arpa /etc/bind/db.10.0.83
 sudo systemctl reload named
-dig @localhost -x 10.0.83.55 +short
+dig @localhost -x 10.0.83.155 +short
 ```
 
 IPv6 pöördtsoon on `ip6.arpa` all, iga kuueteistkümnendnumber eraldi (pikk, kuid põhimõte sama).
@@ -309,8 +309,8 @@ sudo rndc flush                  # tühjenda vahemälu
 
 ```mermaid
 sequenceDiagram
-    participant P as ns1 (primaar)<br>10.0.83.52
-    participant S as ns2 (sekundaar)<br>10.0.83.53
+    participant P as ns1 (primaar)<br>10.0.83.152
+    participant S as ns2 (sekundaar)<br>10.0.83.153
     Note over P: admin muudab tsooni<br>ja suurendab seerianumbrit
     P->>S: NOTIFY: lab.example muutus
     S->>P: SOA? (kontrollib seerianumbrit)
@@ -326,12 +326,12 @@ Primaaris (`debian1`) luba ülekanne ja teavitus sekundaarile:
 zone "lab.example" {
     type primary;
     file "/etc/bind/db.lab.example";
-    allow-transfer { 10.0.83.53; };
-    also-notify { 10.0.83.53; };
+    allow-transfer { 10.0.83.153; };
+    also-notify { 10.0.83.153; };
 };
 ```
 
-Lisa tsoonifaili teine NS-kirje (`IN NS ns2.lab.example.` ja `ns2 IN A 10.0.83.53`) ning suurenda seerianumbrit.
+Lisa tsoonifaili teine NS-kirje (`IN NS ns2.lab.example.` ja `ns2 IN A 10.0.83.153`) ning suurenda seerianumbrit.
 
 Sekundaaris (`debian2`):
 
@@ -339,16 +339,16 @@ Sekundaaris (`debian2`):
 zone "lab.example" {
     type secondary;
     file "/var/cache/bind/db.lab.example";     # BIND kirjutab selle ise
-    primaries { 10.0.83.52; };
+    primaries { 10.0.83.152; };
 };
 ```
 
 ```bash
 sudo named-checkconf && sudo systemctl reload named
 sudo journalctl -u named | grep -i transfer     # "Transfer completed"
-dig @10.0.83.53 kool.lab.example +short
-dig @10.0.83.52 lab.example SOA +short           # võrdle seerianumbreid
-dig @10.0.83.53 lab.example SOA +short
+dig @10.0.83.153 kool.lab.example +short
+dig @10.0.83.152 lab.example SOA +short           # võrdle seerianumbreid
+dig @10.0.83.153 lab.example SOA +short
 ```
 
 SOA-kirje ajad juhivad sekundaari käitumist: `refresh` - kui tihti kontrollib muudatusi ise (kui NOTIFY ei jõudnud kohale), `retry` - kui tihti proovib ebaõnnestumisel uuesti, `expire` - kui kaua vastab vana koopiaga, kui primaar ei vasta.
@@ -392,7 +392,7 @@ server=9.9.9.9
 local=/lab.example/           # see domeen vastatakse ainult kohalikult
 domain=lab.example
 expand-hosts                  # lisa /etc/hosts nimedele domeen
-address=/www.lab.example/10.0.83.52
+address=/www.lab.example/10.0.83.152
 ```
 
 ```bash
@@ -497,6 +497,8 @@ systemd-resolved oskab DoT-i (`DNSOverTLS=opportunistic` failis `/etc/systemd/re
 
 > [!TIP]
 > **Lühidalt:** Otsi viga järjest: kas server vastab (`dig @server nimi`), kas vastus on autoriteetne (`aa`), kas tsoon laadis (`journalctl -u named`), kas seerianumber suurenes, kas tulemüür lubab porti 53.
+
+Üldine töökäik on lisas [tõrkeotsingu töövoog](../lisad/torkeotsing.md); siin on selle DNS-i osa.
 
 | Sümptom | Mida kontrollida |
 |---|---|

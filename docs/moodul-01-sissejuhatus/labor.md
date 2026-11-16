@@ -8,7 +8,7 @@
 |---|---|
 | **Distro** | Debian |
 | **Kestus** | 2-3 × 90 minutit |
-| **Vajalik** | Debiani virtuaalmasin, millele on ligipääs SSH kaudu tavakasutajana |
+| **Vajalik** | Debiani virtuaalmasin, millele on ligipääs SSH kaudu tavakasutajana. HKHK laboris seadistatakse kolme esimese masina (Debian, Ubuntu, AlmaLinux) võrk õpetaja ette näitamisel pärast sissejuhatust ja esimesi käske, enne mooduli 1 laboritöid ([paigalduslisa](../lisad/paigaldus.md#oma-võrgu-leidmine), [moodul 7: staatiline IP](../moodul-07-vork-ssh/index.md#debian-staatiline-ip)).
 | **Eesmärk** | Harjutada ühendumist, liikumist failisüsteemis ja põhitoiminguid failidega |
 
 > **Aruanne:** vasta küsimustele **K1–K21** aruandes, mille vorm (paber, Moodle, tekstifail) määrab õpetaja. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)). Iga käsu järel vaata hoolega, mida see väljastas.

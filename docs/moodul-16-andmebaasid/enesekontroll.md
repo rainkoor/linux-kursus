@@ -118,15 +118,15 @@ Rikkis põhiserveri asendamine koopiaga. Koopias: kontrolli replikatsiooni oleku
 
 ## Praktilised miniülesanded
 
-**1.** Kirjuta SQL-käsud, mis loovad andmebaasi `moodle` ja kasutaja `moodle`, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt `10.0.83.55`.
+**1.** Kirjuta SQL-käsud, mis loovad andmebaasi `moodle` ja kasutaja `moodle`, kellel on sellele andmebaasile kõik õigused ning kes saab ühenduda ainult aadressilt `10.0.83.155`.
 
 <details>
 <summary>Lahendus</summary>
 
 ```sql
 CREATE DATABASE moodle CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'moodle'@'10.0.83.55' IDENTIFIED BY 'Tugev-Parool-456';
-GRANT ALL PRIVILEGES ON moodle.* TO 'moodle'@'10.0.83.55';
+CREATE USER 'moodle'@'10.0.83.155' IDENTIFIED BY 'Tugev-Parool-456';
+GRANT ALL PRIVILEGES ON moodle.* TO 'moodle'@'10.0.83.155';
 ```
 
 </details>
@@ -143,13 +143,13 @@ CREATE DATABASE moodle OWNER moodle;
 
 </details>
 
-**3.** Kirjuta `pg_hba.conf` rida, mis lubab rollil `moodle` ühenduda andmebaasi `moodle` ainult aadressilt `10.0.83.55` paroolitõendusega.
+**3.** Kirjuta `pg_hba.conf` rida, mis lubab rollil `moodle` ühenduda andmebaasi `moodle` ainult aadressilt `10.0.83.155` paroolitõendusega.
 
 <details>
 <summary>Lahendus</summary>
 
 ```text
-host  moodle  moodle  10.0.83.55/32  scram-sha-256
+host  moodle  moodle  10.0.83.155/32  scram-sha-256
 ```
 
 </details>

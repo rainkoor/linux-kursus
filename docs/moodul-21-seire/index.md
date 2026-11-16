@@ -190,8 +190,8 @@ Kui kahtlustad, et võrk on aeglane, mõõda **läbilaskevõimet** kahe masina v
 
 ```bash
 iperf3 -s                                  # masinas A: server (port 5201/tcp)
-iperf3 -c 10.0.83.52 -t 10                 # masinas B: mõõda 10 sekundit A suunas
-iperf3 -c 10.0.83.52 -R                    # vastupidine suund
+iperf3 -c 10.0.83.152 -t 10                 # masinas B: mõõda 10 sekundit A suunas
+iperf3 -c 10.0.83.152 -R                    # vastupidine suund
 sudo ethtool ens18                         # liidese kiirus ja duplex (Speed, Duplex, Link detected)
 mtr -rwc 20 1.1.1.1                        # pakettide kadu ja viide iga hüppe kaupa
 ```
@@ -360,9 +360,9 @@ scrape_configs:
   - job_name: node
     static_configs:
       - targets:
-          - 10.0.83.52:9100      # debian1
-          - 10.0.83.54:9100      # ubuntusrv
-          - 10.0.83.55:9100      # alma
+          - 10.0.83.152:9100      # debian1
+          - 10.0.83.154:9100      # ubuntusrv
+          - 10.0.83.155:9100      # alma
 ```
 
 ```bash

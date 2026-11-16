@@ -133,7 +133,7 @@ kill %1
 **5.1** Paigalda node_exporter masinatesse `debian1` ja `ubuntusrv` (`sudo apt install prometheus-node-exporter`) ning `alma`-sse konteinerina (teooria punkt 21.5). Ava tulemüüris port 9100 ainult seireserverile. Kontrolli seireserverist:
 
 ```bash
-curl -s http://10.0.83.52:9100/metrics | grep -c ^node_
+curl -s http://10.0.83.152:9100/metrics | grep -c ^node_
 ```
 
 **5.2** Loo `ubuntusrv`-s kataloog `~/seire`, failid `compose.yaml` ja `prometheus.yml` (teooria punkt 21.5) ning käivita. Lisa kataloog oma Git-hoidlasse.
@@ -144,7 +144,7 @@ docker compose up -d
 docker compose ps
 ```
 
-Ava `http://10.0.83.54:9090/targets`.
+Ava `http://10.0.83.154:9090/targets`.
 
 > **K7.** Kas kõik sihtmärgid olid **UP**? Kui mõni oli **DOWN**, mis oli põhjus (tulemüür, vale IP, eksportija ei tööta)?
 
@@ -152,7 +152,7 @@ Ava `http://10.0.83.54:9090/targets`.
 
 > **K8.** Kirjuta PromQL-päring, mis näitab iga masina vaba mälu protsentides. Mis oli tulemus?
 
-**5.4** Ava Grafana (`http://10.0.83.54:3000`), muuda administraatori parool, lisa andmeallikas Prometheus (`http://prometheus:9090`) ja impordi armatuurlaud ID **1860**.
+**5.4** Ava Grafana (`http://10.0.83.154:3000`), muuda administraatori parool, lisa andmeallikas Prometheus (`http://prometheus:9090`) ja impordi armatuurlaud ID **1860**.
 
 > **K9.** Miks on Grafanas andmeallika aadress `http://prometheus:9090`, mitte `http://localhost:9090`? (Vihje: moodul 14, Compose'i võrk.)
 
@@ -165,8 +165,8 @@ Ava `http://10.0.83.54:9090/targets`.
 **6.1** Käivita `ubuntusrv`-s Uptime Kuma (teooria punkt 21.6) ja lisa jälgimised:
 
 - HTTPS: `https://kool.lab.example` (laboritöö 15) - lisa `ubuntusrv`-le labori CA või lülita sertifikaadikontroll välja ja põhjenda;
-- DNS: `kool.lab.example` serveris `10.0.83.52` (laboritöö 17);
-- TCP-port: `10.0.83.53:445` (Samba).
+- DNS: `kool.lab.example` serveris `10.0.83.152` (laboritöö 17);
+- TCP-port: `10.0.83.153:445` (Samba).
 
 **6.2** Peata `debian1`-s nginx (`sudo systemctl stop nginx`), oota ja vaata, millal Uptime Kuma probleemi märkas. Käivita nginx uuesti.
 

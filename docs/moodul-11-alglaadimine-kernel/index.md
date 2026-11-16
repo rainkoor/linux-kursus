@@ -19,7 +19,7 @@ Mooduli läbinud õppija:
 - muudab kerneli parameetreid käsuga `sysctl`;
 - taastab süsteemi, mis ei käivitu, parandab GRUB-i taastemeedialt ja lähtestab juurkasutaja parooli;
 - vahetab kasutatavat kernelit ja eemaldab vanu kerneleid;
-- kompileerib ja paigaldab kerneli lähtekoodist;
+- kompileerib ja paigaldab kerneli lähtekoodist (lisaväljakutse);
 - seadistab teenuste sõltuvused ja tüübid, kasutab mallitud, pesa- ja teeüksuseid ning kasutajateenuseid;
 - karastab teenuse systemd turvaseadetega ja lahendab teenuste käivitusvigu.
 
@@ -384,6 +384,8 @@ Levinud parameetrid:
 > [!TIP]
 > **Lühidalt:** Kui süsteem ei käivitu, kasuta GRUB-is parameetrit `systemd.unit=rescue.target`, `init=/bin/bash` või AlmaLinuxis `rd.break`. GRUB-i parandad taastemeedialt `chroot`-iga. Nii saad lähtestada ka juurkasutaja parooli.
 
+Ka siin kehtib üldine [tõrkeotsingu töövoog](../lisad/torkeotsing.md): enne muutmist vaata logisid (`journalctl -b -1`), muuda üht asja korraga ja kirjuta üles, mida tegid.
+
 ### Kui süsteem satub hädaolukorra režiimi
 
 ```text
@@ -581,7 +583,7 @@ sudo dnf remove kernel-core-<versioon>           # AlmaLinux
 AlmaLinuxis määrab alles hoitavate kernelite arvu failis `/etc/dnf/dnf.conf` rida `installonly_limit=3`. **Töötavat kernelit ei saa eemaldada** ja alati tasub alles hoida vähemalt üks varukernel.
 
 <details>
-<summary>Loe lähemalt: Kernelivälised moodulid ja DKMS</summary>
+<summary>Loe lähemalt (lisaväljakutse): Kernelivälised moodulid ja DKMS</summary>
 
 Mõned draiverid (nt NVIDIA graafikadraiver, ZFS, VirtualBoxi moodulid) ei ole kerneli osa. Need tuleb iga uue kerneli jaoks uuesti kompileerida. Seda teeb automaatselt **DKMS** (*Dynamic Kernel Module Support*):
 
@@ -594,6 +596,9 @@ Kui pärast kerneli uuendust mõni draiver ei tööta, on põhjus sageli DKMS-i 
 </details>
 
 ### Oma kerneli kompileerimine
+
+> [!NOTE]
+> **Lisaväljakutse:** edasijõudnutele ja huvilistele. Distro kernelist piisab peaaegu alati; see alapunkt näitab, kuidas kernel valmib. Eksamil ja põhiülesannetes seda ei nõuta (laboritöö 11 valikuline osa V).
 
 Enamasti pole oma kernelit vaja kompileerida - distro kernel on testitud ja saab turvauuendusi. Oma kernel võib siiski olla vajalik, kui:
 

@@ -21,7 +21,7 @@ Mooduli läbinud õppija:
 - seadistab Apache'i virtuaalhostid nii Debianis kui ka AlmaLinuxis;
 - kasutab Caddyt automaatse HTTPS-i ja lihtsa pöördpuhvri jaoks ning tunneb kergemaid veebiservereid (lighttpd);
 - seadistab pöördpuhvri ja koormuse jaotuse (nginx `upstream`, HAProxy) ning kirjeldab Traefiki rolli;
-- teeb koormusejaoturi rikkekindlaks virtuaalse IP-aadressiga (keepalived, VRRP) ja mõõdab veebiserveri jõudlust koormustestiga;
+- teeb koormusejaoturi rikkekindlaks virtuaalse IP-aadressiga (keepalived, VRRP; lisaväljakutse) ja mõõdab veebiserveri jõudlust koormustestiga;
 - valib olukorrale sobiva veebiserveri.
 
 > [!NOTE]
@@ -484,16 +484,16 @@ Kui üks server ei jaksa või peab teenus töötama ka ühe serveri rikke korral
 ```mermaid
 flowchart LR
     K["klient"] --> H["HAProxy<br>:80 / :443"]
-    H --> D["debian1 (nginx)<br>10.0.83.52"]
-    H --> A["alma (Apache)<br>10.0.83.55"]
+    H --> D["debian1 (nginx)<br>10.0.83.152"]
+    H --> A["alma (Apache)<br>10.0.83.155"]
 ```
 
 ### nginx upstream
 
 ```nginx
 upstream kool_taust {
-    server 10.0.83.52:80;
-    server 10.0.83.55:80;
+    server 10.0.83.152:80;
+    server 10.0.83.155:80;
     # least_conn;             # vaikimisi round robin
 }
 server {
@@ -526,8 +526,8 @@ backend koolisait
     balance roundrobin
     option httpchk
     http-check send meth GET uri / ver HTTP/1.1 hdr Host kool.lab.example
-    server debian1 10.0.83.52:80 check
-    server alma    10.0.83.55:80 check
+    server debian1 10.0.83.152:80 check
+    server alma    10.0.83.155:80 check
 
 listen statistika
     bind *:8404
@@ -546,11 +546,14 @@ Tervisekontroll saadab päise `Host`, et taustserverid vastaksid õige saidiga (
 
 ### Jaoturi enda rikkekindlus: keepalived ja VRRP
 
+> [!NOTE]
+> **Lisaväljakutse:** kõrge kättesaadavus on edasijõudnute teema (laboritöö 15 lisaülesanne). Eksamil seda ei nõuta, kuid põhimõte - ükski ühekordne komponent ei tohi kogu teenust maha võtta - on oluline teada.
+
 HAProxy jätab rikkis taustserveri välja, aga mis saab siis, kui rikki läheb **jaotur ise**? Siis on jaotur **üksik rikkepunkt** (*single point of failure*). Lahendus: kaks jaoturit ja nende vahel **virtuaalne IP-aadress** (VIP), mis on alati selle masina küljes, mis parajasti töötab. Kliendid ja DNS kasutavad ainult VIP-i.
 
 ```mermaid
 flowchart LR
-    K["klient"] --> VIP(("VIP<br>10.0.83.50"))
+    K["klient"] --> VIP(("VIP<br>10.0.83.150"))
     VIP --> M["ubuntusrv (MASTER)<br>HAProxy + keepalived"]
     VIP -. "rikke korral" .-> B["debian2 (BACKUP)<br>HAProxy + keepalived"]
     M --> T["debian1, alma"]
@@ -590,7 +593,7 @@ vrrp_instance VEEB {
         auth_pass Kool2026    # sama mõlemas masinas (max 8 märki)
     }
     virtual_ipaddress {
-        10.0.83.50/24
+        10.0.83.150/24
     }
     track_script {
         kontrolli_haproxy
@@ -622,7 +625,7 @@ Enne kui väidad, et lahendus „talub koormust“, mõõda seda. Koormustest sa
 
 ```bash
 sudo apt install apache2-utils      # ab (AlmaLinuxis: dnf install httpd-tools)
-ab -n 2000 -c 50 http://10.0.83.50:8080/      # 2000 päringut, 50 korraga
+ab -n 2000 -c 50 http://10.0.83.150:8080/      # 2000 päringut, 50 korraga
 ```
 
 Olulised read väljundis:

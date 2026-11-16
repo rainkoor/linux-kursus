@@ -21,7 +21,7 @@ Mooduli läbinud õppija:
 - kasutab Valkey/Redise võti-väärtus hoidlat vahemäluna;
 - paigaldab dünaamilise veebirakenduse (nginx + PHP + MariaDB);
 - varundab ja taastab andmebaase ning taastab unustatud administraatori parooli;
-- kirjeldab replikatsiooni põhimõtet ning viib rikke korral koopia põhiserveriks (ülevõtt).
+- kirjeldab replikatsiooni põhimõtet ning viib rikke korral koopia põhiserveriks (ülevõtt; lisaväljakutse).
 
 > [!NOTE]
 > **Kuidas seda lehte lugeda:** iga teema algab kastiga **Lühidalt** - seal on kõige tähtsam paari lausega. Käsud ja näited on alati näha. Pikemad selgitused ja taust on peidetud plokkidesse **Loe lähemalt** - ava need, kui tahad teemast rohkem teada või kui laboritöös midagi ei õnnestu.
@@ -97,7 +97,7 @@ SHOW DATABASES;
 SHOW TABLES;
 ```
 
-Vaikimisi kuulab MariaDB ainult aadressil `127.0.0.1` (`bind-address` failis `/etc/mysql/mariadb.conf.d/50-server.cnf`). **Andmebaas ei tohiks olla internetist kättesaadav.** Kui teine server peab andmebaasiga ühenduma, muuda `bind-address`, loo kasutaja kindla IP-ga (`'kool'@'10.0.83.53'`) ja luba tulemüüris ainult see aadress.
+Vaikimisi kuulab MariaDB ainult aadressil `127.0.0.1` (`bind-address` failis `/etc/mysql/mariadb.conf.d/50-server.cnf`). **Andmebaas ei tohiks olla internetist kättesaadav.** Kui teine server peab andmebaasiga ühenduma, muuda `bind-address`, loo kasutaja kindla IP-ga (`'kool'@'10.0.83.153'`) ja luba tulemüüris ainult see aadress.
 
 Varundus ja taastamine:
 
@@ -143,6 +143,9 @@ sudo mariadb -u root -p                # kontrolli uut parooli
 
 ### Replikatsioon lühidalt
 
+> [!NOTE]
+> **Lisaväljakutse:** replikatsioon ja ülevõtt on edasijõudnute teema (laboritöö 16 lisaülesanne). Põhioskus on varundus ja taastamine (punkt 16.7).
+
 **Replikatsioon** hoiab teises serveris (*replica*) andmebaasist pidevalt uuendatavat koopiat: lugemispäringuid saab jagada ja põhiserveri rikke korral on andmed alles. Põhimõte MariaDB-s:
 
 ```text
@@ -159,10 +162,10 @@ read_only = ON
 
 ```sql
 -- põhiserveris: replikatsioonikasutaja
-CREATE USER 'repl'@'10.0.83.53' IDENTIFIED BY 'Repl-Parool-1';
-GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.0.83.53';
+CREATE USER 'repl'@'10.0.83.153' IDENTIFIED BY 'Repl-Parool-1';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.0.83.153';
 -- koopias (pärast andmete esmast kopeerimist mariadb-dump --master-data=1 abil):
-CHANGE MASTER TO MASTER_HOST='10.0.83.52', MASTER_USER='repl',
+CHANGE MASTER TO MASTER_HOST='10.0.83.152', MASTER_USER='repl',
     MASTER_PASSWORD='Repl-Parool-1', MASTER_USE_GTID=slave_pos;
 START REPLICA;
 SHOW REPLICA STATUS\G
@@ -244,12 +247,12 @@ Seadistus (Debian, Ubuntu): `/etc/postgresql/<versioon>/main/`; AlmaLinux: `/var
 ```text
 # TYPE  DATABASE  USER  ADDRESS          METHOD
 local   all       all                    peer
-host    kool      kool  10.0.83.55/32    scram-sha-256
+host    kool      kool  10.0.83.155/32    scram-sha-256
 ```
 
 ```bash
 sudo systemctl reload postgresql
-psql -h 10.0.83.52 -U kool -d kool           # teisest masinast
+psql -h 10.0.83.152 -U kool -d kool           # teisest masinast
 ```
 
 Varundus ja taastamine:
@@ -372,7 +375,7 @@ Lisa serveriplokis ka `index index.php index.html;`.
 | Reegel | Miks |
 |---|---|
 | Igal rakendusel **oma kasutaja**, õigused ainult oma andmebaasile | häkitud rakendus ei pääse teistele andmetele ligi |
-| Andmebaas kuulab ainult `127.0.0.1` või sisevõrgus kindlatele masinatele (tulemüür, `pg_hba.conf`, kasutaja `'kool'@'10.0.83.55'`) | andmebaas ei tohi kunagi olla internetist kättesaadav |
+| Andmebaas kuulab ainult `127.0.0.1` või sisevõrgus kindlatele masinatele (tulemüür, `pg_hba.conf`, kasutaja `'kool'@'10.0.83.155'`) | andmebaas ei tohi kunagi olla internetist kättesaadav |
 | Paroolid ei ole koodis ega Gitis | seadistusfail piiratud õigustega, keskkonnamuutujad, saladuste haldus |
 | Varundus **dump-tööriistaga** ja regulaarselt testitud taastamine | töötava andmebaasi failide koopia võib olla katki |
 | Uuendused (`unattended-upgrades`, `dnf-automatic`) | andmebaasiserverite turvaaugud on tõsised |

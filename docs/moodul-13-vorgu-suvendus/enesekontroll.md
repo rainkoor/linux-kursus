@@ -40,7 +40,7 @@ Sild ühendab mitu liidest/VM-i üheks võrgulõiguks (tarkvaraline kommutaator)
 <details>
 <summary>Vastus</summary>
 
-`fd83::55`. See on ULA (*Unique Local Address*, `fd00::/8`) - privaatvõrgu aadress nagu IPv4 `10.0.0.0/8`, internetti seda ei marsruudita.
+`fd83::155`. See on ULA (*Unique Local Address*, `fd00::/8`) - privaatvõrgu aadress nagu IPv4 `10.0.0.0/8`, internetti seda ei marsruudita.
 
 </details>
 
@@ -76,7 +76,7 @@ Aadress tuleb seadistada sillale; liides ise jääb aadressita ja töötab ainul
 <details>
 <summary>Vastus</summary>
 
-Access-port edastab ühe VLAN-i kaadreid ilma märgiseta (tavaline arvuti), trunk-port mitme VLAN-i kaadreid 802.1Q märgisega. Hüperviisor vajab trunk-porti ja jagab VLAN-id VM-idele (nt Proxmoxi VLAN-aware sild ja VM-i *VLAN Tag*).
+Pääsuport (access-port) edastab ühe VLAN-i kaadreid ilma märgiseta (tavaline arvuti), magistraalport (trunk-port) mitme VLAN-i kaadreid 802.1Q märgisega. Hüperviisor vajab magistraalporti ja jagab VLAN-id VM-idele (nt Proxmoxi VLAN-aware sild ja VM-i *VLAN Tag*).
 
 </details>
 
@@ -127,13 +127,13 @@ Serveri tulemüür viskab paketi ära (`drop`) või vastus läheb teist teed (va
 
 ## Praktilised miniülesanded
 
-**1.** Lisa AlmaLinuxi liidesele `ens18` püsivalt IPv6-aadress `fd83::55/64` ja kontrolli seda.
+**1.** Lisa AlmaLinuxi liidesele `ens18` püsivalt IPv6-aadress `fd83::155/64` ja kontrolli seda.
 
 <details>
 <summary>Lahendus</summary>
 
 ```bash
-sudo nmcli connection modify ens18 ipv6.method manual ipv6.addresses fd83::55/64
+sudo nmcli connection modify ens18 ipv6.method manual ipv6.addresses fd83::155/64
 sudo nmcli connection up ens18
 ip -6 -br address show ens18
 ```
@@ -181,13 +181,13 @@ Lisaks `net.ipv4.ip_forward = 1` ja tulemüüri `forward` luba.
 
 </details>
 
-**4.** Püüa liidesel `ens18` ainult DNS-päringuid masinast `10.0.83.52` ja salvesta need faili.
+**4.** Püüa liidesel `ens18` ainult DNS-päringuid masinast `10.0.83.152` ja salvesta need faili.
 
 <details>
 <summary>Lahendus</summary>
 
 ```bash
-sudo tcpdump -i ens18 -n -w dns.pcap host 10.0.83.52 and port 53
+sudo tcpdump -i ens18 -n -w dns.pcap host 10.0.83.152 and port 53
 ```
 
 </details>

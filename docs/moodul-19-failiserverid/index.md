@@ -70,15 +70,15 @@ sudo exportfs -v               # vaata jagamisi
 
 ```bash
 sudo apt install nfs-common
-showmount -e 10.0.83.52
+showmount -e 10.0.83.152
 sudo mkdir -p /mnt/nfs
-sudo mount -t nfs 10.0.83.52:/srv/nfs/jagatud /mnt/nfs
+sudo mount -t nfs 10.0.83.152:/srv/nfs/jagatud /mnt/nfs
 ```
 
 Püsivalt (`/etc/fstab`):
 
 ```text
-10.0.83.52:/srv/nfs/jagatud  /mnt/nfs  nfs  defaults,_netdev,nofail  0  0
+10.0.83.152:/srv/nfs/jagatud  /mnt/nfs  nfs  defaults,_netdev,nofail  0  0
 ```
 
 `_netdev` ütleb, et failisüsteem vajab võrku.
@@ -97,7 +97,7 @@ Püsivalt (`/etc/fstab`):
 | `all_squash`, `anonuid=1500`, `anongid=1500` | Kõik kliendi kasutajad muudetakse ühe kindla kasutajana - avalikud jagamised |
 | `no_subtree_check` | Lülitab välja aeglase alamkataloogi kontrolli (soovitatav) |
 
-Mitu klienti eri õigustega: `/srv/nfs/jagatud  10.0.83.0/24(ro,sync) 10.0.83.53(rw,sync,no_root_squash)`. Tühikud on olulised: `10.0.83.0/24 (rw)` (tühikuga) annaks `rw` **kõigile**!
+Mitu klienti eri õigustega: `/srv/nfs/jagatud  10.0.83.0/24(ro,sync) 10.0.83.153(rw,sync,no_root_squash)`. Tühikud on olulised: `10.0.83.0/24 (rw)` (tühikuga) annaks `rw` **kõigile**!
 
 **Tulemüür:** NFSv4 vajab ainult porti **2049/tcp** (`sudo ufw allow from 10.0.83.0/24 to any port nfs`, `sudo firewall-cmd --permanent --add-service=nfs`). Vana NFSv3 ja `showmount` kasutavad lisaks `rpcbind`-i ja muutuvaid porte (`--add-service=rpc-bind --add-service=mountd`).
 
@@ -173,8 +173,8 @@ sudo systemctl restart smbd
 
 Ühendamine:
 
-- **Windows:** Exploreris `\\10.0.83.52\jagatud`;
-- **Linux:** `smbclient //10.0.83.52/jagatud -U mari` või haakimine `mount -t cifs` (pakett `cifs-utils`).
+- **Windows:** Exploreris `\\10.0.83.152\jagatud`;
+- **Linux:** `smbclient //10.0.83.152/jagatud -U mari` või haakimine `mount -t cifs` (pakett `cifs-utils`).
 
 ## 19.5 Ühiskausta õigused: SGID ja ACL
 
@@ -299,7 +299,7 @@ Veebiliides on aadressil `https://server:631` (logi sisse `lpadmin` grupi kasuta
 
 ```bash
 # Lisa võrguprinter (tänapäevased printerid töötavad ilma draiverita: -m everywhere)
-sudo lpadmin -p kontor -E -v ipp://10.0.83.200/ipp/print -m everywhere -D "Kontori printer" -L "2. korrus"
+sudo lpadmin -p kontor -E -v ipp://10.0.83.120/ipp/print -m everywhere -D "Kontori printer" -L "2. korrus"
 sudo lpadmin -p kontor -o printer-is-shared=true      # jaga võrku
 sudo lpadmin -d kontor                                 # vaikeprinter
 

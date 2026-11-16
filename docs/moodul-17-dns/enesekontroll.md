@@ -118,7 +118,7 @@ DNSSEC allkirjastab kirjed, nii et resolver saab kontrollida, et vastust pole v�
 
 ## Praktilised miniülesanded
 
-**1.** Lisa tsooni `lab.example` e-posti server `mail.lab.example` (IP `10.0.83.58`) koos MX-kirjega.
+**1.** Lisa tsooni `lab.example` e-posti server `mail.lab.example` (IP `10.0.83.158`) koos MX-kirjega.
 
 <details>
 <summary>Lahendus</summary>
@@ -126,18 +126,18 @@ DNSSEC allkirjastab kirjed, nii et resolver saab kontrollida, et vastust pole v�
 ```text
 ; 1 (tsoonifaili, suurenda seerianumbrit)
 @       IN  MX  10 mail.lab.example.
-mail    IN  A   10.0.83.58
+mail    IN  A   10.0.83.158
 ```
 
 </details>
 
-**2.** Lisa pöördtsooni `83.0.10.in-addr.arpa` kirje, mis seob aadressi `10.0.83.66` nimega `fbsd.lab.example`, ja kontrolli seda.
+**2.** Lisa pöördtsooni `83.0.10.in-addr.arpa` kirje, mis seob aadressi `10.0.83.166` nimega `fbsd.lab.example`, ja kontrolli seda.
 
 <details>
 <summary>Lahendus</summary>
 
 ```text
-66  IN  PTR fbsd.lab.example.
+166  IN  PTR fbsd.lab.example.
 ```
 
 Suurenda seerianumbrit, siis:
@@ -145,12 +145,12 @@ Suurenda seerianumbrit, siis:
 ```bash
 sudo named-checkzone 83.0.10.in-addr.arpa /etc/bind/db.10.0.83
 sudo rndc reload
-dig @localhost -x 10.0.83.66 +short
+dig @localhost -x 10.0.83.166 +short
 ```
 
 </details>
 
-**3.** Kirjuta `debian2` BIND9 seadistusse tsooni `lab.example` sekundaarkirjeldus (primaar `10.0.83.52`).
+**3.** Kirjuta `debian2` BIND9 seadistusse tsooni `lab.example` sekundaarkirjeldus (primaar `10.0.83.152`).
 
 <details>
 <summary>Lahendus</summary>
@@ -159,7 +159,7 @@ dig @localhost -x 10.0.83.66 +short
 zone "lab.example" {
     type secondary;
     file "/var/cache/bind/db.lab.example";
-    primaries { 10.0.83.52; };
+    primaries { 10.0.83.152; };
 };
 ```
 
@@ -171,7 +171,7 @@ zone "lab.example" {
 <summary>Lahendus</summary>
 
 ```bash
-dig @10.0.83.52 www.lab.example +norecurse    # lipp aa = autoriteetne vastus
+dig @10.0.83.152 www.lab.example +norecurse    # lipp aa = autoriteetne vastus
 dig www.debian.org +trace
 ```
 

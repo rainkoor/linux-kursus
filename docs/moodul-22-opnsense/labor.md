@@ -104,7 +104,7 @@ Kõik selle laboritöö küsimused ühes kohas. Sulgudes on punkt, mille juures 
 
 **5.1** Ava DHCP-teenuse seaded (vaikimisi *Services* → *Dnsmasq DNS & DHCP*) ja kontrolli vahemikku. Leia antud rendid.
 
-**5.2** Lisa **staatiline vastendus**: Ubuntu kliendi MAC-aadress (Ubuntus `ip link`) → võrguplaanis reserveeritud aadress (nt `10.0.83.98`), hostinimi `ubuntuklient`. Ubuntus uuenda renti:
+**5.2** Lisa **staatiline vastendus**: Ubuntu kliendi MAC-aadress (Ubuntus `ip link`) → võrguplaanis reserveeritud aadress (nt `10.0.83.198`), hostinimi `ubuntuklient`. Ubuntus uuenda renti:
 
 ```bash
 sudo networkctl renew <liides>    # või taaskäivita

@@ -29,6 +29,9 @@ hooks:
 extra_css:
   - stylesheets/kursus.css
 
+extra_javascript:
+  - javascripts/sorditav.js
+
 markdown_extensions:
   - tables
   - admonition
@@ -181,6 +184,7 @@ nav:
           - Enesekontroll: moodul-30-freebsd/enesekontroll.md
   - Lisad:
       - Laborikeskkond ja paigaldus: lisad/paigaldus.md
+      - Tõrkeotsingu töövoog: lisad/torkeotsing.md
       - Distrode ülevaade: lisad/distrod.md
       - UNIX-i ja Linuxi ajalugu: lisad/ajalugu.md
       - Sõnastik: lisad/sonastik.md

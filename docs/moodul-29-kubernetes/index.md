@@ -123,9 +123,9 @@ Laboris on kolm Debiani masinat:
 
 | Masin | IP | Roll |
 |---|---|---|
-| `k3s1` | `10.0.83.61` | server (juhtkiht + töökoormus) |
-| `k3s2` | `10.0.83.62` | agent (töösõlm) |
-| `k3s3` | `10.0.83.63` | agent (töösõlm) |
+| `k3s1` | `10.0.83.161` | server (juhtkiht + töökoormus) |
+| `k3s2` | `10.0.83.162` | agent (töösõlm) |
+| `k3s3` | `10.0.83.163` | agent (töösõlm) |
 
 ### Server
 
@@ -133,7 +133,7 @@ Seadistus kirjutatakse enne paigaldust faili `/etc/rancher/k3s/config.yaml` (iga
 
 ```yaml
 # /etc/rancher/k3s/config.yaml (k3s1)
-node-ip: 10.0.83.61
+node-ip: 10.0.83.161
 tls-san:
   - k3s1.lab.example
 write-kubeconfig-mode: "0600"
@@ -175,7 +175,7 @@ sudo cat /var/lib/rancher/k3s/server/node-token        # k3s1-s
 ```bash
 # k3s2 ja k3s3
 curl -sfL https://get.k3s.io -o k3s-install.sh
-sudo K3S_URL=https://10.0.83.61:6443 K3S_TOKEN='<token>' INSTALL_K3S_CHANNEL=stable sh k3s-install.sh
+sudo K3S_URL=https://10.0.83.161:6443 K3S_TOKEN='<token>' INSTALL_K3S_CHANNEL=stable sh k3s-install.sh
 systemctl status k3s-agent
 ```
 
@@ -537,14 +537,14 @@ Uuenda **kõigepealt serverid, siis agendid** ja ühe Kubernetese alamversiooni 
 # esimene server: /etc/rancher/k3s/config.yaml
 cluster-init: true
 token: "<ühine-salajane-token>"
-tls-san: [k3s.lab.example, 10.0.83.64]
+tls-san: [k3s.lab.example, 10.0.83.164]
 ```
 
 ```yaml
 # teine ja kolmas server
-server: https://10.0.83.64:6443      # virtuaalne IP (keepalived) või DNS-nimi
+server: https://10.0.83.164:6443      # virtuaalne IP (keepalived) või DNS-nimi
 token: "<ühine-salajane-token>"
-tls-san: [k3s.lab.example, 10.0.83.64]
+tls-san: [k3s.lab.example, 10.0.83.164]
 ```
 
 Agendid ühendatakse samuti **virtuaalse IP** või DNS-nime kaudu, mitte ühe serveri aadressiga. Kolmest serverist võib üks rikki minna; kahe rikke korral peatub klastri juhtimine.

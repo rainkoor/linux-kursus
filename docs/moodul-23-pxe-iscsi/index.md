@@ -64,7 +64,7 @@ DHCP-server saab kliendi püsivara tuvastada valiku 93 (*client system architect
 Lihtsaim seadistus (ainult BIOS-kliendid) - lisa alamvõrgu juurde:
 
 ```json
-"next-server": "10.0.83.53",
+"next-server": "10.0.83.153",
 "boot-file-name": "netboot.xyz.kpxe"
 ```
 
@@ -137,7 +137,7 @@ Kontrolli faili enne kasutamist: `sudo dnf install pykickstart && ksvalidator ks
 ```text
 #!ipxe
 set repo https://repo.almalinux.org/almalinux/10/BaseOS/x86_64/os
-kernel ${repo}/images/pxeboot/vmlinuz inst.repo=${repo} inst.ks=http://10.0.83.53/ks.cfg ip=dhcp
+kernel ${repo}/images/pxeboot/vmlinuz inst.repo=${repo} inst.ks=http://10.0.83.153/ks.cfg ip=dhcp
 initrd ${repo}/images/pxeboot/initrd.img
 boot
 ```
@@ -148,7 +148,7 @@ Et klient saaks selle skripti, annab Kea esmalt TFTP-ga iPXE (`undionly.kpxe`, a
 "boot-file-name": "undionly.kpxe",
 "client-classes": [
   { "name": "ipxe", "test": "option[77].hex == 'iPXE'",
-    "boot-file-name": "http://10.0.83.53/boot.ipxe" }
+    "boot-file-name": "http://10.0.83.153/boot.ipxe" }
 ]
 ```
 
@@ -248,7 +248,7 @@ InitiatorName=iqn.2026-11.example.lab:alma
 
 ```bash
 sudo systemctl restart iscsid
-sudo iscsiadm -m discovery -t sendtargets -p 10.0.83.53     # avasta sihtmärgid
+sudo iscsiadm -m discovery -t sendtargets -p 10.0.83.153     # avasta sihtmärgid
 sudo iscsiadm -m node --login                               # logi sisse
 lsblk                                                       # uus ketas, nt /dev/sdb
 sudo iscsiadm -m session                                    # aktiivsed seansid
@@ -257,7 +257,7 @@ sudo iscsiadm -m session                                    # aktiivsed seansid
 Automaatne sisselogimine alglaadimisel:
 
 ```bash
-sudo iscsiadm -m node -T iqn.2026-11.example.lab:debian2.disk01 -p 10.0.83.53 \
+sudo iscsiadm -m node -T iqn.2026-11.example.lab:debian2.disk01 -p 10.0.83.153 \
     --op update -n node.startup -v automatic
 ```
 

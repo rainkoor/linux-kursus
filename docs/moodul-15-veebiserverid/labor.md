@@ -98,8 +98,8 @@ DNS-serveri seadistame moodulis 17. Seni lisa saitide nimed **kõigi masinate** 
 
 ```text
 SERVER_IP  kool.lab.example info.lab.example www.lab.example debian1.lab.example debian1
-10.0.83.55 alma.lab.example alma
-10.0.83.54 ubuntusrv.lab.example ubuntusrv caddy.lab.example
+10.0.83.155 alma.lab.example alma
+10.0.83.154 ubuntusrv.lab.example ubuntusrv caddy.lab.example
 ```
 
 ```bash
@@ -229,7 +229,7 @@ Lisa faili `/etc/httpd/conf.d/kool.conf` HTTPS-virtuaalhost:
 
 ```bash
 sudo apachectl configtest && sudo systemctl reload httpd
-curl --resolve kool.lab.example:443:10.0.83.55 https://kool.lab.example/     # Ubuntu kliendist, labori CA on usaldatud
+curl --resolve kool.lab.example:443:10.0.83.155 https://kool.lab.example/     # Ubuntu kliendist, labori CA on usaldatud
 ```
 
 > [!NOTE]
@@ -329,7 +329,7 @@ Ava brauseris `https://crt.sh/?q=debian.org` (või oma kooli domeen).
 3. **Let's Encrypt staging (kui sul on oma domeen ja DNS-i haldus):** hangi `certbot certonly --manual --preferred-challenges dns --staging -d test.<sinu domeen>` abil testsertifikaat DNS-01 väljakutsega ja vaata, millise TXT-kirje certbot sind looma palub. Uuri tulemust `openssl x509 -noout -issuer -dates`.
 4. **HTTPS HAProxys:** lõpeta TLS HAProxys labori CA sertifikaadiga: `cat kool.crt kool.key | sudo tee /etc/haproxy/kool.pem` (õigused `600`) ja `bind *:8443 ssl crt /etc/haproxy/kool.pem`; taustale suuna HTTP-ga.
 5. **Traefik:** käivita Traefik ja kaks `whoami` konteinerit siltidega (teooria punkt 15.7) ning vaata, kuidas Traefik need automaatselt leiab.
-6. **Rikkekindel jaotur (keepalived):** paigalda HAProxy ka `debian2`-sse sama seadistusega (port 8080) ning mõlemasse masinasse keepalived teooria punkti 15.7 järgi: `ubuntusrv` MASTER (`priority 150`), `debian2` BACKUP (`priority 100`), VIP `10.0.83.50`. Luba tulemüüris VRRP. Käivita kliendist `while true; do curl -s -m 1 http://10.0.83.50:8080/ | grep -o "Server [a-z0-9]*"; sleep 0.5; done` ja peata samal ajal `ubuntusrv`-s HAProxy (`sudo systemctl stop haproxy`). Kui kaua teenus katkes? Kumma masina küljes on VIP (`ip -br a`)? Mis juhtub, kui HAProxy uuesti käivitad?
+6. **Rikkekindel jaotur (keepalived):** paigalda HAProxy ka `debian2`-sse sama seadistusega (port 8080) ning mõlemasse masinasse keepalived teooria punkti 15.7 järgi: `ubuntusrv` MASTER (`priority 150`), `debian2` BACKUP (`priority 100`), VIP `10.0.83.150`. Luba tulemüüris VRRP. Käivita kliendist `while true; do curl -s -m 1 http://10.0.83.150:8080/ | grep -o "Server [a-z0-9]*"; sleep 0.5; done` ja peata samal ajal `ubuntusrv`-s HAProxy (`sudo systemctl stop haproxy`). Kui kaua teenus katkes? Kumma masina küljes on VIP (`ip -br a`)? Mis juhtub, kui HAProxy uuesti käivitad?
 7. **Koormustest:** mõõda `ab -n 2000 -c 50`-ga kooli saiti otse ühest taustserverist ja HAProxy kaudu. Võrdle `Requests per second` ja 95. protsentiili. Korda testi, kui üks taustserver on peatatud. Mis oli pudelikael (`top` taustserverites)?
 
 ---

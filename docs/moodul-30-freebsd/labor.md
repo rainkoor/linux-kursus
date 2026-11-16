@@ -8,7 +8,7 @@
 |---|---|
 | **Distro** | FreeBSD 15 (viimane *RELEASE*) |
 | **Kestus** | 4 × 90 minutit |
-| **Vajalik** | FreeBSD VM `fbsd` (2 vCPU, 2 GiB RAM, 20 GiB ketas, VirtIO võrk), aadressid `10.0.83.66` (host) ja `10.0.83.67` (jail). Linuxi klient testimiseks (nt `ubuntuklient`) |
+| **Vajalik** | FreeBSD VM `fbsd` (2 vCPU, 2 GiB RAM, 20 GiB ketas, VirtIO võrk), aadressid `10.0.83.166` (host) ja `10.0.83.167` (jail). Linuxi klient testimiseks (nt `ubuntuklient`) |
 | **Eesmärk** | Paigaldada ja hallata FreeBSD serverit: paketid ja uuendused, teenused, kasutajad, võrk, ZFS-i alglaadimiskeskkonnad, pf ja jail |
 
 > **Aruanne:** vasta küsimustele **K1–K12**. Kõik küsimused on koos ka lehe lõpus ([Aruande küsimused](#aruande-küsimused)).
@@ -145,7 +145,7 @@ less /var/mail/root
 **6.1** **Proxmoxi konsoolis** (mitte SSH-s):
 
 ```sh
-sysrc ifconfig_vtnet0="inet 10.0.83.66/24"
+sysrc ifconfig_vtnet0="inet 10.0.83.166/24"
 sysrc defaultrouter="10.0.83.1"
 echo "nameserver 10.0.83.1" > /etc/resolv.conf
 service netif restart && service routing restart
@@ -215,10 +215,10 @@ pfctl -si
 **8.2** Testi Linuxi kliendist:
 
 ```sh
-ssh kasutaja@10.0.83.66                    # peab töötama
-curl -I http://10.0.83.66                  # peab töötama
-for i in $(seq 1 8); do ssh -o ConnectTimeout=3 -o BatchMode=yes kasutaja@10.0.83.66 true; done
-ssh kasutaja@10.0.83.66                    # kas töötab veel?
+ssh kasutaja@10.0.83.166                    # peab töötama
+curl -I http://10.0.83.166                  # peab töötama
+for i in $(seq 1 8); do ssh -o ConnectTimeout=3 -o BatchMode=yes kasutaja@10.0.83.166 true; done
+ssh kasutaja@10.0.83.166                    # kas töötab veel?
 ```
 
 FreeBSD-s:
@@ -238,12 +238,12 @@ pfctl -t ryndajad -T delete <kliendi-IP>
 **9.1** Hosti nginx kuulab praegu kõigil aadressidel, ka jailile antaval. Lase sel kuulata ainult hosti aadressil:
 
 ```sh
-sed -i '' 's/listen[[:space:]]*80;/listen 10.0.83.66:80;/' /usr/local/etc/nginx/nginx.conf
+sed -i '' 's/listen[[:space:]]*80;/listen 10.0.83.166:80;/' /usr/local/etc/nginx/nginx.conf
 nginx -t && service nginx restart
 sockstat -4l | grep nginx
 ```
 
-**9.2** Loo jail `www` teooria punkti 30.11 järgi (aadress `10.0.83.67`), käivita see ja paigalda sinna nginx (kui `pkg` küsib jailis enda paigaldamist, vasta `y`):
+**9.2** Loo jail `www` teooria punkti 30.11 järgi (aadress `10.0.83.167`), käivita see ja paigalda sinna nginx (kui `pkg` küsib jailis enda paigaldamist, vasta `y`):
 
 ```sh
 zfs create -o mountpoint=/usr/local/jails zroot/jails
@@ -270,7 +270,7 @@ sockstat -4l | grep nginx
 zfs snapshot zroot/jails/www@puhas
 ```
 
-Linuxi kliendist: `curl http://10.0.83.67` ja `curl http://10.0.83.66`. Lisa vajadusel pf-i reeglisse jaili aadress (reegel `to port { http, https }` kehtib kõigile hosti aadressidele).
+Linuxi kliendist: `curl http://10.0.83.167` ja `curl http://10.0.83.166`. Lisa vajadusel pf-i reeglisse jaili aadress (reegel `to port { http, https }` kehtib kõigile hosti aadressidele).
 
 > **K9.** Milliseid protsesse ja võrguliideseid nägi jail ja milliseid host? Mis on jaili ja Podmani konteineri (moodul 14) sarnasused ja erinevused?
 

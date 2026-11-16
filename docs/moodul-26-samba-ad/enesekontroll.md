@@ -157,13 +157,13 @@ sudo samba-tool group addmembers opilased peeter
 
 </details>
 
-**2.** Lisa DNS-kirje `nas.ad.lab.example → 10.0.83.53`.
+**2.** Lisa DNS-kirje `nas.ad.lab.example → 10.0.83.153`.
 
 <details>
 <summary>Lahendus</summary>
 
 ```bash
-sudo samba-tool dns add dc1 ad.lab.example nas A 10.0.83.53 -U administrator
+sudo samba-tool dns add dc1 ad.lab.example nas A 10.0.83.153 -U administrator
 ```
 
 </details>

@@ -20,9 +20,9 @@ Laboris kasutatavad aadressid (asenda `83` oma võrgu numbriga):
 
 | Masin | ens18 (põhivõrk) | IPv6 (ULA) | VLAN 20 | Bond-võrk | WireGuard |
 |---|---|---|---|---|---|
-| `debian1` | `10.0.83.52` | - | - | - | `10.99.0.2` |
-| `ubuntusrv` | `10.0.83.54` | `fd83::54` | `10.20.0.54` | `10.30.0.54` | `10.99.0.1` |
-| `alma` | `10.0.83.55` | `fd83::55` | `10.20.0.55` | `10.30.0.55` | - |
+| `debian1` | `10.0.83.152` | - | - | - | `10.99.0.2` |
+| `ubuntusrv` | `10.0.83.154` | `fd83::154` | `10.20.0.154` | `10.30.0.154` | `10.99.0.1` |
+| `alma` | `10.0.83.155` | `fd83::155` | `10.20.0.155` | `10.30.0.155` | - |
 
 ---
 
@@ -64,12 +64,12 @@ ip -6 neigh
 
 > **K1.** Miks ei töötanud ping ilma liidese nimeta? Mis on IPv4-s käsu `ip -6 neigh` vaste?
 
-**1.3** Lisa mõlemale masinale püsiv ULA-aadress (teooria punkt 13.1): Ubuntule Netplaniga `fd83::54/64`, AlmaLinuxile `nmcli`-ga `fd83::55/64`. Ubuntus kasuta `sudo netplan try`.
+**1.3** Lisa mõlemale masinale püsiv ULA-aadress (teooria punkt 13.1): Ubuntule Netplaniga `fd83::154/64`, AlmaLinuxile `nmcli`-ga `fd83::155/64`. Ubuntus kasuta `sudo netplan try`.
 
 ```bash
 ip -6 -br address
-ping -6 -c2 fd83::55
-ssh kasutaja@fd83::55 hostname
+ping -6 -c2 fd83::155
+ssh kasutaja@fd83::155 hostname
 ```
 
 **1.4** Kontrolli Ubuntus, kas teenused kuulavad ka IPv6-l ja kas tulemüür kaitseb neid:
@@ -100,16 +100,16 @@ sudo tcpdump -i ens18 -n icmp6
 
 ```bash
 sudo nmcli connection add type vlan con-name vlan20 dev ens19 id 20 \
-    ipv4.method manual ipv4.addresses 10.20.0.55/24
+    ipv4.method manual ipv4.addresses 10.20.0.155/24
 sudo nmcli connection up vlan20
 ip -d link show ens19.20
 ```
 
-**2.2** Loo Ubuntus sama VLAN Netplaniga (fail `/etc/netplan/70-vlan.yaml`, liides `ens19`, VLAN `20`, aadress `10.20.0.54/24`) ja pingi:
+**2.2** Loo Ubuntus sama VLAN Netplaniga (fail `/etc/netplan/70-vlan.yaml`, liides `ens19`, VLAN `20`, aadress `10.20.0.154/24`) ja pingi:
 
 ```bash
 sudo netplan try
-ping -c3 10.20.0.55
+ping -c3 10.20.0.155
 ```
 
 **2.3** Käivita Ubuntus `tcpdump` füüsilisel liidesel, kuva Etherneti päis ja pingi AlmaLinuxist uuesti:
@@ -184,7 +184,7 @@ sudo ufw allow 8080/tcp
 sudo ufw route allow in on ens18 out on br0 to 10.50.0.2 port 80 proto tcp
 ```
 
-Ava Debianist või AlmaLinuxist `curl -s http://10.0.83.54:8080/ | head` ja vaata nimeruumi veebiserveri logi.
+Ava Debianist või AlmaLinuxist `curl -s http://10.0.83.154:8080/ | head` ja vaata nimeruumi veebiserveri logi.
 
 > **K8.** Millise lähteaadressiga päringuid nimeruumi veebiserver logis nägi? Millise aadressiga nägi `1.1.1.1` punktis 3.3 nimeruumi ping-päringuid? Selgita masquerade ja DNAT erinevust.
 
@@ -196,15 +196,15 @@ Ava Debianist või AlmaLinuxist `curl -s http://10.0.83.54:8080/ | head` ja vaat
 
 ## 4. osa. Bond
 
-**4.1** Loo Ubuntus Netplaniga `bond0` liidestest `ens19` ja `ens20` (režiim `active-backup`, aadress `10.30.0.54/24`, teooria punkt 13.4). Anna AlmaLinuxi `ens19`-le aadress `10.30.0.55/24` (`nmcli connection add type ethernet ifname ens19 con-name bondtest ipv4.method manual ipv4.addresses 10.30.0.55/24`).
+**4.1** Loo Ubuntus Netplaniga `bond0` liidestest `ens19` ja `ens20` (režiim `active-backup`, aadress `10.30.0.154/24`, teooria punkt 13.4). Anna AlmaLinuxi `ens19`-le aadress `10.30.0.155/24` (`nmcli connection add type ethernet ifname ens19 con-name bondtest ipv4.method manual ipv4.addresses 10.30.0.155/24`).
 
 ```bash
 sudo netplan try
 cat /proc/net/bonding/bond0
-ping -c3 10.30.0.55
+ping -c3 10.30.0.155
 ```
 
-**4.2** Käivita AlmaLinuxist pidev ping `ping 10.30.0.54`. Vaata Ubuntus, milline liides on aktiivne (`Currently Active Slave`), ja ühenda see Proxmoxis lahti (*Hardware* → võrgukaart → *Edit* → *Disconnect*).
+**4.2** Käivita AlmaLinuxist pidev ping `ping 10.30.0.154`. Vaata Ubuntus, milline liides on aktiivne (`Currently Active Slave`), ja ühenda see Proxmoxis lahti (*Hardware* → võrgukaart → *Edit* → *Disconnect*).
 
 ```bash
 cat /proc/net/bonding/bond0
@@ -233,12 +233,12 @@ ping -c3 10.99.0.1               # Debianist
 
 > **K12.** Mida näitab `wg show` väljund (`latest handshake`, `transfer`)? Mis juhtub, kui serveri `[Peer]` plokis on kliendi avalik võti vale?
 
-**5.2** Laienda kliendi `AllowedIPs` nii, et ka AlmaLinuxi VLAN-võrk või muu sisevõrk läheks tunneli kaudu (laboris lisa AlmaLinuxile ajutiselt `ens19`-le aadress `10.40.0.55/24` ja Ubuntule `10.40.0.54/24` - see on „labori sisevõrk“, mida Debian otse ei näe). Lisa serverisse edastamine ja masquerade (teooria punkt 13.6, `PostUp`) - väljuvaks liideseks on siin `ens19` - ning luba ufw-s edastamine: `sudo ufw route allow in on wg0 out on ens19`. Kliendis: `AllowedIPs = 10.99.0.0/24, 10.40.0.0/24`.
+**5.2** Laienda kliendi `AllowedIPs` nii, et ka AlmaLinuxi VLAN-võrk või muu sisevõrk läheks tunneli kaudu (laboris lisa AlmaLinuxile ajutiselt `ens19`-le aadress `10.40.0.155/24` ja Ubuntule `10.40.0.154/24` - see on „labori sisevõrk“, mida Debian otse ei näe). Lisa serverisse edastamine ja masquerade (teooria punkt 13.6, `PostUp`) - väljuvaks liideseks on siin `ens19` - ning luba ufw-s edastamine: `sudo ufw route allow in on wg0 out on ens19`. Kliendis: `AllowedIPs = 10.99.0.0/24, 10.40.0.0/24`.
 
 ```bash
 sudo wg-quick down wg0 && sudo wg-quick up wg0     # mõlemas pärast muudatust
 ip route                                           # Debianis: kuhu läheb 10.40.0.0/24?
-ping -c3 10.40.0.55                                # Debianist
+ping -c3 10.40.0.155                                # Debianist
 ```
 
 > **K13.** Millise marsruudi lisas `wg-quick` Debianisse? Millise lähteaadressiga jõudsid Debiani ping-paketid AlmaLinuxisse (kontrolli AlmaLinuxis `sudo tcpdump -i ens19 -n icmp`)? Miks?

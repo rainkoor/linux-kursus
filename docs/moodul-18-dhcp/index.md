@@ -42,8 +42,8 @@ sequenceDiagram
     participant K as Klient
     participant S as DHCP-server
     K->>S: DHCPDISCOVER (leviedastus): „Kas keegi jagab aadresse?“
-    S->>K: DHCPOFFER: „Võta 10.0.83.85“
-    K->>S: DHCPREQUEST (leviedastus): „Tahan 10.0.83.85“
+    S->>K: DHCPOFFER: „Võta 10.0.83.185“
+    K->>S: DHCPREQUEST (leviedastus): „Tahan 10.0.83.185“
     S->>K: DHCPACK: „Kinnitan, rent 24 h“
 ```
 
@@ -80,9 +80,9 @@ Selles moodulis kasutame **Kea**-d. Kuna paljud olemasolevad juhendid kasutavad 
 dnsmasq-i (moodul 17, punkt 17.6) DHCP käib paari reaga failis `/etc/dnsmasq.conf` ja antud nimed lahenduvad kohe ka DNS-is:
 
 ```text
-dhcp-range=10.0.83.80,10.0.83.99,24h
+dhcp-range=10.0.83.180,10.0.83.199,24h
 dhcp-option=option:router,10.0.83.1
-dhcp-host=bc:24:11:12:34:56,ubuntuklient,10.0.83.98
+dhcp-host=bc:24:11:12:34:56,ubuntuklient,10.0.83.198
 ```
 
 ## 18.3 Kea DHCP-server
@@ -120,14 +120,14 @@ Seadistus on JSON-failis `/etc/kea/kea-dhcp4.conf`:
       {
         "id": 1,
         "subnet": "10.0.83.0/24",
-        "pools": [ { "pool": "10.0.83.80 - 10.0.83.99" } ],
+        "pools": [ { "pool": "10.0.83.180 - 10.0.83.199" } ],
         "option-data": [
           { "name": "routers", "data": "10.0.83.1" }
         ],
         "reservations": [
           {
             "hw-address": "bc:24:11:12:34:56",
-            "ip-address": "10.0.83.98",
+            "ip-address": "10.0.83.198",
             "hostname": "ubuntuklient"
           }
         ]
@@ -178,7 +178,7 @@ Tulemüüris peab olema avatud UDP port 67 (`sudo ufw allow 67/udp` või `sudo f
 2. Lisa alamvõrgu `reservations` loendisse uus kirje (jälgi komasid kirjete vahel):
 
     ```json
-    { "hw-address": "bc:24:11:aa:bb:cc", "ip-address": "10.0.83.99", "hostname": "winklient" }
+    { "hw-address": "bc:24:11:aa:bb:cc", "ip-address": "10.0.83.199", "hostname": "winklient" }
     ```
 
 3. Kontrolli ja taaskäivita:
@@ -226,7 +226,7 @@ Vanemates süsteemides ja juhendites on seadistus failis `/etc/dhcp/dhcpd.conf`:
 ```text
 authoritative;
 subnet 10.0.83.0 netmask 255.255.255.0 {
-    range 10.0.83.80 10.0.83.99;
+    range 10.0.83.180 10.0.83.199;
     option routers 10.0.83.1;
     option domain-name-servers 10.0.83.1;
     option domain-name "lab.example";
@@ -235,7 +235,7 @@ subnet 10.0.83.0 netmask 255.255.255.0 {
 }
 host ubuntuklient {
     hardware ethernet bc:24:11:12:34:56;
-    fixed-address 10.0.83.98;
+    fixed-address 10.0.83.198;
 }
 ```
 
@@ -245,6 +245,8 @@ Liides määratakse Debianis failis `/etc/default/isc-dhcp-server` (`INTERFACESv
 
 > [!TIP]
 > **Lühidalt:** Kui klient aadressi ei saa, kontrolli järjest: kas teenus töötab, kas see kuulab õigel liidesel, kas tulemüür lubab UDP porti 67, kas vahemikus on vabu aadresse, kas võrgus on teine DHCP-server. `tcpdump port 67 or port 68` näitab, kas päringud jõuavad kohale.
+
+Üldine töökäik on lisas [tõrkeotsingu töövoog](../lisad/torkeotsing.md); siin on selle DHCP osa.
 
 | Sümptom | Tõenäoline põhjus | Kontroll |
 |---|---|---|

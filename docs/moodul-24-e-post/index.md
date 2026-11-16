@@ -104,8 +104,8 @@ Saatev server leiab saaja serveri **MX-kirjest**. Teised kirjed aitavad saajal o
 | Kirje | Näide (`lab.example` tsoonis) | Milleks |
 |---|---|---|
 | **MX** | `@ IN MX 10 mail.lab.example.` | Kuhu saata domeeni kirjad (väiksem number = eelistatum) |
-| **A** | `mail IN A 10.0.83.54` | MX-i nimi peab lahenema aadressiks (mitte CNAME!) |
-| **PTR** | `54 IN PTR mail.lab.example.` | Saaja kontrollib, kas saatja IP pöördkirje klapib nimega |
+| **A** | `mail IN A 10.0.83.154` | MX-i nimi peab lahenema aadressiks (mitte CNAME!) |
+| **PTR** | `154 IN PTR mail.lab.example.` | Saaja kontrollib, kas saatja IP pöördkirje klapib nimega |
 | **SPF** (TXT) | `@ IN TXT "v=spf1 mx -all"` | Millised serverid tohivad domeeni nimel kirju saata |
 | **DKIM** (TXT) | `kool._domainkey IN TXT "v=DKIM1; k=rsa; p=MIIB…"` | Avalik võti, millega kontrollitakse kirja allkirja |
 | **DMARC** (TXT) | `_dmarc IN TXT "v=DMARC1; p=quarantine; rua=mailto:dmarc@lab.example"` | Mida teha kirjaga, mis SPF-i ja DKIM-i kontrolli ei läbi; kuhu saata aruanded |

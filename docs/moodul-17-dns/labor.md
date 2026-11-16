@@ -102,7 +102,7 @@ dig @localhost lab.example NS +short
 
 > **K4.** Mida näitab `debian2` logi tsooniülekande kohta? Millises vormingus on sekundaari salvestatud tsoonifail (proovi `file` ja `head` - vihje: BIND kasutab vaikimisi binaarvormingut `raw`)?
 
-**3.2** Lisa `debian1` tsooni uus kirje `uus IN A 10.0.83.70`, suurenda seerianumbrit, laadi uuesti ja kontrolli kohe `debian2`-st: `dig @localhost uus.lab.example +short`.
+**3.2** Lisa `debian1` tsooni uus kirje `uus IN A 10.0.83.170`, suurenda seerianumbrit, laadi uuesti ja kontrolli kohe `debian2`-st: `dig @localhost uus.lab.example +short`.
 
 **3.3** Peata `debian1`-s BIND9 (`sudo systemctl stop named`) ja küsi Ubuntu kliendist mõlemalt serverilt:
 
@@ -268,7 +268,7 @@ dig @localhost www.debian.org +short
 
 > **D6.** Kas CoreDNS vastas mõlemale päringule? Millised read tekkisid logis (`log` pistikprogramm)?
 
-**2.3** Lisa tsoonifaili uus kirje `test IN A 10.0.83.60`, **suurenda seerianumbrit** ja oota ~1 minut ilma konteinerit taaskäivitamata:
+**2.3** Lisa tsoonifaili uus kirje `test IN A 10.0.83.160`, **suurenda seerianumbrit** ja oota ~1 minut ilma konteinerit taaskäivitamata:
 
 ```bash
 dig @localhost test.lab.example +short
